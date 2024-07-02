@@ -1,4 +1,4 @@
-import { AppElement, AppElementProps, RawElement } from "./appElement";
+import { RawElement, AppElementProps, AppElement } from "./AppElement";
 
 export const Raw = (data: string) => {
   return new RawElement(data);

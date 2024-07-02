@@ -1,4 +1,4 @@
-import { Header, Span } from "../../libs/elements";
+import { Header, Span } from "../../libs/Elements";
 import { formatDate } from "../../utils/formatDate";
 import { Icon } from "./Icon";
 

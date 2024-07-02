@@ -1,5 +1,5 @@
 import { useState, useEffect } from "../../libs/createApp";
-import { A, Section, Span } from "../../libs/elements";
+import { A, Section, Span } from "../../libs/Elements";
 import { News, RecentNewsList } from "../../models/News";
 import { getMediaById } from "../../remotes/getMediaById";
 import { getRecentNewsList } from "../../remotes/getRecentNewsList";

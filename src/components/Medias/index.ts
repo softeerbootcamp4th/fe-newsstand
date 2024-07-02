@@ -1,5 +1,5 @@
 import { useState } from "../../libs/createApp";
-import { Header, Section, Span } from "../../libs/elements";
+import { Header, Section, Span } from "../../libs/Elements";
 import { Media } from "../../models/Media";
 import { MediaIdByCategories } from "../../models/Newsstand";
 import { getMediaById } from "../../remotes/getMediaById";

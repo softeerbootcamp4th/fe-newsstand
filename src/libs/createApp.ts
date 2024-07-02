@@ -3,7 +3,7 @@ import {
   RawElement,
   RenderedAppElement,
   SimpleElement,
-} from "./appElement";
+} from "./AppElement";
 import { Deque } from "./deque";
 
 const createApp = () => {
