@@ -1,0 +1,51 @@
+#page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid red;
+  gap: 20px;
+}
+
+#header {
+  border: solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header div {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 29px;
+  gap: 5px;
+}
+
+#date {
+  color: gray;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#roll {
+  border: solid black;
+  display: flex;
+  gap: 10px
+}
+
+#roll div {
+  background-color: lightgray;
+  width: 50%;
+}
+
+#roll .com{
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#newslist {
+  border: solid black;
+}
