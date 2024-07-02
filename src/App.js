@@ -1,6 +1,6 @@
 import "./App.css";
-import Header from "@/components/Header/Header";
-import LatestNewsViewer from "@/components/LatestNewsViewer/LatestNewsViewer";
+import Header from "@/components/common/Header/Header";
+import AutoRollingNews from "@/components/AutoRollingNews/AutoRollingNews";
 import NewsList from "@/components/NewsList/NewsList";
 
 function App({ $target }) {
@@ -9,7 +9,7 @@ function App({ $target }) {
   $target.appendChild(this.$element);
 
   new Header({ $target: this.$element });
-  new LatestNewsViewer({ $target: this.$element });
+  new AutoRollingNews({ $target: this.$element });
   new NewsList({ $target: this.$element });
 }
 

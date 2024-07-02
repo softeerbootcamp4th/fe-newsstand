@@ -1,6 +1,6 @@
-import "./LatestNewsViewer.css";
+import "./AutoRollingNews.css";
 
-function LatestNewsViewer({ $target }) {
+function AutoRollingNews({ $target }) {
   this.$element = document.createElement("div");
   this.$element.className = "viewer";
   $target.appendChild(this.$element);
@@ -20,4 +20,4 @@ function LatestNewsViewer({ $target }) {
   this.render();
 }
 
-export default LatestNewsViewer;
+export default AutoRollingNews;
