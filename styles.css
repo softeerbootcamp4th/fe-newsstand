@@ -1,0 +1,84 @@
+:root {
+    --text-strong: #14212B;
+    --text-bold: #4B5966;
+    --text-default: #5F6E76;
+    --text-weak: #879298;
+    --text-white-default: #FFFFFF;
+    --text-white-weak: #FFFFFFB2;
+    --text-point: #4362D0;
+    --surface-default: #FFFFFF;
+    --surface-alt: #F5F7F9;
+    --surface-brand-default: #4362D0;
+    --surface-brand-alt: #7890E7;
+    --border-bold: #6E8091;
+    --border-default: #D2DAE0;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 58px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 930px;
+
+}
+
+.header-left {
+    display: flex;
+    gap : 8px;
+    color : var(--text-strong);
+    font-size: 24px;
+}
+
+.header-left h3 {
+    margin : 0;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    color : var(--text-default);
+    height: fit-content;
+}
+
+nav {
+    display: flex;
+    width: 930px;
+    gap : 8px;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    flex : 1;
+    border: 1px solid var(--surface-default);
+    gap : 16px;
+    padding : 16px;
+    align-items: center;
+    background-color: var(--surface-alt);
+    cursor: pointer;
+
+}
+
+.nav-news-title {
+    color : var(—text-bold);
+    font-size : 14px;
+    margin : 0;
+}
+
+.nav-news-title:hover {
+    text-decoration: underline;
+}
