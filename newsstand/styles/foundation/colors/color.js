@@ -62,7 +62,6 @@ export const createColorWithClass = () => {
         });
     };
 
-    // Create color items for both groups
     createColorItems(tokenName[0], "Default Color");
     createColorItems(tokenName[1], "Light Mode");
 }
