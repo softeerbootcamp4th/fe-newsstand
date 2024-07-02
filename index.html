@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+    <div class="news-stand">
+        <header class="content-header">
+            <div class="content-header__left">
+                <img src="./icons/newspaper.svg" alt="newspaper" class="content-header__left__svg">
+                <h2 class="content-header__left__title">뉴스스탠드</h2>
+            </div>
+            <div class="content-header__right">
+                <p class="content-header__right__date">2024.7.1</p>
+            </div>
+        </header>
+        <div class="clipping">
+            <div class="content-sub-header">
+                <div class="content-sub-header__box_invisible">
+                    <h4 class="content-sub-header__title">연합뉴스</h4>
+                    <span class="content-sub-header__news-header_invisible">뉴스1</span>
+                </div>
+                <div class="content-sub-header__box_invisible">
+                    <h4 class="content-sub-header__title">연합뉴스</h4>
+                    <span class="content-sub-header__news-header_invisible">뉴스2</span>                
+                </div>
+            </div>
+            <div class="content-sub-header">
+                <div class="content-sub-header__box">
+                    <h4 class="content-sub-header__title">연합뉴스</h4>
+                    <span class="content-sub-header__news-header">뉴스1</span>
+                </div>
+                <div class="content-sub-header__box">
+                    <h4 class="content-sub-header__title">연합뉴스</h4>
+                    <span class="content-sub-header__news-header">뉴스2</span>                
+                </div>
+            </div>
+        </div>
+        <article class="news-list">
+            <menu class="news-list__menu">
+                <div class="news-list__menu__selectors">
+                    <span class="news-list__menu__selectors__all">전체언론사</span>
+                    <span class="news-list__menu__selectors__my">내가 구독한 언론사</span>
+                </div>
+                <div class="news-list__menu__icons">
+                    <img src="./icons/list-view.svg" alt="listView">
+                    <img src="./icons/grid-view.svg" alt="gridView">
+                </div>
+            </menu>
+            <nav class="news-list__navbar">
+                <span class="news-list__navbar__category">방송/통신</span>
+                <span class="news-list__navbar__category">종합/경제</span>
+                <span class="news-list__navbar__category">IT</span>
+                <span class="news-list__navbar__category">영자지</span>
+                <span class="news-list__navbar__category">스포츠/연예</span>
+                <span class="news-list__navbar__category">지역</span>
+                <span class="news-list__navbar__category">매거진/전문지</span>
+            </nav>
+            <main class="news-list__main">
+                <div class="news-list__info">
+                    <span class="news-list__info__company">서울경제</span>
+                    <span class="news-list__info__date">2024.02.23</span>
+                </div>
+                <div>
+                    <div class="news-list__main__image">
+                        <span>이미지</span>
+                    </div>
+                    <div class="news-list__main__titles">
+                        <span>뉴스1</span>
+                        <span>뉴스1</span>
+                        <span>뉴스1</span>
+                        <span>뉴스1</span>
+                        <span>뉴스1</span>
+                    </div>
+                </div>
+            </main>
+        </article>
+    </div>
+    <script defer type="module" src="./js/index.js"></script>
+</body>
+</html>
