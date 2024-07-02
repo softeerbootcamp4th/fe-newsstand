@@ -1,5 +1,10 @@
 import { formatNumberDigit } from "../utils/format.js";
 
+/**
+ * @description 현재 날짜를 포맷해서 반환해주는 함수
+ * 
+ * @returns 2024. 07. 02. 화요일
+ */
 export function getCurrentDate() {
     const days = ['일', '월', '화', '수', '목', '금', '토']
     const date = new Date();

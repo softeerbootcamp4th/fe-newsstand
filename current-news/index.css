@@ -6,7 +6,58 @@
     word-break: keep-all;
 }
 .current-news__headline {
+    max-width: 360px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    position: absolute;
+}
+
+.current-news__rolling-box {
+    height: 17px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.current-news__disappear-text {
+    opacity: 0;
+    top: 0px;
+}
+.current-news__appear-text {
+    top: 17px;
+}
+
+.current-news__not-display {
+    opacity: 0;
+}
+
+.rolling-in {
+    animation-name: rolling-in;
+    animation-duration: 1s;
+    animation-delay: 0.3s;
+}
+.rolling-out {
+    animation-name: rolling-out;
+    animation-duration: 1s;
+}
+
+@keyframes rolling-in {
+    from {
+        top: 17px;
+    }
+    to {
+        top: 0px;
+    }
+}
+@keyframes rolling-out {
+    from {
+        opacity: 1;
+        top: 0px;
+    }
+    to {
+        opacity: 1;
+        top: -17px;
+    }
 }
