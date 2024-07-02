@@ -1,3 +1,9 @@
+import {
+  AppElementRenderer,
+  RenderedAppElement,
+  SimpleElement,
+} from "./appElement";
+
 const createApp = () => {
   const effectCleanUps = new Map<number, () => void>();
   let effectsKey = 0;
@@ -13,8 +19,8 @@ const createApp = () => {
   const states = new Map<number, any>();
   let statesKey = 0;
   let root: HTMLElement | null = null;
-  let app: (() => string) | null = null;
-  const init = (_root: HTMLElement, _app: () => string) => {
+  let app: AppElementRenderer | null = null;
+  const init = (_root: HTMLElement, _app: AppElementRenderer) => {
     root = _root;
     app = _app;
     render();
@@ -23,7 +29,22 @@ const createApp = () => {
     if (root == null || app == null) return;
     statesKey = 0;
     effectsKey = 0;
-    root.innerHTML = app();
+    root.innerHTML = "";
+
+    const currentElems: (SimpleElement | RenderedAppElement)[] = [app()];
+
+    while (currentElems.length > 0) {
+      const currentElem = currentElems.pop()!;
+      const parent = currentElem.parent ?? root;
+      if (currentElem instanceof SimpleElement) {
+        parent.appendChild(document.createTextNode(`${currentElem.value}`));
+        continue;
+      }
+      if (currentElem.node instanceof HTMLElement) {
+        parent.appendChild(currentElem.node);
+      }
+      currentElems.push(...currentElem.children);
+    }
   };
   const useState = <RawT = unknown>(initalState: RawT) => {
     type T = RawT extends unknown ? typeof initalState : RawT;
