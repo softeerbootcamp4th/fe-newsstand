@@ -10,7 +10,9 @@
     --black: #14212B;
 
     --blue100: #7890E7;
-    --blue500: #4362D0;    
+    --blue500: #4362D0;
+
+    font-family: "Pretendard";
 }
 
 .text-bold24 {
@@ -56,4 +58,18 @@
 
 .border {
     border: 1px solid var(--gray100);
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 700;
+	font-display: swap;
+	src: local('Pretendard Bold'), url(../static/fonts/Pretendard-Bold.woff2) format('woff2'), url(../static/fonts/Pretendard-Bold.woff) format('woff');
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 500;
+	font-display: swap;
+	src: local('Pretendard Medium'), url(../static/fonts/Pretendard-Medium.woff2) format('woff2'), url(../static/fonts/Pretendard-Medium.woff) format('woff');
 }
