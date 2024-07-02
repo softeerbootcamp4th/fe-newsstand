@@ -27,20 +27,21 @@ const createApp = () => {
   };
   const useState = <RawT = unknown>(initalState: RawT) => {
     type T = RawT extends unknown ? typeof initalState : RawT;
-    states.set(statesKey, initalState);
-
-    const state = states.get(statesKey) as T;
+    const localStatesKey = statesKey;
+    if (!states.has(localStatesKey)) {
+      states.set(localStatesKey, initalState);
+    }
+    const state = states.get(localStatesKey) as T;
     const get = () => {
       return state;
     };
     const update = (newState: T) => {
-      const lastState = get();
-      if (lastState != newState) {
-        states.set(statesKey, newState);
-        render();
+      if (state == newState) {
+        return;
       }
+      states.set(localStatesKey, newState);
+      render();
     };
-
     statesKey += 1;
     return [get, update] as [() => T, (newState: T) => void];
   };
