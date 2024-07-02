@@ -61,6 +61,9 @@ export const AppElement = ({
       for (const [styleKey, styleValue] of Object.entries(value)) {
         elem.style.setProperty(styleKey, `${styleValue}`);
       }
+    } else if (key === "className") {
+      const value = rawProps[key as keyof typeof rawProps] as string;
+      elem.className = value;
     } else if (key.startsWith("on")) {
       const value = rawProps[key as keyof typeof rawProps] as EventListener;
       const event = key.substring(2).toLowerCase();
