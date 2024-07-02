@@ -5,12 +5,10 @@ const NewsBox = (props) => {
 
     const handleMouseOver = () => {
         setIsHover(true);
-        console.log(props.icon + " HOVER!");
     };
 
     const handleMouseOut = () => {
         setIsHover(false);
-        console.log(props.icon + " UNHOVER!");
     };
 
     const bindEvents = () => {

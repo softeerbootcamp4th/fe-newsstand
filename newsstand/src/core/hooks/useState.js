@@ -6,12 +6,6 @@ const componentsState = {};
 const useState = (initialValue) => {
 	const { id, stateIndex, component, props } = currentComponent;
 
-  console.log("----")
-  console.log(id)
-  console.log(stateIndex)
-  console.log(props)
-
-
   if(!componentsState[id]){
     componentsState[id] = [];
   }
