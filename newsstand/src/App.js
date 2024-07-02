@@ -1,22 +1,21 @@
 import createComponent from './core/component/component.js';
-import ToggleTitle from './components/ToggleTitle.js';
-import Count from './components/Count.js';
-import NewsBox from './components/newsBox.js';
+import NewsBoxes from './components/NewsBoxes.js';
 
 const App = () => {
-  const toggleTitleComponent = createComponent(ToggleTitle);
-  const countComponent = createComponent(Count);
-  const newsBoxCoponent = createComponent(NewsBox, {title:"TEST"});
-
-  return {
-    element: `
-      <div>
-        ${toggleTitleComponent.element}
-        ${countComponent.element}
-        ${newsBoxCoponent.element}
-      </div>
-    `,
-  };
+    const newsBoxes = createComponent(NewsBoxes);
+    
+    return {
+        element: `
+        <div class="main-container">
+            <div class="contents-container">
+                <div class="header-container"> HEADER </div>
+                <div class="rolling-news-container"> ROLLING NEWS </div>
+                <div class="category-container"> CATEGORY </div>
+                ${newsBoxes.element}
+            </div>
+        </div>
+        `
+    };
 }
 
 export default App;
