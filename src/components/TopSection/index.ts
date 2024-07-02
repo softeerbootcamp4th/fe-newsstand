@@ -29,7 +29,7 @@ export const TopSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setFrom(getFrom() + 2);
-    }, 5000);
+    }, 51000);
     return () => {
       clearInterval(interval);
     };

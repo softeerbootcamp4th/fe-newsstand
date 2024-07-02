@@ -1,5 +1,6 @@
 import {
   AppElementRenderer,
+  RawElement,
   RenderedAppElement,
   SimpleElement,
 } from "./appElement";
@@ -26,25 +27,37 @@ const createApp = () => {
     app = _app;
     render();
   };
+  const _converRawElementToDom = (rawData: string) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(rawData, "text/xml");
+    return doc.documentElement;
+  };
   const render = () => {
     if (root == null || app == null) return;
     statesKey = 0;
     effectsKey = 0;
     root.innerHTML = "";
 
-    const currentElems: Deque<SimpleElement | RenderedAppElement> = new Deque();
+    const currentElems: Deque<SimpleElement | RenderedAppElement | RawElement> =
+      new Deque();
     currentElems.pushBack(app());
 
     while (currentElems.length > 0) {
       const currentElem = currentElems.popFront()!;
       const parent = currentElem.parent ?? root;
+
       if (currentElem instanceof SimpleElement) {
         parent.appendChild(document.createTextNode(`${currentElem.value}`));
+        continue;
+      }
+      if (currentElem instanceof RawElement) {
+        parent.appendChild(_converRawElementToDom(currentElem.node));
         continue;
       }
       if (currentElem.node instanceof HTMLElement) {
         parent.appendChild(currentElem.node);
       }
+      console.log(currentElem);
       currentElems.pushBack([...currentElem.children]);
     }
   };

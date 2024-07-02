@@ -1,5 +1,8 @@
-import { AppElement, AppElementProps } from "./appElement";
+import { AppElement, AppElementProps, RawElement } from "./appElement";
 
+export const Raw = (data: string) => {
+  return new RawElement(data);
+};
 type H1Props = AppElementProps<HTMLHeadingElement>["props"];
 export const H1 = (props: H1Props) =>
   AppElement({
