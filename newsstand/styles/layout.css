@@ -1,0 +1,49 @@
+.main-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contents-container{
+    width: 60%;
+    height: 80%;
+}
+
+.header-container{
+    height: 5%;
+    width: 100%;
+    background-color: aqua;
+}
+
+.rolling-news-container{
+    height: 5%;
+    width: 100%;
+    background-color: beige;
+}
+
+.category-container{
+    height: 5%;
+    width: 100%;
+    background-color: azure;
+}
+
+.news-container{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+    height: 70%;
+    width: 100%;
+    background-color:brown;
+}
+
+.NewsBoxes{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+    height: 70%;
+    width: 100%;
+    background-color:brown;
+}
