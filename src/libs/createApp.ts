@@ -1,6 +1,17 @@
 const createApp = () => {
+  const effectCleanUps = new Map<number, () => void>();
+  let effectsKey = 0;
+  const useEffect = (effectFunc: () => () => void) => {
+    const lstEffectCleanUp = effectCleanUps.get(effectsKey);
+    lstEffectCleanUp?.();
+    const effectCleanUp = effectFunc();
+    effectCleanUps.set(effectsKey, effectCleanUp);
+    effectsKey += 1;
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const hooks = new Map<string, any>();
+  const states = new Map<number, any>();
+  let statesKey = 0;
   let root: HTMLElement | null = null;
   let app: (() => string) | null = null;
   const init = (_root: HTMLElement, _app: () => string) => {
@@ -10,31 +21,36 @@ const createApp = () => {
   };
   const render = () => {
     if (root == null || app == null) return;
+    statesKey = 0;
+    effectsKey = 0;
     root.innerHTML = app();
   };
   const useState = <RawT = unknown>(initalState: RawT) => {
     type T = RawT extends unknown ? typeof initalState : RawT;
-    const key = `${Date.now()}`;
-    hooks.set(key, initalState);
+    states.set(statesKey, initalState);
+
+    const state = states.get(statesKey) as T;
     const get = () => {
-      return hooks.get(key) as T;
+      return state;
     };
     const update = (newState: T) => {
       const lastState = get();
       if (lastState != newState) {
-        hooks.set(key, newState);
+        states.set(statesKey, newState);
         render();
       }
     };
 
-    return [get, update];
+    statesKey += 1;
+    return [get, update] as [() => T, (newState: T) => void];
   };
 
   return {
     init,
     useState,
+    useEffect,
   };
 };
 
-const { init, useState } = createApp();
-export { init, useState };
+const { init, useState, useEffect } = createApp();
+export { init, useState, useEffect };
