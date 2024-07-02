@@ -4,12 +4,10 @@ export interface News {
   title: string;
 }
 
-export interface RecentNewsList {
-  data: {
-    mediaId: number;
-    news: News;
-  }[];
-}
+export type RecentNewsList = {
+  mediaId: number;
+  news: News;
+};
 
 export interface MediaRecentNewsList {
   data: News[];
