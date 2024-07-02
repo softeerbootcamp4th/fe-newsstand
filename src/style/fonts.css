@@ -1,0 +1,95 @@
+:root {
+    --grayscale-white-alt: rgba(255, 255, 255, 0.7);
+    --grayscale-white: #FFFFFF;
+    --grayscale-50: #F5F7F9;
+    --grayscale-100: #D2DAE0;
+    --grayscale-200: #879298;
+    --grayscale-300: #6E8091;
+    --grayscale-400: #5F6E76;
+    --grayscale-500: #4B5966;
+    --grayscale-black: #14212B;
+    --blue-100: #7890E7;
+    --blue-500: #4362D0;
+
+    --surface-alt: #F5F7F9;
+}
+
+
+.display-bold24 {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: auto;
+    color: var(--grayscale-black);
+}
+
+
+.selected-bold16,
+.display-bold16 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: auto;
+    cursor: pointer;
+    color: var(--grayscale-black);
+}
+
+
+.selected-bold14,
+.display-bold14 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: auto;
+    color: var(--grayscale-black);
+}
+
+
+.display-bold12 {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: auto;
+    color: var(--grayscale-black);
+}
+
+
+.available-medium16,
+.display-medium16 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: auto;
+    color: var(--grayscale-400);
+    cursor: pointer;
+}
+
+
+.available-medium14,
+.display-medium14 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: auto;
+    color: var(--grayscale-400);
+}
+
+
+.available-medium12,
+.display-medium12 {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: auto;
+    color: var(--grayscale-black);
+}
+
+
+.hover-midium16 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: auto;
+    text-decoration: underline;
+    color: var(--grayscale-black);
+}
+
+.hover-midium16 {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: auto;
+    text-decoration: underline;
+    color: var(--grayscale-black);
+}
