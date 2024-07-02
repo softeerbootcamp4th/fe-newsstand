@@ -1,7 +1,7 @@
 import { Div, Span } from "@/libs/Elements";
 import { formatDate } from "@/utils/formatDate";
 import { Icon } from "./Icon";
-import styles from "./title.module.css";
+import styles from "./Title.module.css";
 import typoStyles from "@/styles/typo.module.css";
 export const Title = () => {
   return Div({

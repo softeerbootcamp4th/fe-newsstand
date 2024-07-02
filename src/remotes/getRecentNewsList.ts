@@ -12,7 +12,7 @@ export const getRecentNewsList = ({
     {
       mediaId: 1,
       news: {
-        title: `test${from}`,
+        title: `test${from}${from}${from}${from}${from}`,
         href: "#",
         imgSrc: "https://picsum.photos/200",
       },
@@ -20,7 +20,9 @@ export const getRecentNewsList = ({
     {
       mediaId: 1,
       news: {
-        title: `test${from + 1}`,
+        title: `test${from + 1}${from + 1}${from + 1}${from + 1}${from + 1}${
+          from + 1
+        }`,
         href: "#",
         imgSrc: "https://picsum.photos/200",
       },

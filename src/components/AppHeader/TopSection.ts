@@ -1,44 +1,32 @@
 import { useState, useEffect } from "../../libs/createApp";
-import { A, Section, Span } from "../../libs/Elements";
-import { News, RecentNewsList } from "../../models/News";
-import { getMediaById } from "../../remotes/getMediaById";
+import { Section } from "../../libs/Elements";
+import { RecentNewsList } from "../../models/News";
 import { getRecentNewsList } from "../../remotes/getRecentNewsList";
-
-const RecentNews = ({ mediaId, news }: { mediaId: number; news: News }) => {
-  const media = getMediaById(mediaId);
-
-  return A({
-    href: news.href,
-    children: [
-      Span({
-        children: [media.name],
-      }),
-      Span({
-        children: [news.title],
-      }),
-    ],
-  });
-};
+import styles from "./TopSection.module.css";
+import { RecentNews } from "./RecentNews";
 export const TopSection = () => {
   const [getFrom, setFrom] = useState(0);
+  const [getIsHovering, setIsHovering] = useState(false);
   const recentNewsList: RecentNewsList[] = getRecentNewsList({
     from: getFrom(),
     limit: 2,
   });
-
   useEffect(() => {
     const interval = setInterval(() => {
+      if (getIsHovering()) return;
       setFrom(getFrom() + 2);
-    }, 51000);
+    }, 512000);
     return () => {
       clearInterval(interval);
     };
   });
   return Section({
+    className: `${styles.container}`,
     children: recentNewsList.map((recentNews) =>
       RecentNews({
         mediaId: recentNews.mediaId,
         news: recentNews.news,
+        setIsHovering: setIsHovering,
       }),
     ),
   });

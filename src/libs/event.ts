@@ -13,3 +13,16 @@ export type EventMap = {
   onKeydown: EventListener<KeyboardEvent>;
   onKeyup: EventListener<KeyboardEvent>;
 };
+
+export const EventNameMap = {
+  onClick: "click",
+  onInput: "input",
+  onChange: "change",
+  onSubmit: "submit",
+  onHover: "mouseenter",
+  onLeave: "mouseleave",
+  onScroll: "scroll",
+  onResize: "resize",
+  onKeydown: "keydown",
+  onKeyup: "keyup",
+};

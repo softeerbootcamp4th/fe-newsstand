@@ -1,4 +1,4 @@
-import { EventMap } from "./event";
+import { EventMap, EventNameMap } from "./event";
 
 export interface AppElementProps<T extends HTMLElement = HTMLElement> {
   tagName: string;
@@ -78,7 +78,7 @@ export const AppElement = ({
       elem.className = value;
     } else if (key.startsWith("on")) {
       const value = props[key as keyof typeof props] as EventListener;
-      const event = key.substring(2).toLowerCase();
+      const event = EventNameMap[key as keyof EventMap];
       elem.addEventListener(event, value);
       eventListeners.set(event, value);
     } else {

@@ -57,7 +57,6 @@ const createApp = () => {
       if (currentElem.node instanceof HTMLElement) {
         parent.appendChild(currentElem.node);
       }
-      console.log(currentElem);
       currentElems.pushBack([...currentElem.children]);
     }
   };
