@@ -1,0 +1,197 @@
+:root{
+	--grayscale-white-alt: #ffffffb3;
+	--grayscale-white: #ffffff;
+	--grayscale-50: #f5f7f9;
+	--grayscale-100: #d2dae0;
+	--grayscale-200: #879298;
+	--grayscale-300: #6e8091;
+	--grayscale-400: #5f6e76;
+	--grayscale-500: #4b5966;
+	--grayscale-black: #14212b;
+	--blue-100: #7890e7;
+	--blue-500: #4362d0;
+	.bold24 {
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+	.bold16 {
+		font-size: 1rem;
+		font-weight: 700;
+	}
+	.bold14 {
+		font-size: 0.875rem;
+		font-weight: 700;
+	}
+	.bold12 {
+		font-size: 0.75rem;
+		font-weight: 700;
+	}
+	.medium16 {
+		font-size: 1rem;
+		line-height: 1.375rem;
+	}
+	.medium14 {
+		font-size: 0.875rem;
+	}
+	.medium12 {
+		font-size: 0.75rem;
+	}
+	.underline {
+		text-decoration: underline;
+	}
+}
+
+
+@media (prefers-color-scheme: light) {
+	:root{
+		--text-strong: var(--grayscale-black, #14212b);
+		--text-bold: var(--grayscale-500, #4b5966);
+		--text-default: var(--grayscale-400, #5f6e76);
+		--text-weak: var(--grayscale-200, #879298);
+		--text-white-default: var(--grayscale-white, #ffffff);
+		--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
+		--text-point: var(--blue-500, #4362d0);
+		--surface-default: var(--grayscale-white, #ffffff);
+		--surface-alt: var(--grayscale-50, #f5f7f9);
+		--surface-brand-default: var(--blue-500, #4362d0);
+		--surface-brand-alt: var(--blue-100, #7890e7);
+		--border-bold: var(--grayscale-300, #6e8091);
+		--border-default: var(--grayscale-100, #d2dae0);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--text-strong: var(--grayscale-white, #ffffff);
+		--text-bold: var(--grayscale-50, #f5f7f9);
+		--text-default: var(--grayscale-100, #d2dae0);
+		--text-weak: var(--grayscale-white-alt, #ffffffb3);
+		--text-white-default: var(--grayscale-white, #ffffff);
+		--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
+		--text-point: var(--blue-500, #4362d0);
+		--surface-default: var(--grayscale-black, #14212b);
+		--surface-alt: var(--grayscale-500, #4b5966);
+		--surface-brand-default: var(--blue-500, #4362d0);
+		--surface-brand-alt: var(--blue-100, #7890e7);
+		--border-bold: var(--grayscale-white-alt, #ffffffb3);
+		--border-default: var(--grayscale-400, #5f6e76);
+	}
+}
+
+html, body, p {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	margin-top: 40px;
+	justify-content: center;
+}
+
+.overallWrapper {
+	width: calc(100% - 60px);
+	max-width: 930px;
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.titleWrapper {
+	width: 100%;
+	height: 29px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.title {
+	margin: 0px;
+	display: flex;
+	gap: 8px;
+	color: var(--text-strong);
+}
+
+.date {
+	color: var(--text-default);
+}
+
+.rollerWrapper {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	gap: 8px;
+}
+
+.roller {
+	width: 50%;
+	flex-basis: 50%;
+	flex-shrink: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 16px;
+	padding: 16px;
+	background-color: var(--surface-alt);
+	border: 1px solid var(--border-default);
+}
+
+.rollerCompany {
+	color: var(--text-strong);
+	font-size: 0.875rem;
+	font-weight: 700;
+}
+
+.rollerDesc {
+	color: var(--text-default);
+	font-size: 0.875rem;
+}
+
+.mainWrapper {
+	width: 100%;
+	diaplay: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+nav {
+	width: 100%;
+	height: 24px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.leftNav {
+	display: flex;
+	gap: 24px;
+}
+
+.menuTitle {
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--text-weak);
+	cursor: pointer;
+}
+
+.menuTitle.selected {
+	font-weight: 700;
+	color: var(--text-strong);
+}
+
+.rightNav {
+	display: flex;
+	gap: 8px;
+}
+
+.navIcon {
+	width: 24px;
+	height: 24px;
+	fill: var(--text-weak);
+	cursor: pointer;
+}
+
+.navIcon.selected {
+	fill: var(--text-point);
+}
