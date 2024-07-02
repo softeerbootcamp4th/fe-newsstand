@@ -6,15 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script type="module" src="./static/js"></script>
+    <link rel="stylesheet" href="./static/css/index.css">
 </head>
 
 <body>
     <div id="newsstand">
-        <div id="newsstandTitle"></div>
+        <div id="newsstandTitle">
+            <div class="container">
+                <img id="mySvgImage" src="./static/assets/images/newsstandTitleSymbol.svg" alt="Description of SVG">
+                <h1 style="font-size: 24px; padding-left: 5px;">뉴스 스탠드</h1>
+                <h3 id="newstandTitleDate">2024. 02. 14 수요일</h3>
+            </div>
+        </div>
         <div id="newsstandRecentArticles"></div>
         <div id="newsstandDetailTitle"></div>
         <div id="newsstandCollection"></div>
-    </div>
+
 </body>
 
 </html>
