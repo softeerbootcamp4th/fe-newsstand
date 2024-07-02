@@ -7,13 +7,13 @@
 </head>
 <body>
 	<div class="overallWrapper">
-		<div class="titleWrapper">
+		<header class="titleWrapper">
 			<h2 class="title bold24">
-				<embed type="image/svg+xml" src="./assets/icons/newspaper.svg" width="24" height="24"></embed>
+				<object type="image/svg+xml" data="./assets/icons/newspaper.svg" width="24" height="24"></object>
 				뉴스스탠드
 			</h2>
 			<p class="date medium16">2024. 07. 02. 화요일</p>
-		</div>
+		</header>
 		<div class="rollerWrapper">
 			<div class="roller">
 				<p class="rollerCompany">연합뉴스</p>
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<main class="mainWrapper">
-			<nav>
+			<nav class="mainNav">
 				<div class="leftNav">
 					<span id="allMediaSelector" class="menuTitle selected">전체 언론사</span>
 					<span id="subMediaSelector" class="menuTitle">내가 구독한 언론사</span>
@@ -41,9 +41,18 @@
 			</nav>
 			<section id="newsSection">
 			</section>
-			<div id="leftMoveButton" class="leftMoveIcon"></div>
-			<div id="rightMoveButton" class="rightMoveIcon"></div>
+			<div id="leftMoveButton" class="moveIcon left">
+				<svg width="24" height="40">
+					<path d="M24 0 L 0 20 L 24 40" fill="none" stroke="inherit" strokeWidth="1" />
+				</svg>
+			</div>
+			<div id="rightMoveButton" class="moveIcon right">
+				<svg width="24" height="40">
+					<path d="M0 0 L 24 20 L 0 40" fill="none" stroke="inherit" strokeWidth="1" />
+				</svg>
+			</div>
 		</main>
 	</div>
+	<script src="./js/index.js" type="module"></script>
 </body>
 </html>

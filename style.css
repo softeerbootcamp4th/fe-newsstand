@@ -149,13 +149,14 @@ body {
 }
 
 .mainWrapper {
+	position: relative;
 	width: 100%;
-	diaplay: flex;
+	display: flex;
 	flex-direction: column;
 	gap: 24px;
 }
 
-nav {
+.mainNav {
 	width: 100%;
 	height: 24px;
 	display: flex;
@@ -173,11 +174,10 @@ nav {
 	font-weight: 500;
 	color: var(--text-weak);
 	cursor: pointer;
-}
-
-.menuTitle.selected {
-	font-weight: 700;
-	color: var(--text-strong);
+	&.selected {
+		font-weight: 700;
+		color: var(--text-strong);
+	}
 }
 
 .rightNav {
@@ -190,8 +190,37 @@ nav {
 	height: 24px;
 	fill: var(--text-weak);
 	cursor: pointer;
+	&.selected {
+		fill: var(--text-point);
+	}
 }
 
-.navIcon.selected {
-	fill: var(--text-point);
+#newsSection {
+	width: 100%;
+	height: 388px;
+	border: 1px solid var(--border-default);
+	box-sizing: border-box;
 }
+
+.moveIcon {
+	position: absolute;
+	stroke: var(--border-bold);
+	top: 222px;
+	cursor: pointer;
+	transition: transform 0.5s;
+	&:hover {
+		transform: scale(1.1);
+	}
+	&:active {
+		transform: scale(0.9);
+	}
+}
+
+.moveIcon.left {
+	left: -48px;
+}
+
+.moveIcon.right {
+	right: -48px;
+}
+
