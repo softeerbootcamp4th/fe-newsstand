@@ -2,19 +2,30 @@ import headers from "../data/headers.js"
 
 const newsHeader = Array.from(document.getElementsByClassName("content-sub-header__news-header"));
 const hiddenHeader = Array.from(document.getElementsByClassName("content-sub-header__news-header_invisible"));
-let time = setInterval(animateHeaders, 5000);
+let time = 0;
+let returnValue = setInterval(animateHeaders, 5000);
 let one, two, three, four;
 
 newsHeader.forEach((element) => {
     element.addEventListener("mouseover", onHoverHandler);
+    element.addEventListener("mouseout", continueAnimate);
 })
 
 hiddenHeader.forEach((element) => {
     element.addEventListener("mouseover", onHoverHandler);
+    element.addEventListener("mouseout", continueAnimate);
 })
 
 function onHoverHandler() {
     one.cancel();
+    two.cancel();
+    three.cancel();
+    four.cancel();
+    clearInterval(returnValue);
+}
+
+function continueAnimate() {
+    returnValue = setInterval(animateHeaders, 5000)
 }
 
 function setLeftName() {

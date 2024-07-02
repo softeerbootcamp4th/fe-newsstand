@@ -81,8 +81,12 @@
     font-size: 16px;
     font-weight: 300;
     display: block;
+    cursor: pointer;
 }
 
+.content-sub-header__news-header:hover {
+    text-decoration: underline;
+}
 /* news list */
 .news-list__menu {
     display: flex;
