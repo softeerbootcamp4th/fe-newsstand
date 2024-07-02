@@ -1,0 +1,90 @@
+/* Regular CSS variables to use everywhere else */
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+}
+
+:root {
+    /* font */
+    --font-primary: "Pretendard-Regular";
+
+    /* type */
+    --font-weight-medium: medium;
+    --font-weight-bold: bold;
+
+    /* size */
+    --font-size-large: 24px;
+    --font-size-medium: 16px;
+    --font-size-regular: 14px;
+    --font-size-small: 12px;
+
+    /* line height */
+    --line-height-auto: 100%;
+    --line-height-22: 22px;
+
+    /* style */
+    --text-decoration-underline: underline;
+}
+
+html { font-family: var(--font-primary); }
+
+.display-bold24 { }
+
+.display-bold16 { }
+
+.display-bold14 { }
+
+.display-bold12 { }
+
+.display-medium16 { }
+
+.display-medium14 { }
+
+.display-medium12 { }
+
+.selected-bold16 { }
+
+.selected-bold14 { }
+
+.available-medium16 { }
+
+.available-medium14 { }
+
+.available-medium12 { }
+
+.hover-medium16 { }
+
+.hover-medium14 { }
+
+.display-bold12, .display-bold14, .display-bold16, .display-bold24, .selected-bold14, .selected-bold16 {
+    font-weight: var(--font-weight-bold);
+}
+
+.hover-medium14, .hover-medium16, .display-medium12, .display-medium14, .display-medium16, .available-medium12, .available-medium14, .available-medium16 {
+    font-weight: var(--font-size-regular);
+}
+
+.display-bold24 {
+    font-size: var(--font-size-large);
+}
+
+.display-bold16, .display-medium16, .selected-bold16, .available-medium16, .hover-medium16 {
+    font-size: var(--font-size-regular);
+}
+
+.display-bold14, .display-medium14, .selected-bold14, .available-medium14, .hover-medium14 {
+    font-size: var(--font-size-regular);
+}
+
+.display-bold12, .display-medium12, .available-medium12 {
+    font-size: var(--font-size-small);
+}
+
+.hover-medium16, .display-medium16, .available-medium16 {
+    line-height: var(--line-height-22);
+}
+
+.hover-medium14, .hover-medium16 {
+    text-decoration: var(--text-decoration-underline);
+}
