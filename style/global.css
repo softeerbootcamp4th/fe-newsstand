@@ -16,6 +16,8 @@
 
   --blue-100: #7890e7;
   --blue-500: #4362d0;
+
+  color: var(--gray-400);
 }
 
 #app {
