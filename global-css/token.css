@@ -78,22 +78,16 @@
     color: var(--blue500);
 }
 .surface--default {
-    color: var(--white);
+    background-color: var(--white);
 }
 .surface--alt {
-    color: var(--gray50);
+    background-color: var(--gray50);
 }
 .surface__brand--default {
-    color: var(--blue500);
+    background-color: var(--blue500);
 }
 .surface__brand--alt {
-    color: var(--blue100);
-}
-.border--bold {
-    color: var(--gray300);
-}
-.border--default {
-    color: var(--gray100);
+    background-color: var(--blue100);
 }
 
 @font-face {

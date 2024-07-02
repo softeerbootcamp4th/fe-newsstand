@@ -1,5 +1,6 @@
 .border {
     border: 1px solid var(--gray100);
+    box-sizing: border-box;
 }
 
 .flexbox__space-between--center {
@@ -10,6 +11,10 @@
 .flexbox__flex-start--center {
     display: flex;
     align-items: center;
+}
+.flexbox__column-direction {
+    display: flex;
+    flex-direction: column;
 }
 
 .gap8 {
@@ -23,6 +28,9 @@
 }
 .gap32 {
     gap: 32px;
+}
+.gap40 {
+    gap: 40px;
 }
 .gap48 {
     gap: 48px;

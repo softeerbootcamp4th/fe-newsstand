@@ -1,0 +1,12 @@
+.current-news__box {
+    padding: 16px;
+    width: 461px;
+}
+.current-news__media-title {
+    word-break: keep-all;
+}
+.current-news__headline {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
