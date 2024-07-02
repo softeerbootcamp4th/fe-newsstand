@@ -1,0 +1,110 @@
+:root {
+    --white-alt: rgba(255,255,255,0.7);
+    --white: #FFFFFF;
+    --gray50: #F5F7F9;
+    --gray100: #D2DAE0;
+    --gray200: #879298;
+    --gray300: #6E8091;
+    --gray400: #5F6E76;
+    --gray500: #4B5966;
+    --black: #14212B;
+
+    --blue100: #7890E7;
+    --blue500: #4362D0;
+
+    font-family: "Pretendard";
+}
+
+.text__bold24 {
+    font-weight: 700;
+    font-size: 24px;
+}
+.text__bold16 {
+    font-weight: 700;
+    font-size: 16px;
+}
+.text__bold14 {
+    font-weight: 700;
+    font-size: 14px;
+}
+.text__bold12 {
+    font-weight: 700;
+    font-size: 12px;
+}
+.text__medium16 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+}
+.text__medium16--underline {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    text-decoration: underline;
+}
+.text__medium14 {
+    font-weight: 500;
+    font-size: 14px;
+}
+.text__medium14--underline {
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: underline;
+}
+.text__medium12 {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.text--strong {
+    color: var(--black);
+}
+.text--bold {
+    color: var(--gray500);
+}
+.text--default {
+    color: var(--gray400);
+}
+.text--weak {
+    color: var(--gray200);
+}
+.text__white--default {
+    color: var(--white);
+}
+.text__white--weak {
+    color: var(--white-alt);
+}
+.text__point {
+    color: var(--blue500);
+}
+.surface--default {
+    color: var(--white);
+}
+.surface--alt {
+    color: var(--gray50);
+}
+.surface__brand--default {
+    color: var(--blue500);
+}
+.surface__brand--alt {
+    color: var(--blue100);
+}
+.border--bold {
+    color: var(--gray300);
+}
+.border--default {
+    color: var(--gray100);
+}
+
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 700;
+	font-display: swap;
+	src: local('Pretendard Bold'), url(../static/fonts/Pretendard-Bold.woff2) format('woff2'), url(../static/fonts/Pretendard-Bold.woff) format('woff');
+}
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 500;
+	font-display: swap;
+	src: local('Pretendard Medium'), url(../static/fonts/Pretendard-Medium.woff2) format('woff2'), url(../static/fonts/Pretendard-Medium.woff) format('woff');
+}

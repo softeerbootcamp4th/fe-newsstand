@@ -1,0 +1,29 @@
+.border {
+    border: 1px solid var(--gray100);
+}
+
+.flexbox__space-between--center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flexbox__flex-start--center {
+    display: flex;
+    align-items: center;
+}
+
+.gap8 {
+    gap: 8px;
+}
+.gap16 {
+    gap: 16px;
+}
+.gap24 {
+    gap: 24px;
+}
+.gap32 {
+    gap: 32px;
+}
+.gap48 {
+    gap: 48px;
+}
