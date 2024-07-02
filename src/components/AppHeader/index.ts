@@ -1,7 +1,7 @@
 import { Header, Span } from "../../libs/Elements";
 import { formatDate } from "../../utils/formatDate";
 import { Icon } from "./Icon";
-import typoStyles from "../../styles/typo.module.css";
+import typoStyles from "@/styles/typo.module.css";
 import styles from "./index.module.css";
 export const AppHeader = () => {
   return Header({
