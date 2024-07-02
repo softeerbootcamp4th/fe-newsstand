@@ -3,7 +3,7 @@ import { getNextNumber } from "../utils/getNextNumber.js";
 /**
  * @description 최신 뉴스 DOM의 텍스트를 rolling 해주는 함수
  */
-export function rolling(rollingBoxDOM, rollingData) {
+export function rollingDOM(rollingBoxDOM, rollingData) {
     const length = rollingData.length;
 
     const staticTextDOM = rollingBoxDOM.querySelector('.current-news__static-text');
@@ -11,6 +11,7 @@ export function rolling(rollingBoxDOM, rollingData) {
     const appearTextDOM = rollingBoxDOM.querySelector('.current-news__appear-text');
 
     staticTextDOM.innerText = rollingData.newsList[0].title;
+    staticTextDOM.href = rollingData.newsList[0].url;
 
     if (length === 1) {
         return;
@@ -19,14 +20,15 @@ export function rolling(rollingBoxDOM, rollingData) {
     let prevIdx = 0, nextIdx = 1;
     disappearTextDOM.innerText = rollingData.newsList[prevIdx].title;
     appearTextDOM.innerText = rollingData.newsList[nextIdx].title;
-    
-    setInterval(() => {
+
+    function rolling() {
         // rolling 애니메이션 실행
         staticTextDOM.classList.add('current-news__not-display')
         disappearTextDOM.classList.add('rolling-out');
         appearTextDOM.classList.add('rolling-in');
 
         staticTextDOM.innerText = rollingData.newsList[nextIdx].title;
+        staticTextDOM.href = rollingData.newsList[nextIdx].url;
 
         // 다음 rolling 애니메이션을 위해 초기화
         prevIdx = getNextNumber(prevIdx, length);
@@ -40,5 +42,18 @@ export function rolling(rollingBoxDOM, rollingData) {
             disappearTextDOM.innerText = rollingData.newsList[prevIdx].title;
             appearTextDOM.innerText = rollingData.newsList[nextIdx].title;        
         }, 1200);
-    }, 5000);
+    }
+    
+    let intervalRolling = setInterval(rolling, 5000);
+
+    staticTextDOM.addEventListener('mouseover', () => {
+        staticTextDOM.classList.remove('text__medium14');
+        staticTextDOM.classList.add('text__medium14--underline');
+        clearInterval(intervalRolling);
+    })
+    staticTextDOM.addEventListener('mouseout', () => {
+        staticTextDOM.classList.add('text__medium14');
+        staticTextDOM.classList.remove('text__medium14--underline');
+        intervalRolling = setInterval(rolling, 5000);
+    })
 }
