@@ -1,5 +1,5 @@
-import "./app.css";
-import Header from "./components/Header";
+import "./App.css";
+import Header from "./src/components/Header/Header";
 
 function App({ $target }) {
   this.$element = document.createElement("main");
