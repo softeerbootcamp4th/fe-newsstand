@@ -12,8 +12,8 @@
     --font-primary: "Pretendard-Regular";
 
     /* type */
-    --font-weight-medium: medium;
-    --font-weight-bold: bold;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
 
     /* size */
     --font-size-large: 24px;
@@ -27,6 +27,11 @@
 
     /* style */
     --text-decoration-underline: underline;
+
+    /*font*/
+    --font-medium16: var(--font-size-medium) var(--font-weight-medium) var(--line-height-22);
+    --font-bold14: var(--font-size-regular) var(--font-weight-bold) var(--line-height-auto);
+    --font-medium14: var(--font-size-regular) var(--font-weight-medium) var(--line-height-auto);
 }
 
 html { font-family: var(--font-primary); }
@@ -64,7 +69,7 @@ html { font-family: var(--font-primary); }
 }
 
 .hover-medium14, .hover-medium16, .display-medium12, .display-medium14, .display-medium16, .available-medium12, .available-medium14, .available-medium16 {
-    font-weight: var(--font-size-regular);
+    font-weight: var(--font-weight-medium);
 }
 
 .display-bold24 {
@@ -72,7 +77,7 @@ html { font-family: var(--font-primary); }
 }
 
 .display-bold16, .display-medium16, .selected-bold16, .available-medium16, .hover-medium16 {
-    font-size: var(--font-size-regular);
+    font-size: var(--font-size-medium);
 }
 
 .display-bold14, .display-medium14, .selected-bold14, .available-medium14, .hover-medium14 {

@@ -1,5 +1,9 @@
 @import "../foundation/foundation.css";
 
 .snackBar {
-    
+    width: max-content  ;
+    color: var(--color-text-white-default);
+    box-shadow: var(--box-shadow);
+    padding: 16px 24px 16px 24px;
+    background-color: var(--color-surface-brand-default);
 }

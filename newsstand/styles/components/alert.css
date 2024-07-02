@@ -1,0 +1,52 @@
+@import "../foundation/foundation.css";
+
+.alert {
+    box-shadow: var(--box-shadow);
+    width: 320px;
+    height: 140px;
+}
+
+.alert-text {
+    height: 92px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    color: var(--color-text-default);
+    background-color: var(--surface-default);
+}
+
+.alert-button {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 48px;
+    margin: 0 auto;
+    background-color: var(--color-surface-alt);
+}
+
+.alert-left-button {
+    font: var(--font-medium16);
+    color: var(--color-text-default);
+    border: var(--border-default);
+    width: 50%;
+    height: 100%;
+}
+
+.alert-left-button:hover {
+    text-decoration: var(--text-decoration-underline);
+}
+
+.alert-right-button {
+    font: var(--font-medium16);
+    color: var(--color-text-strong);
+    border: var(--border-default);
+    width: 50%;
+    height: 100%;
+}
+
+.alert-right-button:hover {
+    text-decoration: var(--text-decoration-underline);
+}
