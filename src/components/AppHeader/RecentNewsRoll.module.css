@@ -37,5 +37,8 @@
 
 .link:hover {
   text-decoration: underline;
-  animation-play-state: paused;
+
+  * {
+    animation-play-state: paused;
+  }
 }

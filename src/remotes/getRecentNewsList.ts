@@ -1,31 +1,19 @@
-import { RecentNewsList } from "../models/News";
+import { RecentNews } from "../models/News";
 
-interface GetRecentNewsListProps {
+interface GetRecentNewsProps {
   from: number;
   limit?: number;
 }
-export const getRecentNewsList = ({
+export const getRecentNews = ({
   from,
   limit = 2,
-}: GetRecentNewsListProps): RecentNewsList[] => {
-  return [
-    {
-      mediaId: 1,
-      news: {
-        title: `test${from}${from}${from}${from}${from}`,
-        href: "#",
-        imgSrc: "https://picsum.photos/200",
-      },
+}: GetRecentNewsProps): RecentNews => {
+  return {
+    mediaId: 1,
+    news: {
+      title: `test${from}${from}${from}${from}${from}`,
+      href: "#",
+      imgSrc: "https://picsum.photos/200",
     },
-    {
-      mediaId: 1,
-      news: {
-        title: `test${from + 1}${from + 1}${from + 1}${from + 1}${from + 1}${
-          from + 1
-        }`,
-        href: "#",
-        imgSrc: "https://picsum.photos/200",
-      },
-    },
-  ];
+  };
 };

@@ -4,7 +4,7 @@ export interface News {
   title: string;
 }
 
-export type RecentNewsList = {
+export type RecentNews = {
   mediaId: number;
   news: News;
 };
