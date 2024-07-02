@@ -1,0 +1,223 @@
+.news_wrapper {
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    width: 930px;
+    height: 300px;
+}
+
+.content_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.title_wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    color: #14212B;
+    gap: 8px;
+}
+
+.rotating_box_container {
+    width: 50%;
+    height: 49px;
+    overflow-y: hidden;
+}
+
+.rotating_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid gray;
+    flex-grow: 1;
+    height: 49px;
+    background-color: #F5F7F9;
+    color: #5F6E76;
+    border: 1px solid #D2DAE0;
+    padding: 16px;
+    box-sizing: border-box;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.roll_out {
+    animation: roll_out 5.0s linear infinite;
+}
+
+.roll_in {
+    animation: roll_in 5.0s linear infinite;
+    transform: translateY(-100%);
+}
+
+.rotating_box:hover .available-medium14 {
+    text-underline-offset: 2px;
+    text-decoration: underline;
+}
+
+@keyframes roll_out {
+    0% {
+        transform: translateY(0%) scaleY(1);
+    }
+    10% {
+        transform: translateY(-50%) scaleY(0);
+    }
+    100% {
+        transform: translateY(-50%) scaleY(0);
+    }
+}
+
+@keyframes roll_in {
+    0% {
+        transform: translateY(-50%) scaleY(0);
+    }
+    10% {
+        transform: translateY(-100%) scaleY(1);
+    }
+    100% {
+        transform: translateY(-100%) scaleY(1);
+    }
+}
+
+.toggle_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    height: 24px;
+    color: #879298;
+}
+
+.toggle_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    color: #879298;
+    cursor: pointer;
+}
+
+.toggle_item_active {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #14212B;   
+}
+
+.news_detail_box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #D2DAE0;
+    height: 388px;
+    width: 100%;
+}
+
+.new_detail_context_box {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+}
+
+.new_detail_context_header {
+    display: flex;
+    box-sizing: border-box;
+    padding: 2px 0px;
+    color: #5F6E76;
+}
+
+.news_detail_tap_box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #D2DAE0;
+}
+
+.news_detail_tap_item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #F5F7F9;
+    height: 40px;
+    width: 100%;
+    color: #879298;
+    box-sizing: border-box;
+    padding: 16px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.news_detail_tap_box::-webkit-scrollbar {
+    display: none;
+}
+
+.news_detail_tap_item:hover {
+    color: #FFFFFF;
+    background-color: gray;
+    /* transition: color 1.5s ease; */
+}
+
+.news_subscribe_button {
+    box-sizing: border-box;
+    padding: 4px 14px 4px 7px;
+    border-radius: 50px;
+    border: 1px solid #D2DAE0;
+    color: #879298;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+}
+
+.news_image_card {
+    display: flex;
+    height: 260px;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #14212B;
+    gap: 16px
+}
+
+.news_letter_title_box {
+    box-sizing: border-box;
+    padding-left: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #4B5966;
+}
+
+.left_arrow {
+    position: absolute;
+    left: -64px;
+}
+
+.right_arrow {
+    position: absolute;
+    right: -64px;
+}
+
+.left_arrow:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.right_arrow:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
