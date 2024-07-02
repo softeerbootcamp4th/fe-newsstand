@@ -12,6 +12,10 @@ const createComponent = (component, props) => {
 	const previousComponent = currentComponent;
 
 	currentComponent = { id: component.name, stateIndex: 0, component, props };
+	
+	if (props){
+		currentComponent.id += props.id
+	}
 
 	const componentInstance = component(props);
 
@@ -19,7 +23,7 @@ const createComponent = (component, props) => {
 	
 	componentInstance.element = namedComponent;
 
-	bindEventsAfterRender(componentInstance, component.name);
+	bindEventsAfterRender(componentInstance, currentComponent.id);
 
 	currentComponent = previousComponent;
   

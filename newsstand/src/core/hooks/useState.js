@@ -6,6 +6,12 @@ const componentsState = {};
 const useState = (initialValue) => {
 	const { id, stateIndex, component, props } = currentComponent;
 
+  console.log("----")
+  console.log(id)
+  console.log(stateIndex)
+  console.log(props)
+
+
   if(!componentsState[id]){
     componentsState[id] = [];
   }
@@ -22,8 +28,8 @@ const useState = (initialValue) => {
     const updatedState = typeof newValue === 'function' ? newValue(currentState) : newValue; 
 
     if (currentState !== updatedState){
-      componentsState[id][stateIndex] = updatedState;
-
+      componentsState[id][stateIndex] = updatedState; 
+      
       render(component, props);
     }
 

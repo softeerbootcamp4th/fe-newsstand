@@ -1,8 +1,7 @@
 import createComponent from "./component.js";
 
 const render = (component, props) => {
-    const $component = document.getElementById(component.name || '')
-
+    const $component = document.getElementById(component.id || component.name + props.id)
     if (!$component){
         throw new Error(`${component.name} not found!`);
     }
