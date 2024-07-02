@@ -5,6 +5,7 @@ import {
   SimpleElement,
 } from "./AppElement";
 import { Deque } from "./deque";
+import { debounceAnimationCallback } from "./utils";
 
 const createApp = () => {
   const effectCleanUps = new Map<number, () => void>();
@@ -77,7 +78,7 @@ const createApp = () => {
       cur.appendChild(nxtChildren[i]);
     }
   };
-  const render = () => {
+  const render = debounceAnimationCallback(() => {
     if (root == null || app == null) return;
     statesKey = 0;
     effectsKey = 0;
@@ -107,7 +108,7 @@ const createApp = () => {
     }
 
     _diffingRender(root, top);
-  };
+  });
   const useState = <RawT = unknown>(initalState: RawT) => {
     type T = RawT extends unknown ? typeof initalState : RawT;
     const localStatesKey = statesKey;
