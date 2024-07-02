@@ -82,3 +82,97 @@ nav {
 .nav-news-title:hover {
     text-decoration: underline;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+}
+
+.main-header {
+    width: 930px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-header-tab {
+    display: flex;
+    font-size: 16px;
+    line-height: 22px;
+    gap: 24px;
+}
+
+#all {
+    color: var(--text-weak);
+}
+#subscribe {
+    color: var(--text-strong);
+
+}
+.main-header-tab p{
+    margin: 0;
+}
+
+.main-header-icons {
+    display: flex;
+    gap: 8px s;
+}
+
+.main-header-icons img {
+    width: 18px; /* 이미지의 너비와 높이를 조정 */
+    height: 18px;
+}
+
+.all-cate-header {
+    width : 930px;
+    display: flex;
+    margin-top: 24px;
+    border: 1px solid var(--border-default);
+    background-color: var(--surface-alt);
+    text-align: center;
+
+
+}
+
+.category-item {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: var(--text-weak);
+    font-size: 14px;
+    text-align: center;
+}
+
+
+.selected {
+    width: 166px;
+    position: relative; /* 상대 위치 설정 */
+    overflow: hidden; /* 넘치는 부분 숨기기 */
+    background-color: var(--surface-brand-alt);
+    z-index: 1;
+    color: var(--text-white-default);
+}
+
+.progress-bar {
+    width: 0%; /* 초기 너비 0%로 설정 */
+    height: 100%;
+    background-color: rgba(67, 98, 208, 0.5); /* 프로그레스 바 색상 */
+    transition: width 1s ease; /* 너비 변경 애니메이션 */
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* CSS 파일에 아래 내용을 추가합니다 */
+@keyframes progressAnimation {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+
