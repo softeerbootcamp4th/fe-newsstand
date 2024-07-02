@@ -3,8 +3,8 @@ import createComponent from './core/component/component.js';
 import { mockData } from './datas/mockData.js';
 
 const App = () => {
-    const newsBoxes = mockData.map((news) => {
-        const newsBoxComponent = createComponent(NewsBox, { icon : news.icon });
+    const newsBoxes = mockData.map((news, index) => {
+        const newsBoxComponent = createComponent(NewsBox, { id : index + 1, icon : news.icon });
         return newsBoxComponent;
     });
 
