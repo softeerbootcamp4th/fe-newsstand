@@ -1,6 +1,7 @@
 import "./App.css";
-import Header from "./src/components/Header/Header";
-import LatestNewsViewer from "./src/components/LatestNewsViewer/LatestNewsViewer";
+import Header from "@/components/Header/Header";
+import LatestNewsViewer from "@/components/LatestNewsViewer/LatestNewsViewer";
+import NewsList from "@/components/NewsList/NewsList";
 
 function App({ $target }) {
   this.$element = document.createElement("main");
@@ -9,6 +10,7 @@ function App({ $target }) {
 
   new Header({ $target: this.$element });
   new LatestNewsViewer({ $target: this.$element });
+  new NewsList({ $target: this.$element });
 }
 
 export default App;

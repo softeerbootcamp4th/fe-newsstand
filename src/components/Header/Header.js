@@ -1,6 +1,5 @@
 import "./Header.css";
-import logo from "../../assets/logo.svg";
-import { formatDate } from "../../utils/date";
+import { formatDate } from "@/utils/date";
 
 function Header({ $target }) {
   this.$element = document.createElement("header");
@@ -18,7 +17,7 @@ function Header({ $target }) {
   this.render = () => {
     this.$element.innerHTML = /* html */ `
       <section id="logo" class="logo">
-        <img src="${logo}" />
+        <img src="/logo.svg" />
         <h2>뉴스 스탠드</h2>
       </section>
       <section>
