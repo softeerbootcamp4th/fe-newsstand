@@ -1,5 +1,3 @@
-import mountLeftSelector from "./views/mountLeftSelector.js";
-import mountRightSelector from "./views/mountRightSelector.js";
+import mountView from "./views/mainView.js";
 
-mountLeftSelector();
-mountRightSelector();
+mountView(document.getElementById("newsSection"));
