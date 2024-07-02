@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="index.css" />
 </head>
 
-<body>
+<body class="flexbox__column-direction gap40">
     <header>
         <section class="flexbox__space-between--center">
             <section class="flexbox__flex-start--center gap8">
@@ -17,7 +17,27 @@
             <p id="header__current-date" class="text__medium16 text--default"></p>
         </section>
     </header>
-    <main></main>
+
+    <main>
+        <section class="flexbox__flex-start--center gap8">
+            <section class="current-news__box surface--alt border flexbox__flex-start--center gap16">
+                <p class="current-news__media-title text--strong text__bold14"></p>
+                <section class="current-news__rolling-box">
+                    <p class="current-news__disappear-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__appear-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__static-text current-news__headline text--default text__medium14"></p>
+                </section>
+            </section>
+            <section class="current-news__box surface--alt border flexbox__flex-start--center gap16">
+                <p class="current-news__media-title text--strong text__bold14"></p>
+                <section class="current-news__rolling-box">
+                    <p class="current-news__disappear-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__appear-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__static-text current-news__headline text--default text__medium14"></p>
+                </section>
+            </section>
+        </section>
+    </main>
 </body>
 
 <script type="module" src="./index.js"></script>
