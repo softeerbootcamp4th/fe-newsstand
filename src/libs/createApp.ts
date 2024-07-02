@@ -3,6 +3,7 @@ import {
   RenderedAppElement,
   SimpleElement,
 } from "./appElement";
+import { Deque } from "./deque";
 
 const createApp = () => {
   const effectCleanUps = new Map<number, () => void>();
@@ -31,10 +32,11 @@ const createApp = () => {
     effectsKey = 0;
     root.innerHTML = "";
 
-    const currentElems: (SimpleElement | RenderedAppElement)[] = [app()];
+    const currentElems: Deque<SimpleElement | RenderedAppElement> = new Deque();
+    currentElems.pushBack(app());
 
     while (currentElems.length > 0) {
-      const currentElem = currentElems.pop()!;
+      const currentElem = currentElems.popFront()!;
       const parent = currentElem.parent ?? root;
       if (currentElem instanceof SimpleElement) {
         parent.appendChild(document.createTextNode(`${currentElem.value}`));
@@ -43,7 +45,7 @@ const createApp = () => {
       if (currentElem.node instanceof HTMLElement) {
         parent.appendChild(currentElem.node);
       }
-      currentElems.push(...currentElem.children);
+      currentElems.pushBack([...currentElem.children]);
     }
   };
   const useState = <RawT = unknown>(initalState: RawT) => {
