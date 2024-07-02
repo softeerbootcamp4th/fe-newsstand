@@ -1,18 +1,23 @@
 import { useState, useEffect } from "../../libs/createApp";
+import { A, Section, Span } from "../../libs/elements";
 import { News, RecentNewsList } from "../../models/News";
 import { getMediaById } from "../../remotes/getMediaById";
 import { getRecentNewsList } from "../../remotes/getRecentNewsList";
 
 const RecentNews = ({ mediaId, news }: { mediaId: number; news: News }) => {
   const media = getMediaById(mediaId);
-  return `<a href=${news.href}>
-    <span>
-    ${media.name}
-    </span>
-    <span>
-    ${news.title}
-    </span>
-  </a>`;
+
+  return A({
+    href: news.href,
+    children: [
+      Span({
+        children: [media.name],
+      }),
+      Span({
+        children: [news.title],
+      }),
+    ],
+  });
 };
 export const TopSection = () => {
   const [getFrom, setFrom] = useState(0);
@@ -29,9 +34,12 @@ export const TopSection = () => {
       clearInterval(interval);
     };
   });
-  return `
-    <section>
-      ${recentNewsList.map((news) => RecentNews(news)).join("")}
-    </section>
-  `;
+  return Section({
+    children: recentNewsList.map((recentNews) =>
+      RecentNews({
+        mediaId: recentNews.mediaId,
+        news: recentNews.news,
+      }),
+    ),
+  });
 };
