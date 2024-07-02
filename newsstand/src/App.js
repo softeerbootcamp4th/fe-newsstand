@@ -1,9 +1,13 @@
+import NewsBox from './components/newsBox.js';
 import createComponent from './core/component/component.js';
-import NewsBoxes from './components/NewsBoxes.js';
+import { mockData } from './datas/mockData.js';
 
 const App = () => {
-    const newsBoxes = createComponent(NewsBoxes);
-    
+    const newsBoxes = mockData.map((news) => {
+        const newsBoxComponent = createComponent(NewsBox, { icon : news.icon });
+        return newsBoxComponent;
+    });
+
     return {
         element: `
         <div class="main-container">
@@ -11,7 +15,9 @@ const App = () => {
                 <div class="header-container"> HEADER </div>
                 <div class="rolling-news-container"> ROLLING NEWS </div>
                 <div class="category-container"> CATEGORY </div>
-                ${newsBoxes.element}
+                <div class="news-container">
+                    ${newsBoxes.map(box => box.element).join('')}
+                </div>
             </div>
         </div>
         `
