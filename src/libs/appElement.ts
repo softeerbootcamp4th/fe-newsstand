@@ -3,10 +3,11 @@ import { EventMap } from "./event";
 export interface AppElementProps<T extends HTMLElement = HTMLElement> {
   tagName: string;
   props: Partial<EventMap> &
-    Omit<Partial<T>, "children"> & {
+    Omit<Partial<T>, "children" | "style"> & {
       children?:
         | (RenderedAppElement | string | number)
         | (RenderedAppElement | string | number)[];
+      style?: Partial<CSSStyleDeclaration>;
     };
 }
 
@@ -52,6 +53,13 @@ export const AppElement = ({
         value.forEach(handleChild);
       } else {
         handleChild(value);
+      }
+    } else if (key === "style") {
+      const value = rawProps[
+        key as keyof typeof rawProps
+      ] as Partial<CSSStyleDeclaration>;
+      for (const [styleKey, styleValue] of Object.entries(value)) {
+        elem.style.setProperty(styleKey, `${styleValue}`);
       }
     } else if (key.startsWith("on")) {
       const value = rawProps[key as keyof typeof rawProps] as EventListener;
