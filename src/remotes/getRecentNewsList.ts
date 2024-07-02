@@ -1,11 +1,18 @@
 import { RecentNewsList } from "../models/News";
 
-export const getRecentNewsList = (): RecentNewsList[] => {
+interface GetRecentNewsListProps {
+  from: number;
+  limit?: number;
+}
+export const getRecentNewsList = ({
+  from,
+  limit = 2,
+}: GetRecentNewsListProps): RecentNewsList[] => {
   return [
     {
       mediaId: 1,
       news: {
-        title: "test1",
+        title: `test${from}`,
         href: "#",
         imgSrc: "https://picsum.photos/200",
       },
@@ -13,7 +20,7 @@ export const getRecentNewsList = (): RecentNewsList[] => {
     {
       mediaId: 1,
       news: {
-        title: "test2",
+        title: `test${from + 1}`,
         href: "#",
         imgSrc: "https://picsum.photos/200",
       },
