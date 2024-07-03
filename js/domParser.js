@@ -22,19 +22,28 @@ function parser(str)
 	return fragment;
 }
 
+function makePlainHTML(plains, elems)
+{
+	let result = plains[0];
+	for(let i=0; i<elems.length; i++)
+	{
+		if(elems[i] instanceof Node) result += "<placeholder></placeholder>";
+		else result += `${elems[i]}`.replace("<", "&lt;").replace(">", "&gt;");
+		result += plains[i+1];
+	}
+	return result;
+}
+
 function domMaker(plains, ...elems)
 {
-	const plainHTML = plains.join("<placeholder></placeholder>");
+	const plainHTML = makePlainHTML(plains, elems);
 	const dom = parser(plainHTML);
 	const holders = dom.querySelectorAll("placeholder");
-	for(let i=0; i<holders.length; i++)
+	const nodes = elems.filter( e=>e instanceof Node );
+	for(let i=0; i<nodes.length; i++)
 	{
-		let elem = elems[i];
-		if(!(elems[i] instanceof Node)) {
-			elem = new Text();
-			elem.textContent = elems[i];
-		}
-		dom.insertBefore(elem, holders[i]);
+		let node = nodes[i];
+		dom.insertBefore(node, holders[i]);
 		holders[i].remove();
 	}
 
