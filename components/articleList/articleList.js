@@ -30,7 +30,7 @@ articleArea.innerHTML = `
     <div id="articleList-wrapper">
         <div id="article-header-wrapper" class="flex-row-between">
             <div id="media-wrapper inline-tag">
-                <button class="btn mode-selection-btn">전체 언론사</button>
+                <button class="btn mode-selection-btn mode-selection-btn-clicked">전체 언론사</button>
                 <button class="btn mode-selection-btn">내가 구독한 언론사</button>
             </div>
             <div id="icon-wrapper inline-tag flex-row-between">
@@ -68,3 +68,12 @@ articleArea.innerHTML = `
         </div>
     </div>
 `
+
+// mode-selection-event
+const modeSelectionBtns = document.querySelectorAll('.mode-selection-btn');
+    modeSelectionBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+    modeSelectionBtns.forEach(b => b.classList.remove('mode-selection-btn-clicked'));
+    this.classList.add('mode-selection-btn-clicked');
+    });
+});

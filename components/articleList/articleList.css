@@ -25,8 +25,15 @@ button {
         #media-wrapper {
             padding: 0;
         }
+
             .mode-selection-btn {
                 padding: 1.5px 12px 1.5px 0;
+                cursor: pointer;
+            }
+
+            .mode-selection-btn-clicked {
+                color: #14212B;
+                font-weight: 700;
             }
 
         #icon-wrapper {
