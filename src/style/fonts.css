@@ -12,6 +12,8 @@
     --blue-500: #4362D0;
 
     --surface-alt: #F5F7F9;
+    --border-default: #D2DAE0;
+    --surface-brand-alt: #7890E7;
 }
 
 
@@ -33,7 +35,14 @@
 }
 
 
-.selected-bold14,
+.selected-bold14 {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: auto;
+    color: var(--grayscale-white);
+}
+
+
 .display-bold14 {
     font-weight: 700;
     font-size: 14px;
@@ -46,7 +55,7 @@
     font-weight: 700;
     font-size: 12px;
     line-height: auto;
-    color: var(--grayscale-black);
+    color: var(--grayscale-white-alt);
 }
 
 
@@ -60,7 +69,14 @@
 }
 
 
-.available-medium14,
+.available-medium14 {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: auto;
+    color: var(--grayscale-200);
+}
+
+
 .display-medium14 {
     font-weight: 500;
     font-size: 14px;
