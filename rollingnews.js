@@ -71,14 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("./data/latestNews.json")
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Network Error');
             }
             return response.json();
         })
         .then(newsData => {
             // 왼쪽과 오른쪽 배열로 나누기
-            leftNews = newsData.slice(0, 5); // 첫 5개 뉴스
-            rightNews = newsData.slice(5, 10); // 다음 5개 뉴스
+            leftNews = newsData.slice(0, 5); 
+            rightNews = newsData.slice(5, 10);
 
             // 초기 뉴스 출력
             renderLeftNews();
