@@ -9,10 +9,15 @@ button {
 
 .view-btn {
     padding: 0;
+    filter: invert(60%) sepia(9%) saturate(342%) hue-rotate(160deg) brightness(93%) contrast(89%);
 }
 
 .inline-tag {
     display: inline;
+}
+
+.block-tag {
+    display: block;
 }
 
 .flex-row {
@@ -45,6 +50,9 @@ button {
         #media-wrapper {
             padding: 0;
         }
+            .mode-selection-btn {
+                padding: 1.5px 12px 1.5px 0;
+            }
 
         #icon-wrapper {
             width: 56px;
@@ -82,13 +90,17 @@ button {
                 flex-direction: row;
                 align-items: center;
             }
+                
+                #content-header-wrapper > * {
+                    margin: 0 16px 0 0;
+                }
+
                 #subscribe-btn {
                     width: 72px;
                     height: 24px;
                     border-radius: 50px;
                     border: 1px solid #D2DAE0;
                     background-color: #F5F7F9;
-                    padding: 6px;
                     color: #879298;
                     text-align: center;
                     font-size: 12px;
@@ -102,5 +114,5 @@ button {
                     color: #4B5966;
                     list-style: none;
                     width: 530px;
-                    height: 235px;
+                    height: 245px;
                 }

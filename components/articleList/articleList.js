@@ -30,8 +30,8 @@ articleArea.innerHTML = `
     <div id="articleList-wrapper">
         <div id="article-header-wrapper" class="flex-row-between">
             <div id="media-wrapper inline-tag">
-                <button class="btn">전체 언론사</button>
-                <button class="btn">내가 구독한 언론사</button>
+                <button class="btn mode-selection-btn">전체 언론사</button>
+                <button class="btn mode-selection-btn">내가 구독한 언론사</button>
             </div>
             <div id="icon-wrapper inline-tag flex-row-between">
                 <button class="btn view-btn">
@@ -51,7 +51,7 @@ articleArea.innerHTML = `
             <div id="article-content-wrapper">
                 <div id="content-header-wrapper" class="flex-row">
                     <img src="${mediaImgPath}" alt="">
-                    <h4 class="inline-tag" style="margin: 0px 8px; font-size: 12px; font-weight: 400;">${updateDate} 편집</h4>
+                    <h4 style="font-size: 12px; font-weight: 400;">${updateDate} 편집</h4>
                     <button id="subscribe-btn" class="btn">+ 구독하기</button>
                 </div>
                 <div id="content-body-wrapper" class="flex-row-between">
