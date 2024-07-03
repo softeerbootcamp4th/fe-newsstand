@@ -1,0 +1,13 @@
+html {
+    display: flex;
+    justify-content: center;
+}
+body {
+    margin: 0;
+    width: 930px;
+    margin-top: 58px;
+}
+p, h1, h2, h3, h4 {
+    margin: 0;
+    display: inline-block;
+}

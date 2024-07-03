@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>news stand</title>
+<link rel="icon" type="image/x-icon" href="./static/icons/newspaper.svg" />
+<link rel="stylesheet" type="text/css" href="index.css" />
+</head>
+
+<body class="flexbox__column-direction gap40">
+    <header>
+        <section class="flexbox__space-between--center">
+            <section class="flexbox__flex-start--center gap8">
+                <img alt="뉴스스탠드 아이콘" src="./static/icons/newspaper.svg"/>
+                <h1 class="text__bold24 text--strong">뉴스스탠드</h1>
+            </section>
+            <p id="header__current-date" class="text__medium16 text--default"></p>
+        </section>
+    </header>
+
+    <main>
+        <section class="flexbox__flex-start--center gap8">
+            <section class="current-news__box surface--alt border flexbox__flex-start--center gap16">
+                <p class="current-news__media-title text--strong text__bold14"></p>
+                <section class="current-news__rolling-box">
+                    <p class="current-news__disappear-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__appear-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__static-text current-news__headline text--default text__medium14"></p>
+                </section>
+            </section>
+            <section class="current-news__box surface--alt border flexbox__flex-start--center gap16">
+                <p class="current-news__media-title text--strong text__bold14"></p>
+                <section class="current-news__rolling-box">
+                    <p class="current-news__disappear-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__appear-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__static-text current-news__headline text--default text__medium14"></p>
+                </section>
+            </section>
+        </section>
+    </main>
+</body>
+
+<script type="module" src="./index.js"></script>
+</html>
