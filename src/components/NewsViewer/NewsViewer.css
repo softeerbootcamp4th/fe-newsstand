@@ -45,13 +45,13 @@
   color: var(--gray-500);
 }
 
-.subNews ul {
+.subNews > ul {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.subNews ul p {
+.subNews > ul > p {
   font-size: 14px;
   color: var(--gray-200);
 }

@@ -38,16 +38,16 @@ function NewsViewer({ $target, position = "beforeend" }) {
             </div>
           </section>
       `;
+
+    new Button({
+      $target: this.$element.querySelector(".companyInfo"),
+      text: "구독하기",
+      color: "gray",
+      icon: "plus",
+    });
   };
 
   this.render();
-
-  new Button({
-    $target: this.$element.querySelector(".companyInfo"),
-    text: "구독하기",
-    color: "gray",
-    icon: "plus",
-  });
 }
 
 export default NewsViewer;

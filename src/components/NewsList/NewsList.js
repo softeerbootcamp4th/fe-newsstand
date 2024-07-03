@@ -1,5 +1,7 @@
 import NewsViewer from "@/components/NewsViewer/NewsViewer";
 import "./NewsList.css";
+import leftButton from "@/assets/icons/leftButton.png";
+import rightButton from "@/assets/icons/rightButton.png";
 
 function NewsList({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");
@@ -14,6 +16,32 @@ function NewsList({ $target, position = "beforeend" }) {
     this.state = { page };
 
     this.render();
+  };
+
+  const handleNextClick = () => {
+    if (this.state.page + 1 >= 100) return;
+
+    this.setState({ page: this.state.page + 1 });
+  };
+
+  const handlePrevClick = () => {
+    if (this.state.page - 1 < 0) return;
+
+    this.setState({ page: this.state.page - 1 });
+  };
+
+  const handleClick = (event) => {
+    if (event.target.closest("button").className === "newsButton next") {
+      handleNextClick();
+
+      return;
+    }
+
+    if (event.target.closest("button").className === "newsButton prev") {
+      handlePrevClick();
+
+      return;
+    }
   };
 
   this.render = () => {
@@ -32,16 +60,21 @@ function NewsList({ $target, position = "beforeend" }) {
           <li>스포츠/연예</li>
           <li>매거진/전문지</li>
           <li>지역</li>
-        </ul>       
+        </ul>
+        
+        <button class="newsButton prev"><img src="${leftButton}"/></button>
+        <button class="newsButton next"><img src="${rightButton}"/></button>
       </article>
       `;
+
+    new NewsViewer({
+      $target: this.$element.querySelector(".newsView"),
+    });
   };
 
   this.render();
 
-  new NewsViewer({
-    $target: this.$element.querySelector(".newsView"),
-  });
+  this.$element.addEventListener("click", handleClick.bind(this));
 }
 
 export default NewsList;
