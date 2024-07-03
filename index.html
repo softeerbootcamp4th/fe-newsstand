@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>뉴스스탠드</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="header__group">
+          <img src="./asset/newsIcon.svg" />
+          <h1 class="header__title">뉴스스탠드</h1>
+        </div>
+        <h2 class="header__today-date">2023.02.10 금요일</h2>
+      </header>
+
+      <section class="news-bar">
+        <div class="news-bar__item">
+          <div class="item-title">연합뉴스</div>
+          <div class="item-content" id="rolling1">
+            [1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출
+          </div>
+        </div>
+        <div class="news-bar__item">
+          <div class="item-title">연합뉴스</div>
+          <div class="item-content" id="rolling2">
+            [1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출
+          </div>
+        </div>
+      </section>
+
+      <section class="news-list">
+        <header class="news-list__header">
+          <div class="news-list__header-group1">
+            <div class="news-list__header-total">전체 언론사</div>
+            <div class="news-list__header-subscribe">내가 구독한 언론사</div>
+          </div>
+          <div class="news-list__header-group2">
+            <img
+              class="news-list__header-list-btn"
+              src="./asset/listIcon.svg"
+            />
+            <img
+              class="news-list__header-grid-btn"
+              src="./asset/splitIcon.svg"
+            />
+          </div>
+        </header>
+
+        <div class="news-list__body">
+          <div class="news-list__btn-wrap">
+            <button class="tab-btn">종합/경제</button>
+            <button class="tab-btn">방송/통신</button>
+            <button class="tab-btn">IT</button>
+            <button class="tab-btn">영자지</button>
+            <button class="tab-btn">스포츠/연예</button>
+            <button class="tab-btn">매거진/전문지</button>
+            <button class="tab-btn">지역</button>
+          </div>
+
+          <div class="news-list__main">
+            <div class="header">
+              <h1 class="title">서울경제</h1>
+              <div class="edit-date">2023.02.10. 18:27 편집</div>
+              <button class="subscribe-btn">+ 구독하기</button>
+            </div>
+            <!-- 대표 뉴스 -->
+            <div class="body">
+              <div class="news-list__group1">
+                <img class="img" src="./asset/articleImg.svg" />
+                <a href="#" class="content"
+                  >또 국민연금의 몽니…현대百 지주사 불발</a
+                >
+              </div>
+
+              <!-- 뉴스 기사 리스트 -->
+              <div class="news-list__group2">
+                <ul id="news-list__articles"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
