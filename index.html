@@ -7,29 +7,29 @@
     </head>
     <body>
         <div class="container">
-            <div class="section1">
+            <header class="section1">
                 <div class="section1-left-group">
                     <img src="asset/newspaper.svg" alt="newspaper">
                     <h3>뉴스스탠드</h3>
                 </div>
-                <span>2023.02.10 금요일</span>
-            </div>
-            <div class="section2">
-                <div class="section2-left-group">
+                <span id="currentTime"></span>
+            </header>
+            <section class="headline">
+                <div class="headline-left-group">
                     <strong>연합뉴스</strong>
                     <span id="newsTitle">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
                 </div>
-                <div class="section2-right-group">
+                <div class="headline-right-group">
                     <strong>연합뉴스</strong>
                     <span id="newsTitle">[속보] 與최고위원 본경선, 김병민·김용태·김재원·민영삼</span>
                 </div>
-            </div>
-            <div class="section3">
-                <div class="section3-left-group">
+            </section>
+            <section class="selectOption">
+                <div class="selectOption-left-group">
                     <a id="totalPress" href="">전체 언론사</a>
                     <a id="subscribePress" href="">내가 구독한 언론사</a>
                 </div>
-                <div class="section3-right-group">
+                <div class="selectOption-right-group">
                     <a href="">
                         <img src="asset/Symbol.svg" alt="Symbol">
                     </a>
@@ -37,9 +37,9 @@
                         <img src="asset/grid-view.svg" alt="grid-view">
                     </a>
                 </div>
-            </div>
-            <div class="section4">
-                <div class="nav">
+            </section>
+            <section class="newsList">
+                <nav>
                     <ul>
                         <li>
                             <a href="">종합/경제</a>
@@ -63,8 +63,8 @@
                             <a href="">지역</a>
                         </li>
                     </ul>
-                </div>
-                <div class="article">
+                </nav>
+                <article>
                     <div class="articleTop">
                         <img src="asset/서울경제.svg" alt="pressImage">
                         <span>2023.02.10 18:27 편집</span>
@@ -73,19 +73,47 @@
                     <div class="articleBottom">
                         <div class="articleImage">
                             <img src="asset/기사사진.svg" alt="articleImage">
-                            <p>또 국민연금의 몽니…현대百 지주사 불발</p>
+                            <strong>또 국민연금의 몽니…현대百 지주사 불발</strong>
                         </div>
                         <div class="articleOther">
-                            <p>"위스키 사려고 이틀 전부터 줄 섰어요"</p>
-                            <p>'방시혁 제국'이냐 '카카오 왕국'이냐…K엔터 누가 거머쥘까</p>
-                            <p>사용후핵연료 저장시설 포화…이대론 7년 뒤 원전 멈춘다</p>
-                            <p>[단독] 원희룡 "해외건설 근로자 소득공제 월 500만원으로 상향할 것"</p>
-                            <p>태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]</p>
-                            <p>LG엔솔, 폴란드 자동차산업협회 가입…“유럽서 목소리 키운다”</p>
+                            <ul class="vertical-list">
+                                <li>
+                                    <span>
+                                        <a href="">"위스키 사려고 이틀 전부터 줄 섰어요"</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <a href="">'방시혁 제국'이냐 '카카오 왕국'이냐…K엔터 누가 거머쥘까</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <a href="">사용후핵연료 저장시설 포화…이대론 7년 뒤 원전 멈춘다</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <a href="">[단독] 원희룡 "해외건설 근로자 소득공제 월 500만원으로 상향할 것"</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <a href="">태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <a href="">LG엔솔, 폴란드 자동차산업협회 가입…“유럽서 목소리 키운다”</a>
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </div>
+                </article>
+            </section>
         </div>
+        <script src="js/getDate.js"></script>
+        <!-- <script src="js/changeNavTheme.js"></script> -->
     </body>
 </html>
