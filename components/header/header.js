@@ -10,7 +10,7 @@ headerArea.innerHTML = `
         </div>
         <h3 id="date-text" class="inline-tag">
         </h3>
-    <div>
+    </div>
 `
 
 const nowDate = new Date();
