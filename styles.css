@@ -144,15 +144,16 @@ section {
 
 main {
     display: flex;
+    max-width: 930px;
     flex-direction: column;
     margin-top: 32px;
     align-items: center;
-    width: 930px;
+    max-width: 930px;
 }
 
 .main-header {
-    width: 930px;
     display: flex;
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -193,7 +194,6 @@ main {
 }
 
 .all-cate-header {
-    width : 930px;
     display: flex;
     margin-top: 24px;
     border: 1px solid var(--border-default);
@@ -246,7 +246,6 @@ main {
 }
 
 .news-container {
-    max-width: 930px;
     display: flex;
     flex-direction: column;
     gap: 16px;
