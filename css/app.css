@@ -93,6 +93,7 @@
     width: 930px;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .news-list__menu__selectors {
