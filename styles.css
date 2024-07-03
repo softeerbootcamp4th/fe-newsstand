@@ -134,6 +134,7 @@ main {
 
 }
 
+
 .category-item {
     height: 40px;
     line-height: 40px;
@@ -142,30 +143,32 @@ main {
     color: var(--text-weak);
     font-size: 14px;
     text-align: center;
+    position: relative;
 }
-
 
 .selected {
     width: 166px;
-    position: relative; /* 상대 위치 설정 */
-    overflow: hidden; /* 넘치는 부분 숨기기 */
+    overflow: hidden;
     background-color: var(--surface-brand-alt);
-    z-index: 1;
     color: var(--text-white-default);
 }
 
-.progress-bar {
-    width: 0%; /* 초기 너비 0%로 설정 */
-    height: 100%;
-    background-color: rgba(67, 98, 208, 0.5); /* 프로그레스 바 색상 */
-    transition: width 1s ease; /* 너비 변경 애니메이션 */
-    z-index: 2;
+.selected .progress-bar {
     position: absolute;
     top: 0;
     left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: rgba(67, 98, 208, 0.5);
+    z-index: 1;
+    animation: progressAnimation 20s linear forwards; 
 }
 
-/* CSS 파일에 아래 내용을 추가합니다 */
+.selected .category-text {
+    position: relative;
+    z-index: 2;
+}
+
 @keyframes progressAnimation {
     from {
         width: 0%;
@@ -174,5 +177,3 @@ main {
         width: 100%;
     }
 }
-
-
