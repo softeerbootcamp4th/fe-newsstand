@@ -1,19 +1,26 @@
+.flex-row-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inline-tag {
+    display: inline;
+}
+
 #title-text {
     font-size: 24px;
     color: #14212B;
-    display: inline;
 }
 
 #date-text {
     font-size: 16px;
     line-height: 22px;
     color: #5F6E76;
-    display: inline;
 }
 
 #title-wrapper {
     height: 29px;
-    display: inline;
 }
 
 #news-paper {
@@ -21,9 +28,6 @@
 }
 
 #header-wrapper {
-    display: flex;
-    flex-direction: row;
-    width: 930px;
-    justify-content: space-between;
     align-items: center;
+    width: 930px;
 }
