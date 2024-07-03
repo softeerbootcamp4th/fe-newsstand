@@ -1,5 +1,6 @@
 import { RecentNews } from "../models/News";
 
+// TODO change file name
 interface GetRecentNewsProps {
   from: number;
   limit?: number;

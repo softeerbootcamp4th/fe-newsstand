@@ -3,14 +3,13 @@ import { getMediaById } from "../../remotes/getMediaById";
 import typoStyles from "@/styles/typo.module.css";
 import styles from "./RecentNewsRoll.module.css";
 import { useState, useEffect } from "@/libs/createApp";
-import { getRecentNews } from "@/remotes/getRecentNewsList";
+import { getRecentNews } from "@/remotes/getRecentNews";
 
-export const RecentNewsRoll = ({ differ }: { differ: number }) => {
+export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
   const [getIsHovering, setIsHovering] = useState(false);
   const [getFrom, setFrom] = useState(0);
-
   const { news, mediaId } = getRecentNews({
-    from: getFrom() * 2 + differ,
+    from: getFrom() * 2 + (needDelay ? 1 : 0),
     limit: 2,
   });
   useEffect(() => {
