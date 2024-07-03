@@ -58,7 +58,12 @@ function NewsViewer({ $target, position = "beforeend", news }) {
   this.render = () => {
     this.$element.innerHTML = /* html */ `
       <ul class="categoryFilter">
-        <li>종합/경제</li>
+        <li class="selected">
+          <span>종합/경제</span>
+          <span class="pageInfo">${this.state.page + 1}<span class="newsLength"> / ${
+      news.length
+    }</span></span>
+        </li>
         <li>방송/통신</li>
         <li>IT</li>
         <li>영자지</li>

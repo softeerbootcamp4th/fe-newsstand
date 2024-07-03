@@ -27,7 +27,28 @@
 
   padding: 0 16px 0 16px;
 
+  box-sizing: border-box;
+
   cursor: pointer;
+}
+
+.categoryFilter > .selected {
+  justify-content: space-between;
+
+  width: 166px;
+
+  background-color: var(--blue-500);
+
+  color: white;
+  font-weight: 600;
+}
+
+.pageInfo {
+  font-size: 12px;
+}
+
+.newsLength {
+  color: var(--white-weak);
 }
 
 .contents {

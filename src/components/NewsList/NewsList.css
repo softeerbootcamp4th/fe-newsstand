@@ -21,7 +21,7 @@
   cursor: pointer;
 }
 
-.selected {
-  color: var(--black) !important;
+.newsFilter > .selected {
+  color: var(--black);
   font-weight: bold;
 }
