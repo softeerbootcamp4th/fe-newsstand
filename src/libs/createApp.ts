@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AppElementRenderer,
   RawElement,
@@ -5,20 +6,31 @@ import {
   SimpleElement,
 } from "./AppElement";
 import { Deque } from "./deque";
-import { debounceAnimationCallback } from "./utils";
+import { debounceAnimationCallback, toStringAnything } from "./utils";
 
 const createApp = () => {
   const effectCleanUps = new Map<number, () => void>();
+  const effectDependencies = new Map<number, string[]>();
   let effectsKey = 0;
-  const useEffect = (effectFunc: () => () => void) => {
-    const lstEffectCleanUp = effectCleanUps.get(effectsKey);
-    lstEffectCleanUp?.();
-    const effectCleanUp = effectFunc();
-    effectCleanUps.set(effectsKey, effectCleanUp);
+  const useEffect = (effectFunc: () => () => void, rawDependencies?: any[]) => {
+    const dependencies = rawDependencies?.map(toStringAnything) ?? [];
+    const lstDependencies = effectDependencies.get(effectsKey);
+    if (
+      lstDependencies == null ||
+      lstDependencies.length !== dependencies.length ||
+      lstDependencies.some((value, index) => value !== dependencies[index])
+    ) {
+      effectDependencies.set(effectsKey, dependencies);
+      const lstEffectCleanUp = effectCleanUps.get(effectsKey);
+      lstEffectCleanUp?.();
+      const effectCleanUp = effectFunc();
+      effectCleanUps.set(effectsKey, effectCleanUp);
+      effectCleanUps.delete(effectsKey);
+    }
+
     effectsKey += 1;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const states = new Map<number, any>();
   let statesKey = 0;
   let root: HTMLElement | null = null;
@@ -106,7 +118,7 @@ const createApp = () => {
       }
       currentElems.pushBack([...currentElem.children]);
     }
-
+    console.log(top);
     _diffingRender(root, top);
   });
   const useState = <RawT = unknown>(initalState: RawT) => {
@@ -116,10 +128,9 @@ const createApp = () => {
       states.set(localStatesKey, initalState);
     }
     const state = states.get(localStatesKey) as T;
-    const get = () => {
-      return state;
-    };
+
     const update = (newState: T) => {
+      console.log(state, newState, localStatesKey, state == newState, states);
       if (state == newState) {
         return;
       }
@@ -127,7 +138,7 @@ const createApp = () => {
       render();
     };
     statesKey += 1;
-    return [get, update] as [() => T, (newState: T) => void];
+    return [state, update] as [T, (newState: T) => void];
   };
 
   return {

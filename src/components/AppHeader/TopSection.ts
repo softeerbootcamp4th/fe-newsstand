@@ -1,14 +1,24 @@
 import { Section } from "../../libs/Elements";
 import styles from "./TopSection.module.css";
 import { RecentNewsRoll } from "./RecentNewsRoll";
+import { useEffect, useState } from "@/libs/createApp";
 export const TopSection = () => {
+  const [showDelayed, setShowDelayed] = useState(false);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowDelayed(true);
+    }, 1000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  });
   return Section({
     className: `${styles.container}`,
     children: [
       RecentNewsRoll({
-        differ: 0,
+        needDelay: false,
       }),
-      RecentNewsRoll({ differ: 1 }),
+      showDelayed ? RecentNewsRoll({ needDelay: true }) : "",
     ],
   });
 };

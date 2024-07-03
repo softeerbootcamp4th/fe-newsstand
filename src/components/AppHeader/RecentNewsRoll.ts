@@ -6,21 +6,23 @@ import { useState, useEffect } from "@/libs/createApp";
 import { getRecentNews } from "@/remotes/getRecentNews";
 
 export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
-  const [getIsHovering, setIsHovering] = useState(false);
-  const [getFrom, setFrom] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+  const [from, setFrom] = useState(0);
+
   const { news, mediaId } = getRecentNews({
-    from: getFrom() * 2 + (needDelay ? 1 : 0),
+    from: from * 2 + (needDelay ? 1 : 0),
     limit: 2,
   });
   useEffect(() => {
     const interval = setInterval(() => {
-      if (getIsHovering()) return;
-      setFrom(getFrom() + 1);
+      console.log("interval", needDelay);
+      if (isHovering) return;
+      setFrom(from + 1);
     }, 5000);
     return () => {
       clearInterval(interval);
     };
-  });
+  }, []);
   const media = getMediaById(mediaId);
 
   return Div({

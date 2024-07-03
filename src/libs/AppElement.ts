@@ -86,7 +86,17 @@ export const AppElement = ({
       elem.setAttribute(key, value);
     }
   };
-  Object.keys(props).forEach(parseProp);
+  const mount = () => {
+    Object.keys(props).forEach(parseProp);
+  };
+
+  const unmount = () => {
+    eventListeners.forEach((value, key) => {
+      elem.removeEventListener(key, value);
+    });
+  };
+  unmount();
+  mount();
   return {
     node: elem,
     eventListeners,

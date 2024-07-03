@@ -10,3 +10,16 @@ export const debounceAnimationCallback = (callback: () => void) => {
     });
   };
 };
+
+export const toStringAnything = (value: any) => {
+  if (value === undefined) {
+    return "undefined";
+  }
+  if (value === null) {
+    return "null";
+  }
+  if (typeof value === "object") {
+    return JSON.stringify(value);
+  }
+  return value.toString();
+};
