@@ -60,13 +60,9 @@ export function rollingDOM(rollingBoxDOM, rollingData, rollingIdx) {
      * static 텍스트 hover 처리
      */
     staticTextDOM.addEventListener('mouseover', () => {
-        staticTextDOM.classList.remove('text__medium14');
-        staticTextDOM.classList.add('text__medium14--underline');
         clearInterval(intervalRolling);
     });
     staticTextDOM.addEventListener('mouseout', () => {
-        staticTextDOM.classList.add('text__medium14');
-        staticTextDOM.classList.remove('text__medium14--underline');
         intervalRolling = setInterval(rolling, 5000);
     });
 }
