@@ -22,8 +22,7 @@ function onMyclick() {
 function changeSelected() {
     selected = document.querySelector("span[data-selected='yes']");
     unselected = document.querySelector("span[data-selected='no']");
-    console.log(selected);
-    console.log(unselected);
+
     selected.style.color = "black";
     unselected.style.color = "gray";
 }
