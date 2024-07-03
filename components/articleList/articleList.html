@@ -9,12 +9,12 @@
 </head>
 <body>
     <div id="articleList-wrapper">
-        <div id="article-header-wrapper">
+        <div id="article-header-wrapper" class="flex-col-between">
             <div id="media-wrapper inline-tag">
                 <button class="btn">전체 언론사</button>
                 <button class="btn">내가 구독한 언론사</button>
             </div>
-            <div id="icon-wrapper inline-tag">
+            <div id="icon-wrapper inline-tag flex-row-between">
                 <button class="btn view-btn">
                     <img src="/icons/list-view.png" alt="" width="24px" height="24px">
                 </button>
@@ -28,18 +28,15 @@
         </div>
         <div id="article-wrapper">
             <div id="article-selection-wrapper">
-
             </div>
             <div id="article-content-wrapper">
-                <div id="content-header-wrapper" class="flex-row-tag">
+                <div id="content-header-wrapper" class="flex-row">
                     <!-- <button class="btn">+ 구독하기</button> -->
                 </div>
-                <div id="content-body-wrapper" class="flex-row-tag">
+                <div id="content-body-wrapper" class="flex-row-between">
                     <aside id="thumbnail-part">
-                        <!-- <img src="/icons/newspaper.png" alt="" width="320px" height="200px">
-                        <p>ABC</p> -->
                     </aside>
-                    <ul id="article-li-part">
+                    <ul id="article-li-part" class="flex-row-between">
                     </ul>
                 </div>
             </div>
