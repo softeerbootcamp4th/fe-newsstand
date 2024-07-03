@@ -23,7 +23,7 @@
   font-weight: bold;
 }
 
-.listSection {
+.newsView {
   display: flex;
   flex-direction: column;
 
@@ -53,66 +53,8 @@
   cursor: pointer;
 }
 
-.listSection > div {
+.newsView > div {
   flex: 1;
 
   padding: 24px;
-}
-
-.newsInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.companyInfo {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-
-  height: 24px;
-
-  font-size: 12px;
-}
-
-.companyInfo img {
-  width: auto;
-  height: 20px;
-}
-
-.articleInfo {
-  display: flex;
-  gap: 32px;
-}
-
-.articleInfo img {
-  width: 320px;
-  height: 200px;
-}
-
-.mainNews {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  width: 320px;
-
-  color: var(--black);
-}
-
-.subNews {
-  flex: 1;
-
-  color: var(--gray-500);
-}
-
-.subNews ul {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.subNews ul p {
-  font-size: 14px;
-  color: var(--gray-200);
 }
