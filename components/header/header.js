@@ -1,5 +1,9 @@
 const headerArea = document.querySelector('#header-area');
 
+const nowDate = new Date();
+const nowDay = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'][nowDate.getDay()]
+const dateText = `${nowDate.getFullYear()}.${nowDate.getMonth()+1}.${nowDate.getDate()}.${nowDay}`
+
 headerArea.innerHTML = `
     <div id="header-wrapper" class="flex-row-between">
         <div id="title-wrapper" class="flex-row-between">
@@ -9,12 +13,7 @@ headerArea.innerHTML = `
             </h3>
         </div>
         <h3 id="date-text" class="inline-tag">
+            ${dateText}
         </h3>
     </div>
 `
-
-const nowDate = new Date();
-const nowDay = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'][nowDate.getDay()]
-const dateText = `${nowDate.getFullYear()}.${nowDate.getMonth()+1}.${nowDate.getDate()}.${nowDay}`
-
-document.querySelector('#date-text').textContent = dateText
