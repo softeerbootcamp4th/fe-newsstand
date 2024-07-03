@@ -12,31 +12,6 @@ button {
     filter: invert(60%) sepia(9%) saturate(342%) hue-rotate(160deg) brightness(93%) contrast(89%);
 }
 
-.inline-tag {
-    display: inline;
-}
-
-.block-tag {
-    display: block;
-}
-
-.flex-row {
-    display: flex;
-    flex-direction: row;
-}
-
-.flex-row-between {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.flex-col-between {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
 #articleList-wrapper {
     width: 930px;
     height: 388px;
