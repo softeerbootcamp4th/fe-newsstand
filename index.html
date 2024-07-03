@@ -28,28 +28,28 @@
         <div class="display-medium16" id="date_section"></div>
       </div>
 
-      <div class="vertical_space_40" ></div>
+      <div class="vertical_space_40"></div>
 
       <div class="content_wrapper">
-        <div class="rotating_box_container" >
-          <div class="rotating_box roll_out" style="animation-delay: 5.0s;" id="rotating_left" >
+        <div class="rotating_box_container">
+          <div class="rotating_box roll_out" style="animation-delay: 5.0s;" id="rotating_left">
             <div class="display-bold14">연합뉴스</div>
-            <div class="available-medium14" id="rotate_left_roll_out_content" >[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div class="available-medium14" id="rotate_left_roll_out_content">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
           </div>
-          <div class="rotating_box roll_in" style="animation-delay: 5.0s;" id="rotating_left" >
+          <div class="rotating_box roll_in" style="animation-delay: 5.0s;" id="rotating_left">
             <div class="display-bold14">연합뉴스</div>
-            <div class="available-medium14" id="rotate_left_roll_in_content" >[2보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div class="available-medium14" id="rotate_left_roll_in_content">[2보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
           </div>
         </div>
 
-        <div class="rotating_box_container" >
-          <div class="rotating_box roll_out" style="animation-delay: 6.0s;" id="rotating_right" >
+        <div class="rotating_box_container">
+          <div class="rotating_box roll_out" style="animation-delay: 6.0s;" id="rotating_right">
             <div class="display-bold14">연합뉴스</div>
-            <div class="available-medium14" id="rotate_right_roll_out_content" >[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div class="available-medium14" id="rotate_right_roll_out_content">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
           </div>
-          <div class="rotating_box roll_in" style="animation-delay: 6.0s;" id="rotating_right" >
+          <div class="rotating_box roll_in" style="animation-delay: 6.0s;" id="rotating_right">
             <div class="display-bold14">연합뉴스</div>
-            <div class="available-medium14" id="rotate_right_roll_in_content" >[2보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div class="available-medium14" id="rotate_right_roll_in_content">[2보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
           </div>
         </div>
       </div>
@@ -58,10 +58,10 @@
 
       <div class="content_wrapper">
         <div class="toggle_wrapper">
-          <div class="toggle_item toggle_item_active" id="toggle_left" >
+          <div class="toggle_item toggle_item_active" id="toggle_left">
             전체 언론사
           </div>
-          <div class="toggle_item" id="toggle_right" >
+          <div class="toggle_item" id="toggle_right">
             내가 구독한 언론사
           </div>
         </div>
@@ -70,69 +70,38 @@
           <img src="public/grid-view.svg" />
         </div>
       </div>
-
+      
       <div class="vertical_space_24"></div>
 
       <div class="content_wrapper">
         <div class="news_detail_box">
           <div class="available-medium14 news_detail_tap_box">
-            <!-- <div class="news_detail_tap_item">종합/경제 1/81</div>
-            <div class="news_detail_tap_item">방송/통신</div>
-            <div class="news_detail_tap_item">IT</div>
-            <div class="news_detail_tap_item">영자지</div>
-            <div class="news_detail_tap_item">스포츠/연예</div>
-            <div class="news_detail_tap_item">스포츠/연예</div>
-            <div class="news_detail_tap_item">스포츠/연예</div>
-            <div class="news_detail_tap_item">스포츠/연예</div>
-            <div class="news_detail_tap_item">스포츠/연예</div>
-            <div class="news_detail_tap_item">스포츠/연예</div>
-            <div class="news_detail_tap_item">스포츠/연예</div> -->
           </div>
           <div class="new_detail_context_box">
-            <img src="public/left_arrow.svg" class="left_arrow pointer" width="24" height="40" />
-            <div class="new_detail_context_header">
-              <img src="public/item_1.svg" />
+            <img src="public/left_arrow.svg" class="left_arrow arrow_hover pointer" width="24" height="40" />
+
+            <div class="new_detail_context_header" id="company_header">
+              <img src="public/item_1.svg" height="20" id="company_img" />
               <div class="horizontal_space_16"></div>
-              <div class="display-medium12 flex_row_center color_5F6E76">
-                2023.02.10. 18:27 편집
+              <div class="display-medium12 flex_row_center color_5F6E76" id="register_date" >
               </div>
-              <div class="horizontal_space_16" ></div>
-              <div class="news_subscribe_button available-medium12">
-                <img src="public/subscribe_icon.svg" />
-                구독하기
+              <div class="horizontal_space_16"></div>
+              <div id="subscribe_button_wrapper" class="flex_row_center" >
+
               </div>
             </div>
+
+
             <div class="vertical_space_16"></div>
             <div class="flex">
               <div class="news_image_card">
-                <img src="public/dummy_new_image.png" width="320" height="200" />
-                <div class="available-medium16 grow">또 국민연금의 몽니…현대百 지주사 불발</div>
+                <img id="selected_article_img" src="" alt="X" width="320" height="200" />
+                <div id="selected_article_description" class="available-medium16 grow"></div>
               </div>
               <div class="news_letter_title_box">
-                <div class="available-medium16">
-                  "위스키 사려고 이틀 전부터 줄 섰어요"
-                </div>
-                <div class="available-medium16">
-                  '방시혁 제국'이냐 '카카오 왕국'이냐…K엔터 누가 거머쥘까
-                </div>
-                <div class="available-medium16">
-                  사용후핵연료 저장시설 포화…이대론 7년 뒤 원전 멈춘다
-                </div>
-                <div class="available-medium16">
-                  [단독] 원희룡 "해외건설 근로자 소득공제 월 500만원으로 상향할 것"
-                </div>
-                <div class="available-medium16">
-                  태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]
-                </div>
-                <div class="available-medium16">
-                  LG엔솔, 폴란드 자동차산업협회 가입…“유럽서 목소리 키운다”
-                </div>
-                <div class="display-medium14 color_879298">
-                  "위스키 사려고 이틀 전부터 줄 섰어요"
-                </div>
               </div>
             </div>
-            <img src="public/right_arrow.svg" class="right_arrow pointer" width="24" height="40" />
+            <img src="public/right_arrow.svg" class="right_arrow arrow_hover pointer" width="24" height="40" />
           </div>
         </div>
       </div>
