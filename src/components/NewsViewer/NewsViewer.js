@@ -1,11 +1,22 @@
 import "./NewsViewer.css";
 import Button from "@/components/common/Button/Button";
-import articles from "@/mocks/data/articles.json";
+import leftButton from "@/assets/icons/leftButton.png";
+import rightButton from "@/assets/icons/rightButton.png";
 
-function NewsViewer({ $target, position = "beforeend" }) {
+function NewsViewer({ $target, position = "beforeend", news }) {
   this.$element = document.createElement("div");
   this.$element.className = "newsViewer";
   $target.insertAdjacentElement(position, this.$element);
+
+  this.state = {
+    page: 0,
+  };
+
+  this.setState = ({ page }) => {
+    this.state = { page };
+
+    this.render();
+  };
 
   function formatDate(date) {
     const year = date.getFullYear();
@@ -17,26 +28,60 @@ function NewsViewer({ $target, position = "beforeend" }) {
     return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
   }
 
+  const isLastPage = () => this.state.page === news.length - 1;
+  const isFirstPage = () => this.state.page === 0;
+
+  const handleNextClick = () => {
+    this.setState({ page: this.state.page + 1 });
+  };
+
+  const handlePrevClick = () => {
+    this.setState({ page: this.state.page - 1 });
+  };
+
+  const handleClick = (event) => {
+    const button = event.target.closest("button");
+
+    if (button && button.id === "nextButton") {
+      handleNextClick(event.target.closest("button"));
+
+      return;
+    }
+
+    if (button && button.id === "prevButton") {
+      handlePrevClick(event.target.closest("button"));
+
+      return;
+    }
+  };
+
   this.render = () => {
     this.$element.innerHTML = /* html */ `
-          <section class="companyInfo">
-            <img src="${articles[0].companyLogo}"/>
-            <p>${formatDate(new Date())} 편집</p>
-          </section>
+      <section class="companyInfo">
+        <img src="${news[this.state.page].companyLogo}"/>
+        <p>${formatDate(new Date())} 편집</p>
+      </section>
 
-          <section class="articleInfo">
-            <div class="mainNews">
-              <img src="${articles[0].imgUrl}"/>
-              <p>${articles[0].title}</p>
-            </div>
+      <section class="articleInfo">
+        <div class="mainNews">
+          <img src="${news[this.state.page].imgUrl}"/>
+          <p>${news[this.state.page].title}</p>
+        </div>
 
-            <div class="subNews">
-              <ul>
-                ${articles[0].headlines.map((str) => `<li>${str}</li>`).join("\n")}
-                <p>${articles[0].company} 언론사에서 직접 편집한 뉴스입니다.</p>
-              </ul>
-            </div>
-          </section>
+        <div class="subNews">
+          <ul>
+            ${news[this.state.page].headlines.map((str) => `<li>${str}</li>`).join("\n")}
+            <p>${news[this.state.page].company} 언론사에서 직접 편집한 뉴스입니다.</p>
+          </ul>
+        </div>
+      </section>
+
+      <button id="prevButton" class="newsButton prev${
+        isFirstPage() ? " hide" : ""
+      }"><img src="${leftButton}"/></button>
+      <button id="nextButton" class="newsButton next${
+        isLastPage() ? " hide" : ""
+      }"><img src="${rightButton}"/></button>
       `;
 
     new Button({
@@ -48,6 +93,8 @@ function NewsViewer({ $target, position = "beforeend" }) {
   };
 
   this.render();
+
+  this.$element.addEventListener("click", handleClick.bind(this));
 }
 
 export default NewsViewer;

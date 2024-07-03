@@ -55,3 +55,38 @@
   font-size: 14px;
   color: var(--gray-200);
 }
+
+.newsButton {
+  width: 24px;
+  height: 40px;
+
+  border: none;
+  padding: 0;
+
+  background: none;
+}
+
+.prev {
+  position: absolute;
+  top: 50%;
+  left: -47px;
+
+  transform: translate(-50%, 50%);
+}
+
+.next {
+  position: absolute;
+  top: 50%;
+  right: -47px;
+
+  transform: translate(50%, 50%);
+}
+
+.newsButton > img {
+  width: 24px;
+  height: 40px;
+}
+
+.hide {
+  display: none;
+}
