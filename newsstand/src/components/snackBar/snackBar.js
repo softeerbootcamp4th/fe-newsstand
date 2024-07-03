@@ -1,14 +1,11 @@
-export const SnackBar = (snackBarContent) => {
-  const content = snackBarContent;
+import { createElement } from '../../app/createElement.js';
 
-  const contentElement = document.getElementById("snackBarContent");
-  if (contentElement) {
-    contentElement.textContent = content;
-  } else {
-    console.error('Element with id "snackBarContent" not found.');
-  }
-
-  return document.body.innerHTML;
+export const SnackBar = () => {
+  return {
+    element: `
+    <div class="snackBar" id="snackBarContent"> 내가 구독한 언론사에 추가되었습니다.</div>
+  `
+  };
 };
 
 export default SnackBar;

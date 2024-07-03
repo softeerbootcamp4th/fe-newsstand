@@ -1,14 +1,19 @@
 @import "../foundation/foundation.css";
 
 .autoRollingNews {
+    width: 100%;
     display: flex;
-    gap: 16px;
+    /* gap: 16px; */
     background-color: var(--color-surface-alt);
     padding: 16px;
+
+    border: var(--border-default);
 }
 
 .autoRollingNews-company {
     width: max-content;
+    margin: 0;
+    height: 100%;
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-regular);
     color: var(--color-text-strong);
