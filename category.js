@@ -54,8 +54,8 @@ function showCategory(index) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const thumbnailContainer = document.querySelector('.thumbnail-news-item');
-    const newsColumnContainer = document.querySelector('.news-column');
+    const mainNewsDiv = document.querySelector('.main-news');
+    const subNewsDiv = document.querySelector('.sub-news');
 
     fetch("./data/allNews.json")
     .then(response => {
@@ -73,12 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const thumnbailImg = document.createElement('img');
         console.log(news.thumbnailUrl);
         thumnbailImg.src = news.thumbnailUrl;
-        // thumnbailImg.src = "https://imgnews.pstatic.net/image/014/2024/07/03/0005208091_001_20240703124715600.jpg?type=w647";
         const thumbnailNews = document.createElement('div');
         thumbnailNews.textContent = news.newsItems[0].title;
 
-        thumbnailContainer.appendChild(thumnbailImg);
-        thumbnailContainer.appendChild(thumbnailNews);
+        mainNewsDiv.appendChild(thumnbailImg);
+        mainNewsDiv.appendChild(thumbnailNews);
 
         news.newsItems.slice(1).forEach(n => {
             const newsItemDiv = document.createElement('div');
@@ -88,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.open(n.url, '_blank');
             })
 
-            newsColumnContainer.appendChild(newsItemDiv);
+            subNewsDiv.appendChild(newsItemDiv);
         });
     })
     .catch(error => {
