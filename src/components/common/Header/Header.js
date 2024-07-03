@@ -1,10 +1,10 @@
 import "./Header.css";
 import { formatDate } from "@/utils/date";
 
-function Header({ $target }) {
+function Header({ $target, position = "afterbegin" }) {
   this.$element = document.createElement("header");
   this.$element.className = "header";
-  $target.appendChild(this.$element);
+  $target.insertAdjacentElement(position, this.$element);
 
   function handleLogoClick(event) {
     if (event.target.parentElement.id === "logo") {

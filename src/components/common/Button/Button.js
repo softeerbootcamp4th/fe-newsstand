@@ -3,11 +3,11 @@ import plus from "@/assets/icons/plus.svg";
 import closed from "@/assets/icons/closed.svg";
 import { changeFillColor } from "@/utils/svg";
 
-function Button({ $target, icon, color, text }) {
+function Button({ $target, position = "beforeend", icon, color, text }) {
   this.$element = document.createElement("button");
   this.$element.className = "button";
   this.$element.classList.add(color);
-  $target.appendChild(this.$element);
+  $target.insertAdjacentElement(position, this.$element);
 
   function handleButtonHover() {
     const svgDoc = svgObject.contentDocument;

@@ -2,10 +2,10 @@ import Button from "../common/Button/Button";
 import "./NewsList.css";
 import articles from "@/mocks/data/articles.json";
 
-function NewsList({ $target }) {
+function NewsList({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");
   this.$element.className = "newsList";
-  $target.appendChild(this.$element);
+  $target.insertAdjacentElement(position, this.$element);
 
   function formatDate(date) {
     const year = date.getFullYear();

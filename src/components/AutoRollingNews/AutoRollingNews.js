@@ -1,9 +1,9 @@
 import "./AutoRollingNews.css";
 
-function AutoRollingNews({ $target }) {
+function AutoRollingNews({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");
   this.$element.className = "viewer";
-  $target.appendChild(this.$element);
+  $target.insertAdjacentElement(position, this.$element);
 
   this.render = () => {
     this.$element.innerHTML = /* html */ `
