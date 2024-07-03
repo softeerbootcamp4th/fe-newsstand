@@ -80,7 +80,9 @@ function NewsViewer({ $target, position = "beforeend", news }) {
 
         <section class="articleInfo">
           <div class="mainNews">
-            <img src="${news[this.state.page].imgUrl}"/>
+            <div>
+              <img src="${news[this.state.page].imgUrl}"/>
+            </div>
             <p>${news[this.state.page].title}</p>
           </div>
 

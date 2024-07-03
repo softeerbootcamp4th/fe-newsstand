@@ -33,4 +33,10 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
