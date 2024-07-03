@@ -56,7 +56,7 @@ header {
     height: fit-content;
 }
 
-nav {
+section {
     display: flex;
     width: 930px;
     gap : 8px;
@@ -64,26 +64,82 @@ nav {
     margin-top: 40px;
 }
 
-.nav-left, .nav-right {
+.news-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: top 0.5s ease-in-out;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 16px;
     display: flex;
-    flex : 1;
-    border: 1px solid var(--surface-default);
     gap : 16px;
-    padding : 16px;
+    align-items: center;
+    overflow: hidden;
+
+}
+
+.news-item:hover {
+    text-decoration: underline;
+}
+
+.news-item.hovered {
+    text-decoration: underline;
+}
+
+.news-item .news-company {
+    font-weight: bold;
+    color: #333;
+    flex-shrink: 0;
+}
+
+.news-item .news-title {
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0;
+    margin-bottom: 0;
+    color : var(--text-default);
+    flex-grow: 1; 
+    max-width: 364px;
+
+}
+
+.news-item .news-title::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, white);
+    pointer-events: none;
+    animation: rollUp 5s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rollUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+.news-container-left, .news-container-right {
+    position: relative;
+    overflow: hidden;
+    height: 49px;
+    display: flex;
+    flex: 1;
+    border: 1px solid var(--surface-default);
     align-items: center;
     background-color: var(--surface-alt);
     cursor: pointer;
 
-}
-
-.nav-news-title {
-    color : var(—text-bold);
-    font-size : 14px;
-    margin : 0;
-}
-
-.nav-news-title:hover {
-    text-decoration: underline;
 }
 
 main {
