@@ -51,7 +51,6 @@
 
     overflow: hidden;
     -webkit-line-clamp: 2;
-    max-height: 44px;
     text-overflow: ellipsis;
 }
 .media-contents__image-content:hover .media-contents__image-headline {
