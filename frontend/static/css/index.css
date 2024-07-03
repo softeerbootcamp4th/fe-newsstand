@@ -59,6 +59,13 @@
     height: 388px;
 }
 
+#rollingBox {
+    height: 17px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
 .recentArticle {
     align-content: center;
     width: 50%;
@@ -75,6 +82,15 @@
 }
 
 .recentArticleTitle {
+    font-size: 14px;
+    color: #5F6E76;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#curretDom {
     font-size: 14px;
     color: #5F6E76;
     font-weight: 500;
@@ -178,4 +194,58 @@
 .newsstandCollectionList div {
     font-size: 14px;
     color: #879298;
+}
+
+/*  여기서 부터 rolling css 나중에 분리하자 */
+
+.hoverInRecentNews {
+    text-decoration: underline;
+}
+
+.currentDom {
+    top: 0px;
+    max-width: 360px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+}
+
+.futureDom {
+    top: 17px;
+    max-width: 360px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+}
+
+.futureDomStart {
+    animation-name: futureDomStart;
+    animation-duration: 1s;
+}
+
+.currentDomStart {
+    animation-name: currentDomStart;
+    animation-duration: 1s;
+}
+
+@keyframes futureDomStart {
+    from {
+        top: 17px;
+    }
+
+    to {
+        top: 0px;
+    }
+}
+
+@keyframes currentDomStart {
+    from {
+        top: 0px;
+    }
+
+    to {
+        top: -17px;
+    }
 }
