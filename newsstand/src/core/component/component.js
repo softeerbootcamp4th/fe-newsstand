@@ -12,14 +12,19 @@ const createComponent = (component, props) => {
 	const previousComponent = currentComponent;
 
 	currentComponent = { id: component.name, stateIndex: 0, component, props };
-	
+
 	if (props){
 		currentComponent.id += props.id
 	}
 
 	const componentInstance = component(props);
 
-	const namedComponent = `<div id="${currentComponent.id}">${componentInstance.element}</div>`
+	const namedComponent = `
+	<div 
+	  style="${props ? props.style : ''}" 
+	  id="${currentComponent.id}">
+	  ${componentInstance.element}
+	</div>`;
 	
 	componentInstance.element = namedComponent;
 
