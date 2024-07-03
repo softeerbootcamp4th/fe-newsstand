@@ -1,0 +1,33 @@
+.flex-row-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inline-tag {
+    display: inline;
+}
+
+#title-text {
+    font-size: 24px;
+    color: #14212B;
+}
+
+#date-text {
+    font-size: 16px;
+    line-height: 22px;
+    color: #5F6E76;
+}
+
+#title-wrapper {
+    height: 29px;
+}
+
+#news-paper {
+    filter: invert(70%) sepia(39%) saturate(4732%) hue-rotate(198deg) brightness(91%) contrast(98%);
+}
+
+#header-wrapper {
+    align-items: center;
+    width: 930px;
+}
