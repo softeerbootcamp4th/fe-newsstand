@@ -18,7 +18,7 @@
         </section>
     </header>
 
-    <main>
+    <main class="flexbox__column-direction gap32">
         <section class="flexbox__flex-start--center gap8">
             <section class="current-news__box surface--alt border flexbox__flex-start--center gap16">
                 <p class="current-news__media-title text--strong text__bold14"></p>
@@ -35,6 +35,71 @@
                     <p class="current-news__appear-text current-news__headline text__medium14"></p>
                     <a class="current-news__static-text current-news__headline text__medium14" target="_blank"></a>
                 </section>
+            </section>
+        </section>
+
+        <section class="flexbox__column-direction gap24">
+            <section class="flexbox__space-between--center gap24">
+                <section class="flexbox__flex-start--center gap24">
+                    <h2 class="text__bold16 text--strong">전체 언론사</h2>
+                    <h2 class="text__medium16 text--weak">내가 구독한 언론사</h2>
+                </section>
+                <section class="flexbox__flex-start--center gap8">
+                    <img alt="리스트 아이콘" src="./static/icons/list-active.svg" />
+                    <img alt="그리드 아이콘" src="./static/icons/grid-inactive.svg" />
+                </section>
+            </section>
+
+            <section class="media-contents__container border">
+                <ul class="media-contents__category-list flexbox__flex-start--center surface--alt text__medium14">
+                    <li class="media-contents__category-item media-contents__category-item--selected">
+                        <p class="text__bold14 text__white--default">종합/경제</p>
+                        <section>
+                            <p class="text__bold14 text__white--default">1</p> <p class="text__bold14 text__white--weak">/ 81</p>
+                        </section>
+                    </li>
+                    <li class="media-contents__category-item">
+                        <p class="text--weak">방송/통신</p>
+                    </li>
+                    <li class="media-contents__category-item">
+                        <p class="text--weak">IT</p>
+                    </li>
+                </ul>
+
+                <section class="media-contents__contents-box flexbox__column-direction gap16">
+                    <section class="flexbox__flex-start--center gap16">
+                        <img alt="뉴스 아이콘" src="./static/icons/list-active.svg" />
+                        <p class="text__medium12">2024.02.10 18:59 편집</p>
+                        <section class="border media-contents__subscribe-button">
+                            <img alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
+                            <p class="media-contents__subscribe-text text__medium12 text--weak">구독하기</p>
+                        </section>
+                        <section class="border media-contents__subscribe-button">
+                            <img alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
+                        </section>
+                    </section>
+
+                    <section class="flexbox__flex-start--start">
+                        <section class="media-contents__image-content flexbox__column-direction gap16">
+                            <img alt="뉴스 이미지" src="" style="width: 320px; height: 200px;"/>
+                            <p class="media-contents__image-headline text__medium16 text--strong">봇물처럼 터지는 공공요금 인상…꼭 지금이어야 하나봇물처럼 터지는 공공요금 인상…꼭 지금이어야 하나</p>
+                        </section>
+                        <section class="flexbox__column-direction gap16">
+                            <ul class="flexbox__column-direction gap16">
+                                <li class="media-contents__list-item">
+                                    <p class="media-contents__list-item-text text__medium16 text--bold">[단독] 美복권 키오스크 "불법"인데…정부 방치에 '우후죽순'</p>
+                                </li>
+                                <li class="media-contents__list-item">
+                                    <p class="media-contents__list-item-text text__medium16 text--bold">[단독] 美복권 키오스크 "불법"인데…정부 방치에 '우후죽순'</p>
+                                </li>
+                            </ul>
+                            <p class="media-contents__tip text__medium14 text--weak">SBS Biz 언론사에서 직접 편집한 뉴스입니다.</p>
+                        </section>
+                    </section>
+                </section>
+
+                <img class="media-contents__navigation-button media-contents__left-button" alt="이전 미디어 보기 버튼" src="./static/icons/leftbutton.svg" />
+                <img class="media-contents__navigation-button media-contents__right-button" alt="다음 미디어 보기 버튼" src="./static/icons/rightbutton.svg" />
             </section>
         </section>
     </main>
