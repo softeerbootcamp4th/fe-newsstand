@@ -22,16 +22,16 @@ function makeUniqueKeyMap(children, reversed = false)
 function makeRelativeNodePositionMap(children)
 {
 	const length = children.length;
-	let nextNodeIndex = new Array(length).fill(length);
+	// let nextNodeIndex = new Array(length).fill(length);
 
-	// 노드의 다음 유효한(data-unique-key 프로퍼티가 있는(리액트의 key와 유사)) unique-key를 찾습니다.
-	let lastHasUniqueKeyIndex = length;
-	for(let i=length-1; i>=0; i--)
-	{
-		let child = children[i];
-		nextNodeIndex[i] = lastHasUniqueKeyIndex;
-		if(child.dataset?.uniqueKey !== undefined) lastHasUniqueKeyIndex = i;
-	}
+	// // 노드의 다음 유효한(data-unique-key 프로퍼티가 있는(리액트의 key와 유사)) unique-key를 찾습니다.
+	// let lastHasUniqueKeyIndex = length;
+	// for(let i=length-1; i>=0; i--)
+	// {
+	// 	let child = children[i];
+	// 	nextNodeIndex[i] = lastHasUniqueKeyIndex;
+	// 	if(child.dataset?.uniqueKey !== undefined) lastHasUniqueKeyIndex = i;
+	// }
 
 	// 이전 노드의 유니크 키 - 새 노드의 다음위치 유니크키 맵을 생성합니다.
 	const map = makeUniqueKeyMap(children, true);
@@ -40,7 +40,8 @@ function makeRelativeNodePositionMap(children)
 	for(let i=0; i<length; i++)
 	{
 		let uniqueKey = map.get(children[i]);
-		nodeNextMap.set(uniqueKey, nextNodeIndex[i]);
+		let nextUniqueKey = map.get(children[i+1]) ?? null;
+		nodeNextMap.set(uniqueKey, nextUniqueKey);
 	}
 
 	return nodeNextMap;
@@ -68,13 +69,16 @@ function applyDiffAttributes(targetDom, newDom)
 	for(let i=0; i<newAttr.length; i++)
 	{
 		let attr = newAttr[i].name;
-		targetDom.setAttribute(attr, newDom.getAttribute(attr));
+		let oldAttrValue = targetDom.getAttribute(attr);
+		let newAttrValue = newDom.getAttribute(attr);
+		if(oldAttrValue !== newAttrValue) targetDom.setAttribute(attr, newDom.getAttribute(attr));
 	}
 }
 
 function applyDiffChildren(targetDom, childList)
 {
-	// 새로운 자식의 상대적 위치를 저장하는 별도의 맵을 만듭니다.
+	// 자식의 상대적 위치를 저장하는 별도의 맵을 만듭니다.
+	const oldNodeNextMap = makeRelativeNodePositionMap(targetDom.childNodes);
 	const newNodeNextMap = makeRelativeNodePositionMap(childList);
 
 	// 유니크 키 맵을 만듭니다. 순회에 용이하기 위함
@@ -85,7 +89,7 @@ function applyDiffChildren(targetDom, childList)
 	for(let [uniqueKey, child] of oldNodeKeyMap)
 	{
 		if(!newNodeNextMap.has(uniqueKey)) targetDom.removeChild(child);
-		else {
+		else if(oldNodeNextMap.get(uniqueKey) !== newNodeNextMap.get(uniqueKey) ){
 			const nextNode = oldNodeKeyMap.get(newNodeNextMap.get(uniqueKey)) ?? null;
 			targetDom.insertBefore(child, nextNode);
 		}

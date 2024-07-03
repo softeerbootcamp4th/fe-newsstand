@@ -11,12 +11,13 @@ function parser(str)
 		const policy = trustedTypes.createPolicy("unsafePolicy", {createHTML: str=>str});
 		innerString = policy.createHTML(str);
 	}
-	
+
 	factory.innerHTML = innerString;
-	if(factory.children.length === 0) return null;
-	if(factory.children.length === 1) return factory.children[0];
-	for(let child of factory.children) {
-		fragment.appendChild(child);
+	if(factory.childNodes.length === 0) return null;
+	if(factory.childNodes.length === 1) return factory.childNodes[0];
+	const childNodes = [...factory.childNodes];
+	for(let child of childNodes) {
+		fragment.append(child);
 	}
 	return fragment;
 }
