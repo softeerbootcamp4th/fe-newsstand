@@ -1,4 +1,5 @@
-export function rollingNews(currentDom, data, hoverIn, hoverOut) {
+
+export function rollingNews(currentDom, data) {
     const futureDom = document.querySelector(".futureDom");
 
     currentDom.classList.add("currentDomStart");
