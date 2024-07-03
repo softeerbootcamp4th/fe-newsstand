@@ -10,16 +10,16 @@ myMedia.addEventListener("click", onMyclick);
 function onAllClick() {
     allMedia.dataset.selected = "yes";
     myMedia.dataset.selected = "no";
-    onClickController();
+    categoryController();
 }
 
 function onMyclick() {
     allMedia.dataset.selected = "no";
     myMedia.dataset.selected = "yes";
-    onClickController();
+    categoryController();
 }
 
-function onClickController() {
+function categoryController() {
     const selected = changeSelected();
     const categoryData = chooseData(selected);
     changeCategoryUI(categoryData);
@@ -51,21 +51,25 @@ function chooseData(selected) {
 // 표시할 데이터에 대한 DOM Element를 만들어 추가한다.
 function changeCategoryUI(categoryData) {
     const parentNode = document.querySelector(".news-list__navbar");
-    
+
     // 데이터 추가 전, 이전 데이터 삭제
     while(parentNode.firstChild) {
         parentNode.removeChild(parentNode.firstChild);
     }
 
-    Object.keys(categoryData).forEach((category) => {
+    Object.keys(categoryData).forEach((category, index) => {
         const childNode = document.createElement("span");
 
+        if(index === 0) {
+            childNode.dataset.selected = "yes";
+            childNode.dataset.newsCount = categoryData[category].length;
+            childNode.dataset.newsIndex = 1;
+        }
+
         childNode.className = "news-list__navbar__category";
-        childNode.innerHTML = 
-        `<span>${category}</span>
-        `
+        childNode.innerHTML = category;
         parentNode.appendChild(childNode);
     })
 }
 
-
+categoryController();
