@@ -1,0 +1,55 @@
+.bars-container {
+    display: flex;
+    justify-content: space-between;
+    width: 600px; /* Adjust as needed */
+    margin: 50px auto;
+  }
+  
+  .left-bar, .right-bar {
+    width: 50%;
+    height: 50px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+  }
+  
+  .news-headlines {
+    position: relative;
+    height: 100%;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* 기사 타이틀이 아래로 슬라이드 애니메이션 */
+  @keyframes slideOut {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+  
+  .headline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    padding: 5px;
+    animation: animateHeadline 5s infinite;
+  }
+  
+  
+  

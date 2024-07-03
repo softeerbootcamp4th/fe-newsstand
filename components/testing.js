@@ -11,8 +11,24 @@ const svgFiles = [
     './image/grid9.svg',
     './image/grid10.svg',
     './image/grid11.svg',
+    './image/grid12.svg',
+    './image/grid13.svg',
+    './image/grid14.svg',
+    './image/grid15.svg',
+    './image/grid16.svg',
+    './image/grid17.svg',
+    './image/grid18.svg',
+    './image/grid19.svg',
+    './image/grid20.svg',
+    './image/grid21.svg',
+    './image/grid22.svg',
+    './image/grid23.svg',
 
 ];
+
+const svgfilenames = ['서울경제','데일리안', '헤럴드경제', 'SBS Biz', '세계일보', '아시아경제','이데일리', '조선일보', '아이뉴스24', 
+    '파이낸셜뉴스', '스포츠서울', '스포츠동아', '석간 문화일보', 'KBS WORLD', '중앙데일리', '인사이트', '법률 방송뉴스', '시사저널e', 'RBS 한국농어촌방송', 
+    '조이뉴스24', '에너지경제', '비즈니스포스트', 'CEO스코어데일리', 'KNN'];
 
 function createGridItems(numItems) {
     /*

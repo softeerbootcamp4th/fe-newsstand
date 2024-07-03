@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List Navigation</title>
+<style>
+  .list-container {
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ccc;
+  }
+
+  .list {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+
+  .item {
+    width: 300px;
+    height: 200px;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 200px;
+    font-size: 24px;
+  }
+
+  .btn {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-left {
+    left: 10px;
+  }
+
+  .btn-right {
+    right: 10px;
+  }
+
+  .btn img {
+    width: 30px; /* 버튼 이미지 크기 설정 */
+    height: 30px;
+  }
+
+  .btn.disabled {
+    opacity: 0.5; /* 비활성화된 버튼은 투명도를 조절하여 비활성화 효과를 줍니다. */
+    pointer-events: none; /* 비활성화된 버튼은 클릭 이벤트를 막습니다. */
+  }
+</style>
+</head>
+<body>
+
+<div class="list-container">
+  <div class="list">
+    <div class="item">List 1</div>
+    <div class="item">List 2</div>
+    <div class="item">List 3</div>
+    <div class="item">List 4</div>
+    <div class="item">List 5</div>
+  </div>
+  <div class="btn btn-left" id="btnLeft" onclick="leftButtonClick()">
+    <img src="../icons/LeftButton.svg" alt="Left Button">
+  </div>
+  <div class="btn btn-right" id="btnRight" onclick="rightButtonClick()">
+    <img src="../icons/RightButton.svg" alt="Right Button">
+  </div>
+</div>
+
+<script>
+  const listContainer = document.querySelector('.list-container');
+  const list = document.querySelector('.list');
+  const items = document.querySelectorAll('.item');
+  const btnLeft = document.getElementById('btnLeft');
+  const btnRight = document.getElementById('btnRight');
+
+  let currentIndex = 0;
+
+  function rightButtonClick() {
+    if (currentIndex < items.length - 1) {
+      currentIndex++;
+      updateList();
+      console.log('Current Index:', currentIndex);
+    }
+  }
+
+  function leftButtonClick() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateList();
+      console.log('Current Index:', currentIndex);
+    }
+  }
+
+  function updateList() {
+    const itemWidth = items[0].offsetWidth;
+    const newPosition = -currentIndex * itemWidth;
+    list.style.transform = `translateX(${newPosition}px)`;
+
+    // 왼쪽 버튼 상태 업데이트
+    if (currentIndex === 0) {
+      btnLeft.classList.add('disabled');
+    } else {
+      btnLeft.classList.remove('disabled');
+    }
+
+    // 오른쪽 버튼 상태 업데이트
+    if (currentIndex === items.length - 1) {
+      btnRight.classList.add('disabled');
+    } else {
+      btnRight.classList.remove('disabled');
+    }
+  }
+
+  updateList(); // 초기 리스트 설정
+</script>
+
+</body>
+</html>

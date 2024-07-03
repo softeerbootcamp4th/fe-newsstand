@@ -1,3 +1,4 @@
+//grid layout
 function Home(){
     var div = document.createElement("Div");
     
