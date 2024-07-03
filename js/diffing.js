@@ -22,16 +22,6 @@ function makeUniqueKeyMap(children, reversed = false)
 function makeRelativeNodePositionMap(children)
 {
 	const length = children.length;
-	// let nextNodeIndex = new Array(length).fill(length);
-
-	// // 노드의 다음 유효한(data-unique-key 프로퍼티가 있는(리액트의 key와 유사)) unique-key를 찾습니다.
-	// let lastHasUniqueKeyIndex = length;
-	// for(let i=length-1; i>=0; i--)
-	// {
-	// 	let child = children[i];
-	// 	nextNodeIndex[i] = lastHasUniqueKeyIndex;
-	// 	if(child.dataset?.uniqueKey !== undefined) lastHasUniqueKeyIndex = i;
-	// }
 
 	// 이전 노드의 유니크 키 - 새 노드의 다음위치 유니크키 맵을 생성합니다.
 	const map = makeUniqueKeyMap(children, true);
@@ -127,7 +117,11 @@ function _applyDiff(oldDom, newDom)
 	}
 	
 	// 그 외의 경우(노드타입이 같고 태그명도 같다면, 속성을 변경하고 children을 변경한다.)
-	applyDiffAttributes(oldDom, newDom);
+	if(newDom.dataset.forceReplace) {
+		replaceTo(oldDom, newDom);
+		return;
+	}
+	else applyDiffAttributes(oldDom, newDom);
 	applyDiffChildren(oldDom, newDom.childNodes);
 }
 

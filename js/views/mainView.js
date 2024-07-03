@@ -1,14 +1,8 @@
 import mountLeftSelector from "./mountLeftSelector.js";
 import mountRightSelector from "./mountRightSelector.js";
 import html from "../domParser.js";
-
-function removeChildren(el)
-{
-	for(let child of el.children)
-	{
-		el.removeChild(child);
-	}
-}
+import ListContentComponent from "./listContentComponent.js";
+import applyDiff from "../diffing.js";
 
 function mountView(el, data)
 {
@@ -17,9 +11,8 @@ function mountView(el, data)
 	const viewTypeState = mountRightSelector();
 
 	viewTypeState.addSideEffect( (state)=>{
-		removeChildren(el);
-		if(state === 1) el.appendChild(html`<div>Hello!</div>`);
-		else el.appendChild(html`<div>List view!</div>`);
+		if(state === 1) applyDiff(el, ListContentComponent("현대방송"));
+		else applyDiff(el, ListContentComponent("대구지역신문"));
 	} );
 
 	el.appendChild(html`<div>Hello!</div>`);
