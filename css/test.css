@@ -208,6 +208,15 @@ h2 {
     display: block; /* 다른 요소와 세로로 정렬 */
     transition: transform 0.3s ease;
 }
+
+.news-title {
+    color: #14212B;
+}
+
+.news-image-container img:hover + .news-title {
+    text-decoration: underline;
+}
+
 .news-image-container:hover img {
     transform: scale(1.2);
 }
@@ -222,8 +231,10 @@ h2 {
     display: flex;
 }
 
-.news-title {
-    color: #14212B;
+
+
+.news-title:hover {
+    text-decoration: underline;
 }
 .news-sub-titles{
     display: flex;

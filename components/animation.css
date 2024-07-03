@@ -17,6 +17,10 @@
     height: 100%;
   }
 
+  .headline:hover {
+    text-decoration: underline;
+  }
+
   @keyframes slideIn {
     from {
       transform: translateY(100%);
@@ -28,7 +32,7 @@
     }
   }
   
-  /* 기사 타이틀이 아래로 슬라이드 애니메이션 */
+  /* 아래로 슬라이드 */
   @keyframes slideOut {
     from {
       transform: translateY(0);
@@ -39,7 +43,7 @@
       opacity: 0;
     }
   }
-  
+
   .headline {
     position: absolute;
     top: 0;
