@@ -1,0 +1,36 @@
+.inline-tag {
+    display: inline;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-row-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-col-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+#news-bar-wrapper {
+    width: 930px;
+    height: 49px;
+}
+
+#news-bar {
+    width: 461px;
+    height: 49px;
+    border: 1px solid #D2DAE0;
+    background-color: #F5F7F9;
+    align-items: center;
+}
+    #news-bar-content {
+        font-size: 14px;
+        margin-left: 16px;
+    }
