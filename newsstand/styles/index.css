@@ -1,3 +1,4 @@
 @import "./common.css";
 @import "./layout.css";
-@import "./components/NewBox.css";
+@import "./base/Button.css";
+@import "./newsstand.css";
