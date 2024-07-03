@@ -1,5 +1,5 @@
 import { CURRENT_NEWS } from '../static/data/current-news.js'
-import { rolling } from './rolling.js';
+import { rollingDOM } from './rolling.js';
 
 function initCurrentNews() {
     const currentNewsBoxDOMs = document.querySelectorAll('.current-news__box');
@@ -9,7 +9,7 @@ function initCurrentNews() {
         const rollingBoxDOM = newsBoxDOM.querySelector('.current-news__rolling-box');
 
         mediaTitleDOM.innerText = CURRENT_NEWS.data[idx].media;
-        rolling(rollingBoxDOM, CURRENT_NEWS.data[idx])
+        rollingDOM(rollingBoxDOM, CURRENT_NEWS.data[idx], idx)
     });
 }
 

@@ -10,4 +10,9 @@ body {
 p, h1, h2, h3, h4 {
     margin: 0;
     display: inline-block;
+    color: var(--gray400);
+}
+a {
+    text-decoration: none;
+    color: var(--gray400);
 }
