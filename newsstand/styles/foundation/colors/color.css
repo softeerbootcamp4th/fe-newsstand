@@ -1,0 +1,42 @@
+:root {
+  /* default */
+    --color-grayscale-white-alt: #ffffff70;
+    --color-grayscale-white: #ffffff;
+    --color-grayscale50: #f5f7f9;
+    --color-grayscale100: #d2dae0;
+    --color-grayscale200: #879298;
+    --color-grayscale300: #6e8091;
+    --color-grayscale400: #5f6e76;
+    --color-grayscale500: #4b5966;
+    --color-grayscale-black: #14212b;
+    --color-blue100: #7890E7;
+    --color-blue500: #4362d0;
+
+    /* light mode */
+    --color-text-strong: var(--color-grayscale-black);
+    --color-text-bold: var(--color-grayscale500);
+    --color-text-default: var(--color-grayscale400);
+    --color-text-weak: var(--color-grayscale200);
+    --color-text-white-default: var(--color-grayscale-white);
+    --color-text-white-weak: var(--color-grayscale-white-alt);
+    --color-text-point: var(--color-blue500);
+    --color-surface-default: var(--color-grayscale-white);
+    --color-surface-alt: var(--color-grayscale50);
+    --color-surface-brand-default: var(--color-blue500);
+    --color-surface-brand-alt: var(--color-blue100);
+    --color-border-bold: var(--color-grayscale300);
+    --color-border-default: var(--color-grayscale100);
+}
+  
+.color-box {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border: 1px solid var(--color-border-default);
+  border-radius: 50%;
+}
+.color-item {
+  margin-bottom: 10px;
+}
