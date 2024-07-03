@@ -32,7 +32,9 @@ const createApp = () => {
   };
 
   const states = new Map<number, any>();
+  const renderQueue = new Deque<() => void>();
   let statesKey = 0;
+  let isRendering = false;
   let root: HTMLElement | null = null;
   let app: AppElementRenderer | null = null;
   const init = (_root: HTMLElement, _app: AppElementRenderer) => {
@@ -91,6 +93,7 @@ const createApp = () => {
     }
   };
   const render = debounceAnimationCallback(() => {
+    isRendering = true;
     if (root == null || app == null) return;
     statesKey = 0;
     effectsKey = 0;
@@ -118,9 +121,25 @@ const createApp = () => {
       }
       currentElems.pushBack([...currentElem.children]);
     }
-    console.log(top);
     _diffingRender(root, top);
+    isRendering = false;
+    runRenderQueue();
   });
+
+  const fillRenderQueue = (callback: () => void) => {
+    renderQueue.pushBack(callback);
+  };
+
+  const runRenderQueue = () => {
+    if (renderQueue.length === 0) {
+      return;
+    }
+    while (renderQueue.length > 0) {
+      const callback = renderQueue.popFront()!;
+      callback();
+    }
+    render();
+  };
   const useState = <RawT = unknown>(initalState: RawT) => {
     type T = RawT extends unknown ? typeof initalState : RawT;
     const localStatesKey = statesKey;
@@ -130,8 +149,13 @@ const createApp = () => {
     const state = states.get(localStatesKey) as T;
 
     const update = (newState: T) => {
-      console.log(state, newState, localStatesKey, state == newState, states);
       if (state == newState) {
+        return;
+      }
+      if (isRendering) {
+        fillRenderQueue(() => {
+          states.set(localStatesKey, newState);
+        });
         return;
       }
       states.set(localStatesKey, newState);
