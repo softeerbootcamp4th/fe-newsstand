@@ -1,3 +1,42 @@
+const articleArea = document.querySelector('#article-list-area');
+
+articleArea.innerHTML = `
+    <div id="articleList-wrapper">
+        <div id="article-header-wrapper" class="flex-col-between">
+            <div id="media-wrapper inline-tag">
+                <button class="btn">전체 언론사</button>
+                <button class="btn">내가 구독한 언론사</button>
+            </div>
+            <div id="icon-wrapper inline-tag flex-row-between">
+                <button class="btn view-btn">
+                    <img src="/icons/list-view.png" alt="" width="24px" height="24px">
+                </button>
+                <button class="btn view-btn">
+                    <img src="/icons/grid-view.png" alt="" width="24px" height="24px">
+                </button>
+            </div>
+        </div>
+        <div id="article-menu-wrapper">
+
+        </div>
+        <div id="article-wrapper">
+            <div id="article-selection-wrapper">
+            </div>
+            <div id="article-content-wrapper">
+                <div id="content-header-wrapper" class="flex-row">
+                    <!-- <button class="btn">+ 구독하기</button> -->
+                </div>
+                <div id="content-body-wrapper" class="flex-row-between">
+                    <aside id="thumbnail-part">
+                    </aside>
+                    <ul id="article-li-part" class="flex-row-between">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+`
+
 const articleMenuWrapper = document.getElementById('article-menu-wrapper')
 const menuList = ['종합/경제', '방송/통신', 'IT', '영자지', '스포츠/연예', '매거진/전문지', '지역']
 
@@ -13,7 +52,6 @@ menuList.forEach((menuItem) => {
 });
 
 // 내용 추가
-
 const mediaName = '서울경제'
 const updateDate = '2023.02.10. 18:27'
 const thumbnailDetail = '또 국민연금의 몽니..현대차 지주사 불발'

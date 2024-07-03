@@ -1,3 +1,9 @@
+const newsBarArea = document.querySelector('#news-bar-area');
+newsBarArea.innerHTML = `
+    <div id="news-bar-wrapper" class="flex-row-between">
+    </div>
+`
+
 const newsBarWrapper = document.querySelector('#news-bar-wrapper');
 
 const mediaImgPath = '/images/asset 35 1.png'
