@@ -9,7 +9,6 @@ function displayDate() {
 
     document.getElementById('currentDate').innerText = formattedDate;
 }
-window.onload = displayDate;
 
 function startAnimation() {
     var button = document.getElementById('colorButton');
@@ -49,6 +48,7 @@ function updateList() {
 }
 
 window.onload = updateList;
+window.onload = displayDate;
 
 function rightButtonClick() {
     currentIndex++;
