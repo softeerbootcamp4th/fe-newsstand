@@ -90,6 +90,12 @@ body {
 	justify-content: center;
 }
 
+ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
 .overallWrapper {
 	width: calc(100% - 200px);
 	max-width: 930px;
@@ -222,5 +228,104 @@ body {
 
 .moveIcon.right {
 	right: -48px;
+}
+
+.listContent {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	padding: 24px;
+	gap: 16px;
+}
+
+.contentHeader {
+	width: 100%;
+	height: 24px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 16px;
+}
+
+.logoImage {
+	width: 53px;
+	height: 20px;
+	overflow: hidden;
+	object-fit: none;
+	object-position: center;
+}
+
+.lastEditDate {
+	font-size: 0.75rem;
+	color: var(--text-default);
+}
+
+.subscribeButton {
+	display: flex;
+	align-items: center;
+	padding: 2px 10px 2px 8px;
+	gap: 2px;
+	border: 1px solid var(--border-default);
+	border-radius: 50px;
+	background-color: var(--surface-alt);
+	font-size: 0.75rem;
+	color: var(--text-weak);
+	cursor: pointer;
+}
+
+.subscribeButton > .icon {
+	width: 12px;
+	height: 12px;
+	fill: var(--text-weak);
+}
+
+.contentBody {
+	width: 100%;
+	display: flex;
+	gap: 32px;
+}
+
+.headlineArticle {
+	width: 320px;
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.headlineArticle img {
+	width: 320px;
+	height: 200px;
+	object-position: center;
+	object-fit: cover;
+}
+
+.headlineArticle p {
+	font-size: 1rem;
+	line-height: 1.375rem;
+	color: var(--text-strong);
+}
+
+.articleList {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 0;
+	flex-grow: 1;
+}
+
+.articleList > li{
+	font-size: 1rem;
+	line-height: 1.375rem;
+	color: var(--text-bold);
+	text-overflow: ellipsis;
+	overflow: hidden;
+	text-wrap: nowrap;
+}
+
+.articleFooter {
+	font-size: 0.875rem;
+	color: var(--text-weak);
 }
 

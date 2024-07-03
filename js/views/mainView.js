@@ -15,7 +15,7 @@ function mountView(el, data)
 		else applyDiff(el, ListContentComponent("대구지역신문"));
 	} );
 
-	el.appendChild(html`<div>Hello!</div>`);
+	el.appendChild(ListContentComponent("현대방송"));
 }
 
 export default mountView;

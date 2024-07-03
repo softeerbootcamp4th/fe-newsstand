@@ -1,7 +1,7 @@
 export default {
 	"현대방송": {
 		"name": "현대방송",
-		"logo": "./assets/logos/grid (32).png",
+		"logo": "./assets/logos/grid.png",
 		"category": "broadcast",
 		"lastEditDate": 1719893011952,
 		"headArticle": {
