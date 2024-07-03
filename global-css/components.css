@@ -12,6 +12,10 @@
     display: flex;
     align-items: center;
 }
+.flexbox__flex-start--start {
+    display: flex;
+    align-items: flex-start;
+}
 .flexbox__column-direction {
     display: flex;
     flex-direction: column;

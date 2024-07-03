@@ -21,6 +21,9 @@
     overflow: hidden;
 }
 
+.current-news__static-text:hover {
+    text-decoration: underline;
+}
 .current-news__disappear-text {
     opacity: 0;
     top: 0px;
