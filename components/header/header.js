@@ -2,7 +2,7 @@ const headerArea = document.querySelector('#header-area');
 
 headerArea.innerHTML = `
     <div id="header-wrapper" class="flex-row-between">
-        <div id="title-wrapper" class="inline-tag">
+        <div id="title-wrapper" class="flex-row-between">
             <img id="news-paper" src="/icons/newspaper.png" alt="A" width="24px" height="24px">
             <h3 id="title-text" class="inline-tag">
                 뉴스 스탠드
