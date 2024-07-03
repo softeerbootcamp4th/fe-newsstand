@@ -48,3 +48,41 @@
     100% { transform: translateY(-200%); }
 }
 
+
+/* list-news */
+
+.list-news-header{
+    display: flex;
+    height: 10%;
+    width: 100%;
+    background-color: #D2DAE0;
+}
+
+.list-news-body{
+    display: flex;
+    height: 90%;
+    width: 100%;
+}
+
+.list-news-left-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 40%;
+    background-color:#f9fafb;
+    padding: 2%;
+}
+
+.list-news-left-top{
+    display: flex;
+    height: 20px;
+    align-items: center;
+}
+
+.list-news-right-container{
+    display: flex;
+    height: 100%;
+    width: 60%;
+    background-color:#374151;
+    padding: 2%;
+}

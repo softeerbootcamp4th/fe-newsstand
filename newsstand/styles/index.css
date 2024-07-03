@@ -1,4 +1,5 @@
 @import "./common.css";
 @import "./layout.css";
-@import "./base/Button.css";
 @import "./newsstand.css";
+@import "./base/Button.css";
+@import "./base/IconView.css";
