@@ -4,7 +4,7 @@ import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
 
 function NewsViewer({ $target, position = "beforeend", news }) {
-  this.$element = document.createElement("div");
+  this.$element = document.createElement("article");
   this.$element.className = "newsViewer";
   $target.insertAdjacentElement(position, this.$element);
 
@@ -57,31 +57,43 @@ function NewsViewer({ $target, position = "beforeend", news }) {
 
   this.render = () => {
     this.$element.innerHTML = /* html */ `
-      <section class="companyInfo">
-        <img src="${news[this.state.page].companyLogo}"/>
-        <p>${formatDate(new Date())} 편집</p>
-      </section>
+      <ul class="categoryFilter">
+        <li>종합/경제</li>
+        <li>방송/통신</li>
+        <li>IT</li>
+        <li>영자지</li>
+        <li>스포츠/연예</li>
+        <li>매거진/전문지</li>
+        <li>지역</li>
+      </ul>
 
-      <section class="articleInfo">
-        <div class="mainNews">
-          <img src="${news[this.state.page].imgUrl}"/>
-          <p>${news[this.state.page].title}</p>
-        </div>
+      <div class="contents">
+        <section class="companyInfo">
+          <img src="${news[this.state.page].companyLogo}"/>
+          <p>${formatDate(new Date())} 편집</p>
+        </section>
 
-        <div class="subNews">
-          <ul>
-            ${news[this.state.page].headlines.map((str) => `<li>${str}</li>`).join("\n")}
-            <p>${news[this.state.page].company} 언론사에서 직접 편집한 뉴스입니다.</p>
-          </ul>
-        </div>
-      </section>
+        <section class="articleInfo">
+          <div class="mainNews">
+            <img src="${news[this.state.page].imgUrl}"/>
+            <p>${news[this.state.page].title}</p>
+          </div>
 
-      <button id="prevButton" class="newsButton prev${
-        isFirstPage() ? " hide" : ""
-      }"><img src="${leftButton}"/></button>
-      <button id="nextButton" class="newsButton next${
-        isLastPage() ? " hide" : ""
-      }"><img src="${rightButton}"/></button>
+          <div class="subNews">
+            <ul>
+              ${news[this.state.page].headlines.map((str) => `<li>${str}</li>`).join("\n")}
+              <p>${news[this.state.page].company} 언론사에서 직접 편집한 뉴스입니다.</p>
+            </ul>
+          </div>
+        </section>
+
+        <button id="prevButton" class="newsButton prev${
+          isFirstPage() ? " hide" : ""
+        }"><img src="${leftButton}"/></button>
+        <button id="nextButton" class="newsButton next${
+          isLastPage() ? " hide" : ""
+        }"><img src="${rightButton}"/></button>
+      </div>
       `;
 
     new Button({

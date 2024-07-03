@@ -14,22 +14,10 @@ function NewsList({ $target, position = "beforeend" }) {
         <li class="selected" >전체 언론사</li>
         <li>내가 구독한 언론사</li>
       </ul>
-      
-      <article class="newsView">
-        <ul class="categoryFilter">
-          <li>종합/경제</li>
-          <li>방송/통신</li>
-          <li>IT</li>
-          <li>영자지</li>
-          <li>스포츠/연예</li>
-          <li>매거진/전문지</li>
-          <li>지역</li>
-        </ul>
-      </article>
       `;
 
     new NewsViewer({
-      $target: this.$element.querySelector(".newsView"),
+      $target: this.$element,
       news: news0,
     });
   };
