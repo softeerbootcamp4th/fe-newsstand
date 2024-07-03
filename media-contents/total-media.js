@@ -4,18 +4,39 @@ import { TOTAL_MEDIA_CATEGORY } from "../static/data/total-media-category.js";
  * @description 전체 언론사를 렌더링하는 함수
  */
 export function renderTotalMedia() {
+    /**
+     * @NOTE 기본으로 0번째 index의 카테고리, 미디어가 선택된 상태
+     */
+    renderMedia(0, 0);
+
+    /**
+     * prev, next 버튼 클릭 시 언론사 이동 이벤트
+     */
+    const prevMediaButton = document.querySelector(".media-contents__left-button");
+    const nextMediaButton = document.querySelector(".media-contents__right-button");
+    prevMediaButton.addEventListener("click", () => clickNavigationButton(-1));
+    nextMediaButton.addEventListener("click", () => clickNavigationButton(1));
+}
+
+/**
+ * @description 미디어 카테고리, 콘텐츠를 렌더링하는 함수
+ */
+function renderMedia(categoryIdx, mediaIdx) {
     const category = TOTAL_MEDIA_CATEGORY.data;
     const categoryListDOM = document.querySelector(".media-contents__category-list");
 
     /**
      * 미디어 카테고리 렌더링
-     * 
-     * @NOTE 기본으로 0번째 index의 카테고리가 선택된 상태
      */
-    categoryListDOM.insertAdjacentHTML('beforeend', getSelectedCategoryItem(category[0]));
-    category.slice(1).forEach((_category) => {
-        categoryListDOM.insertAdjacentHTML('beforeend', getUnselectedCategoryItem(_category.categoryName));
+    categoryListDOM.innerHTML = '';
+    category.slice(0, categoryIdx).map((_category) => {
+        categoryListDOM.innerHTML += getUnselectedCategoryItem(_category.categoryName);
+    })
+    categoryListDOM.innerHTML += getSelectedCategoryItem(category[categoryIdx], categoryIdx, mediaIdx);
+    category.slice(categoryIdx + 1).forEach((_category) => {
+        categoryListDOM.innerHTML += getUnselectedCategoryItem(_category.categoryName);
     });
+
     categoryListDOM.addEventListener('click', (e) => {
         /**
          * TODO: category list DOM을 클릭하면 리스트 아이템으로 이벤트 위임이 되고, 해당 리스트 아이템 카테고리로 이동
@@ -27,19 +48,19 @@ export function renderTotalMedia() {
      * 선택된 카테고리의 콘텐츠 렌더링
      */
     const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
-    const contentsString = getSelectedCategoryContents(category[0].media[0]);
-    contentsBoxDOM.insertAdjacentHTML('beforeend', contentsString);
+    const contentsString = getSelectedCategoryContents(category[categoryIdx].media[mediaIdx]);
+    contentsBoxDOM.innerHTML = contentsString;
 }
 
 /**
- * @description 선택된 카테고리 아이템 DOM string을 반환해주는 함수 
+ * @description 선택된 카테고리 아이템 DOM string을 반환해주는 함수
  * @returns "<li>...</li>"
  */
-function getSelectedCategoryItem(category) {
-    return `<li class="media-contents__category-item media-contents__category-item--selected">
+function getSelectedCategoryItem(category, selectedCategoryIdx, selectedMediaIdx) {
+    return `<li class="media-contents__category-item media-contents__category-item--selected" data-selected-category-idx="${selectedCategoryIdx}" data-selected-media-idx="${selectedMediaIdx}">
                 <p class="text__bold14 text__white--default">${category.categoryName}</p>
                 <section>
-                    <p class="text__bold14 text__white--default">1</p> <p class="text__bold14 text__white--weak">/ ${category.length}</p>
+                    <p class="text__bold14 text__white--default">${selectedMediaIdx + 1}</p> <p class="text__bold14 text__white--weak">/ ${category.length}</p>
                 </section>
             </li>`
 }
@@ -53,6 +74,10 @@ function getUnselectedCategoryItem(categoryName) {
             </li>`
 }
 
+/**
+ * @description 선택된 카테고리의 콘텐츠 DOM string을 반환해주는 함수
+ * @returns "<section>...</section>"
+ */
 function getSelectedCategoryContents(media) {
     const { iconUrl, editDate, isSubscribed, imageContent, contents } = media;
 
@@ -89,4 +114,40 @@ function getSelectedCategoryContents(media) {
         </section>
     </section>
     `;
+}
+
+/**
+ * @description prev, next 버튼 클릭 동작을 수행하는 함수
+ */
+function clickNavigationButton(step) {
+    const selectedCategory = document.querySelector(".media-contents__category-item--selected");
+
+    const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
+    const selectedMediaIdx = parseInt(selectedCategory.dataset.selectedMediaIdx);
+
+    const category = TOTAL_MEDIA_CATEGORY.data;
+    const currentCategory = category[selectedCategoryIdx];
+
+    const nextMediaIdx = selectedMediaIdx + step;
+    if (nextMediaIdx >= 0 && nextMediaIdx < currentCategory.length) {
+        selectedCategory.dataset.selectedMediaIdx = nextMediaIdx;
+    } else if (nextMediaIdx < 0) {
+        const prevCategoryIdx = selectedCategoryIdx - 1;
+        if (prevCategoryIdx < 0) {
+            return;
+        }
+        selectedCategory.dataset.selectedCategoryIdx = prevCategoryIdx;
+        selectedCategory.dataset.selectedMediaIdx = category[prevCategoryIdx].length - 1;
+    } else if (nextMediaIdx === currentCategory.length) {
+        const nextCategoryIdx = selectedCategoryIdx + 1;
+        if (nextCategoryIdx === TOTAL_MEDIA_CATEGORY.length) {
+            return;
+        }
+        selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
+        selectedCategory.dataset.selectedMediaIdx = 0;
+    }
+
+    const categoryIdxNumber = parseInt(selectedCategory.dataset.selectedCategoryIdx);
+    const mediaIdxNumber = parseInt(selectedCategory.dataset.selectedMediaIdx);
+    renderMedia(categoryIdxNumber, mediaIdxNumber);
 }

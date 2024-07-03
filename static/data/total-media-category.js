@@ -19,9 +19,26 @@ export const TOTAL_MEDIA_CATEGORY = {
                             headline: "봇물처럼 터지는 공공요금 인상…꼭 지금이어야 하나"
                         }
                     ]
+                },
+                {
+                    name: "한겨례",
+                    iconUrl: "https://s.pstatic.net/static/newsstand/up/2024/0219/nsd145828169.png",
+                    editDate: "07월 04일 16:23 편집",
+                    isSubscribed: false,
+                    imageContent: {
+                        imageUrl: "https://www.pressian.com/_resources/10/2024/07/03/2024070311344319469_l.jpg",
+                        url: "https://www.pressian.com/pages/articles/2024070311170206107&amp;utm_source=naver&amp;utm_medium=mynews",
+                        headline: "봇물처럼 터지는 공공요금 인상…꼭 지금이어야 하나"
+                    },
+                    contents: [
+                        {
+                            url: "",
+                            headline: "봇물처럼 터지는 공공요금 인상…꼭 지금이어야 하나"
+                        }
+                    ]
                 }
             ],
-            length: 3
+            length: 2
         },
         {
             categoryName: "방송/통신",
@@ -44,8 +61,8 @@ export const TOTAL_MEDIA_CATEGORY = {
                     ]
                 }
             ],
-            length: 3
+            length: 1
         }
     ],
-    length: 7
+    length: 2
 }
