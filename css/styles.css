@@ -154,4 +154,17 @@ nav ul li.active a {
     color: white;
     text-decoration: none;
 }
-
+.leftButton {
+    position: fixed;
+    top: 450px;
+    left: 150px;
+    z-index: 1;
+    cursor: pointer;
+}
+.rightButton {
+    position: fixed;
+    top: 450px;
+    right: 150px;
+    z-index: 1;
+    cursor: pointer;
+}
