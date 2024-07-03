@@ -12,6 +12,9 @@
   <link
     rel="stylesheet"
     href="/src/style/fonts.css" />
+    <link
+    rel="stylesheet"
+    href="/src/style/global.css" />
 </head>
 <body>
   <div id="app">
@@ -19,18 +22,18 @@
       <div class="headerContent">
         <div id="title">
           <img src="/images/newspaper.svg" class="logoImage">
-          <span class="display-bold24">뉴스 스탠드</span>
+          <span class="display-bold24">뉴스스탠드</span>
         </div>
         <div class="display-medium16" id="nowDate"></div>
       </div>
     </header>
-    <div id="autoRollingNewsBar">
-      <div class="autoRollingNewsBar">
-        <div class="autoRollingNewsBarEach">
+    <div id="newsTicker">
+      <div class="newsTicker">
+        <div class="newsTickerEach">
           <span class="display-bold14">연합뉴스</span>
           <span class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
         </div>
-        <div class="autoRollingNewsBarEach">
+        <div class="newsTickerEach">
           <span class="display-bold14">연합뉴스</span>
           <span class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
         </div>
@@ -44,7 +47,7 @@
         </div>
         <div class="ViewerButton">
           <svg id="listViewIcon" class="listViewIcon">
-            <use xlink:href="./sprite.svg#listViewIcon" fill = "#4362D0"></use>
+            <use xlink:href="./sprite.svg#listViewIcon"></use>
           </svg>
           <svg id="gridViewIcon" class="gridViewIcon">
             <use xlink:href="./sprite.svg#gridViewIcon"></use>
@@ -52,9 +55,16 @@
         </div>
       </div>
     </div>
-    <div> 
-      <!-- newsList -->
-    </div>
+    <main> 
+      <div id="NewsList">
+        <ul>
+          <!-- 뉴스 카테고리의 내용이 들어간다 -->
+        </ul>
+        <div>
+          
+        </div>
+      </div>
+    </main>
     <nav>
       <!-- 화살표 넣기 -->
     </nav>
@@ -63,5 +73,6 @@
   <script src="./app.js" type="module"></script>
   <script src="./components/date.js" type="module"></script>
   <script src="./components/topAndViewer.js" type="module"></script>
+  <script src="./components/fieldTab.js" type="module"></script>
 </body>
 </html>
