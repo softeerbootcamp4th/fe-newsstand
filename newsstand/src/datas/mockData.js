@@ -23,4 +23,4 @@ export const mockData = [
     { icon: '22' },
     { icon: '23' },
     { icon: '24' },
-];
+]

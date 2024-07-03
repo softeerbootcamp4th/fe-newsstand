@@ -1,26 +1,26 @@
-import useState from "../core/hooks/useState.js";
+import useState from '../core/hooks/useState.js'
 
 const CategoryText = (props) => {
-    const [isHover, setIsHover] = useState(false);
+    const [isHover, setIsHover] = useState(false)
 
     const handleMouseOver = () => {
-        setIsHover(true);
-    };
+        setIsHover(true)
+    }
 
     const handleMouseOut = () => {
-        setIsHover(false);
-    };
+        setIsHover(false)
+    }
 
     const handleMouseClick = () => {
         props.setState(props.text)
-    };
+    }
 
     const bindEvents = () => {
-        const button = document.getElementById(`category-text-${props.id}`);
-        button.addEventListener('mouseover', (handleMouseOver));
-        button.addEventListener('mouseout', handleMouseOut);
-        button.addEventListener('click', handleMouseClick);
-    };
+        const button = document.getElementById(`category-text-${props.id}`)
+        button.addEventListener('mouseover', handleMouseOver)
+        button.addEventListener('mouseout', handleMouseOut)
+        button.addEventListener('click', handleMouseClick)
+    }
 
     return {
         element: `
@@ -29,7 +29,7 @@ const CategoryText = (props) => {
         </div>
         `,
         bindEvents,
-    };
-};
+    }
+}
 
-export default CategoryText;
+export default CategoryText

@@ -1,56 +1,55 @@
-import useState from "../../core/hooks/useState.js";
+import useState from '../../core/hooks/useState.js'
 
 const buttonVariant = (type) => {
     const variant = {
         white: {
             light: {
-                backgroundColor: "#fff",
-                color: "gray",
+                backgroundColor: '#fff',
+                color: 'gray',
             },
             dark: {
-                backgroundColor: "#375a7f",
-                color: "#fff",
+                backgroundColor: '#375a7f',
+                color: '#fff',
             },
         },
         gray: {
             light: {
-                backgroundColor: "gainsboro",
-                color: "gray",
+                backgroundColor: 'gainsboro',
+                color: 'gray',
             },
             dark: {
-                backgroundColor: "#444950",
-                color: "#fff",
+                backgroundColor: '#444950',
+                color: '#fff',
             },
         },
-    };
+    }
 
-    return variant[type].light;
-};
-
+    return variant[type].light
+}
 
 const Button = (props) => {
-    const [isHover, setIsHover] = useState(false);
+    const [isHover, setIsHover] = useState(false)
 
     const handleMouseOver = () => {
-        setIsHover(true);
-    };
+        setIsHover(true)
+    }
 
     const handleMouseOut = () => {
-        setIsHover(false);
-    };
+        setIsHover(false)
+    }
 
     const handleMouseClick = () => {
-        console.log("CLICKED");
-    };
+        console.log('CLICKED')
+    }
 
     const bindEvents = () => {
-        const button = document.getElementById(`button-${props.id}`);
-        button.addEventListener('mouseover', handleMouseOver);
-        button.addEventListener('mouseout', handleMouseOut);
-        button.addEventListener('click', handleMouseClick);
-    };
+        const button = document.getElementById(`button-${props.id}`)
+        button.addEventListener('mouseover', handleMouseOver)
+        button.addEventListener('mouseout', handleMouseOut)
+        button.addEventListener('click', handleMouseClick)
+    }
 
-    const { backgroundColor, color } = buttonVariant(props.variant);
+    const { backgroundColor, color } = buttonVariant(props.variant)
 
     return {
         element: `
@@ -60,7 +59,7 @@ const Button = (props) => {
         </div>
         `,
         bindEvents,
-    };
-};
+    }
+}
 
-export default Button;
+export default Button

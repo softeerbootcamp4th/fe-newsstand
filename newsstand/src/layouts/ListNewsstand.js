@@ -1,23 +1,35 @@
-import Button from "../components/base/Button.js";
-import { Icon } from "../components/base/IconView.js";
-import createComponent from "../core/component/component.js";
-import ImageView from "../components/base/ImageView.js";
-import { generateRandomId } from "../utils/idGenerator.js";
-import useState from "../core/hooks/useState.js";
+import Button from '../components/base/Button.js'
+import { Icon } from '../components/base/IconView.js'
+import createComponent from '../core/component/component.js'
+import ImageView from '../components/base/ImageView.js'
+import { generateRandomId } from '../utils/idGenerator.js'
+import useState from '../core/hooks/useState.js'
 
 const ListNewsstand = () => {
+    const [count, setCount] = useState(0)
 
-    const [count, setCount] = useState(0);
+    const buttonComponent1 = createComponent(Button, {
+        id: generateRandomId(10),
+        icon: Icon.PLUS,
+        text: `test1 ${count}`,
+        style: 'width: 80px; height:10px;',
+        variant: 'white',
+    })
+    const buttonComponent2 = createComponent(Button, {
+        id: generateRandomId(10),
+        icon: Icon.PLUS,
+        text: `test2 ${count}`,
+        style: 'width: 80px; height:10px;',
+        variant: 'white',
+    })
 
-    const buttonComponent1 = createComponent(Button, { id : generateRandomId(10), icon: Icon.PLUS, text : `test1 ${count}`, style : "width: 80px; height:10px;", variant : "white"});
-    const buttonComponent2 = createComponent(Button, { id : generateRandomId(10), icon: Icon.PLUS, text : `test2 ${count}`, style : "width: 80px; height:10px;", variant : "white"});
-    
-    const ImageComponent = createComponent(ImageView, { src : "https://img4.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202407/03/ned/20240703103837967unkh.jpg"})
-    
+    const ImageComponent = createComponent(ImageView, {
+        src: 'https://img4.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202407/03/ned/20240703103837967unkh.jpg',
+    })
+
     setInterval(() => {
-        setCount(count + 1);
-    },2000);
-
+        setCount(count + 1)
+    }, 2000)
 
     return {
         element: `
@@ -42,4 +54,4 @@ const ListNewsstand = () => {
     }
 }
 
-export default ListNewsstand;
+export default ListNewsstand

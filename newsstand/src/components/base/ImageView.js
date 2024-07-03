@@ -3,7 +3,7 @@ const ImageView = (props) => {
         element: `
         <img class="icon-view" src="${props.src}" alt="icon"/>
         `,
-    };
-};
+    }
+}
 
-export default ImageView;
+export default ImageView
