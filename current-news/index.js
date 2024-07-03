@@ -9,7 +9,7 @@ function initCurrentNews() {
         const rollingBoxDOM = newsBoxDOM.querySelector('.current-news__rolling-box');
 
         mediaTitleDOM.innerText = CURRENT_NEWS.data[idx].media;
-        rollingDOM(rollingBoxDOM, CURRENT_NEWS.data[idx])
+        rollingDOM(rollingBoxDOM, CURRENT_NEWS.data[idx], idx)
     });
 }
 

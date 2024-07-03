@@ -41,7 +41,6 @@
     font-size: 16px;
     line-height: 22px;
     text-decoration: underline;
-    cursor: pointer;
 }
 .text__medium14 {
     font-weight: 500;
@@ -51,7 +50,6 @@
     font-weight: 500;
     font-size: 14px;
     text-decoration: underline;
-    cursor: pointer;
 }
 .text__medium12 {
     font-weight: 500;
