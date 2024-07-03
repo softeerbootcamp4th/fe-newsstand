@@ -68,7 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log(newsData);
 
-        const news = newsData[0];
+        const news = newsData[0].news[0];
+
+        console.log(news);
 
         const thumnbailImg = document.createElement('img');
         console.log(news.thumbnailUrl);
@@ -81,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         news.newsItems.slice(1).forEach(n => {
             const newsItemDiv = document.createElement('div');
-            newsItemDiv.classList.add('news-column-item');
+            newsItemDiv.classList.add('sub-news-item');
             newsItemDiv.textContent = n.title;
             newsItemDiv.addEventListener('click', () => {
                 window.open(n.url, '_blank');
@@ -89,6 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             subNewsDiv.appendChild(newsItemDiv);
         });
+
+        const explanationDiv = document.createElement('div');
+        explanationDiv.classList.add('explanation');
+        explanationDiv.textContent = `${news.company} 언론사에서 직접 편집한 뉴스 입니다.`
+        subNewsDiv.appendChild(explanationDiv);
     })
     .catch(error => {
         console.error(error);

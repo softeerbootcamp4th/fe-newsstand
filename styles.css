@@ -297,30 +297,39 @@ main {
     width: 930px;
 }
 
-.thumbnail-news-item {
+.main-news {
     width: 320px;
     display: flex;
     flex-direction: column;
     gap: 16px;
     cursor: pointer;
+    color: var(--text-strong);
+    font-size: 16px;
 }
 
-.thumbnail-news-item div:hover {
+.main-news div:hover {
     text-decoration: underline;
 
 }
 
-.thumbnail-news-item img {
+.main-news img {
     width: 320px;
     height: 200px;
 }
-.news-column {
+.sub-news {
    display: flex;
    flex-direction: column;
    gap: 16px; 
+   color: var(--text-bold);
+   font-size: 16px;
 }
 
-.news-column-item:hover {
+.sub-news-item:hover {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.explanation {
+    color: var(--text-weak);
+    font-size: 14px;
 }
