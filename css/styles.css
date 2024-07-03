@@ -95,16 +95,6 @@ header > span {
     height: 300px;
     padding: 10px 20px;
 }
-nav > ul li:first-child {
-    background-color: #4362D0;
-}
-nav > ul li a {
-    font-weight: bold;
-}
-nav > ul li:first-child a {
-    color: white;
-    font-weight: bold;
-}
 .articleTop {
     padding: 10px 0px;
     display: flex;
@@ -148,7 +138,20 @@ nav > ul li:first-child a {
 .vertical-list li span a {
     color: black;
 }
-/* nav ul li.active {
-    background-color: blue;
-    color: white; 
-} */
+nav ul li {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+nav ul li a {
+    font-weight: bold;
+}
+nav ul li.active {
+    background-color: #4362D0;
+    color: white;
+    font-weight: bold;
+}
+nav ul li.active a {
+    color: white;
+    text-decoration: none;
+}
+
