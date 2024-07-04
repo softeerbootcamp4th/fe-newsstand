@@ -22,7 +22,7 @@ const buttonVariant = (type) => {
         gray: {
             light: {
                 backgroundColor: 'gainsboro',
-                hoverdColor: '#dcdcdc',
+                hoverdColor: '#bcbcbc',
                 color: 'gray',
             },
             dark: {
