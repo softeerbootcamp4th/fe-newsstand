@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴스 스탠드-css</title>
     <link rel="stylesheet" href="../css/test.css" type="text/css" />
-    <script src="./mainscript.js"></script>
+    <script type="module" src="./mainscript.js"></script>
 </head>
 <body>
-    <div class="btn left-button disabled" id="btnLeft" onclick="leftButtonClick()">
+    <div class="btn left-button disabled" id="btnLeft">
         <img src="../icons/LeftButton.svg" />
     </div>
-    <div class="btn right-button" id="btnRight" onclick="rightButtonClick()">
+    <div class="btn right-button" id="btnRight">
         <img src="../icons/RightButton.svg"/>
     </div>
     <div class="news-header">
@@ -31,21 +31,19 @@
         </div>
     </div>
     <div class="news-ticker-container">
-        <div class="news-ticker">
+        <div class="news-ticker" id="leftNews">
             <div class="press">연합뉴스</div>
-            <div class="article">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div class="article" id="leftNews-sub">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
         </div>
-        <div class="news-ticker">
+        <div class="news-ticker" id="rightNews">
             <div class="press">연합뉴스</div>
-            <div class="article">[속보] 스포츠 경기 결과... </div>
+            <div class="article" id="leftNews-sub">[속보] 스포츠 경기 결과... </div>
         </div>
     </div>
     <div class="article-container">
-        <div class="all-article">전체 언론사</div>
-        <div class="my-article">내가 구독한 언론사 </div>
-        <div id="list-icon" class="button active" onclick="toggleButton('list-icon')" style="
-    margin-left: auto;
-">
+        <div class="subs active-art" id="all-article" >전체 언론사</div>
+        <div class="subs" id="my-article" >내가 구독한 언론사 </div>
+        <div id="list-icon" class="button active" onclick="toggleButton('list-icon')" style="margin-left: auto;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="blue" xmlns="http://www.w3.org/2000/svg">
                 <!--
                 <style>
