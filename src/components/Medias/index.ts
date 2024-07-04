@@ -2,6 +2,7 @@ import { useState } from "../../libs/createApp";
 import { Div, Header, Section, Span } from "../../libs/Elements";
 import { MediaIdByCategories } from "../../models/Newsstand";
 import { CategoryNav } from "./CategoryNav";
+import { CategoryNavs } from "./CategoryNavs";
 import { MediasContent } from "./MediasContent";
 
 interface CurrentCategoryTogglerProps {
@@ -118,19 +119,11 @@ export const Medias = () => {
         currentFilter: currentFilter,
         setCurrentFilter: setCurrentFilter,
       }),
-      Div({
-        children: [
-          ...mediaIdByCategories.map((mediaIdByCategory, idx) => {
-            return CategoryNav({
-              currentMediaIdsAndCategory: mediaIdByCategory,
-              currentMediaIdx: currentMediaIdx,
-              isActive: currentCategoryIdx == idx,
-              handleCategoryClick: () => {
-                handleCategoryClick(idx);
-              },
-            });
-          }),
-        ],
+      CategoryNavs({
+        mediaIdByCategories: mediaIdByCategories,
+        currentCategoryIdx: currentCategoryIdx,
+        handleCategoryClick: handleCategoryClick,
+        currentMediaIdx: currentMediaIdx,
       }),
       MediasContent({
         currentMediaIdsAndCategory: currentMediaIdsAndCategory,

@@ -1,6 +1,7 @@
 import { Div, Span } from "../../libs/Elements";
 import { MediaIdByCategories } from "../../models/Newsstand";
-
+import styles from "./CategoryNav.module.css";
+import typoStyles from "@/styles/typo.module.css";
 interface CategoryNavProps {
   currentMediaIdsAndCategory: MediaIdByCategories[0];
   currentMediaIdx: number;
@@ -18,12 +19,16 @@ export const CategoryNav = ({
   return Div({
     style: {
       background: isActive
-        ? `linear-gradient(to right, #4CAF50 ${
+        ? `linear-gradient(to right, #4362D0 ${
             currentProgress * 100
-          }%, #f1f1f1 0%)`
+          }%, #7890E7 0%)`
         : "inherit",
-      cursor: "pointer",
     },
+    className: `${styles.container} ${
+      isActive
+        ? `${typoStyles["selected-bold14"]} ${styles["active"]}`
+        : `${typoStyles["available-medium14"]} ${styles["in-active"]}`
+    }`,
     onClick: () => handleCategoryClick(),
     children: [
       Span({
