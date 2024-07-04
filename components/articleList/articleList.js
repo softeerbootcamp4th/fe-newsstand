@@ -252,3 +252,6 @@ articleMenuWrapper.forEach((btnWrapper, idx) => {
         moveToNextPage(this)
     });
 });
+
+articleMenuWrapper[0].click();
+
