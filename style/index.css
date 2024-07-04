@@ -7,7 +7,6 @@
   margin-left: auto;
   margin-right: auto;
   /* border: solid red; */
-  gap: 20px;
 }
 
 .header {
@@ -15,6 +14,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .header img {
@@ -38,7 +38,8 @@
 .roll {
   /* border: solid black; */
   display: flex;
-  gap:8px;
+  gap: 8px;
+  margin-bottom: 40px;
 }
 
 .roll .graybox {
@@ -57,7 +58,7 @@
   white-space: nowrap;
 }
 
-.roll span.com{
+.roll span.com {
   font-size: 14px;
   width: 50px;
   margin-right: 16px;
@@ -65,7 +66,7 @@
   font-weight: bold;
 }
 
-.roll span.title{
+.roll span.title {
   font-size: 14px;
   color: #5F6E76;
 }
@@ -78,22 +79,83 @@
 .toggle {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.toggle .subscribeToggle {
+  display: flex;
+  gap: 30px;
 }
 
 .toggle span {
   color: #879298;
   font-size: 16px;
+  letter-spacing: -1px;
 }
 
-.newslist {
-  border: solid black;
+.toggle .whole {
+  font-weight: bold;
+  color: black;
 }
 
-@keyframes slideUp {
-  from {
+.toggle .list-view {
+  filter: invert(44%) sepia(40%) saturate(1022%) hue-rotate(190deg) brightness(83%) contrast(98%);
+}
 
-  }
-  to {
-    color: red;
-  }
+.list .newsgroup {
+  background-color: #F5F7F9;
+  border: solid #D2DAE0 1px;
+  display: flex;
+  align-items: center;
+  color: #879298;
+}
+
+.list .newsgroup div {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.list .manynews {
+  border: solid #D2DAE0 1px;
+  height: 348px;
+  padding: 24px;
+}
+
+.list .manynews .subscrBar {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.list .manynews .subscrBar img {
+  height: 20px;
+}
+
+.list .manynews .subscrBar span {
+  color: #5F6E76;
+  font-size: 12px;
+}
+
+.list .manynews .subscrBar button {
+  background-color: #F5F7F9;
+  border: #D2DAE0 1px solid;
+  font-size: 12px;
+  height: 24px;
+  color: #879298;
+  border-radius: 12px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.list .manynews .bottom {
+  display: flex;
+}
+
+.list .manynews .headline {
+  display: flex;
+  flex-direction: column;
 }
