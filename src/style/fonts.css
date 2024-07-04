@@ -59,13 +59,19 @@
 }
 
 
-.available-medium16,
+.available-medium16 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: auto;
+    color: var(--grayscale-black);
+}
+
+
 .display-medium16 {
     font-weight: 500;
     font-size: 16px;
     line-height: auto;
     color: var(--grayscale-400);
-    cursor: pointer;
 }
 
 
@@ -85,27 +91,17 @@
 }
 
 
-.available-medium12,
+.available-medium12 {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: auto;
+    color: var(--grayscale-200);
+}
+
+
 .display-medium12 {
     font-weight: 500;
     font-size: 12px;
     line-height: auto;
-    color: var(--grayscale-black);
-}
-
-
-.hover-midium16 {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: auto;
-    text-decoration: underline;
-    color: var(--grayscale-black);
-}
-
-.hover-midium16 {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: auto;
-    text-decoration: underline;
-    color: var(--grayscale-black);
+    color: var(--grayscale-400);
 }
