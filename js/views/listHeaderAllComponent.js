@@ -7,11 +7,12 @@ function ListHeaderAllComponent(pressId, moveToFunc, listData, listMetaData)
 	const items = listMetaData.map( ({pages, offset, name, destination})=>{
 		if(offset <= index && offset+pages > index) {
 			return html`<div class="listItem selected" 
-				style="--page-progress: ${(index-offset) / pages}" 
+				style="--page-progress: ${index-offset+1}; --page-all: ${pages}" 
 				data-unique-key="all-pagination-${name}" 
 				data-move-destination="${destination}"
 			>
 				${name}
+				<span class="pagination-tooltip"><span class="white">${index-offset+1}</span> / ${pages}</span>
 			</div>`;
 		}
 		return html`<div class="listItem" data-unique-key="all-pagination-${name}" data-move-destination="${destination}">${name}</div>`;
