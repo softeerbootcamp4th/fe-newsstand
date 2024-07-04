@@ -5,6 +5,8 @@
  * @property {"arrow" | "plus" | "closed" | "grid_view" | "list_view" | "newspaper"} [iconId]
  */
 
+export const ButtonProps = {};
+
 /**
  * @param {ButtonProps} props
  *
@@ -18,20 +20,20 @@ export function createButton({ iconId, text = "", color = "white" }) {
   const button = document.createElement("button");
   button.className = `button button-${color}`;
 
-  const div = document.createElement("div");
+  const svg = `<div>
+                  <svg class="button-icon">
+                    <use xlink:href=src/assets/sprite.svg#${iconId}></use>
+                  </svg>
+                </div>`;
 
-  const svg = `<svg class="button-icon">
-    <use xlink:href=src/assets/sprite.svg#${iconId}></use>
-  </svg>`;
-
-  div.innerHTML = svg;
-  button.appendChild(div);
+  button.insertAdjacentHTML("beforeend", svg);
 
   if (text) {
-    const textSpan = document.createElement("span");
-    textSpan.className = `available-medium12 button-text`;
-    textSpan.textContent = text;
-    button.appendChild(textSpan);
+    button.insertAdjacentHTML(
+      "beforeend",
+      `<span class='available-medium12 button-text'>${text}</span>`
+    );
   }
+
   return button;
 }

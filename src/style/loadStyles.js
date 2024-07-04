@@ -6,6 +6,7 @@ const stylesheets = [
 
   "src/components/button/button.css",
   "src/components/newsTicker/newsTicker.css",
+  "src/components/switcher/switcher.css",
 
   "src/components/overlays/overlay.css",
   "src/components/overlays/dialog/dialog.css",
@@ -17,9 +18,8 @@ const stylesheets = [
 stylesheets.forEach(loadCSS);
 
 function loadCSS(url) {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.type = "text/css";
-  link.href = url;
-  document.head.appendChild(link);
+  document.head.insertAdjacentHTML(
+    "beforeend",
+    `<link rel='stylesheet' type='text/css' href='${url}'/>`
+  );
 }
