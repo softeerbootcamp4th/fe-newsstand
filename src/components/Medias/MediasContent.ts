@@ -8,10 +8,12 @@ interface MediasContentProps {
   currentMediaIdsAndCategory: MediaIdByCategories[0];
   currentMediaIdx: number;
   handleMediaNext: () => void;
+  handleMediaPrev: () => void;
 }
 export const MediasContent = ({
   currentMediaIdsAndCategory,
   handleMediaNext,
+  handleMediaPrev,
   currentMediaIdx,
 }: MediasContentProps) => {
   const currentMedia = getMediaById(
@@ -30,7 +32,7 @@ export const MediasContent = ({
     return () => {
       clearTimeout(timeout);
     };
-  }, [currentMediaIdx]);
+  }, [currentMediaIdx, currentMediaIdsAndCategory]);
   return Div({
     children: [
       Div({
@@ -41,6 +43,12 @@ export const MediasContent = ({
             });
           }),
         ],
+      }),
+      Button({
+        children: ["이전"],
+        onClick: () => {
+          handleMediaPrev();
+        },
       }),
       Button({
         children: ["다음"],

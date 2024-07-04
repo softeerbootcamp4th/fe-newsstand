@@ -80,16 +80,36 @@ export const Medias = () => {
     },
   ];
 
+  const hasNextCategory = currentCategoryIdx < mediaIdByCategories.length - 1;
+  const hasPrevCategory = currentCategoryIdx > 0;
   const handleMediaNext = () => {
     if (
       currentMediaIdx ===
       mediaIdByCategories[currentCategoryIdx].mediaIds.length - 1
     ) {
+      if (!hasNextCategory) return;
       setCurrentMediaIdx(0);
       setCurrentCategoryIdx(currentCategoryIdx + 1);
       return;
     }
     setCurrentMediaIdx(currentMediaIdx + 1);
+  };
+
+  const handleMediaPrev = () => {
+    if (currentMediaIdx === 0) {
+      if (!hasPrevCategory) return;
+      setCurrentCategoryIdx(currentCategoryIdx - 1);
+      setCurrentMediaIdx(
+        mediaIdByCategories[currentCategoryIdx - 1].mediaIds.length - 1,
+      );
+      return;
+    }
+    setCurrentMediaIdx(currentMediaIdx - 1);
+  };
+
+  const handleCategoryClick = (idx: number) => {
+    setCurrentCategoryIdx(idx);
+    setCurrentMediaIdx(0);
   };
   const currentMediaIdsAndCategory = mediaIdByCategories[currentCategoryIdx];
   return Section({
@@ -105,6 +125,9 @@ export const Medias = () => {
               currentMediaIdsAndCategory: mediaIdByCategory,
               currentMediaIdx: currentMediaIdx,
               isActive: currentCategoryIdx == idx,
+              handleCategoryClick: () => {
+                handleCategoryClick(idx);
+              },
             });
           }),
         ],
@@ -113,6 +136,7 @@ export const Medias = () => {
         currentMediaIdsAndCategory: currentMediaIdsAndCategory,
         currentMediaIdx: currentMediaIdx,
         handleMediaNext,
+        handleMediaPrev,
       }),
     ],
   });
