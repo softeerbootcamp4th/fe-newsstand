@@ -32,13 +32,17 @@ NewsViewer.prototype.handlePrevClick = function () {
 NewsViewer.prototype.handleClick = function (event) {
   const button = event.target.closest("button");
 
-  if (button && button.id === "nextButton") {
+  if (!button) return;
+
+  const { id } = button;
+
+  if (id === "nextButton") {
     this.handleNextClick();
 
     return;
   }
 
-  if (button && button.id === "prevButton") {
+  if (id === "prevButton") {
     this.handlePrevClick();
 
     return;
