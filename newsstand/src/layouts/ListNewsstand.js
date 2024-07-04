@@ -76,13 +76,7 @@ const ListNewsstand = () => {
         rightBtn.addEventListener('click', handleRightButtonClick)
     }
 
-    const newsListElements = newsData.news
-        .map(
-            (newsItem) => `
-        <a class="news-content">${newsItem.title}</a>
-    `,
-        )
-        .join('')
+    const newsListElements = newsData.news.map((newsItem) => `<a class="news-content">${newsItem.title}</a>`).join('')
 
     return {
         element: `
