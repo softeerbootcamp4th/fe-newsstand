@@ -28,6 +28,23 @@ function renderMedia(mediaId) {
     const mediaListDOM = document.querySelector(".media-contents__category-list");
     const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
 
+    /**
+     * prev, next 버튼 클릭 시 언론사 이동 이벤트
+     */
+    const prevMediaButton = document.querySelector(".media-contents__left-button");
+    const nextMediaButton = document.querySelector(".media-contents__right-button");
+
+    function resetNavigationButton() {
+        prevMediaButton.removeEventListener("click", navigatePrevMedia);
+        nextMediaButton.removeEventListener("click", navigateNextMedia);
+    }
+    document.addEventListener(REMOVE_MEDIA_ARROW, resetNavigationButton)
+    document.dispatchEvent(removeTotalArrowEvent);
+
+    prevMediaButton.addEventListener("click", navigatePrevMedia);
+    nextMediaButton.addEventListener("click", navigateNextMedia);
+
+    
     if (subscribedMediaList.length === 0) {
         mediaListDOM.innerHTML = "";
         contentsBoxDOM.innerHTML = "";
@@ -70,22 +87,6 @@ function renderMedia(mediaId) {
     contentsBoxDOM.innerHTML = contentsString;
 
     setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaIdx, 0));
-
-    /**
-     * prev, next 버튼 클릭 시 언론사 이동 이벤트
-     */
-     const prevMediaButton = document.querySelector(".media-contents__left-button");
-     const nextMediaButton = document.querySelector(".media-contents__right-button");
- 
-     function resetNavigationButton() {
-         prevMediaButton.removeEventListener("click", navigatePrevMedia);
-         nextMediaButton.removeEventListener("click", navigateNextMedia);
-     }
-     document.addEventListener(REMOVE_MEDIA_ARROW, resetNavigationButton)
-     document.dispatchEvent(removeTotalArrowEvent);
- 
-     prevMediaButton.addEventListener("click", navigatePrevMedia);
-     nextMediaButton.addEventListener("click", navigateNextMedia);
 }
 
 /**
@@ -126,14 +127,14 @@ function navigatePrevMedia() {
  * @description prev, next 버튼 클릭 동작을 수행하는 함수
  */
 function clickNavigationButton(step) {
-    const selectedCategory = document.querySelector(".media-contents__category-item--selected");
-    const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
-
     const subscribeIdList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
-    
+
     if (subscribeIdList.length === 0) {
         return;
     }
+
+    const selectedCategory = document.querySelector(".media-contents__category-item--selected");
+    const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
 
     /**
      * 이전/다음 언론사 콘텐츠로 이동
