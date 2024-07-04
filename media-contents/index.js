@@ -1,10 +1,10 @@
-import { renderTotalMedia } from "./total-media.js";
+import { renderMediaFilter } from "./filter-media.js";
 
 function initMediaContents() {
     /**
-     * 전체 미디어 렌더링
+     * 언론사 필터 렌더링
      */
-    renderTotalMedia();
+    renderMediaFilter();
 }
 
 initMediaContents();

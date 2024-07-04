@@ -37,13 +37,11 @@
 }
 
 .rolling-in {
-    animation-name: rolling-in;
-    animation-duration: 1s;
+    animation: rolling-in 1s;
     animation-delay: 0.3s;
 }
 .rolling-out {
-    animation-name: rolling-out;
-    animation-duration: 1s;
+    animation: rolling-out 1s;
 }
 
 @keyframes rolling-in {
