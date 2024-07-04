@@ -20,7 +20,7 @@ export function renderMediaFilter() {
 function clickMediaFilter(e) {
     const mediaId = e.target.id;
 
-    renderMediaContents(mediaId)
+    renderMediaContents(mediaId);
 }
 
 /**
@@ -31,9 +31,32 @@ function renderMediaContents(mediaId) {
 
     if (mediaId === "total-media") {
         filterMediaDOM.dataset.selectedFilter = "total-media";
+        setSelectedMedia("total-media");
+        setUnselectedMedia("subscribed-media");
+
         renderTotalMedia();
     } else if (mediaId === "subscribed-media") {
         filterMediaDOM.dataset.selectedFilter = "subscribed-media";
+        setSelectedMedia("subscribed-media");
+        setUnselectedMedia("total-media");
+        
         renderSubscribedMedia();
     }
+}
+
+/**
+ * @description 선택된 언론사 카테고리에 css 부여하는 함수
+ */
+function setSelectedMedia(id) {
+    const selectedMediaDOM = document.querySelector(`#${id}`);
+    selectedMediaDOM.classList.add("media--selected");
+    selectedMediaDOM.classList.remove("media--unselected");
+}
+/**
+ * @description 선택되지 않은 언론사 카테고리에 css 부여하는 함수
+ */
+function setUnselectedMedia(id) {
+    const unselectedMediaDOM = document.querySelector(`#${id}`);
+    unselectedMediaDOM.classList.add("media--unselected");
+    unselectedMediaDOM.classList.remove("media--selected");
 }

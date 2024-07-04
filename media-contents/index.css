@@ -75,3 +75,17 @@
 .media-contents__right-button {
     right: -70px;
 }
+
+.media--selected {
+    font-weight: 700;
+    font-size: 16px;
+
+    color: var(--black);
+}
+.media--unselected {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+
+    color: var(--gray200);
+}
