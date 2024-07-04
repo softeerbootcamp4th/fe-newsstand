@@ -7,11 +7,6 @@ button {
     padding: 0;
 }
 
-.view-btn {
-    padding: 0;
-    filter: invert(60%) sepia(9%) saturate(342%) hue-rotate(160deg) brightness(93%) contrast(89%);
-}
-
 #articleList-wrapper {
     width: 930px;
     height: 388px;
@@ -39,6 +34,16 @@ button {
         #icon-wrapper {
             width: 56px;
         }
+
+            .view-btn {
+                padding: 0;
+                filter: invert(60%) sepia(9%) saturate(342%) hue-rotate(160deg) brightness(93%) contrast(89%);
+                cursor: pointer;
+            }
+
+            .view-btn-clicked {
+                filter: invert(43%) sepia(52%) saturate(6027%) hue-rotate(218deg) brightness(86%) contrast(87%);
+            }
 
     #article-menu-wrapper {
         width: 100%;

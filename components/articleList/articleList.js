@@ -34,7 +34,7 @@ articleArea.innerHTML = `
                 <button class="btn mode-selection-btn">내가 구독한 언론사</button>
             </div>
             <div id="icon-wrapper inline-tag flex-row-between">
-                <button class="btn view-btn">
+                <button class="btn view-btn view-btn-clicked">
                     <img src="/icons/list-view.png" alt="" width="24px" height="24px">
                 </button>
                 <button class="btn view-btn">
@@ -53,8 +53,8 @@ articleArea.innerHTML = `
                     <img src="${mediaImgPath}" alt="">
                     <h4 style="font-size: 12px; font-weight: 400;">${updateDate} 편집</h4>
                     <button id="subscribe-btn" class="btn">+ 구독하기</button>
-                </div>
-                <div id="content-body-wrapper" class="flex-row-between">
+                    </div>
+                    <div id="content-body-wrapper" class="flex-row-between">
                     <aside id="thumbnail-part">
                         <img src="${thumbnailPath}" alt="" width="320px" height="200px">
                         <p>ABC</p>
@@ -71,9 +71,17 @@ articleArea.innerHTML = `
 
 // mode-selection-event
 const modeSelectionBtns = document.querySelectorAll('.mode-selection-btn');
-    modeSelectionBtns.forEach(btn => {
+modeSelectionBtns.forEach(btn => {
     btn.addEventListener('click', function() {
-    modeSelectionBtns.forEach(b => b.classList.remove('mode-selection-btn-clicked'));
-    this.classList.add('mode-selection-btn-clicked');
+        modeSelectionBtns.forEach(b => b.classList.remove('mode-selection-btn-clicked'));
+        this.classList.add('mode-selection-btn-clicked');
+    });
+});
+
+const viewBtns = document.querySelectorAll('.view-btn');
+viewBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        viewBtns.forEach(b => b.classList.remove('view-btn-clicked'));
+        this.classList.add('view-btn-clicked');
     });
 });
