@@ -1,5 +1,10 @@
 import { CONTENTS_BY_MEDIA } from "../static/data/media.js";
-import { REMOVE_MEDIA_CATEGORY, removeTotalCategoryEvent } from "../utils/events.js";
+import { 
+    REMOVE_MEDIA_CATEGORY, 
+    REMOVE_MEDIA_ARROW,
+    removeTotalCategoryEvent,
+    removeTotalArrowEvent
+} from "../utils/events.js";
 import { 
     getSelectedCategoryItemDOMString, 
     getUnselectedCategoryItemDOMString,
@@ -11,7 +16,7 @@ import {
  * @description 구독한 언론사를 렌더링하는 함수
  */
 export function renderSubscribedMedia() {
-    renderMedia();
+    renderMedia();    
 }
 
 function renderMedia(mediaId) {
@@ -65,6 +70,22 @@ function renderMedia(mediaId) {
     contentsBoxDOM.innerHTML = contentsString;
 
     setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaIdx, 0));
+
+    /**
+     * prev, next 버튼 클릭 시 언론사 이동 이벤트
+     */
+     const prevMediaButton = document.querySelector(".media-contents__left-button");
+     const nextMediaButton = document.querySelector(".media-contents__right-button");
+ 
+     function resetNavigationButton() {
+         prevMediaButton.removeEventListener("click", navigatePrevMedia);
+         nextMediaButton.removeEventListener("click", navigateNextMedia);
+     }
+     document.addEventListener(REMOVE_MEDIA_ARROW, resetNavigationButton)
+     document.dispatchEvent(removeTotalArrowEvent);
+ 
+     prevMediaButton.addEventListener("click", navigatePrevMedia);
+     nextMediaButton.addEventListener("click", navigateNextMedia);
 }
 
 /**
@@ -86,4 +107,41 @@ function clickMediaList(e) {
     const mediaId = subscribeIdList.find((_, idx) => idx === mediaIdx);
 
     renderMedia(mediaId);
+}
+
+/**
+ * @description 다음 페이지로 이동하는 함수
+ */
+function navigateNextMedia() {
+    clickNavigationButton(1);
+}
+/**
+ * @description 이전 페이지로 이동하는 함수
+ */
+function navigatePrevMedia() {
+    clickNavigationButton(-1);
+}
+
+/**
+ * @description prev, next 버튼 클릭 동작을 수행하는 함수
+ */
+function clickNavigationButton(step) {
+    const selectedCategory = document.querySelector(".media-contents__category-item--selected");
+    const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
+
+    const subscribeIdList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    
+    if (subscribeIdList.length === 0) {
+        return;
+    }
+
+    /**
+     * 이전/다음 언론사 콘텐츠로 이동
+     */
+    const nextCategoryIdx = selectedCategoryIdx + step;
+    const nextCategoryId = subscribeIdList[nextCategoryIdx];
+    if (nextCategoryIdx >= 0 && nextCategoryIdx < subscribeIdList.length) {
+        selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
+        renderMedia(nextCategoryId);
+    }
 }

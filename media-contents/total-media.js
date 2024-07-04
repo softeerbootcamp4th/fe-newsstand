@@ -1,5 +1,10 @@
 import { CONTENTS_BY_CATEGORY } from "../static/data/media.js";
-import { REMOVE_TOTAL_CATEGORY, removeMediaCategoryEvent } from "../utils/events.js";
+import { 
+    REMOVE_TOTAL_ARROW, 
+    REMOVE_TOTAL_CATEGORY, 
+    removeMediaCategoryEvent,
+    removeMediaArrowEvent
+} from "../utils/events.js";
 import { 
     getSelectedCategoryItemDOMString, 
     getUnselectedCategoryItemDOMString,
@@ -14,15 +19,7 @@ export function renderTotalMedia() {
     /**
      * @NOTE 기본으로 0번째 index의 카테고리, 미디어가 선택된 상태
      */
-    renderMedia(0, 0);
-
-    /**
-     * prev, next 버튼 클릭 시 언론사 이동 이벤트
-     */
-    const prevMediaButton = document.querySelector(".media-contents__left-button");
-    const nextMediaButton = document.querySelector(".media-contents__right-button");
-    prevMediaButton.addEventListener("click", () => clickNavigationButton(-1));
-    nextMediaButton.addEventListener("click", () => clickNavigationButton(1));
+    renderMedia(0, 0)
 }
 
 /**
@@ -65,6 +62,22 @@ function renderMedia(categoryIdx, mediaIdx) {
     contentsBoxDOM.innerHTML = contentsString;
 
     setSubscribeButtonEvent(CONTENTS_BY_CATEGORY.data[categoryIdx].media[mediaIdx], () => renderMedia(categoryIdx, mediaIdx));
+
+    /**
+     * prev, next 버튼 클릭 시 언론사 이동 이벤트
+     */
+    const prevMediaButton = document.querySelector(".media-contents__left-button");
+    const nextMediaButton = document.querySelector(".media-contents__right-button");
+
+    function resetNavigationButton() {
+        prevMediaButton.removeEventListener("click", navigatePrevMedia);
+        nextMediaButton.removeEventListener("click", navigateNextMedia);
+    }
+    document.addEventListener(REMOVE_TOTAL_ARROW, resetNavigationButton)
+    document.dispatchEvent(removeMediaArrowEvent);
+
+    prevMediaButton.addEventListener("click", navigatePrevMedia);
+    nextMediaButton.addEventListener("click", navigateNextMedia);
 }
 
 /**
@@ -83,6 +96,19 @@ function clickCategoryList(e) {
     }
 
     renderMedia(categoryIdx, 0);
+}
+
+/**
+ * @description 다음 페이지로 이동하는 함수
+ */
+function navigateNextMedia() {
+    clickNavigationButton(1);
+}
+/**
+ * @description 이전 페이지로 이동하는 함수
+ */
+function navigatePrevMedia() {
+    clickNavigationButton(-1);
 }
 
 /**
