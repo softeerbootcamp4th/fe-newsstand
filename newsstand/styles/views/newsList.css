@@ -23,4 +23,23 @@
 .news-category-button {
     height: 100%;
     color: var(--color-text-weak);
+    text-align: center;
+
+    text-transform: uppercase;
+
+    position: relative;
+    cursor: pointer;
+    
+    z-index: 0;
+}
+
+.news-category-button-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: width 1s ease;
+
+    z-index: -100;
 }
