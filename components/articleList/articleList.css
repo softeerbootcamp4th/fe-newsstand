@@ -1,33 +1,15 @@
-
-#article-header-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+button {
+    border: 0;
+    background-color: transparent;
+    color: #5F6E76;
+    display: inline;
+    font-size: 16px;
+    padding: 0;
 }
 
-#media-wrapper {
-    /* display: inline; */
-}
-
-#icon-wrapper {
-    /* display: inline; */
-    width: 56px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#article-menu-wrapper {
-    width: 100%;
-    height: 40px;
-    background-color: #F5F7F9;
-    font-size: 14px;
-    color: #879298;
-    display: flex;
-    align-items: center;
-    border: 1px solid #D2DAE0;
-    border-bottom: 0px;
+.view-btn {
+    padding: 0;
+    filter: invert(60%) sepia(9%) saturate(342%) hue-rotate(160deg) brightness(93%) contrast(89%);
 }
 
 #articleList-wrapper {
@@ -35,70 +17,84 @@
     height: 388px;
 }
 
-#article-wrapper {
-    width: 930px;
-    height: 344px;
-    border: 1px solid #D2DAE0;
-}
+    #article-header-wrapper {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 
-#content-body-wrapper {
-    width: 882px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+        #media-wrapper {
+            padding: 0;
+        }
 
-#content-header-wrapper {
-    height: 24px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
+            .mode-selection-btn {
+                padding: 1.5px 12px 1.5px 0;
+                cursor: pointer;
+            }
 
-#article-content-wrapper {
-    padding: 24px;
-}
+            .mode-selection-btn-clicked {
+                color: #14212B;
+                font-weight: 700;
+            }
 
-.btn {
-    border: 0;
-    background-color: transparent;
-    color: #5F6E76;
-    display: inline;
-    font-size: 16px;
-}
+        #icon-wrapper {
+            width: 56px;
+        }
 
-.view-btn {
-    padding: 0;
-}
+    #article-menu-wrapper {
+        width: 100%;
+        height: 40px;
+        background-color: #F5F7F9;
+        font-size: 14px;
+        color: #879298;
+        display: flex;
+        align-items: center;
+        border: 1px solid #D2DAE0;
+        border-bottom: 0px;
+    }
+        .article-menu-item {
+            padding: 16px;
+            font-weight: '400';
+        }
 
-#subscribe-btn {
-    width: 72px;
-    height: 24px;
-    border-radius: 50px;
-    border: 1px solid #D2DAE0;
-    background-color: #F5F7F9;
-    padding: 6px;
-    color: #879298;
-    text-align: center;
-    font-size: 12px;
-}
+    #article-wrapper {
+        width: 930px;
+        height: 344px;
+        border: 1px solid #D2DAE0;
+    }
 
-.inline-tag {
-    display: inline;
-}
+        #article-content-wrapper {
+            padding: 24px;
+        }
 
-.flex-row-tag {
-    display: flex;
-    flex-direction: row;
-}
+            #content-header-wrapper {
+                height: 24px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+                
+                #content-header-wrapper > * {
+                    margin: 0 16px 0 0;
+                }
 
-#article-li-part {
-    font-size: 16px;
-    color: #4B5966;
-    list-style: none;
-    width: 530px;
-    height: 235px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+                #subscribe-btn {
+                    width: 72px;
+                    height: 24px;
+                    border-radius: 50px;
+                    border: 1px solid #D2DAE0;
+                    background-color: #F5F7F9;
+                    color: #879298;
+                    text-align: center;
+                    font-size: 12px;
+                }
+
+            #content-body-wrapper {
+                width: 882px;
+            }
+                #article-li-part {
+                    font-size: 16px;
+                    color: #4B5966;
+                    list-style: none;
+                    width: 530px;
+                    height: 245px;
+                }
