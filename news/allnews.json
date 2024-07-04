@@ -1,0 +1,121 @@
+[
+    {
+        "uid": "1",
+        "pressType": "economy",
+        "pressImg": "../image/grid.svg",
+        "pressName": "경제신문",
+        "news": [
+            {
+                "editDate": "2024-02-05 18:25 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 첫 번째 기사 제목"
+            },
+
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 두 번째 기사 제목"
+            },
+
+            {
+                "editDate": "2023-07-29 11:11 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 세 번째 기사 제목"
+            },
+
+            {
+                "editDate": "2023-06-14 22:34 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 네 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-10-02 15:22 편집",
+                 "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 다섯 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 여섯 번째 기사 제목"
+            }
+        ]
+    },
+
+    {
+        "uid": "2",
+        "pressType": "economy",
+        "pressImg": "../image/grid1.svg",
+        "pressName": "조선일보",
+        "news": [
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 일곱 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-01-19 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 여덟 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-02-02 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 아홉 번째 기사 제목"
+            },
+            {
+                "editDate": "2024-07-04 15:20 편집",
+                "photo": "https://wimg.mk.co.kr/news/cms/202407/04/news-p.v1.20240704.f3722099cac344a3bf51ae2e204023b4_P1.png",
+                "title": "트럼프 리스크에 너무 내렸나··· 태양광주 반등 성공"
+            },
+            {
+                "editDate": "2024-07-03",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 열한 번째 기사 제목"
+            },
+            {
+                "editDate": "2024-07-03",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 열두 번째 기사 제목"
+            }
+        ]
+    },
+    {
+        "uid": "3",
+        "pressType": "internet",
+        "pressImg": "../image/grid1.svg",
+        "pressName": "구글",
+        "news": [
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 일곱 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 여덟 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 아홉 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 열 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 열한 번째 기사 제목"
+            },
+            {
+                "editDate": "2023-07-29 15:22 편집",
+                "photo": "../image/Thumbnail.png",
+                "title": "경제 섹션의 열두 번째 기사 제목"
+            }
+        ]
+    }
+]
+ 
