@@ -140,7 +140,13 @@ const createApp = () => {
     }
     render();
   };
-  function useState<RawT = unknown>(key: string, initalState: RawT) {
+  function useState<RawT = unknown>({
+    key,
+    initalState,
+  }: {
+    key: string;
+    initalState: RawT;
+  }) {
     type T = RawT extends unknown ? typeof initalState : RawT;
     type Updater = (updater: T | ((state: T) => T)) => void;
 

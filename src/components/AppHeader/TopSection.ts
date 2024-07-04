@@ -3,7 +3,10 @@ import styles from "./TopSection.module.css";
 import { RecentNewsRoll } from "./RecentNewsRoll";
 import { useEffect, useState } from "@/libs/createApp";
 export const TopSection = () => {
-  const [showDelayed, setShowDelayed] = useState("top-section", false);
+  const [showDelayed, setShowDelayed] = useState({
+    key: "TopSection",
+    initalState: false,
+  });
   useEffect(() => {
     const timeout = setTimeout(() => {
       setShowDelayed(true);

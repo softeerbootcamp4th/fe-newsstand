@@ -6,8 +6,14 @@ import { useState, useEffect } from "@/libs/createApp";
 import { getRecentNews } from "@/remotes/getRecentNews";
 
 export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
-  const [isHovering, setIsHovering] = useState("news-roll", false);
-  const [from, setFrom] = useState("news-roll", 0);
+  const [isHovering, setIsHovering] = useState({
+    key: "RecentNewsRoll",
+    initalState: false,
+  });
+  const [from, setFrom] = useState({
+    key: "RecentNewsRoll",
+    initalState: 0,
+  });
 
   const { news, mediaId } = getRecentNews({
     from: from * 2 + (needDelay ? 1 : 0),
