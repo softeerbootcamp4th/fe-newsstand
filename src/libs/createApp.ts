@@ -124,27 +124,22 @@ const createApp = () => {
 
     while (currentElems.length > 0) {
       const currentElem = currentElems.popFront()!;
-      let parentElem: HTMLElement;
-      if (
-        currentElem instanceof SimpleElement ||
-        currentElem instanceof RawElement
-      ) {
-        parentElem = currentElem.parent ?? top;
-      } else {
-        parentElem = currentElem.parentRenderedAppElement?.node ?? top;
-      }
+      const parent = currentElem.parent ?? top;
 
       if (currentElem instanceof SimpleElement) {
-        parentElem.appendChild(document.createTextNode(`${currentElem.value}`));
+        parent.appendChild(document.createTextNode(`${currentElem.value}`));
         continue;
       }
       if (currentElem instanceof RawElement) {
-        parentElem.appendChild(_converRawElementToDom(currentElem.node));
+        parent.appendChild(_converRawElementToDom(currentElem.node));
         continue;
       }
-      parentElem.appendChild(currentElem.node);
-      const key = currentElem.key;
+      parent.appendChild(currentElem.node);
+      const key = `${parent.getAttribute("key") ?? ""}-${
+        currentElem.node.tagName
+      }`;
       currentElem.node.setAttribute("key", key);
+
       if (!isPropsEqual(propsMap.get(key), currentElem.props)) {
         propsMap.set(key, currentElem.props);
         currentElem.node.setAttribute("forced", "true");

@@ -44,6 +44,9 @@ export const isPropsEqual = (prevProps: any, nextProps: any) => {
     return false;
   }
   for (const key of prevKeys) {
+    if (key == "children") {
+      continue;
+    }
     if (prevProps[key] !== nextProps[key]) {
       return false;
     }
