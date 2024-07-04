@@ -2,6 +2,7 @@ import { Button, Div } from "@/libs/Elements";
 import { MediaIdByCategories } from "../../models/Newsstand";
 import { getMediaById } from "../../remotes/getMediaById";
 import { getMediaRecentNewsByCategory } from "../../remotes/getMediaRecentNewsList";
+import { useEffect } from "@/libs/createApp";
 
 interface MediasContentProps {
   currentMediaIdsAndCategory: MediaIdByCategories[0];
@@ -20,6 +21,16 @@ export const MediasContent = ({
     currentMedia.id,
     currentMediaIdsAndCategory.category.id,
   );
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      handleMediaNext();
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [currentMediaIdx]);
   return Div({
     children: [
       Div({

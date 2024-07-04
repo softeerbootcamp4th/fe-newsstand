@@ -100,9 +100,11 @@ export const Medias = () => {
       }),
       Div({
         children: [
-          ...mediaIdByCategories.map((mediaIdByCategory) => {
+          ...mediaIdByCategories.map((mediaIdByCategory, idx) => {
             return CategoryNav({
               currentMediaIdsAndCategory: mediaIdByCategory,
+              currentMediaIdx: currentMediaIdx,
+              isActive: currentCategoryIdx == idx,
             });
           }),
         ],
