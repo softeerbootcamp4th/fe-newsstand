@@ -4,6 +4,7 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 
   --white: #ffffff;
+  --white-weak: rgba(255, 255, 255, 0.7);
 
   --gray-50: #f5f7f9;
   --gray-100: #d2dae0;
