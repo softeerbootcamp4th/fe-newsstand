@@ -36,3 +36,17 @@ export const toStringAnything = (value: any) => {
   }
   return value.toString();
 };
+
+export const isPropsEqual = (prevProps: any, nextProps: any) => {
+  const prevKeys = Object.keys(prevProps ?? {});
+  const nextKeys = Object.keys(nextProps ?? {});
+  if (prevKeys.length !== nextKeys.length) {
+    return false;
+  }
+  for (const key of prevKeys) {
+    if (prevProps[key] !== nextProps[key]) {
+      return false;
+    }
+  }
+  return true;
+};
