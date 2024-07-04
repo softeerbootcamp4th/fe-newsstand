@@ -1,0 +1,170 @@
+.container {
+    padding: 30px 200px;
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.section1-left-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 20px;
+}
+header > span { 
+    padding-right: 20px;
+}
+.headline {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0px;
+    padding: 0px 20px;
+}
+.headline-left-group {
+    background-color: #f5f7f9;
+    border-radius: 3px;
+    border: 2px solid #D2DAE0;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+}
+.headline-right-group {
+    background-color: #f5f7f9;
+    border-radius: 3px;
+    border: 2px solid #D2DAE0;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+}
+#newsTitle {
+    margin-left: 5px;
+}
+.selectOption {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+.selectOption-left-group {
+    padding-left: 20px;
+}
+.selectOption-right-group {
+    padding-right: 20px;
+}
+.selectOption-right-group a {
+    text-decoration: none;
+}
+#totalPress {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+#subscribePress {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #5F6E76;
+}
+.newsList {
+    padding: 20px 20px 0px 20px;
+}
+.newsList ul {
+    display: flex;
+    list-style: none;
+    border: 1px solid #D2DAE0;
+    padding: 0px;
+    margin: 0px;
+}
+.newsList ul li {
+    padding: 8px 15px;
+}
+.newsList a {
+    text-decoration: none;
+    color: #5F6E76;
+}
+.newsList nav {
+    background-color: #f5f7f9;
+    padding-left: 0;
+    margin-left: 0;
+}
+.newsList article {
+    border: 1px solid #D2DAE0;
+    height: 300px;
+    padding: 10px 20px;
+}
+.articleTop {
+    padding: 10px 0px;
+    display: flex;
+    align-items: center;
+}
+.articleTop img {
+    height: 20px; /* 원하는 높이로 조절 */
+    width: auto; /* 비율 유지 */
+    margin-right: 10px;
+}
+.articleTop span, .articleTop button {
+    line-height: 20px; /* img 태그의 높이에 맞춤 */
+    height: 20px; /* 동일 높이로 설정 */
+    margin-right: 10px;
+    font-size: 12px;
+}
+.subscribeBtn {
+    border: 1px solid #575757;
+    border-radius: 20px;
+    background-color: #f5f7f9;
+    color: #5F6E76;
+    cursor: pointer;
+}
+.articleBottom {
+    display: flex;
+}
+.articleImage img {
+    margin-bottom: 10px;
+}
+.articleOther {
+    padding-left: 40px;
+}
+.vertical-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    border: none !important;
+}
+.vertical-list li span a {
+    color: black;
+}
+nav ul li {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+nav ul li a {
+    font-weight: bold;
+}
+nav ul li.active {
+    background-color: #4362D0;
+    color: white;
+    font-weight: bold;
+}
+nav ul li.active a {
+    color: white;
+    text-decoration: none;
+}
+.leftButton {
+    position: fixed;
+    top: 450px;
+    left: 150px;
+    z-index: 1;
+    cursor: pointer;
+}
+.rightButton {
+    position: fixed;
+    top: 450px;
+    right: 150px;
+    z-index: 1;
+    cursor: pointer;
+}
