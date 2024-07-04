@@ -65,7 +65,7 @@ class PaginationCursor
 	}
 	findOffset(offset)
 	{
-		return this.attachedLinkedList.findKeyAtOffset(this.current, offset);
+		return this.attachedLinkedList.findKeyAtOffsetNoOverflow(this.current, offset);
 	}
 }
 

@@ -50,7 +50,7 @@ CursorAdaptor.prototype.getLast = function()
 
 CursorAdaptor.prototype.findOffset = function(offset)
 {
-	return this.cursor.findOffset();
+	return this.cursor.findOffset(offset);
 }
 
 CursorAdaptor.prototype.getDataList = function(num)

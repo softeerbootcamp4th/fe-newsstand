@@ -19,6 +19,7 @@ function mountView(state, reducer, metadata)
 
 	function render()
 	{
+		console.log("render call");
 		if(state.viewType.value === "grid") applyDiff(el, html`<div>Grid View</div>`);
 		else applyDiff(el, ListComponent(state.cursor.state.value));
 	}

@@ -64,6 +64,17 @@ class LinkedList
 	findKeyAtOffset(basis, offset)
 	{
 		if(!this.has(basis)) return null;
+		const result = this.findKeyAtOffsetNoOverflow(basis, offset);
+		if(result === null)
+		{
+			if(offset < 0) return this.first;
+			else return this.last;
+		}
+		return result;
+	}
+	findKeyAtOffsetNoOverflow(basis, offset)
+	{
+		if(!this.has(basis)) return null;
 
 		if(offset === 0) return basis;
 		if(offset < 0)
@@ -72,7 +83,7 @@ class LinkedList
 			for(let i=0; i<-offset; i++)
 			{
 				let before = this.get(cursor).prev;
-				if(before === null) break;
+				if(before === null) return null;
 				cursor = before;
 			}
 			return cursor;
@@ -83,7 +94,7 @@ class LinkedList
 			for(let i=0; i<offset; i++)
 			{
 				let after = this.get(cursor).next;
-				if(after === null) break;
+				if(after === null) return null;
 				cursor = after;
 			}
 			return cursor;

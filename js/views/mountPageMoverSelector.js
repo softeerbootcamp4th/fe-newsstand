@@ -3,7 +3,7 @@ function mountPageMoverSelector(state, reducers)
 	const leftMover = document.getElementById("leftMoveButton");
 	const rightMover = document.getElementById("rightMoveButton");
 
-	state.addSideEffect( ()=>{
+	state.addSideEffect( (value)=>{
 		leftMover.classList.toggle("hidden", reducers.isFirstPage());
 		rightMover.classList.toggle("hidden", reducers.isLastPage());
 	} );

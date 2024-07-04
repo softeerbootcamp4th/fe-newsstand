@@ -76,11 +76,11 @@ function generateReducer(fullList)
 			// derived state
 			isFirstPage()
 			{
-				return cursorState.findOffset(-getDelta()) === cursorState.getFirst();
+				return cursorState.findOffset(-getDelta()) === null;
 			},
 			isLastPage()
 			{
-				return cursorState.findOffset(getDelta()) === cursorState.getLast();
+				return cursorState.findOffset(getDelta()) === null;
 			},
 			beforeCursor()
 			{

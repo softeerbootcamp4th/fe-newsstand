@@ -15,6 +15,8 @@ mountRightSelector(state.viewType, reducer.setListView, reducer.setGridView);
 mountPageMoverSelector(state.cursor, reducer);
 mountView(state, reducer, metadata);
 
+console.log(fullList);
+
 state.subFilter.addSideEffect( (e)=>console.log(`chnge sub filter : ${e}`) );
 state.viewType.addSideEffect( (e)=>console.log(`chnge view type : ${e}`) );
 state.cursor.addSideEffect( (e)=>console.log(`chnge cursor state : ${e}`) );

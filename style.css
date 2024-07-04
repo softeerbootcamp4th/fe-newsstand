@@ -230,6 +230,11 @@ ul {
 	right: -48px;
 }
 
+.moveIcon.hidden {
+	visibility: hidden;
+	pointer-events: none;
+}
+
 .listContent {
 	width: 100%;
 	display: flex;
