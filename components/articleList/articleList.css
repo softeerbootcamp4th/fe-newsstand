@@ -7,6 +7,15 @@
     h6 태그: 12px
 */
 
+@keyframes fill {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
     padding: 0;
@@ -48,6 +57,7 @@ button {
             .mode-selection-btn-clicked {
                 color: #14212B;
                 font-weight: 700;
+                
             }
 
         #icon-wrapper {
@@ -76,23 +86,54 @@ button {
         border-bottom: 0px;
     }
 
-        .article-menu-btn {
-            padding: 0 16px;
-            font-weight: '400';
+        .menu-btn-wrapper {
+            position: relative;
+            width: auto;
             height: 100%;
-            cursor: pointer;
-            align-items: center;
         }
 
-        .article-menu-btn-clicked {
+        .menu-btn-wrapper-clicked {
             width: 166px;
             background-color: #7890E7;
             color: white;
         }
 
-            .article-menu-btn-clicked > .article-menu-pages {
-                display: block;
+            .article-menu-btn {
+                padding: 0 16px;
+                font-weight: '400';
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                align-items: center;
+                position: relative;
+                z-index: 10000;
             }
+
+                .menu-btn-wrapper-clicked > .article-menu-btn {
+                    color: white;
+                }
+
+                .menu-btn-wrapper-clicked > .article-menu-btn > .article-menu-pages {
+                    display: block;
+                }
+
+        .fill-background {
+            overflow: hidden;
+            display: none;
+            width: 100%;
+        }
+        
+        .menu-btn-wrapper-clicked > .fill-background {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            width: 0;
+            background-color: #4462D0;
+            animation: fill 20s forwards;
+        }
 
     #article-wrapper {
         width: 930px;
@@ -129,6 +170,7 @@ button {
             #content-body-wrapper {
                 width: 882px;
             }
+            
                 #article-li-part {
                     font-size: 16px;
                     color: #4B5966;

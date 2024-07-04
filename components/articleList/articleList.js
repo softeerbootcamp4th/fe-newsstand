@@ -46,14 +46,18 @@ const infoMsg = `${mediaName} 언론사에서 직접 편집한 뉴스입니다.`
 // create 태그
 const createMenuList = (menuInfos) => {
     return menuInfos.map((menuInfo, idx) => `
-        <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
-            <h5>
-                ${menuInfo.category}
-            </h5>
-            <h5 class="article-menu-pages display-none">
-                1 / ${menuInfo.totalPages}
-            </h5>
-        </button>
+        <div class="menu-btn-wrapper">
+            <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
+                <h5>
+                    ${menuInfo.category}
+                </h5>
+                <h5 class="article-menu-pages display-none">
+                    1 / ${menuInfo.totalPages}
+                </h5>
+            </button>
+            <div class="fill-background">
+            </div>
+        </div>
     `).join('');
 }
 
@@ -125,10 +129,10 @@ viewBtns.forEach(btn => {
 });
 
 // category-selection-event
-const articleMenuBtns = document.querySelectorAll('.article-menu-btn');
-articleMenuBtns.forEach(btn => {
+const articleMenuWrapper = document.querySelectorAll('.menu-btn-wrapper');
+articleMenuWrapper.forEach(btn => {
     btn.addEventListener('click', function() {
-        articleMenuBtns.forEach(b => b.classList.remove('article-menu-btn-clicked'));
-        this.classList.add('article-menu-btn-clicked');
+        articleMenuWrapper.forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
+        this.classList.add('menu-btn-wrapper-clicked');
     });
 });
