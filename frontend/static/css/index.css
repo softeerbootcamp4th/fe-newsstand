@@ -19,6 +19,7 @@
 }
 
 #newsstand {
+    width: 900px;
     margin: 0 auto;
 }
 
@@ -28,16 +29,122 @@
 }
 
 .mainContentNavElement {
-    display: inline-block;
+    position: relative;
+    display: inline-flex;
     padding: 16px 12px;
     margin: 0;
+}
+
+.absolute {
+    position: absolute;
+    z-index: 100;
 }
 
 #mainContentArticles {
     margin-top: 16px;
 }
 
+.mainContentNavProgress {
+    animation-name: mainContentNavProgress;
+    animation-duration: 20s;
+    position: absolute;
+    animation-timing-function: linear;
+    background-color: #4b60c9;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
 
+#mainContentContainer {
+    position: relative;
+    height: 348px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#mainContentArea {
+    position: absolute;
+
+}
+
+#mainContentArea.animationStartNext {
+    animation-name: mainStartNext;
+    animation-duration: 1s;
+}
+
+@keyframes mainStartNext {
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: -898px;
+    }
+}
+
+#mainContentArea.animationStartPrevious {
+    animation-name: mainStartPrevious;
+    animation-duration: 1s;
+}
+
+@keyframes mainStartPrevious {
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: 898px;
+    }
+}
+
+#previousMainContentArea {
+    position: absolute;
+}
+
+#previousMainContentArea.animationStartPrevious {
+    animation-name: previousStartPrevious;
+    animation-duration: 1s;
+}
+
+@keyframes previousStartPrevious {
+    from {
+        left: -898px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+#nextMainContentArea {
+    position: absolute;
+}
+
+#nextMainContentArea.animationStartNext {
+    animation-name: nextStartNext;
+    animation-duration: 1s;
+}
+
+@keyframes nextStartNext {
+    from {
+        left: 898px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+
+@keyframes mainContentNavProgress {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
 
 .mainContentNavElement.isSelected {
     background-color: var(--maincontennNav-selected-color);
