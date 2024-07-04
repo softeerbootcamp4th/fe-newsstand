@@ -1,5 +1,5 @@
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
-import { useState } from "../../libs/createApp";
+import { useCallback, useState } from "../../libs/createApp";
 import { Header, Section, Span } from "../../libs/Elements";
 import { CategoryNavs } from "./CategoryNavs";
 import { MediasContent } from "./MediasContent";
@@ -59,6 +59,12 @@ export const Medias = () => {
   const mediaIdByCategories = getMediaIdByCategories();
   const hasNextCategory = currentCategoryIdx < mediaIdByCategories.length - 1;
   const hasPrevCategory = currentCategoryIdx > 0;
+
+  const hasNext =
+    currentMediaIdx <
+      mediaIdByCategories[currentCategoryIdx].mediaIds.length - 1 ||
+    hasNextCategory;
+  const hasPrev = currentMediaIdx > 0 || hasPrevCategory;
   const handleMediaNext = () => {
     if (
       currentMediaIdx ===
@@ -84,10 +90,18 @@ export const Medias = () => {
     setCurrentMediaIdx(currentMediaIdx - 1);
   };
 
-  const handleCategoryClick = (idx: number) => {
-    setCurrentCategoryIdx(idx);
-    setCurrentMediaIdx(0);
-  };
+  const handleCategoryClick = useCallback(
+    {
+      key: "Medias",
+      callback: (idx: number) => {
+        return () => {
+          setCurrentCategoryIdx(idx);
+          setCurrentMediaIdx(0);
+        };
+      },
+    },
+    [],
+  );
   const currentMediaIdsAndCategory = mediaIdByCategories[currentCategoryIdx];
   return Section({
     children: [
@@ -106,6 +120,8 @@ export const Medias = () => {
         currentMediaIdx: currentMediaIdx,
         handleMediaNext,
         handleMediaPrev,
+        hasNext,
+        hasPrev,
       }),
     ],
   });

@@ -7,3 +7,22 @@
   justify-content: center;
   position: relative;
 }
+
+.btn {
+  position: absolute;
+  background: var(--surface-surface-alt, #F5F7F9);
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  width: 24px;
+}
+
+.prev-btn {
+  left: -64px;
+}
+
+.nxt-btn {
+  right: -64px;
+
+
+}
