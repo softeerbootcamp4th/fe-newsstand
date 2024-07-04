@@ -1,6 +1,7 @@
-let viewDateElement = document.getElementById("date");
-let newsLeftTitleElement = document.getElementById("newsLeftTitle");
-let newsLeftComElement = document.getElementById("newsLeftCom");
+let viewDateDOM = document.querySelector(".date");
+let newsPreviewDOMList = document.querySelectorAll(".newsPreview");
+let mouseHover = [];
+
 const getDate = () => {
   const time = new Date();
   let year = time.getFullYear();
@@ -11,21 +12,44 @@ const getDate = () => {
 
   if (month < 10) month = '0' + month;
   if (date < 10) date = '0' + date;
-  viewDateElement.innerText = year + '. ' + month + '. ' + date + ' ' + week[day] + '요일';
+  viewDateDOM.innerText = year + '. ' + month + '. ' + date + ' ' + week[day] + '요일';
 };
-getDate();
 
-fetch("/data/news.json")
-  .then((r) => r.json())
-  .then((json) => {
-    let newsLeftLength;
-    let i = 0;
-    newsLeftLength = json.news.length;
-    newsLeftTitleElement.innerText = json.news[i].title;
-    newsLeftComElement.innerText = json.news[i++].com;
-    setInterval(() => {
-      if (i >= newsLeftLength) i = 0;
-      newsLeftTitleElement.innerText = json.news[i].title;
-      newsLeftComElement.innerText = json.news[i++].com;
-    }, 1000);
+const loadNews = async () => {
+  let { news } = await (await fetch("/data/news.json")).json();
+  let left = 0;
+  let right = 123456789; // 랜덤수
+  let newsLength = news.length;
+
+  const insertNews = (newsIndex, DOMIndex) => {
+    newsPreviewDOMList[DOMIndex].innerText = news[newsIndex].com;
+    newsPreviewDOMList[DOMIndex + 1].innerText = news[newsIndex].title.substr(0, 30) + "...";
+  }
+
+  insertNews(left, 0);
+  insertNews(right % newsLength, 2);
+  setInterval(() => {
+    if (!mouseHover[0] && !mouseHover[1]) {
+      insertNews(left % newsLength, 0);
+      left++;
+    }
+    setTimeout(() => {
+      if (!mouseHover[2] && !mouseHover[3]) {
+        insertNews(right % newsLength, 2);
+        right++;
+      }
+    }, 500)
+  }, 1000);
+}
+
+for (let i = 0; i < newsPreviewDOMList.length; i++) {
+  newsPreviewDOMList[i].addEventListener("mouseenter", () => {
+    mouseHover[i] = 1;
   });
+  newsPreviewDOMList[i].addEventListener("mouseleave", () => {
+    mouseHover[i] = 0;
+  });
+}
+
+getDate();
+loadNews();
