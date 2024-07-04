@@ -14,27 +14,49 @@
                 <img alt="뉴스스탠드 아이콘" src="./static/icons/newspaper.svg"/>
                 <h1 class="text__bold24 text--strong">뉴스스탠드</h1>
             </section>
-            <p id="header__current-date" class="text__medium16 text--default"></p>
+            <p id="header__current-date" class="text__medium16"></p>
         </section>
     </header>
 
-    <main>
+    <main class="flexbox__column-direction gap32">
         <section class="flexbox__flex-start--center gap8">
             <section class="current-news__box surface--alt border flexbox__flex-start--center gap16">
                 <p class="current-news__media-title text--strong text__bold14"></p>
                 <section class="current-news__rolling-box">
-                    <p class="current-news__disappear-text current-news__headline text--default text__medium14"></p>
-                    <p class="current-news__appear-text current-news__headline text--default text__medium14"></p>
-                    <p class="current-news__static-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__disappear-text current-news__headline text__medium14"></p>
+                    <p class="current-news__appear-text current-news__headline text__medium14"></p>
+                    <a class="current-news__static-text current-news__headline text__medium14" target="_blank"></a>
                 </section>
             </section>
             <section class="current-news__box surface--alt border flexbox__flex-start--center gap16">
                 <p class="current-news__media-title text--strong text__bold14"></p>
                 <section class="current-news__rolling-box">
-                    <p class="current-news__disappear-text current-news__headline text--default text__medium14"></p>
-                    <p class="current-news__appear-text current-news__headline text--default text__medium14"></p>
-                    <p class="current-news__static-text current-news__headline text--default text__medium14"></p>
+                    <p class="current-news__disappear-text current-news__headline text__medium14"></p>
+                    <p class="current-news__appear-text current-news__headline text__medium14"></p>
+                    <a class="current-news__static-text current-news__headline text__medium14" target="_blank"></a>
                 </section>
+            </section>
+        </section>
+
+        <section class="flexbox__column-direction gap24">
+            <section class="flexbox__space-between--center gap24">
+                <section class="flexbox__flex-start--center gap24">
+                    <h2 class="text__bold16 text--strong">전체 언론사</h2>
+                    <h2 class="text__medium16 text--weak">내가 구독한 언론사</h2>
+                </section>
+                <section class="flexbox__flex-start--center gap8">
+                    <img alt="리스트 아이콘" src="./static/icons/list-active.svg" />
+                    <img alt="그리드 아이콘" src="./static/icons/grid-inactive.svg" />
+                </section>
+            </section>
+
+            <section class="media-contents__container border">
+                <ul class="media-contents__category-list flexbox__flex-start--center surface--alt text__medium14"></ul>
+
+                <section class="media-contents__contents-box flexbox__column-direction gap16"></section>
+
+                <img class="media-contents__navigation-button media-contents__left-button" alt="이전 미디어 보기 버튼" src="./static/icons/leftbutton.svg" />
+                <img class="media-contents__navigation-button media-contents__right-button" alt="다음 미디어 보기 버튼" src="./static/icons/rightbutton.svg" />
             </section>
         </section>
     </main>

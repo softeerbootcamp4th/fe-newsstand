@@ -1,13 +1,26 @@
 html {
     display: flex;
     justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
 }
 body {
     margin: 0;
     width: 930px;
-    margin-top: 58px;
+    margin-top: 132px;
 }
 p, h1, h2, h3, h4 {
     margin: 0;
     display: inline-block;
+    color: var(--gray400);
+}
+a {
+    text-decoration: none;
+    color: var(--gray400);
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }

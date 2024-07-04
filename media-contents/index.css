@@ -1,0 +1,96 @@
+.media-contents__container {
+    position: relative;
+}
+
+.media-contents__category-list {
+    height: 40px;
+    border-bottom: 1px solid var(--gray100);
+}
+.media-contents__category-item {
+    padding: 0 16px;
+}
+.media-contents__category-item--selected {
+    width: 166px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--blue100);
+}
+.media-contents__category-item-text {
+    cursor: pointer;
+}
+.media-contents__category-item-text:hover {
+    text-decoration: underline;
+}
+
+.media-contents__contents-box {
+    padding: 26px 24px;
+    height: 312px;
+}
+
+.media-contents__subscribe-button {
+    box-sizing: border-box;
+    padding: 5px 6px;
+    border-radius: 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1px;
+
+    cursor: pointer;
+}
+.media-contents__subscribe-button:hover {
+    border: 1px solid var(--gray300);
+}
+.media-contents__subscribe-button:hover .media-contents__subscribe-text {
+    color: var(--gray500);
+}
+
+.media-contents__image-content {
+    width: 320px;
+    cursor: pointer;
+}
+.media-contents__image-content img {
+    width: 320px;
+    height: 200px;
+    object-fit: cover;
+}
+.media-contents__image-headline {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+
+    word-break: keep-all;
+}
+.media-contents__image-content:hover .media-contents__image-headline {
+    text-decoration: underline;
+}
+
+.media-contents__list-item-text {
+    cursor: pointer;
+
+    max-width: 532px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.media-contents__list-item:hover .media-contents__list-item-text {
+    text-decoration: underline;
+}
+
+.media-contents__navigation-button {
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+}
+.media-contents__left-button {
+    left: -70px;
+}
+.media-contents__right-button {
+    right: -70px;
+}
