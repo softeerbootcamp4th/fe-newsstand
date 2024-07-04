@@ -1,10 +1,10 @@
 const allPress = document.getElementById("allPress");
 const subscribedPress = document.getElementById("subscribedPress");
 
-const listViewIcon = document.getElementById('listViewIcon').querySelector('use');
-const gridViewIcon = document.getElementById('gridViewIcon').querySelector('use');
+const listViewIcon = document.getElementById('listViewIcon');
+const gridViewIcon = document.getElementById('gridViewIcon');
 
-function setColor(element, color) {
+const setColor = (element, color) => {
     element.setAttribute('fill', color);
 }
 
@@ -34,3 +34,5 @@ subscribedPress.addEventListener('click', () => {
     allPress.classList.remove('selected-bold16');
     allPress.classList.add('available-medium16');
 });
+
+setColor(listViewIcon, '#4362D0');
