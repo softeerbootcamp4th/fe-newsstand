@@ -1,0 +1,53 @@
+.contentList {
+  display: flex;
+  flex-direction: row;
+  width: 930px;
+  height: 40px;
+  background-color: #f5f7f9;
+  align-items: center;
+  list-style: none;
+}
+
+.contentList ul {
+  width: auto;
+  height: 40px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.progress {
+  display: none;
+}
+
+.contentList ul:hover {
+  text-decoration: underline;
+}
+
+.contentList ul.selected {
+  width: 166px;
+  background-color: #7890e7;
+  color: white;
+  cursor: default;
+  text-decoration: none;
+  pointer-events: none;
+  position: relative;
+}
+
+.contentList ul.selected::after {
+  width: 0%;
+  content: "";
+  display: block;
+  background-color: #002ac0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 4s ease;
+}
+
+ul.selected .progress {
+  margin-left: auto;
+  display: block;
+}
