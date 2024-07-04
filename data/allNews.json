@@ -6,6 +6,8 @@
             {
                 "id" : 1,
                 "company" : "연합뉴스",
+                "logoUrl" : "./src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/014/2024/07/03/0005208091_001_20240703124715600.jpg?type=w647",
                 "newsItems" : [
                     {
@@ -50,6 +52,8 @@
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/seoulEconomic.png",
+                "date" : "2024. 07. 03. 09:23",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -94,6 +98,8 @@
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -136,7 +142,9 @@
             {
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "company" : "파이낸스",
+                "logoUrl" : "/src/images/finance.png",
+                "date" : "2024. 07. 03. 09:23",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -180,7 +188,10 @@
             {
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "company" : "아이뉴스",
+                "logoUrl" : "/src/images/iNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -225,6 +236,9 @@
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/YTN.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -267,6 +281,9 @@
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -317,6 +334,8 @@
                 "id" : 1,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/seoulEconomic.png",
+                "date" : "2024. 07. 03. 12:26",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -360,6 +379,8 @@
             {
                 "id" : 2,
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/014/2024/07/03/0005208091_001_20240703124715600.jpg?type=w647",
                 "newsItems" : [
                     {
@@ -405,6 +426,8 @@
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -447,7 +470,9 @@
             {
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "company" : "아이뉴스",
+                "logoUrl" : "/src/images/iNews.png",
+                "date" : "2024. 07. 03. 09:23",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -492,6 +517,9 @@
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
                 "company" : "뉴스엔",
+                "logoUrl" : "/src/images/finance.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -536,6 +564,8 @@
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/YTN.png",
+                "date" : "2024. 07. 03. 09:23",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -578,6 +608,8 @@
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -627,6 +659,9 @@
             {
                 "id" : 1,
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/014/2024/07/03/0005208091_001_20240703124715600.jpg?type=w647",
                 "newsItems" : [
                     {
@@ -671,6 +706,9 @@
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -715,6 +753,9 @@
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -758,6 +799,9 @@
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
                 "company" : "뉴시스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -802,6 +846,9 @@
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
                 "company" : "뉴스엔",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -846,6 +893,9 @@
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -888,6 +938,9 @@
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -938,6 +991,9 @@
                 "id" : 1,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -981,6 +1037,9 @@
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1025,6 +1084,9 @@
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1068,6 +1130,9 @@
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
                 "company" : "뉴시스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1112,6 +1177,9 @@
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
                 "company" : "뉴스엔",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1156,6 +1224,9 @@
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1198,6 +1269,9 @@
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1248,6 +1322,9 @@
                 "id" : 1,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
                 "company" : "뉴시스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1292,6 +1369,9 @@
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1336,6 +1416,9 @@
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1379,6 +1462,9 @@
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
                 "company" : "뉴시스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1423,6 +1509,9 @@
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
                 "company" : "뉴스엔",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1467,6 +1556,9 @@
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1509,6 +1601,9 @@
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1559,6 +1654,9 @@
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
                 "company" : "뉴스엔",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1603,6 +1701,9 @@
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1647,6 +1748,9 @@
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1690,6 +1794,9 @@
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
                 "company" : "뉴시스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1734,6 +1841,9 @@
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
                 "company" : "뉴스엔",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1778,6 +1888,9 @@
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1820,6 +1933,9 @@
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1870,6 +1986,9 @@
                 "id" : 1,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1912,6 +2031,9 @@
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1956,6 +2078,9 @@
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1999,6 +2124,9 @@
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
                 "company" : "뉴시스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -2043,6 +2171,9 @@
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
                 "company" : "뉴스엔",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -2087,6 +2218,9 @@
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -2129,6 +2263,9 @@
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
                 "company" : "연합뉴스",
+                "logoUrl" : "/src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 09:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,

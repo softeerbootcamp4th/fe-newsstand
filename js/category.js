@@ -73,8 +73,11 @@ function displayNews() {
     mainNewsDiv.innerHTML = '';
     subNewsDiv.innerHTML = '';
 
-
     const news = newsData[curCategoryIdx].news[curNewsIdx];
+
+    document.getElementById('logo').src = news.logoUrl;
+    document.querySelector('.edit-date').textContent = `${news.date} 편집`;
+
 
     const thumnbailImg = document.createElement('img');
     thumnbailImg.src = news.thumbnailUrl;
