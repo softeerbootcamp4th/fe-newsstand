@@ -1,3 +1,9 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
 .container {
     padding: 30px 200px;
 }
@@ -23,26 +29,18 @@ header > span {
     margin-bottom: 0px;
     padding: 0px 20px;
 }
-.headline-left-group {
+.headline-left-group, .headline-right-group {
     background-color: #f5f7f9;
     border-radius: 3px;
     border: 2px solid #D2DAE0;
     flex: 1;
     align-items: center;
     justify-content: center;
-    padding: 10px 20px;
-}
-.headline-right-group {
-    background-color: #f5f7f9;
-    border-radius: 3px;
-    border: 2px solid #D2DAE0;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
+    padding: 20px 20px;
+    letter-spacing: -1px;
 }
 #newsTitle {
-    margin-left: 5px;
+    margin-left: 15px;
 }
 .selectOption {
     display: flex;
@@ -166,5 +164,41 @@ nav ul li.active a {
     top: 450px;
     right: 150px;
     z-index: 1;
+    cursor: pointer;
+}
+.wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.headline-left-group ul, .headline-right-group ul {
+    list-style: none;
+}
+.headline-left-group li, .headline-right-group li {
+    position: absolute;
+    top: -39px;
+    left: 0;
+}
+.headline-left-group strong, .headline-right-group strong {
+    margin-right: 15px;
+}
+/* prev 롤링 배너 표시 */
+.headline-left-group li.prev, .headline-right-group li.prev {
+    top: -39px;
+    transition: top 0.5s ease;
+}
+/* current 롤링 배너 표시 */
+.headline-left-group li.current, .headline-right-group li.current {
+    top: -3px;
+    transition: top 0.5s ease;
+}
+/* next 롤링 배너 표시 */
+.headline-left-group li.next, .headline-right-group li.next {
+    top: 39px;
+}
+.headline-left-group span:hover, .headline-right-group span:hover {
+    text-decoration: underline;
     cursor: pointer;
 }
