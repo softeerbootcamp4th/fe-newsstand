@@ -1,27 +1,38 @@
-import NewsBox from './components/newsBox.js';
-import createComponent from './core/component/component.js';
-import { mockData } from './datas/mockData.js';
+import createComponent from './core/component/component.js'
+import Header from './layouts/Header.js'
+import SubHeader from './layouts/SubHeader.js'
+import Category from './layouts/Category.js'
+import ListNewsstand from './layouts/ListNewsstand.js'
+import { generateRandomId } from './utils/idGenerator.js'
 
 const App = () => {
-    const newsBoxes = mockData.map((news, index) => {
-        const newsBoxComponent = createComponent(NewsBox, { id : index + 1, icon : news.icon });
-        return newsBoxComponent;
-    });
+    const headerLayout = createComponent(Header, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
+    const SubHeaderLayout = createComponent(SubHeader, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
+    const categoryLayout = createComponent(Category, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
+    const ListNewsstandLayout = createComponent(ListNewsstand, {
+        id: generateRandomId(10),
+        style: 'width:100%; height:65%;',
+    })
 
     return {
         element: `
         <div class="main-container">
             <div class="contents-container">
-                <div class="header-container"> HEADER </div>
-                <div class="rolling-news-container"> ROLLING NEWS </div>
-                <div class="category-container"> CATEGORY </div>
-                <div class="news-container">
-                    ${newsBoxes.map(box => box.element).join('')}
-                </div>
+                ${/* header layout */ ''}
+                ${headerLayout.element}
+
+                ${/* subheader layout */ ''}
+                ${SubHeaderLayout.element}
+
+                ${/* category layout */ ''}
+                ${categoryLayout.element}
+
+                ${/* news container layout */ ''}
+                ${ListNewsstandLayout.element}
             </div>
         </div>
-        `
-    };
+        `,
+    }
 }
 
-export default App;
+export default App

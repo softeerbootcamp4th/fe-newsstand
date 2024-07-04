@@ -1,7 +1,7 @@
-import createComponent from './core/component/component.js';
-import App from './App.js';
+import createComponent from './core/component/component.js'
+import App from './App.js'
 
-const $app = document.getElementById('app');
-const appComponent = createComponent(App);
+const $app = document.getElementById('app')
+const appComponent = createComponent(App)
 
-$app.innerHTML = appComponent.element;
+$app.innerHTML = appComponent.element

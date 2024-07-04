@@ -1,0 +1,138 @@
+.news-box-container {
+    width: 120px;
+    height: 100px;
+    border: 1px solid gainsboro;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* category text */
+.category-text {
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+/* auto-rolling-news */
+.auto-rolling-news-container {
+    position: relative;
+    width: 100%;
+    height: 32px;
+    font-size: 0.875rem;
+    letter-spacing: -1px;
+    padding: 7px 15px;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+    border: 1px solid #d1d5db;
+}
+
+.auto-rolling-news-title {
+    font-weight: bold;
+    float: left;
+    padding-right: 10px;
+}
+
+.auto-rolling-wrap {
+    position: relative;
+    width: auto;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.auto-rolling-news-container ul {
+    list-style: none;
+}
+
+.auto-rolling-news-container li {
+    position: absolute;
+    top: -36px;
+    left: 0;
+}
+
+.auto-rolling-news-container li.prev {
+    top: -36px;
+    transition: top 0.5s ease;
+}
+
+.auto-rolling-news-container li.current {
+    top: 0;
+    transition: top 0.5s ease;
+}
+
+.auto-rolling-news-container li.next {
+    top: 36px;
+}
+
+.auto-rolling-news-container a {
+    display: block;
+    display: -webkit-box;
+    text-decoration: none;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #5f6e76;
+}
+
+.auto-rolling-news-container a:hover {
+    text-decoration: underline;
+}
+
+/* list-news */
+.list-news-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 20px;
+    height: 10%;
+    width: auto;
+    background-color: #d2dae0;
+    list-style: none;
+    margin: 0px;
+    padding-left: 20px;
+}
+
+.list-news-body {
+    display: flex;
+    height: 90%;
+    width: 100%;
+}
+
+.list-news-left-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 40%;
+    padding: 2%;
+}
+.list-news-left-top {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    width: 100%;
+    height: 70px;
+    align-items: baseline;
+}
+
+.list-news-left-body {
+    width: 100%;
+    height: auto;
+}
+
+.list-news-left-bottom {
+    width: 100%;
+    height: auto;
+}
+
+.list-news-right-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    width: 60%;
+    padding: 2%;
+    padding-top: calc(2% + 70px);
+}

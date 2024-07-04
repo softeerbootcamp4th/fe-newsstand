@@ -22,7 +22,11 @@ body {
     color: var(--color-text);
 }
 
-h1, h2, h3, h4, form legend {
+h1,
+h2,
+h3,
+h4,
+form legend {
     color: var(--color-text-heading);
     margin-bottom: var(--space-xxs);
     line-height: var(--heading-line-height);
@@ -33,23 +37,28 @@ h1, h2, h3, h4, form legend {
     font-size: var(--text-xxxl);
 }
 
-h1, .text--xxl {
+h1,
+.text--xxl {
     font-size: var(--text-xxl);
 }
 
-h2, .text--xl {
+h2,
+.text--xl {
     font-size: var(--text-xl);
 }
 
-h3, .text--lg {
+h3,
+.text--lg {
     font-size: var(--text-lg);
 }
 
-h4, .text--md {
+h4,
+.text--md {
     font-size: var(--text-md);
 }
 
-.text--sm, small {
+.text--sm,
+small {
     font-size: var(--text-sm);
 }
 
