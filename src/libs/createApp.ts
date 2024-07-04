@@ -16,8 +16,8 @@ const effectCleanUps = new Map<number, () => void>();
 const effectDependencies = new Map<number, any[]>();
 const statesMap = new Map<string, Array<any>>();
 const statesKeyMap = new Map<string, number>();
-const callbacksMap = new Map<number, Array<() => void>>();
-const callbacksDependenciesMap = new Map<number, any[]>();
+const callbacksMap = new Map<string, Array<() => void>>();
+const callbacksDependenciesMap = new Map<string, any[]>();
 const callbacksKeyMap = new Map<string, number>();
 const propsMap = new Map<string, any>();
 let effectsKey = 0;
@@ -56,25 +56,20 @@ const createApp = () => {
       callbacksKeyMap.set(key, 0);
     }
     const localCallbacksKey = callbacksKeyMap.get(key)!;
-    if (!callbacksMap.has(localCallbacksKey)) {
-      callbacksMap.set(localCallbacksKey, []);
+    if (!callbacksMap.has(key)) {
+      callbacksMap.set(key, []);
     }
+    const callbacks = callbacksMap.get(key)!;
 
-    const callbacks = callbacksMap.get(localCallbacksKey)!;
-    if (
-      isPropsEqual(
-        dependencies,
-        callbacksDependenciesMap.get(localCallbacksKey),
-      )
-    ) {
-      return callbacks[localCallbacksKey];
-    }
-    callbacksDependenciesMap.set(localCallbacksKey, dependencies);
     if (callbacks.length <= localCallbacksKey) {
       callbacks.push(callback as () => void);
     }
-    const memoedCallback = callbacks[localCallbacksKey];
     callbacksKeyMap.set(key, localCallbacksKey + 1);
+    if (isPropsEqual(dependencies, callbacksDependenciesMap.get(key))) {
+      return callbacks[localCallbacksKey] as T;
+    }
+    callbacksDependenciesMap.set(key, dependencies);
+    const memoedCallback = callbacks[localCallbacksKey];
     return memoedCallback as T;
   };
 

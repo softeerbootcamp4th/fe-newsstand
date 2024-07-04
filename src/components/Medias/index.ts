@@ -94,10 +94,8 @@ export const Medias = () => {
     {
       key: "Medias",
       callback: (idx: number) => {
-        return () => {
-          setCurrentCategoryIdx(idx);
-          setCurrentMediaIdx(0);
-        };
+        setCurrentCategoryIdx(idx);
+        setCurrentMediaIdx(0);
       },
     },
     [],
