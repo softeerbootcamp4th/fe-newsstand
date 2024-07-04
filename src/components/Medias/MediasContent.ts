@@ -3,7 +3,8 @@ import { MediaIdByCategories } from "../../models/Newsstand";
 import { getMediaById } from "../../remotes/getMediaById";
 import { getMediaRecentNewsByCategory } from "../../remotes/getMediaRecentNewsList";
 import { useEffect } from "@/libs/createApp";
-
+import styles from "./MediasContent.module.css";
+import { MediaContentHeader } from "./MediaContentHeader";
 interface MediasContentProps {
   currentMediaIdsAndCategory: MediaIdByCategories[0];
   currentMediaIdx: number;
@@ -34,7 +35,11 @@ export const MediasContent = ({
     };
   }, [currentMediaIdx, currentMediaIdsAndCategory]);
   return Div({
+    className: `${styles.container}`,
     children: [
+      MediaContentHeader({
+        media: currentMedia,
+      }),
       Div({
         children: [
           ...recentNewsList.map((news) => {

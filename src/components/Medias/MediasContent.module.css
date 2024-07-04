@@ -1,0 +1,9 @@
+.container {
+  border: 1px solid var(--border-border-default, #D2DAE0);
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}

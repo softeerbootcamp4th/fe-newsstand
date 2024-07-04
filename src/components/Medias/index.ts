@@ -1,8 +1,6 @@
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { useState } from "../../libs/createApp";
-import { Div, Header, Section, Span } from "../../libs/Elements";
-import { MediaIdByCategories } from "../../models/Newsstand";
-import { CategoryNav } from "./CategoryNav";
+import { Header, Section, Span } from "../../libs/Elements";
 import { CategoryNavs } from "./CategoryNavs";
 import { MediasContent } from "./MediasContent";
 
