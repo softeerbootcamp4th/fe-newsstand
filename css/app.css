@@ -135,7 +135,7 @@
 }
 
 .news-list__navbar__category[data-selected="yes"] {
-    background-color: #7890E7;
+    background-image: linear-gradient(to right, #4362D0 0%, #7890E7 0%, #7890E7);
     text-align: left;
     min-width: 200px;
     color: white;

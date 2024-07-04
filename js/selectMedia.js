@@ -1,4 +1,5 @@
 import { newsListController } from "./newsList.js";
+import { backColorAnimate } from "./animation/backColorAnimation.js";
 
 function mediaListController(categoryData) {
     const mediaList = getMediaList();
@@ -48,6 +49,7 @@ function mediaClickHandler(event, categoryData) {
 function resetSelected(mediaList) {
     [...mediaList].forEach((media) => {
         media.dataset.selected = "no";
+        media.style.backgroundImage = "none";
     })
 }
 
@@ -80,6 +82,7 @@ function leftButtonHandler(event, categoryData) {
 
     const changedMedia = getSelectedMedia();
     const changedMediaIndex = getSelectedMediaIndex(changedMedia);
+    backColorAnimate();
     newsListController(categoryData[changedMedia.innerText], changedMediaIndex);
 }
 
@@ -103,6 +106,7 @@ function rightButtonHandler(event, categoryData) {
 
     const changedMedia = getSelectedMedia();
     const changedMediaIndex = getSelectedMediaIndex(changedMedia);
+    backColorAnimate();
     newsListController(categoryData[changedMedia.innerText], changedMediaIndex);
 }
 
