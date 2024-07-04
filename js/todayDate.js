@@ -1,5 +1,6 @@
-
-getTodayDate();
+document.addEventListener("DOMContentLoaded", () => {
+    getTodayDate();
+});
 
 function getTodayDate() {
     const dateDiv = document.querySelector('.header-date');
