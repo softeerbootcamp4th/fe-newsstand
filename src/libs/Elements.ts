@@ -3,11 +3,23 @@ import { RawElement, AppElementProps, AppElement } from "./AppElement";
 export const Raw = (data: string) => {
   return new RawElement(data);
 };
-type H1Props = AppElementProps<HTMLHeadingElement>["props"];
-export const H1 = (props: H1Props) =>
+type HeadingProps = AppElementProps<HTMLHeadingElement>["props"];
+export const H1 = (props: HeadingProps) =>
   AppElement({
     props,
     tagName: "h1",
+  });
+
+export const H2 = (props: HeadingProps) =>
+  AppElement({
+    props,
+    tagName: "h2",
+  });
+
+export const H3 = (props: HeadingProps) =>
+  AppElement({
+    props,
+    tagName: "h3",
   });
 
 type DivProps = AppElementProps<HTMLDivElement>["props"];
