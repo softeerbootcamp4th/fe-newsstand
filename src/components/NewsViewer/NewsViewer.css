@@ -164,7 +164,7 @@
   background: none;
 }
 
-.prev {
+.newsButton.prev {
   position: absolute;
   top: 50%;
   left: -47px;
@@ -172,7 +172,7 @@
   transform: translate(-50%, 50%);
 }
 
-.next {
+.newsButton.next {
   position: absolute;
   top: 50%;
   right: -47px;
