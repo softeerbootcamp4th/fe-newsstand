@@ -1,5 +1,10 @@
 import useState from '../../core/hooks/useState.js'
 
+export const ButtonVariantProps = {
+    WHITE: 'white',
+    GRAY: 'gray',
+}
+
 const buttonVariant = (type) => {
     const variant = {
         white: {

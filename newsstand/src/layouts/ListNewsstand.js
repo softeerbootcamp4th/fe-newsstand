@@ -1,17 +1,16 @@
-import Button from '../components/base/Button.js'
+import Button, { ButtonVariantProps } from '../components/base/Button.js'
 import { Icon } from '../components/base/IconView.js'
 import createComponent from '../core/component/component.js'
 import ImageView from '../components/base/ImageView.js'
 import { generateRandomId } from '../utils/idGenerator.js'
-import useState from '../core/hooks/useState.js'
 
 const ListNewsstand = () => {
     const buttonComponent = createComponent(Button, {
         id: generateRandomId(10),
         icon: Icon.PLUS,
         text: '구독하기',
-        style: 'width: 70px; height:10px;',
-        variant: 'white',
+        style: 'height:10px;',
+        variant: ButtonVariantProps.WHITE,
     })
 
     const ImageComponent = createComponent(ImageView, {
