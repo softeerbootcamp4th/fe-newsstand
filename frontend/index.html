@@ -15,14 +15,16 @@
                 <img id="mySvgImage" src="./static/assets/images/newsstandTitleSymbol.svg" alt="Description of SVG">
                 <h1 style="font-size: 24px; padding-left: 5px;">뉴스 스탠드</h1>
             </div>
-            <div class="titleDate">
-                <div>2024. 02. 14 수요일</div>
-            </div>
+            <div class="titleDate"></div>
         </div>
         <div id="newsstandRecentArticles">
             <div class="recentArticle">
-                <span class="recentArticleMedia">연합뉴스</span>
-                <span class="recentArticleTitle">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
+                <div id="rollingBox">
+                    <div class="currentDom"></div>
+                    <div class="futureDom"></div>
+                </div>
+                <!-- <span class="recentArticleMedia">연합뉴스</span>
+                <span class="recentArticleTitle">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span> -->
             </div>
             <div class="recentArticle">
                 <span class="recentArticleMedia">연합뉴스</span>
@@ -74,8 +76,8 @@
 
             </div>
         </div>
-        <script type="module" src="./static/js"></script>
     </main>
+    <script type="module" src="./static/js/index.js"></script>
 </body>
 
 </html>
