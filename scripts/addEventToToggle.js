@@ -1,5 +1,6 @@
-import { drawArticles, drawTapList } from "./drawer.js";
+import { drawArticles, drawTapAnimationList, drawTapList } from "./drawer.js";
 import { resetstate } from "./reset.js";
+import { updateTabAnimationStyle } from "./tap.js";
 
 export function addEventToToggle(state) {
     let leftToggleDom = document.querySelector("#toggle_left");
@@ -10,7 +11,9 @@ export function addEventToToggle(state) {
         document.querySelector("#toggle_right").classList.remove('toggle_item_active');
         resetstate(state);
         drawTapList(state);
-        drawArticles(state)
+        drawArticles(state);
+        drawTapAnimationList(state);
+        updateTabAnimationStyle(state);
     });
     rightToggleDom.addEventListener("click",function() {
         state.toggleName="right";
@@ -19,8 +22,12 @@ export function addEventToToggle(state) {
         resetstate(state);
         drawTapList(state);
         drawArticles(state)
+        drawTapAnimationList(state);
+        updateTabAnimationStyle(state);
     });
     drawTapList(state);
-    drawArticles(state)
+    drawArticles(state);
+    drawTapAnimationList(state);
+    updateTabAnimationStyle(state);
 }
 

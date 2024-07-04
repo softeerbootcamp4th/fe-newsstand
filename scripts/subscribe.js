@@ -1,9 +1,16 @@
 import { getAvailableCompanyNumber } from "./article.js";
+import { getSubscribeCompanies } from "./company.js";
 import { drawArticles, drawTapList } from "./drawer.js";
+import { updateTabAnimationStyle } from "./tap.js";
 
-export function addSubscribeEvent(state) {
+export function updateSubscribeButton(state) {
     if(getAvailableCompanyNumber(state)===0)return;
-    const companyName = state.articleDataList[state.titleIndex].companies[state.selectedCompanyIndex].name;
+    let companyName = "";
+    if(state.toggleName === "left"){
+        companyName = state.articleDataList[state.titleIndex].companies[state.selectedCompanyIndex].name;
+    }else{
+        companyName = getSubscribeCompanies(state)[state.selectedCompanyIndex].name;
+    }
     const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
 
     document.querySelector("#subscribe_button_wrapper").innerHTML =
@@ -23,17 +30,21 @@ export function addSubscribeEvent(state) {
     ;
 
     const subscribeButtonDom = document.querySelector("#subscribe_button");
-    subscribeButtonDom.addEventListener("click", eventFunction);
+    subscribeButtonDom.addEventListener("click", function() {
+        eventFunction(state,companyName,isSubscribed);
+    });
 
-    function eventFunction() {
-        const companyName = state.articleDataList[state.titleIndex].companies[state.selectedCompanyIndex].name;
-        const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
+    function eventFunction(state,companyName,isSubscribed) {
         if (isSubscribed) {
             state.subscribedCompanyNameSet.delete(companyName);
+            if(state.selectedCompanyIndex > (getAvailableCompanyNumber(state)-1)){
+                state.selectedCompanyIndex-=1;
+            }
         } else {
             state.subscribedCompanyNameSet.add(companyName);
         }
         drawTapList(state);
+        updateTabAnimationStyle(state);
         drawArticles(state);
     }
 

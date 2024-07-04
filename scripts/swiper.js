@@ -1,21 +1,26 @@
 import { getAvailableCompanyNumber } from "./article.js";
-import { drawArticles, drawTapList } from "./drawer.js";
-import { getTabLength } from "./tap.js";
+import { drawArticles, drawTapAnimationList, drawTapList } from "./drawer.js";
+import { getTabLength, updateTabAnimationStyle } from "./tap.js";
 
 /**
    * @param {Number} companyIndex - The image element whose source will be changed.
    * @param {"left" | "right"} type - The new source URL for the image.
    */
 export function handleCompanySwipe(state,type) {
-    rotate(state,type);
+    let isNeedRetrierDrawAnimation = rotate(state,type);
     drawTapList(state);
+    updateTabAnimationStyle(state);
     drawArticles(state,type);
+    if(isNeedRetrierDrawAnimation){
+        drawTapAnimationList(state);
+        updateTabAnimationStyle(state);
+    }
 }
 
  /**
 * @param {"left" | "right"} type
 */
- function rotate(state,type) {
+ function rotate(state,type,animationResetPointer = { isNeed: false }) {
     state.selectedArticleIndex = 0;
     const max = getAvailableCompanyNumber(state)-1;
     const min = 0;
@@ -28,6 +33,7 @@ export function handleCompanySwipe(state,type) {
             }else{
                 if(!(state.selectedCompanyIndex === min && state.titleIndex === min)){
                     if(state.selectedCompanyIndex === min){
+                        animationResetPointer.isNeed = true;
                         pageGoBack(state);
                     }else if(max !== -1){
                         state.selectedCompanyIndex -= 1;
@@ -37,11 +43,13 @@ export function handleCompanySwipe(state,type) {
             break;
         case "right":
             if(max === -1 && state.titleIndex !== tabLastIndex){
+                animationResetPointer.isNeed = true;
                 pageGoForward(state);
-                rotate(state,type);
+                rotate(state,type,animationResetPointer);
             }else{
                 if(!(state.selectedCompanyIndex === max && state.titleIndex === tabLastIndex)){
                     if(state.selectedCompanyIndex == max){
+                        animationResetPointer.isNeed = true;
                         pageGoForward(state);
                     }else if(max !== -1){
                         state.selectedCompanyIndex += 1;
@@ -50,6 +58,7 @@ export function handleCompanySwipe(state,type) {
             }
             break;
     }
+    return animationResetPointer.isNeed;
  }
 
  

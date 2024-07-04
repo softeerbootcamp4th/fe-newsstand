@@ -1,9 +1,9 @@
 import { getAvailableCompanyNumber,getCurrentArticle } from "./article.js";
 import { getCurrentCompany } from "./company.js";
-import { addSubscribeEvent } from "./subscribe.js";
-import { getTabLength, handleTabClick } from "./tap.js";
+import { updateSubscribeButton } from "./subscribe.js";
+import { getTabLength, handleTabClick, updateTabAnimationStyle } from "./tap.js";
 export function drawArticles(state) {
-    addSubscribeEvent(state);
+    updateSubscribeButton(state);
     drawArrow(state);
     let articleBoxDom = document.querySelector(".news_letter_title_box");
     articleBoxDom.innerHTML = "";
@@ -75,22 +75,28 @@ export function drawArticles(state) {
 
 
 export function drawTapList(state) {
-    let tap = document.querySelector(".news_detail_tap_box");
-    tap.innerHTML = "";
+    let tapDom = document.querySelector("#tab_wrapper");
+    tapDom.innerHTML = "";
     state.articleDataList.forEach(articleObject => {
-        const tapItem = document.createElement('div');
+        const tapItemDom = document.createElement('div');
         let max = getAvailableCompanyNumber(state);
         if(state.titleIndex == articleObject.index){
-            tapItem.classList.add('news_detail_tap_item_active');
-            tapItem.textContent = articleObject.title+`${max == 0 ? 0 : state.selectedCompanyIndex+1}/${max}`;
+            tapItemDom.classList.add('news_detail_tap_item_active','selected-bold14');
+            tapItemDom.innerHTML = `
+            <span>
+                ${articleObject.title}
+            </span>
+            <span class="counter_box" >
+                ${max == 0 ? 0 : state.selectedCompanyIndex+1}/${max}
+            </span>`;
         }else{
-            tapItem.classList.add('news_detail_tap_item');
-            tapItem.textContent = articleObject.title;
+            tapItemDom.classList.add('news_detail_tap_item','available-medium14');
+            tapItemDom.textContent = articleObject.title;
         }
-        tapItem.addEventListener("click", function () {
+        tapItemDom.addEventListener("click", function () {
             handleTabClick(articleObject.index, state);
         });
-        tap.appendChild(tapItem);
+        tapDom.appendChild(tapItemDom);
     });
 }
  
@@ -114,4 +120,32 @@ export function drawTapList(state) {
     }
  }
 
- 
+ export function drawTapAnimationList(state) {
+    let tapAnimationDom = document.querySelector("#tab_animation_wrapper");
+    tapAnimationDom.innerHTML = "";
+    let tapDom = document.querySelector("#tab_wrapper");
+    tapDom.childNodes.forEach((item,index) => {
+        const tapAnimationItemDom = document.createElement('div');
+        const tapAnimationHiderItemDom = document.createElement('div');
+        const width = window.getComputedStyle(item).width;
+        tapAnimationItemDom.id=`title_${index}_tap`;
+        tapAnimationHiderItemDom.style.overflowX = "hidden";
+        tapAnimationHiderItemDom.style.backgroundColor = "#F5F7F9";
+        if(state.titleIndex === index){
+            // tapAnimationItemDom.style.zIndex = 1;
+            tapAnimationHiderItemDom.style.backgroundColor = "#7890E7";
+            tapAnimationItemDom.style.transition = "transform 0.2s ease";
+            tapAnimationItemDom.style.transform = "translate(-100%)"
+            tapAnimationItemDom.style.backgroundColor = "#4362D0";
+        }else{
+            // tapAnimationItemDom.style.zIndex = 2;
+            tapAnimationItemDom.style.backgroundColor = "transparent";
+        }
+        tapAnimationHiderItemDom.style.width = width;
+        tapAnimationItemDom.style.width = width;
+        tapAnimationHiderItemDom.style.height = "40px";
+        tapAnimationItemDom.style.height = "40px";
+        tapAnimationHiderItemDom.appendChild(tapAnimationItemDom);
+        tapAnimationDom.appendChild(tapAnimationHiderItemDom);
+    })
+ }
