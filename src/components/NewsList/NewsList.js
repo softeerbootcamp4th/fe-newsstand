@@ -8,21 +8,21 @@ function NewsList({ $target, position = "beforeend" }) {
   this.$element.className = "newsList";
   $target.insertAdjacentElement(position, this.$element);
 
-  this.render = () => {
-    this.$element.innerHTML = /* html */ `
-      <ul class="newsFilter">
-        <li class="selected" >전체 언론사</li>
-        <li>내가 구독한 언론사</li>
-      </ul>
-      `;
-
-    new NewsViewer({
-      $target: this.$element,
-      news: news0,
-    });
-  };
-
   this.render();
 }
+
+NewsList.prototype.render = function () {
+  this.$element.innerHTML = /* html */ `
+    <ul class="newsFilter">
+      <li class="selected" >전체 언론사</li>
+      <li>내가 구독한 언론사</li>
+    </ul>
+  `;
+
+  new NewsViewer({
+    $target: this.$element,
+    news: news0,
+  });
+};
 
 export default NewsList;
