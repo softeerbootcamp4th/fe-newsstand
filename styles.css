@@ -221,8 +221,20 @@ main {
     text-decoration: underline;
 }
 
+.selected-category {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selected-category,.index-text {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
 .selected {
     width: 166px;
+    box-sizing: border-box;
     overflow: hidden;
     background-color: var(--surface-brand-alt);
     color: var(--text-white-default);

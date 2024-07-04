@@ -55,6 +55,7 @@ function loadCurrentCategoryNews() {
             newsData = data;
             displayNews();
             updateBtnVisibility();
+            updateCategoryDisplay();
         })
         .catch(error => {
             console.error(error);
@@ -63,6 +64,7 @@ function loadCurrentCategoryNews() {
     else {
         displayNews();
         updateBtnVisibility();
+        updateCategoryDisplay();
     }
 
     
@@ -104,6 +106,29 @@ function displayNews() {
 
 }
 
+function updateCategoryDisplay() {
+    const categoryItems = document.querySelectorAll('.category-item');
+    categoryItems.forEach((item, index) => {
+        // 기존의 인덱스 요소 제거
+        const existingIndexElement = item.querySelector('.index-text');
+        if (existingIndexElement) {
+            existingIndexElement.remove();
+        }
+
+        // 새로운 인덱스 요소 생성 및 추가
+        const textElement = document.createElement('span');
+        textElement.classList.add('index-text');
+        if (index === curCategoryIdx) {
+            textElement.textContent = `${curNewsIdx + 1}/${newsData[curCategoryIdx].news.length}`;
+            item.classList.add('selected-category'); // 선택된 카테고리 스타일
+        } else {
+            item.classList.remove('selected-category'); // 선택되지 않은 카테고리 스타일 제거
+        }
+        item.appendChild(textElement);
+    });
+}
+
+
 /* 프로그래스바 삭제 */
 function resetProgressBar() {
     const categoryItems = document.querySelectorAll('.category-item');
@@ -126,7 +151,7 @@ function updateProgressBar() {
     const progressBarDivElement = document.createElement('div');
     progressBarDivElement.classList.add('progress-bar');
     selectedDiv.appendChild(progressBarDivElement);
-
+    
     progressBarDivElement.style.animation = `progressAnimation ${intervalTime / 1000}s linear forwards`;
 
 }
