@@ -40,16 +40,17 @@ const createApp = () => {
     effectsKey += 1;
   };
 
-  const useCallback = (
+  const useCallback = <RawT = unknown>(
     {
       callback,
       key,
     }: {
-      callback: () => void;
+      callback: RawT;
       key: string;
     },
     rawDependencies?: any[],
   ) => {
+    type T = RawT extends unknown ? typeof callback : RawT;
     const dependencies = rawDependencies?.map(toStringAnything) ?? [];
     if (!callbacksKeyMap.has(key)) {
       callbacksKeyMap.set(key, 0);
@@ -70,11 +71,11 @@ const createApp = () => {
     }
     callbacksDependenciesMap.set(localCallbacksKey, dependencies);
     if (callbacks.length <= localCallbacksKey) {
-      callbacks.push(callback);
+      callbacks.push(callback as () => void);
     }
     const memoedCallback = callbacks[localCallbacksKey];
     callbacksKeyMap.set(key, localCallbacksKey + 1);
-    return memoedCallback;
+    return memoedCallback as T;
   };
 
   const renderQueue = new Deque<() => void>();
