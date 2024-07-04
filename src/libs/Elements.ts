@@ -44,3 +44,10 @@ export const A = (props: AnchorProps) => AppElement({ props, tagName: "a" });
 type ImgProps = AppElementProps<HTMLImageElement>["props"];
 
 export const Img = (props: ImgProps) => AppElement({ props, tagName: "img" });
+
+type UlProps = AppElementProps<HTMLUListElement>["props"];
+
+export const Ul = (props: UlProps) => AppElement({ props, tagName: "ul" });
+
+type LiProps = AppElementProps<HTMLLIElement>["props"];
+export const Li = (props: LiProps) => AppElement({ props, tagName: "li" });
