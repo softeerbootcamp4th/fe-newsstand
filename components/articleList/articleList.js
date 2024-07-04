@@ -1,36 +1,64 @@
+const loadJsonData = async (src) => {
+    const res = await fetch(src);
+    return res.json();
+}
+
+let menuInfo = await loadJsonData('/datas/menuInfo.json')
+menuInfo = menuInfo.data
+console.log(menuInfo)
+
 const articleArea = document.querySelector('#article-list-area');
 
 // 내용
 const menuInfos = [
     {
+        categoryIdx: 0,
         category: '종합/경제',
-        totalPages: 78
+        totalPages: 3,
+        thumbnailDatas: [
+            {
+                'pageIdx': 0,
+                'thumbnailMediaName': '서울경제',
+                'thumbnailMediaImgPath': '/images/asset 35 1.png',
+                'thumbnailUpdatedDate': '2023.02.10. 18:27',
+                'thumbnailImgPath': '/icons/newspaper.png',
+                'thumbnailDetail': '또 국민연금의 몽니..현대차 지주사 불발',
+                'articleList': [
+                    `"위스키 사려고 이틀 전부터 줄 섰어요"`,
+                    `'방시혁 제국'이냐 '카카오 왕국'이냐…K엔터 누가 거머쥘까`,
+                    `사용후핵연료 저장시설 포화…이대론 7년 뒤 원전 멈춘다`,
+                    '[단독] 원희룡 "해외건설 근로자 소득공제 월 500만원으로 상향할 것"',
+                    '태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]',
+                    'LG엔솔, 폴란드 자동차산업협회 가입…“유럽서 목소리 키운다”']
+            }
+        ]
     },
     {
         category: '방송/통신',
-        totalPages: 2
+        totalPages: 4
     },
     {
         category: 'IT',
-        totalPages: 92
+        totalPages: 2
     },
     {
         category: '영자지',
-        totalPages: 53
+        totalPages: 1
     },
     {
         category: '스포츠/연예',
-        totalPages: 71
+        totalPages: 3
     },
     {
         category: '매거진/전문지',
-        totalPages: 84
+        totalPages: 1
     },
     {
         category: '지역',
-        totalPages: 59
+        totalPages: 4
     }
 ];
+
 
 const menuList = ['종합/경제', '방송/통신', 'IT', '영자지', '스포츠/연예', '매거진/전문지', '지역']
 const mediaName = '서울경제'
@@ -49,6 +77,7 @@ const infoMsg = `${mediaName} 언론사에서 직접 편집한 뉴스입니다.`
 
 let menuCurrentPage = 1;
 let menuLastpage = 0;
+let nowMenuIdx = 0;
 
 // create 태그
 const createMenuList = (menuInfos) => {
@@ -98,14 +127,14 @@ articleArea.innerHTML = `
             </div>
             <div id="article-content-wrapper">
                 <div id="content-header-wrapper" class="flex-row">
-                    <img src="${mediaImgPath}" alt="">
-                    <h4 style="font-size: 12px; font-weight: 400;">${updateDate} 편집</h4>
+                    <img id="media-img" src="${mediaImgPath}" alt="">
+                    <h4 id="updated-date-tag" style="font-size: 12px; font-weight: 400;">${updateDate} 편집</h4>
                     <button id="subscribe-btn" class="btn">+ 구독하기</button>
                     </div>
                     <div id="content-body-wrapper" class="flex-row-between">
                     <aside id="thumbnail-part">
-                        <img src="${thumbnailPath}" alt="" width="320px" height="200px">
-                        <p>ABC</p>
+                        <img id="thumbnail-img" src="${thumbnailPath}" alt="" width="320px" height="200px">
+                        <p id="thumbnail-detail">ABC</p>
                     </aside>
                     <ul id="article-li-part" class="flex-col-between">
                         ${createArticleLiPart(articleData)}
@@ -136,40 +165,87 @@ viewBtns.forEach(btn => {
 });
 
 // category-selection-event
-
 let categoryTimeoutId; // setTimeoutId
+
+const insertContent = (nowMenuIdx, menuCurrentPage) => {
+    const nowInfo = menuInfo[nowMenuIdx].thumbnailDatas[menuCurrentPage-1]
+    
+    // 미디어 사진
+    document.querySelector('#media-img').src = `${nowInfo.thumbnailMediaImgPath}`
+
+    // 수정일
+    document.querySelector('#updated-date-tag').innerText = `${nowInfo.thumbnailUpdatedDate} 편집`
+    
+    // 구독하기에 해당 신문사 정보 삽입
+    
+    // 썸네일 경로
+    document.querySelector('#thumbnail-img').src = `${nowInfo.thumbnailImgPath}`
+    
+    // 썸네일 디테일
+    document.querySelector('#thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
+
+    // 목록 리스트, 안내 문구
+    document.querySelector('#article-li-part').innerHTML = `
+        ${createArticleLiPart(nowInfo.articleList)}
+        <p>${nowInfo.thumbnailMediaName}에서 직접 편집한 뉴스입니다.</p>
+    `
+}
 
 const moveToNextPage = (thisBtn) => {
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
+    const totalMenuLength = menuInfo.length;
     categoryTimeoutId = setTimeout(() => { // 타이머 식별자 저장
         // 다음 메뉴로 넘어감
         if (menuCurrentPage === menuLastpage) {
+            // 페이지 세팅
             menuCurrentPage = 1;
-            menuLastpage = Number(nextBtn.firstElementChild.firstElementChild.nextElementSibling.innerText.split('/')[1])
+            nowMenuIdx += 1;
+            if (nowMenuIdx === totalMenuLength) {
+                nowMenuIdx = 0;
+            }
+            menuLastpage = menuInfo[nowMenuIdx].totalPages
+            
+            // 다음 버튼으로 이동
             thisBtn.classList.remove('menu-btn-wrapper-clicked')
             nextBtn.classList.add('menu-btn-wrapper-clicked')
+            
             moveToNextPage(nextBtn)
         // 다음 페이지로 넘어감
         } else {
+            // 페이지 세팅
             menuCurrentPage += 1;
             thisBtn.firstElementChild.children[1].innerText = `${menuCurrentPage} / ${menuLastpage}`   
             thisBtn.children[1].remove();
+
+            // fillBackground를 지웠다가 다시 생성
             const fillBackground = document.createElement('div');
             fillBackground.classList.add('fill-background');
             thisBtn.appendChild(fillBackground);
+
             moveToNextPage(thisBtn)
         }
-    }, 1000 * 20)
+        insertContent(nowMenuIdx, menuCurrentPage)
+    }, 1000 * 5)
 }
 
 const articleMenuWrapper = document.querySelectorAll('.menu-btn-wrapper');
-articleMenuWrapper.forEach(btnWrapper => {
+articleMenuWrapper.forEach((btnWrapper, idx) => {
     btnWrapper.addEventListener('click', function() {
+        // 초기 페이지 세팅
+        nowMenuIdx = idx;
         menuCurrentPage = 1;
-        menuLastpage = Number(this.firstElementChild.firstElementChild.nextElementSibling.innerText.split('/')[1])
+        menuLastpage = menuInfo[nowMenuIdx].totalPages
+        
+        // 클릭 시 초기 정보 삽입
+        insertContent(nowMenuIdx, menuCurrentPage)
+        
+        // timeout 초기화
         clearTimeout(categoryTimeoutId);
+        
+        // 클릭한 버튼에만 클래스 부여
         articleMenuWrapper.forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
         this.classList.add('menu-btn-wrapper-clicked');
+        
         moveToNextPage(this)
     });
 });
