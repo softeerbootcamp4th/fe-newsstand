@@ -5,8 +5,8 @@ export interface AppElementProps<T extends HTMLElement = HTMLElement> {
   props: Partial<EventMap> &
     Omit<Partial<T>, "children" | "style"> & {
       children?:
-        | (RenderedAppElement | RawElement | string | number)
-        | (RenderedAppElement | RawElement | string | number)[];
+        | (RenderedAppElement | RawElement | string | number | false)
+        | (RenderedAppElement | RawElement | string | number | false)[];
       style?: Partial<CSSStyleDeclaration>;
     };
 }
@@ -43,7 +43,7 @@ export const AppElement = ({
   const eventListeners: Map<string, EventListener> = new Map();
 
   const handleChild = (
-    child: RenderedAppElement | RawElement | string | number,
+    child: RenderedAppElement | RawElement | string | number | false,
   ) => {
     if (child instanceof RawElement) {
       children.push(new RawElement(child.node, elem));
