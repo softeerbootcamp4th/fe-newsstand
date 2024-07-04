@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS Property Basic</title>
+	<style>
+		.use-line-height {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			border: 20px solid black;
+			margin: 0px 30px 0px 30px;
+			padding: 0 30px;
+			text-align: center;
+			line-height: 100px;
+		}
+		.use-position {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			border: 20px solid black;
+			margin: 0 30px 0 30px;
+			padding: 0 30px;
+			position: relative;
+		}
+		.use-position span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.use-flexbox {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			border: 20px solid black;
+			margin: 0 30px 0 30px;
+			padding: 0 30px;
+			display:flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+		}
+		.use-grid {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			border: 20px solid black;
+			margin: 0 30px 0 30px;
+			padding: 0 30px;
+			display: grid;
+			place-items: center;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="use-line-height">hello1111111111111111111111</div>
+	<div class="use-position"><span>hello111111111111111111</span></div>
+	<div class="use-flexbox"><span>hello111111111111111111</span></div>
+	<div class="use-grid"><span>hello111111111111111111</span></div>
+</body>
+</html>

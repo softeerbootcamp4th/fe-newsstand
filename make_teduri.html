@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS Property Basic</title>
+	<style>
+		.box {
+			border-width: thick;
+			border-style: dashed;
+			border-color: black;
+			width: 300px;
+			height: 150px;
+			position: relative;
+		}
+		.round_box {
+			border-width: thick;
+			border-style: dashed;
+			border-color: black;
+			border-radius: 20px;
+			width: 300px;
+			height: 150px;
+			position: relative;
+		}
+		.diff_round_box {
+			border-width: thick;
+			border-style: dashed;
+			border-color: black;
+			border-radius: 0 20px 40px 60px;
+			width: 300px;
+			height: 150px;
+			position: relative;
+		}
+		span {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	</style>
+</head>
+<body>
+	<div class="box"><span>hello</span></div>
+	<br>
+	<div class="round_box"><span>hello</span></div>
+	<br>
+	<div class="diff_round_box"><span>hello</span></div>
+</body>
+</html>
