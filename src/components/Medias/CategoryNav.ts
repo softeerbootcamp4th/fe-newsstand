@@ -37,9 +37,13 @@ export const CategoryNav = ({
       isActive &&
         Span({
           children: [
-            `${currentMediaIdx + 1}/${
-              currentMediaIdsAndCategory.mediaIds.length
-            }`,
+            `${currentMediaIdx + 1}`,
+            Span({
+              style: {
+                opacity: "0.7",
+              },
+              children: [`/${currentMediaIdsAndCategory.mediaIds.length}`],
+            }),
           ],
         }),
     ],

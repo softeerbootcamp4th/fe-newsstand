@@ -1,3 +1,4 @@
+import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { useState } from "../../libs/createApp";
 import { Div, Header, Section, Span } from "../../libs/Elements";
 import { MediaIdByCategories } from "../../models/Newsstand";
@@ -57,30 +58,7 @@ export const Medias = () => {
     initalState: 0,
   });
 
-  const mediaIdByCategories: MediaIdByCategories = [
-    {
-      mediaIds: [1, 2, 3],
-      category: {
-        id: 1,
-        name: "정치",
-      },
-    },
-    {
-      mediaIds: [1, 2, 3],
-      category: {
-        id: 2,
-        name: "사회",
-      },
-    },
-    {
-      mediaIds: [1, 2, 3],
-      category: {
-        id: 3,
-        name: "경제",
-      },
-    },
-  ];
-
+  const mediaIdByCategories = getMediaIdByCategories();
   const hasNextCategory = currentCategoryIdx < mediaIdByCategories.length - 1;
   const hasPrevCategory = currentCategoryIdx > 0;
   const handleMediaNext = () => {
