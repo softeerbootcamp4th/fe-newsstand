@@ -1,3 +1,11 @@
+:root {
+    --main-color: #ff0000;
+  }
+  
+  h1 {
+    color: var(--main-color);
+  }
+
 @media (prefers-color-scheme: light) {
     .theme-a.adaptive {
       background: #753;
@@ -333,7 +341,43 @@ button:hover {
 
 /* progress button - tab*/
 .progress-button{
+    cursor: pointer;
     background: var(--surface-surface-brand-alt, #7890E7);
     width: 166px;
-    height: 40px;
+    height: 17px;
+    font-size: 15px;
+    color: white;
+}
+
+.progress-button.transition {
+    animation: colorChange 5s linear;
+}
+
+@keyframes colorChange {
+    0% { background-color: #66b3ff; } /* 시작 색 (하늘색) */
+    100% { background-color: blue; } /* 종료 색 (파란색) */
+}
+
+/* 구독 시 나타남*/
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%, 50%);
+    background-color: #4362D0; 
+    color: white; 
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.toast.visible {
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
 }
