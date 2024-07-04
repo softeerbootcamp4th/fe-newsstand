@@ -1,7 +1,37 @@
 const articleArea = document.querySelector('#article-list-area');
 
-
 // 내용
+const menuInfos = [
+    {
+        category: '종합/경제',
+        totalPages: 78
+    },
+    {
+        category: '방송/통신',
+        totalPages: 65
+    },
+    {
+        category: 'IT',
+        totalPages: 92
+    },
+    {
+        category: '영자지',
+        totalPages: 53
+    },
+    {
+        category: '스포츠/연예',
+        totalPages: 71
+    },
+    {
+        category: '매거진/전문지',
+        totalPages: 84
+    },
+    {
+        category: '지역',
+        totalPages: 59
+    }
+];
+
 const menuList = ['종합/경제', '방송/통신', 'IT', '영자지', '스포츠/연예', '매거진/전문지', '지역']
 const mediaName = '서울경제'
 const updateDate = '2023.02.10. 18:27'
@@ -14,9 +44,16 @@ const articleData = [
 const infoMsg = `${mediaName} 언론사에서 직접 편집한 뉴스입니다.`
 
 // create 태그
-const createMenuList = (menuList) => {
-    return menuList.map((menuItem) => `
-        <p class="article-menu-item">${menuItem}</p>
+const createMenuList = (menuInfos) => {
+    return menuInfos.map((menuInfo, idx) => `
+        <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
+            <h5>
+                ${menuInfo.category}
+            </h5>
+            <h5 class="article-menu-pages display-none">
+                1 / ${menuInfo.totalPages}
+            </h5>
+        </button>
     `).join('');
 }
 
@@ -43,7 +80,7 @@ articleArea.innerHTML = `
             </div>
         </div>
         <div id="article-menu-wrapper">
-            ${createMenuList(menuList)}
+            ${createMenuList(menuInfos)}
         </div>
         <div id="article-wrapper">
             <div id="article-selection-wrapper">
@@ -78,10 +115,20 @@ modeSelectionBtns.forEach(btn => {
     });
 });
 
+// view-selection-event
 const viewBtns = document.querySelectorAll('.view-btn');
 viewBtns.forEach(btn => {
     btn.addEventListener('click', function() {
         viewBtns.forEach(b => b.classList.remove('view-btn-clicked'));
         this.classList.add('view-btn-clicked');
+    });
+});
+
+// category-selection-event
+const articleMenuBtns = document.querySelectorAll('.article-menu-btn');
+articleMenuBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        articleMenuBtns.forEach(b => b.classList.remove('article-menu-btn-clicked'));
+        this.classList.add('article-menu-btn-clicked');
     });
 });

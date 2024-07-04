@@ -1,3 +1,22 @@
+/* 
+    h1 태그: 32px
+    h2 태그: 24px
+    h3 태그: 18px
+    h4 태그: 16px
+    h5 태그: 14px
+    h6 태그: 12px
+*/
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+}
+
+.display-none {
+    display: none;
+}
+
 button {
     border: 0;
     background-color: transparent;
@@ -56,10 +75,24 @@ button {
         border: 1px solid #D2DAE0;
         border-bottom: 0px;
     }
-        .article-menu-item {
-            padding: 16px;
+
+        .article-menu-btn {
+            padding: 0 16px;
             font-weight: '400';
+            height: 100%;
+            cursor: pointer;
+            align-items: center;
         }
+
+        .article-menu-btn-clicked {
+            width: 166px;
+            background-color: #7890E7;
+            color: white;
+        }
+
+            .article-menu-btn-clicked > .article-menu-pages {
+                display: block;
+            }
 
     #article-wrapper {
         width: 930px;
