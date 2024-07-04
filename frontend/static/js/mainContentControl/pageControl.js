@@ -16,7 +16,7 @@ export function moveToNextPage(data, currentDom, nextDom) {
         currentDom.insertAdjacentHTML('beforeend', template);
         nextDom.classList.remove("animationStartNext");
         currentDom.classList.remove("animationStartNext");
-    }, 999);
+    }, 1000);
 }
 
 export function moveToPreviousPage(data, currentDom, previousDom) {
@@ -35,5 +35,5 @@ export function moveToPreviousPage(data, currentDom, previousDom) {
         currentDom.insertAdjacentHTML('beforeend', template);
         previousDom.classList.remove("animationStartPrevious");
         currentDom.classList.remove("animationStartPrevious");
-    }, 999);
+    }, 1000);
 }
