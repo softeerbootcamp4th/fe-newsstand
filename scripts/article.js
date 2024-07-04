@@ -1,11 +1,20 @@
-export function getAvailableCompanyNumber(state) {
-    let max = state.articleDataList[state.titleIndex].companies.length;
-    if(state.toggleName=="right"){
-        max = state.articleDataList[state.titleIndex].companies.filter(company=>state.subscribedCompanyNameSet.has(company.name)).length;
-    }
-    return max;
- }
+import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
 
  export function getCurrentArticle(state) {
-    return state.articleDataList[state.titleIndex].companies[state.selectedCompanyIndex].articles[state.selectedArticleIndex];
+    switch(state.toggleName){
+        case "left":
+            return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles[state.selectedArticleIndex];
+        case "right":
+            return getCurrentCompany(state).articles[state.selectedArticleIndex];
+    }
+    
+ }
+
+ export function getCurrentArticleList(state) {
+    switch(state.toggleName){
+        case "left":
+            return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles;
+        case "right":
+            return state.companiesWithArticles[getCurrentCompany(state).name].articles;
+    }
  }

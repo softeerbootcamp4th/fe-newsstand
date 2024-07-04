@@ -1,13 +1,14 @@
-import { getAvailableCompanyNumber } from "./article.js";
 import { getSubscribeCompanies } from "./company.js";
-import { drawArticles, drawTapList } from "./drawer.js";
-import { updateTabAnimationStyle } from "./tap.js";
+import { drawArticles, drawTabAnimationList, drawTabList } from "./drawer.js";
+import { getRightTabValidation } from "./tab.js";
+import { getTabLength } from "./tab.js";
+import { updateTabAnimationStyle } from "./tab.js";
 
 export function updateSubscribeButton(state) {
-    if(getAvailableCompanyNumber(state)===0)return;
+    if(!getRightTabValidation(state))return;
     let companyName = "";
     if(state.toggleName === "left"){
-        companyName = state.articleDataList[state.titleIndex].companies[state.selectedCompanyIndex].name;
+        companyName = state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].name;
     }else{
         companyName = getSubscribeCompanies(state)[state.selectedCompanyIndex].name;
     }
@@ -37,13 +38,16 @@ export function updateSubscribeButton(state) {
     function eventFunction(state,companyName,isSubscribed) {
         if (isSubscribed) {
             state.subscribedCompanyNameSet.delete(companyName);
-            if(state.selectedCompanyIndex > (getAvailableCompanyNumber(state)-1)){
+            if(state.selectedCompanyIndex > (getTabLength(state)-1)){
                 state.selectedCompanyIndex-=1;
             }
         } else {
             state.subscribedCompanyNameSet.add(companyName);
         }
-        drawTapList(state);
+        drawTabList(state);
+        if(state.toggleName === "right"){
+            drawTabAnimationList(state);
+        }
         updateTabAnimationStyle(state);
         drawArticles(state);
     }

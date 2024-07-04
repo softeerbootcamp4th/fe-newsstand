@@ -1,9 +1,18 @@
 export function getCurrentCompany(state) {
-    return state.articleDataList[state.titleIndex].companies[state.selectedCompanyIndex];
+    switch (state.toggleName) {
+        case "left":
+            return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex];
+        case "right":
+            return getSubscribeCompanies(state)[state.selectedTabIndex];
+    }
 }
 
 export function getSubscribeCompanies(state) {
-    const currentCompanise = state.articleDataList[state.titleIndex].companies;
-    const subscribedCompanies = currentCompanise.filter(company => state.subscribedCompanyNameSet.has(company.name));
-    return subscribedCompanies;
+    return (Object.values(state.companiesWithArticles)).filter(company => state.subscribedCompanyNameSet.has(company.name));
 }
+
+export function getTotalCompanyLength(state) {
+    return Object.keys(state.companiesWithArticles).length;
+}
+
+
