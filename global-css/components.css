@@ -3,6 +3,13 @@
     box-sizing: border-box;
 }
 
+.clickable {
+    cursor: pointer;
+}
+.clickable:hover {
+    text-decoration: underline;
+}
+
 .flexbox__space-between--center {
     display: flex;
     justify-content: space-between;
