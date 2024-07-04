@@ -37,12 +37,7 @@ function renderMedia(categoryIdx, mediaIdx) {
         categoryListDOM.innerHTML += getUnselectedCategoryItem(_category.categoryName);
     });
 
-    categoryListDOM.addEventListener('click', (e) => {
-        /**
-         * TODO: category list DOM을 클릭하면 리스트 아이템으로 이벤트 위임이 되고, 해당 리스트 아이템 카테고리로 이동
-         */
-        console.log("click", e.target)
-    });
+    categoryListDOM.addEventListener('click', clickCategoryList);
 
     /**
      * 선택된 카테고리의 콘텐츠 렌더링
@@ -114,6 +109,13 @@ function getSelectedCategoryContents(media) {
         </section>
     </section>
     `;
+}
+
+function clickCategoryList(e) {
+    /**
+     * TODO: category list DOM을 클릭하면 리스트 아이템으로 이벤트 위임이 되고, 해당 리스트 아이템 카테고리로 이동
+     */
+    console.log("click", e.target)
 }
 
 /**
