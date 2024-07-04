@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AppElementRenderer,
   RawElement,
@@ -5,22 +6,35 @@ import {
   SimpleElement,
 } from "./AppElement";
 import { Deque } from "./deque";
-import { debounceAnimationCallback } from "./utils";
+import { debounceAnimationCallback, toStringAnything } from "./utils";
 
+const effectCleanUps = new Map<number, () => void>();
+const effectDependencies = new Map<number, string[]>();
+const statesMap = new Map<string, Array<any>>();
+const statesKeyMap = new Map<string, number>();
+let effectsKey = 0;
 const createApp = () => {
-  const effectCleanUps = new Map<number, () => void>();
-  let effectsKey = 0;
-  const useEffect = (effectFunc: () => () => void) => {
-    const lstEffectCleanUp = effectCleanUps.get(effectsKey);
-    lstEffectCleanUp?.();
-    const effectCleanUp = effectFunc();
-    effectCleanUps.set(effectsKey, effectCleanUp);
+  const useEffect = (effectFunc: () => () => void, rawDependencies?: any[]) => {
+    const dependencies = rawDependencies?.map(toStringAnything) ?? [];
+    const lstDependencies = effectDependencies.get(effectsKey);
+    if (
+      lstDependencies == null ||
+      lstDependencies.length !== dependencies.length ||
+      lstDependencies.some((value, index) => value !== dependencies[index])
+    ) {
+      effectDependencies.set(effectsKey, dependencies);
+      const lstEffectCleanUp = effectCleanUps.get(effectsKey);
+      lstEffectCleanUp?.();
+      const effectCleanUp = effectFunc();
+      effectCleanUps.set(effectsKey, effectCleanUp);
+    }
+
     effectsKey += 1;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const states = new Map<number, any>();
-  let statesKey = 0;
+  const renderQueue = new Deque<() => void>();
+
+  let isRendering = false;
   let root: HTMLElement | null = null;
   let app: AppElementRenderer | null = null;
   const init = (_root: HTMLElement, _app: AppElementRenderer) => {
@@ -79,8 +93,9 @@ const createApp = () => {
     }
   };
   const render = debounceAnimationCallback(() => {
+    isRendering = true;
     if (root == null || app == null) return;
-    statesKey = 0;
+    statesKeyMap.clear();
     effectsKey = 0;
 
     const top = document.createElement("div");
@@ -106,29 +121,66 @@ const createApp = () => {
       }
       currentElems.pushBack([...currentElem.children]);
     }
-
     _diffingRender(root, top);
+    isRendering = false;
+    runRenderQueue();
   });
-  const useState = <RawT = unknown>(initalState: RawT) => {
-    type T = RawT extends unknown ? typeof initalState : RawT;
-    const localStatesKey = statesKey;
-    if (!states.has(localStatesKey)) {
-      states.set(localStatesKey, initalState);
+
+  const fillRenderQueue = (callback: () => void) => {
+    renderQueue.pushBack(callback);
+  };
+
+  const runRenderQueue = () => {
+    if (renderQueue.length === 0) {
+      return;
     }
-    const state = states.get(localStatesKey) as T;
-    const get = () => {
-      return state;
-    };
-    const update = (newState: T) => {
-      if (state == newState) {
+    while (renderQueue.length > 0) {
+      const callback = renderQueue.popFront()!;
+      callback();
+    }
+    render();
+  };
+  function useState<RawT = unknown>(key: string, initalState: RawT) {
+    type T = RawT extends unknown ? typeof initalState : RawT;
+    type Updater = (updater: T | ((state: T) => T)) => void;
+
+    if (!statesMap.has(key)) {
+      statesMap.set(key, []);
+    }
+    if (!statesKeyMap.has(key)) {
+      statesKeyMap.set(key, 0);
+    }
+    const localStatesKey = statesKeyMap.get(key)!;
+    const states = statesMap.get(key)!;
+
+    if (states.length <= localStatesKey) {
+      states.push(initalState);
+    }
+    const state = states[localStatesKey] as T;
+    function update(updater: Updater) {
+      const curLocalStatesKey = statesKeyMap.get(key)!;
+      const curState = states[curLocalStatesKey] as T;
+
+      const newState =
+        typeof updater === "function"
+          ? (updater as (state: T) => T)(curState)
+          : updater;
+
+      if (curState == newState) {
         return;
       }
-      states.set(localStatesKey, newState);
+      if (isRendering) {
+        fillRenderQueue(() => {
+          states[localStatesKey] = newState;
+        });
+        return;
+      }
+      states[localStatesKey] = newState;
       render();
-    };
-    statesKey += 1;
-    return [get, update] as [() => T, (newState: T) => void];
-  };
+    }
+    statesKeyMap.set(key, localStatesKey + 1);
+    return [state, update] as [T, Updater];
+  }
 
   return {
     init,

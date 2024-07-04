@@ -22,9 +22,9 @@ const MediasContent = () => {
   return "";
 };
 export const Medias = () => {
-  const [getCurrentCategory, setCurrentCategory] = useState<
+  const [currentCategory, setCurrentCategory] = useState<
     "전체 언론사" | "내가 구독한 언론사"
-  >("전체 언론사");
+  >("Medias", "전체 언론사");
 
   return Section({
     children: [
@@ -37,7 +37,7 @@ export const Medias = () => {
             },
             style: {
               cursor: "pointer",
-              color: getCurrentCategory() === "전체 언론사" ? "blue" : "black",
+              color: currentCategory === "전체 언론사" ? "blue" : "black",
             },
           }),
           Span({
@@ -48,9 +48,7 @@ export const Medias = () => {
             style: {
               cursor: "pointer",
               color:
-                getCurrentCategory() === "내가 구독한 언론사"
-                  ? "blue"
-                  : "black",
+                currentCategory === "내가 구독한 언론사" ? "blue" : "black",
             },
           }),
         ],
