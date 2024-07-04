@@ -1,8 +1,6 @@
 import NewsViewer from "@/components/NewsViewer/NewsViewer";
 import "./NewsList.css";
 
-import news0 from "@/mocks/data/news0.json";
-
 function NewsList({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");
   this.$element.className = "newsList";
@@ -21,7 +19,6 @@ NewsList.prototype.render = function () {
 
   new NewsViewer({
     $target: this.$element,
-    news: news0,
   });
 };
 

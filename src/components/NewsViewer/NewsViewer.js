@@ -2,22 +2,28 @@ import "./NewsViewer.css";
 import Button from "@/components/common/Button/Button";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
+import { getNews } from "../../mocks/news";
+import { CATEGORIES } from "../../constants/news";
 
-function NewsViewer({ $target, position = "beforeend", news }) {
+function NewsViewer({ $target, position = "beforeend" }) {
   this.$element = document.createElement("article");
   this.$element.className = "newsViewer";
   $target.insertAdjacentElement(position, this.$element);
 
   this.state = {
     page: 0,
+    category: 0,
   };
 
-  this.setState = function ({ page }) {
-    this.state = { page };
-    this.render(news);
+  this.setState = function ({ page, category }) {
+    this.state = {
+      page: page ?? this.state.page,
+      category: category ?? this.state.category,
+    };
+    this.render(getNews(this.state.category));
   };
 
-  this.render(news);
+  this.render(getNews(this.state.category));
   this.$element.addEventListener("click", this.handleClick.bind(this));
 }
 
@@ -32,20 +38,28 @@ NewsViewer.prototype.handlePrevClick = function () {
 NewsViewer.prototype.handleClick = function (event) {
   const button = event.target.closest("button");
 
-  if (!button) return;
+  if (button) {
+    const { id } = button;
 
-  const { id } = button;
+    if (id === "nextButton") {
+      this.handleNextClick();
 
-  if (id === "nextButton") {
-    this.handleNextClick();
+      return;
+    }
 
-    return;
+    if (id === "prevButton") {
+      this.handlePrevClick();
+
+      return;
+    }
   }
 
-  if (id === "prevButton") {
-    this.handlePrevClick();
+  const listItem = event.target.closest("li.category");
 
-    return;
+  if (listItem) {
+    const category = Number(listItem.dataset.categoryNumber);
+
+    this.handleCategoryClick(category);
   }
 };
 
@@ -59,21 +73,36 @@ NewsViewer.prototype.formatDate = function formatDate(date) {
   return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
 };
 
+NewsViewer.prototype.getCategoryFilterTemplate = function (newsLength) {
+  return CATEGORIES.map((name, idx) => {
+    if (idx === this.state.category) {
+      return /* html */ ` 
+        <li data-category-number="${idx}" class="category selected">
+          <span>${name}</span>
+          <span class="pageInfo">${this.state.page + 1}
+          <span class="newsLength"> / ${newsLength}</span>
+          </span>
+          <progress class="progress" value="0" min="0" max="100"></progress>
+        </li>
+        `;
+    }
+
+    return /* html */ `
+      <li data-category-number="${idx}" class="category">
+        ${name}
+      </li>
+    `;
+  }).join("");
+};
+
+NewsViewer.prototype.handleCategoryClick = function (category) {
+  this.setState({ page: 0, category });
+};
+
 NewsViewer.prototype.render = function (news) {
   this.$element.innerHTML = /* html */ `
     <ul class="categoryFilter">
-      <li class="selected">
-        <span>종합/경제</span>
-        <span class="pageInfo">${this.state.page + 1}
-          <span class="newsLength"> / ${news.length}</span>
-        </span>
-      </li>
-      <li>방송/통신</li>
-      <li>IT</li>
-      <li>영자지</li>
-      <li>스포츠/연예</li>
-      <li>매거진/전문지</li>
-      <li>지역</li>
+      ${this.getCategoryFilterTemplate(news.length)}
     </ul>
 
     <div class="contents">
@@ -94,7 +123,7 @@ NewsViewer.prototype.render = function (news) {
           <ul>
             ${news[this.state.page].headlines
               .map((str) => `<li class="ellipsis"><a>${str}</a></li>`)
-              .join("\n")}
+              .join("")}
             <p>${news[this.state.page].company} 언론사에서 직접 편집한 뉴스입니다.</p>
           </ul>
         </div>
