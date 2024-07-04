@@ -1,13 +1,20 @@
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #87CEEB; /* 하늘색 배경 */
-    color: #fff; /* 흰색 텍스트 */
+.button {
     border: none;
+    background-color: transparent;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
-}
-
-.blue-background {
-    background-color: #1E90FF; /* 파란색 배경 */
-}
+  }
+  
+  .gridButton{
+    margin-left: 100px;
+  }
+  .icon {
+    width: 24px;
+    height: 24px;
+    fill: black; 
+  }
+  
+  .button.active .icon {
+    fill: blue; 
+  }
+  
+  
