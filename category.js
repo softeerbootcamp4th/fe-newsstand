@@ -53,6 +53,7 @@ function showCategory(index) {
 }
 
 
+/* 모든 언론사 뉴스 가져오기 */
 document.addEventListener("DOMContentLoaded", () => {
     const mainNewsDiv = document.querySelector('.main-news');
     const subNewsDiv = document.querySelector('.sub-news');
