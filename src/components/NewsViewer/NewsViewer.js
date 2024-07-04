@@ -1,9 +1,9 @@
 import "./NewsViewer.css";
-import Button from "@/components/common/Button/Button";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
-import { getNews } from "../../mocks/news";
-import { CATEGORIES } from "../../constants/news";
+import { getNews } from "@/mocks/news";
+import { CATEGORIES } from "@/constants/news";
+import ContentsBox from "./ContentsBox/ContentsBox";
 
 function NewsViewer({ $target, position = "beforeend" }) {
   this.$element = document.createElement("article");
@@ -105,44 +105,18 @@ NewsViewer.prototype.render = function (news) {
       ${this.getCategoryFilterTemplate(news.length)}
     </ul>
 
-    <div class="contents">
-      <section class="companyInfo">
-        <img src="${news[this.state.page].companyLogo}"/>
-        <p>${this.formatDate(new Date())} 편집</p>
-      </section>
-
-      <section class="articleInfo">
-        <div class="mainNews">
-          <div>
-            <img src="${news[this.state.page].thumbnail}"/>
-          </div>
-          <p>${news[this.state.page].title}</p>
-        </div>
-
-        <div class="subNews">
-          <ul>
-            ${news[this.state.page].headlines
-              .map((str) => `<li class="ellipsis"><a>${str}</a></li>`)
-              .join("")}
-            <p>${news[this.state.page].company} 언론사에서 직접 편집한 뉴스입니다.</p>
-          </ul>
-        </div>
-      </section>
-
-      <button id="prevButton" class="newsButton prev${
-        this.state.page === 0 ? " hide" : ""
-      }"><img src="${leftButton}"/></button>
-      <button id="nextButton" class="newsButton next${
-        this.state.page === news.length - 1 ? " hide" : ""
-      }"><img src="${rightButton}"/></button>
-    </div>
+    <button id="prevButton" class="newsButton prev${
+      this.state.page === 0 ? " hide" : ""
+    }"><img src="${leftButton}"/></button>
+    <button id="nextButton" class="newsButton next${
+      this.state.page === news.length - 1 ? " hide" : ""
+    }"><img src="${rightButton}"/></button>
   `;
 
-  new Button({
-    $target: this.$element.querySelector(".companyInfo"),
-    text: "구독하기",
-    color: "gray",
-    icon: "plus",
+  new ContentsBox({
+    $target: this.$element.querySelector(".categoryFilter"),
+    position: "afterend",
+    news: getNews(this.state.category)[this.state.page],
   });
 };
 
