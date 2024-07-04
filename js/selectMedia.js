@@ -2,10 +2,12 @@ import { newsListController } from "./newsList.js";
 
 function mediaListController(categoryData) {
     const mediaList = getMediaList();
-    addEvents(mediaList, categoryData);
+    addMediaListClickEvent(mediaList, categoryData);
 
     const selectedMedia = getSelectedMedia();
     const selectedMediaIndex = getSelectedMediaIndex(selectedMedia);
+
+    addNewsListButtonEvent(categoryData);
 
     newsListController(categoryData[selectedMedia.innerText], selectedMediaIndex);
 }
@@ -23,7 +25,7 @@ function getSelectedMediaIndex(selectedMedia) {
 }
 
 // 각 언론사 요소에 클릭 이벤트를 설정한다.
-function addEvents(mediaList, categoryData) {
+function addMediaListClickEvent(mediaList, categoryData) {
     mediaList.forEach((media) => {
         media.addEventListener("click", (event) => mediaClickHandler(event, categoryData)); 
     });
@@ -47,6 +49,61 @@ function resetSelected(mediaList) {
     [...mediaList].forEach((media) => {
         media.dataset.selected = "no";
     })
+}
+
+// 뉴스 목록 버튼 클릭 핸들러 추가
+function addNewsListButtonEvent(categoryData) {
+    const leftButton = document.querySelector(".news-list__btn-left");
+    const rightButton = document.querySelector(".news-list__btn-right");
+
+    leftButton.addEventListener("click", (event) => leftButtonHandler(event, categoryData));
+    rightButton.addEventListener("click", (event) => rightButtonHandler(event, categoryData));
+}
+
+function leftButtonHandler(event, categoryData) {
+    const selectedMedia = getSelectedMedia();
+    const selectedMediaIndex = getSelectedMediaIndex(selectedMedia);
+
+    if (selectedMediaIndex === "1") {
+        const previousElement = selectedMedia.previousElementSibling;
+
+        if (previousElement) {
+            const mediaList = getMediaList();
+            resetSelected(mediaList);
+            previousElement.dataset.selected = "yes";
+            previousElement.dataset.newsCount = categoryData[previousElement.innerText].length;
+            previousElement.dataset.newsIndex = previousElement.dataset.newsCount;
+        } 
+    } else {
+        selectedMedia.dataset.newsIndex--;
+    }   
+
+    const changedMedia = getSelectedMedia();
+    const changedMediaIndex = getSelectedMediaIndex(changedMedia);
+    newsListController(categoryData[changedMedia.innerText], changedMediaIndex);
+}
+
+function rightButtonHandler(event, categoryData) {
+    const selectedMedia = getSelectedMedia();
+    const selectedMediaIndex = getSelectedMediaIndex(selectedMedia);
+
+    if (selectedMediaIndex === selectedMedia.dataset.newsCount) {
+        const nextElement = selectedMedia.nextElementSibling;
+
+        if (nextElement) {
+            const mediaList = getMediaList();
+            resetSelected(mediaList);
+            nextElement.dataset.selected = "yes";
+            nextElement.dataset.newsCount = categoryData[nextElement.innerText].length;
+            nextElement.dataset.newsIndex = 1;
+        } 
+    } else {
+        selectedMedia.dataset.newsIndex++;
+    }   
+
+    const changedMedia = getSelectedMedia();
+    const changedMediaIndex = getSelectedMediaIndex(changedMedia);
+    newsListController(categoryData[changedMedia.innerText], changedMediaIndex);
 }
 
 export { mediaListController }
