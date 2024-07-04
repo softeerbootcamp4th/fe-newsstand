@@ -85,7 +85,7 @@ NewsViewer.prototype.render = function (news) {
       <section class="articleInfo">
         <div class="mainNews">
           <div>
-            <img src="${news[this.state.page].imgUrl}"/>
+            <img src="${news[this.state.page].thumbnail}"/>
           </div>
           <p>${news[this.state.page].title}</p>
         </div>
