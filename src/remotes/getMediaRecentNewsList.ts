@@ -1,22 +1,23 @@
 import { MediaRecentNewsList } from "../models/News";
 
-export const getMediaRecentNewsList = (
+export const getMediaRecentNewsByCategory = (
   mediaId: number,
+  categoryId: number,
 ): MediaRecentNewsList => {
   return {
     data: [
       {
-        title: "test1",
+        title: `${mediaId} ${categoryId} 뉴스 test1`,
         href: "#",
         imgSrc: "https://picsum.photos/200",
       },
       {
-        title: "test1",
+        title: `${mediaId} ${categoryId} 뉴스 test2`,
         href: "#",
         imgSrc: "https://picsum.photos/200",
       },
       {
-        title: "test1",
+        title: `${mediaId} ${categoryId} 뉴스 test3`,
         href: "#",
         imgSrc: "https://picsum.photos/200",
       },

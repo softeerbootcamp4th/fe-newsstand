@@ -3,6 +3,6 @@ export interface Category {
   name: string;
 }
 export type MediaIdByCategories = {
-  mediaId: number;
+  mediaIds: number[];
   category: Category;
 }[];

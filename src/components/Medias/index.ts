@@ -1,31 +1,40 @@
 import { useState } from "../../libs/createApp";
-import { Header, Section, Span } from "../../libs/Elements";
+import { Div, Header, Section, Span } from "../../libs/Elements";
 import { Media } from "../../models/Media";
 import { MediaIdByCategories } from "../../models/Newsstand";
-import { getMediaById } from "../../remotes/getMediaById";
-import { getMediaRecentNewsList } from "../../remotes/getMediaRecentNewsList";
+import { CategoryNav } from "./CategoryNav";
+import { MediasContent } from "./MediasContent";
 
-const MediasContent = () => {
-  const mediaIdByCategories: MediaIdByCategories = [
-    {
-      mediaId: 1,
-      category: {
-        id: 1,
-        name: "정치",
-      },
-    },
-  ];
-
-  const currentMediaIdAndCategory = mediaIdByCategories[0];
-  const currentMedia = getMediaById(currentMediaIdAndCategory.mediaId);
-  const recentNewsList = getMediaRecentNewsList(currentMedia.id);
-  return "";
-};
 export const Medias = () => {
   const [currentCategory, setCurrentCategory] = useState<
     "전체 언론사" | "내가 구독한 언론사"
   >("Medias", "전체 언론사");
 
+  const mediaIdByCategories: MediaIdByCategories = [
+    {
+      mediaIds: [1, 2, 3],
+      category: {
+        id: 1,
+        name: "정치",
+      },
+    },
+    {
+      mediaIds: [1, 2, 3],
+      category: {
+        id: 2,
+        name: "사회",
+      },
+    },
+    {
+      mediaIds: [1, 2, 3],
+      category: {
+        id: 3,
+        name: "경제",
+      },
+    },
+  ];
+
+  const currentMediaIdsAndCategory = mediaIdByCategories[0];
   return Section({
     children: [
       Header({
@@ -53,7 +62,18 @@ export const Medias = () => {
           }),
         ],
       }),
-      MediasContent(),
+      Div({
+        children: [
+          ...mediaIdByCategories.map((mediaIdByCategory) => {
+            return CategoryNav({
+              currentMediaIdsAndCategory: mediaIdByCategory,
+            });
+          }),
+        ],
+      }),
+      MediasContent({
+        currentMediaIdsAndCategory: currentMediaIdsAndCategory,
+      }),
     ],
   });
 };
