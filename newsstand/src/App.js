@@ -11,7 +11,7 @@ const App = () => {
     const categoryLayout = createComponent(Category, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
     const ListNewsstandLayout = createComponent(ListNewsstand, {
         id: generateRandomId(10),
-        style: 'width:100%; height:70%;',
+        style: 'width:100%; height:65%;',
     })
 
     return {
