@@ -1,4 +1,5 @@
-const jsonFilePath = '../news/allnews.json';
+const jData = require(jsonFilePath);
+
 const xhr = new XMLHttpRequest();
 var datatotal = "";
 xhr.onreadystatechange = function() {

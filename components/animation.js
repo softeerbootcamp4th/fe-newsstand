@@ -10,10 +10,9 @@ function changeColor() {
     }, 1500); // 1.5초 
     
     button.style.color = '#fff';
-}
+};
 
-
-const leftNews = [
+export const leftNews = [
     "속보 1: Lorem ipsum dolor sit amet",
     "속보 2: Consectetur adipiscing elit",
     "속보 3: Sed do eiusmod tempor incididunt ut labore",
@@ -21,11 +20,11 @@ const leftNews = [
     "속보 5: Ut enim ad minim veniam"
 ];
   
-const rightNews = [
+export const rightNews = [
     "충격111 1: Duis aute irure dolor in reprehenderit",
     "충격222 2: Voluptate velit esse cillum dolore",
     "충격 3: Fugiat nulla pariatur",
-    "왼쪽 바와 오른쪽 바는 각각 다른 최신 뉴스의 헤드라인 5개가 5초마다 자동으로 무한 롤링되도록 한다.",
+    "왼쪽 바와 오른쪽 바는 각각 다른 최신 뉴스의 헤드라인 5개 롤링",
     "Latest Update 5: Sunt in culpa qui officia deserunt mollit anim"
 ];
 

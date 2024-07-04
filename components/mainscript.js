@@ -1,5 +1,20 @@
 //import { leftNews, rightNews } from "./animation.js";
 
+const leftNews = [
+  "[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
+  "[2보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
+  "[3보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
+  "[4보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
+  "[5보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출"
+];
+
+const rightNews = [
+  "[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
+  "[2보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
+  "[3보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
+  "[4보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
+  "[5보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출"
+];
 
 window.addEventListener('load', function() {
   displayDate();
@@ -110,52 +125,56 @@ function popup_sub(){
     window.open("./popup_subscribe.html", "a", "width=400, height=300, left=100, top=50"); 
 };
 
-/*
-
-function rotateHeadlines(newsContainer, newsData) {
-  let currentIndex = 0;
+function rotateHeadlines(newsContainer, newsData, subId) {
+  let currentNewsIndex = 0; // currentIndex를 currentNewsIndex로 변경
   const headlinesLength = newsData.length;
   let animationTimer;
 
-  function animate() {
-    const headline = document.querySelectorAll('.rollarticle');
-    headline.textContent = newsData[currentIndex];
+  function rolling() {
+    const headline = document.createElement('div');
+    headline.className = 'rollarticle';
+    headline.textContent = newsData[currentNewsIndex];
 
-    newsContainer.appendChild(headline); //새 타이틀
+    newsContainer.appendChild(headline); // 새 타이틀
 
     // 이전 기사 타이틀 - 사라짐
-    if (newsContainer.children.length > 1) {
-      // 기존 - slideout
-      for (let i = 0; i < newsContainer.children.length - 1; i++) {
+    if (newsContainer.children.length > 2) {
+      // 기존 - slideOut
+      for (let i = 1; i < newsContainer.children.length - 1; i++) { 
         const child = newsContainer.children[i];
         child.style.animation = 'slideOut 1s forwards';
       }
     }
 
-    // 새로운 기사 - slidein
+    // 새로운 기사 - slideIn
     headline.style.animation = 'slideIn 1s forwards';
 
     setTimeout(() => {
-      while (newsContainer.children.length > 1) {
-        newsContainer.removeChild(newsContainer.children[0]);
+      while (newsContainer.children.length > 2) { //rolling article만
+        newsContainer.removeChild(newsContainer.children[1]);
       }
-    }, 1000); // 1초 후 기존 기사 타이틀 제거
+    }, 1000); // 1초 후 기존 기사 제거
 
-    currentIndex = (currentIndex + 1) % headlinesLength;
+    currentNewsIndex = (currentNewsIndex + 1) % headlinesLength;
 
     // 초기화
-    animationTimer = setTimeout(animate, 5000); // 5초 간격
+    animationTimer = setTimeout(rolling, 5000); // 5초 간격
   }
 
-  animate();
+  if (subId === 'rightNews-sub'){
+    setTimeout(rolling, 1000); //1초 지연
+  }  
+  else{
+    rolling();
+  }
 
   newsContainer.addEventListener('mouseenter', function() {
-    clearTimeout(animationTimer); //정지
+    clearTimeout(animationTimer); // 정지
   });
 
   newsContainer.addEventListener('mouseleave', function() {
-    clearTimeout(animationTimer); 
-    animate(); 
+    clearTimeout(animationTimer);
+    rolling();
   });
 }
 
@@ -163,8 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const leftNewsContainer = document.getElementById('leftNews');
   const rightNewsContainer = document.getElementById('rightNews');
 
-  //독립적으로 회전
-  rotateHeadlines(leftNewsContainer, leftNews);
-  rotateHeadlines(rightNewsContainer, rightNews);
+  // 독립적으로 회전
+  rotateHeadlines(leftNewsContainer, leftNews, 'leftNews-sub');
+  rotateHeadlines(rightNewsContainer, rightNews, 'rightNews-sub');
 });
-*/

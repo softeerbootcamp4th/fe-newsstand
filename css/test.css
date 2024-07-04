@@ -65,7 +65,7 @@ h2 {
     background-color: #f3f3f3;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     opacity: 1;
@@ -101,6 +101,22 @@ h2 {
     text-decoration: underline; /* 마우스 커서가 올라갔을 때 밑줄 표시 */
 }
 
+.rollarticle {
+    width: 375px;
+    height: 17px;
+    gap: 0px;
+    margin-left: 16px;
+    opacity: 0px;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 14px;
+    color: #5f6e76;
+    animation: animateHeadline 5s infinite;
+}
+
+.rollarticle:hover {
+    text-decoration: underline; /* 마우스 커서가 올라갔을 때 밑줄 표시 */
+}
+
 @keyframes slideIn {
     from {
       transform: translateY(100%);
@@ -110,10 +126,9 @@ h2 {
       transform: translateY(0);
       opacity: 1;
     }
-  }
-  
-  /* 아래로 슬라이드 */
-  @keyframes slideOut {
+}
+
+@keyframes slideOut {
     from {
       transform: translateY(0);
       opacity: 1;
@@ -123,7 +138,6 @@ h2 {
       opacity: 0;
     }
 }
-
 .all-article-container{
     width: 930px;
     height: 24px;
