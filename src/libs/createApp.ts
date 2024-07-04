@@ -13,9 +13,12 @@ import {
 } from "./utils";
 
 const effectCleanUps = new Map<number, () => void>();
-const effectDependencies = new Map<number, string[]>();
+const effectDependencies = new Map<number, any[]>();
 const statesMap = new Map<string, Array<any>>();
 const statesKeyMap = new Map<string, number>();
+const callbacksMap = new Map<number, Array<() => void>>();
+const callbacksDependenciesMap = new Map<number, any[]>();
+const callbacksKeyMap = new Map<string, number>();
 const propsMap = new Map<string, any>();
 let effectsKey = 0;
 const createApp = () => {
@@ -35,6 +38,43 @@ const createApp = () => {
     }
 
     effectsKey += 1;
+  };
+
+  const useCallback = (
+    {
+      callback,
+      key,
+    }: {
+      callback: () => void;
+      key: string;
+    },
+    rawDependencies?: any[],
+  ) => {
+    const dependencies = rawDependencies?.map(toStringAnything) ?? [];
+    if (!callbacksKeyMap.has(key)) {
+      callbacksKeyMap.set(key, 0);
+    }
+    const localCallbacksKey = callbacksKeyMap.get(key)!;
+    if (!callbacksMap.has(localCallbacksKey)) {
+      callbacksMap.set(localCallbacksKey, []);
+    }
+
+    const callbacks = callbacksMap.get(localCallbacksKey)!;
+    if (
+      isPropsEqual(
+        dependencies,
+        callbacksDependenciesMap.get(localCallbacksKey),
+      )
+    ) {
+      return callbacks[localCallbacksKey];
+    }
+    callbacksDependenciesMap.set(localCallbacksKey, dependencies);
+    if (callbacks.length <= localCallbacksKey) {
+      callbacks.push(callback);
+    }
+    const memoedCallback = callbacks[localCallbacksKey];
+    callbacksKeyMap.set(key, localCallbacksKey + 1);
+    return memoedCallback;
   };
 
   const renderQueue = new Deque<() => void>();
@@ -139,7 +179,6 @@ const createApp = () => {
         currentElem.node.tagName
       }`;
       currentElem.node.setAttribute("key", key);
-
       if (!isPropsEqual(propsMap.get(key), currentElem.props)) {
         propsMap.set(key, currentElem.props);
         currentElem.node.setAttribute("forced", "true");
@@ -217,8 +256,9 @@ const createApp = () => {
     init,
     useState,
     useEffect,
+    useCallback,
   };
 };
 
-const { init, useState, useEffect } = createApp();
-export { init, useState, useEffect };
+const { init, useState, useEffect, useCallback } = createApp();
+export { init, useState, useEffect, useCallback };

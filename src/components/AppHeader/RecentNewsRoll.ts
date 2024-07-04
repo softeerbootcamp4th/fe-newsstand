@@ -2,7 +2,7 @@ import { A, Div, Span } from "../../libs/Elements";
 import { getMediaById } from "../../remotes/getMediaById";
 import typoStyles from "@/styles/typo.module.css";
 import styles from "./RecentNewsRoll.module.css";
-import { useState, useEffect } from "@/libs/createApp";
+import { useState, useEffect, useCallback } from "@/libs/createApp";
 import { getRecentNews } from "@/remotes/getRecentNews";
 
 export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
@@ -31,15 +31,32 @@ export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
   }, [from]);
   const media = getMediaById(mediaId);
 
+  const handleHover = useCallback(
+    {
+      key: "RecentNewsRoll",
+      callback: () => {
+        setIsHovering(true);
+      },
+    },
+    [],
+  );
+  const handleLeave = useCallback(
+    {
+      key: "RecentNewsRoll",
+      callback: () => {
+        setIsHovering(false);
+      },
+    },
+    [],
+  );
+
   return Div({
     className: `${styles.box}`,
     children: [
       A({
         href: news.href,
-        onHover: () => {
-          setIsHovering(true);
-        },
-        onLeave: () => setIsHovering(false),
+        onHover: handleHover,
+        onLeave: handleLeave,
         className: `${styles.link}`,
         children: [
           Span({
