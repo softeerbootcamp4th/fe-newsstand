@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-logo">
+            <img src="./icons/newspaper.svg" >
+            <a href="/">뉴스스탠드</a>
+        </div>
+        <div class="header-date">
+        </div>
+    </header>
+    <section>
+        <div class="news-container-left">
+            <span class="news-company">연합뉴스</span>
+            <p class="news-title">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</p>
+        </div>
+        <div class="news-container-right">
+            <span class="news-company">연합뉴스</span>
+            <p class="news-title">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</p>
+        </div>
+    </section>
+    <main>
+        <div class="main-header">
+            <div class="main-header-tab">
+                <p id="all">전체 언론사</p>
+                <p id="subscribe">내가 구독한 언론사</p>
+            </div>
+            <div class="main-header-icons">
+                <img src="/icons/list-view-checked.svg"> 
+                <img src="/icons/grid-view.svg" id="grid-view"> 
+            </div>
+        </div>
+        <div class="all-cate-container">
+            <div class="all-cate-header">
+            </div>
+            <div class="news-container">
+                <div class="container-header">
+                    <img alt="company-logo" src="/images/newsis.png">
+                    <p class="edit-date">2024.05.02 18.43 편집</p>
+                    <div class="subscribe-btn"><span>+</span>구독하기</div>
+                </div>
+                <div class="news-item-container">
+                    <div class="main-news"></div>
+                    <div class="sub-news"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="subscribe-cate-container">
+
+        </div>
+        <div class="left-btn">
+            <img src="./images/LeftButton.png" alt="left-arrow">
+        </div>
+        <div class="right-btn">
+            <img src="./images/RightButton.png" alt="left-arrow">
+        </div>
+
+    </main>
+    <script type="module" src="./header.js"></script>
+    <script type="module" src="./category.js"></script>
+    <script type="module" src="./rollingnews.js"></script>
+
+</body>
+
+</html>

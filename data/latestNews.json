@@ -1,0 +1,80 @@
+[
+    {
+        "id" : 1,
+        "date" : "2024. 07. 03 12:04",
+        "company" : "연합뉴스",
+        "title" : "[속보] '아동학대 논란' 손웅정 감독·코치 2명 첫 검찰 소환조사",
+        "url" : "https://n.news.naver.com/article/422/0000668522?ntype=RANKING"
+    },
+    {
+        "id" : 2,
+        "date" : "2024. 07. 03 12:11",
+        "company" : "채널A",
+        "title" : "[정치시그널]김용태 “당원들, 한동훈이 이재명이 못하는 부분을 적절한 언어로 지적한다 말해”",
+        "url" : "https://n.news.naver.com/article/449/0000278953?cds=news_media_pc&type=editn"
+    },
+    {   
+        "id" : 3,
+        "date" : "2024. 07. 03 11:41",
+        "company" : "매일신문",
+        "title" : "尹 대통령 탄핵 국민청원…100만 넘었다",
+        "url" : "https://n.news.naver.com/article/088/0000889575?cds=news_media_pc&type=editn"
+    },
+    {
+        "id" : 4,
+        "date" : "2024. 07. 03 08:39",
+        "company" : "한겨례21",
+        "title" : "외면받은 통신병, '닭둘기'가 되다",
+        "url" : "https://n.news.naver.com/article/036/0000050070?cds=news_media_pc&type=editn"
+    },
+    {
+        "id" : 5,
+        "date" : "2024. 07. 03 12:33",
+        "company" : "채널A",
+        "title" : "[단독]시청역 사고 차량 브레이크 밟은 흔적 없었다",
+        "url" : "https://n.news.naver.com/article/449/0000278969?cds=news_media_pc&type=editn"
+    },
+    {
+        "id" : 6,
+        "date" : "2024. 07. 03 09:49",
+        "company" : "매일경제",
+        "title" : "“신의직장은 무조건 버텨야돼”…평균연봉 1억 넘는 ‘이곳’ 근속연수 15년 달해",
+        "url" : "https://n.news.naver.com/article/009/0005328582?ntype=RANKING"
+    },
+    {
+        "id" : 7,
+        "date" : "2024. 07. 03 12:04",
+        "company" : "매일경제",
+        "title" : "“어 어” 소리만 담겼다...시청역 역주행 차량 블랙박스 ‘급발진’ 단서 없어",
+        "url" : "https://n.news.naver.com/article/009/0005328640?ntype=RANKING"
+    },
+    {
+        "id" : 8,
+        "date" : "2024. 07. 03 13:32",
+        "company" : "한겨례",
+        "title" : "시청역 사고, ‘노인’ 운전면허증 뺏으면 해결되나 [7월3일 뉴스뷰리핑]",
+        "url" : "https://n.news.naver.com/article/028/0002696388?ntype=RANKING"
+    },
+    {
+        "id" : 9,
+        "date" : "2024. 07. 03 09:58",
+        "company" : "조선일보",
+        "title" : "박지윤 저격했던 최동석…“너무 힘들다” 이혼 심경 밝히며 눈물",
+        "url" : "https://n.news.naver.com/article/023/0003843883?ntype=RANKING"
+    },
+    {
+        "id" : 9,
+        "date" : "2024. 07. 03 12:04",
+        "company" : "조선일보",
+        "title" : "[단독] 도로 화단 올라탄 음주車…“대리 맡겨” 잡아떼다 실토했다",
+        "url" : "https://n.news.naver.com/article/023/0003843917?ntype=RANKING"
+    },
+    {
+        "id" : 10,
+        "date" : "2024. 07. 03 09:16",
+        "company" : "조선일보",
+        "title" : "허웅 전 연인, 박수홍·선우은숙 변호한 변호사 선임",
+        "url" : "허웅 전 연인, 박수홍·선우은숙 변호한 변호사 선임"
+    }
+
+]

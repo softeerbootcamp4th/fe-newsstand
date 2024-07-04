@@ -1,0 +1,363 @@
+:root {
+    --text-strong: #14212B;
+    --text-bold: #4B5966;
+    --text-default: #5F6E76;
+    --text-weak: #879298;
+    --text-white-default: #FFFFFF;
+    --text-white-weak: #FFFFFFB2;
+    --text-point: #4362D0;
+    --surface-default: #FFFFFF;
+    --surface-alt: #F5F7F9;
+    --surface-brand-default: #4362D0;
+    --surface-brand-alt: #7890E7;
+    --border-bold: #6E8091;
+    --border-default: #D2DAE0;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 58px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 930px;
+
+}
+
+.header-logo {
+    display: flex;
+    gap : 8px;
+}
+
+.header-logo a {
+    margin : 0;
+    color: var(--text-strong);
+    font-size: 24px;
+    text-decoration: none;
+    line-height: 28.13px;
+    font-weight: bold;
+}
+
+.header-date {
+    display: flex;
+    align-items: center;
+    color : var(--text-default);
+    height: fit-content;
+}
+
+section {
+    display: flex;
+    width: 930px;
+    gap : 8px;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.news-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: top 0.5s ease-in-out;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 16px;
+    display: flex;
+    gap : 16px;
+    align-items: center;
+    overflow: hidden;
+
+}
+
+.news-item:hover {
+    text-decoration: underline;
+}
+
+.news-item.hovered {
+    text-decoration: underline;
+}
+
+.news-item .news-company {
+    font-weight: bold;
+    color: #333;
+    flex-shrink: 0;
+}
+
+.news-item .news-title {
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0;
+    margin-bottom: 0;
+    color : var(--text-default);
+    flex-grow: 1; 
+    max-width: 364px;
+
+}
+
+.news-item .news-title::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, white);
+    pointer-events: none;
+    animation: rollUp 5s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rollUp {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+.news-container-left, .news-container-right {
+    position: relative;
+    overflow: hidden;
+    height: 49px;
+    display: flex;
+    flex: 1;
+    border: 1px solid var(--surface-default);
+    align-items: center;
+    background-color: var(--surface-alt);
+    cursor: pointer;
+
+}
+
+main {
+    display: flex;
+    max-width: 930px;
+    flex-direction: column;
+    margin-top: 32px;
+    align-items: center;
+    max-width: 930px;
+    position: relative;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    width: 930px;
+}
+
+.main-header-tab {
+    display: flex;
+    font-size: 16px;
+    line-height: 22px;
+    gap: 24px;
+}
+
+#all {
+    color: var(--text-weak);
+}
+#subscribe {
+    color: var(--text-strong);
+
+}
+.main-header-tab p{
+    margin: 0;
+}
+
+.main-header-icons {
+    display: flex;
+}
+
+.main-header-icons img {
+    width: 24px;
+    height: 24px;
+}
+
+#grid-view {
+    margin-left: 8px;
+}
+.all-cate-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 930px;
+}
+
+.all-cate-header {
+    display: flex;
+    margin-top: 24px;
+    border: 1px solid var(--border-default);
+    background-color: var(--surface-alt);
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.category-item {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: var(--text-weak);
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+}
+
+.category-item:hover {
+    text-decoration: underline;
+}
+
+.selected {
+    width: 166px;
+    overflow: hidden;
+    background-color: var(--surface-brand-alt);
+    color: var(--text-white-default);
+}
+
+.selected .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: rgba(67, 98, 208, 0.5);
+    z-index: 1;
+    animation: progressAnimation 20s linear forwards; 
+}
+
+.selected .category-text {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes progressAnimation {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.news-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: 1px solid var(--border-default);
+    padding: 24px;
+}
+
+.container-header {
+    display: flex;
+    justify-content: space-evenly;
+    gap : 16px;
+    width: fit-content;
+    align-items: center;
+}
+
+.company-logo {
+    height: 20px;
+}
+
+.edit-date {
+    color: var(--text-default);
+    font-size: 12px;
+    margin: 0;
+}
+
+.subscribe-btn {
+    height: 24px;
+    color: var(--text-weak);
+    font-size: 12px;
+    background-color: var(--surface-alt);
+    border : 1px solid var(--border-default);
+    border-radius: 50px;
+    padding : 0px 6px 0px 6px;
+    display: flex;
+    align-items: center;  
+    cursor: pointer;
+
+}
+
+.subscribe-btn span {
+    margin-right: 4px;
+    font-size: 12px;
+}
+
+.news-item-container {
+    display: flex;
+    gap:32px;
+    width: 930px;
+}
+
+.main-news {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    cursor: pointer;
+    color: var(--text-strong);
+    font-size: 16px;
+}
+
+.main-news div:hover {
+    text-decoration: underline;
+
+}
+
+.main-news img {
+    width: 320px;
+    height: 200px;
+}
+.sub-news {
+   display: flex;
+   flex-direction: column;
+   gap: 16px; 
+   color: var(--text-bold);
+   font-size: 16px;
+}
+
+.sub-news-item:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.explanation {
+    color: var(--text-weak);
+    font-size: 14px;
+}
+
+.left-btn {
+    display: flex;
+    position: absolute;
+    left: -47px;
+    top: 50%;
+    width: 24px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.right-btn {
+    display: flex;
+    position: absolute;
+    right: -47px;
+    top: 50%;
+    width: 24px;
+    height: 40px;
+    cursor: pointer;
+
+}
