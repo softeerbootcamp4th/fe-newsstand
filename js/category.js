@@ -117,11 +117,12 @@ function updateCategoryDisplay() {
         const textElement = document.createElement('span');
         textElement.classList.add('index-text');
         if (index === curCategoryIdx) {
-            textElement.textContent = `${curNewsIdx + 1}/${newsData[curCategoryIdx].news.length}`;
-            item.classList.add('selected-category'); // 선택된 카테고리 스타일
+            textElement.textContent = `${curNewsIdx + 1} / ${newsData[curCategoryIdx].news.length}`;
+            item.classList.add('selected-category'); 
         } else {
-            item.classList.remove('selected-category'); // 선택되지 않은 카테고리 스타일 제거
+            item.classList.remove('selected-category'); 
         }
+
         item.appendChild(textElement);
     });
 }
