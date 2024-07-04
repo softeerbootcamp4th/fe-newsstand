@@ -1,6 +1,8 @@
 import { category } from "./data.js";
 
 let curCategoryIdx = 0;
+let newsData = [];
+let curNewsIdx = 0;
 
 /* 카테고리 초기화 및 클릭 이벤트 추가 함수 */
 function createCategory() {
@@ -21,6 +23,7 @@ function createCategory() {
         // 카테고리명 선택하면 선택한 카테고리의 인덱스 가져옴
         divElement.addEventListener('click', () => {
             curCategoryIdx = idx;
+            curNewsIdx = 0;
             loadCurrentCategoryNews();
         })
     });
@@ -71,47 +74,65 @@ function loadCurrentCategoryNews() {
     const mainNewsDiv = document.querySelector('.main-news');
     const subNewsDiv = document.querySelector('.sub-news');
 
+
     mainNewsDiv.innerHTML = '';
     subNewsDiv.innerHTML = '';
 
-    fetch("./data/allNews.json")
+    if(!newsData.length) {
+        fetch("./data/allNews.json")
         .then(response => {
             if(!response.ok) {
                 throw new Error('Network Error');
             }
             return response.json();
         })
-        .then(newsData => {
-            const news = newsData[curCategoryIdx].news[0];
-            
-            const thumnbailImg = document.createElement('img');
-            thumnbailImg.src = news.thumbnailUrl;
-            const thumbnailNews = document.createElement('div');
-            thumbnailNews.textContent = news.newsItems[0].title;
-
-            mainNewsDiv.appendChild(thumnbailImg);
-            mainNewsDiv.appendChild(thumbnailNews);
-
-            news.newsItems.slice(1).forEach(n => {
-                const newsItemDiv = document.createElement('div');
-                newsItemDiv.classList.add('sub-news-item');
-                newsItemDiv.textContent = n.title;
-                newsItemDiv.addEventListener('click', () => {
-                    window.open(n.url, '_blank');
-                })
-
-                subNewsDiv.appendChild(newsItemDiv);
-            });
-
-            const explanationDiv = document.createElement('div');
-            explanationDiv.classList.add('explanation');
-            explanationDiv.textContent = `${news.company} 언론사에서 직접 편집한 뉴스 입니다.`
-            subNewsDiv.appendChild(explanationDiv);
+        .then(data => {
+            newsData = data;
+            displayNews();
         })
         .catch(error => {
             console.error(error);
-        })
+        });
+    }
+    else {
+        displayNews();
+    }
+
     
+
+}
+
+function displayNews() {
+    const mainNewsDiv = document.querySelector('.main-news');
+    const subNewsDiv = document.querySelector('.sub-news');
+
+    const news = newsData[curCategoryIdx].news[curNewsIdx];
+
+    const thumnbailImg = document.createElement('img');
+    thumnbailImg.src = news.thumbnailUrl;
+    const thumbnailNews = document.createElement('div');
+    thumbnailNews.textContent = news.newsItems[0].title;
+
+    mainNewsDiv.appendChild(thumnbailImg);
+    mainNewsDiv.appendChild(thumbnailNews);
+
+    news.newsItems.slice(1).forEach(n => {
+        const newsItemDiv = document.createElement('div');
+        newsItemDiv.classList.add('sub-news-item');
+        newsItemDiv.textContent = n.title;
+        newsItemDiv.addEventListener('click', () => {
+            window.open(n.url, '_blank');
+        })
+
+        subNewsDiv.appendChild(newsItemDiv);
+    });
+
+    const explanationDiv = document.createElement('div');
+    explanationDiv.classList.add('explanation');
+    explanationDiv.textContent = `${news.company} 언론사에서 직접 편집한 뉴스 입니다.`
+    subNewsDiv.appendChild(explanationDiv);
+
+
 
 }
 
@@ -119,4 +140,20 @@ document.addEventListener("DOMContentLoaded", () => {
     createCategory();
     loadCurrentCategoryNews();
 
-})
+    const leftBtn = document.querySelector('.left-btn');
+    const rightBtn = document.querySelector('.right-btn');
+
+    leftBtn.addEventListener('click',() => {
+        if(curNewsIdx > 0) {
+            curNewsIdx--;
+            loadCurrentCategoryNews();
+        }
+    });
+
+    rightBtn.addEventListener('click', () => {
+        if(curNewsIdx < newsData[curCategoryIdx].news.length - 1) {
+            curNewsIdx++;
+            loadCurrentCategoryNews();
+        }
+    });
+});    

@@ -217,6 +217,10 @@ main {
     position: relative;
 }
 
+.category-item:hover {
+    text-decoration: underline;
+}
+
 .selected {
     width: 166px;
     overflow: hidden;
@@ -344,6 +348,7 @@ main {
     top: 50%;
     width: 24px;
     height: 40px;
+    cursor: pointer;
 }
 
 .right-btn {
@@ -353,4 +358,6 @@ main {
     top: 50%;
     width: 24px;
     height: 40px;
+    cursor: pointer;
+
 }
