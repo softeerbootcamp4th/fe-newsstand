@@ -4,11 +4,10 @@ export const TOTAL_MEDIA_CATEGORY = {
             categoryName: "종합/경제",
             media: [
                 {
-                    id: '0',
+                    id: 0,
                     name: "한겨례",
                     iconUrl: "https://s.pstatic.net/static/newsstand/up/2024/0219/nsd145828169.png",
                     editDate: "07월 03일 16:23 편집",
-                    isSubscribed: false,
                     imageContent: {
                         imageUrl: "https://www.pressian.com/_resources/10/2024/07/03/2024070311344319469_l.jpg",
                         url: "https://www.pressian.com/pages/articles/2024070311170206107&amp;utm_source=naver&amp;utm_medium=mynews",
@@ -22,11 +21,10 @@ export const TOTAL_MEDIA_CATEGORY = {
                     ]
                 },
                 {
-                    id: '0',
+                    id: 0,
                     name: "한겨례",
                     iconUrl: "https://s.pstatic.net/static/newsstand/up/2024/0219/nsd145828169.png",
                     editDate: "07월 04일 16:23 편집",
-                    isSubscribed: false,
                     imageContent: {
                         imageUrl: "https://www.pressian.com/_resources/10/2024/07/03/2024070311344319469_l.jpg",
                         url: "https://www.pressian.com/pages/articles/2024070311170206107&amp;utm_source=naver&amp;utm_medium=mynews",
@@ -46,11 +44,10 @@ export const TOTAL_MEDIA_CATEGORY = {
             categoryName: "방송/통신",
             media: [
                 {
-                    id: '1',
+                    id: 1,
                     name: "세계일보",
                     iconUrl: "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/022.png",
                     editDate: "07월 03일 16:23 편집",
-                    isSubscribed: true,
                     imageContent: {
                         imageUrl: "https://it.donga.com/media/__sized__/images/2024/7/3/aafceafdecd94926-thumbnail-1920x1080-70.jpg",
                         url: "https://it.donga.com/105568/",

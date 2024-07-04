@@ -51,6 +51,21 @@ function renderMedia(categoryIdx, mediaIdx) {
     const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
     const contentsString = getSelectedCategoryContentsDOMString(category[categoryIdx].media[mediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
+
+    /**
+     * 구독/구독취소 이벤트 등록
+     */
+    const subscribeButtonDOM = document.querySelector('.subscribe-button--subscribe');
+    if (subscribeButtonDOM) {
+        const subscribeMediaId = parseInt(subscribeButtonDOM.dataset.mediaId);
+        subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(categoryIdx, mediaIdx, subscribeMediaId));
+    }
+
+    const unsubscribeButtonDOM = document.querySelector('.subscribe-button--unsubscribe');
+    if (unsubscribeButtonDOM) {
+        const unsubscribeMediaId = parseInt(unsubscribeButtonDOM.dataset.mediaId);
+        unsubscribeButtonDOM.addEventListener("click", () => clickUnsubscribeButton(categoryIdx, mediaIdx, unsubscribeMediaId));
+    }
 }
 
 /**
@@ -83,17 +98,20 @@ function getUnselectedCategoryItemDOMString(categoryName, categoryIdx) {
  * @returns "<section>...</section>"
  */
 function getSelectedCategoryContentsDOMString(media) {
-    const { iconUrl, editDate, isSubscribed, imageContent, contents } = media;
+    const { id, iconUrl, editDate, imageContent, contents } = media;
+
+    const subscribeList = localStorage.getItem("newsstand-subscribe") ?? [];
+    const isSubscribed = subscribeList.includes(id);
 
     return `
     <section class="flexbox__flex-start--center gap16">
-        <img alt="언론사 아이콘" src="${iconUrl}" />
+        <img alt="언론사 아이콘" src="${iconUrl}"/>
         <p class="text__medium12">${editDate}</p>
         ${isSubscribed ? `
-            <section class="button subscribe-button">
+            <section class="button__container subscribe-button--unsubscribe" data-media-id="${id}">
                 <img alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
             </section>` : `
-            <section class="button subscribe-button">
+            <section class="button__container subscribe-button--subscribe" data-media-id="${id}">
                 <img alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
                 <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
             </section>`}
@@ -177,4 +195,25 @@ function clickNavigationButton(step) {
     const categoryIdxNumber = parseInt(selectedCategory.dataset.selectedCategoryIdx);
     const mediaIdxNumber = parseInt(selectedCategory.dataset.selectedMediaIdx);
     renderMedia(categoryIdxNumber, mediaIdxNumber);
+}
+
+/**
+ * @description 언론사 구독 이벤트 등록하는 함수
+ */
+function clickSubscribeButton(categoryIdx, mediaIdx, subscribeMediaId) {
+    const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    const newSubscribeList = JSON.stringify([...subscribeList, subscribeMediaId]);
+    localStorage.setItem("newsstand-subscribe", newSubscribeList);
+
+    renderMedia(categoryIdx, mediaIdx);
+}
+/**
+ * @description 언론사 구독 취소 이벤트 등록하는 함수
+ */
+function clickUnsubscribeButton(categoryIdx, mediaIdx, subscribeMediaId) {
+    const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    const newSubscribeList = JSON.stringify(subscribeList.filter((subscribedId) => subscribedId !== subscribeMediaId));
+    localStorage.setItem("newsstand-subscribe", newSubscribeList);
+
+    renderMedia(categoryIdx, mediaIdx);
 }
