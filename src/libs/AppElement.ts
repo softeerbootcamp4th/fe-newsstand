@@ -25,10 +25,12 @@ export class RawElement {
 }
 
 export interface RenderedAppElement {
-  parent?: HTMLElement;
+  parentRenderedAppElement?: RenderedAppElement;
   node: HTMLElement;
   eventListeners: Map<string, EventListener>;
   children: (RenderedAppElement | SimpleElement | RawElement)[];
+  props: any;
+  key: string;
 }
 
 export type AppElementRenderer = () => RenderedAppElement;
@@ -41,6 +43,7 @@ export const AppElement = ({
   const children: (RenderedAppElement | RawElement | SimpleElement)[] = [];
   const eventListeners: Map<string, EventListener> = new Map();
 
+  const renderedAppElement: RenderedAppElement = {} as RenderedAppElement;
   const handleChild = (
     child: RenderedAppElement | RawElement | string | number,
   ) => {
@@ -51,7 +54,7 @@ export const AppElement = ({
     if (typeof child === "object") {
       children.push({
         ...child,
-        parent: elem,
+        parentRenderedAppElement: renderedAppElement,
       });
     } else if (typeof child === "string" || typeof child === "number") {
       children.push(new SimpleElement(child, elem));
@@ -97,9 +100,11 @@ export const AppElement = ({
   };
   unmount();
   mount();
-  return {
-    node: elem,
-    eventListeners,
-    children,
-  };
+  renderedAppElement.node = elem;
+  renderedAppElement.eventListeners = eventListeners;
+  renderedAppElement.children = children;
+  renderedAppElement.props = props;
+  renderedAppElement.key =
+    renderedAppElement.parentRenderedAppElement?.key ?? "" + elem.nodeName;
+  return renderedAppElement;
 };

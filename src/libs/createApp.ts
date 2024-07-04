@@ -124,20 +124,26 @@ const createApp = () => {
 
     while (currentElems.length > 0) {
       const currentElem = currentElems.popFront()!;
-      const parent = currentElem.parent ?? top;
+      let parentElem: HTMLElement;
+      if (
+        currentElem instanceof SimpleElement ||
+        currentElem instanceof RawElement
+      ) {
+        parentElem = currentElem.parent ?? top;
+      } else {
+        parentElem = currentElem.parentRenderedAppElement?.node ?? top;
+      }
 
       if (currentElem instanceof SimpleElement) {
-        parent.appendChild(document.createTextNode(`${currentElem.value}`));
+        parentElem.appendChild(document.createTextNode(`${currentElem.value}`));
         continue;
       }
       if (currentElem instanceof RawElement) {
-        parent.appendChild(_converRawElementToDom(currentElem.node));
+        parentElem.appendChild(_converRawElementToDom(currentElem.node));
         continue;
       }
-      parent.appendChild(currentElem.node);
-      const key =
-        currentElem.parent?.getAttribute("key") ??
-        "" + currentElem.node.localName;
+      parentElem.appendChild(currentElem.node);
+      const key = currentElem.key;
       currentElem.node.setAttribute("key", key);
       if (!isPropsEqual(propsMap.get(key), currentElem.props)) {
         propsMap.set(key, currentElem.props);
