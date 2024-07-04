@@ -282,7 +282,7 @@ function drawTabItems(state,tabNames) {
             // tabAnimationItemDom.style.zIndex = 2;
             tabAnimationItemDom.style.backgroundColor = "transparent";
         }
-        tabAnimationHiderItemDom.style.width = width;
+        tabAnimationHiderItemDom.style.minWidth = width;
         tabAnimationItemDom.style.width = width;
         tabAnimationHiderItemDom.style.height = "40px";
         tabAnimationItemDom.style.height = "40px";
