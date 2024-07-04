@@ -58,7 +58,7 @@ function changeCategoryUI(categoryData) {
     }
 
     Object.keys(categoryData).forEach((category, index) => {
-        const childNode = document.createElement("span");
+        const childNode = document.createElement("li");
 
         if(index === 0) {
             childNode.dataset.selected = "yes";
