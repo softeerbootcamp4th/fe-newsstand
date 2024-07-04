@@ -40,3 +40,7 @@ export const Button = (props: ButtonProps) =>
 
 type AnchorProps = AppElementProps<HTMLAnchorElement>["props"];
 export const A = (props: AnchorProps) => AppElement({ props, tagName: "a" });
+
+type ImgProps = AppElementProps<HTMLImageElement>["props"];
+
+export const Img = (props: ImgProps) => AppElement({ props, tagName: "img" });
