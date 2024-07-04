@@ -17,17 +17,19 @@ function generatePaginationGroup(rawData)
 
 function generatePaginationMetadata(groupedPressList)
 {
-	console.log(groupedPressList);
 	const categoryName = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
 
 	const metadata = [];
-	for(let i=0; i<metadata.length; i++)
+	let sum = 0;
+	for(let i=0; i<categoryName.length; i++)
 	{
-		let allPages = groupedPressList[i].length;
-		let offset = i === 0 ? 0 : groupedPressList[i-1].length;
-		metadata.push( { allPages, offset, name: categoryName[i] } );
-	}
+		let pages = groupedPressList[i].length;
+		if(pages === 0) continue;
 
+		let offset = sum;
+		sum += groupedPressList[i].length;
+		metadata.push( { pages, offset, name: categoryName[i], destination: groupedPressList[i][0]?.key ?? null } );
+	}
 	return metadata;
 }
 

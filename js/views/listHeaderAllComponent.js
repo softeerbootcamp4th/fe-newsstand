@@ -1,20 +1,31 @@
-function ListHeaderAllComponent(currentPageState, paginationData)
-{
-	const page = currentPageState.value;
+import html from "../domParser.js";
 
-	const items = paginationData.map( ({allPage, indexOffset, name})=>{
-		if(indexOffset <= page && indexOffset+allPage > page) {
-			return html`<div class="listItem selected" style="--page-progress: ${(page-indexOffset) / allPage}" data-unique-key="all-pagination-${name}">
+function ListHeaderAllComponent(pressId, moveToFunc, listData, listMetaData)
+{
+	const index = listData.indexOf(pressId);
+
+	const items = listMetaData.map( ({pages, offset, name, destination})=>{
+		if(offset <= index && offset+pages > index) {
+			return html`<div class="listItem selected" 
+				style="--page-progress: ${(index-offset) / pages}" 
+				data-unique-key="all-pagination-${name}" 
+				data-move-destination="${destination}"
+			>
 				${name}
 			</div>`;
 		}
-		return html`<div class="listItem">${name}</div>`;
+		return html`<div class="listItem" data-unique-key="all-pagination-${name}" data-move-destination="${destination}">${name}</div>`;
 	} );
-	items.forEach( (e, i)=>e.addEventListener("click", ()=>{
-		currentPageState.change( paginationData[i].indexOffset );
-	}) );
 
-	const dom = html`<nav class="listNav full-paged">${items}</nav>`;
+	const dom = html`<nav class="listNav full-paged" data-unique-key="list-view-header">${items}</nav>`;
+
+	dom.addEventListener( "click", (e)=>{
+		const button = e.target.closest(".listItem");
+		if(button === null) return;
+		moveToFunc(button.dataset.moveDestination);
+	} )
 
 	return dom;
 }
+
+export default ListHeaderAllComponent;

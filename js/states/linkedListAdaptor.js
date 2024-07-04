@@ -5,6 +5,9 @@ function LinkedListAdaptor(linkedList, sideEffect=null)
 {
 	this.linkedList = linkedList;
 	this.state = new State(linkedList.array, sideEffect);
+	Object.defineProperty(this, "value", {
+		get: function(){return this.state.value;}
+	});
 }
 
 LinkedListAdaptor.prototype.add = function(value, prev)

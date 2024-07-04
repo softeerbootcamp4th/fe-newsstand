@@ -4,7 +4,7 @@ function mountLeftSelector(state, setFullView, setSubscribedView)
 	const subMediaSelector = document.getElementById("subMediaSelector");
 
 	state.addSideEffect( (newState)=>{
-		if(newState === 1) {
+		if(!newState) {
 			allMediaSelector.classList.add("selected");
 			subMediaSelector.classList.remove("selected");
 		}

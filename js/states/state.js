@@ -12,7 +12,7 @@ function State(initialValue, sideEffect=null)
 		if(this.value === newValue) return;
 		const oldValue = this.value;
 		this.value = newValue;
-		return oldValue;
+		stateBatchUpdater.__appendSideEffects(this.__sideEffects, newValue, oldValue);
 	}
 }
 

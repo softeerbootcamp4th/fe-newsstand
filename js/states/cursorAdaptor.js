@@ -6,6 +6,9 @@ function CursorAdaptor(linkedList, sideEffect=null)
 {
 	this.cursor = new PaginationCursor(linkedList);
 	this.state = new State(this.cursor.current, sideEffect);
+	Object.defineProperty(this, "value", {
+		get: function(){return this.state.value;}
+	});
 }
 
 CursorAdaptor.prototype.moveBefore = function(delta=1)
