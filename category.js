@@ -20,7 +20,6 @@ function createCategory() {
 
         // 카테고리명 선택하면 선택한 카테고리의 인덱스 가져옴
         divElement.addEventListener('click', () => {
-            console.log(idx);
             curCategoryIdx = idx;
             loadCurrentCategoryNews();
         })
@@ -83,14 +82,9 @@ function loadCurrentCategoryNews() {
             return response.json();
         })
         .then(newsData => {
-            console.log(newsData);
-
             const news = newsData[curCategoryIdx].news[0];
-
-            console.log(news);
-
+            
             const thumnbailImg = document.createElement('img');
-            console.log(news.thumbnailUrl);
             thumnbailImg.src = news.thumbnailUrl;
             const thumbnailNews = document.createElement('div');
             thumbnailNews.textContent = news.newsItems[0].title;
