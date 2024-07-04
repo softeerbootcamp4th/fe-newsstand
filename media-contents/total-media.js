@@ -205,6 +205,7 @@ function clickSubscribeButton(categoryIdx, mediaIdx, subscribeMediaId) {
     const newSubscribeList = JSON.stringify([...subscribeList, subscribeMediaId]);
     localStorage.setItem("newsstand-subscribe", newSubscribeList);
 
+    renderSnackbar("내가 구독한 언론사에 추가되었습니다.", 'subscribe');
     renderMedia(categoryIdx, mediaIdx);
 }
 /**
@@ -216,4 +217,27 @@ function clickUnsubscribeButton(categoryIdx, mediaIdx, subscribeMediaId) {
     localStorage.setItem("newsstand-subscribe", newSubscribeList);
 
     renderMedia(categoryIdx, mediaIdx);
+}
+/**
+ * @description snackbar를 렌더하는 함수
+ */
+function renderSnackbar(text, id) {
+    const bodyDOM = document.querySelector("body");
+    const snackbarDOMString = `
+    <section id="snackbar-${id}" class="snackbar__container">
+        <p class="text__medium16 text__white--default">${text}</p>
+    </section>`;
+    
+    bodyDOM.insertAdjacentHTML("beforeend", snackbarDOMString);
+
+    setTimeout(() => {
+        const snackbarDOM = bodyDOM.querySelector(`#snackbar-${id}`);
+        bodyDOM.removeChild(snackbarDOM);
+    }, 5000);
+}
+/**
+ * @description alert를 렌더하는 함수
+ */
+function renderAlert() {
+
 }

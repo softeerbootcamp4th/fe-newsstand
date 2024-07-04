@@ -28,7 +28,6 @@ export function rollingDOM(rollingBoxDOM, rollingData, rollingIdx) {
     /**
      * @description 실제 rolling 애니메이션 실행하는 함수
      */
-    let resetRollingId = null;
     function rolling() {
         staticTextDOM.classList.add('current-news__not-display');
         disappearTextDOM.classList.add('rolling-out');
@@ -43,14 +42,14 @@ export function rollingDOM(rollingBoxDOM, rollingData, rollingIdx) {
         prevIdx = getNextNumber(prevIdx, length);
         nextIdx = getNextNumber(nextIdx, length);
 
-        resetRollingId = setTimeout(() => {
+        appearTextDOM.addEventListener("animationend", () => {
             staticTextDOM.classList.remove('current-news__not-display');
             disappearTextDOM.classList.remove('rolling-out');
             appearTextDOM.classList.remove('rolling-in');
 
             disappearTextDOM.textContent = rollingData.newsList[prevIdx].title;
             appearTextDOM.textContent = rollingData.newsList[nextIdx].title;
-        }, 1200);
+        });
     }
     
     /**
@@ -66,7 +65,6 @@ export function rollingDOM(rollingBoxDOM, rollingData, rollingIdx) {
      */
     staticTextDOM.addEventListener('mouseover', () => {
         clearInterval(intervalRollingId);
-        clearTimeout(resetRollingId);
     });
     staticTextDOM.addEventListener('mouseout', () => {
         intervalRollingId = setInterval(rolling, 5000);
