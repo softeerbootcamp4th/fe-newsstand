@@ -1,5 +1,3 @@
-@import "../foundation/foundation.css";
-
 .alert {
     box-shadow: var(--box-shadow);
     width: 320px;

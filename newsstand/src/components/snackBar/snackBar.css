@@ -1,5 +1,3 @@
-@import "../foundation/foundation.css";
-
 .snackBar {
     width: max-content  ;
     color: var(--color-text-white-default);

@@ -1,0 +1,19 @@
+@import "./header//header.css";
+@import "./headline/headline.css";
+@import "./newsList/newsList.css";
+@import "./pressMenu/pressMenu.css";
+
+.content-container {
+    width: calc(100% - 208px);
+    height: 100%;
+    margin: 0 auto;
+    
+    display: flex;
+    align-items: end;
+}
+
+.main-container {
+    width: 100%;
+    height: calc(100% - 142px);
+}
+

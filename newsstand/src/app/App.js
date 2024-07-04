@@ -1,6 +1,8 @@
 import AutoRollingNews from "../components/autoRollingNews/autoRollingNews.js";
-import NewsList from "../views/newsList.js";
-
+import Header from "../views/header/header.js";
+import Headline from "../views/headline/headline.js";
+import NewsList from "../views/newsList/newsList.js";
+import { PressMenu } from "../views/pressMenu/pressMenu.js";
 
 // App 컴포넌트
 export const App = () => {
@@ -9,47 +11,62 @@ export const App = () => {
 
     const html = `
         <div class="main-container">
-            <div class="title-container">
-                <div class="logo-container">
-                    <img src="../../assets/icons/newspaper.svg" alt="newspaper icon">
-                    <span class="logo-label">뉴스스탠드</span>
-                </div>
-                <div class="day-label">2023. 02. 10. 금요일</div>
-            </div>
-            <div class="headline-container"></div>
-            <div class="menu-container">
-                <div class="subscribe-menu-container">
-                    <button class="subscribe-menu-button">전체 언론사</button>
-                    <button class="subscribe-menu-button">내가 구독한 언론사</button>
-                </div>
-                <div>
-                    <img src="../../assets/icons/list-view.svg" alt="list view icon">
-                    <img src="../../assets/icons/grid-view.svg" alt="grid view icon">
-                </div>
-            </div>
-            <div class="newsList-container"></div>
+            <div class="header"></div>
+            <div class="headline"></div>
+            <div class="press-menu"></div>
+            <div class="newsList"></div>
         </div>
     `;
 
+    function makeHeader(appContainer) {
+        const className = "header"
+        const headerContainer = appContainer.querySelector(`.${className}`);
+
+        if (!headerContainer) {
+            console.log(`not founded header container with className ${className}`)
+            return;
+        }
+
+        const header = Header();
+        headerContainer.appendChild(header.element);
+    }
 
     function makeHeadline(appContainer) {
-        const headlineContainer = appContainer.querySelector('.headline-container');
+        const className = "headline"
+        const headlineContainer = appContainer.querySelector(`.${className}`);
+
+        if (!headlineContainer) {
+            console.log(`not founded headline container with className ${className}`)
+            return;
+        }
+
+        const headline = Headline();
     
-        const autoRollingNews1 = AutoRollingNews({
-            company: '연합뉴스',
-            title: '[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출'
-        });
-        const autoRollingNews2 = AutoRollingNews({
-            company: '중앙일보',
-            title: '[2보] 새로운 뉴스 타이틀'
-        });
+        headlineContainer.appendChild(headline.element);
+    }
+
+    function makePressMenu(appContainer) {
+        const className ="press-menu"
+        const pressMenuContainer = appContainer.querySelector(`.${className}`);
+
+        if (!pressMenuContainer) {
+            console.log(`not founded pressMenu container with className ${className}`)
+            return;
+        }
+
+        const pressMenu = PressMenu();
     
-        headlineContainer.appendChild(autoRollingNews1.element);
-        headlineContainer.appendChild(autoRollingNews2.element);
+        pressMenuContainer.appendChild(pressMenu.element);
     }
 
     function makeNewsList(appContainer) {
-        const newsListContainer = appContainer.querySelector('.newsList-container');
+        const className = "newsList"
+        const newsListContainer = appContainer.querySelector(`.${className}`);
+
+        if (!newsListContainer) {
+            console.log(`not founded newsList container with className ${className}`)
+            return;
+        }
 
         const newsList = NewsList();
 
@@ -59,13 +76,18 @@ export const App = () => {
     function initializeApp() {
         appContainer.innerHTML = html;
 
+        makeHeader(appContainer);
         makeHeadline(appContainer);
+        makePressMenu(appContainer);
         makeNewsList(appContainer);
 
-        document.body.appendChild(appContainer);
+        const appDiv = document.getElementById('app');
+        if (appDiv) {
+            appDiv.appendChild(appContainer);
+        }
     }
 
     initializeApp();
 }
 
-App()
+App();

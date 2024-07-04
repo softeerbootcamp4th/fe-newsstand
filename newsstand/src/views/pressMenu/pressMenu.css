@@ -1,0 +1,19 @@
+.press-menu-container {
+    margin: 0 auto;
+    width: calc(100% - 142px);
+
+    padding-bottom: 24px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.subscribe-menu-container {
+    display: flex;
+    gap: 24px;
+}
+
+.subscribe-menu-button {
+    border: 0px;
+    background-color: transparent;
+}
