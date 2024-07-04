@@ -3,6 +3,7 @@ import mountRightSelector from "./mountRightSelector.js";
 import html from "../domParser.js";
 import ListContentComponent from "./listContentComponent.js";
 import ListHeaderAllComponent from "./listHeaderAllComponent.js";
+import GridViewComponent from "./gridViewComponent.js";
 import applyDiff from "../diffing.js";
 
 function ListComponent(pressId, reducer, fullList, metadata)
@@ -26,7 +27,7 @@ function mountView(state, reducer, fullList, metadata)
 
 	function render(current)
 	{
-		if(state.viewType.value === "grid") applyDiff(el, html`<div>Grid View</div>`);
+		if(state.viewType.value === "grid") applyDiff(el, GridViewComponent(state.cursor.getDataList(24)));
 		else applyDiff(el, ListComponent(state.cursor.value, reducer, fullList, metadata));
 	}
 
