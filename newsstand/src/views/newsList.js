@@ -15,19 +15,39 @@ export const NewsList = (props) => {
         const selectedButton = element.querySelector(`#${selectedId}`);
     
         changeStyle(selectedButton);
+    }   
 
-        console.log("change auto");
+    function autoChangePress() {
+        selectedId = `news-category-${selectedId}`;
+        const selectedButton = element.querySelector(`#${selectedId}`);
+
+        changeStyle(selectedButton)
+    }
+
+    function autoChangeCategory() {
+        const currentId = parseInt(selectedId.split('-')[2]);
+        const nextId = (currentId + 1) % 6;
+
+        selectedId = `news-category-${nextId}`;
+        const selectedButton = element.querySelector(`#${selectedId}`);
+    
+        changeStyle(selectedButton);
     }   
 
     function onClickEvent(event) {
         selectedId = event.target.id;
-        const selectedButton = element.querySelector(`#${selectedId}`)
+        const selectedButton = element.querySelector(`#${selectedId}`);
         changeStyle(selectedButton);
     }
 
     function changeStyle(selectedButton) {
         const buttons = element.querySelectorAll('.news-category-button');
         const progressButtons = element.querySelectorAll('.news-category-button-progress');
+        const categoryCount = element.querySelector(`#category-count`);
+
+        if (categoryCount) {
+            categoryCount.remove();
+        }
 
         buttons.forEach((button, index) => {
             progressButtons[index].style.width = 0;
@@ -40,6 +60,16 @@ export const NewsList = (props) => {
         selectedButton.style.color = rootStyles.getPropertyValue('--color-text-white-default');
 
         setProgress(selectedButton)
+        addCountElement(selectedButton)
+    }
+
+    function addCountElement(selectedButton) {
+        const spanElement = document.createElement('span');
+        spanElement.id = "category-count"
+        spanElement.textContent = ' 1/81 ';
+        
+        selectedButton.appendChild(spanElement);
+        selectedButton.style.width = 'max-content'
     }
 
     function setProgress(selectedButton) {
