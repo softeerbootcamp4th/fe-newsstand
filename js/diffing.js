@@ -47,6 +47,7 @@ function makeRelativeNodePositionMap(children)
 function replaceTo(oldDom, newDom)
 {
 	const parent = oldDom.parentNode;
+	console.log("replaced", parent, oldDom, newDom);
 	parent.insertBefore(newDom, oldDom);
 	parent.removeChild(oldDom);
 }
@@ -87,7 +88,6 @@ function applyDiffChildren(targetDom, childList)
 	for(let [uniqueKey, child] of newNodeKeyMap)
 	{
 		if(!oldNodeKeyMap.has(uniqueKey)) targetDom.append(child);
-		else _applyDiff(oldNodeKeyMap.get(uniqueKey), child);
 	}
 
 	// 자식의 상대적 위치를 저장하는 별도의 맵을 만듭니다.
@@ -100,6 +100,13 @@ function applyDiffChildren(targetDom, childList)
 		if(oldNodeNextMap.get(uniqueKey) !== newNodeNextMap.get(uniqueKey) ){
 			const nextNode = oldNodeKeyMap.get(newNodeNextMap.get(uniqueKey)) ?? null;
 			targetDom.insertBefore(child, nextNode);
+		}
+	}
+
+	for(let [uniqueKey, child] of newNodeKeyMap)
+	{
+		if(oldNodeKeyMap.has(uniqueKey)) {
+			_applyDiff(oldNodeKeyMap.get(uniqueKey), child);
 		}
 	}
 }
