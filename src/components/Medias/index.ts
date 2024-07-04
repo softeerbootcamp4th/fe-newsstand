@@ -6,33 +6,33 @@ import { CategoryNav } from "./CategoryNav";
 import { MediasContent } from "./MediasContent";
 
 interface CurrentCategoryTogglerProps {
-  currentCategory: "전체 언론사" | "내가 구독한 언론사";
-  setCurrentCategory: (category: "전체 언론사" | "내가 구독한 언론사") => void;
+  currentFilter: "전체 언론사" | "내가 구독한 언론사";
+  setCurrentFilter: (category: "전체 언론사" | "내가 구독한 언론사") => void;
 }
-export const CurrentCategoryToggler = ({
-  currentCategory,
-  setCurrentCategory,
+export const CurrentFilterToggler = ({
+  currentFilter,
+  setCurrentFilter,
 }: CurrentCategoryTogglerProps) => {
   return Header({
     children: [
       Span({
         children: ["전체 언론사"],
         onClick: () => {
-          setCurrentCategory("전체 언론사");
+          setCurrentFilter("전체 언론사");
         },
         style: {
           cursor: "pointer",
-          color: currentCategory === "전체 언론사" ? "blue" : "black",
+          color: currentFilter === "전체 언론사" ? "blue" : "black",
         },
       }),
       Span({
         children: ["내가 구독한 언론사"],
         onClick: () => {
-          setCurrentCategory("내가 구독한 언론사");
+          setCurrentFilter("내가 구독한 언론사");
         },
         style: {
           cursor: "pointer",
-          color: currentCategory === "내가 구독한 언론사" ? "blue" : "black",
+          color: currentFilter === "내가 구독한 언론사" ? "blue" : "black",
         },
       }),
     ],
@@ -40,7 +40,7 @@ export const CurrentCategoryToggler = ({
 };
 
 export const Medias = () => {
-  const [currentCategory, setCurrentCategory] = useState<
+  const [currentFilter, setCurrentFilter] = useState<
     "전체 언론사" | "내가 구독한 언론사"
   >({
     key: "Medias",
@@ -74,9 +74,9 @@ export const Medias = () => {
   const currentMediaIdsAndCategory = mediaIdByCategories[0];
   return Section({
     children: [
-      CurrentCategoryToggler({
-        currentCategory,
-        setCurrentCategory,
+      CurrentFilterToggler({
+        currentFilter: currentFilter,
+        setCurrentFilter: setCurrentFilter,
       }),
       Div({
         children: [
