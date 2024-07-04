@@ -24,7 +24,7 @@ export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
     setFrom(from + 1);
   };
   useEffect(() => {
-    const interval = setInterval(update, 125000);
+    const interval = setInterval(update, 5000);
     return () => {
       clearInterval(interval);
     };
