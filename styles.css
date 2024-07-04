@@ -178,7 +178,6 @@ main {
 
 .main-header-icons {
     display: flex;
-    gap: 8px s;
 }
 
 .main-header-icons img {
@@ -203,6 +202,7 @@ main {
     border: 1px solid var(--border-default);
     background-color: var(--surface-alt);
     text-align: center;
+    cursor: pointer;
 }
 
 
