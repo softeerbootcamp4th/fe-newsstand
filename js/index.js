@@ -1,3 +1,3 @@
 import "./selectCategory.js"
 import "./selectMedia.js"
-import "./subHeaderAnimation.js"
+import "./animation/subHeaderAnimation.js"
