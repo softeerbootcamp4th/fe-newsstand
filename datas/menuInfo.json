@@ -8,9 +8,7 @@
                 {
                     "pageIdx": 0,
                     "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
                     "thumbnailUpdatedDate": "2023.02.10. 18:27",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "또 국민연금의 몽니..현대차 지주사 불발",
                     "articleList": [
                         "위스키 사려고 이틀 전부터 줄 섰어요",
@@ -23,10 +21,8 @@
                 },
                 {
                     "pageIdx": 1,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
+                    "thumbnailMediaName": "아시아경제",
                     "thumbnailUpdatedDate": "2023.02.11. 09:15",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "국민연금 논란, 현대차의 대응은?",
                     "articleList": [
                         "주가 상승에 대한 기대감 높아져",
@@ -39,10 +35,8 @@
                 },
                 {
                     "pageIdx": 2,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
+                    "thumbnailMediaName": "이데일리",
                     "thumbnailUpdatedDate": "2023.02.12. 16:30",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "현대차, 새로운 도전에 직면하다",
                     "articleList": [
                         "미래 자동차 산업의 방향성",
@@ -62,10 +56,8 @@
             "thumbnailDatas": [
                 {
                     "pageIdx": 0,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
+                    "thumbnailMediaName": "세계일보",
                     "thumbnailUpdatedDate": "2023.03.12. 14:10",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "5G 시대, 방송 통신 융합의 미래",
                     "articleList": [
                         "5G의 현재와 미래",
@@ -78,10 +70,8 @@
                 },
                 {
                     "pageIdx": 1,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
+                    "thumbnailMediaName": "조선일보",
                     "thumbnailUpdatedDate": "2023.03.13. 10:45",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "통신 산업의 새로운 패러다임",
                     "articleList": [
                         "통신 기술의 혁신",
@@ -94,10 +84,8 @@
                 },
                 {
                     "pageIdx": 2,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
+                    "thumbnailMediaName": "헤럴드경제",
                     "thumbnailUpdatedDate": "2023.03.14. 08:20",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "방송 통신 융합의 실제 사례",
                     "articleList": [
                         "융합 기술의 사례",
@@ -110,10 +98,8 @@
                 },
                 {
                     "pageIdx": 3,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
+                    "thumbnailMediaName": "파이낸셜뉴스",
                     "thumbnailUpdatedDate": "2023.03.15. 12:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "통신 산업의 글로벌 트렌드",
                     "articleList": [
                         "글로벌 통신 산업의 동향",
@@ -133,10 +119,8 @@
             "thumbnailDatas": [
                 {
                     "pageIdx": 0,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
+                    "thumbnailMediaName": "데일리안",
                     "thumbnailUpdatedDate": "2023.04.10. 17:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "IT 산업의 혁신과 발전",
                     "articleList": [
                         "IT 기술의 현재와 미래",
@@ -149,10 +133,8 @@
                 },
                 {
                     "pageIdx": 1,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
+                    "thumbnailMediaName": "이데일리",
                     "thumbnailUpdatedDate": "2023.04.11. 14:30",
-                    "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "IT 기술의 혁신과 변혁",
                     "articleList": [
                         "혁신적인 IT 기술",
@@ -172,167 +154,16 @@
             "thumbnailDatas": [
                 {
                     "pageIdx": 0,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.05.01. 11:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "영자지의 새로운 도전",
+                    "thumbnailMediaName": "스포츠동아",
+                    "thumbnailUpdatedDate": "2023.05.05. 11:50",
+                    "thumbnailDetail": "스포츠 산업의 현재와 미래",
                     "articleList": [
-                        "영자지의 변화",
-                        "'영자지의 미래'",
-                        "영자지의 발전",
-                        "[특집] 영자지의 새로운 시도",
-                        "영자지의 글로벌 동향",
-                        "미래 영자지의 방향성"
-                    ]
-                }
-            ]
-        },
-        {
-            "categoryIdx": 4,
-            "category": "스포츠/연예",
-            "totalPages": 3,
-            "thumbnailDatas": [
-                {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.06.10. 09:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "스포츠와 연예의 세계",
-                    "articleList": [
-                        "스포츠의 미래",
-                        "'연예계의 변화'",
-                        "스포츠와 연예의 융합",
-                        "[인터뷰] 스포츠 스타의 이야기",
-                        "연예계의 새로운 트렌드",
-                        "미래 스포츠의 방향성"
-                    ]
-                },
-                {
-                    "pageIdx": 1,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.06.11. 10:30",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "연예계의 변화와 도전",
-                    "articleList": [
-                        "연예계의 새로운 시도",
-                        "'스포츠와 연예의 만남'",
-                        "미래 연예계의 전망",
-                        "[기고] 연예계의 변혁",
-                        "스포츠와 연예의 글로벌 동향",
-                        "미래 연예계의 전략"
-                    ]
-                },
-                {
-                    "pageIdx": 2,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.06.12. 08:15",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "스포츠와 연예의 혁신",
-                    "articleList": [
-                        "혁신적인 스포츠",
-                        "'연예계의 발전'",
-                        "스포츠와 연예의 변혁",
-                        "[특집] 스포츠와 연예의 융합",
-                        "스포츠의 글로벌 트렌드",
-                        "미래 스포츠와 연예의 방향성"
-                    ]
-                }
-            ]
-        },
-        {
-            "categoryIdx": 5,
-            "category": "매거진/전문지",
-            "totalPages": 1,
-            "thumbnailDatas": [
-                {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.07.01. 12:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "매거진과 전문지의 미래",
-                    "articleList": [
-                        "매거진의 변화",
-                        "'전문지의 발전'",
-                        "매거진과 전문지의 융합",
-                        "[특집] 매거진의 새로운 시도",
-                        "전문지의 글로벌 동향",
-                        "미래 매거진과 전문지의 방향성"
-                    ]
-                }
-            ]
-        },
-        {
-            "categoryIdx": 6,
-            "category": "지역",
-            "totalPages": 4,
-            "thumbnailDatas": [
-                {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.08.10. 14:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "지역 경제의 변화",
-                    "articleList": [
-                        "지역 경제의 미래",
-                        "'지역 경제의 발전'",
-                        "지역 경제의 동향",
-                        "[특집] 지역 경제의 새로운 시도",
-                        "지역 경제의 글로벌 동향",
-                        "미래 지역 경제의 방향성"
-                    ]
-                },
-                {
-                    "pageIdx": 1,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.08.11. 11:30",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "지역 경제의 혁신",
-                    "articleList": [
-                        "혁신적인 지역 경제",
-                        "'미래 지역 경제의 전망'",
-                        "지역 경제의 발전",
-                        "[기고] 지역 경제의 중요성",
-                        "지역 경제의 발전 방향",
-                        "미래 지역 경제의 전망"
-                    ]
-                },
-                {
-                    "pageIdx": 2,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.08.12. 09:45",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "지역 경제의 글로벌 동향",
-                    "articleList": [
-                        "글로벌 지역 경제",
-                        "'지역 경제의 글로벌화'",
-                        "미래 지역 경제의 글로벌 동향",
-                        "[특집] 지역 경제의 글로벌 전략",
-                        "지역 경제의 글로벌 트렌드",
-                        "미래 지역 경제의 혁신"
-                    ]
-                },
-                {
-                    "pageIdx": 3,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailMediaImgPath": "/images/asset 35 1.png",
-                    "thumbnailUpdatedDate": "2023.08.13. 13:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "지역 경제의 새로운 도전",
-                    "articleList": [
-                        "지역 경제의 도전",
-                        "'지역 경제의 새로운 시도'",
-                        "미래 지역 경제의 전략",
-                        "[인터뷰] 지역 경제 전문가의 의견",
-                        "지역 경제의 글로벌 전략",
-                        "미래 지역 경제의 발전"
+                        "스포츠 산업의 현재",
+                        "'스포츠 산업의 미래'",
+                        "스포츠 기술의 발전",
+                        "[인터뷰] 스포츠 전문가가 말하는 미래",
+                        "스포츠 산업의 글로벌 동향",
+                        "미래 스포츠 산업의 전망"
                     ]
                 }
             ]

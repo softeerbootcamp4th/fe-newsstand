@@ -1,6 +1,6 @@
 const newsBarArea = document.querySelector('#news-bar-area');
 
-const mediaImgPath = '/images/asset 35 1.png'
+const mediaImgPath = '/images/logos/조선일보.png'
 const content = '[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출'
 
 newsBarArea.innerHTML = `

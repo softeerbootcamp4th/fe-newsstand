@@ -167,19 +167,21 @@ viewBtns.forEach(btn => {
 // category-selection-event
 let categoryTimeoutId; // setTimeoutId
 
+const mediaList = ['데일리안', '서울경제', '세계일보', '스포츠동아', '스포츠서울', '아시아경제', '이데일리', '조선일보', '파이낸셜뉴스', '헤럴드경제'];
+Math.random()
 const insertContent = (nowMenuIdx, menuCurrentPage) => {
     const nowInfo = menuInfo[nowMenuIdx].thumbnailDatas[menuCurrentPage-1]
     
     // 미디어 사진
-    document.querySelector('#media-img').src = `${nowInfo.thumbnailMediaImgPath}`
-
+    document.querySelector('#media-img').src = `/images/logos/${nowInfo.thumbnailMediaName}.png`
+    
     // 수정일
     document.querySelector('#updated-date-tag').innerText = `${nowInfo.thumbnailUpdatedDate} 편집`
     
     // 구독하기에 해당 신문사 정보 삽입
     
     // 썸네일 경로
-    document.querySelector('#thumbnail-img').src = `${nowInfo.thumbnailImgPath}`
+    document.querySelector('#thumbnail-img').src = `/images/logos/${mediaList[menuCurrentPage]}.png`
     
     // 썸네일 디테일
     document.querySelector('#thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
