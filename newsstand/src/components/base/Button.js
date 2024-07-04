@@ -5,20 +5,24 @@ const buttonVariant = (type) => {
         white: {
             light: {
                 backgroundColor: '#fff',
+                hoverdColor: '#f0f0f0',
                 color: 'gray',
             },
             dark: {
                 backgroundColor: '#375a7f',
+                hoverdColor: '#2d4866',
                 color: '#fff',
             },
         },
         gray: {
             light: {
                 backgroundColor: 'gainsboro',
+                hoverdColor: '#dcdcdc',
                 color: 'gray',
             },
             dark: {
                 backgroundColor: '#444950',
+                hoverdColor: '#3a3f46',
                 color: '#fff',
             },
         },
@@ -49,11 +53,11 @@ const Button = (props) => {
         button.addEventListener('click', handleMouseClick)
     }
 
-    const { backgroundColor, color } = buttonVariant(props.variant)
+    const { backgroundColor, hoverdColor, color } = buttonVariant(props.variant)
 
     return {
         element: `
-        <div class="button" id="button-${props.id}" style="background-color: ${backgroundColor}; color: ${color};">
+        <div class="button" id="button-${props.id}" style="background-color: ${isHover ? hoverdColor : backgroundColor}; color: ${color};">
             <img class="button-left-icon" src=${props.icon} alt="icon"/>
             ${props.text}
         </div>
