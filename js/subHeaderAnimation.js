@@ -74,7 +74,7 @@ function animateLeftHeaders() {
             {transform : "translateY(49px)"}
         ],
         {duration:1000}
-    );    
+    ); 
     leftName = setTimeout(setLeftName, 1000)
 }
 

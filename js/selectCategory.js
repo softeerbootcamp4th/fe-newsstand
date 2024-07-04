@@ -1,5 +1,6 @@
 import news from "../data/allNews.js"
 import subscribeInfo from "../data/subscribedNews.js";
+import { mediaListController } from "./selectMedia.js";
 
 const allMedia = document.querySelector(".news-list__menu__selectors__all");
 const myMedia = document.querySelector(".news-list__menu__selectors__my");
@@ -23,6 +24,7 @@ function categoryController() {
     const selected = changeSelected();
     const categoryData = chooseData(selected);
     changeCategoryUI(categoryData);
+    mediaListController(categoryData);
 }
 
 // data 어트리뷰트를 사용하여 선택된 카테고리를 가져온다.
@@ -42,8 +44,6 @@ function chooseData(selected) {
 
     if (selected.innerText === "전체언론사") categoryData = news;
     else categoryData = subscribeInfo;
-
-    console.log(categoryData)
 
     return categoryData;
 }
