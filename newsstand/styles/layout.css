@@ -12,6 +12,8 @@
 }
 
 .contents-container {
+    min-width: 800px;
+    min-height: 600px;
     width: 60%;
     height: 80%;
 }
@@ -25,7 +27,7 @@
 }
 
 .rolling-news-container {
-    height: 8%;
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: space-between;
