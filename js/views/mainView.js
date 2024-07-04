@@ -17,15 +17,14 @@ function mountView(state, reducer, metadata)
 {
 	const el = document.getElementById("newsSection");
 
-	function render()
+	function render(current)
 	{
-		console.log("render call");
 		if(state.viewType.value === "grid") applyDiff(el, html`<div>Grid View</div>`);
 		else applyDiff(el, ListComponent(state.cursor.state.value));
 	}
 
-	state.viewType.addSideEffect(render);
-	state.cursor.addSideEffect(render);
+	state.viewType.addSideEffect(render, "viewType");
+	state.cursor.addSideEffect(render, "cursor");
 }
 
 export default mountView;

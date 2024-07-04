@@ -58,9 +58,9 @@ CursorAdaptor.prototype.getDataList = function(num)
 	return this.cursor.getDataList(num);
 }
 
-CursorAdaptor.prototype.addSideEffect = function(func)
+CursorAdaptor.prototype.addSideEffect = function(func, key)
 {
-	this.state.addSideEffect(func);
+	this.state.addSideEffect(func, key);
 }
 
 CursorAdaptor.prototype.removeSideEffect = function(func)

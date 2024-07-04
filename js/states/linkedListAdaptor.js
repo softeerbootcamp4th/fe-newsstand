@@ -25,9 +25,9 @@ LinkedListAdaptor.prototype.change = function(newLinkedList)
 	this.state.change(this.linkedList.array);
 }
 
-LinkedListAdaptor.prototype.addSideEffect = function(func)
+LinkedListAdaptor.prototype.addSideEffect = function(func, key)
 {
-	this.state.addSideEffect(func);
+	this.state.addSideEffect(func, key);
 }
 
 LinkedListAdaptor.prototype.removeSideEffect = function(func)

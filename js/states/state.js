@@ -5,17 +5,14 @@ function State(initialValue, sideEffect=null)
 	if(sideEffect !== null && typeof sideEffect !== "function") {
 		throw new Error("side effect must be function!");
 	}
-	this.__sideEffects = new Set();
-	if( typeof sideEffect === "function" ) this.__sideEffects.add(sideEffect);
+	this.__sideEffects = new Map();
+	if( typeof sideEffect === "function" ) this.__sideEffects.set(sideEffect, "default");
 	this.value = initialValue;
 	this.__applyChange = (newValue)=>{
 		if(this.value === newValue) return;
 		const oldValue = this.value;
 		this.value = newValue;
-		for(let func of this.__sideEffects)
-		{
-			func.call(this, newValue, oldValue);
-		}
+		return oldValue;
 	}
 }
 
@@ -24,9 +21,9 @@ State.prototype.change = function(newValue)
 	stateBatchUpdater.callUpdate(this, newValue);
 }
 
-State.prototype.addSideEffect = function(func)
+State.prototype.addSideEffect = function(func, key="default")
 {
-	this.__sideEffects.add(func);
+	this.__sideEffects.set(func, key);
 }
 
 State.prototype.removeSideEffect = function(func)

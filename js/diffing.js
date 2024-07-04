@@ -133,14 +133,14 @@ function _applyDiff(oldDom, newDom)
 
 function applyDiff(root, target)
 {
-	if(root.children.length === 0) {
+	if(root.childNodes.length === 0) {
 		root.appendChild(target);
 		return;
 	}
 	if(target instanceof DocumentFragment) {
 		applyDiffChildren(root, target.childNodes);
 	}
-	else if(root.children.length > 1) {
+	else if(root.childNodes.length > 1) {
 		applyDiffChildren(root, [target]);
 	}
 	else _applyDiff(root.firstChild, target);

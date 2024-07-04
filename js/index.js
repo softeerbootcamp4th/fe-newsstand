@@ -19,4 +19,4 @@ console.log(fullList);
 
 state.subFilter.addSideEffect( (e)=>console.log(`chnge sub filter : ${e}`) );
 state.viewType.addSideEffect( (e)=>console.log(`chnge view type : ${e}`) );
-state.cursor.addSideEffect( (e)=>console.log(`chnge cursor state : ${e}`) );
+state.cursor.addSideEffect( (e)=>console.log(e) );
