@@ -8,10 +8,12 @@ import {
 import { Deque } from "./deque";
 import { debounceAnimationCallback, toStringAnything } from "./utils";
 
+const effectCleanUps = new Map<number, () => void>();
+const effectDependencies = new Map<number, string[]>();
+const statesMap = new Map<string, Array<any>>();
+const statesKeyMap = new Map<string, number>();
+let effectsKey = 0;
 const createApp = () => {
-  const effectCleanUps = new Map<number, () => void>();
-  const effectDependencies = new Map<number, string[]>();
-  let effectsKey = 0;
   const useEffect = (effectFunc: () => () => void, rawDependencies?: any[]) => {
     const dependencies = rawDependencies?.map(toStringAnything) ?? [];
     const lstDependencies = effectDependencies.get(effectsKey);
@@ -25,15 +27,13 @@ const createApp = () => {
       lstEffectCleanUp?.();
       const effectCleanUp = effectFunc();
       effectCleanUps.set(effectsKey, effectCleanUp);
-      effectCleanUps.delete(effectsKey);
     }
 
     effectsKey += 1;
   };
 
-  const states = new Map<number, any>();
   const renderQueue = new Deque<() => void>();
-  let statesKey = 0;
+
   let isRendering = false;
   let root: HTMLElement | null = null;
   let app: AppElementRenderer | null = null;
@@ -95,7 +95,7 @@ const createApp = () => {
   const render = debounceAnimationCallback(() => {
     isRendering = true;
     if (root == null || app == null) return;
-    statesKey = 0;
+    statesKeyMap.clear();
     effectsKey = 0;
 
     const top = document.createElement("div");
@@ -140,35 +140,47 @@ const createApp = () => {
     }
     render();
   };
-  const useState = <RawT = unknown>(initalState: RawT) => {
+  function useState<RawT = unknown>(key: string, initalState: RawT) {
     type T = RawT extends unknown ? typeof initalState : RawT;
     type Updater = (updater: T | ((state: T) => T)) => void;
-    const localStatesKey = statesKey;
-    if (!states.has(localStatesKey)) {
-      states.set(localStatesKey, initalState);
+
+    if (!statesMap.has(key)) {
+      statesMap.set(key, []);
     }
-    const state = states.get(localStatesKey) as T;
+    if (!statesKeyMap.has(key)) {
+      statesKeyMap.set(key, 0);
+    }
+    const localStatesKey = statesKeyMap.get(key)!;
+    const states = statesMap.get(key)!;
+
+    if (states.length <= localStatesKey) {
+      states.push(initalState);
+    }
+    const state = states[localStatesKey] as T;
     function update(updater: Updater) {
+      const curLocalStatesKey = statesKeyMap.get(key)!;
+      const curState = states[curLocalStatesKey] as T;
+
       const newState =
         typeof updater === "function"
-          ? (updater as (state: T) => T)(state)
+          ? (updater as (state: T) => T)(curState)
           : updater;
 
-      if (state == newState) {
+      if (curState == newState) {
         return;
       }
       if (isRendering) {
         fillRenderQueue(() => {
-          states.set(localStatesKey, newState);
+          states[localStatesKey] = newState;
         });
         return;
       }
-      states.set(localStatesKey, newState);
+      states[localStatesKey] = newState;
       render();
     }
-    statesKey += 1;
+    statesKeyMap.set(key, localStatesKey + 1);
     return [state, update] as [T, Updater];
-  };
+  }
 
   return {
     init,

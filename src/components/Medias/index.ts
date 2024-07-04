@@ -24,7 +24,7 @@ const MediasContent = () => {
 export const Medias = () => {
   const [currentCategory, setCurrentCategory] = useState<
     "전체 언론사" | "내가 구독한 언론사"
-  >("전체 언론사");
+  >("Medias", "전체 언론사");
 
   return Section({
     children: [
