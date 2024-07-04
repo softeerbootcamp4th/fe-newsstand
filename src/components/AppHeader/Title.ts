@@ -1,5 +1,5 @@
 import { Div, Span } from "@/libs/Elements";
-import { formatDate } from "@/utils/formatDate";
+import { formatHeaderDate } from "@/utils/formatDate";
 import { Icon } from "./Icon";
 import styles from "./Title.module.css";
 import typoStyles from "@/styles/typo.module.css";
@@ -13,7 +13,7 @@ export const Title = () => {
       }),
       Span({
         className: `${styles.date} ${typoStyles["display-medium16"]}`,
-        children: [formatDate(new Date())],
+        children: [formatHeaderDate(new Date())],
       }),
     ],
   });
