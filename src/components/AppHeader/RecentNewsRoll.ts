@@ -13,12 +13,14 @@ export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
     from: from * 2 + (needDelay ? 1 : 0),
     limit: 2,
   });
+  const update = () => {
+    if (isHovering) return;
+    setFrom((prev) => {
+      return prev + 1;
+    });
+  };
   useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("interval", needDelay);
-      if (isHovering) return;
-      setFrom(from + 1);
-    }, 5000);
+    const interval = setInterval(update, 5000);
     return () => {
       clearInterval(interval);
     };

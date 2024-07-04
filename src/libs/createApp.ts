@@ -142,13 +142,18 @@ const createApp = () => {
   };
   const useState = <RawT = unknown>(initalState: RawT) => {
     type T = RawT extends unknown ? typeof initalState : RawT;
+    type Updater = (updater: T | ((state: T) => T)) => void;
     const localStatesKey = statesKey;
     if (!states.has(localStatesKey)) {
       states.set(localStatesKey, initalState);
     }
     const state = states.get(localStatesKey) as T;
+    function update(updater: Updater) {
+      const newState =
+        typeof updater === "function"
+          ? (updater as (state: T) => T)(state)
+          : updater;
 
-    const update = (newState: T) => {
       if (state == newState) {
         return;
       }
@@ -160,9 +165,9 @@ const createApp = () => {
       }
       states.set(localStatesKey, newState);
       render();
-    };
+    }
     statesKey += 1;
-    return [state, update] as [T, (newState: T) => void];
+    return [state, update] as [T, Updater];
   };
 
   return {
