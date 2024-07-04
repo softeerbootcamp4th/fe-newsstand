@@ -1,2 +1,2 @@
-import "./category.js"
-import "./headerAnimation.js"
+import "./selectCategory.js"
+import "./subHeaderAnimation.js"
