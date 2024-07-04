@@ -8,7 +8,7 @@ const menuInfos = [
     },
     {
         category: '방송/통신',
-        totalPages: 65
+        totalPages: 2
     },
     {
         category: 'IT',
@@ -41,7 +41,14 @@ const mediaImgPath = '/images/asset 35 1.png'
 const articleData = [
     '11111111', '2222222', '3333333', '444444', '55555555', '66666666'
 ]
+
 const infoMsg = `${mediaName} 언론사에서 직접 편집한 뉴스입니다.`
+
+
+// menu selection state
+
+let menuCurrentPage = 1;
+let menuLastpage = 0;
 
 // create 태그
 const createMenuList = (menuInfos) => {
@@ -52,7 +59,7 @@ const createMenuList = (menuInfos) => {
                     ${menuInfo.category}
                 </h5>
                 <h5 class="article-menu-pages display-none">
-                    1 / ${menuInfo.totalPages}
+                    ${menuCurrentPage} / ${menuInfo.totalPages}
                 </h5>
             </button>
             <div class="fill-background">
@@ -129,10 +136,40 @@ viewBtns.forEach(btn => {
 });
 
 // category-selection-event
+
+let categoryTimeoutId; // setTimeoutId
+
+const moveToNextPage = (thisBtn) => {
+    const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
+    categoryTimeoutId = setTimeout(() => { // 타이머 식별자 저장
+        // 다음 메뉴로 넘어감
+        if (menuCurrentPage === menuLastpage) {
+            menuCurrentPage = 1;
+            menuLastpage = Number(nextBtn.firstElementChild.firstElementChild.nextElementSibling.innerText.split('/')[1])
+            thisBtn.classList.remove('menu-btn-wrapper-clicked')
+            nextBtn.classList.add('menu-btn-wrapper-clicked')
+            moveToNextPage(nextBtn)
+        // 다음 페이지로 넘어감
+        } else {
+            menuCurrentPage += 1;
+            thisBtn.firstElementChild.children[1].innerText = `${menuCurrentPage} / ${menuLastpage}`   
+            thisBtn.children[1].remove();
+            const fillBackground = document.createElement('div');
+            fillBackground.classList.add('fill-background');
+            thisBtn.appendChild(fillBackground);
+            moveToNextPage(thisBtn)
+        }
+    }, 1000 * 20)
+}
+
 const articleMenuWrapper = document.querySelectorAll('.menu-btn-wrapper');
-articleMenuWrapper.forEach(btn => {
-    btn.addEventListener('click', function() {
+articleMenuWrapper.forEach(btnWrapper => {
+    btnWrapper.addEventListener('click', function() {
+        menuCurrentPage = 1;
+        menuLastpage = Number(this.firstElementChild.firstElementChild.nextElementSibling.innerText.split('/')[1])
+        clearTimeout(categoryTimeoutId);
         articleMenuWrapper.forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
         this.classList.add('menu-btn-wrapper-clicked');
+        moveToNextPage(this)
     });
 });
