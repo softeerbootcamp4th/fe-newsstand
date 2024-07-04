@@ -179,3 +179,8 @@ button {
                     width: 530px;
                     height: 245px;
                 }
+                    
+                    #li-part-info {
+                        font-size: 14px;
+                        color: #879298;
+                    }

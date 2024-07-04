@@ -138,7 +138,7 @@ articleArea.innerHTML = `
                     </aside>
                     <ul id="article-li-part" class="flex-col-between">
                         ${createArticleLiPart(articleData)}
-                        <p>${infoMsg}</p>
+                        <p id="li-part-info">${infoMsg}</p>
                     </ul>
                 </div>
             </div>
@@ -189,7 +189,7 @@ const insertContent = (nowMenuIdx, menuCurrentPage) => {
     // 목록 리스트, 안내 문구
     document.querySelector('#article-li-part').innerHTML = `
         ${createArticleLiPart(nowInfo.articleList)}
-        <p>${nowInfo.thumbnailMediaName}에서 직접 편집한 뉴스입니다.</p>
+        <p id="li-part-info">${nowInfo.thumbnailMediaName}에서 직접 편집한 뉴스입니다.</p>
     `
 }
 
@@ -236,6 +236,7 @@ articleMenuWrapper.forEach((btnWrapper, idx) => {
         // 초기 페이지 세팅
         nowMenuIdx = idx;
         menuCurrentPage = 1;
+        console.log(menuInfo)
         menuLastpage = menuInfo[nowMenuIdx].totalPages
         
         // 클릭 시 초기 정보 삽입
