@@ -4,6 +4,7 @@ export const TOTAL_MEDIA_CATEGORY = {
             categoryName: "종합/경제",
             media: [
                 {
+                    id: '0',
                     name: "한겨례",
                     iconUrl: "https://s.pstatic.net/static/newsstand/up/2024/0219/nsd145828169.png",
                     editDate: "07월 03일 16:23 편집",
@@ -21,6 +22,7 @@ export const TOTAL_MEDIA_CATEGORY = {
                     ]
                 },
                 {
+                    id: '0',
                     name: "한겨례",
                     iconUrl: "https://s.pstatic.net/static/newsstand/up/2024/0219/nsd145828169.png",
                     editDate: "07월 04일 16:23 편집",
@@ -44,6 +46,7 @@ export const TOTAL_MEDIA_CATEGORY = {
             categoryName: "방송/통신",
             media: [
                 {
+                    id: '1',
                     name: "세계일보",
                     iconUrl: "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/022.png",
                     editDate: "07월 03일 16:23 편집",

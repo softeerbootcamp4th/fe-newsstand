@@ -39,3 +39,23 @@
 .gap48 {
     gap: 48px;
 }
+
+.button {
+    border: 1px solid var(--gray100);
+    box-sizing: border-box;
+    padding: 5px 6px;
+    border-radius: 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1px;
+
+    cursor: pointer;
+}
+.button:hover {
+    border: 1px solid var(--gray300);
+}
+.button:hover .button__text {
+    color: var(--gray500);
+}

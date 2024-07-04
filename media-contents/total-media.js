@@ -90,12 +90,12 @@ function getSelectedCategoryContentsDOMString(media) {
         <img alt="언론사 아이콘" src="${iconUrl}" />
         <p class="text__medium12">${editDate}</p>
         ${isSubscribed ? `
-            <section class="border media-contents__subscribe-button">
+            <section class="button subscribe-button">
                 <img alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
             </section>` : `
-            <section class="border media-contents__subscribe-button">
+            <section class="button subscribe-button">
                 <img alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
-                <p class="media-contents__subscribe-text text__medium12 text--weak">구독하기</p>
+                <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
             </section>`}
     </section>
 
@@ -134,7 +134,7 @@ function clickCategoryList(e) {
          */
         return;
     }
-    
+
     renderMedia(categoryIdx, 0);
 }
 
