@@ -36,7 +36,7 @@ function ListContentComponent(pressId)
 			</div>
 			<ul class="articleList">
 				${
-					articleList.slice(0,6).map( (title)=>html`<li>${title}</li>`)
+					articleList.slice(0,6).map( (title, i)=>html`<li data-unique-key="article-slice-${i}">${title}</li>`)
 				}
 				<p class="articleFooter" data-unique-key="article-footer">${name} 언론사에서 직접 편집한 뉴스입니다.</p>
 			</ul>

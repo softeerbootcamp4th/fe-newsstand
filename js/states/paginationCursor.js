@@ -17,23 +17,13 @@ class PaginationCursor
 	moveBefore(delta = 1)
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
-		for(let i=0; i<delta; i++)
-		{
-			let before = this.attachedLinkedList.get(this.current).prev;
-			if(before === null) return;
-			this.current = before;
-		}
+		this.current = this.attachedLinkedList.findKeyAtOffset(this.current, -delta);
 		return this.current;
 	}
 	moveNext(delta = 1)
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
-		for(let i=0; i<delta; i++)
-		{
-			let after = this.attachedLinkedList.get(this.current).next;
-			if(after === null) return;
-			this.current = after;
-		}
+		this.current = this.attachedLinkedList.findKeyAtOffset(this.current, delta);
 		return this.current;
 	}
 	moveTo(id)
@@ -43,7 +33,13 @@ class PaginationCursor
 		else this.current = this.attachedLinkedList.first;
 		return this.current;
 	}
-	*getDataIterator(num)
+	moveFirst()
+	{
+		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
+		this.current = this.attachedLinkedList.first;
+		return this.current;
+	}
+	*getDataIterator(num, offset=0)
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
 		let cursor = this.current;
@@ -55,9 +51,21 @@ class PaginationCursor
 			cursor = after;
 		}
 	}
-	getDataList(num)
+	getDataList(num, offset)
 	{
-		return [...this.getDataIterator(num)];
+		return [...this.getDataIterator(num, offset)];
+	}
+	getFirstKey()
+	{
+		return this.attachedLinkedList.first;
+	}
+	getLastKey()
+	{
+		return this.attachedLinkedList.last;
+	}
+	findOffset(offset)
+	{
+		return this.attachedLinkedList.findKeyAtOffset(this.current, offset);
 	}
 }
 

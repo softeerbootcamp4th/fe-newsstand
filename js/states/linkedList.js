@@ -61,6 +61,34 @@ class LinkedList
 
 		this.#map.delete(value);
 	}
+	findKeyAtOffset(basis, offset)
+	{
+		if(!this.has(basis)) return null;
+
+		if(offset === 0) return basis;
+		if(offset < 0)
+		{
+			let cursor = basis;
+			for(let i=0; i<-offset; i++)
+			{
+				let before = this.get(cursor).prev;
+				if(before === null) break;
+				cursor = before;
+			}
+			return cursor;
+		}
+		else
+		{
+			let cursor = basis;
+			for(let i=0; i<offset; i++)
+			{
+				let after = this.get(cursor).next;
+				if(after === null) break;
+				cursor = after;
+			}
+			return cursor;
+		}
+	}
 	*[Symbol.iterator]()
 	{
 		let cursor = this.first;

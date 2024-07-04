@@ -17,9 +17,10 @@ function generatePaginationGroup(rawData)
 
 function generatePaginationMetadata(groupedPressList)
 {
+	console.log(groupedPressList);
 	const categoryName = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
 
-	const metadata = new Array(categories.length);
+	const metadata = [];
 	for(let i=0; i<metadata.length; i++)
 	{
 		let allPages = groupedPressList[i].length;

@@ -1,27 +1,12 @@
-const stateBatchUpdater = {
-	pendingTasks: new Map(),
-	hasPendingTask: false,
-	callUpdate(state, newValue) {
-		this.pendingTasks.set( state, newValue );
-		if(this.hasPendingTask) return;
-		this.hasPendingTask = true;
-		requestAnimationFrame( ()=>{
-			for(let [st, nv] of this.pendingTasks)
-			{
-				st.__applyChange(nv);
-			}
-			this.pendingTasks.clear();
-			this.hasPendingTask = false;
-		} );
-	}
-};
+import stateBatchUpdater from "./stateBatchUpdater.js";
 
-function State(initialValue, sideEffect)
+function State(initialValue, sideEffect=null)
 {
-	if(typeof sideEffect !== "function") {
+	if(sideEffect !== null && typeof sideEffect !== "function") {
 		throw new Error("side effect must be function!");
 	}
-	this.__sideEffects = new Set([sideEffect]);
+	this.__sideEffects = new Set();
+	if( typeof sideEffect === "function" ) this.__sideEffects.add(sideEffect);
 	this.value = initialValue;
 	this.__applyChange = (newValue)=>{
 		if(this.value === newValue) return;
