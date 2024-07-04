@@ -1,4 +1,5 @@
 import { TOTAL_MEDIA_CATEGORY } from "../static/data/total-media-category.js";
+import { convertToMarkdown } from "../utils/convertToMarkdown.js";
 
 /**
  * @description 전체 언론사를 렌더링하는 함수
@@ -212,10 +213,25 @@ function clickSubscribeButton(categoryIdx, mediaIdx, subscribeMediaId) {
  * @description 언론사 구독 취소 이벤트 등록하는 함수
  */
 function clickUnsubscribeButton(categoryIdx, mediaIdx, subscribeMediaId) {
-    const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
-    const newSubscribeList = JSON.stringify(subscribeList.filter((subscribedId) => subscribedId !== subscribeMediaId));
-    localStorage.setItem("newsstand-subscribe", newSubscribeList);
+    const media = TOTAL_MEDIA_CATEGORY.data[categoryIdx].media[mediaIdx];
+    const mediaName = media.name;
+    const id = media.id;
 
+    function clickCancel() {
+        const bodyDOM = document.querySelector("body");
+        const alertDOM = bodyDOM.querySelector(`#alert-${id}`);
+        bodyDOM.removeChild(alertDOM);
+    }
+    function clickUnsubscribe() {
+        const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+        const newSubscribeList = JSON.stringify(subscribeList.filter((subscribedId) => subscribedId !== subscribeMediaId));
+        localStorage.setItem("newsstand-subscribe", newSubscribeList);
+
+        clickCancel();
+        renderMedia(categoryIdx, mediaIdx);
+    }
+
+    renderAlert(`{${mediaName}}을(를)\n구독해지하시겠습니까?`, id, "예, 해지합니다", "아니오", clickUnsubscribe, clickCancel, clickCancel)
     renderMedia(categoryIdx, mediaIdx);
 }
 /**
@@ -224,20 +240,82 @@ function clickUnsubscribeButton(categoryIdx, mediaIdx, subscribeMediaId) {
 function renderSnackbar(text, id) {
     const bodyDOM = document.querySelector("body");
     const snackbarDOMString = `
-    <section id="snackbar-${id}" class="snackbar__container">
-        <p class="text__medium16 text__white--default">${text}</p>
+    <section id="snackbar-${id}" class="snackbar__wrapper">
+        <section class="snackbar__container">
+            <p class="text__medium16 text__white--default">${text}</p>
+        </section>
     </section>`;
     
     bodyDOM.insertAdjacentHTML("beforeend", snackbarDOMString);
 
-    setTimeout(() => {
-        const snackbarDOM = bodyDOM.querySelector(`#snackbar-${id}`);
-        bodyDOM.removeChild(snackbarDOM);
+    /**
+     * 5초 후 snackbar 삭제 로직
+     */
+    let snackbarId = null;
+    const snackbarWrapperDOM = document.querySelector(`#snackbar-${id}`);
+    snackbarId = setTimeout(() => {
+        bodyDOM.removeChild(snackbarWrapperDOM);
+        snackbarId = null;
     }, 5000);
+
+    /**
+     * snackbar 외부 영역 클릭 시 snackbar 삭제 로직
+     */
+    snackbarWrapperDOM.addEventListener("click", clickSnackbarOutside);
+    function clickSnackbarOutside(e) {
+        if (e.target !== snackbarWrapperDOM) {
+            return;
+        }
+
+        if (snackbarId !== null) {
+            clearTimeout(snackbarId);
+            snackbarId = null;
+        }
+
+        const bodyDOM = document.querySelector("body");
+        bodyDOM.removeChild(snackbarWrapperDOM);
+    }
 }
 /**
  * @description alert를 렌더하는 함수
  */
-function renderAlert() {
+function renderAlert(text, id, leftButtonText, rightButtonText, leftButtonEventHandler, rightButtonEventHandler) {
+    const markdownText = convertToMarkdown(text, 16);
 
+    const bodyDOM = document.querySelector("body");
+    const alertDOMString = `
+    <section id="alert-${id}" class="alert__wrapper">
+        <section class="alert__container">
+            <section class="alert__contents">${markdownText}</section>
+        
+            <section class="alert__buttons">
+                <p class="alert__button alert__button--left text__medium16">${leftButtonText}</p>
+                <p class="alert__button alert__button--right text__medium16 text--strong">${rightButtonText}</p>
+            </section>
+        </section>
+    </section>`;
+
+    bodyDOM.insertAdjacentHTML("beforeend", alertDOMString);
+
+    /**
+     * alert 이벤트 리스너 부착
+     */
+    const leftButtonDOM = document.querySelector(".alert__button--left");
+    const rightButtonDOM = document.querySelector(".alert__button--right");
+    leftButtonDOM.addEventListener("click", leftButtonEventHandler);
+    rightButtonDOM.addEventListener("click", rightButtonEventHandler);
+
+    /**
+     * alert 외부 영역 클릭 시 alert 삭제 로직
+     */
+    const alertWrapperDOM = document.querySelector(`#alert-${id}`);
+    alertWrapperDOM.addEventListener("click", clickAlertOutside);
+    function clickAlertOutside(e) {
+        if (e.target !== alertWrapperDOM) {
+            return;
+        }
+
+        const bodyDOM = document.querySelector("body");
+        bodyDOM.removeChild(alertWrapperDOM);
+    }
 }

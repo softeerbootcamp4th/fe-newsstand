@@ -60,6 +60,14 @@
     color: var(--gray500);
 }
 
+.snackbar__wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100vw;
+    height: 100vh;
+}
 .snackbar__container {
     position: absolute;
     left: 50%;
@@ -72,6 +80,14 @@
     box-shadow: var(--shadow);
 }
 
+.alert__wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 100vw;
+    height: 100vh;
+}
 .alert__container {
     width: 320px;
 
