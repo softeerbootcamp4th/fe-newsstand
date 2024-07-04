@@ -1,0 +1,10 @@
+.image-view {
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.image-view:hover {
+    transform: scale(1.05);
+}
