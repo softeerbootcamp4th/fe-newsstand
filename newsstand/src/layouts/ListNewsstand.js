@@ -1,12 +1,11 @@
-import Button, { ButtonVariantProps } from '../components/base/Button.js'
 import IconView, { Icon } from '../components/base/IconView.js'
 import createComponent from '../core/component/component.js'
-import ImageView from '../components/base/ImageView.js'
 import MediaCategories from './MediaCategories.js'
 import { mediaCategoryData, getNewsData, getCompanyCount } from '../datas/mockData.js'
 import { generateRandomId } from '../utils/idGenerator.js'
 import useState from '../core/hooks/useState.js'
 import { getPrevIndexInList, getNextIndexInList } from '../utils/listUtils.js'
+import MainNews from '../components/MainNews.js'
 
 const ListNewsstand = () => {
     const [selectedCategory, setSelectedCategory] = useState(mediaCategoryData[0])
@@ -22,23 +21,10 @@ const ListNewsstand = () => {
         setCurrentNewsId: setCurrentNewsId,
     })
 
-    const companyIcon = createComponent(IconView, {
+    const mainNewsComponent = createComponent(MainNews, {
         id: generateRandomId(10),
-        icon: newsData.companyLogo || '',
-    })
-
-    const subscribeButton = createComponent(Button, {
-        id: generateRandomId(10),
-        icon: Icon.PLUS,
-        text: '구독하기',
-        style: 'height:10px;',
-        variant: ButtonVariantProps.WHITE,
-    })
-
-    const ImageComponent = createComponent(ImageView, {
-        id: generateRandomId(10),
-        src: newsData.mainNews.src,
-        style: 'width: 100%; height:100%',
+        newsData: newsData,
+        style: 'width:40%; padding:2%;',
     })
 
     const leftButtonIcon = createComponent(IconView, {
@@ -107,23 +93,7 @@ const ListNewsstand = () => {
             <div class="list-news-container">
                 ${mediaCategories.element}
                 <div class="list-news-body">
-                    <div class="list-news-left-container">
-                        <div class="list-news-left-top">
-                            ${companyIcon.element}
-                            <h5>
-                                ${newsData.updatedDate}
-                            </h5>
-                            ${subscribeButton.element}
-                        </div>
-                        <div class="list-news-left-body">
-                            ${ImageComponent.element}
-                        </div>
-                        <div class="list-news-left-bottom">
-                            <h4 class="news-content">
-                                ${newsData.mainNews.title}
-                            </h4>
-                        </div>
-                    </div>
+                    ${mainNewsComponent.element}
                     <div class="list-news-right-container">
                         ${newsListElements}
                     </div>
