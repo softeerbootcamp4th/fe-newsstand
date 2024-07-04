@@ -19,6 +19,7 @@
 
 .header img {
   height: 24px;
+  filter: invert(37%) sepia(47%) saturate(1493%) hue-rotate(200deg) brightness(90%) contrast(91%);
 }
 
 .header div {
@@ -40,16 +41,20 @@
   gap:8px;
 }
 
-.roll div {
+.roll .graybox {
   flex: 1;
   background-color: #F5F7F9;
-  height: 17px;
-  border: solid #D2DAE0;
-  display: flex;
-  align-items: center;
+  border: 1px solid #D2DAE0;
   padding: 16px;
-  white-space: nowrap;
   overflow: hidden;
+}
+
+.roll .invisibleBox {
+  display: flex;
+  border: none;
+  height: 17px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .roll span.com{
@@ -68,6 +73,16 @@
 .roll span.title:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.toggle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toggle span {
+  color: #879298;
+  font-size: 16px;
 }
 
 .newslist {
