@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let leftIndex = 0;
     let rightIndex = 0;
-    const intervalTime = 5000; // 롤링 간격 (5초)
+    const intervalTime = 5000;
 
     let leftTimer;
     let rightTimer;
@@ -27,11 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
         titleParagraph.textContent = news.title;
         newsItem.appendChild(titleParagraph);
 
-        newsItem.setAttribute('data-url', news.url); // 뉴스 링크 추가
+        newsItem.setAttribute('data-url', news.url);
 
-        // 클릭 이벤트 리스너 추가
         newsItem.addEventListener('click', () => {
-            window.open(news.url, '_blank'); // 새 창에서 뉴스 링크 열기
+            window.open(news.url, '_blank'); 
         });
 
         return newsItem;
@@ -76,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return response.json();
         })
         .then(newsData => {
-            // 왼쪽과 오른쪽 배열로 나누기
             leftNews = newsData.slice(0, 5); 
             rightNews = newsData.slice(5, 10);
 

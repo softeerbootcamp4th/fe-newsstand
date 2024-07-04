@@ -163,14 +163,14 @@ main {
     font-size: 16px;
     line-height: 22px;
     gap: 24px;
-}
-
-#all {
     color: var(--text-weak);
+    cursor: pointer;
+    line-height: 22px;
 }
-#subscribe {
-    color: var(--text-strong);
 
+.selected-tab {
+    color: var(--text-strong);
+    font-weight: bold;
 }
 .main-header-tab p{
     margin: 0;

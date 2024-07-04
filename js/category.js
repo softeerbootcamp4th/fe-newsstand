@@ -36,12 +36,6 @@ function createCategory() {
 
 /* 조회한 카테고리의 전체 뉴스 가져오는 함수 */
 function loadCurrentCategoryNews() {
-    const mainNewsDiv = document.querySelector('.main-news');
-    const subNewsDiv = document.querySelector('.sub-news');
-
-
-    mainNewsDiv.innerHTML = '';
-    subNewsDiv.innerHTML = '';
 
     if(!newsData.length) {
         fetch("./data/allNews.json")
@@ -75,6 +69,10 @@ function loadCurrentCategoryNews() {
 function displayNews() {
     const mainNewsDiv = document.querySelector('.main-news');
     const subNewsDiv = document.querySelector('.sub-news');
+
+    mainNewsDiv.innerHTML = '';
+    subNewsDiv.innerHTML = '';
+
 
     const news = newsData[curCategoryIdx].news[curNewsIdx];
 
@@ -183,8 +181,8 @@ function updateBtnVisibility() {
 
     }
 
-
 }
+
 document.addEventListener("DOMContentLoaded", () => {
     createCategory();
     loadCurrentCategoryNews();

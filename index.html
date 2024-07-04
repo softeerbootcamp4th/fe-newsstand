@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="header-logo">
-            <img src="./icons/newspaper.svg" >
+            <img src="./src/icons/newspaper.svg" >
             <a href="/">뉴스스탠드</a>
         </div>
         <div class="header-date">
@@ -28,12 +28,12 @@
     <main>
         <div class="main-header">
             <div class="main-header-tab">
-                <p id="all">전체 언론사</p>
-                <p id="subscribe">내가 구독한 언론사</p>
+                <p class="all selected-tab">전체 언론사</p>
+                <p class="subscribe">내가 구독한 언론사</p>
             </div>
             <div class="main-header-icons">
-                <img src="/icons/list-view-checked.svg"> 
-                <img src="/icons/grid-view.svg" id="grid-view"> 
+                <img src="src/icons/list-view-checked.svg"> 
+                <img src="src/icons/grid-view.svg" id="grid-view"> 
             </div>
         </div>
         <div class="all-cate-container">
@@ -41,7 +41,7 @@
             </div>
             <div class="news-container">
                 <div class="container-header">
-                    <img alt="company-logo" src="/images/newsis.png">
+                    <img alt="company-logo" src="src/images/newsis.png">
                     <p class="edit-date">2024.05.02 18.43 편집</p>
                     <div class="subscribe-btn"><span>+</span>구독하기</div>
                 </div>
@@ -56,16 +56,17 @@
 
         </div>
         <div class="left-btn">
-            <img src="./images/LeftButton.png" alt="left-arrow">
+            <img src="./src/images/LeftButton.png" alt="left-arrow">
         </div>
         <div class="right-btn">
-            <img src="./images/RightButton.png" alt="left-arrow">
+            <img src="./src/images/RightButton.png" alt="left-arrow">
         </div>
 
     </main>
-    <script type="module" src="./header.js"></script>
-    <script type="module" src="./category.js"></script>
-    <script type="module" src="./rollingnews.js"></script>
+    <script type="module" src="./js/header.js"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/category.js"></script>
+    <script type="module" src="./js/rollingnews.js"></script>
 
 </body>
 
