@@ -1,6 +1,5 @@
 import { useState } from "../../libs/createApp";
 import { Div, Header, Section, Span } from "../../libs/Elements";
-import { Media } from "../../models/Media";
 import { MediaIdByCategories } from "../../models/Newsstand";
 import { CategoryNav } from "./CategoryNav";
 import { MediasContent } from "./MediasContent";
@@ -47,6 +46,16 @@ export const Medias = () => {
     initalState: "전체 언론사",
   });
 
+  const [currentCategoryIdx, setCurrentCategoryIdx] = useState({
+    key: "Medias",
+    initalState: 0,
+  });
+
+  const [currentMediaIdx, setCurrentMediaIdx] = useState({
+    key: "Medias",
+    initalState: 0,
+  });
+
   const mediaIdByCategories: MediaIdByCategories = [
     {
       mediaIds: [1, 2, 3],
@@ -71,7 +80,18 @@ export const Medias = () => {
     },
   ];
 
-  const currentMediaIdsAndCategory = mediaIdByCategories[0];
+  const handleMediaNext = () => {
+    if (
+      currentMediaIdx ===
+      mediaIdByCategories[currentCategoryIdx].mediaIds.length - 1
+    ) {
+      setCurrentMediaIdx(0);
+      setCurrentCategoryIdx(currentCategoryIdx + 1);
+      return;
+    }
+    setCurrentMediaIdx(currentMediaIdx + 1);
+  };
+  const currentMediaIdsAndCategory = mediaIdByCategories[currentCategoryIdx];
   return Section({
     children: [
       CurrentFilterToggler({
@@ -89,6 +109,8 @@ export const Medias = () => {
       }),
       MediasContent({
         currentMediaIdsAndCategory: currentMediaIdsAndCategory,
+        currentMediaIdx: currentMediaIdx,
+        handleMediaNext,
       }),
     ],
   });

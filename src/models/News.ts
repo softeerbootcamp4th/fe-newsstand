@@ -8,7 +8,3 @@ export type RecentNews = {
   mediaId: number;
   news: News;
 };
-
-export interface MediaRecentNewsList {
-  data: News[];
-}
