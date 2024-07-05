@@ -71,6 +71,12 @@
   background: var(--blue-500);
 }
 
+.progressTransition {
+  &::-webkit-progress-value {
+    transition: width 1s linear;
+  }
+}
+
 .pageInfo {
   font-size: 12px;
 }

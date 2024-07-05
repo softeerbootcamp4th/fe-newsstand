@@ -25,6 +25,8 @@ function NewsViewer({ $target, position = "beforeend" }) {
 
   this.render(getNews(this.state.category));
   this.$element.addEventListener("click", this.handleClick.bind(this));
+
+  this.initializeProgress();
 }
 
 NewsViewer.prototype.handleNextClick = function () {
@@ -82,7 +84,7 @@ NewsViewer.prototype.getCategoryFilterTemplate = function (newsLength) {
           <span class="pageInfo">${this.state.page + 1}
           <span class="newsLength"> / ${newsLength}</span>
           </span>
-          <progress class="progress" value="0" min="0" max="100"></progress>
+          <progress class="progress progressTransition" value="0" min="0" max="100"></progress>
         </li>
         `;
     }
@@ -97,6 +99,50 @@ NewsViewer.prototype.getCategoryFilterTemplate = function (newsLength) {
 
 NewsViewer.prototype.handleCategoryClick = function (category) {
   this.setState({ page: 0, category });
+};
+
+NewsViewer.prototype.initializeProgress = function () {
+  const interval = setInterval(this.progressInterval.bind(this), 1000);
+};
+
+NewsViewer.prototype.progressInterval = function () {
+  const $progress = this.$element.querySelector(".progress");
+
+  if ($progress.value === 100) {
+    $progress.classList.remove("progressTransition");
+    $progress.value = 0;
+
+    this.nextPage();
+
+    $progress.classList.add("progressTransition");
+  }
+
+  $progress.value += 5;
+};
+
+NewsViewer.prototype.nextPage = function () {
+  const news = getNews(this.state.category);
+  const nextPage = this.state.page + 1;
+
+  if (nextPage >= news.length) {
+    this.nextCategory();
+
+    return;
+  }
+
+  this.setState({ page: nextPage });
+};
+
+NewsViewer.prototype.nextCategory = function () {
+  const nextCategory = this.state.category + 1;
+
+  if (nextCategory >= CATEGORIES.length) {
+    this.setState({ category: 0, page: 0 });
+
+    return;
+  }
+
+  this.setState({ category: nextCategory, page: 0 });
 };
 
 NewsViewer.prototype.render = function (news) {
