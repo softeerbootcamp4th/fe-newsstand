@@ -12,6 +12,7 @@ const MediaCategories = (props) => {
             setState: props.setSelectedCategory,
             currentNewsId: props.currentNewsId,
             setCurrentNewsId: props.setCurrentNewsId,
+            onFillComplete: props.onFillComplete,
             style: 'height:100%;',
         }),
     )

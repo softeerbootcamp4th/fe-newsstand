@@ -13,33 +13,6 @@ const ListNewsstand = () => {
 
     const newsData = getNewsData(selectedCategory, currentNewsId)
 
-    const mediaCategories = createComponent(MediaCategories, {
-        id: generateRandomId(10),
-        style: 'width:100%; height:10%;',
-        selectedCategory: selectedCategory,
-        setSelectedCategory: setSelectedCategory,
-        currentNewsId: currentNewsId,
-        setCurrentNewsId: setCurrentNewsId,
-    })
-
-    const mainNewsComponent = createComponent(MainNews, {
-        id: generateRandomId(10),
-        newsData: newsData,
-        style: 'width:40%; padding:2%;',
-    })
-
-    const leftButtonIcon = createComponent(IconView, {
-        id: generateRandomId(10),
-        icon: Icon.LEFT_BUTTON,
-        color: 'red',
-    })
-
-    const rightButtonIcon = createComponent(IconView, {
-        id: generateRandomId(10),
-        icon: Icon.RIGHT_BUTTON,
-        color: 'blue',
-    })
-
     const handleRightButtonClick = () => {
         const currentCategoryCompanyCount = getCompanyCount(selectedCategory)
 
@@ -76,6 +49,34 @@ const ListNewsstand = () => {
         leftBtn.addEventListener('click', handleLeftButtonClick)
         rightBtn.addEventListener('click', handleRightButtonClick)
     }
+
+    const mediaCategories = createComponent(MediaCategories, {
+        id: generateRandomId(10),
+        style: 'width:100%; height:10%;',
+        selectedCategory: selectedCategory,
+        setSelectedCategory: setSelectedCategory,
+        currentNewsId: currentNewsId,
+        setCurrentNewsId: setCurrentNewsId,
+        onFillComplete: handleRightButtonClick,
+    })
+
+    const mainNewsComponent = createComponent(MainNews, {
+        id: generateRandomId(10),
+        newsData: newsData,
+        style: 'width:40%; padding:2%;',
+    })
+
+    const leftButtonIcon = createComponent(IconView, {
+        id: generateRandomId(10),
+        icon: Icon.LEFT_BUTTON,
+        color: 'red',
+    })
+
+    const rightButtonIcon = createComponent(IconView, {
+        id: generateRandomId(10),
+        icon: Icon.RIGHT_BUTTON,
+        color: 'blue',
+    })
 
     const newsListElements = newsData.news.map((newsItem) => `<a class="news-content">${newsItem.title}</a>`).join('')
 

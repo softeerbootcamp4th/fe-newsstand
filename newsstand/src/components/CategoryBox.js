@@ -12,9 +12,6 @@ const CategoryBox = (props) => {
     }
 
     let countText = `${props.currentNewsId}/${companyCount}`
-    if (props.currentNewsId === companyCount) {
-        countText = '>'
-    }
 
     const handleMouseOver = () => {
         setIsHover(true)
@@ -36,11 +33,34 @@ const CategoryBox = (props) => {
         button.addEventListener('click', handleMouseClick)
     }
 
+    const fillGauge = () => {
+        const fill = document.getElementById(`category-fill-${props.id}`)
+        if (fill) {
+            let width = 0
+            const interval = setInterval(() => {
+                if (width >= 110) {
+                    clearInterval(interval)
+                    if (props.onFillComplete) {
+                        props.onFillComplete()
+                    }
+                } else {
+                    width++
+                    fill.style.width = width + '%'
+                }
+            }, 190)
+        }
+    }
+
+    if (props.state === props.text) {
+        setTimeout(fillGauge, 0)
+    }
+
     return {
         element: `
         <div class="category-box-wrap"
             style="background-color: ${props.state === props.text ? '#7890E7' : 'transparent'};"
         >
+            <div class="category-box-fill" id="category-fill-${props.id}"></div>
             <li class="category-text" id="category-text-${props.id}"
                 style="font-weight: ${isHover || props.state === props.text ? 'bold' : 400};
                 color: ${props.state === props.text ? 'white' : 'black'};"
