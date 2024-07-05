@@ -38,20 +38,19 @@ export const AutoRollingNews = (props) => {
 
     let interval;
 
-    document.addEventListener('DOMContentLoaded', () => {
+    // 초기 렌더링 함수 호출
+    render();
+
+    // 자동 롤링 기능 구현
+    interval = setInterval(rollingCallback, 3000);
+
+    // 마우스 오버/아웃 이벤트 처리
+    element.addEventListener('mouseover', function() {
+        clearInterval(interval);
+    });
+
+    element.addEventListener('mouseout', function() {
         interval = setInterval(rollingCallback, 3000);
-
-        const container =  document.querySelector('.autoRollingNews-container')
-        console.log(container)
-
-        container.addEventListener('mouseover', function() {
-            console.log('냥')
-            clearInterval(interval);
-        });
-
-        container.addEventListener('mouseout', function() {
-            interval = setInterval(rollingCallback, 3000);
-        });
     });
 
     function rollingCallback() {
@@ -63,8 +62,8 @@ export const AutoRollingNews = (props) => {
         const { press, title, link } = newsStrings[currentIndex];
 
         const html = `
+            <p class="autoRollingNews-company">${press}</p>
             <div class="autoRollingNews-item animate-out">
-                <p class="autoRollingNews-company">${press}</p>
                 <a class="autoRollingNews-title" href="${link}">${title}</a>
             </div>
         `;

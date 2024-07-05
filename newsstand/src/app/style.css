@@ -9,6 +9,12 @@ html, body {
     height: 100%;
 }
 
+a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
 button {
     border: 0px;
     background-color: transparent;

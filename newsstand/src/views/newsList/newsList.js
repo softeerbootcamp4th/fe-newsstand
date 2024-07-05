@@ -7,10 +7,17 @@ export const NewsList = (props) => {
     element.className = 'news-container';
 
     let selectedId = 'press-category-0';
+    let pressCategoryContainer = PressCategoryContainer({
+        selectedId, 
+        onChangeCategory: handleChangeCategory
+    });
 
     function handleChangeCategory(newSelectedId) {
-        selectedId = newSelectedId;
-        render();
+        if (newSelectedId !== selectedId) {
+            selectedId = newSelectedId;
+            pressCategoryContainer.updateSelectedId(newSelectedId);
+            render();
+        }
     }
 
     function render() {
@@ -19,15 +26,10 @@ export const NewsList = (props) => {
             <div class="news-content-container"></div>
             <img src="../../assets/icons/right-arrow-button.svg" alt="right arrow icon">
         `;
-        
+
         element.innerHTML = html;
 
         const newsContentContainer = element.querySelector('.news-content-container');
-
-        const newsCategoryContainer = PressCategoryContainer({
-            selectedId, 
-            onChangeCategory: handleChangeCategory
-        });
 
         const pressInfoContainer = PressInfoContainer({ 
             imageSrc: "", 
@@ -49,7 +51,7 @@ export const NewsList = (props) => {
             ]
         });
 
-        newsContentContainer.appendChild(newsCategoryContainer.element);
+        newsContentContainer.appendChild(pressCategoryContainer.element);
         newsContentContainer.appendChild(pressInfoContainer.element);
         newsContentContainer.appendChild(pressNewsContainer.element);
     }
