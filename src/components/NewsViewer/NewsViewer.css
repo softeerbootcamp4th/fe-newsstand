@@ -4,6 +4,8 @@
 
   height: 388px;
 
+  position: relative;
+
   border: 1px solid var(--gray-100);
   box-sizing: border-box;
 }
@@ -213,8 +215,4 @@
 .newsButton > img {
   width: 24px;
   height: 40px;
-}
-
-.hide {
-  display: none;
 }
