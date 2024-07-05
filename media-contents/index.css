@@ -5,6 +5,9 @@
 .media-contents__category-list {
     height: 40px;
     border-bottom: 1px solid var(--gray100);
+
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 .media-contents__category-item {
     padding: 0 16px;
@@ -49,9 +52,13 @@
 
 .media-contents__category-item-text {
     cursor: pointer;
+    word-break: keep-all;
 }
 .media-contents__category-item-text:hover {
     text-decoration: underline;
+}
+.media-contents__category-item-text--selected {
+    word-break: keep-all;
 }
 
 .media-contents__contents-box {

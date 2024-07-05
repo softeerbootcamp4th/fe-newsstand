@@ -13,7 +13,7 @@ export function getSelectedCategoryItemDOMString(categoryName, selectedCategoryI
     return `<li class="media-contents__category-item media-contents__category-item--selected" data-selected-category-idx="${selectedCategoryIdx}" data-selected-media-idx="${selectedMediaIdx}">
                 <section class="media-contents__category-item-background"></section>
                 <section class="media-contents__category-item-contents">
-                    <p class="text__bold14 text__white--default">${categoryName}</p>
+                    <p class="text__bold14 text__white--default media-contents__category-item-text--selected">${categoryName}</p>
                     <section>
                         ${categoryLength ? `
                             <p class="text__bold14 text__white--default">${selectedMediaIdx + 1}</p> <p class="text__bold14 text__white--weak">/ ${categoryLength}</p>
@@ -52,10 +52,10 @@ export function getSelectedCategoryContentsDOMString(media) {
         <p class="text__medium12">${editDate}</p>
         ${isSubscribed ? `
             <section class="button__container subscribe-button--unsubscribe" data-media-id="${id}">
-                <img alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
+                <img class="subscribe-button__icon--unsubscribe" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
             </section>` : `
             <section class="button__container subscribe-button--subscribe" data-media-id="${id}">
-                <img alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
+                <img class="subscribe-button__icon" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
                 <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
             </section>`}
     </section>
@@ -89,12 +89,20 @@ export function setSubscribeButtonEvent(media, triggerRender) {
     if (subscribeButtonDOM) {
         const subscribeMediaId = parseInt(subscribeButtonDOM.dataset.mediaId);
         subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(subscribeMediaId, triggerRender));
+
+        const subscribeButtonIconDOM = subscribeButtonDOM.querySelector(".subscribe-button__icon");
+        subscribeButtonDOM.addEventListener("mouseover", () => subscribeButtonIconDOM.src = "./static/icons/plus-hover.svg");
+        subscribeButtonDOM.addEventListener("mouseout", () => subscribeButtonIconDOM.src = "./static/icons/plus-default.svg");
     }
 
     const unsubscribeButtonDOM = document.querySelector('.subscribe-button--unsubscribe');
     if (unsubscribeButtonDOM) {
         const unsubscribeMediaId = parseInt(unsubscribeButtonDOM.dataset.mediaId);
         unsubscribeButtonDOM.addEventListener("click", () => clickUnsubscribeButton(media, unsubscribeMediaId, triggerRender));
+        
+        const unsubscribeButtonIconDOM = unsubscribeButtonDOM.querySelector(".subscribe-button__icon--unsubscribe");
+        unsubscribeButtonDOM.addEventListener("mouseover", () => unsubscribeButtonIconDOM.src = "./static/icons/close-hover.svg");
+        unsubscribeButtonDOM.addEventListener("mouseout", () => unsubscribeButtonIconDOM.src = "./static/icons/close-default.svg");
     }
 }
 
