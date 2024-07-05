@@ -9,7 +9,7 @@ function backColorAnimate() {
     selectedMedia.style.backgroundSize = '200%';
     selectedMedia.style.backgroundRepeat = 'no-repeat';
     selectedMedia.style.backgroundPosition = `${100 - gradientPosition}%`
-    selectedMedia.style.transition = "background 1s"
+    selectedMedia.style.transition = "background 0.5s"
 }
 
 export { backColorAnimate }
