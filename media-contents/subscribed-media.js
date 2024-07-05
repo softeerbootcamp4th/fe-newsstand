@@ -12,6 +12,8 @@ import {
     setSubscribeButtonEvent,
 } from "./util.js";
 
+const DEFAULT_MEDIA_INDEX = 0;
+
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
@@ -44,7 +46,7 @@ function renderMedia(mediaId) {
     prevMediaButton.addEventListener("click", navigatePrevMedia);
     nextMediaButton.addEventListener("click", navigateNextMedia);
 
-    
+
     if (subscribedMediaList.length === 0) {
         mediaListDOM.innerHTML = "";
         contentsBoxDOM.innerHTML = "";
@@ -64,7 +66,7 @@ function renderMedia(mediaId) {
             /**
              * 선택된 카테고리인 경우
              */
-            mediaListDOM.innerHTML += getSelectedCategoryItemDOMString(_media.name, _mediaIdx, 0);
+            mediaListDOM.innerHTML += getSelectedCategoryItemDOMString(_media.name, _mediaIdx, DEFAULT_MEDIA_INDEX);
         } else {
             /**
              * 선택되지 않은 카테고리인 경우
@@ -86,7 +88,7 @@ function renderMedia(mediaId) {
     const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaIdx, 0));
+    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaIdx, DEFAULT_MEDIA_INDEX));
 }
 
 /**

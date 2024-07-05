@@ -12,14 +12,14 @@ import {
     setSubscribeButtonEvent,
 } from "./util.js";
 
+const DEFAULT_CATEGORY_INDEX = 0;
+const DEFAULT_MEDIA_INDEX = 0;
+
 /**
  * @description 전체 언론사를 렌더링하는 함수
  */
 export function renderTotalMedia() {
-    /**
-     * @NOTE 기본으로 0번째 index의 카테고리, 미디어가 선택된 상태
-     */
-    renderMedia(0, 0)
+    renderMedia(DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
 }
 
 /**
