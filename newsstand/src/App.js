@@ -1,15 +1,15 @@
 import createComponent from './core/component/component.js'
 import Header from './layouts/Header.js'
 import SubHeader from './layouts/SubHeader.js'
-import Category from './layouts/Category.js'
+import NewsSourceSelector from './layouts/NewsSourceSelector.js'
 import ListNewsstand from './layouts/ListNewsstand.js'
 import { generateRandomId } from './utils/idGenerator.js'
 
 const App = () => {
     const headerLayout = createComponent(Header, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
-    const SubHeaderLayout = createComponent(SubHeader, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
-    const categoryLayout = createComponent(Category, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
-    const ListNewsstandLayout = createComponent(ListNewsstand, {
+    const subHeaderLayout = createComponent(SubHeader, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
+    const newsSourceSelectorLayout = createComponent(NewsSourceSelector, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
+    const listNewsstandLayout = createComponent(ListNewsstand, {
         id: generateRandomId(10),
         style: 'width:100%; height:70%;',
     })
@@ -22,13 +22,13 @@ const App = () => {
                 ${headerLayout.element}
 
                 ${/* subheader layout */ ''}
-                ${SubHeaderLayout.element}
+                ${subHeaderLayout.element}
 
-                ${/* category layout */ ''}
-                ${categoryLayout.element}
+                ${/* news source selector layout */ ''}
+                ${newsSourceSelectorLayout.element}
 
                 ${/* news container layout */ ''}
-                ${ListNewsstandLayout.element}
+                ${listNewsstandLayout.element}
             </div>
         </div>
         `,

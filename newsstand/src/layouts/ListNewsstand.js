@@ -10,6 +10,7 @@ import MainNews from '../components/MainNews.js'
 const ListNewsstand = () => {
     const [selectedCategory, setSelectedCategory] = useState(mediaCategoryData[0])
     const [currentNewsId, setCurrentNewsId] = useState(1)
+
     const newsData = getNewsData(selectedCategory, currentNewsId)
 
     const mediaCategories = createComponent(MediaCategories, {
