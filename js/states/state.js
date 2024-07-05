@@ -5,8 +5,10 @@ function State(initialValue, sideEffect=null)
 	if(sideEffect !== null && typeof sideEffect !== "function") {
 		throw new Error("side effect must be function!");
 	}
+
 	this.__sideEffects = new Map();
 	if( typeof sideEffect === "function" ) this.__sideEffects.set(sideEffect, "default");
+
 	this.value = initialValue;
 	this.__applyChange = (newValue)=>{
 		if(this.value === newValue) return;

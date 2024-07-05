@@ -14,9 +14,10 @@ const stateBatchUpdater = {
 			{
 				st.__applyChange(nv);
 			}
-			this.callSideEffects();
 			this.pendingTasks.clear();
 			this.hasPendingTask = false;
+
+			this.callSideEffects();
 		} );
 	},
 	// 저장된 모든 사이드이펙트에 대해, {func : [ {stateKey:newState}, {stateKey:oldState} ]}로 변경하는걸 수행

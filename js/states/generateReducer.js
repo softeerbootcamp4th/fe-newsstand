@@ -1,4 +1,5 @@
 import State from "./state.js";
+import DerivedState from "./derivedState.js";
 import LinkedList from "./linkedList.js";
 import LinkedListAdaptor from "./linkedListAdaptor.js";
 import CursorAdaptor from "./cursorAdaptor.js";
@@ -8,6 +9,7 @@ function generateReducer(fullList)
 	const fullLinkedList = new LinkedList(fullList);
 	const subscribedLinkedList = new LinkedList();
 
+	// state
 	const subscribeFilterState = new State(false);
 	const viewTypeState = new State("list");
 	const subscribedListState = new LinkedListAdaptor(subscribedLinkedList);
@@ -18,13 +20,23 @@ function generateReducer(fullList)
 		return viewTypeState.value === "list" ? 1 : 24;
 	}
 
+	// derived state
+	const isFirstPage = new DerivedState( ()=>{
+		return cursorState.findOffset(-getDelta()) === null;
+	}, [cursorState, viewTypeState, subscribeFilterState, subscribedListState] );
+	const isLastPage = new DerivedState( ()=>{
+		return cursorState.findOffset(getDelta()) === null;
+	}, [cursorState, viewTypeState, subscribeFilterState, subscribedListState] );
+
 	return [
 		// state
 		{
 			subFilter : subscribeFilterState,
 			viewType : viewTypeState,
 			subList: subscribedListState,
-			cursor: cursorState
+			cursor: cursorState,
+			isFirstPage,
+			isLastPage
 		},
 		// reducer
 		{
@@ -74,14 +86,6 @@ function generateReducer(fullList)
 				subscribedListState.delete(value);
 			},
 			// derived state
-			isFirstPage()
-			{
-				return cursorState.findOffset(-getDelta()) === null;
-			},
-			isLastPage()
-			{
-				return cursorState.findOffset(getDelta()) === null;
-			},
 			beforeCursor()
 			{
 				return cursorState.findOffset(-getDelta());

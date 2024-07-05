@@ -12,7 +12,7 @@ const [state, reducer] = generateReducer(fullList);
 
 mountLeftSelector(state.subFilter, reducer.setFullView, reducer.setSubscribedView);
 mountRightSelector(state.viewType, reducer.setListView, reducer.setGridView);
-mountPageMoverSelector(state.cursor, reducer);
+mountPageMoverSelector(state, reducer);
 mountView(state, reducer, fullList, metadata);
 
 state.subFilter.addSideEffect( (e)=>console.log(`chnge sub filter : ${e}`) );
