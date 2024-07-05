@@ -24,7 +24,6 @@ function ListComponent(state, reducer, fullList, metadata)
 
 function mountView(state, reducer, fullList, metadata)
 {
-	console.log(fullList, metadata);
 	const el = document.getElementById("newsSection");
 
 	function render(current)
@@ -33,6 +32,7 @@ function mountView(state, reducer, fullList, metadata)
 		else applyDiff(el, ListComponent(state, reducer, fullList, metadata));
 	}
 
+	state.subFilter.addSideEffect(render, "subFilter");
 	state.viewType.addSideEffect(render, "viewType");
 	state.cursor.addSideEffect(render, "cursor");
 }

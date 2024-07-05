@@ -47,7 +47,6 @@ function makeRelativeNodePositionMap(children)
 function replaceTo(oldDom, newDom)
 {
 	const parent = oldDom.parentNode;
-	console.log("replaced", parent, oldDom, newDom);
 	parent.insertBefore(newDom, oldDom);
 	parent.removeChild(oldDom);
 }

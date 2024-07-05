@@ -57,6 +57,7 @@ class PaginationCursor
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
 		let cursor = this.attachedLinkedList.has(this.current) ? this.current : this.neighbor.next;
+		if(cursor === null) return;
 		for(let i=0; i<num; i++)
 		{
 			yield cursor;
