@@ -18,6 +18,11 @@
   color: var(--text-text-bold, #4B5966);
 }
 
+.news-preview-sub {
+  list-style-type: none;
+  color: var(--text-text-weak, #879298);
+}
+
 .main-news-box {
   display: flex;
   flex-direction: column;

@@ -49,6 +49,7 @@ export const MediasContent = ({
       }),
       MediaContentMain({
         newsList: recentNewsList,
+        media: currentMedia,
       }),
       hasPrev &&
         Button({
