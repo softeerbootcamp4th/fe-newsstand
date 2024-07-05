@@ -12,7 +12,7 @@ function mountLeftSelector(state, setFullView, setSubscribedView)
 			allMediaSelector.classList.remove("selected");
 			subMediaSelector.classList.add("selected");
 		}
-	} )
+	} );
 
 	allMediaSelector.addEventListener("click", setFullView);
 	subMediaSelector.addEventListener("click", setSubscribedView);

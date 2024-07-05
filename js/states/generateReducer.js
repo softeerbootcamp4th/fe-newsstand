@@ -15,9 +15,11 @@ function generateReducer(fullList)
 	const subscribedListState = new LinkedListAdaptor(subscribedLinkedList);
 	const cursorState = new CursorAdaptor(fullLinkedList);
 
+	const GRID_ITEMS_PER_PAGE = 24;
+
 	function getDelta()
 	{
-		return viewTypeState.value === "list" ? 1 : 24;
+		return viewTypeState.value === "list" ? 1 : GRID_ITEMS_PER_PAGE;
 	}
 
 	// derived state

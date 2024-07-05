@@ -8,6 +8,7 @@ import mountPageMoverSelector from "./views/mountPageMoverSelector.js";
 import mountView from "./views/mainView.js";
 
 const {list: fullList, metadata} = processListPagination(rawData);
+
 const [state, reducer] = generateReducer(fullList);
 
 mountLeftSelector(state.subFilter, reducer.setFullView, reducer.setSubscribedView);
