@@ -60,20 +60,21 @@ function renderMedia(mediaId) {
     const _selectedMediaIdx = subscribedMediaList.findIndex((media) => media.id === selectedMediaId);
     const selectedMediaIdx = _selectedMediaIdx === -1 ? 0 : _selectedMediaIdx;
 
-    mediaListDOM.innerHTML = "";
+    let mediaListDOMString = ''
     subscribedMediaList.forEach((_media, _mediaIdx) => {
         if (_mediaIdx === selectedMediaIdx) {
             /**
              * 선택된 카테고리인 경우
              */
-            mediaListDOM.innerHTML += getSelectedCategoryItemDOMString(_media.name, _mediaIdx, DEFAULT_MEDIA_INDEX);
+            mediaListDOMString += getSelectedCategoryItemDOMString(_media.name, _mediaIdx, DEFAULT_MEDIA_INDEX);
         } else {
             /**
              * 선택되지 않은 카테고리인 경우
              */
-            mediaListDOM.innerHTML += getUnselectedCategoryItemDOMString(_media.name, _mediaIdx);
+            mediaListDOMString += getUnselectedCategoryItemDOMString(_media.name, _mediaIdx);
         }
     });
+    mediaListDOM.innerHTML = mediaListDOMString;
 
     /**
      * 카테고리 이벤트 초기화 후 이벤트 리스너 등록

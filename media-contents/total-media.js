@@ -32,20 +32,21 @@ function renderMedia(categoryIdx, mediaIdx) {
     /**
      * 미디어 카테고리 렌더링
      */
-    categoryListDOM.innerHTML = '';
+    let categoryListDOMString = ''
     category.forEach((_category, _categoryIdx) => {
         if (_categoryIdx === categoryIdx) {
             /**
              * 선택된 카테고리인 경우
              */
-            categoryListDOM.innerHTML += getSelectedCategoryItemDOMString(_category.categoryName, categoryIdx, mediaIdx, _category.length);
+            categoryListDOMString += getSelectedCategoryItemDOMString(_category.categoryName, categoryIdx, mediaIdx, _category.length);
         } else {
             /**
              * 선택되지 않은 카테고리인 경우
              */
-            categoryListDOM.innerHTML += getUnselectedCategoryItemDOMString(_category.categoryName, _categoryIdx);
+            categoryListDOMString += getUnselectedCategoryItemDOMString(_category.categoryName, _categoryIdx);
         }
-    })
+    });
+    categoryListDOM.innerHTML = categoryListDOMString;
 
     /**
      * 카테고리 이벤트 초기화 후 이벤트 리스너 등록
