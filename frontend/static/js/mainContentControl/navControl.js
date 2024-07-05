@@ -11,7 +11,7 @@ export function removeSelected(navElements) {
     });
 }
 
-export function navSelected(data, selectedDom, timeOut) {
+export function navSelected(index, totalIndex, selectedDom) {
     // 현재 선택한 nav element에 선택했다는 class추가
     selectedDom.classList.add("isSelected");
     // 그 안에 존재하던 종합/경제와 같은 text를 postion: absolute로 변경
@@ -19,7 +19,7 @@ export function navSelected(data, selectedDom, timeOut) {
     document.querySelector(".mainContentNavElement.isSelected>#text").classList.add("absolute");
     // template literal을 통해 배경 prograss와 1/81같은 카운터를 추가하기 위한 div 생성
     // 이때 mainContentNavProgress가 생기면 자동으로 progress가 시작됨
-    const template = `<div class="mainContentNavProgress"></div><span class="mainContentNavCounter" style="margin-left: 100px; opacity:99%;">${data}</span><span class="mainContentNavCounter" style="opacity: 70%; margin-left:10px;"> / 81</span>`
+    const template = `<div class="mainContentNavProgress"></div><span class="mainContentNavCounter" style="margin-left: 100px; opacity:99%;">${index + 1}</span><span class="mainContentNavCounter" style="opacity: 70%; margin-left:10px;"> / ${totalIndex}</span>`
     // 현재 nav element에 주입
     selectedDom.insertAdjacentHTML('beforeend', template);
 }
