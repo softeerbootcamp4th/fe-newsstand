@@ -32,15 +32,21 @@ export const MediasContent = ({
     currentMediaIdsAndCategory.category.id,
   );
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      handleMediaNext();
-    }, 20000);
+  useEffect(
+    {
+      key: "MediasContent",
+      effectFunc: () => {
+        const timeout = setTimeout(() => {
+          handleMediaNext();
+        }, 20000);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [currentMediaIdx, currentMediaIdsAndCategory]);
+        return () => {
+          clearTimeout(timeout);
+        };
+      },
+    },
+    [currentMediaIdx, currentMediaIdsAndCategory],
+  );
   return Div({
     className: `${styles.container}`,
     children: [

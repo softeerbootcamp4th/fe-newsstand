@@ -8,32 +8,53 @@ import {
 import { Deque } from "./deque";
 import { debounceAnimationCallback, isPropsEqual } from "./utils";
 
-const effectCleanUps = new Map<number, () => void>();
-const effectDependencies = new Map<number, any[]>();
+const effectCleanUpsMap = new Map<string, Array<() => void>>();
+const effectsKeyMap = new Map<string, number>();
+const effectDependenciesMap = new Map<string, any[]>();
 const statesMap = new Map<string, Array<any>>();
 const statesKeyMap = new Map<string, number>();
 const callbacksMap = new Map<string, Array<() => void>>();
 const callbacksDependenciesMap = new Map<string, any[]>();
 const callbacksKeyMap = new Map<string, number>();
 const propsMap = new Map<string, any>();
-let effectsKey = 0;
 const createApp = () => {
-  const useEffect = (effectFunc: () => () => void, rawDependencies?: any[]) => {
+  const useEffect = (
+    {
+      effectFunc,
+      key,
+    }: {
+      effectFunc: () => () => void;
+      key: string;
+    },
+    rawDependencies?: any[],
+  ) => {
     const dependencies = rawDependencies ?? [];
-    const lstDependencies = effectDependencies.get(effectsKey);
-    if (
-      lstDependencies == null ||
-      lstDependencies.length !== dependencies.length ||
-      lstDependencies.some((value, index) => value !== dependencies[index])
-    ) {
-      effectDependencies.set(effectsKey, dependencies);
-      const lstEffectCleanUp = effectCleanUps.get(effectsKey);
-      lstEffectCleanUp?.();
-      const effectCleanUp = effectFunc();
-      effectCleanUps.set(effectsKey, effectCleanUp);
+    const localKey = effectsKeyMap.get(key) ?? 0;
+    if (effectsKeyMap.has(key)) {
+      effectsKeyMap.set(key, localKey + 1);
+    } else {
+      effectsKeyMap.set(key, 0);
+    }
+    if (!effectDependenciesMap.has(key)) {
+      effectDependenciesMap.set(key, []);
     }
 
-    effectsKey += 1;
+    if (!effectCleanUpsMap.has(key)) {
+      effectCleanUpsMap.set(key, []);
+    }
+    const effectCleanUps = effectCleanUpsMap.get(key)!;
+    const effectDependencies = effectDependenciesMap.get(key)!;
+    if (effectDependencies.length <= localKey) {
+      effectDependencies.push([]);
+    }
+    const lstDependencies = effectDependencies[localKey];
+    if (!isPropsEqual(dependencies, lstDependencies)) {
+      effectDependencies[localKey] = dependencies;
+      const lstEffectCleanUp = effectCleanUps[localKey];
+      lstEffectCleanUp?.();
+      const effectCleanUp = effectFunc();
+      effectCleanUps[localKey] = effectCleanUp;
+    }
   };
 
   const useCallback = <RawT = unknown>(
@@ -146,8 +167,7 @@ const createApp = () => {
     if (root == null || app == null) return;
     statesKeyMap.clear();
     callbacksKeyMap.clear();
-
-    effectsKey = 0;
+    effectsKeyMap.clear();
 
     const top = document.createElement("div");
 

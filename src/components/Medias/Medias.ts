@@ -1,5 +1,5 @@
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
-import { useCallback, useState } from "../../libs/createApp";
+import { useCallback, useEffect, useState } from "../../libs/createApp";
 import { Div, Section } from "../../libs/Elements";
 import { CategoryNavs } from "./CategoryNavs";
 import { MediasContent } from "./MediasContent";
@@ -32,18 +32,24 @@ export const Medias = () => {
       mediaIdByCategories[currentCategoryIdx].mediaIds.length - 1 ||
     hasNextCategory;
   const hasPrev = currentMediaIdx > 0 || hasPrevCategory;
-  const handleMediaNext = () => {
-    if (
-      currentMediaIdx ===
-      mediaIdByCategories[currentCategoryIdx].mediaIds.length - 1
-    ) {
-      if (!hasNextCategory) return;
-      setCurrentMediaIdx(0);
-      setCurrentCategoryIdx(currentCategoryIdx + 1);
-      return;
-    }
-    setCurrentMediaIdx(currentMediaIdx + 1);
-  };
+  const handleMediaNext = useCallback(
+    {
+      key: "Medias",
+      callback: () => {
+        if (
+          currentMediaIdx ===
+          mediaIdByCategories[currentCategoryIdx].mediaIds.length - 1
+        ) {
+          if (!hasNextCategory) return;
+          setCurrentCategoryIdx(currentCategoryIdx + 1);
+          setCurrentMediaIdx(0);
+          return;
+        }
+        setCurrentMediaIdx(currentMediaIdx + 1);
+      },
+    },
+    [currentMediaIdx, mediaIdByCategories, currentCategoryIdx, hasNextCategory],
+  );
 
   const handleMediaPrev = () => {
     if (currentMediaIdx === 0) {
@@ -66,6 +72,22 @@ export const Medias = () => {
       },
     },
     [],
+  );
+
+  useEffect(
+    {
+      key: "Medias",
+      effectFunc: () => {
+        const timeout = setTimeout(() => {
+          handleMediaNext();
+        }, 20000);
+
+        return () => {
+          clearTimeout(timeout);
+        };
+      },
+    },
+    [handleMediaNext],
   );
   const currentMediaIdsAndCategory = mediaIdByCategories[currentCategoryIdx];
   return Section({
