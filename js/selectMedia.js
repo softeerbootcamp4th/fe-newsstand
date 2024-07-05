@@ -36,11 +36,13 @@ function addMediaListClickEvent(mediaList, categoryData) {
 function mediaClickHandler(event, categoryData) {
     resetSelected(event.currentTarget.parentElement.children);
     event.currentTarget.dataset.selected = "yes";
-    event.currentTarget.dataset.newsCount = categoryData[event.currentTarget.innerText].length;
+    event.currentTarget.dataset.newsCount = Math.ceil(categoryData[event.currentTarget.innerText].length / 7);
     event.currentTarget.dataset.newsIndex = 1;
 
     const selectedMedia = getSelectedMedia();
     const selectedMediaIndex = getSelectedMediaIndex(selectedMedia);
+
+    backColorAnimate();
 
     newsListController(categoryData[selectedMedia.innerText], selectedMediaIndex);
 }
@@ -53,10 +55,19 @@ function resetSelected(mediaList) {
     })
 }
 
+function removeEventListeners(element) {
+    const oldElement = element.cloneNode(true);
+    element.parentNode.replaceChild(oldElement, element);
+    return oldElement;
+}
+
 // 뉴스 목록 버튼 클릭 핸들러 추가
 function addNewsListButtonEvent(categoryData) {
-    const leftButton = document.querySelector(".news-list__btn-left");
-    const rightButton = document.querySelector(".news-list__btn-right");
+    let leftButton = document.querySelector(".news-list__btn-left");
+    let rightButton = document.querySelector(".news-list__btn-right");
+
+    leftButton = removeEventListeners(leftButton);
+    rightButton = removeEventListeners(rightButton);
 
     leftButton.addEventListener("click", (event) => leftButtonHandler(event, categoryData));
     rightButton.addEventListener("click", (event) => rightButtonHandler(event, categoryData));
@@ -65,6 +76,7 @@ function addNewsListButtonEvent(categoryData) {
 function leftButtonHandler(event, categoryData) {
     const selectedMedia = getSelectedMedia();
     const selectedMediaIndex = getSelectedMediaIndex(selectedMedia);
+    console.log("add", categoryData)
 
     if (selectedMediaIndex === "1") {
         const previousElement = selectedMedia.previousElementSibling;
@@ -73,7 +85,7 @@ function leftButtonHandler(event, categoryData) {
             const mediaList = getMediaList();
             resetSelected(mediaList);
             previousElement.dataset.selected = "yes";
-            previousElement.dataset.newsCount = categoryData[previousElement.innerText].length;
+            previousElement.dataset.newsCount = Math.ceil(categoryData[previousElement.innerText].length / 7);
             previousElement.dataset.newsIndex = previousElement.dataset.newsCount;
         } 
     } else {
@@ -82,6 +94,7 @@ function leftButtonHandler(event, categoryData) {
 
     const changedMedia = getSelectedMedia();
     const changedMediaIndex = getSelectedMediaIndex(changedMedia);
+
     backColorAnimate();
     newsListController(categoryData[changedMedia.innerText], changedMediaIndex);
 }
@@ -89,6 +102,7 @@ function leftButtonHandler(event, categoryData) {
 function rightButtonHandler(event, categoryData) {
     const selectedMedia = getSelectedMedia();
     const selectedMediaIndex = getSelectedMediaIndex(selectedMedia);
+    console.log("add", categoryData)
 
     if (selectedMediaIndex === selectedMedia.dataset.newsCount) {
         const nextElement = selectedMedia.nextElementSibling;
@@ -97,7 +111,7 @@ function rightButtonHandler(event, categoryData) {
             const mediaList = getMediaList();
             resetSelected(mediaList);
             nextElement.dataset.selected = "yes";
-            nextElement.dataset.newsCount = categoryData[nextElement.innerText].length;
+            nextElement.dataset.newsCount = Math.ceil(categoryData[nextElement.innerText].length / 7);
             nextElement.dataset.newsIndex = 1;
         } 
     } else {
@@ -106,6 +120,9 @@ function rightButtonHandler(event, categoryData) {
 
     const changedMedia = getSelectedMedia();
     const changedMediaIndex = getSelectedMediaIndex(changedMedia);
+    console.log(categoryData);
+    console.log(changedMedia.innerText)
+    console.log(categoryData[changedMedia.innerText])
     backColorAnimate();
     newsListController(categoryData[changedMedia.innerText], changedMediaIndex);
 }

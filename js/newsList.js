@@ -8,7 +8,6 @@ function setMainNews(categoryData, newsIndex) {
     const mainNewsTitle = document.querySelector(".news-list__main__heading__title");
     const mainNewsDate = document.querySelector(".news-list__main__heading__date");
     const mainNewsCompany = document.querySelector(".news-list__main__heading__company");
-
     mainNewsTitle.innerText = categoryData[newsIndex * 7].title;
     mainNewsDate.innerText = categoryData[newsIndex * 7].date;
     mainNewsCompany.innerText = categoryData[newsIndex * 7].media;
@@ -18,7 +17,11 @@ function setNewsList(categoryData, newsIndex) {
     const newsList = document.querySelectorAll(".news-list__main__list__title");
 
     newsList.forEach((news, index) => {
-        news.innerText = categoryData[newsIndex * 7 + (index + 1)].title;
+        if(categoryData[newsIndex * 7 + (index + 1)]) {
+            news.innerText = categoryData[newsIndex * 7 + (index + 1)].title;
+        } else {
+            // news.style.color = 'white'
+        }
     })
 }
 

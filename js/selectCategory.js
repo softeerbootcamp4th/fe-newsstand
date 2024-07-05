@@ -64,7 +64,7 @@ function changeCategoryUI(categoryData) {
 
         if(index === 0) {
             childNode.dataset.selected = "yes";
-            childNode.dataset.newsCount = categoryData[category].length;
+            childNode.dataset.newsCount = Math.ceil(categoryData[category].length / 7) ;
             childNode.dataset.newsIndex = 1;
         }
 
