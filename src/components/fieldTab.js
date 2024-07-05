@@ -1,5 +1,6 @@
 import { data } from './news.js';
 import { pressInfoButton } from './button.js';
+import { snackBar } from './snackBar.js';
 
 let currentIntervalId = null; // 현재 실행 중인 intervalId
 let currentTimeoutId = null; // 현재 실행 중인 timeoutId
@@ -66,6 +67,36 @@ const deselectCategory = async (index, liList) => {
     clearTimeout(currentTimeoutId);
 };
 
+const subscribeNews = async () => {
+    const NewsListUl = document.getElementById('NewsList').querySelector('ul');
+    NewsListUl.innerHTML = '';
+
+    // forEach 대신 map 사용
+    const liList = data.map((category, categoryIndex) => {
+        return category.company.map((company, companyIndex) => {
+            if (company.isSubscribe) {
+                const li = document.createElement('li');
+                li.textContent = company.companyName;
+                li.classList.add('notselectNews');
+
+                li.addEventListener('click', async () => {
+                    await handleCategoryClick(companyIndex, liList);
+                });
+
+                NewsListUl.appendChild(li);
+                return li; // li를 반환하여 liList에 추가될 수 있도록 함
+            }
+        });
+    }).flat(); // 중첩 배열을 평탄화하여 최종 liList를 얻음
+
+    let newsIndex = 0;
+    while (true) {
+        await processCategory(newsIndex, liList);
+        newsIndex = (newsIndex + 1) % data.length;
+    }
+};
+
+
 // 카테고리의 정보를 표시하고 일정 시간 간격으로 업데이트하는 함수
 const processCategory = async (index, liList) => {
     let i = 1;
@@ -103,12 +134,28 @@ const processCategory = async (index, liList) => {
         const button = pressInfo.querySelector('.pressInfoButton');
         if (button) {
             button.addEventListener('click', () => {
-                newsData.isSubscribe = !newsData.isSubscribe;
-                const pressInfoText = `
+
+                if (!newsData.isSubscribe) {
+                    const pressInfoText = `
             <img src = ${newsData.companyLogo}>
             <span class = "display-medium12">${newsData.updatedDate}</span>
-            ${pressInfoButton(newsData.isSubscribe ? "" : "구독하기")}`
-                pressInfo.innerHTML = pressInfoText;
+            ${pressInfoButton(newsData.isSubscribe ? "구독하기" : "")}`
+                    pressInfo.innerHTML = pressInfoText;
+                    snackBar("내가 구독한 언론사에 추가되었습니다.");
+                    setTimeout(() => {
+                        subscribeNews();
+                    }, 5000);
+                }
+                else {
+                    const pressInfoText = `
+            <img src = ${newsData.companyLogo}>
+            <span class = "display-medium12">${newsData.updatedDate}</span>
+            ${pressInfoButton(newsData.isSubscribe ? "구독하기" : "")}`
+                    pressInfo.innerHTML = pressInfoText;
+                }
+                newsData.isSubscribe = !newsData.isSubscribe;
+
+
             })
         }
 

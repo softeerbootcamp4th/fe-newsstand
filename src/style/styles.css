@@ -72,7 +72,31 @@ header {
 
 .newsTickerEach span {
     margin: 5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
+
+
+.autoRolling {
+    animation: none;
+}
+
+.autoRolling.active {
+    animation: autoRollingAnimation 0.5s linear forwards;
+}
+
+@keyframes autoRollingAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
 
 
 /*******************************************************************/
@@ -205,7 +229,7 @@ main {
     width: 0%;
     height: 100%;
     background-color: var(--blue-500);
-    transition: width 2s linear;
+    transition: width 50s linear;
 }
 
 
@@ -320,4 +344,40 @@ main {
 
 .pressInfoButton:hover img {
     filter: grayscale(100%) brightness(60%);
+}
+
+
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/* snackBar */
+
+#snackBar {
+    position: fixed;
+    visibility: hidden;
+    width: 286px;
+    height: 54px;
+    background-color: var(--surface-brand-default);
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: auto;
+    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
+        0 2px 18px hsla(var(--grayscale-black), 0.8);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: visibility 0s, opacity 0.5s linear;
+    opacity: 0;
+}
+
+#snackBar.show {
+    visibility: visible;
+    opacity: 1;
 }
