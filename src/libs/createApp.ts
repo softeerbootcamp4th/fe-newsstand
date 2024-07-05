@@ -6,11 +6,7 @@ import {
   SimpleElement,
 } from "./AppElement";
 import { Deque } from "./deque";
-import {
-  debounceAnimationCallback,
-  isPropsEqual,
-  toStringAnything,
-} from "./utils";
+import { debounceAnimationCallback, isPropsEqual } from "./utils";
 
 const effectCleanUps = new Map<number, () => void>();
 const effectDependencies = new Map<number, any[]>();
@@ -23,7 +19,7 @@ const propsMap = new Map<string, any>();
 let effectsKey = 0;
 const createApp = () => {
   const useEffect = (effectFunc: () => () => void, rawDependencies?: any[]) => {
-    const dependencies = rawDependencies?.map(toStringAnything) ?? [];
+    const dependencies = rawDependencies ?? [];
     const lstDependencies = effectDependencies.get(effectsKey);
     if (
       lstDependencies == null ||
@@ -51,7 +47,7 @@ const createApp = () => {
     rawDependencies?: any[],
   ) => {
     type T = RawT extends unknown ? typeof callback : RawT;
-    const dependencies = rawDependencies?.map(toStringAnything) ?? [];
+    const dependencies = rawDependencies ?? [];
     if (!callbacksKeyMap.has(key)) {
       callbacksKeyMap.set(key, 0);
     }
@@ -64,13 +60,12 @@ const createApp = () => {
     if (callbacks.length <= localCallbacksKey) {
       callbacks.push(callback as () => void);
     }
-    callbacksKeyMap.set(key, localCallbacksKey + 1);
-    if (isPropsEqual(dependencies, callbacksDependenciesMap.get(key))) {
-      return callbacks[localCallbacksKey] as T;
+    if (!isPropsEqual(dependencies, callbacksDependenciesMap.get(key))) {
+      callbacks[localCallbacksKey] = callback as () => void;
+      callbacksDependenciesMap.set(key, dependencies);
     }
-    callbacksDependenciesMap.set(key, dependencies);
-    const memoedCallback = callbacks[localCallbacksKey];
-    return memoedCallback as T;
+    callbacksKeyMap.set(key, localCallbacksKey + 1);
+    return callbacks[localCallbacksKey] as T;
   };
 
   const renderQueue = new Deque<() => void>();
@@ -150,6 +145,8 @@ const createApp = () => {
     isRendering = true;
     if (root == null || app == null) return;
     statesKeyMap.clear();
+    callbacksKeyMap.clear();
+
     effectsKey = 0;
 
     const top = document.createElement("div");
@@ -170,11 +167,13 @@ const createApp = () => {
         parent.appendChild(_converRawElementToDom(currentElem.node));
         continue;
       }
+      const idx = parent.children.length;
       parent.appendChild(currentElem.node);
       const key = `${parent.getAttribute("key") ?? ""}-${
         currentElem.node.tagName
-      }`;
+      }[${idx}]`;
       currentElem.node.setAttribute("key", key);
+
       if (!isPropsEqual(propsMap.get(key), currentElem.props)) {
         propsMap.set(key, currentElem.props);
         currentElem.node.setAttribute("forced", "true");

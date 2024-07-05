@@ -24,29 +24,17 @@ export const debounce = (callback: () => void, delay: number) => {
   };
 };
 
-export const toStringAnything = (value: any) => {
-  if (value === undefined) {
-    return "undefined";
-  }
-  if (value === null) {
-    return "null";
-  }
-  if (typeof value === "object") {
-    return JSON.stringify(value);
-  }
-  return value.toString();
-};
-
 export const isPropsEqual = (prevProps: any, nextProps: any) => {
   const prevKeys = Object.keys(prevProps ?? {});
   const nextKeys = Object.keys(nextProps ?? {});
   if (prevKeys.length !== nextKeys.length) {
     return false;
   }
-  for (const key of prevKeys) {
+  for (const key of nextKeys) {
     if (key == "children") {
       continue;
     }
+
     if (prevProps[key] !== nextProps[key]) {
       return false;
     }
