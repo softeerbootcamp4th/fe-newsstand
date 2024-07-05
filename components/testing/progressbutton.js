@@ -1,4 +1,5 @@
-let currentIndex = 1;
+let idx_loc = 1;
+//import {currentIndex} from "../mainscript.js";
 let animationTimer;
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -6,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     buttons.forEach(button => {
         button.addEventListener('click', function() {
             resetProgress(); // 다른 버튼 상태 초기화
+            //console.log(currentIndex);
+
             transformToProgress(this); // 클릭된 버튼을 progress-button으로 변경
         });
     });
@@ -20,20 +23,20 @@ function transformToProgress(element) {
     updateButtonText(element);
 
     animationTimer = setInterval(() => {
-        currentIndex++;
+        idx_loc++;
         updateButtonText(element);
-        clearInterval(animationTimer);
+        //clearInterval(animationTimer);
     }, 5000); 
 }
 
 function updateButtonText(element) {
     const originalText = element.getAttribute('data-original-text');
-    element.textContent = `${originalText} ${currentIndex}/81`;
+    element.textContent = `${originalText}      ${idx_loc}/81`;
 }
 
 //초기화
 function resetProgress() {
-    currentIndex = 1;
+    idx_loc = 1;
     clearInterval(animationTimer);
 
     const progressButtons = document.querySelectorAll('.progress-button');
