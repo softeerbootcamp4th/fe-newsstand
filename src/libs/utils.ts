@@ -35,6 +35,15 @@ export const isPropsEqual = (prevProps: any, nextProps: any) => {
       continue;
     }
 
+    if (
+      typeof prevProps[key] === "object" &&
+      typeof nextProps[key] === "object"
+    ) {
+      if (!isPropsEqual(prevProps[key], nextProps[key])) {
+        return false;
+      }
+      continue;
+    }
     if (prevProps[key] !== nextProps[key]) {
       return false;
     }

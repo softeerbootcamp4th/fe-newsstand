@@ -53,6 +53,7 @@ const createApp = () => {
       const lstEffectCleanUp = effectCleanUps[localKey];
       lstEffectCleanUp?.();
       const effectCleanUp = effectFunc();
+
       effectCleanUps[localKey] = effectCleanUp;
     }
   };
@@ -242,27 +243,28 @@ const createApp = () => {
       states.push(initalState);
     }
     const state = states[localStatesKey] as T;
-    function update(updater: Updater) {
-      const curLocalStatesKey = statesKeyMap.get(key)!;
-      const curState = states[curLocalStatesKey] as T;
+    const update = useCallback(
+      {
+        key: `${key}-SET_STATE`,
+        callback: (updater: Updater) => {
+          const newState =
+            typeof updater === "function" ? updater(state) : updater;
+          if (newState === state) {
+            return;
+          }
 
-      const newState =
-        typeof updater === "function"
-          ? (updater as (state: T) => T)(curState)
-          : updater;
-
-      if (curState == newState) {
-        return;
-      }
-      if (isRendering) {
-        fillRenderQueue(() => {
+          if (isRendering) {
+            fillRenderQueue(() => {
+              states[localStatesKey] = newState;
+            });
+            return;
+          }
           states[localStatesKey] = newState;
-        });
-        return;
-      }
-      states[localStatesKey] = newState;
-      render();
-    }
+          render();
+        },
+      },
+      [],
+    );
     statesKeyMap.set(key, localStatesKey + 1);
     return [state, update] as [T, Updater];
   }

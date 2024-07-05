@@ -2,14 +2,10 @@ import { A, Div, Span } from "../../libs/Elements";
 import { getMediaById } from "../../remotes/getMediaById";
 import typoStyles from "@/styles/typo.module.css";
 import styles from "./RecentNewsRoll.module.css";
-import { useState, useEffect, useCallback } from "@/libs/createApp";
+import { useState, useEffect } from "@/libs/createApp";
 import { getRecentNews } from "@/remotes/getRecentNews";
 
 export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
-  const [isHovering, setIsHovering] = useState({
-    key: "RecentNewsRoll",
-    initalState: false,
-  });
   const [from, setFrom] = useState({
     key: "RecentNewsRoll",
     initalState: 0,
@@ -19,15 +15,13 @@ export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
     from: from * 2 + (needDelay ? 1 : 0),
     limit: 2,
   });
-  const update = () => {
-    if (isHovering) return;
-    setFrom(from + 1);
-  };
   useEffect(
     {
       key: "RecentNewsRoll",
       effectFunc: () => {
-        const interval = setInterval(update, 5000);
+        const interval = setInterval(() => {
+          setFrom(from + 1);
+        }, 5000);
         return () => {
           clearInterval(interval);
         };
@@ -37,32 +31,11 @@ export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
   );
   const media = getMediaById(mediaId);
 
-  const handleHover = useCallback(
-    {
-      key: "RecentNewsRoll",
-      callback: () => {
-        setIsHovering(true);
-      },
-    },
-    [],
-  );
-  const handleLeave = useCallback(
-    {
-      key: "RecentNewsRoll",
-      callback: () => {
-        setIsHovering(false);
-      },
-    },
-    [],
-  );
-
   return Div({
     className: `${styles.box}`,
     children: [
       A({
         href: news.href,
-        onHover: handleHover,
-        onLeave: handleLeave,
         className: `${styles.link}`,
         children: [
           Span({
