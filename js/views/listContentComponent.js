@@ -21,14 +21,14 @@ function ListContentComponent(pressId, subscribeState)
 	const dom = html`
 	<article class="listContent">
 		<div class="contentHeader">
-			<img src="${logo}" alt="${name}" class="logoImage" />
+			<img src="${logo}" alt="${name}" class="logoImage" loading="lazy" />
 			<p class="lastEditDate">${getDateFormat(lastEditDate)} 편집</p>
 			${SubscribeButton(pressId, subscribeState)}
 		</div>
 		<div class="contentBody">
 			<div class="headlineArticle">
 				<div class="headlineImgWrapper">
-					<img src="${headArticle.img}" alt="${headArticle.title}">
+					<img src="${headArticle.img}" alt="${headArticle.title}" loading="lazy">
 				</div>
 				<p>${headArticle.title}</p>
 			</div>

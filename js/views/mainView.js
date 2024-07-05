@@ -28,11 +28,12 @@ function mountView(state, reducer, fullList, metadata)
 
 	function render(current)
 	{
-		if(state.viewType.value === "grid") applyDiff(el, GridViewComponent(state.cursor.getDataList(24)));
+		if(state.viewType.value === "grid") applyDiff(el, GridViewComponent(state.cursor.getDataList(24), state.subList));
 		else applyDiff(el, ListComponent(state, reducer, fullList, metadata));
 	}
 
 	state.subFilter.addSideEffect(render, "subFilter");
+	state.subList.addSideEffect(render, "subList");
 	state.viewType.addSideEffect(render, "viewType");
 	state.cursor.addSideEffect(render, "cursor");
 }

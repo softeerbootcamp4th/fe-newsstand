@@ -26,10 +26,10 @@ function SubscribeButton(pressId, subList)
 		// subscribePopup(pressId);
 	} );
 
-	subList.addSideEffect( (after, before)=>{
-		if(after.includes(pressId) && !before.includes(pressId)) applyDiff(dom, SubscribeButtonInner(true));
-		else if(before.includes(pressId) && !after.includes(pressId)) applyDiff(dom, SubscribeButtonInner(false));
-	} );
+	// subList.addSideEffect( (after, before)=>{
+	// 	if(after.includes(pressId) && !before.includes(pressId)) applyDiff(dom, SubscribeButtonInner(true));
+	// 	else if(before.includes(pressId) && !after.includes(pressId)) applyDiff(dom, SubscribeButtonInner(false));
+	// } );
 
 	return dom;
 }
