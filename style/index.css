@@ -60,7 +60,7 @@
 
 .roll span.com {
   font-size: 14px;
-  width: 50px;
+  width: 60px;
   margin-right: 16px;
   color: #14212B;
   font-weight: bold;
@@ -102,7 +102,7 @@
   filter: invert(44%) sepia(40%) saturate(1022%) hue-rotate(190deg) brightness(83%) contrast(98%);
 }
 
-.list .newsgroup {
+.newsgroup {
   background-color: #F5F7F9;
   border: solid #D2DAE0 1px;
   display: flex;
@@ -110,37 +110,40 @@
   color: #879298;
 }
 
-.list .newsgroup div {
+.newsgroup div {
   height: 40px;
   display: flex;
   align-items: center;
   padding-left: 16px;
   padding-right: 16px;
+  font-size: 14px;
+  gap: 60px;
 }
 
-.list .manynews {
+.list {
   border: solid #D2DAE0 1px;
   height: 348px;
   padding: 24px;
+  position: relative;
 }
 
-.list .manynews .subscrBar {
+.list .subscrBar {
   margin-bottom: 16px;
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-.list .manynews .subscrBar img {
+.list .subscrBar img {
   height: 20px;
 }
 
-.list .manynews .subscrBar span {
+.list .subscrBar span {
   color: #5F6E76;
   font-size: 12px;
 }
 
-.list .manynews .subscrBar button {
+.list .subscrBar button {
   background-color: #F5F7F9;
   border: #D2DAE0 1px solid;
   font-size: 12px;
@@ -151,11 +154,35 @@
   padding-right: 6px;
 }
 
-.list .manynews .bottom {
+.list .bottom {
   display: flex;
 }
 
-.list .manynews .headline {
+.list .headline {
   display: flex;
   flex-direction: column;
+}
+
+.list .headline img {
+  height: 200px;
+}
+
+.list .leftscroll {
+  position: absolute;
+  left: -6%;
+  top: 40%;
+}
+
+.list .leftscroll:hover {
+  cursor: pointer;
+}
+
+.list .rightscroll {
+  position: absolute;
+  right: -6%;
+  top: 40%;
+}
+
+.list .rightscroll:hover {
+  cursor: pointer;
 }

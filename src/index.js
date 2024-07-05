@@ -23,9 +23,13 @@ const getDate = () => {
 };
 
 const loadNews = async () => {
-  let { news } = await (await fetch("/data/news.json")).json();
-  let left = 0;
-  let right = 123456789; // 랜덤수
+  let news = [];
+  let { ctg } = await (await fetch("/data/news.json")).json();
+  Object.keys(ctg).forEach((key) => {
+    news = [...news, ...ctg[key]];
+  });
+  let leftNewsIndex = 0;
+  let rightNewsIndex = 123456789; // 랜덤수
   let newsLength = news.length;
 
   const insertNews = (newsIndex, DOMIndex, first) => {
@@ -40,19 +44,19 @@ const loadNews = async () => {
     }, 500);
   }
 
-  insertNews(left++, 0, 1);
-  insertNews(right++ % newsLength, 2, 1);
+  insertNews(leftNewsIndex++, 0, 1);
+  insertNews(rightNewsIndex++ % newsLength, 2, 1);
   setInterval(() => {
     if (!mouseHover[0] && !mouseHover[1]) {
-      insertNews(left % newsLength, 0, 0);
-      left++;
+      insertNews(leftNewsIndex % newsLength, 0, 0);
+      leftNewsIndex++;
     }
 
     if (!mouseHover[2] && !mouseHover[3]) {
       setTimeout(() => {
         if (!mouseHover[2] && !mouseHover[3]) {
-          insertNews(right % newsLength, 2, 0);
-          right++;
+          insertNews(rightNewsIndex % newsLength, 2, 0);
+          rightNewsIndex++;
         }
       }, 1000);
     }
