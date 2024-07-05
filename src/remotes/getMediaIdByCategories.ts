@@ -49,5 +49,33 @@ export const getMediaIdByCategories = () => {
         name: "지역",
       },
     },
+    {
+      mediaIds: [1, 2, 3],
+      category: {
+        id: 8,
+        name: "8번 카테고리",
+      },
+    },
+    {
+      mediaIds: [1, 2, 3],
+      category: {
+        id: 9,
+        name: "9번 카테고리",
+      },
+    },
+    {
+      mediaIds: [1, 2, 3],
+      category: {
+        id: 10,
+        name: "10번 카테고리",
+      },
+    },
+    {
+      mediaIds: [1, 2, 3],
+      category: {
+        id: 11,
+        name: "11번 카테고리",
+      },
+    },
   ];
 };
