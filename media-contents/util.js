@@ -43,7 +43,7 @@ export function getUnselectedCategoryItemDOMString(categoryName, categoryIdx) {
 export function getSelectedCategoryContentsDOMString(media) {
     const { id, iconUrl, editDate, imageContent, contents } = media;
 
-    const subscribeList = localStorage.getItem("newsstand-subscribe") ?? [];
+    const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
     const isSubscribed = subscribeList.includes(id);
 
     return `

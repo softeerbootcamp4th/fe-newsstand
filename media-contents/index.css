@@ -8,6 +8,8 @@
 
     overflow-x: auto;
     overflow-y: hidden;
+
+    user-select: none;
 }
 .media-contents__category-item {
     padding: 0 16px;
