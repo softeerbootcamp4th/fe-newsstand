@@ -37,6 +37,8 @@
     width: 320px;
     height: 200px;
     object-fit: cover;
+
+    transition: 0.3s;
 }
 .media-contents__image-headline {
     display: -webkit-box;
@@ -50,6 +52,9 @@
 }
 .media-contents__image-content:hover .media-contents__image-headline {
     text-decoration: underline;
+}
+.media-contents__image-content:hover img {
+    transform: scale(105%);
 }
 
 .media-contents__list-item-text {
