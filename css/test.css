@@ -110,6 +110,8 @@ h2 {
     font-family: 'Pretendard Variable', sans-serif;
     font-size: 14px;
     color: #5f6e76;
+    text-overflow: ellipsis;
+    overflow: hidden;
     animation: animateHeadline 5s infinite;
 }
 
@@ -202,7 +204,9 @@ h2 {
 .news-press-container {
     height: 40px;
     display: flex;
-    align-items: center; 
+    align-items: center;
+    margin-left: 18px;
+    margin-top: 24px; 
 }
 
 .news-press-img {
@@ -210,8 +214,14 @@ h2 {
     align-items: center; 
     margin-left: 10px;
     margin-right: 10px;
+    width: 50px; 
+    height: 20px; 
 }
-
+.news-press-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지를 컨테이너에 맞추기 */
+}
 .news-press-edit {
     width: 150px;
     font-family: Pretendard Variable;
@@ -238,15 +248,14 @@ h2 {
 
 .news-sub-container_right{
     margin-left: 20px;
-    margin-top:30px;
 }
 .news-image-container {
     width: 320px;
     height: 200px;
     overflow: hidden; 
     border: 1px #D2DAE0; 
-    margin-left: 25px;
-    margin-top: 45px;
+    margin-left: 26px;
+    margin-top: 15px;
     display: flex;
 }
 
@@ -287,6 +296,8 @@ h2 {
     display: flex;
     gap: 16px;
     margin-top: 16px;
+    color:  #4B5966;
+
 }
 .news-sub-titles:hover {
     text-decoration: underline;
@@ -356,17 +367,29 @@ button:hover {
 /* progress button - tab*/
 .progress-button{
     cursor: pointer;
-    background: var(--surface-surface-brand-alt, #7890E7);
+    /*background: var(--surface-surface-brand-alt, #7890E7); */
     width: 166px;
     height: 17px;
+    background: #7890E7;
     font-size: 15px;
     color: white;
+    overflow: hidden;
 }
 
-.progress-button.transition {
-    animation: colorChange 5s linear;
+/*눌린 후 탭*/
+.selected::after{
+    content: "";
+    position: absolute;
+    top:0;
+    left:0;
+    width:0%;
+    height: 100%;
+    transition: width 5s linear;
 }
 
+.selected.nowSelected::after{
+    width: 100%;
+}
 @keyframes colorChange {
     0% { background-color: #66b3ff; } /* 시작 색 (하늘색) */
     100% { background-color: blue; } /* 종료 색 (파란색) */
