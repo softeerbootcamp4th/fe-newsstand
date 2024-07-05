@@ -1,157 +1,160 @@
 [
     {
-        "uid": "1",
+        "category" : 0,
+        "pid": "0",
         "pressType": "economy",
-        "pressImg": "../image/grid.svg",
-        "pressName": "경제신문",
+        "pressImg": "../../image/grid.svg",
+        "edittime" : "2024.07.04 12:56 편집",
+        "pressName": "서울경제",
+        "mainphoto" : "https://newsimg.sedaily.com/2024/07/04/2DBLZL2FO4_2.jpg",
+        "maintitle" : "\"저가 매수 기회\"…SK하이닉스 순매수 1위 [주식 초고수는 지금]",
         "news": [
             {
-                "editDate": "2024.07.04 12:56 편집",
-                "photo": "https://newsimg.sedaily.com/2024/07/04/2DBLZL2FO4_2.jpg",
-                "title": "\"저가 매수 기회\"…SK하이닉스 순매수 1위 [주식 초고수는 지금]"
+                "title": "이번엔 서울 강남서…70대 운전자 차량, 어린이집 돌진",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
 
             {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 두 번째 기사 제목"
+                "title": "경제 섹션의 두 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"  
             },
 
             {
-                "editDate": "2023-07-29 11:11 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 세 번째 기사 제목"
+                "title": "경제 섹션의 세 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
 
             {
-                "editDate": "2023-06-14 22:34 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 네 번째 기사 제목"
+                "title": "경제 섹션의 네 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "editDate": "2023-10-02 15:22 편집",
-                 "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 다섯 번째 기사 제목"
+                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 여섯 번째 기사 제목"
+                "title": "경제 섹션의 여섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             }
         ]
     },
-
     {
-        "uid": "2",
+        "category" : 0,
+        "pid": "1",
         "pressType": "economy",
-        "pressImg": "../image/grid1.svg",
-        "pressName": "매일경제",
+        "pressImg": "../../image/grid1.svg",
+        "pressName": "데일리안",
+        "edittime" : "2024.05.31 12:56 편집",
+        "mainphoto" : "../image/Thumbnail.png",
+        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
         "news": [
             {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 일곱 번째 기사 제목"
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "editDate": "2023-01-19 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 여덟 번째 기사 제목"
+                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "editDate": "2024-07-03 09:48 편집",
-                "photo": "https://wimg.mk.co.kr/news/cms/202407/03/news-p.v1.20240703.d76d855e0ead4461b13b84bf6dfca0ad_P1.jpg",
-                "title": "신의직장은 무조건 버텨야돼”…평균연봉 1억 넘는 ‘이곳’ 근속연수 15년 달해"
-            },
-            {
-                "editDate": "2024-07-04 15:20 편집",
-                "photo": "https://wimg.mk.co.kr/news/cms/202407/04/news-p.v1.20240704.f3722099cac344a3bf51ae2e204023b4_P1.png",
-                "title": "트럼프 리스크에 너무 내렸나··· 태양광주 반등 성공"
-            },
-            {
-                "editDate": "2024-07-03",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 열한 번째 기사 제목"
-            },
-            {
-                "editDate": "2024-07-03",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 열두 번째 기사 제목"
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             }
         ]
     },
     {
-        "uid": "3",
+        "category" : 2,
+        "pid": "0",
         "pressType": "internet",
-        "pressImg": "../image/grid1.svg",
-        "pressName": "구글",
+        "pressImg": "../../image/grid8.svg",
+        "pressName": "아이뉴스24",
+        "edittime" : "2023.12.29 12:56 편집",
+        "mainphoto" : "https://wimg.mk.co.kr/news/cms/202407/04/news-p.v1.20240410.e544b897d89545e1ab9c0503c619bdcc_P1.jpg",
+        "maintitle" : "‘오픈AI 챗GPT’ 중국 해커한테 털렸다…AI 기술 설계·세부정보 탈취",
         "news": [
             {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 일곱 번째 기사 제목"
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 여덟 번째 기사 제목"
+                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 아홉 번째 기사 제목"
-            },
-            {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 열 번째 기사 제목"
-            },
-            {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 열한 번째 기사 제목"
-            },
-            {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 열두 번째 기사 제목"
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             }
         ]
     },
     {
-        "uid": "4",
-        "pressType": "internet",
-        "pressImg": "../image/grid1.svg",
-        "pressName": "인사이트",
+        "category" : 1,
+        "pid": "0",
+        "pressType": "broadcast",
+        "pressImg": "../../image/grid16.svg",
+        "pressName": "법률방송뉴스",
+        "edittime" : "2023.11.15 12:00 편집",
+        "mainphoto" : "https://cdn.itbiznews.com/news/photo/202109/48169_43554_442.jpg",
+        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
         "news": [
             {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/ns/2024/06/18/NISI20240613_0020377482_web.jpg",
-                "title": "왜 나만 물지?...'모기'가 밤낮 안 가리고 스토커처럼 당신만 졸졸 쫓아다니는 이유"
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "editDate": "2024-07-02 16:54 편집",
-                "photo": "https://img.insight.co.kr/static/2024/07/02/700/img_20240702162255_gox2004w.webp",
-                "title": "애플, 카메라 탑재한 새로운 에어팟 출시한다"
+                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 아홉 번째 기사 제목"
-            },
-            {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 열 번째 기사 제목"
-            },
-            {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 열한 번째 기사 제목"
-            },
-            {
-                "editDate": "2023-07-29 15:22 편집",
-                "photo": "../image/Thumbnail.png",
-                "title": "경제 섹션의 열두 번째 기사 제목"
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             }
         ]
     }
