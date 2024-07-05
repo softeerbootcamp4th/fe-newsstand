@@ -1,6 +1,6 @@
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { useCallback, useState } from "../../libs/createApp";
-import { Section } from "../../libs/Elements";
+import { Div, Section } from "../../libs/Elements";
 import { CategoryNavs } from "./CategoryNavs";
 import { MediasContent } from "./MediasContent";
 import { CurrentFilterToggler } from "./CurrentFilterToggler";
@@ -75,19 +75,23 @@ export const Medias = () => {
         currentFilter: currentFilter,
         setCurrentFilter: setCurrentFilter,
       }),
-      CategoryNavs({
-        mediaIdByCategories: mediaIdByCategories,
-        currentCategoryIdx: currentCategoryIdx,
-        handleCategoryClick: handleCategoryClick,
-        currentMediaIdx: currentMediaIdx,
-      }),
-      MediasContent({
-        currentMediaIdsAndCategory: currentMediaIdsAndCategory,
-        currentMediaIdx: currentMediaIdx,
-        handleMediaNext,
-        handleMediaPrev,
-        hasNext,
-        hasPrev,
+      Div({
+        children: [
+          CategoryNavs({
+            mediaIdByCategories: mediaIdByCategories,
+            currentCategoryIdx: currentCategoryIdx,
+            handleCategoryClick: handleCategoryClick,
+            currentMediaIdx: currentMediaIdx,
+          }),
+          MediasContent({
+            currentMediaIdsAndCategory: currentMediaIdsAndCategory,
+            currentMediaIdx: currentMediaIdx,
+            handleMediaNext,
+            handleMediaPrev,
+            hasNext,
+            hasPrev,
+          }),
+        ],
       }),
     ],
   });

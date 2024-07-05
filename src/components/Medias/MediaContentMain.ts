@@ -1,7 +1,7 @@
 import { News } from "@/models/News";
 import styles from "./MediaContentMain.module.css";
 import typoStyles from "@/styles/typo.module.css";
-import { Div, H2, H3, Img, Li, Ul } from "@/libs/Elements";
+import { Div, H2, Img, Li, Ul } from "@/libs/Elements";
 import { Media } from "@/models/Media";
 interface MediaContentMainProps {
   newsList: News[];
