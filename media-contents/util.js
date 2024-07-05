@@ -1,4 +1,5 @@
 import { convertToMarkdown } from "../utils/convert-to-markdown.js";
+import { getItem, setItem } from "../utils/local-storage.js";
 
 /**
  * @description 선택된 카테고리 아이템 DOM string을 반환해주는 함수
@@ -43,7 +44,7 @@ export function getUnselectedCategoryItemDOMString(categoryName, categoryIdx) {
 export function getSelectedCategoryContentsDOMString(media) {
     const { id, iconUrl, editDate, imageContent, contents } = media;
 
-    const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    const subscribeList = getItem("newsstand-subscribe") ?? [];
     const isSubscribed = subscribeList.includes(id);
 
     return `
@@ -110,9 +111,8 @@ export function setSubscribeButtonEvent(media, triggerRender) {
  * @description 언론사 구독 이벤트 등록하는 함수
  */
 function clickSubscribeButton(subscribeMediaId, triggerRender) {
-    const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
-    const newSubscribeList = JSON.stringify([...subscribeList, subscribeMediaId]);
-    localStorage.setItem("newsstand-subscribe", newSubscribeList);
+    const subscribeList = getItem("newsstand-subscribe") ?? [];
+    setItem("newsstand-subscribe", [...subscribeList, subscribeMediaId]);
 
     renderSnackbar("내가 구독한 언론사에 추가되었습니다.", 'subscribe');
     triggerRender();
@@ -130,9 +130,9 @@ function clickUnsubscribeButton(media, subscribeMediaId, triggerRender) {
         bodyDOM.removeChild(alertDOM);
     }
     function clickUnsubscribe() {
-        const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
-        const newSubscribeList = JSON.stringify(subscribeList.filter((subscribedId) => subscribedId !== subscribeMediaId));
-        localStorage.setItem("newsstand-subscribe", newSubscribeList);
+        const subscribeList = getItem("newsstand-subscribe") ?? [];
+        const newSubscribeList = subscribeList.filter((subscribedId) => subscribedId !== subscribeMediaId);
+        setItem("newsstand-subscribe", newSubscribeList);
 
         clickCancel();
         triggerRender();

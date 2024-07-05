@@ -5,6 +5,7 @@ import {
     removeTotalCategoryEvent,
     removeTotalArrowEvent
 } from "../utils/events.js";
+import { getItem } from "../utils/local-storage.js";
 import { 
     getSelectedCategoryItemDOMString,
     getUnselectedCategoryItemDOMString,
@@ -24,7 +25,7 @@ export function renderSubscribedMedia() {
 function renderMedia(mediaId) {
     const media = CONTENTS_BY_MEDIA.data;
 
-    const subscribeIdList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
 
     const mediaListDOM = document.querySelector(".media-contents__category-list");
@@ -109,7 +110,7 @@ function clickMediaList(e) {
         return;
     }
 
-    const subscribeIdList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const mediaId = subscribeIdList.find((_, idx) => idx === mediaIdx);
 
     renderMedia(mediaId);
@@ -132,7 +133,7 @@ function navigatePrevMedia() {
  * @description prev, next 버튼 클릭 동작을 수행하는 함수
  */
 function clickNavigationButton(step) {
-    const subscribeIdList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
 
     if (subscribeIdList.length === 0) {
         return;
