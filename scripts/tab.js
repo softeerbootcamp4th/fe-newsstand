@@ -1,13 +1,15 @@
 import { drawArticles, drawTabAnimationList, drawTabList } from "./drawer.js";
 import { resetstate } from "./reset.js";
 
-export function handleTabClick(selectedTabIndex,state) {
-    resetstate(state);
-    state.selectedTabIndex = selectedTabIndex;
-    drawTabList(state);
-    drawArticles(state);
-    drawTabAnimationList(state);
-    updateTabAnimationStyle(state);
+export function handleTabClick(selectedTabIndex,state,isDragging) {
+    if(!isDragging){
+        resetstate(state);
+        state.selectedTabIndex = selectedTabIndex;
+        drawTabList(state);
+        drawArticles(state);
+        drawTabAnimationList(state);
+        updateTabAnimationStyle(state);
+    }    
 } 
 
 export function getTabLength(state) {

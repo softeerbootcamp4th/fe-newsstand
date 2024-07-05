@@ -48,9 +48,10 @@ let state = {
     selectedTabIndex: 0,
     selectedArticleIndex: 0,
     selectedCompanyIndex: 0,
+    isDragging: false,
     subscribedCompanyNameSet: new Set(),
     articleDataList: articleDataList,
-    companiesWithArticles: companiesWithArticles
+    companiesWithArticles: companiesWithArticles,
 }
 
 

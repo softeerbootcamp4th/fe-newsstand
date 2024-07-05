@@ -3,17 +3,14 @@
 
 <head>
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="index.css" />
   <link rel="stylesheet" href="style/font.css" />
   <link rel="stylesheet" href="style/news.css" />
   <link rel="stylesheet" href="style/color.css" />
   <script src="main.js" type="module"></script>
-
   <title>네이버 뉴스</title>
 </head>
-
 <body>
 
   <div class="paper">
@@ -31,6 +28,7 @@
       <div class="vertical_space_40"></div>
 
       <div class="content_wrapper">
+
         <div class="rotating_box_container">
           <div class="rotating_box roll_out" style="animation-delay: 5.0s;" id="rotating_left">
             <div class="display-bold14">연합뉴스</div>
@@ -52,6 +50,7 @@
             <div class="available-medium14" id="rotate_right_roll_in_content">[2보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
           </div>
         </div>
+
       </div>
 
       <div class="vertical_space_32"></div>
@@ -70,32 +69,33 @@
           <img src="public/grid-view.svg" />
         </div>
       </div>
-      
+
       <div class="vertical_space_24"></div>
 
       <div class="content_wrapper">
         <div class="news_detail_box">
-          <div class="scroll_x_wrapper" >
+          <div class="scroll_x_wrapper" id="draggable_wrapper" >
             <div class="available-medium14 news_detail_tab_box" id="tab_wrapper"></div>
             <div class="available-medium14 news_detail_tab_box" id="tab_animation_wrapper"></div>
           </div>
-          
+
           <div class="new_detail_context_box">
             <img src="public/left_arrow.svg" class="left_arrow arrow_hover pointer" width="24" height="40" />
 
             <div class="new_detail_context_header" id="company_header">
               <img src="public/item_1.svg" height="20" id="company_img" />
               <div class="horizontal_space_16"></div>
-              <div class="display-medium12 flex_row_center color_5F6E76" id="register_date" >
+              <div class="display-medium12 flex_row_center color_5F6E76" id="register_date">
               </div>
               <div class="horizontal_space_16"></div>
-              <div id="subscribe_button_wrapper" class="flex_row_center" >
+              <div id="subscribe_button_wrapper" class="flex_row_center">
 
               </div>
             </div>
 
 
             <div class="vertical_space_16"></div>
+
             <div class="flex">
               <div class="news_image_card">
                 <img id="selected_article_img" src="" alt="X" width="320" height="200" />
@@ -104,7 +104,9 @@
               <div class="news_letter_subject_box">
               </div>
             </div>
+
             <img src="public/right_arrow.svg" class="right_arrow arrow_hover pointer" width="24" height="40" />
+
           </div>
         </div>
       </div>
