@@ -41,7 +41,7 @@ function renderMedia(mediaId) {
         prevMediaButton.removeEventListener("click", navigatePrevMedia);
         nextMediaButton.removeEventListener("click", navigateNextMedia);
     }
-    document.addEventListener(REMOVE_MEDIA_ARROW, resetNavigationButton)
+    document.addEventListener(REMOVE_MEDIA_ARROW, resetNavigationButton);
     document.dispatchEvent(removeTotalArrowEvent);
 
     prevMediaButton.addEventListener("click", navigatePrevMedia);
