@@ -23,12 +23,18 @@ export const RecentNewsRoll = ({ needDelay }: { needDelay: boolean }) => {
     if (isHovering) return;
     setFrom(from + 1);
   };
-  useEffect(() => {
-    const interval = setInterval(update, 5000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [from]);
+  useEffect(
+    {
+      key: "RecentNewsRoll",
+      effectFunc: () => {
+        const interval = setInterval(update, 5000);
+        return () => {
+          clearInterval(interval);
+        };
+      },
+    },
+    [from],
+  );
   const media = getMediaById(mediaId);
 
   const handleHover = useCallback(
