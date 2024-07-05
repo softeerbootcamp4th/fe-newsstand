@@ -1,14 +1,19 @@
 
-export function rollingNews(currentDom, data) {
-    const futureDom = document.querySelector(".futureDom");
-
-    currentDom.classList.add("currentDomStart");
-    futureDom.innerText = data;
+export function rollingNews(currentDom, template, isLeft) {
+    const futureDom = document.querySelector(isLeft ? ".futureDom_left" : ".futureDom_right");
+    while (futureDom.firstChild) {
+        futureDom.removeChild(futureDom.firstChild);
+    }
+    currentDom.classList.add("currentDom_Start");
+    futureDom.insertAdjacentHTML('beforeend', template);
     futureDom.classList.add("futureDomStart");
 
     setTimeout(function () {
-        currentDom.innerText = data;
-        currentDom.classList.remove("currentDomStart");
+        while (currentDom.firstChild) {
+            currentDom.removeChild(currentDom.firstChild);
+        }
+        currentDom.insertAdjacentHTML('beforeend', template);
+        currentDom.classList.remove("currentDom_Start");
         futureDom.classList.remove("futureDomStart");
-    }, 1001);
+    }, 1000);
 }
