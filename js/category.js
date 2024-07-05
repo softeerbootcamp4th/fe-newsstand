@@ -4,6 +4,7 @@ let curCategoryIdx = 0;
 let newsData = [];
 let curNewsIdx = 0;
 const intervalTime = 20000;
+let progressBarTimeout;
 
 /* 카테고리 초기화 및 클릭 이벤트 추가 함수 */
 function createCategory() {
@@ -27,12 +28,9 @@ function createCategory() {
             curNewsIdx = 0;
             resetProgressBar();
             loadCurrentCategoryNews();
-            updateBtnVisibility();
-        })
+        });
     });
-   
 }
-
 
 /* 조회한 카테고리의 전체 뉴스 가져오는 함수 */
 function loadCurrentCategoryNews() {
@@ -50,19 +48,17 @@ function loadCurrentCategoryNews() {
             displayNews();
             updateBtnVisibility();
             updateCategoryDisplay();
+            startProgressBar(); // 첫 데이터 로드 후 프로그래스바 시작
         })
         .catch(error => {
             console.error(error);
         });
-    }
-    else {
+    } else {
         displayNews();
         updateBtnVisibility();
         updateCategoryDisplay();
+        startProgressBar(); // 데이터 갱신 후 프로그래스바 시작
     }
-
-    
-
 }
 
 /* 현재 카테고리의 뉴스 정보로 div 생성하는 함수 */
@@ -78,7 +74,6 @@ function displayNews() {
     document.getElementById('logo').src = news.logoUrl;
     document.querySelector('.edit-date').textContent = `${news.date} 편집`;
 
-
     const thumnbailImg = document.createElement('img');
     thumnbailImg.src = news.thumbnailUrl;
     const thumbnailNews = document.createElement('div');
@@ -93,18 +88,17 @@ function displayNews() {
         newsItemDiv.textContent = n.title;
         newsItemDiv.addEventListener('click', () => {
             window.open(n.url, '_blank');
-        })
+        });
 
         subNewsDiv.appendChild(newsItemDiv);
     });
 
     const explanationDiv = document.createElement('div');
     explanationDiv.classList.add('explanation');
-    explanationDiv.textContent = `${news.company} 언론사에서 직접 편집한 뉴스 입니다.`
+    explanationDiv.textContent = `${news.company} 언론사에서 직접 편집한 뉴스 입니다.`;
     subNewsDiv.appendChild(explanationDiv);
 
     resetProgressBar();
-
 }
 
 function updateCategoryDisplay() {
@@ -130,9 +124,9 @@ function updateCategoryDisplay() {
     });
 }
 
-
 /* 프로그래스바 삭제 */
 function resetProgressBar() {
+    clearTimeout(progressBarTimeout);
     const categoryItems = document.querySelectorAll('.category-item');
     categoryItems.forEach(item => {
         item.classList.remove('selected');
@@ -153,9 +147,25 @@ function updateProgressBar() {
     const progressBarDivElement = document.createElement('div');
     progressBarDivElement.classList.add('progress-bar');
     selectedDiv.appendChild(progressBarDivElement);
-    
-    progressBarDivElement.style.animation = `progressAnimation ${intervalTime / 1000}s linear forwards`;
 
+    progressBarDivElement.style.animation = `progressAnimation ${intervalTime / 1000}s linear forwards`;
+}
+
+function startProgressBar() {
+    clearTimeout(progressBarTimeout);
+    progressBarTimeout = setTimeout(() => {
+        if(curNewsIdx < newsData[curCategoryIdx].news.length - 1) {
+            curNewsIdx++;
+        } else if(curCategoryIdx < category.length - 1) {
+            curCategoryIdx++;
+            curNewsIdx = 0;
+        } else {
+            curCategoryIdx = 0;
+            curNewsIdx = 0;
+        }
+        updateBtnVisibility();
+        loadCurrentCategoryNews();
+    }, intervalTime);
 }
 
 function showCategory(index) {
@@ -174,7 +184,6 @@ function updateBtnVisibility() {
     }
     else {
         leftBtn.style.display = "block";
-
     }
 
     if(curNewsIdx === newsData[curCategoryIdx].news.length-1) {
@@ -182,9 +191,7 @@ function updateBtnVisibility() {
     }
     else {
         rightBtn.style.display = "block";
-
     }
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -200,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
             resetProgressBar();
             updateBtnVisibility();
             loadCurrentCategoryNews();
-
         }
     });
 
@@ -212,20 +218,4 @@ document.addEventListener("DOMContentLoaded", () => {
             loadCurrentCategoryNews();
         }
     });
-
-    setInterval(() => {
-        if(curNewsIdx < newsData[curCategoryIdx].news.length -1) {
-            curNewsIdx++;
-        }
-        else if(curCategoryIdx < category.length -1) {
-            curCategoryIdx++;
-            curNewsIdx = 0;
-        }
-        else {
-            curCategoryIdx = 0;
-            curNewsIdx = 0;
-        }
-        updateBtnVisibility();
-        loadCurrentCategoryNews();
-    },intervalTime);
-});    
+});

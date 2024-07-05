@@ -251,7 +251,6 @@ main {
     width: 0%;
     background-color: rgba(67, 98, 208, 0.5);
     z-index: 1;
-    animation: progressAnimation 20s linear forwards; 
 }
 
 .selected .category-text {
