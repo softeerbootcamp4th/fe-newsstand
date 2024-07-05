@@ -58,7 +58,7 @@ header {
 
 
 .newsTickerEach {
-    border: 1px;
+    border: 1px solid;
     width: 461px;
     height: 100%;
     display: flex;
@@ -67,23 +67,51 @@ header {
     border-color: var(--border-default);
     border-style: solid;
     cursor: pointer;
+    overflow: hidden;
 }
 
+
+.newsTickerEach:hover {
+    text-decoration: underline;
+}
 
 .newsTickerEach span {
-    margin: 5%;
+    margin: 16px;
+}
+
+.newsTickerContainer {
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    padding-top: 37px;
+
+    /* 텍스트 높이에 맞게 조정 */
 }
 
 
+#newsTitleShown {
+    opacity: 1
+}
+
+
+#newsTitleHidden {
+    opacity: 0
+}
+
+
+#newsTitleShown2 {
+    opacity: 1
+}
+
+
+#newsTitleHidden2 {
+    opacity: 0
+}
+
+.newsTickerContainer div:nth-child(1) {
+    white-space: nowrap;
+    height: 35px;
+}
 
 .autoRolling {
-    animation: none;
-}
-
-.autoRolling.active {
     animation: autoRollingAnimation 0.5s linear forwards;
 }
 
@@ -208,7 +236,6 @@ main {
 
 .selectNews {
     position: relative;
-    /* position을 relative로 설정 */
     width: 166px;
     height: 40px;
     display: flex;
@@ -218,7 +245,6 @@ main {
     background-color: var(--surface-brand-alt);
     padding: 0px 16px;
     overflow: hidden;
-    /* 내용이 넘칠 경우를 대비하여 overflow hidden 설정 */
 }
 
 .selectNews::after {
@@ -229,7 +255,7 @@ main {
     width: 0%;
     height: 100%;
     background-color: var(--blue-500);
-    transition: width 50s linear;
+    transition: width 2s linear;
 }
 
 

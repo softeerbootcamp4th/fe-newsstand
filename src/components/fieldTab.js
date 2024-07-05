@@ -182,7 +182,7 @@ const processCategory = async (index, liList) => {
                 NewsListCategory.classList.remove('selectNews', 'nowSelected');
                 NewsListCategory.classList.add('notselectNews');
                 NewsListCategory.textContent = data[index].type;
-            }, 50000);
+            }, 2000);
         }
 
     };
@@ -197,7 +197,7 @@ const processCategory = async (index, liList) => {
     currentIntervalId = setInterval(() => {
         updateNewsCategory();
         resetAnimation();
-    }, 50000);
+    }, 2000);
 
     // 맨 처음 랜더링을 해주기 위해 호출
     updateNewsCategory();
@@ -208,6 +208,6 @@ const processCategory = async (index, liList) => {
         currentTimeoutId = setTimeout(() => {
             clearInterval(currentIntervalId);
             resolve();
-        }, totalCompanies * 50000);
+        }, totalCompanies * 2000);
     });
 };

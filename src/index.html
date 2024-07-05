@@ -23,13 +23,20 @@
     </header>
     <div id="newsTicker">
       <div class="newsTicker">
-        <div class="newsTickerEach">
+        <div class="newsTickerEach" id="ticker1">
           <span class="display-bold14">연합뉴스</span>
-          <span class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
+          <div class="newsTickerContainer">
+            <div id="newsTitleShown" class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div id="newsTitleHidden" class="available-medium14">[속보] 미국, '중동 양자 정상 회담' 제안…이란, 긍정적 반응</div>
+          </div>
         </div>
-        <div class="newsTickerEach">
+
+        <div class="newsTickerEach" id="ticker2">
           <span class="display-bold14">연합뉴스</span>
-          <span class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
+          <div class="newsTickerContainer">
+            <div id="newsTitleShown2" class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div id="newsTitleHidden2" class="available-medium14">[속보] 미국, '중동 양자 정상 회담' 제안…이란, 긍정적 반응</div>
+          </div>
         </div>
       </div>
     </div>
@@ -72,12 +79,15 @@
     <nav>
       <!-- 화살표 넣기 -->
     </nav>
+    <!-- snackBar 메세지 -->
+    <div id="snackBar"></div>
   </div>
 
   <script src="./app.js" type="module"></script>
   <script src="./components/date.js" type="module"></script>
   <script src="./components/topAndViewer.js" type="module"></script>
   <script src="./components/fieldTab.js" type="module"></script>
+  <script src="./components/autoRollingNews.js" type="module"></script>
 </body>
 
 </html>
