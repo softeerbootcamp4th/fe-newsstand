@@ -29,14 +29,6 @@ function NewsViewer({ $target, position = "beforeend" }) {
   this.initializeProgress();
 }
 
-NewsViewer.prototype.handleNextClick = function () {
-  this.setState({ page: this.state.page + 1 });
-};
-
-NewsViewer.prototype.handlePrevClick = function () {
-  this.setState({ page: this.state.page - 1 });
-};
-
 NewsViewer.prototype.handleClick = function (event) {
   const button = event.target.closest("button");
 
@@ -44,13 +36,13 @@ NewsViewer.prototype.handleClick = function (event) {
     const { id } = button;
 
     if (id === "nextButton") {
-      this.handleNextClick();
+      this.nextPage();
 
       return;
     }
 
     if (id === "prevButton") {
-      this.handlePrevClick();
+      this.prevPage();
 
       return;
     }
@@ -133,6 +125,18 @@ NewsViewer.prototype.nextPage = function () {
   this.setState({ page: nextPage });
 };
 
+NewsViewer.prototype.prevPage = function () {
+  const prevPage = this.state.page - 1;
+
+  if (prevPage < 0) {
+    this.prevCategory();
+
+    return;
+  }
+
+  this.setState({ page: prevPage });
+};
+
 NewsViewer.prototype.nextCategory = function () {
   const nextCategory = this.state.category + 1;
 
@@ -145,6 +149,20 @@ NewsViewer.prototype.nextCategory = function () {
   this.setState({ category: nextCategory, page: 0 });
 };
 
+NewsViewer.prototype.prevCategory = function () {
+  const prevCategory = this.state.category - 1;
+
+  if (prevCategory < 0) {
+    this.setState({ category: 0, page: 0 });
+
+    return;
+  }
+
+  const news = getNews(prevCategory);
+
+  this.setState({ category: prevCategory, page: news.length - 1 });
+};
+
 NewsViewer.prototype.render = function (news) {
   this.$element.innerHTML = /* html */ `
     <ul class="categoryFilter">
@@ -152,11 +170,9 @@ NewsViewer.prototype.render = function (news) {
     </ul>
 
     <button id="prevButton" class="newsButton prev${
-      this.state.page === 0 ? " hide" : ""
+      this.state.category === 0 && this.state.page === 0 ? " hide" : ""
     }"><img src="${leftButton}"/></button>
-    <button id="nextButton" class="newsButton next${
-      this.state.page === news.length - 1 ? " hide" : ""
-    }"><img src="${rightButton}"/></button>
+    <button id="nextButton" class="newsButton next"><img src="${rightButton}"/></button>
   `;
 
   new ContentsBox({
