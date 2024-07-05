@@ -12,6 +12,8 @@ export function renderMediaFilter() {
 
     const filterMediaDOM = document.querySelector("#media-filter");
     filterMediaDOM.addEventListener("click", clickMediaFilter)
+
+    setDragCategory();
 }
 
 /**
@@ -59,4 +61,35 @@ function setUnselectedMedia(id) {
     const unselectedMediaDOM = document.querySelector(`#${id}`);
     unselectedMediaDOM.classList.add("media--unselected");
     unselectedMediaDOM.classList.remove("media--selected");
+}
+
+/**
+ * @description 카테고리 데이터가 DOM의 크기를 벗어날 때 드래그로 스크롤 가능하도록 이벤트를 부여하는 함수
+ */
+function setDragCategory() {
+    const categoryListDOM = document.querySelector(".media-contents__category-list");
+    let throttle = null, prevX = -1;
+
+    function moveMouse(e) {
+        if (throttle !== null) {
+            return;
+        }
+
+        throttle = setTimeout(() => {
+            if (prevX !== -1) {
+                const diffByPrevX = prevX - e.x;
+                categoryListDOM.scrollBy({ left: diffByPrevX, behavior: "smooth" });
+            }
+            
+            prevX = e.x;
+            throttle = null;
+        }, 100);
+    }
+
+    categoryListDOM.addEventListener("mousedown", () => {
+        categoryListDOM.addEventListener("mousemove", moveMouse);
+    });
+    document.addEventListener("mouseup", () => {
+        categoryListDOM.removeEventListener("mousemove", moveMouse);
+    });
 }

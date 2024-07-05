@@ -1,4 +1,5 @@
-import { convertToMarkdown } from "../utils/convertToMarkdown.js";
+import { convertToMarkdown } from "../utils/convert-to-markdown.js";
+import { getItem, setItem } from "../utils/local-storage.js";
 
 /**
  * @description 선택된 카테고리 아이템 DOM string을 반환해주는 함수
@@ -11,13 +12,16 @@ export function getSelectedCategoryItemDOMString(categoryName, selectedCategoryI
      * category length가 존재하지 않는 경우 : 내가 구독한 언론사
      */
     return `<li class="media-contents__category-item media-contents__category-item--selected" data-selected-category-idx="${selectedCategoryIdx}" data-selected-media-idx="${selectedMediaIdx}">
-                <p class="text__bold14 text__white--default">${categoryName}</p>
-                <section>
-                    ${categoryLength ? `
-                        <p class="text__bold14 text__white--default">${selectedMediaIdx + 1}</p> <p class="text__bold14 text__white--weak">/ ${categoryLength}</p>
-                        ` : `
-                        <img alt="화살표" src="./static/icons/arrow-right.svg" />
-                    `}
+                <section class="media-contents__category-item-background"></section>
+                <section class="media-contents__category-item-contents">
+                    <p class="text__bold14 text__white--default media-contents__category-item-text--selected">${categoryName}</p>
+                    <section>
+                        ${categoryLength ? `
+                            <p class="text__bold14 text__white--default">${selectedMediaIdx + 1}</p> <p class="text__bold14 text__white--weak">/ ${categoryLength}</p>
+                            ` : `
+                            <img alt="화살표" src="./static/icons/arrow-right.svg" />
+                        `}
+                    </section>
                 </section>
             </li>`
 }
@@ -40,7 +44,7 @@ export function getUnselectedCategoryItemDOMString(categoryName, categoryIdx) {
 export function getSelectedCategoryContentsDOMString(media) {
     const { id, iconUrl, editDate, imageContent, contents } = media;
 
-    const subscribeList = localStorage.getItem("newsstand-subscribe") ?? [];
+    const subscribeList = getItem("newsstand-subscribe") ?? [];
     const isSubscribed = subscribeList.includes(id);
 
     return `
@@ -49,10 +53,10 @@ export function getSelectedCategoryContentsDOMString(media) {
         <p class="text__medium12">${editDate}</p>
         ${isSubscribed ? `
             <section class="button__container subscribe-button--unsubscribe" data-media-id="${id}">
-                <img alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
+                <img class="subscribe-button__icon--unsubscribe" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
             </section>` : `
             <section class="button__container subscribe-button--subscribe" data-media-id="${id}">
-                <img alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
+                <img class="subscribe-button__icon" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
                 <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
             </section>`}
     </section>
@@ -86,12 +90,20 @@ export function setSubscribeButtonEvent(media, triggerRender) {
     if (subscribeButtonDOM) {
         const subscribeMediaId = parseInt(subscribeButtonDOM.dataset.mediaId);
         subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(subscribeMediaId, triggerRender));
+
+        const subscribeButtonIconDOM = subscribeButtonDOM.querySelector(".subscribe-button__icon");
+        subscribeButtonDOM.addEventListener("mouseover", () => subscribeButtonIconDOM.src = "./static/icons/plus-hover.svg");
+        subscribeButtonDOM.addEventListener("mouseout", () => subscribeButtonIconDOM.src = "./static/icons/plus-default.svg");
     }
 
     const unsubscribeButtonDOM = document.querySelector('.subscribe-button--unsubscribe');
     if (unsubscribeButtonDOM) {
         const unsubscribeMediaId = parseInt(unsubscribeButtonDOM.dataset.mediaId);
         unsubscribeButtonDOM.addEventListener("click", () => clickUnsubscribeButton(media, unsubscribeMediaId, triggerRender));
+        
+        const unsubscribeButtonIconDOM = unsubscribeButtonDOM.querySelector(".subscribe-button__icon--unsubscribe");
+        unsubscribeButtonDOM.addEventListener("mouseover", () => unsubscribeButtonIconDOM.src = "./static/icons/close-hover.svg");
+        unsubscribeButtonDOM.addEventListener("mouseout", () => unsubscribeButtonIconDOM.src = "./static/icons/close-default.svg");
     }
 }
 
@@ -99,9 +111,8 @@ export function setSubscribeButtonEvent(media, triggerRender) {
  * @description 언론사 구독 이벤트 등록하는 함수
  */
 function clickSubscribeButton(subscribeMediaId, triggerRender) {
-    const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
-    const newSubscribeList = JSON.stringify([...subscribeList, subscribeMediaId]);
-    localStorage.setItem("newsstand-subscribe", newSubscribeList);
+    const subscribeList = getItem("newsstand-subscribe") ?? [];
+    setItem("newsstand-subscribe", [...subscribeList, subscribeMediaId]);
 
     renderSnackbar("내가 구독한 언론사에 추가되었습니다.", 'subscribe');
     triggerRender();
@@ -119,9 +130,9 @@ function clickUnsubscribeButton(media, subscribeMediaId, triggerRender) {
         bodyDOM.removeChild(alertDOM);
     }
     function clickUnsubscribe() {
-        const subscribeList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
-        const newSubscribeList = JSON.stringify(subscribeList.filter((subscribedId) => subscribedId !== subscribeMediaId));
-        localStorage.setItem("newsstand-subscribe", newSubscribeList);
+        const subscribeList = getItem("newsstand-subscribe") ?? [];
+        const newSubscribeList = subscribeList.filter((subscribedId) => subscribedId !== subscribeMediaId);
+        setItem("newsstand-subscribe", newSubscribeList);
 
         clickCancel();
         triggerRender();

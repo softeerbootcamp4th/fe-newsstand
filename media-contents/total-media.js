@@ -1,7 +1,7 @@
 import { CONTENTS_BY_CATEGORY } from "../static/data/media.js";
-import { 
-    REMOVE_TOTAL_ARROW, 
-    REMOVE_TOTAL_CATEGORY, 
+import {
+    REMOVE_TOTAL_ARROW,
+    REMOVE_TOTAL_CATEGORY,
     removeMediaCategoryEvent,
     removeMediaArrowEvent
 } from "../utils/events.js";
@@ -12,14 +12,14 @@ import {
     setSubscribeButtonEvent,
 } from "./util.js";
 
+const DEFAULT_CATEGORY_INDEX = 0;
+const DEFAULT_MEDIA_INDEX = 0;
+
 /**
  * @description 전체 언론사를 렌더링하는 함수
  */
 export function renderTotalMedia() {
-    /**
-     * @NOTE 기본으로 0번째 index의 카테고리, 미디어가 선택된 상태
-     */
-    renderMedia(0, 0)
+    renderMedia(DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
 }
 
 /**
@@ -32,20 +32,23 @@ function renderMedia(categoryIdx, mediaIdx) {
     /**
      * 미디어 카테고리 렌더링
      */
-    categoryListDOM.innerHTML = '';
+    let categoryListDOMString = ''
     category.forEach((_category, _categoryIdx) => {
         if (_categoryIdx === categoryIdx) {
             /**
              * 선택된 카테고리인 경우
              */
-            categoryListDOM.innerHTML += getSelectedCategoryItemDOMString(_category.categoryName, categoryIdx, mediaIdx, _category.length);
+            categoryListDOMString += getSelectedCategoryItemDOMString(_category.categoryName, categoryIdx, mediaIdx, _category.length);
         } else {
             /**
              * 선택되지 않은 카테고리인 경우
              */
-            categoryListDOM.innerHTML += getUnselectedCategoryItemDOMString(_category.categoryName, _categoryIdx);
+            categoryListDOMString += getUnselectedCategoryItemDOMString(_category.categoryName, _categoryIdx);
         }
-    })
+    });
+    categoryListDOM.innerHTML = categoryListDOMString;
+    const progressAnimationDOM = document.querySelector(".media-contents__category-item-background");
+    progressAnimationDOM.addEventListener("animationiteration", navigateNextMedia);
 
     /**
      * 카테고리 이벤트 초기화 후 이벤트 리스너 등록
@@ -132,19 +135,28 @@ function clickNavigationButton(step) {
     } else if (nextMediaIdx < 0) {
         const prevCategoryIdx = selectedCategoryIdx - 1;
         if (prevCategoryIdx < 0) {
-            return;
+            /**
+             * 첫 카테고리에 다다른 경우 마지막 카테고리로 이동
+             */
+            const categoryIdx = CONTENTS_BY_CATEGORY.length - 1;
+            selectedCategory.dataset.selectedCategoryIdx = categoryIdx;
+            selectedCategory.dataset.selectedMediaIdx = category[categoryIdx].length - 1;
+        } else {
+            selectedCategory.dataset.selectedCategoryIdx = prevCategoryIdx;
+            selectedCategory.dataset.selectedMediaIdx = category[prevCategoryIdx].length - 1;
         }
-
-        selectedCategory.dataset.selectedCategoryIdx = prevCategoryIdx;
-        selectedCategory.dataset.selectedMediaIdx = category[prevCategoryIdx].length - 1;
     } else if (nextMediaIdx === currentCategory.length) {
         const nextCategoryIdx = selectedCategoryIdx + 1;
         if (nextCategoryIdx === CONTENTS_BY_CATEGORY.length) {
-            return;
+            /**
+             * 마지막 카테고리에 다다른 경우 첫 카테고리로 이동
+             */
+            selectedCategory.dataset.selectedCategoryIdx = 0;
+            selectedCategory.dataset.selectedMediaIdx = 0;
+        } else {
+            selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
+            selectedCategory.dataset.selectedMediaIdx = 0;
         }
-        
-        selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
-        selectedCategory.dataset.selectedMediaIdx = 0;
     }
 
     const categoryIdxNumber = parseInt(selectedCategory.dataset.selectedCategoryIdx);

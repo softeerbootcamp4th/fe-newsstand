@@ -1,4 +1,4 @@
-import { getNextNumber } from "../utils/getNextNumber.js";
+import { getNextNumber } from "../utils/get-next-number.js";
 
 /**
  * @description 최신 뉴스 DOM의 텍스트를 rolling 해주는 함수

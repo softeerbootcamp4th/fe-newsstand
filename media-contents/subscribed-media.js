@@ -1,16 +1,19 @@
 import { CONTENTS_BY_MEDIA } from "../static/data/media.js";
 import { 
-    REMOVE_MEDIA_CATEGORY, 
+    REMOVE_MEDIA_CATEGORY,
     REMOVE_MEDIA_ARROW,
     removeTotalCategoryEvent,
     removeTotalArrowEvent
 } from "../utils/events.js";
+import { getItem } from "../utils/local-storage.js";
 import { 
-    getSelectedCategoryItemDOMString, 
+    getSelectedCategoryItemDOMString,
     getUnselectedCategoryItemDOMString,
     getSelectedCategoryContentsDOMString,
     setSubscribeButtonEvent,
 } from "./util.js";
+
+const DEFAULT_MEDIA_INDEX = 0;
 
 /**
  * @description 구독한 언론사를 렌더링하는 함수
@@ -22,11 +25,28 @@ export function renderSubscribedMedia() {
 function renderMedia(mediaId) {
     const media = CONTENTS_BY_MEDIA.data;
 
-    const subscribeIdList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
 
     const mediaListDOM = document.querySelector(".media-contents__category-list");
     const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
+
+    /**
+     * prev, next 버튼 클릭 시 언론사 이동 이벤트
+     */
+    const prevMediaButton = document.querySelector(".media-contents__left-button");
+    const nextMediaButton = document.querySelector(".media-contents__right-button");
+
+    function resetNavigationButton() {
+        prevMediaButton.removeEventListener("click", navigatePrevMedia);
+        nextMediaButton.removeEventListener("click", navigateNextMedia);
+    }
+    document.addEventListener(REMOVE_MEDIA_ARROW, resetNavigationButton)
+    document.dispatchEvent(removeTotalArrowEvent);
+
+    prevMediaButton.addEventListener("click", navigatePrevMedia);
+    nextMediaButton.addEventListener("click", navigateNextMedia);
+
 
     if (subscribedMediaList.length === 0) {
         mediaListDOM.innerHTML = "";
@@ -41,20 +61,23 @@ function renderMedia(mediaId) {
     const _selectedMediaIdx = subscribedMediaList.findIndex((media) => media.id === selectedMediaId);
     const selectedMediaIdx = _selectedMediaIdx === -1 ? 0 : _selectedMediaIdx;
 
-    mediaListDOM.innerHTML = "";
+    let mediaListDOMString = ''
     subscribedMediaList.forEach((_media, _mediaIdx) => {
         if (_mediaIdx === selectedMediaIdx) {
             /**
              * 선택된 카테고리인 경우
              */
-            mediaListDOM.innerHTML += getSelectedCategoryItemDOMString(_media.name, _mediaIdx, 0);
+            mediaListDOMString += getSelectedCategoryItemDOMString(_media.name, _mediaIdx, DEFAULT_MEDIA_INDEX);
         } else {
             /**
              * 선택되지 않은 카테고리인 경우
              */
-            mediaListDOM.innerHTML += getUnselectedCategoryItemDOMString(_media.name, _mediaIdx);
+            mediaListDOMString += getUnselectedCategoryItemDOMString(_media.name, _mediaIdx);
         }
     });
+    mediaListDOM.innerHTML = mediaListDOMString;
+    const progressAnimationDOM = document.querySelector(".media-contents__category-item-background");
+    progressAnimationDOM.addEventListener("animationiteration", navigateNextMedia);
 
     /**
      * 카테고리 이벤트 초기화 후 이벤트 리스너 등록
@@ -69,23 +92,7 @@ function renderMedia(mediaId) {
     const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaIdx, 0));
-
-    /**
-     * prev, next 버튼 클릭 시 언론사 이동 이벤트
-     */
-     const prevMediaButton = document.querySelector(".media-contents__left-button");
-     const nextMediaButton = document.querySelector(".media-contents__right-button");
- 
-     function resetNavigationButton() {
-         prevMediaButton.removeEventListener("click", navigatePrevMedia);
-         nextMediaButton.removeEventListener("click", navigateNextMedia);
-     }
-     document.addEventListener(REMOVE_MEDIA_ARROW, resetNavigationButton)
-     document.dispatchEvent(removeTotalArrowEvent);
- 
-     prevMediaButton.addEventListener("click", navigatePrevMedia);
-     nextMediaButton.addEventListener("click", navigateNextMedia);
+    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaIdx, DEFAULT_MEDIA_INDEX));
 }
 
 /**
@@ -103,7 +110,7 @@ function clickMediaList(e) {
         return;
     }
 
-    const subscribeIdList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const mediaId = subscribeIdList.find((_, idx) => idx === mediaIdx);
 
     renderMedia(mediaId);
@@ -126,22 +133,32 @@ function navigatePrevMedia() {
  * @description prev, next 버튼 클릭 동작을 수행하는 함수
  */
 function clickNavigationButton(step) {
-    const selectedCategory = document.querySelector(".media-contents__category-item--selected");
-    const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
 
-    const subscribeIdList = JSON.parse(localStorage.getItem("newsstand-subscribe") ?? "[]");
-    
     if (subscribeIdList.length === 0) {
         return;
     }
 
+    const selectedCategory = document.querySelector(".media-contents__category-item--selected");
+    const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
+
     /**
      * 이전/다음 언론사 콘텐츠로 이동
      */
-    const nextCategoryIdx = selectedCategoryIdx + step;
-    const nextCategoryId = subscribeIdList[nextCategoryIdx];
-    if (nextCategoryIdx >= 0 && nextCategoryIdx < subscribeIdList.length) {
-        selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
-        renderMedia(nextCategoryId);
+    let nextCategoryIdx = selectedCategoryIdx + step;
+    if (nextCategoryIdx < 0) {
+        /**
+         * 첫 카테고리에 다다른 경우 마지막 카테고리로 이동
+         */
+        nextCategoryIdx = subscribeIdList.length - 1;
+    } else if (nextCategoryIdx === subscribeIdList.length) {
+        /**
+         * 마지막 카테고리에 다다른 경우 첫 카테고리로 이동
+         */
+        nextCategoryIdx = 0;
     }
+
+    selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
+    const nextCategoryId = subscribeIdList[nextCategoryIdx];
+    renderMedia(nextCategoryId);
 }
