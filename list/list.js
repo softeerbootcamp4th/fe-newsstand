@@ -11,6 +11,31 @@ const categoryList = [
   "지역",
 ];
 
+const myList = ["언론사1", "언론사5", "언론사9", "언론사11", "언론사12"];
+
+const headlineData = [
+  {
+    media: "언론사1",
+    news: [
+      "[1보] 경제 성장률, 기대 이상의 상승",
+      "[1보] 코로나19 백신 접종률, 예상을 웃도는 증가",
+      "[속보] 기후 변화 대응, 세계 각국 공조 모색",
+      "[속보] 디지털 트랜스포메이션 가속화, 기업들 반응",
+      "[1보] 주식 시장 급락, 투자자들 불안 증가",
+    ],
+  },
+  {
+    media: "언론사2",
+    news: [
+      "[1보] 금리 인상 기대에 부동산 시장 영향",
+      "[속보] 글로벌 무역 갈등 재점화 가능성",
+      "[속보] 기술 기업들의 인공지능 연구 경쟁",
+      "[1보] 5G 네트워크 확장 속도, 소비자 접근성 향상",
+      "[1보] 통신사들의 요금 인하 경쟁 가열",
+    ],
+  },
+];
+
 const data = {
   "종합/경제": [
     {
@@ -182,47 +207,92 @@ const data = {
   ],
 };
 
-generateBanner("banner_container", "언론사1", "뉴스내용1");
-generateBanner("banner_container", "언론사2", "뉴스내용2");
-generateNav("nav_container", categoryList);
+//요소 생성
+const bannerContainer = document.getElementById("banner_container");
+const navContainer = document.getElementById("nav_container");
+generateNav(navContainer, categoryList);
+generateBanner(bannerContainer, headlineData[0]);
+generateBanner(bannerContainer, headlineData[1]);
 
+//각 배너는 time delay를 가지고 롤링
+function rollingCallback(time) {
+  const prevElements = document.querySelectorAll(".prev");
+  prevElements.forEach((prev, index) => {
+    setTimeout(() => {
+      prev.classList.remove("prev");
+    }, index * time);
+  });
+
+  const currentElements = document.querySelectorAll(".current");
+  currentElements.forEach((current, index) => {
+    setTimeout(() => {
+      current.classList.remove("current");
+      current.classList.add("prev");
+    }, index * time);
+  });
+
+  const nextElements = document.querySelectorAll(".next");
+  nextElements.forEach((next, index) => {
+    setTimeout(() => {
+      next.classList.remove("next");
+      next.classList.add("current");
+
+      let nextNext = next.nextElementSibling;
+      if (!nextNext) {
+        nextNext = next.parentElement.firstElementChild;
+      }
+      nextNext.classList.add("next");
+    }, index * time);
+  });
+}
+
+const category = document.getElementById("category");
+const show = document.getElementById("show");
 const newsListContainer = document.getElementById("newsList_container");
 const categoryElements = document.querySelectorAll(".contentList ul");
 const currentMedia = document.querySelector(".media");
 const progresses = document.querySelectorAll(".progress");
+
 let selectedCategoryIndex = 0;
 let currentMediaIndex = 0;
 
-init();
+// 초기화 함수
+function initialize() {
+  //banner 초기화
+  category.children[0].classList.add("selected");
+  show.children[0].classList.add("selected");
 
-//초기값
-function init() {
-  selectedCategoryIndex = 0;
-  currentMediaIndex = 0;
+  //nav, newsList 초기화
   categoryElements[selectedCategoryIndex].classList.add("selected");
-  generateNewsList(
-    newsListContainer,
-    data[categoryList[0]][0].media,
-    data[categoryList[0]][0].news
-  );
   currentMedia.innerHTML = data[categoryList[0]][0].media;
-  setProgress(selectedCategoryIndex, currentMediaIndex);
+  updateNewsList(categoryList[selectedCategoryIndex], currentMediaIndex);
+
+  // nav 카테고리 선택 시 클릭 이벤트 정의
+  categoryElements.forEach((element, index) => {
+    element.addEventListener("click", function () {
+      categoryElements[selectedCategoryIndex].classList.remove("selected");
+      element.classList.add("selected");
+
+      selectedCategoryIndex = index;
+      updateCategory(categoryList[index]);
+    });
+  });
 }
 
-//몇번째 언론사인지 표시
+// nav 진행도 표시
 function setProgress(categoryIndex, index) {
   progresses[categoryIndex].innerHTML = `${index + 1}/${
     data[categoryList[categoryIndex]].length
   }`;
 }
 
-//뉴스 리스트 업데이트
+// 뉴스 리스트 업데이트, 카테고리와 언론사 index를 매개변수로 사용
 function updateNewsList(category, mediaIndex) {
   newsListContainer.innerHTML = "";
 
   const mediaList = data[category];
-
   setProgress(selectedCategoryIndex, mediaIndex);
+
   generateNewsList(
     newsListContainer,
     mediaList[mediaIndex].media,
@@ -231,34 +301,35 @@ function updateNewsList(category, mediaIndex) {
   currentMedia.innerHTML = mediaList[mediaIndex].media;
 }
 
-//뉴스 카테고리 업데이트
+// 카테고리 변경 업데이트
 function updateCategory(category) {
   currentMediaIndex = 0;
   updateNewsList(category, currentMediaIndex);
 }
 
-//클릭 이벤트 추가, 클릭 시 리스트 업데이트
-categoryElements.forEach((element, index) => {
-  element.addEventListener("click", function () {
-    if (selectedCategoryIndex !== null) {
-      categoryElements[selectedCategoryIndex].classList.remove("selected");
-    }
-    element.classList.add("selected");
-
-    selectedCategoryIndex = index;
-    updateCategory(categoryList[index]);
-  });
-});
-
-//20초마다 뉴스 리스트 변경
+// 20초 마다 언론사 넘김
 setInterval(() => {
-  //category와 mediaIndex가 최대값을 넘었는지 판별
+  currentMediaIndex++;
   if (currentMediaIndex >= data[categoryList[selectedCategoryIndex]].length) {
-    categoryElements[selectedCategoryIndex].classList.remove("selected");
     selectedCategoryIndex = (selectedCategoryIndex + 1) % categoryList.length;
-    categoryElements[selectedCategoryIndex].classList.add("selected");
+    categoryElements.forEach((element, index) => {
+      if (index === selectedCategoryIndex) {
+        element.classList.add("selected");
+      } else {
+        element.classList.remove("selected");
+      }
+    });
     updateCategory(categoryList[selectedCategoryIndex]);
     currentMediaIndex = 0;
+  } else {
+    updateNewsList(categoryList[selectedCategoryIndex], currentMediaIndex);
   }
-  updateNewsList(categoryList[selectedCategoryIndex], currentMediaIndex++);
 }, 20000);
+
+//5초마다 롤링
+setInterval(() => {
+  rollingCallback(1000);
+}, 5000);
+
+// 초기화
+initialize();

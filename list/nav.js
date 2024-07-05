@@ -1,5 +1,4 @@
-export function generateNav(containerId, categoryList) {
-  const container = document.getElementById(containerId);
+export function generateNav(container, categoryList) {
   const nav = document.createElement("nav");
   nav.classList.add("content_navigator");
 

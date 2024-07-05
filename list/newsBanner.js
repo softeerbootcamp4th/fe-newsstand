@@ -1,19 +1,29 @@
-export function generateBanner(containerId, mediaContent, newsContent) {
-  const container = document.getElementById(containerId);
+export function generateBanner(container, content) {
+  const listContainer = document.createElement("div");
+  listContainer.classList.add("listContainer");
+  container.appendChild(listContainer);
 
-  const banner = document.createElement("div");
-  banner.classList.add("newsBanner");
+  const bannerList = document.createElement("ul");
+  bannerList.classList.add("bannerList");
+  listContainer.appendChild(bannerList);
 
-  const media = document.createElement("p");
-  media.classList.add("banner_media");
-  const news = document.createElement("p");
-  news.classList.add("banner_news");
+  content.news.forEach((element) => {
+    const elementContainer = document.createElement("li");
+    const media = document.createElement("p");
+    media.classList.add("banner_media");
+    const news = document.createElement("p");
+    news.classList.add("banner_news");
 
-  media.textContent = mediaContent;
-  news.textContent = newsContent;
+    media.textContent = content.media;
+    news.textContent = element;
 
-  banner.appendChild(media);
-  banner.appendChild(news);
+    elementContainer.appendChild(media);
+    elementContainer.appendChild(news);
 
-  container.appendChild(banner);
+    bannerList.appendChild(elementContainer);
+  });
+
+  bannerList.children[0].classList.add("prev");
+  bannerList.children[1].classList.add("current");
+  bannerList.children[2].classList.add("next");
 }
