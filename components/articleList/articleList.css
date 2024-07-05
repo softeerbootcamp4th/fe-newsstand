@@ -132,7 +132,7 @@ button {
             height: 100%;
             width: 0;
             background-color: #4462D0;
-            animation: fill 20s forwards;
+            animation: fill 20s linear;
         }
 
 
