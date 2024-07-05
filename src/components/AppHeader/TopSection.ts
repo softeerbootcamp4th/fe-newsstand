@@ -7,14 +7,20 @@ export const TopSection = () => {
     key: "TopSection",
     initalState: false,
   });
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowDelayed(true);
-    }, 1000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  });
+  useEffect(
+    {
+      key: "TopSection",
+      effectFunc: () => {
+        const timeout = setTimeout(() => {
+          setShowDelayed(true);
+        }, 1000);
+        return () => {
+          clearTimeout(timeout);
+        };
+      },
+    },
+    [],
+  );
   return Section({
     className: `${styles.container}`,
     children: [

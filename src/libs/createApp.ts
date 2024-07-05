@@ -6,38 +6,56 @@ import {
   SimpleElement,
 } from "./AppElement";
 import { Deque } from "./deque";
-import {
-  debounceAnimationCallback,
-  isPropsEqual,
-  toStringAnything,
-} from "./utils";
+import { debounceAnimationCallback, isPropsEqual } from "./utils";
 
-const effectCleanUps = new Map<number, () => void>();
-const effectDependencies = new Map<number, any[]>();
+const effectCleanUpsMap = new Map<string, Array<() => void>>();
+const effectsKeyMap = new Map<string, number>();
+const effectDependenciesMap = new Map<string, any[]>();
 const statesMap = new Map<string, Array<any>>();
 const statesKeyMap = new Map<string, number>();
 const callbacksMap = new Map<string, Array<() => void>>();
 const callbacksDependenciesMap = new Map<string, any[]>();
 const callbacksKeyMap = new Map<string, number>();
 const propsMap = new Map<string, any>();
-let effectsKey = 0;
 const createApp = () => {
-  const useEffect = (effectFunc: () => () => void, rawDependencies?: any[]) => {
-    const dependencies = rawDependencies?.map(toStringAnything) ?? [];
-    const lstDependencies = effectDependencies.get(effectsKey);
-    if (
-      lstDependencies == null ||
-      lstDependencies.length !== dependencies.length ||
-      lstDependencies.some((value, index) => value !== dependencies[index])
-    ) {
-      effectDependencies.set(effectsKey, dependencies);
-      const lstEffectCleanUp = effectCleanUps.get(effectsKey);
-      lstEffectCleanUp?.();
-      const effectCleanUp = effectFunc();
-      effectCleanUps.set(effectsKey, effectCleanUp);
+  const useEffect = (
+    {
+      effectFunc,
+      key,
+    }: {
+      effectFunc: () => () => void;
+      key: string;
+    },
+    rawDependencies?: any[],
+  ) => {
+    const dependencies = rawDependencies ?? [];
+    const localKey = effectsKeyMap.get(key) ?? 0;
+    if (effectsKeyMap.has(key)) {
+      effectsKeyMap.set(key, localKey + 1);
+    } else {
+      effectsKeyMap.set(key, 0);
+    }
+    if (!effectDependenciesMap.has(key)) {
+      effectDependenciesMap.set(key, []);
     }
 
-    effectsKey += 1;
+    if (!effectCleanUpsMap.has(key)) {
+      effectCleanUpsMap.set(key, []);
+    }
+    const effectCleanUps = effectCleanUpsMap.get(key)!;
+    const effectDependencies = effectDependenciesMap.get(key)!;
+    if (effectDependencies.length <= localKey) {
+      effectDependencies.push([]);
+    }
+    const lstDependencies = effectDependencies[localKey];
+    if (!isPropsEqual(dependencies, lstDependencies)) {
+      effectDependencies[localKey] = dependencies;
+      const lstEffectCleanUp = effectCleanUps[localKey];
+      lstEffectCleanUp?.();
+      const effectCleanUp = effectFunc();
+
+      effectCleanUps[localKey] = effectCleanUp;
+    }
   };
 
   const useCallback = <RawT = unknown>(
@@ -51,7 +69,7 @@ const createApp = () => {
     rawDependencies?: any[],
   ) => {
     type T = RawT extends unknown ? typeof callback : RawT;
-    const dependencies = rawDependencies?.map(toStringAnything) ?? [];
+    const dependencies = rawDependencies ?? [];
     if (!callbacksKeyMap.has(key)) {
       callbacksKeyMap.set(key, 0);
     }
@@ -64,13 +82,12 @@ const createApp = () => {
     if (callbacks.length <= localCallbacksKey) {
       callbacks.push(callback as () => void);
     }
-    callbacksKeyMap.set(key, localCallbacksKey + 1);
-    if (isPropsEqual(dependencies, callbacksDependenciesMap.get(key))) {
-      return callbacks[localCallbacksKey] as T;
+    if (!isPropsEqual(dependencies, callbacksDependenciesMap.get(key))) {
+      callbacks[localCallbacksKey] = callback as () => void;
+      callbacksDependenciesMap.set(key, dependencies);
     }
-    callbacksDependenciesMap.set(key, dependencies);
-    const memoedCallback = callbacks[localCallbacksKey];
-    return memoedCallback as T;
+    callbacksKeyMap.set(key, localCallbacksKey + 1);
+    return callbacks[localCallbacksKey] as T;
   };
 
   const renderQueue = new Deque<() => void>();
@@ -150,7 +167,8 @@ const createApp = () => {
     isRendering = true;
     if (root == null || app == null) return;
     statesKeyMap.clear();
-    effectsKey = 0;
+    callbacksKeyMap.clear();
+    effectsKeyMap.clear();
 
     const top = document.createElement("div");
 
@@ -170,11 +188,13 @@ const createApp = () => {
         parent.appendChild(_converRawElementToDom(currentElem.node));
         continue;
       }
+      const idx = parent.children.length;
       parent.appendChild(currentElem.node);
       const key = `${parent.getAttribute("key") ?? ""}-${
         currentElem.node.tagName
-      }`;
+      }[${idx}]`;
       currentElem.node.setAttribute("key", key);
+
       if (!isPropsEqual(propsMap.get(key), currentElem.props)) {
         propsMap.set(key, currentElem.props);
         currentElem.node.setAttribute("forced", "true");
@@ -223,27 +243,28 @@ const createApp = () => {
       states.push(initalState);
     }
     const state = states[localStatesKey] as T;
-    function update(updater: Updater) {
-      const curLocalStatesKey = statesKeyMap.get(key)!;
-      const curState = states[curLocalStatesKey] as T;
+    const update = useCallback(
+      {
+        key: `${key}-SET_STATE`,
+        callback: (updater: Updater) => {
+          const newState =
+            typeof updater === "function" ? updater(state) : updater;
+          if (newState === state) {
+            return;
+          }
 
-      const newState =
-        typeof updater === "function"
-          ? (updater as (state: T) => T)(curState)
-          : updater;
-
-      if (curState == newState) {
-        return;
-      }
-      if (isRendering) {
-        fillRenderQueue(() => {
+          if (isRendering) {
+            fillRenderQueue(() => {
+              states[localStatesKey] = newState;
+            });
+            return;
+          }
           states[localStatesKey] = newState;
-        });
-        return;
-      }
-      states[localStatesKey] = newState;
-      render();
-    }
+          render();
+        },
+      },
+      [],
+    );
     statesKeyMap.set(key, localStatesKey + 1);
     return [state, update] as [T, Updater];
   }

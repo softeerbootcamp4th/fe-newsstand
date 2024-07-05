@@ -14,22 +14,16 @@ export const CategoryNav = ({
   isActive,
   handleCategoryClick,
 }: CategoryNavProps) => {
-  const currentProgress =
-    (currentMediaIdx + 1) / currentMediaIdsAndCategory.mediaIds.length;
   return Div({
-    style: {
-      background: isActive
-        ? `linear-gradient(to right, #4362D0 ${
-            currentProgress * 100
-          }%, #7890E7 0%)`
-        : "inherit",
-    },
     className: `${styles.container} ${
       isActive
         ? `${typoStyles["selected-bold14"]} ${styles["active"]}`
         : `${typoStyles["available-medium14"]} ${styles["in-active"]}`
     }`,
-    onClick: () => handleCategoryClick(),
+    onClick: () => {
+      if (isActive) return;
+      handleCategoryClick();
+    },
     children: [
       Span({
         children: [currentMediaIdsAndCategory.category.name],

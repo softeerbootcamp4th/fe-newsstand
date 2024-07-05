@@ -1,3 +1,5 @@
+import { News } from "@/models/News";
+
 export const getMediaRecentNewsByCategory = (
   mediaId: number,
   categoryId: number,
