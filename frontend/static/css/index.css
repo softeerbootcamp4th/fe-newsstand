@@ -226,7 +226,14 @@
     height: 388px;
 }
 
-#rollingBox {
+#rollingBox_left {
+    height: 17px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#rollingBox_right {
     height: 17px;
     width: 100%;
     position: relative;
@@ -237,7 +244,7 @@
     width: 50%;
 }
 
-/* .recentArticleMedia {
+.recentArticleMedia {
     padding-left: 16px;
     font-size: 14px;
     font-weight: 700;
@@ -251,7 +258,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-} */
+}
 
 #curretDom {
     font-size: 14px;
@@ -375,11 +382,11 @@
 
 /*  여기서 부터 rolling css 나중에 분리하자 */
 
-.hoverInRecentNews {
+.hoverInRecentNews>.recentArticleTitle {
     text-decoration: underline;
 }
 
-.currentDom {
+.currentDom_left {
     top: 0px;
     max-width: 360px;
     overflow: hidden;
@@ -388,7 +395,25 @@
     position: absolute;
 }
 
-.futureDom {
+.currentDom_right {
+    top: 0px;
+    max-width: 360px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+}
+
+.futureDom_left {
+    top: 17px;
+    max-width: 360px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+}
+
+.futureDom_right {
     top: 17px;
     max-width: 360px;
     overflow: hidden;
@@ -402,7 +427,7 @@
     animation-duration: 1s;
 }
 
-.currentDomStart {
+.currentDom_Start {
     animation-name: currentDomStart;
     animation-duration: 1s;
 }
