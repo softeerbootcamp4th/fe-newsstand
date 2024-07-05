@@ -1,12 +1,12 @@
 import { CONTENTS_BY_MEDIA } from "../static/data/media.js";
 import { 
-    REMOVE_MEDIA_CATEGORY, 
+    REMOVE_MEDIA_CATEGORY,
     REMOVE_MEDIA_ARROW,
     removeTotalCategoryEvent,
     removeTotalArrowEvent
 } from "../utils/events.js";
 import { 
-    getSelectedCategoryItemDOMString, 
+    getSelectedCategoryItemDOMString,
     getUnselectedCategoryItemDOMString,
     getSelectedCategoryContentsDOMString,
     setSubscribeButtonEvent,
@@ -142,10 +142,20 @@ function clickNavigationButton(step) {
     /**
      * 이전/다음 언론사 콘텐츠로 이동
      */
-    const nextCategoryIdx = selectedCategoryIdx + step;
-    const nextCategoryId = subscribeIdList[nextCategoryIdx];
-    if (nextCategoryIdx >= 0 && nextCategoryIdx < subscribeIdList.length) {
-        selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
-        renderMedia(nextCategoryId);
+    let nextCategoryIdx = selectedCategoryIdx + step;
+    if (nextCategoryIdx < 0) {
+        /**
+         * 첫 카테고리에 다다른 경우 마지막 카테고리로 이동
+         */
+        nextCategoryIdx = subscribeIdList.length - 1;
+    } else if (nextCategoryIdx === subscribeIdList.length) {
+        /**
+         * 마지막 카테고리에 다다른 경우 첫 카테고리로 이동
+         */
+        nextCategoryIdx = 0;
     }
+
+    selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
+    const nextCategoryId = subscribeIdList[nextCategoryIdx];
+    renderMedia(nextCategoryId);
 }
