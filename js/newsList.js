@@ -20,7 +20,7 @@ function setNewsList(categoryData, newsIndex) {
         if(categoryData[newsIndex * 7 + (index + 1)]) {
             news.innerText = categoryData[newsIndex * 7 + (index + 1)].title;
         } else {
-            // news.style.color = 'white'
+            news.innerText = '\n';
         }
     })
 }

@@ -76,7 +76,6 @@ function addNewsListButtonEvent(categoryData) {
 function leftButtonHandler(event, categoryData) {
     const selectedMedia = getSelectedMedia();
     const selectedMediaIndex = getSelectedMediaIndex(selectedMedia);
-    console.log("add", categoryData)
 
     if (selectedMediaIndex === "1") {
         const previousElement = selectedMedia.previousElementSibling;
@@ -102,7 +101,6 @@ function leftButtonHandler(event, categoryData) {
 function rightButtonHandler(event, categoryData) {
     const selectedMedia = getSelectedMedia();
     const selectedMediaIndex = getSelectedMediaIndex(selectedMedia);
-    console.log("add", categoryData)
 
     if (selectedMediaIndex === selectedMedia.dataset.newsCount) {
         const nextElement = selectedMedia.nextElementSibling;
@@ -120,9 +118,6 @@ function rightButtonHandler(event, categoryData) {
 
     const changedMedia = getSelectedMedia();
     const changedMediaIndex = getSelectedMediaIndex(changedMedia);
-    console.log(categoryData);
-    console.log(changedMedia.innerText)
-    console.log(categoryData[changedMedia.innerText])
     backColorAnimate();
     newsListController(categoryData[changedMedia.innerText], changedMediaIndex);
 }

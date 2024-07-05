@@ -5,7 +5,11 @@ function backColorAnimate() {
     const count = selectedMedia.dataset.newsCount;
     let gradientPosition = (index / count) * 100;
 
-    selectedMedia.style.backgroundImage = `linear-gradient(to right, #4362D0 ${gradientPosition}%, #7890E7 ${gradientPosition}%, #7890E7)`
+    selectedMedia.style.background = `linear-gradient(to right, #4362D0 50%, #7890E7 50%, #7890E7)`
+    selectedMedia.style.backgroundSize = '200%';
+    selectedMedia.style.backgroundRepeat = 'no-repeat';
+    selectedMedia.style.backgroundPosition = `${100 - gradientPosition}%`
+    selectedMedia.style.transition = "background 1s"
 }
 
 export { backColorAnimate }
