@@ -1,4 +1,4 @@
-import { convertToMarkdown } from "../utils/convertToMarkdown.js";
+import { convertToMarkdown } from "../utils/convert-to-markdown.js";
 
 /**
  * @description 선택된 카테고리 아이템 DOM string을 반환해주는 함수
