@@ -47,6 +47,8 @@ function renderMedia(categoryIdx, mediaIdx) {
         }
     });
     categoryListDOM.innerHTML = categoryListDOMString;
+    const progressAnimationDOM = document.querySelector(".media-contents__category-item-background");
+    progressAnimationDOM.addEventListener("animationiteration", navigateNextMedia);
 
     /**
      * 카테고리 이벤트 초기화 후 이벤트 리스너 등록

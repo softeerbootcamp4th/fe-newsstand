@@ -11,13 +11,16 @@ export function getSelectedCategoryItemDOMString(categoryName, selectedCategoryI
      * category length가 존재하지 않는 경우 : 내가 구독한 언론사
      */
     return `<li class="media-contents__category-item media-contents__category-item--selected" data-selected-category-idx="${selectedCategoryIdx}" data-selected-media-idx="${selectedMediaIdx}">
-                <p class="text__bold14 text__white--default">${categoryName}</p>
-                <section>
-                    ${categoryLength ? `
-                        <p class="text__bold14 text__white--default">${selectedMediaIdx + 1}</p> <p class="text__bold14 text__white--weak">/ ${categoryLength}</p>
-                        ` : `
-                        <img alt="화살표" src="./static/icons/arrow-right.svg" />
-                    `}
+                <section class="media-contents__category-item-background"></section>
+                <section class="media-contents__category-item-contents">
+                    <p class="text__bold14 text__white--default">${categoryName}</p>
+                    <section>
+                        ${categoryLength ? `
+                            <p class="text__bold14 text__white--default">${selectedMediaIdx + 1}</p> <p class="text__bold14 text__white--weak">/ ${categoryLength}</p>
+                            ` : `
+                            <img alt="화살표" src="./static/icons/arrow-right.svg" />
+                        `}
+                    </section>
                 </section>
             </li>`
 }
