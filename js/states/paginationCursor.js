@@ -3,8 +3,18 @@ class PaginationCursor
 	constructor(linkedList = null)
 	{
 		this.attachedLinkedList = null;
-		this.current = null;
+		this._current = null;
+		this.neighbor = {prev: null, next: null};
 		if(linkedList !== null) this.changeLinkedList(linkedList);
+	}
+	get current()
+	{
+		return this._current;
+	}
+	set current(value)
+	{
+		this._current = value;
+		this.neighbor = this.attachedLinkedList.get(value) ?? {prev: null, next: null};
 	}
 	changeLinkedList(linkedList)
 	{
@@ -17,13 +27,17 @@ class PaginationCursor
 	moveBefore(delta = 1)
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
-		this.current = this.attachedLinkedList.findKeyAtOffset(this.current, -delta);
+		if(!this.attachedLinkedList.has(this.current)) this.current = this.attachedLinkedList.findKeyAtOffset(this.neighbor.prev, -delta+1);
+		else this.current = this.attachedLinkedList.findKeyAtOffset(this.current, -delta);
+
 		return this.current;
 	}
 	moveNext(delta = 1)
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
-		this.current = this.attachedLinkedList.findKeyAtOffset(this.current, delta);
+		if(!this.attachedLinkedList.has(this.current)) this.current = this.attachedLinkedList.findKeyAtOffset(this.neighbor.next, delta-1);
+		else this.current = this.attachedLinkedList.findKeyAtOffset(this.current, delta);
+
 		return this.current;
 	}
 	moveTo(id)
@@ -42,7 +56,7 @@ class PaginationCursor
 	*getDataIterator(num, offset=0)
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
-		let cursor = this.current;
+		let cursor = this.attachedLinkedList.has(this.current) ? this.current : this.neighbor.next;
 		for(let i=0; i<num; i++)
 		{
 			yield cursor;
@@ -65,6 +79,7 @@ class PaginationCursor
 	}
 	findOffset(offset)
 	{
+		let cursor = this.attachedLinkedList.has(this.current) ? this.current : this.neighbor.next;
 		return this.attachedLinkedList.findKeyAtOffsetNoOverflow(this.current, offset);
 	}
 }
