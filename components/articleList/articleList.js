@@ -168,10 +168,13 @@ viewBtns.forEach(btn => {
 let categoryTimeoutId; // setTimeoutId
 
 const mediaList = ['데일리안', '서울경제', '세계일보', '스포츠동아', '스포츠서울', '아시아경제', '이데일리', '조선일보', '파이낸셜뉴스', '헤럴드경제'];
-Math.random()
-const insertContent = (nowMenuIdx, menuCurrentPage) => {
+
+const insertContent = (nowMenuIdx, menuCurrentPage, menuLastpage) => {
     const nowInfo = menuInfo[nowMenuIdx].thumbnailDatas[menuCurrentPage-1]
     
+    // 페이지 정보
+    document.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastpage}`
+
     // 미디어 사진
     document.querySelector('#media-img').src = `/images/logos/${nowInfo.thumbnailMediaName}.png`
     
@@ -226,8 +229,8 @@ const moveToNextPage = (thisBtn) => {
 
             moveToNextPage(thisBtn)
         }
-        insertContent(nowMenuIdx, menuCurrentPage)
-    }, 1000 * 5)
+        insertContent(nowMenuIdx, menuCurrentPage, menuLastpage)
+    }, 1000 * 2)
 }
 
 const articleMenuWrapper = document.querySelectorAll('.menu-btn-wrapper');
@@ -236,12 +239,14 @@ articleMenuWrapper.forEach((btnWrapper, idx) => {
         // 초기 페이지 세팅
         nowMenuIdx = idx;
         menuCurrentPage = 1;
-        console.log(menuInfo)
         menuLastpage = menuInfo[nowMenuIdx].totalPages
         
         // 클릭 시 초기 정보 삽입
-        insertContent(nowMenuIdx, menuCurrentPage)
+        insertContent(nowMenuIdx, menuCurrentPage, menuLastpage)
         
+        // 클릭 시 초기 페이지 세팅
+        btnWrapper.children[0].children[1].innerText = `${menuCurrentPage} / ${menuLastpage}`
+
         // timeout 초기화
         clearTimeout(categoryTimeoutId);
         
@@ -253,5 +258,5 @@ articleMenuWrapper.forEach((btnWrapper, idx) => {
     });
 });
 
+// 렌더링 시 초기 상태
 articleMenuWrapper[0].click();
-
