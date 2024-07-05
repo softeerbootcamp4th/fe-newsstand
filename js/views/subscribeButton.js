@@ -15,12 +15,13 @@ function SubscribeButtonInner(isSubbed)
 
 function SubscribeButton(pressId, subList)
 {
+	const prevCache = subList.getPrev(pressId);
 	const dom = html`<button class="subscribeButton" data-force-replace="true" data-unique-key="subscribe-button-${pressId}">
 		${SubscribeButtonInner(subList.has(pressId))}
 	</button>`
 
 	dom.addEventListener( "click", ()=>{
-		if(!subList.has(pressId)) subList.add(pressId);
+		if(!subList.has(pressId)) subList.add(pressId, prevCache);
 		else subList.delete(pressId);
 		// subscribePopup(pressId);
 	} );

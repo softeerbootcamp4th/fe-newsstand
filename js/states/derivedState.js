@@ -3,9 +3,9 @@ import stateBatchUpdater from "./stateBatchUpdater.js";
 function DerivedState(func, dependency)
 {
 	this.__sideEffects = new Map();
-	this.value = func(...dependency);
+	this.value = func(dependency.map( state=>state.value ), null);
 	const calculateValue = (des)=>{
-		const newValue = func(...dependency.map( state=>state.value ));
+		const newValue = func(dependency.map( state=>state.value ), this.value);
 		if(this.value !== newValue) stateBatchUpdater.callUpdate(this, newValue);
 	}
 	dependency.forEach( (state, i)=>state.addSideEffect(calculateValue, i) );

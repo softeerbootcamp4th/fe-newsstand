@@ -27,7 +27,7 @@ class PaginationCursor
 	moveBefore(delta = 1)
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
-		if(!this.attachedLinkedList.has(this.current)) this.current = this.attachedLinkedList.findKeyAtOffset(this.neighbor.prev, -delta+1);
+		if(this.isOutOfList()) this.current = this.attachedLinkedList.findKeyAtOffset(this.neighbor.prev, -delta+1);
 		else this.current = this.attachedLinkedList.findKeyAtOffset(this.current, -delta);
 
 		return this.current;
@@ -35,7 +35,7 @@ class PaginationCursor
 	moveNext(delta = 1)
 	{
 		if(this.attachedLinkedList === null) throw new Error("There is no attached Linked List!");
-		if(!this.attachedLinkedList.has(this.current)) this.current = this.attachedLinkedList.findKeyAtOffset(this.neighbor.next, delta-1);
+		if(this.isOutOfList()) this.current = this.attachedLinkedList.findKeyAtOffset(this.neighbor.next, delta-1);
 		else this.current = this.attachedLinkedList.findKeyAtOffset(this.current, delta);
 
 		return this.current;
@@ -80,8 +80,12 @@ class PaginationCursor
 	}
 	findOffset(offset)
 	{
-		let cursor = this.attachedLinkedList.has(this.current) ? this.current : this.neighbor.next;
-		return this.attachedLinkedList.findKeyAtOffsetNoOverflow(this.current, offset);
+		let cursor = this.isOutOfList() ? this.neighbor.next : this.current;
+		return this.attachedLinkedList.findKeyAtOffsetNoOverflow(cursor, offset);
+	}
+	isOutOfList()
+	{
+		return !this.attachedLinkedList.has(this.current);
 	}
 }
 
