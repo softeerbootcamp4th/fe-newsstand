@@ -40,3 +40,7 @@ button {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.hide {
+  display: none !important;
+}
