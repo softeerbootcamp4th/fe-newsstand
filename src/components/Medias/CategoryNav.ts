@@ -29,7 +29,10 @@ export const CategoryNav = ({
         ? `${typoStyles["selected-bold14"]} ${styles["active"]}`
         : `${typoStyles["available-medium14"]} ${styles["in-active"]}`
     }`,
-    onClick: () => handleCategoryClick(),
+    onClick: () => {
+      if (isActive) return;
+      handleCategoryClick();
+    },
     children: [
       Span({
         children: [currentMediaIdsAndCategory.category.name],
