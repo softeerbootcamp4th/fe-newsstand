@@ -22,6 +22,11 @@ LinkedListAdaptor.prototype.delete = function(value)
 	this.state.change(this.linkedList.array);
 }
 
+LinkedListAdaptor.prototype.has = function(value)
+{
+	return this.linkedList.has(value);
+}
+
 LinkedListAdaptor.prototype.change = function(newLinkedList)
 {
 	this.linkedList = newLinkedList;

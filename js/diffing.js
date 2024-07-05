@@ -129,11 +129,12 @@ function _applyDiff(oldDom, newDom)
 		return;
 	}
 	
-	// 그 외의 경우(노드타입이 같고 태그명도 같다면, 속성을 변경하고 children을 변경한다.)
-	if(newDom.dataset.forceReplace) {
+	// forceReplace 속성이 true이거나, forceReplace 속성이 이전 것과 다르다면, 완전히 변경시킨다.
+	if(newDom.dataset.forceReplace === "true" || (newDom.dataset.forceReplace !== undefined && newDom.dataset.forceReplace !== oldDom.dataset.forceReplace)) {
 		replaceTo(oldDom, newDom);
 		return;
 	}
+	// 그 외의 경우(노드타입이 같고 태그명도 같다면, 속성을 변경하고 children을 변경한다.)
 	else applyDiffAttributes(oldDom, newDom);
 	applyDiffChildren(oldDom, newDom.childNodes);
 }

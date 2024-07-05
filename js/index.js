@@ -17,4 +17,4 @@ mountView(state, reducer, fullList, metadata);
 
 state.subFilter.addSideEffect( (e)=>console.log(`chnge sub filter : ${e}`) );
 state.viewType.addSideEffect( (e)=>console.log(`chnge view type : ${e}`) );
-state.cursor.addSideEffect( (e)=>console.log(e) );
+state.subList.addSideEffect( (e)=>console.log(`change subList : ${e}`) );

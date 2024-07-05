@@ -6,8 +6,10 @@ import ListHeaderAllComponent from "./listHeaderAllComponent.js";
 import GridViewComponent from "./gridViewComponent.js";
 import applyDiff from "../diffing.js";
 
-function ListComponent(pressId, reducer, fullList, metadata)
+function ListComponent(state, reducer, fullList, metadata)
 {
+	const pressId = state.cursor.value;
+
 	if(pressId === null) return html`<div>없어요 구독한게</div>`;
 
 	// const pressId = paginationState.value === 1 ? "현대방송" : "대구지역신문";
@@ -15,7 +17,7 @@ function ListComponent(pressId, reducer, fullList, metadata)
 	// return html`${header}${ListContentComponent(pressId)}`;
 
 	const header = ListHeaderAllComponent(pressId, reducer.moveTo, fullList, metadata);
-	const content = ListContentComponent(pressId);
+	const content = ListContentComponent(pressId, state.subList);
 
 	return html`${header}${content}`
 }
@@ -28,7 +30,7 @@ function mountView(state, reducer, fullList, metadata)
 	function render(current)
 	{
 		if(state.viewType.value === "grid") applyDiff(el, GridViewComponent(state.cursor.getDataList(24)));
-		else applyDiff(el, ListComponent(state.cursor.value, reducer, fullList, metadata));
+		else applyDiff(el, ListComponent(state, reducer, fullList, metadata));
 	}
 
 	state.viewType.addSideEffect(render, "viewType");
