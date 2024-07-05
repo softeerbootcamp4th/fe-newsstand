@@ -24,7 +24,7 @@ const articleTitles = [
 
 export const NEWS = Array.from({ length: 100 }, () => ({
     "category": getRandomElement(categories),
-    "lastDate": new Date(),
+    "lastDate": "2023.02.10. 18:27",
     "mediaCompanyImageURL": "https://s.pstatic.net/static/newsstand/2019/logo/011.png",
     "name": getRandomElement(mediaCompanies),
     "isSubscribe": false, // 랜덤 구독 여부
