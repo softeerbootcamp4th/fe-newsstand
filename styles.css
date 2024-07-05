@@ -307,10 +307,13 @@ main {
 
 }
 
-.subscribe-btn span {
-    margin-right: 4px;
-    font-size: 12px;
+.my-subscribe {
+    background-color: var(--surface-default);
+    width: 24px;
+    box-sizing: border-box;
+    justify-content: center;
 }
+
 
 .news-item-container {
     display: flex;
