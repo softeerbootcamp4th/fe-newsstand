@@ -31,7 +31,9 @@ function ListContentComponent(pressId)
 		</div>
 		<div class="contentBody">
 			<div class="headlineArticle">
-				<img src="${headArticle.img}" alt="${headArticle.title}">
+				<div class="headlineImgWrapper">
+					<img src="${headArticle.img}" alt="${headArticle.title}">
+				</div>
 				<p>${headArticle.title}</p>
 			</div>
 			<ul class="articleList">
