@@ -1,4 +1,5 @@
 import { category } from "./data.js";
+import { getSubscriptionList } from "./subscribe.js";
 
 let curCategoryIdx = 0;
 let newsData = [];
@@ -63,6 +64,7 @@ function loadCurrentCategoryNews() {
 
 /* 현재 카테고리의 뉴스 정보로 div 생성하는 함수 */
 function displayNews() {
+
     const mainNewsDiv = document.querySelector('.main-news');
     const subNewsDiv = document.querySelector('.sub-news');
 
@@ -71,7 +73,20 @@ function displayNews() {
 
     const news = newsData[curCategoryIdx].news[curNewsIdx];
 
+    const subscribeBtn = document.querySelector('.subscribe-btn');
+    const subscriptions = getSubscriptionList();
+
+    if(subscriptions.includes(news.company)) {
+        subscribeBtn.classList.add('my-subscribe');
+        subscribeBtn.textContent = 'x';
+    } else {
+        subscribeBtn.classList.remove('my-subscribe');
+        subscribeBtn.textContent = '+ 구독하기';
+    }
+
+
     document.getElementById('logo').src = news.logoUrl;
+    document.getElementById('logo').alt = news.company;
     document.querySelector('.edit-date').textContent = `${news.date} 편집`;
 
     const thumnbailImg = document.createElement('img');
