@@ -1,3 +1,5 @@
+// 초기 상태
+
 const loadJsonData = async (src) => {
     const res = await fetch(src);
     return res.json();
@@ -5,90 +7,28 @@ const loadJsonData = async (src) => {
 
 let menuInfo = await loadJsonData('/datas/menuInfo.json')
 menuInfo = menuInfo.data
-console.log(menuInfo)
 
 const articleArea = document.querySelector('#article-list-area');
-
-// 내용
-const menuInfos = [
-    {
-        categoryIdx: 0,
-        category: '종합/경제',
-        totalPages: 3,
-        thumbnailDatas: [
-            {
-                'pageIdx': 0,
-                'thumbnailMediaName': '서울경제',
-                'thumbnailMediaImgPath': '/images/asset 35 1.png',
-                'thumbnailUpdatedDate': '2023.02.10. 18:27',
-                'thumbnailImgPath': '/icons/newspaper.png',
-                'thumbnailDetail': '또 국민연금의 몽니..현대차 지주사 불발',
-                'articleList': [
-                    `"위스키 사려고 이틀 전부터 줄 섰어요"`,
-                    `'방시혁 제국'이냐 '카카오 왕국'이냐…K엔터 누가 거머쥘까`,
-                    `사용후핵연료 저장시설 포화…이대론 7년 뒤 원전 멈춘다`,
-                    '[단독] 원희룡 "해외건설 근로자 소득공제 월 500만원으로 상향할 것"',
-                    '태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]',
-                    'LG엔솔, 폴란드 자동차산업협회 가입…“유럽서 목소리 키운다”']
-            }
-        ]
-    },
-    {
-        category: '방송/통신',
-        totalPages: 4
-    },
-    {
-        category: 'IT',
-        totalPages: 2
-    },
-    {
-        category: '영자지',
-        totalPages: 1
-    },
-    {
-        category: '스포츠/연예',
-        totalPages: 3
-    },
-    {
-        category: '매거진/전문지',
-        totalPages: 1
-    },
-    {
-        category: '지역',
-        totalPages: 4
-    }
-];
-
-
-const menuList = ['종합/경제', '방송/통신', 'IT', '영자지', '스포츠/연예', '매거진/전문지', '지역']
-const mediaName = '서울경제'
-const updateDate = '2023.02.10. 18:27'
-const thumbnailDetail = '또 국민연금의 몽니..현대차 지주사 불발'
-const thumbnailPath = '/icons/newspaper.png'
-const mediaImgPath = '/images/asset 35 1.png'
-const articleData = [
-    '11111111', '2222222', '3333333', '444444', '55555555', '66666666'
-]
-
-const infoMsg = `${mediaName} 언론사에서 직접 편집한 뉴스입니다.`
-
-
-// menu selection state
 
 let menuCurrentPage = 1;
 let menuLastpage = 0;
 let nowMenuIdx = 0;
 
 // create 태그
-const createMenuList = (menuInfos) => {
-    return menuInfos.map((menuInfo, idx) => `
+const createMenuList = (menuInfo) => {
+    return menuInfo.map((info) => (
+        {
+            menuName: info.category,
+            menuLastPage: info.totalPages
+        }
+    )).map((info, idx) => `
         <div class="menu-btn-wrapper">
             <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
                 <h5>
-                    ${menuInfo.category}
+                    ${info.menuName}
                 </h5>
                 <h5 class="article-menu-pages display-none">
-                    ${menuCurrentPage} / ${menuInfo.totalPages}
+                    ${1} / ${info.menuLastPage}
                 </h5>
             </button>
             <div class="fill-background">
@@ -97,11 +37,10 @@ const createMenuList = (menuInfos) => {
     `).join('');
 }
 
-const createArticleLiPart = (articleData) => {
-    return articleData.map((articleItem) => `
+const createArticleLiPart = (articleData) => 
+    {return articleData.map((articleItem) => `
         <li>${articleItem}</li>
-    `).join('')
-}
+    `).join('')}
 
 articleArea.innerHTML = `
     <div id="articleList-wrapper">
@@ -120,25 +59,24 @@ articleArea.innerHTML = `
             </div>
         </div>
         <div id="article-menu-wrapper">
-            ${createMenuList(menuInfos)}
+            ${createMenuList(menuInfo)}
         </div>
         <div id="article-wrapper">
             <div id="article-selection-wrapper">
             </div>
             <div id="article-content-wrapper">
                 <div id="content-header-wrapper" class="flex-row">
-                    <img id="media-img" src="${mediaImgPath}" alt="">
-                    <h4 id="updated-date-tag" style="font-size: 12px; font-weight: 400;">${updateDate} 편집</h4>
+                    <img id="media-img" src="" alt="">
+                    <h4 id="updated-date-tag" style="font-size: 12px; font-weight: 400;"> 편집</h4>
                     <button id="subscribe-btn" class="btn">+ 구독하기</button>
                     </div>
                     <div id="content-body-wrapper" class="flex-row-between">
                     <aside id="thumbnail-part">
-                        <img id="thumbnail-img" src="${thumbnailPath}" alt="" width="320px" height="200px">
+                        <img id="thumbnail-img" src="" alt="" width="320px" height="200px">
                         <p id="thumbnail-detail">ABC</p>
                     </aside>
                     <ul id="article-li-part" class="flex-col-between">
-                        ${createArticleLiPart(articleData)}
-                        <p id="li-part-info">${infoMsg}</p>
+                        <p id="li-part-info"></p>
                     </ul>
                 </div>
             </div>
@@ -199,6 +137,7 @@ const insertContent = (nowMenuIdx, menuCurrentPage, menuLastpage) => {
 const moveToNextPage = (thisBtn) => {
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
     const totalMenuLength = menuInfo.length;
+    menuLastpage = menuInfo[nowMenuIdx].totalPages
     categoryTimeoutId = setTimeout(() => { // 타이머 식별자 저장
         // 다음 메뉴로 넘어감
         if (menuCurrentPage === menuLastpage) {
@@ -208,7 +147,6 @@ const moveToNextPage = (thisBtn) => {
             if (nowMenuIdx === totalMenuLength) {
                 nowMenuIdx = 0;
             }
-            menuLastpage = menuInfo[nowMenuIdx].totalPages
             
             // 다음 버튼으로 이동
             thisBtn.classList.remove('menu-btn-wrapper-clicked')
@@ -230,23 +168,51 @@ const moveToNextPage = (thisBtn) => {
             moveToNextPage(thisBtn)
         }
         insertContent(nowMenuIdx, menuCurrentPage, menuLastpage)
-    }, 1000 * 2)
+    }, 1000 * 20)
 }
 
 const articleMenuWrapper = document.querySelectorAll('.menu-btn-wrapper');
+const setDataWithTab = (btnWrapper, idx) => {
+    nowMenuIdx = idx;
+    menuCurrentPage = 1;
+    menuLastpage = menuInfo[nowMenuIdx].totalPages
+    
+    // 클릭 시 초기 정보 삽입
+    insertContent(nowMenuIdx, menuCurrentPage, menuLastpage)
+    
+    // 클릭 시 모든 탭들의 페이지 정보 초기화
+    document.querySelectorAll('.menu-btn-wrapper').forEach((btnWrapper, idx) => {
+        btnWrapper.children[0].children[1].innerText = `${menuCurrentPage} / ${menuInfo[idx].totalPages}`
+    })
+
+    // timeout 초기화
+    clearTimeout(categoryTimeoutId);
+    
+    // 클릭한 버튼에만 클래스 부여
+    const articleMenuWrapper = document.querySelectorAll('.menu-btn-wrapper');
+    articleMenuWrapper.forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
+    btnWrapper.classList.add('menu-btn-wrapper-clicked');
+
+    moveToNextPage(btnWrapper)
+}
+
 articleMenuWrapper.forEach((btnWrapper, idx) => {
     btnWrapper.addEventListener('click', function() {
         // 초기 페이지 세팅
+
         nowMenuIdx = idx;
         menuCurrentPage = 1;
         menuLastpage = menuInfo[nowMenuIdx].totalPages
         
         // 클릭 시 초기 정보 삽입
+        btnWrapper.children[0].children[1].innerText = `1 / ${menuLastpage}`
         insertContent(nowMenuIdx, menuCurrentPage, menuLastpage)
         
-        // 클릭 시 초기 페이지 세팅
-        btnWrapper.children[0].children[1].innerText = `${menuCurrentPage} / ${menuLastpage}`
-
+        // 클릭 시 모든 탭들의 페이지 정보 초기화
+        articleMenuWrapper.forEach((btnWrapper, idx) => {
+            btnWrapper.children[0].children[1].innerText = `${menuCurrentPage} / ${menuInfo[idx].totalPages}`
+        })
+        
         // timeout 초기화
         clearTimeout(categoryTimeoutId);
         
@@ -254,9 +220,9 @@ articleMenuWrapper.forEach((btnWrapper, idx) => {
         articleMenuWrapper.forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
         this.classList.add('menu-btn-wrapper-clicked');
         
-        moveToNextPage(this)
+        moveToNextPage(btnWrapper)
     });
 });
 
 // 렌더링 시 초기 상태
-articleMenuWrapper[0].click();
+setDataWithTab(document.querySelectorAll('.menu-btn-wrapper')[0], 0)
