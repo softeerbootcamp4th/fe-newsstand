@@ -92,7 +92,7 @@ function renderMedia(mediaId) {
     const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaIdx, DEFAULT_MEDIA_INDEX));
+    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaId));
 }
 
 /**
