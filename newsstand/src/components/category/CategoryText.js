@@ -12,7 +12,7 @@ const CategoryText = (props) => {
     }
 
     const handleMouseClick = () => {
-        props.setState(props.text)
+        props.onClick()
     }
 
     const bindEvents = () => {
