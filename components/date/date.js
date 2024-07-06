@@ -1,4 +1,4 @@
-export function displayDate() {
+export const displayDate = () => {
     const days = ["일","월","화","수","목","금","토"];
     const today = new Date();
     const year = today.getFullYear();
