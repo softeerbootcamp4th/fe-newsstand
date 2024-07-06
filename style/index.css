@@ -53,7 +53,7 @@
 .roll .invisibleBox {
   display: flex;
   border: none;
-  height: 17px;
+  height: 18px;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -146,6 +146,8 @@
 .list .subscrBar button {
   background-color: #F5F7F9;
   border: #D2DAE0 1px solid;
+  display: flex;
+  align-items: center;
   font-size: 12px;
   height: 24px;
   color: #879298;
@@ -156,15 +158,19 @@
 
 .list .bottom {
   display: flex;
+  gap: 30px;
 }
 
 .list .headline {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 .list .headline img {
   height: 200px;
+  width: 320px;
+  object-fit: contain;
 }
 
 .list .leftscroll {

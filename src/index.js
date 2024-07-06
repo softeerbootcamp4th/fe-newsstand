@@ -19,7 +19,7 @@ const getDate = () => {
 
   if (month < 10) month = '0' + month;
   if (date < 10) date = '0' + date;
-  $viewDateDOM.innerText = year + '. ' + month + '. ' + date + ' ' + week[day] + '요일';
+  $viewDateDOM.innerText = `${year}. ${month}. ${date} ${week[day]}요일`;
 };
 
 const loadNews = async () => {
@@ -28,6 +28,7 @@ const loadNews = async () => {
   Object.keys(ctg).forEach((key) => {
     news = [...news, ...ctg[key]];
   });
+  console.log(Object.keys((ctg)));
   let leftNewsIndex = 0;
   let rightNewsIndex = 123456789; // 랜덤수
   let newsLength = news.length;

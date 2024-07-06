@@ -7,6 +7,18 @@ const $rightScrollDOM = document.querySelector(".list .rightscroll");
 const categories = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
 const ctgScrollNum = 3;
 
+const keyframes = [
+  {
+    backgroundPosition: "100%",
+  },
+  {
+    backgroundPosition: "0%",
+  }
+];
+const options = {
+  duration: 5000,
+};
+
 let state = {
   subscribeToggle: "whole",
   ctg: 0,
@@ -25,10 +37,12 @@ const $ctgDOM = document.querySelectorAll(".newsgroup div");
 
 const ctgDOMFill = (DOM) => {
   updateDOMstyle(DOM, {
-    background: `linear-gradient(to right, #4362D0 ${state.ctgNews / ctgScrollNum * 100}%, #7890E7 ${state.ctgNews / ctgScrollNum * 100}%)`,
+    background: `linear-gradient(to right, #4362D0 50%, #7890E7 50%)`,
+    backgroundSize: "200%",
     color: "white",
     fontWeight: "bold",
   });
+  DOM.animate(keyframes, options);
 
   if (DOM.childElementCount >= 2) {
     DOM.removeChild(DOM.lastElementChild);
@@ -104,7 +118,7 @@ for (let i = 0; i < $ctgDOM.length; i++) {
       ctgDOMLose($ctgDOM[state.ctg]);
       state.ctg = i;
       state.ctgNews = 1;
+      ctgDOMFill($ctgDOM[i]);
     }
-    ctgDOMFill($ctgDOM[i]);
   })
 }
