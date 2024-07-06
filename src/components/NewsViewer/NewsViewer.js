@@ -12,18 +12,18 @@ function NewsViewer({ $target, position = "beforeend" }) {
 
   this.state = {
     page: 0,
-    category: 0,
+    tab: 0,
   };
 
-  this.setState = function ({ page, category }) {
+  this.setState = function ({ page, tab }) {
     this.state = {
       page: page ?? this.state.page,
-      category: category ?? this.state.category,
+      tab: tab ?? this.state.tab,
     };
-    this.render(getNews(this.state.category));
+    this.render(getNews(this.state.tab));
   };
 
-  this.render(getNews(this.state.category));
+  this.render(getNews(this.state.tab));
   this.$element.addEventListener("click", this.handleClick.bind(this));
 
   this.initializeProgress();
@@ -48,17 +48,17 @@ NewsViewer.prototype.handleClick = function (event) {
     }
   }
 
-  const listItem = event.target.closest("li.category");
+  const listItem = event.target.closest("li.tab");
 
   if (listItem) {
-    const category = Number(listItem.dataset.categoryNumber);
+    const tab = Number(listItem.dataset.tabNumber);
 
-    this.handleCategoryClick(category);
+    this.handleCategoryClick(tab);
   }
 };
 
-NewsViewer.prototype.handleCategoryClick = function (category) {
-  this.setState({ page: 0, category });
+NewsViewer.prototype.handleCategoryClick = function (tab) {
+  this.setState({ page: 0, tab });
 };
 
 NewsViewer.prototype.initializeProgress = function () {
@@ -67,7 +67,7 @@ NewsViewer.prototype.initializeProgress = function () {
 
 NewsViewer.prototype.progressInterval = function () {
   const $progress = this.$element.querySelector(
-    `.category[data-category-number="${this.state.category}"] .progress`
+    `.tab[data-tab-number="${this.state.tab}"] .progress`
   );
 
   if ($progress.value === 100) {
@@ -83,7 +83,7 @@ NewsViewer.prototype.progressInterval = function () {
 };
 
 NewsViewer.prototype.nextPage = function () {
-  const news = getNews(this.state.category);
+  const news = getNews(this.state.tab);
   const nextPage = this.state.page + 1;
 
   if (nextPage >= news.length) {
@@ -108,33 +108,33 @@ NewsViewer.prototype.prevPage = function () {
 };
 
 NewsViewer.prototype.nextCategory = function () {
-  const nextCategory = this.state.category + 1;
+  const nextCategory = this.state.tab + 1;
 
   if (nextCategory >= CATEGORIES.length) {
-    this.setState({ category: 0, page: 0 });
+    this.setState({ tab: 0, page: 0 });
 
     return;
   }
 
-  this.setState({ category: nextCategory, page: 0 });
+  this.setState({ tab: nextCategory, page: 0 });
 };
 
 NewsViewer.prototype.prevCategory = function () {
-  const prevCategory = this.state.category - 1;
+  const prevCategory = this.state.tab - 1;
 
   if (prevCategory < 0) {
-    this.setState({ category: 0, page: 0 });
+    this.setState({ tab: 0, page: 0 });
 
     return;
   }
 
   const news = getNews(prevCategory);
 
-  this.setState({ category: prevCategory, page: news.length - 1 });
+  this.setState({ tab: prevCategory, page: news.length - 1 });
 };
 
 NewsViewer.prototype.MoveToSelectedTab = function () {
-  const selectedTab = this.$element.querySelector(".category.selected");
+  const selectedTab = this.$element.querySelector(".tab.selected");
 
   if (selectedTab) {
     selectedTab.scrollIntoView({ behavior: "instant", inline: "center" });
@@ -153,16 +153,14 @@ NewsViewer.prototype.formatDate = function formatDate(date) {
 
 NewsViewer.prototype.render = function (news) {
   this.$element.innerHTML = /* html */ `
-    <ul class="categoryTabs">
+    <ul class="tabs">
       ${CATEGORIES.map(
         (name, idx) => /* html */ `
-          <li data-category-number="${idx}" class="category${
-          this.state.category === idx ? " selected" : ""
-        }">
-            <p class="categoryInfo">
+          <li data-tab-number="${idx}" class="tab${this.state.tab === idx ? " selected" : ""}">
+            <p class="tabInfo">
               <span>${name}</span>
               <span class="pageInfo">${this.state.page + 1}
-                <span class="newsLength"> / ${news.length}</span>
+                <span class="maxPage"> / ${news.length}</span>
               </span>
             </p>
             <progress class="progress progressTransition" value="0" min="0" max="100"></progress>
@@ -172,7 +170,7 @@ NewsViewer.prototype.render = function (news) {
     </ul>
 
     <button id="prevButton" class="newsButton prev${
-      this.state.category === 0 && this.state.page === 0 ? " hide" : ""
+      this.state.tab === 0 && this.state.page === 0 ? " hide" : ""
     }"><img src="${leftButton}"/></button>
     <button id="nextButton" class="newsButton next"><img src="${rightButton}"/></button>
   `;
@@ -180,9 +178,9 @@ NewsViewer.prototype.render = function (news) {
   this.MoveToSelectedTab();
 
   new ContentsBox({
-    $target: this.$element.querySelector(".categoryTabs"),
+    $target: this.$element.querySelector(".tabs"),
     position: "afterend",
-    news: getNews(this.state.category)[this.state.page],
+    news: getNews(this.state.tab)[this.state.page],
   });
 };
 
