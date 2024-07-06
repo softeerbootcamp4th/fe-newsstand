@@ -1,6 +1,6 @@
 import createComponent from './core/component/component.js'
-import Header from './layouts/Header.js'
-import SubHeader from './layouts/SubHeader.js'
+import Header from './layouts/header/Header.js'
+import SubHeader from './layouts/sub-header/SubHeader.js'
 import NewsSourceSelector from './layouts/source-selector/NewsSourceSelector.js'
 import ListNewsstand from './layouts/news-container/ListNewsstand.js'
 import { generateRandomId } from './utils/idGenerator.js'
