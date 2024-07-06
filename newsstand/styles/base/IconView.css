@@ -1,0 +1,7 @@
+.icon-view {
+    cursor: pointer;
+}
+
+.icon-view:hover {
+    filter: invert(45%) sepia(63%) saturate(10946%) hue-rotate(162deg) brightness(95%) contrast(101%);
+}
