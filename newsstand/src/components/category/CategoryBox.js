@@ -1,5 +1,5 @@
-import { mediaCategoryData, getCompanyCount } from '../datas/mockData.js'
-import { isIn } from '../utils/listUtils.js'
+import { mediaCategoryData, getCompanyCount } from '../../datas/mockData.js'
+import { isIn } from '../../utils/listUtils.js'
 let intervalId = null
 
 const CategoryBox = (props) => {

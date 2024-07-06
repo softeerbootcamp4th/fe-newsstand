@@ -1,5 +1,5 @@
 import createComponent from '../../core/component/component.js'
-import AutoRollingNews from '../../components/AutoRollingNews.js'
+import AutoRollingNews from '../../components/news/AutoRollingNews.js'
 import { generateRandomId } from '../../utils/idGenerator.js'
 
 const SubHeader = () => {

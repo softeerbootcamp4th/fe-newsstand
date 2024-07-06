@@ -1,7 +1,7 @@
 import createComponent from '../../core/component/component.js'
 import { generateRandomId } from '../../utils/idGenerator.js'
 import { mediaCategoryData } from '../../datas/mockData.js'
-import CategoryBox from '../../components/CategoryBOx.js'
+import CategoryBox from './CategoryBox.js'
 
 const MediaCategories = (props) => {
     const categoryComponents = mediaCategoryData.map((category) =>

@@ -1,9 +1,9 @@
-import Button, { ButtonVariantProps } from '../components/base/Button.js'
-import IconView, { Icon } from '../components/base/IconView.js'
-import createComponent from '../core/component/component.js'
-import ImageView from '../components/base/ImageView.js'
-import { generateRandomId } from '../utils/idGenerator.js'
-import { isSubscribed, handleSubscription } from '../utils/subscribeUtils.js'
+import Button, { ButtonVariantProps } from '../base/Button.js'
+import IconView, { Icon } from '../base/IconView.js'
+import createComponent from '../../core/component/component.js'
+import ImageView from '../base/ImageView.js'
+import { generateRandomId } from '../../utils/idGenerator.js'
+import { isSubscribed, handleSubscription } from '../../utils/subscribeUtils.js'
 
 const MainNews = (props) => {
     const companyIcon = createComponent(IconView, {

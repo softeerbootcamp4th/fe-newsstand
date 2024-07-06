@@ -1,11 +1,11 @@
 import IconView, { Icon } from '../../components/base/IconView.js'
 import createComponent from '../../core/component/component.js'
-import MediaCategories from './MediaCategories.js'
+import MediaCategories from '../../components/category/MediaCategories.js'
 import { mediaCategoryData, getNewsData, getCompanyCount } from '../../datas/mockData.js'
 import { generateRandomId } from '../../utils/idGenerator.js'
 import useState from '../../core/hooks/useState.js'
 import { getPrevIndexInList, getNextIndexInList } from '../../utils/listUtils.js'
-import MainNews from '../../components/MainNews.js'
+import MainNews from '../../components/news/MainNews.js'
 
 const ListNewsstand = () => {
     const [selectedCategory, setSelectedCategory] = useState(mediaCategoryData[0])

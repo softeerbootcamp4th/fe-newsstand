@@ -1,4 +1,4 @@
-import useState from '../core/hooks/useState.js'
+import useState from '../../core/hooks/useState.js'
 
 const CategoryText = (props) => {
     const [isHover, setIsHover] = useState(false)

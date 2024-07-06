@@ -1,7 +1,7 @@
 import useState from '../../core/hooks/useState.js'
 import createComponent from '../../core/component/component.js'
 import IconView, { Icon } from '../../components/base/IconView.js'
-import CategoryText from '../../components/CategoryText.js'
+import CategoryText from '../../components/category/CategoryText.js'
 import { generateRandomId } from '../../utils/idGenerator.js'
 
 const NewsSourceSelector = () => {

@@ -1,6 +1,6 @@
 import NewsBox from './components/newsBox.js'
-import Button from '../components/base/Button.js'
-import { mockData } from '../datas/mockData.js'
+import Button from '../../components/base/Button.js'
+import { mockData } from '../../datas/mockData.js'
 
 const GridNewsstand = () => {
     const newsBoxes = mockData.map((news, index) => {
