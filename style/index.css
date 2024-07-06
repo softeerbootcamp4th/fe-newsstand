@@ -36,7 +36,6 @@
 }
 
 .roll {
-  /* border: solid black; */
   display: flex;
   gap: 8px;
   margin-bottom: 40px;
@@ -50,28 +49,29 @@
   overflow: hidden;
 }
 
-.roll .invisibleBox {
+.roll .invisible-box {
   display: flex;
-  border: none;
   height: 18px;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.roll span.com {
+.roll .invisible-box .com {
+  flex: 1;
   font-size: 14px;
-  width: 60px;
-  margin-right: 16px;
+  min-width: 60px;
+  margin-right: 20px;
   color: #14212B;
   font-weight: bold;
 }
 
-.roll span.title {
+.roll .invisible-box .title {
+  flex: 1;
   font-size: 14px;
   color: #5F6E76;
 }
 
-.roll span.title:hover {
+.roll .invisible-box .title:hover {
   text-decoration: underline;
   cursor: pointer;
 }
