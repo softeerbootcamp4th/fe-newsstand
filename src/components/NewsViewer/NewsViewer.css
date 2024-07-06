@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 
-.categoryFilter {
+.categoryTabs {
   display: flex;
 
   width: 100%;
@@ -20,11 +20,12 @@
   box-sizing: border-box;
 }
 
-.categoryFilter > li {
+.category {
   display: flex;
   justify-content: center;
   align-items: center;
 
+  width: fit-content;
   height: 40px;
 
   padding: 0 16px 0 16px;
@@ -34,7 +35,7 @@
   cursor: pointer;
 }
 
-.categoryFilter > .selected {
+.category.selected {
   justify-content: space-between;
 
   position: relative;
@@ -46,12 +47,25 @@
   font-weight: 600;
 }
 
-.categoryFilter > li:not(.selected):hover {
-  text-decoration: underline;
+.category.selected .categoryInfo {
+  z-index: 1;
 }
 
-.categoryFilter span {
-  z-index: 1;
+.categoryInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+.category:not(.selected) .pageInfo,
+.category:not(.selected) progress {
+  display: none;
+}
+
+.category:not(.selected):hover {
+  text-decoration: underline;
 }
 
 .progress {
@@ -73,10 +87,8 @@
   background: var(--blue-500);
 }
 
-.progressTransition {
-  &::-webkit-progress-value {
-    transition: width 1s linear;
-  }
+.progressTransition::-webkit-progress-value {
+  transition: width 1s linear;
 }
 
 .pageInfo {

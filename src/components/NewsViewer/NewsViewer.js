@@ -67,28 +67,6 @@ NewsViewer.prototype.formatDate = function formatDate(date) {
   return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
 };
 
-NewsViewer.prototype.getCategoryFilterTemplate = function (newsLength) {
-  return CATEGORIES.map((name, idx) => {
-    if (idx === this.state.category) {
-      return /* html */ ` 
-        <li data-category-number="${idx}" class="category selected">
-          <span>${name}</span>
-          <span class="pageInfo">${this.state.page + 1}
-          <span class="newsLength"> / ${newsLength}</span>
-          </span>
-          <progress class="progress progressTransition" value="0" min="0" max="100"></progress>
-        </li>
-        `;
-    }
-
-    return /* html */ `
-      <li data-category-number="${idx}" class="category">
-        ${name}
-      </li>
-    `;
-  }).join("");
-};
-
 NewsViewer.prototype.handleCategoryClick = function (category) {
   this.setState({ page: 0, category });
 };
@@ -98,7 +76,9 @@ NewsViewer.prototype.initializeProgress = function () {
 };
 
 NewsViewer.prototype.progressInterval = function () {
-  const $progress = this.$element.querySelector(".progress");
+  const $progress = this.$element.querySelector(
+    `.category[data-category-number="${this.state.category}"] .progress`
+  );
 
   if ($progress.value === 100) {
     $progress.classList.remove("progressTransition");
@@ -165,8 +145,22 @@ NewsViewer.prototype.prevCategory = function () {
 
 NewsViewer.prototype.render = function (news) {
   this.$element.innerHTML = /* html */ `
-    <ul class="categoryFilter">
-      ${this.getCategoryFilterTemplate(news.length)}
+    <ul class="categoryTabs">
+      ${CATEGORIES.map(
+        (name, idx) => /* html */ `
+          <li data-category-number="${idx}" class="category${
+          this.state.category === idx ? " selected" : ""
+        }">
+            <p class="categoryInfo">
+              <span>${name}</span>
+              <span class="pageInfo">${this.state.page + 1}
+                <span class="newsLength"> / ${news.length}</span>
+              </span>
+            </p>
+            <progress class="progress progressTransition" value="0" min="0" max="100"></progress>
+          </li>
+        `
+      ).join("")}
     </ul>
 
     <button id="prevButton" class="newsButton prev${
@@ -176,7 +170,7 @@ NewsViewer.prototype.render = function (news) {
   `;
 
   new ContentsBox({
-    $target: this.$element.querySelector(".categoryFilter"),
+    $target: this.$element.querySelector(".categoryTabs"),
     position: "afterend",
     news: getNews(this.state.category)[this.state.page],
   });
