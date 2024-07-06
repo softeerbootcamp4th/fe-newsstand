@@ -57,16 +57,6 @@ NewsViewer.prototype.handleClick = function (event) {
   }
 };
 
-NewsViewer.prototype.formatDate = function formatDate(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-
-  return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
-};
-
 NewsViewer.prototype.handleCategoryClick = function (category) {
   this.setState({ page: 0, category });
 };
@@ -143,6 +133,24 @@ NewsViewer.prototype.prevCategory = function () {
   this.setState({ category: prevCategory, page: news.length - 1 });
 };
 
+NewsViewer.prototype.MoveToSelectedTab = function () {
+  const selectedTab = this.$element.querySelector(".category.selected");
+
+  if (selectedTab) {
+    selectedTab.scrollIntoView({ behavior: "instant", inline: "center" });
+  }
+};
+
+NewsViewer.prototype.formatDate = function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
+};
+
 NewsViewer.prototype.render = function (news) {
   this.$element.innerHTML = /* html */ `
     <ul class="categoryTabs">
@@ -168,6 +176,8 @@ NewsViewer.prototype.render = function (news) {
     }"><img src="${leftButton}"/></button>
     <button id="nextButton" class="newsButton next"><img src="${rightButton}"/></button>
   `;
+
+  this.MoveToSelectedTab();
 
   new ContentsBox({
     $target: this.$element.querySelector(".categoryTabs"),

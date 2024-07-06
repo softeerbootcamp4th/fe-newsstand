@@ -18,6 +18,8 @@
   border-bottom: 1px solid var(--gray-100);
   background-color: var(--gray-50);
   box-sizing: border-box;
+
+  overflow-x: scroll;
 }
 
 .category {
@@ -25,7 +27,6 @@
   justify-content: center;
   align-items: center;
 
-  width: fit-content;
   height: 40px;
 
   padding: 0 16px 0 16px;
@@ -51,12 +52,18 @@
   z-index: 1;
 }
 
-.categoryInfo {
+.category.selected .categoryInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
+  width: 166px;
+}
+
+.categoryInfo span {
+  overflow: hidden;
+  word-break: nowrap;
+  white-space: nowrap;
 }
 
 .category:not(.selected) .pageInfo,
