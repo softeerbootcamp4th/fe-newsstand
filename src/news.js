@@ -7,18 +7,6 @@ const $rightScrollDOM = document.querySelector(".list .rightscroll");
 const categories = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
 const ctgScrollNum = 3;
 
-const keyframes = [
-  {
-    backgroundPosition: "100%",
-  },
-  {
-    backgroundPosition: "0%",
-  }
-];
-const options = {
-  duration: 5000,
-};
-
 let state = {
   subscribeToggle: "whole",
   ctg: 0,
@@ -36,15 +24,37 @@ categories.forEach((ctg) => {
 const $ctgDOM = document.querySelectorAll(".newsgroup div");
 
 const ctgDOMFill = (DOM) => {
+  const keyframes = [
+    {
+      backgroundPosition: "100%",
+    },
+    {
+      backgroundPosition: "0%",
+    }
+  ];
+  const options = {
+    duration: 5000,
+  };
+
   updateDOMstyle(DOM, {
     background: `linear-gradient(to right, #4362D0 50%, #7890E7 50%)`,
     backgroundSize: "200%",
     color: "white",
     fontWeight: "bold",
   });
-  DOM.animate(keyframes, options);
 
-  if (DOM.childElementCount >= 2) {
+  DOM.animate(keyframes, options).onfinish = () => {
+    ctgDOMLose($ctgDOM[state.ctg]);
+    state.ctgNews++;
+    if (state.ctgNews > ctgScrollNum) {
+      state.ctgNews = 1;
+      state.ctg++;
+      if (state.ctg === categories.length) state.ctg = 0;
+    }
+    ctgDOMFill($ctgDOM[state.ctg]);
+  }
+
+  if (DOM.childElementCount === 2) {
     DOM.removeChild(DOM.lastElementChild);
   }
   const newDOM = document.createElement("span");
@@ -53,6 +63,9 @@ const ctgDOMFill = (DOM) => {
 };
 
 const ctgDOMLose = (DOM) => {
+  const animations = DOM.getAnimations();
+  animations.forEach(ani => ani.cancel());
+
   updateDOMstyle(DOM, {
     background: "inherit",
     color: "inherit",
@@ -64,61 +77,63 @@ const ctgDOMLose = (DOM) => {
   }
 };
 
-$subscribeToggleDOM[0].addEventListener("click", () => {
-  state.subscribeToggle = "whole";
-  updateDOMstyle($subscribeToggleDOM[0], {
-    fontWeight: "bold",
-    color: "black",
-  });
-  updateDOMstyle($subscribeToggleDOM[1], {
-    fontWeight: "normal",
-    color: "#879298",
+export default function CategoriesAndNewsSection() {
+  $subscribeToggleDOM[0].addEventListener("click", () => {
+    state.subscribeToggle = "whole";
+    updateDOMstyle($subscribeToggleDOM[0], {
+      fontWeight: "bold",
+      color: "black",
+    });
+    updateDOMstyle($subscribeToggleDOM[1], {
+      fontWeight: "normal",
+      color: "#879298",
+    })
   })
-})
 
-$subscribeToggleDOM[1].addEventListener("click", () => {
-  state.subscribeToggle = "my";
-  updateDOMstyle($subscribeToggleDOM[0], {
-    fontWeight: "normal",
-    color: "#879298",
-  });
-  updateDOMstyle($subscribeToggleDOM[1], {
-    fontWeight: "bold",
-    color: "black",
+  $subscribeToggleDOM[1].addEventListener("click", () => {
+    state.subscribeToggle = "my";
+    updateDOMstyle($subscribeToggleDOM[0], {
+      fontWeight: "normal",
+      color: "#879298",
+    });
+    updateDOMstyle($subscribeToggleDOM[1], {
+      fontWeight: "bold",
+      color: "black",
+    })
   })
-})
 
-$leftScrollDOM.addEventListener("click", () => {
-  state.ctgNews--;
-  if (state.ctgNews === 0) {
+  $leftScrollDOM.addEventListener("click", () => {
     ctgDOMLose($ctgDOM[state.ctg]);
-    state.ctgNews = ctgScrollNum;
-    state.ctg--;
-    if (state.ctg < 0) state.ctg = categories.length - 1;
-  }
-  ctgDOMFill($ctgDOM[state.ctg]);
-})
-
-$rightScrollDOM.addEventListener("click", () => {
-  state.ctgNews++;
-  if (state.ctgNews > ctgScrollNum) {
-    ctgDOMLose($ctgDOM[state.ctg]);
-    state.ctgNews = 1;
-    state.ctg++;
-    if (state.ctg === categories.length) state.ctg = 0;
-  }
-  ctgDOMFill($ctgDOM[state.ctg]);
-})
-
-ctgDOMFill($ctgDOM[state.ctg]);
-
-for (let i = 0; i < $ctgDOM.length; i++) {
-  $ctgDOM[i].addEventListener("click", () => {
-    if (state.ctg !== i) {
-      ctgDOMLose($ctgDOM[state.ctg]);
-      state.ctg = i;
-      state.ctgNews = 1;
-      ctgDOMFill($ctgDOM[i]);
+    state.ctgNews--;
+    if (state.ctgNews === 0) {
+      state.ctgNews = ctgScrollNum;
+      state.ctg--;
+      if (state.ctg < 0) state.ctg = categories.length - 1;
     }
+    ctgDOMFill($ctgDOM[state.ctg]);
   })
+
+  $rightScrollDOM.addEventListener("click", () => {
+    ctgDOMLose($ctgDOM[state.ctg]);
+    state.ctgNews++;
+    if (state.ctgNews > ctgScrollNum) {
+      state.ctgNews = 1;
+      state.ctg++;
+      if (state.ctg === categories.length) state.ctg = 0;
+    }
+    ctgDOMFill($ctgDOM[state.ctg]);
+  })
+
+  ctgDOMFill($ctgDOM[state.ctg]);
+
+  for (let i = 0; i < $ctgDOM.length; i++) {
+    $ctgDOM[i].addEventListener("click", () => {
+      if (state.ctg !== i) {
+        ctgDOMLose($ctgDOM[state.ctg]);
+        state.ctg = i;
+        state.ctgNews = 1;
+        ctgDOMFill($ctgDOM[i]);
+      }
+    })
+  }
 }

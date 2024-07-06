@@ -1,4 +1,5 @@
 import rollingNewsSection from "./rolling.js";
+import CategoriesAndNewsSection from "./news.js";
 
 const $viewDateDOM = document.querySelector(".date");
 
@@ -17,3 +18,4 @@ const getDate = () => {
 
 getDate();
 rollingNewsSection();
+CategoriesAndNewsSection();
