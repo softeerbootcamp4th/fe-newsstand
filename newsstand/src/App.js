@@ -1,15 +1,13 @@
 import createComponent from './core/component/component.js'
 import Header from './layouts/header/Header.js'
 import SubHeader from './layouts/sub-header/SubHeader.js'
-import NewsSourceSelector from './layouts/source-selector/NewsSourceSelector.js'
-import ListNewsstand from './layouts/news-container/ListNewsstand.js'
+import NewsContainer from './layouts/news-container/NewsContainer.js'
 import { generateRandomId } from './utils/idGenerator.js'
 
 const App = () => {
     const headerLayout = createComponent(Header, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
     const subHeaderLayout = createComponent(SubHeader, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
-    const newsSourceSelectorLayout = createComponent(NewsSourceSelector, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
-    const listNewsstandLayout = createComponent(ListNewsstand, { id: generateRandomId(10), style: 'width:100%; height:70%;' })
+    const newsContainerLayout = createComponent(NewsContainer, { id: generateRandomId(10), style: 'width:100%; height:80%;' })
 
     return {
         element: `
@@ -21,11 +19,8 @@ const App = () => {
                 ${/* subheader layout */ ''}
                 ${subHeaderLayout.element}
 
-                ${/* news source selector layout */ ''}
-                ${newsSourceSelectorLayout.element}
-
                 ${/* news container layout */ ''}
-                ${listNewsstandLayout.element}
+                ${newsContainerLayout.element}
             </div>
         </div>
         `,
