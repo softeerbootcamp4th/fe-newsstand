@@ -1,8 +1,8 @@
-import useState from '../core/hooks/useState.js'
-import createComponent from '../core/component/component.js'
-import IconView, { Icon } from '../components/base/IconView.js'
-import CategoryText from '../components/CategoryText.js'
-import { generateRandomId } from '../utils/idGenerator.js'
+import useState from '../../core/hooks/useState.js'
+import createComponent from '../../core/component/component.js'
+import IconView, { Icon } from '../../components/base/IconView.js'
+import CategoryText from '../../components/CategoryText.js'
+import { generateRandomId } from '../../utils/idGenerator.js'
 
 const NewsSourceSelector = () => {
     const [selectedSource, setSelectedSource] = useState('전체 언론사')
