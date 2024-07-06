@@ -14,7 +14,7 @@ const MainNews = (props) => {
     const subscribeButton = createComponent(Button, {
         id: generateRandomId(10),
         icon: isSubscribed(props.newsData.companyName) ? Icon.X : Icon.PLUS,
-        text: isSubscribed(props.newsData.companyName) ? '구독해제' : '구독하기',
+        text: isSubscribed(props.newsData.companyName) ? '' : '구독하기',
         style: 'height:10px;',
         variant: ButtonVariantProps.WHITE,
         onClick: () => {
