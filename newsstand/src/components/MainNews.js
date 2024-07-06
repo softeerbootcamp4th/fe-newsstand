@@ -3,6 +3,7 @@ import IconView, { Icon } from '../components/base/IconView.js'
 import createComponent from '../core/component/component.js'
 import ImageView from '../components/base/ImageView.js'
 import { generateRandomId } from '../utils/idGenerator.js'
+import { isSubscribed, handleSubscription } from '../utils/subscribeUtils.js'
 
 const MainNews = (props) => {
     const companyIcon = createComponent(IconView, {
@@ -12,10 +13,13 @@ const MainNews = (props) => {
 
     const subscribeButton = createComponent(Button, {
         id: generateRandomId(10),
-        icon: Icon.PLUS,
-        text: '구독하기',
+        icon: isSubscribed(props.newsData.companyName) ? Icon.MINUS : Icon.PLUS,
+        text: isSubscribed(props.newsData.companyName) ? '구독해제' : '구독하기',
         style: 'height:10px;',
         variant: ButtonVariantProps.WHITE,
+        onClick: () => {
+            handleSubscription(props.newsData.companyName)
+        },
     })
 
     const ImageComponent = createComponent(ImageView, {
