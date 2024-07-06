@@ -21,6 +21,10 @@ body {
     font-size: var(--text-base-size);
     font-family: var(--font-primary);
     color: var(--color-text);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 h1,
