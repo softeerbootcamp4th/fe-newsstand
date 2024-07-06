@@ -1,5 +1,5 @@
 import "./App.css";
-import Header from "@/components/common/Header/Header";
+import Header from "@/components/Header/Header";
 import AutoRollingNews from "@/components/AutoRollingNews/AutoRollingNews";
 import NewsList from "@/components/NewsList/NewsList";
 import breakingNews from "@/mocks/data/breakingNews.json";
