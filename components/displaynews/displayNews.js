@@ -1,6 +1,6 @@
 let newsData = [];
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     fetch('../../news/allnews.json')
         .then(response => response.json())
         .then(data => {
@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     updateNewsDisplay(this.id);
                 });
             });
-            // 초기화면 표시
-            updateNewsDisplay('economy'); // 초기 섹션 - 종합.경제
+            
         })
         .catch(error => console.error('Error loading JSON:', error));
 });
 
-export function updateNewsDisplay(pressType, idx) {
+//뉴스 종류를 선택하였을 때, 페이지 넘김에 따른 컨텐츠 변화 함수 
+export const updateNewsDisplay = (pressType, idx)  =>{
     const filteredNews = newsData.filter(item => item.pressType === pressType);
     const newsItem = filteredNews.find(item => item.pid == idx);
 
