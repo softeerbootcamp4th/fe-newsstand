@@ -13,7 +13,7 @@ const NewsSourceSelector = () => {
         state: selectedSource,
         setState: setSelectedSource,
     })
-    const subscribeCategoryText2 = createComponent(CategoryText, {
+    const subscribeCategory = createComponent(CategoryText, {
         id: generateRandomId(10),
         text: '내가 구독한 언론사',
         state: selectedSource,
@@ -28,7 +28,7 @@ const NewsSourceSelector = () => {
         <div class="category-container">
             <div class="flex">
                 ${wholeCategory.element}
-                ${subscribeCategoryText2.element}
+                ${subscribeCategory.element}
             </div>
             <div class="flex">
                 ${listCategoryButton.element}
