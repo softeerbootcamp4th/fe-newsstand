@@ -5,47 +5,64 @@
 .media-contents__category-list {
     height: 40px;
     border-bottom: 1px solid var(--gray100);
+
+    overflow-y: hidden;
+    user-select: none;
 }
 .media-contents__category-item {
     padding: 0 16px;
 }
 .media-contents__category-item--selected {
+    position: relative;
+    height: 100%;
+
+    background: var(--blue100);
+}
+.media-contents__category-item-contents {
+    position: relative;
+    z-index: 2;
     width: 166px;
     height: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--blue100);
 }
+.media-contents__category-item-background {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--blue500);
+
+    animation: progress-bar 20s infinite;
+}
+
+@keyframes progress-bar {
+    from {
+        clip-path: polygon(0 0, 0% 0, 0% 100%, 0% 100%);
+    }
+    to {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+}
+
 .media-contents__category-item-text {
     cursor: pointer;
+    word-break: keep-all;
 }
 .media-contents__category-item-text:hover {
     text-decoration: underline;
+}
+.media-contents__category-item-text--selected {
+    word-break: keep-all;
 }
 
 .media-contents__contents-box {
     padding: 26px 24px;
     height: 312px;
-}
-
-.media-contents__subscribe-button {
-    box-sizing: border-box;
-    padding: 5px 6px;
-    border-radius: 50px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1px;
-
-    cursor: pointer;
-}
-.media-contents__subscribe-button:hover {
-    border: 1px solid var(--gray300);
-}
-.media-contents__subscribe-button:hover .media-contents__subscribe-text {
-    color: var(--gray500);
 }
 
 .media-contents__image-content {
@@ -56,6 +73,8 @@
     width: 320px;
     height: 200px;
     object-fit: cover;
+
+    transition: 0.3s;
 }
 .media-contents__image-headline {
     display: -webkit-box;
@@ -69,6 +88,9 @@
 }
 .media-contents__image-content:hover .media-contents__image-headline {
     text-decoration: underline;
+}
+.media-contents__image-content:hover img {
+    transform: scale(105%);
 }
 
 .media-contents__list-item-text {
@@ -93,4 +115,18 @@
 }
 .media-contents__right-button {
     right: -70px;
+}
+
+.media--selected {
+    font-weight: 700;
+    font-size: 16px;
+
+    color: var(--black);
+}
+.media--unselected {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+
+    color: var(--gray200);
 }

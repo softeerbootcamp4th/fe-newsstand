@@ -1,30 +1,34 @@
-import { getNextNumber } from "../utils/getNextNumber.js";
+import { getNextNumber } from "../utils/get-next-number.js";
 
 /**
  * @description 최신 뉴스 DOM의 텍스트를 rolling 해주는 함수
  */
 export function rollingDOM(rollingBoxDOM, rollingData, rollingIdx) {
     const length = rollingData.length;
+    
+    if (length === 0) {
+        return;
+    }
 
     const staticTextDOM = rollingBoxDOM.querySelector('.current-news__static-text');
     const disappearTextDOM = rollingBoxDOM.querySelector('.current-news__disappear-text');
     const appearTextDOM = rollingBoxDOM.querySelector('.current-news__appear-text');
 
-    staticTextDOM.textContent = rollingData.newsList[0].title;
-    staticTextDOM.href = rollingData.newsList[0].url;
+    let prevIdx = 0, nextIdx = 1;
+    staticTextDOM.textContent = rollingData.newsList[prevIdx].title;
+    staticTextDOM.href = rollingData.newsList[prevIdx].url;
 
     if (length === 1) {
         return;
     }
 
-    let prevIdx = 0, nextIdx = 1;
     disappearTextDOM.textContent = rollingData.newsList[prevIdx].title;
     appearTextDOM.textContent = rollingData.newsList[nextIdx].title;
 
+    /**
+     * @description 실제 rolling 애니메이션 실행하는 함수
+     */
     function rolling() {
-        /**
-         * rolling 애니메이션 실행
-         */ 
         staticTextDOM.classList.add('current-news__not-display');
         disappearTextDOM.classList.add('rolling-out');
         appearTextDOM.classList.add('rolling-in');
@@ -38,31 +42,31 @@ export function rollingDOM(rollingBoxDOM, rollingData, rollingIdx) {
         prevIdx = getNextNumber(prevIdx, length);
         nextIdx = getNextNumber(nextIdx, length);
 
-        setTimeout(() => {
+        appearTextDOM.addEventListener("animationend", () => {
             staticTextDOM.classList.remove('current-news__not-display');
             disappearTextDOM.classList.remove('rolling-out');
             appearTextDOM.classList.remove('rolling-in');
 
             disappearTextDOM.textContent = rollingData.newsList[prevIdx].title;
-            appearTextDOM.textContent = rollingData.newsList[nextIdx].title;        
-        }, 1200);
+            appearTextDOM.textContent = rollingData.newsList[nextIdx].title;
+        });
     }
     
     /**
      * 순차적 rolling 실행
      */
-    let intervalRolling = null;
+    let intervalRollingId = null;
     setTimeout(() => {
-        intervalRolling = setInterval(rolling, 5000);
+        intervalRollingId = setInterval(rolling, 5000);
     }, 1000 * rollingIdx);
 
     /**
      * static 텍스트 hover 처리
      */
     staticTextDOM.addEventListener('mouseover', () => {
-        clearInterval(intervalRolling);
+        clearInterval(intervalRollingId);
     });
     staticTextDOM.addEventListener('mouseout', () => {
-        intervalRolling = setInterval(rolling, 5000);
+        intervalRollingId = setInterval(rolling, 5000);
     });
 }
