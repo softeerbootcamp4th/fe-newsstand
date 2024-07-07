@@ -89,11 +89,7 @@
 }
 
 .auto-rolling-news-container a {
-    display: block;
-    display: -webkit-box;
     text-decoration: none;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
     overflow: hidden;
     color: #5f6e76;
 }
