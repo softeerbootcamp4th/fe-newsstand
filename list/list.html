@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="list.css" />
+    <link rel="stylesheet" href="nav.css" />
+    <link rel="stylesheet" href="newsBanner.css" />
+    <link rel="stylesheet" href="newsList.css" />
+    <script type="module" src="./nav.js"></script>
+    <script type="module" src="./newsBanner.js"></script>
+    <script type="module" src="./newsList.js"></script>
+    <script type="module" src="./list.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="header">
+        <h3 class="header_title">
+          <img src="../resources/newspaper.png" alt="" />뉴스스탠드
+          <div class="today">오늘 날짜</div>
+        </h3>
+        <div id="banner_container"></div>
+      </div>
+      <div class="header_selected">
+        <div id="category">
+          <button>전체 언론사</button>
+          <button>내가 구독한 언론사</button>
+        </div>
+        <div id="show">
+          <button>리스트</button>
+          <button>그리드</button>
+        </div>
+      </div>
+      <div id="nav_container"></div>
+      <main>
+        <button class="leftButton">&lt;</button>
+        <div class="body_wrapper">
+          <div class="body_title">
+            <p class="media"></p>
+            <p class="date">날짜</p>
+            <button>구독하기</button>
+          </div>
+          <div class="content_wrapper">
+            <div class="imageNews">
+              <img src="../resources/Thumbnail.png" alt="" />
+              <div class="imageNews_title">이미지 뉴스 제목</div>
+            </div>
+            <div id="newsList_container"></div>
+          </div>
+        </div>
+        <button class="rightButton">&gt;</button>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+.newsList {
+  list-style: none;
+  margin-left: 32px;
+}
+
+.newsList li {
+  margin-bottom: 16px;
+}
+
+.newsList_footer {
+  color: #879298;
+  margin: 0;
+}

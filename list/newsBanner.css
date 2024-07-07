@@ -1,0 +1,40 @@
+.listContainer {
+  width: 100%;
+  height: 50px;
+  border: 1px solid gray;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.bannerList {
+  list-style: none;
+}
+
+.bannerList li {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+  margin-top: 16px;
+}
+
+.bannerList li.prev {
+  top: 50px;
+  transition: top 0.5s ease;
+}
+.bannerList li.current {
+  top: 0;
+  transition: top 0.5s ease;
+}
+.bannerList li.next {
+  top: -50px;
+}
+
+.banner_media {
+  font-weight: 700;
+  margin-right: 10px;
+}
