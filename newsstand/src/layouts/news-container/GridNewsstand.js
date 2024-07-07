@@ -1,20 +1,27 @@
 import NewsBox from '../../components/news/NewsBox.js'
 import createComponent from '../../core/component/component.js'
 import IconView, { Icon } from '../../components/base/IconView.js'
-import { getCompanyDataByPage, getMaxPage } from '../../datas/companyData.js'
-import { generateRandomId } from '../../utils/idGenerator.js'
 import useState from '../../core/hooks/useState.js'
+import { wholeCompanyData, getCompanyDataByPage, getMaxPage } from '../../datas/companyData.js'
+import { generateRandomId } from '../../utils/idGenerator.js'
+import { getSubscribedCompanies } from '../../utils/subscribeUtils.js'
 
-const GridNewsstand = () => {
+const GridNewsstand = (props) => {
     const [page, setPage] = useState(1)
     const maxPage = getMaxPage()
-    let companyData = getCompanyDataByPage(page)
+
+    let companyData = []
+
+    if (props.selectedSource === '전체 언론사') {
+        companyData = getCompanyDataByPage(page)
+    } else {
+        companyData = getSubscribedCompanies(wholeCompanyData)
+    }
 
     const newsBoxes = companyData.map((news) => {
         return createComponent(NewsBox, {
-            id: news.id,
-            name: news.name,
-            icon: news.logo,
+            id: generateRandomId(10),
+            news: news,
             style: 'width: 100%; height:100%;',
         })
     })
