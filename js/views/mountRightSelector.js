@@ -1,12 +1,10 @@
-import State from "../state.js";
-
-function mountRightSelector()
+function mountRightSelector(state, setListView, setGridView)
 {
 	const listSelector = document.getElementById("listSelector");
 	const gridSelector = document.getElementById("gridSelector");
 
-	const state = new State(1, (newState)=>{
-		if(newState === 1) {
+	state.addSideEffect( (newState)=>{
+		if(newState === "list") {
 			listSelector.classList.add("selected");
 			gridSelector.classList.remove("selected");
 		}
@@ -14,16 +12,10 @@ function mountRightSelector()
 			listSelector.classList.remove("selected");
 			gridSelector.classList.add("selected");
 		}
-	});
+	} );
 
-	listSelector.addEventListener("click", ()=>{
-		state.change(1);
-	});
-	gridSelector.addEventListener("click", ()=>{
-		state.change(2);
-	});
-
-	return state;
+	listSelector.addEventListener("click", setListView);
+	gridSelector.addEventListener("click", setGridView);
 }
 
 export default mountRightSelector;

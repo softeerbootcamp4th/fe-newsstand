@@ -31,6 +31,7 @@ function makePlainHTML(plains, elems)
 		else result += `${elems[i]}`.replace("<", "&lt;").replace(">", "&gt;");
 		result += plains[i+1];
 	}
+	result.replace(/\>\s+\</, "><");
 	return result;
 }
 
@@ -52,6 +53,29 @@ function convertArrayToFragment(array)
 	return frag;
 }
 
+function removeEmptyTextNodes(element) {
+  // Check if the element has child nodes
+  if (element.hasChildNodes()) {
+    for (let childNode of element.childNodes) {
+      // Check if the child node is a Text node
+      if (childNode.nodeType === Node.TEXT_NODE) {
+        // Check if the text content is only whitespace
+        if (childNode.textContent.trim() === '') {
+          // Remove the empty Text node
+          element.removeChild(childNode);
+        } else {
+          // Recursively check child nodes of the Text node
+          removeEmptyTextNodes(childNode);
+        }
+      } else {
+        // Recursively check child nodes of the current element
+        removeEmptyTextNodes(childNode);
+      }
+    }
+  }
+  return element;
+}
+
 function domMaker(plains, ...elems)
 {
 	const plainHTML = makePlainHTML(plains, elems);
@@ -66,7 +90,7 @@ function domMaker(plains, ...elems)
 		holders[i].remove();
 	}
 
-	return dom;
+	return removeEmptyTextNodes(dom);
 }
 
 export default domMaker;
