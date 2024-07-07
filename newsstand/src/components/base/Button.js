@@ -39,11 +39,11 @@ const buttonVariant = (type) => {
 const Button = (props) => {
     const [isHover, setIsHover] = useState(false)
 
-    const handleMouseOver = () => {
+    const handleMouseEnter = () => {
         setIsHover(true)
     }
 
-    const handleMouseOut = () => {
+    const handleMouseLeave = () => {
         setIsHover(false)
     }
 
@@ -53,8 +53,8 @@ const Button = (props) => {
 
     const bindEvents = () => {
         const button = document.getElementById(`button${props.id}`)
-        button.addEventListener('mouseover', handleMouseOver)
-        button.addEventListener('mouseout', handleMouseOut)
+        button.addEventListener('mouseenter', handleMouseEnter)
+        button.addEventListener('mouseleave', handleMouseLeave)
         button.addEventListener('click', handleMouseClick)
     }
 
