@@ -14,6 +14,8 @@ const useState = (initialValue) => {
         componentsState[id][stateIndex] = initialValue
     }
 
+    currentComponent.stateIndex += 1
+
     const state = componentsState[id][stateIndex]
 
     const setState = (newValue) => {

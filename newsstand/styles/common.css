@@ -17,9 +17,14 @@
 }
 
 body {
+    margin: 0;
     font-size: var(--text-base-size);
     font-family: var(--font-primary);
     color: var(--color-text);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 h1,
@@ -27,6 +32,7 @@ h2,
 h3,
 h4,
 form legend {
+    margin: 0;
     color: var(--color-text-heading);
     margin-bottom: var(--space-xxs);
     line-height: var(--heading-line-height);

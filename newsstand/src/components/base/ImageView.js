@@ -1,7 +1,7 @@
 const ImageView = (props) => {
     return {
         element: `
-        <img class="image-view" src="${props.src}" alt="icon"/>
+        <img class="image-view" src="${props.src}" alt="image"/>
         `,
     }
 }

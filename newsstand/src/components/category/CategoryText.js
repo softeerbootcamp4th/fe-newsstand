@@ -1,4 +1,4 @@
-import useState from '../core/hooks/useState.js'
+import useState from '../../core/hooks/useState.js'
 
 const CategoryText = (props) => {
     const [isHover, setIsHover] = useState(false)
@@ -12,7 +12,7 @@ const CategoryText = (props) => {
     }
 
     const handleMouseClick = () => {
-        props.setState(props.text)
+        props.onClick()
     }
 
     const bindEvents = () => {
@@ -24,7 +24,9 @@ const CategoryText = (props) => {
 
     return {
         element: `
-        <div class="category-text" id="category-text-${props.id}" style="font-weight: ${isHover || props.state === props.text ? 'bold' : 400}">
+        <div class="category-text" id="category-text-${props.id}" 
+            style="font-weight: ${isHover || props.state === props.text ? 'bold' : 400}; padding-left: 1px;"
+        >
             ${props.text}
         </div>
         `,
