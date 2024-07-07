@@ -1,9 +1,9 @@
-#news-bar-wrapper {
+.news-bar-wrapper {
     width: 930px;
     height: 49px;
 }
 
-    #news-bar {
+    .news-bar {
         width: 461px;
         height: 49px;
         border: 1px solid #D2DAE0;
@@ -11,11 +11,11 @@
         align-items: center;
     }
 
-        #news-bar-media-img {
+        .news-bar-media-img {
             margin: 16px;
         }
 
-        #news-bar-content {
+        .news-bar-content {
             font-size: 14px;
             color: #5F6E76;
         }

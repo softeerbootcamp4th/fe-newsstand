@@ -1,3 +1,31 @@
+/* 
+    h1 태그: 32px
+    h2 태그: 24px
+    h3 태그: 18px
+    h4 태그: 16px
+    h5 태그: 14px
+    h6 태그: 12px
+*/
+
+@keyframes fill {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+}
+
+.display-none {
+    display: none;
+}
+
 button {
     border: 0;
     background-color: transparent;
@@ -7,22 +35,17 @@ button {
     padding: 0;
 }
 
-.view-btn {
-    padding: 0;
-    filter: invert(60%) sepia(9%) saturate(342%) hue-rotate(160deg) brightness(93%) contrast(89%);
-}
-
-#articleList-wrapper {
+.articleList-wrapper {
     width: 930px;
     height: 388px;
 }
 
-    #article-header-wrapper {
+    .article-header-wrapper {
         width: 100%;
         margin-bottom: 20px;
     }
 
-        #media-wrapper {
+        .media-wrapper {
             padding: 0;
         }
 
@@ -34,13 +57,24 @@ button {
             .mode-selection-btn-clicked {
                 color: #14212B;
                 font-weight: 700;
+                
             }
 
-        #icon-wrapper {
+        .icon-wrapper {
             width: 56px;
         }
 
-    #article-menu-wrapper {
+            .view-btn {
+                padding: 0;
+                filter: invert(60%) sepia(9%) saturate(342%) hue-rotate(160deg) brightness(93%) contrast(89%);
+                cursor: pointer;
+            }
+
+            .view-btn-clicked {
+                filter: invert(43%) sepia(52%) saturate(6027%) hue-rotate(218deg) brightness(86%) contrast(87%);
+            }
+
+    .article-menu-wrapper {
         width: 100%;
         height: 40px;
         background-color: #F5F7F9;
@@ -51,33 +85,79 @@ button {
         border: 1px solid #D2DAE0;
         border-bottom: 0px;
     }
-        .article-menu-item {
-            padding: 16px;
-            font-weight: '400';
+
+        .menu-btn-wrapper {
+            position: relative;
+            width: auto;
+            height: 100%;
         }
 
-    #article-wrapper {
+        .menu-btn-wrapper-clicked {
+            width: 166px;
+            background-color: #7890E7;
+            color: white;
+        }
+
+            .article-menu-btn {
+                padding: 0 16px;
+                font-weight: '400';
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                align-items: center;
+                position: relative;
+                z-index: 10000;
+            }
+
+                .menu-btn-wrapper-clicked > .article-menu-btn {
+                    color: white;
+                }
+
+                .menu-btn-wrapper-clicked > .article-menu-btn > .article-menu-pages {
+                    display: block;
+                }
+
+        .fill-background {
+            overflow: hidden;
+            display: none;
+            width: 100%;
+        }
+
+        .menu-btn-wrapper-clicked > .fill-background {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            width: 0;
+            background-color: #4462D0;
+            animation: fill 20s linear;
+        }
+
+
+    .article-wrapper {
         width: 930px;
         height: 344px;
         border: 1px solid #D2DAE0;
     }
 
-        #article-content-wrapper {
+        .article-content-wrapper {
             padding: 24px;
         }
 
-            #content-header-wrapper {
+            .content-header-wrapper {
                 height: 24px;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
             }
                 
-                #content-header-wrapper > * {
+                .content-header-wrapper > * {
                     margin: 0 16px 0 0;
                 }
 
-                #subscribe-btn {
+                .subscribe-btn {
                     width: 72px;
                     height: 24px;
                     border-radius: 50px;
@@ -88,13 +168,19 @@ button {
                     font-size: 12px;
                 }
 
-            #content-body-wrapper {
+            .content-body-wrapper {
                 width: 882px;
             }
-                #article-li-part {
+
+                .article-li-part {
                     font-size: 16px;
                     color: #4B5966;
                     list-style: none;
                     width: 530px;
                     height: 245px;
                 }
+                    
+                    .li-part-info {
+                        font-size: 14px;
+                        color: .879298;
+                    }

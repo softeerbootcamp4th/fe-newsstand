@@ -25,10 +25,10 @@
 }
 
 /* 컴포넌트 간 간격 */
-#header-area {
+.header-area {
     margin-bottom: 40px;
 }
 
-#news-bar-area {
+.news-bar-area {
     margin-bottom: 30px;
 }
