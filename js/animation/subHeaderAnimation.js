@@ -1,4 +1,4 @@
-import headers from "../data/headers.js"
+import headers from "../../data/headers.js"
 
 const newsHeader = Array.from(document.getElementsByClassName("content-sub-header__news-header"));
 const hiddenHeader = Array.from(document.getElementsByClassName("content-sub-header__news-header_invisible"));
@@ -74,7 +74,7 @@ function animateLeftHeaders() {
             {transform : "translateY(49px)"}
         ],
         {duration:1000}
-    );    
+    ); 
     leftName = setTimeout(setLeftName, 1000)
 }
 

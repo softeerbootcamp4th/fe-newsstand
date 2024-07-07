@@ -135,7 +135,10 @@
 }
 
 .news-list__navbar__category[data-selected="yes"] {
-    background-color: #7890E7;
+    background: linear-gradient(to right, #4362D0 50%, #7890E7 50%, #7890E7);
+    background-size: 200%;
+    background-repeat: no-repeat;
+    background-position: 100%;
     text-align: left;
     min-width: 200px;
     color: white;
@@ -165,8 +168,99 @@
 
 .news-list__main {
     width: 930px;
-    height: 383px;
+    height: 348px;
     border: lightgray solid 1px;
+}
+
+.news-list__main__heading {
+    float: left;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    padding-top: 15px;
+}
+
+.news-list__main__heading__company {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.news-list__main__heading__headers {
+    display: flex;
+    gap: 15px;
+    padding: 25px;
+    padding-bottom: 0px;
+}
+
+.news-list__main__heading__date {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.news-list__main__heading__title {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 500;
+    max-width: 320px;
+    margin-top: 16px;
+}
+
+.news-list__main__list {
+    float: left;
+    padding: 25px;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #4B5966;
+}
+
+.news-list__main__list__media-annotation {
+    font-size: 14px;
+    line-height: 16px;
+    color: #879298;
+}
+
+.news-list__main__heading__image {
+    width: 320px;
+    height: 200px;
+    border: #D2DAE0 solid 1px;
+}
+
+.news-list__with-btn {
+    position: relative;
+}
+
+.news-list__btn-left {
+    position: absolute;
+    top: 50%;
+    left: -50px;
+    translate: 0 -50%;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-top: 1px solid #6E8091; 
+    border-right: 1px solid #6E8091; 
+    transform: rotate(225deg);
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.news-list__btn-right {
+    position: absolute;
+    top: 50%;
+    right: -50px;
+    translate: 0 -50%;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-top: 1px solid #6E8091; 
+    border-right: 1px solid #6E8091; 
+    transform: rotate(45deg);
+    background-color: inherit;
+    cursor: pointer;
 }
 
 /* news stand */
