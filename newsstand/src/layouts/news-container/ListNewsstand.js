@@ -12,6 +12,9 @@ const ListNewsstand = () => {
     const [currentNewsId, setCurrentNewsId] = useState(1)
     const newsData = getNewsData(selectedCategory, currentNewsId)
 
+    const lastIndex = 6
+    const lastCategoryCompanyCount = getCompanyCount(mediaCategoryData[lastIndex])
+
     const handleRightButtonClick = () => {
         const currentCategoryCompanyCount = getCompanyCount(selectedCategory)
 
@@ -83,7 +86,7 @@ const ListNewsstand = () => {
         element: `
         <div class="carousel-container">
             <button class="carousel-btn left-btn">
-                ${leftButtonIcon.element}
+                ${currentNewsId === 1 && selectedCategory === mediaCategoryData[0] ? '' : leftButtonIcon.element}
             </button>
             <div class="list-news-container">
                 ${mediaCategories.element}
@@ -95,7 +98,7 @@ const ListNewsstand = () => {
                 </div>
             </div>
             <button class="carousel-btn right-btn">
-                ${rightButtonIcon.element}
+                ${currentNewsId === lastCategoryCompanyCount && selectedCategory === mediaCategoryData[lastIndex] ? '' : rightButtonIcon.element}
             </button>
         </div>
         `,
