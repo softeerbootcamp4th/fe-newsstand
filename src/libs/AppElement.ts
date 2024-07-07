@@ -1,8 +1,8 @@
-import { EventMap, EventNameMap } from "./event";
+import { EventHandlers, EventNameMap } from "./event";
 
 export interface AppElementProps<T extends HTMLElement = HTMLElement> {
   tagName: string;
-  props: Partial<EventMap> &
+  props: Partial<EventHandlers> &
     Omit<Partial<T>, "children" | "style"> & {
       children?:
         | (RenderedAppElement | RawElement | string | number | false)
@@ -79,7 +79,7 @@ export const AppElement = ({
       elem.className = value;
     } else if (key.startsWith("on")) {
       const value = props[key as keyof typeof props] as EventListener;
-      const event = EventNameMap[key as keyof EventMap];
+      const event = EventNameMap[key as keyof EventHandlers];
       elem.addEventListener(event, value);
       eventListeners.set(event, value);
     } else {

@@ -1,7 +1,7 @@
 export type EventListener<T extends Event = Event> = (event: T) => void;
 export type EventKey = `on${string}`;
 
-export type EventMap = {
+export type EventHandlers = {
   onClick: EventListener<MouseEvent>;
   onInput: EventListener<InputEvent>;
   onChange: EventListener<Event>;
@@ -26,3 +26,16 @@ export const EventNameMap = {
   onKeydown: "keydown",
   onKeyup: "keyup",
 };
+
+export const EventNameMaps = new Map<string, string>([
+  ["onClick", "click"],
+  ["onInput", "input"],
+  ["onChange", "change"],
+  ["onSubmit", "submit"],
+  ["onHover", "mouseenter"],
+  ["onLeave", "mouseleave"],
+  ["onScroll", "scroll"],
+  ["onResize", "resize"],
+  ["onKeydown", "keydown"],
+  ["onKeyup", "keyup"],
+]);
