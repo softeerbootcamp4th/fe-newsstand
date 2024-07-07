@@ -1,25 +1,179 @@
+:root {
+    --date-text-color: #5F6E76;
+    --background-color-sub-gray: #F5F7F9;
+    --main-border: 1px solid #D2DAE0;
+    --disable-color: #879298;
+    --selected-color: #14212B;
+    --maincontennNav-selected-color: #7890E7;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    list-style-type: none;
+}
+
+#header {
+    margin-top: 50px;
 }
 
 #newsstand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    height: 700px;
+    width: 900px;
     margin: 0 auto;
 }
 
-#newsstandTitle {
-    width: 100%;
+#mainContentNav {
+    background-color: var(--background-color-sub-gray);
+    border-bottom: var(--main-border);
+}
+
+.mainContentNavElement {
+    position: relative;
+    display: inline-flex;
+    padding: 16px 12px;
+    margin: 0;
+}
+
+.absolute {
+    position: absolute;
+    z-index: 100;
+}
+
+#mainContentArticles {
+    margin-top: 16px;
+}
+
+.mainContentNavProgress {
+    animation-name: mainContentNavProgress;
+    animation-duration: 20s;
+    position: absolute;
+    animation-timing-function: linear;
+    background-color: #4b60c9;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+
+#mainContentContainer {
+    position: relative;
+    height: 348px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#mainContentArea {
+    position: absolute;
+
+}
+
+#mainContentArea.animationStartNext {
+    animation-name: mainStartNext;
+    animation-duration: 1s;
+}
+
+@keyframes mainStartNext {
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: -898px;
+    }
+}
+
+#mainContentArea.animationStartPrevious {
+    animation-name: mainStartPrevious;
+    animation-duration: 1s;
+}
+
+@keyframes mainStartPrevious {
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: 898px;
+    }
+}
+
+#previousMainContentArea {
+    position: absolute;
+}
+
+#previousMainContentArea.animationStartPrevious {
+    animation-name: previousStartPrevious;
+    animation-duration: 1s;
+}
+
+@keyframes previousStartPrevious {
+    from {
+        left: -898px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+#nextMainContentArea {
+    position: absolute;
+}
+
+#nextMainContentArea.animationStartNext {
+    animation-name: nextStartNext;
+    animation-duration: 1s;
+}
+
+@keyframes nextStartNext {
+    from {
+        left: 898px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+
+@keyframes mainContentNavProgress {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+.mainContentNavElement.isSelected {
+    background-color: var(--maincontennNav-selected-color);
+    color: white;
+}
+
+.justyfyContent-center {
+    justify-content: center;
+}
+
+.Layout__column-center {
+    display: flex;
+    flex-direction: column;
+}
+
+.width_80percent {
+    width: 80%;
+}
+
+.Layout__row-between {
     display: flex;
     justify-content: space-between;
-    height: 50px;
-    padding: 0 20px;
+    margin: 58px, 0;
+
+}
+
+.Layout__row-center {
+    display: flex;
+    align-items: center;
 }
 
 .container {
@@ -28,24 +182,37 @@
     width: 100%;
 }
 
-.titleNSymbol {
-    display: flex;
-    align-items: center;
+.datetext {
+    color: var(--date-text-color);
 }
 
-.titleDate {
-    display: flex;
-    align-items: center;
-    color: #5F6E76;
-    font-size: 16px;
+.fontSize14 {
+    font-size: 14px;
 }
 
-#newsstandRecentArticles {
-    display: flex;
-    width: 100%;
+#rollingHeader {
     height: 50px;
-    margin: 10px 0;
+    margin-top: 40px;
+}
+
+.gap10 {
     gap: 10px;
+}
+
+.bg-subGray {
+    background-color: var(--background-color-sub-gray);
+}
+
+.Layout__row {
+    display: flex;
+}
+
+.alignItems-center {
+    align-items: center;
+}
+
+.main-border {
+    border: var(--main-border);
 }
 
 #newsstandDetailTitle {
@@ -59,19 +226,22 @@
     height: 388px;
 }
 
-#rollingBox {
+#rollingBox_left {
     height: 17px;
     width: 100%;
     position: relative;
     overflow: hidden;
 }
 
-.recentArticle {
-    align-content: center;
+#rollingBox_right {
+    height: 17px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.width_50percent {
     width: 50%;
-    flex-grow: 1;
-    background-color: #F5F7F9;
-    border: 1px solid #D2DAE0;
 }
 
 .recentArticleMedia {
@@ -99,13 +269,18 @@
     text-overflow: ellipsis;
 }
 
-#newsstandCetagory {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 33px;
-    margin-bottom: 25px;
+#mainContentSelector {
+    margin-top: 32px;
 }
+
+.mainContentSelectorElement {
+    color: var(--disable-color);
+}
+
+.mainContentSelectorElement.isSelected {
+    color: var(--selected-color);
+}
+
 
 .detailTitleCategory {
     display: flex;
@@ -116,9 +291,13 @@
     font-weight: 700;
 }
 
-.detailTitleCategory>.isSelected {
-    color: #14212B;
+
+
+.color-disable {
+    color: var(--disable-color);
 }
+
+
 
 .showingMode {
     align-items: center;
@@ -126,11 +305,6 @@
     gap: 8px;
 }
 
-.newsstandCollectionTitlies {
-    width: 100%;
-    height: 40px;
-
-}
 
 .newsstandCollectionTitle {
     display: flex;
@@ -142,6 +316,14 @@
     height: 40px;
     padding: 11.5px 16px;
     color: #879298;
+}
+
+.allPadding24 {
+    padding: 24px;
+}
+
+.alignContent-center {
+    align-content: center;
 }
 
 .currentNewsInfo {
@@ -167,13 +349,19 @@
     display: flex;
 }
 
-.newsstandCollectionMainContent {
-    width: 320px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+#mainContent {
+    margin-top: 24px;
+}
+
+#mainContentRepresentiveArticle {
     margin-right: 32px;
 }
+
+.marginTop16 {
+    margin-top: 16px;
+}
+
+
 
 .newsstandCollectionMainContent>.title {
     margin-top: 16px;
@@ -181,28 +369,24 @@
     color: #14212B;
 }
 
-.newsstandCollectionList>.list {
-    list-style-type: none;
-}
-
-.newsstandCollectionList li {
+#mainContentAritcleList li {
     padding-bottom: 16px;
     color: #667584;
     font-weight: 500;
 }
 
-.newsstandCollectionList div {
+#mainContentAritcleList div {
     font-size: 14px;
     color: #879298;
 }
 
 /*  여기서 부터 rolling css 나중에 분리하자 */
 
-.hoverInRecentNews {
+.hoverInRecentNews>.recentArticleTitle {
     text-decoration: underline;
 }
 
-.currentDom {
+.currentDom_left {
     top: 0px;
     max-width: 360px;
     overflow: hidden;
@@ -211,7 +395,25 @@
     position: absolute;
 }
 
-.futureDom {
+.currentDom_right {
+    top: 0px;
+    max-width: 360px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+}
+
+.futureDom_left {
+    top: 17px;
+    max-width: 360px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: absolute;
+}
+
+.futureDom_right {
     top: 17px;
     max-width: 360px;
     overflow: hidden;
@@ -225,7 +427,7 @@
     animation-duration: 1s;
 }
 
-.currentDomStart {
+.currentDom_Start {
     animation-name: currentDomStart;
     animation-duration: 1s;
 }

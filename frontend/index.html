@@ -9,72 +9,69 @@
 </head>
 
 <body>
-    <main id="newsstand">
-        <div id="newsstandTitle">
-            <div class="titleNSymbol">
-                <img id="mySvgImage" src="./static/assets/images/newsstandTitleSymbol.svg" alt="Description of SVG">
-                <h1 style="font-size: 24px; padding-left: 5px;">뉴스 스탠드</h1>
+    <main>
+        <div id="newsstand" class="Layout__column-center">
+            <div id="header" class="Layout__row-between">
+                <img src="./static/assets/images/headerTitle.svg" alt="Description of SVG">
+                <div id="headerDate" class="datetext"></div>
             </div>
-            <div class="titleDate"></div>
+            <div id="rollingHeader" class="Layout__row-between gap10">
+                <div class="Layout__row width_50percent bg-subGray alignItems-center main-border">
+                    <div id="rollingBox_left">
+                        <div class="currentDom_left"></div>
+                        <div class="futureDom_left"></div>
+                    </div>
+                </div>
+                <div class="Layout__row width_50percent bg-subGray alignItems-center main-border">
+                    <div id="rollingBox_right">
+                        <div class="currentDom_right"></div>
+                        <div class="futureDom_right"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="mainContentSelector" class="Layout__row-between">
+                <div class="Layout__row gap10">
+                    <span class="mainContentSelectorElement isSelected">전체 언론사</span>
+                    <span class="mainContentSelectorElement">내가 구독한 언론사</span>
+                </div>
+                <div class="Layout__row alignItems-center gap10">
+                    <img class="modeImg" src="./static/assets/images/list-view.svg" alt="Description of SVG">
+                    <img class="modeImg" src="./static/assets/images/grid-view.svg" alt="Description of SVG">
+                </div>
+            </div>
+            <div id="mainContent" class="main-border">
+                <ul id="mainContentNav">
+                    <li class="mainContentNavElement isSelected">
+                        <div id="text">종합/경제</div>
+                    </li>
+                    <li class="mainContentNavElement">
+                        <div id="text">방송/통신</div>
+                    </li>
+                    <li class="mainContentNavElement">
+                        <div id="text">IT</div>
+                    </li>
+                    <li class="mainContentNavElement">
+                        <div id="text">스포츠/연애</div>
+                    </li>
+                    <li class="mainContentNavElement">
+                        <div id="text">매거진/전문진</div>
+                    </li>
+                    <li class="mainContentNavElement">
+                        <div id="text">지역</div>
+                    </li>
+                </ul>
+                <div id="mainContentContainer">
+                    <div id="previousMainContentArea" class="allPadding24"></div>
+                    <div id="mainContentArea" class="allPadding24">
+                    </div>
+                    <div id="nextMainContentArea" class="allPadding24"></div>
+                </div>
+            </div>
         </div>
-        <div id="newsstandRecentArticles">
-            <div class="recentArticle">
-                <div id="rollingBox">
-                    <div class="currentDom"></div>
-                    <div class="futureDom"></div>
-                </div>
-                <!-- <span class="recentArticleMedia">연합뉴스</span>
-                <span class="recentArticleTitle">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span> -->
-            </div>
-            <div class="recentArticle">
-                <span class="recentArticleMedia">연합뉴스</span>
-                <span class="recentArticleTitle">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
-            </div>
-        </div>
-        <div id="newsstandCetagory">
-            <div class="detailTitleCategory">
-                <span class="isSelected">전체 언론사</span>
-                <span class>내가 구독한 언론사</span>
-            </div>
-            <div class="showingMode">
-                <img class="modeImg isSelected" src="./static/assets/images/list-view.svg" alt="Description of SVG">
-                <img class="modeImg" src="./static/assets/images/grid-view.svg" alt="Description of SVG">
-            </div>
-        </div>
-        <div id="newsstandCollection">
-            <div class="newsstandCollectionTitlies">
-                <div class="newsstandCollectionTitle">
-                    <div class="isSelected">종합/경제</div>
-                    <div>방송/통신</div>
-                    <div>IT</div>
-                    <div>스포츠/연애</div>
-                    <div>매거진/전문진</div>
-                    <div>지역</div>
-                </div>
-            </div>
-            <div class="currentNewsInfo">
-                <img class="modeImg" src="./static/assets/images/grid-view.svg" alt="Description of SVG">
-                <span>2023.02.10. 18:24편집</span>
-                <img class="modeImg" src="./static/assets/images/subscribeButton.svg" alt="Description of SVG">
-            </div>
-            <div class="newsstandCollectionContent">
-                <div class="newsstandCollectionMainContent">
-                    <img class="modeImg" src="./static/assets/images/tempImage.svg" alt="Description of SVG">
-                    <span class="title">또 국민연금의 몽니…현대百 지주사 불발</span>
-                </div>
-                <div class="newsstandCollectionList">
-                    <ui class="list">
-                        <li>"위스키 사려고 이틀 전부터 줄 섰어요"</li>
-                        <li>'방시혁 제국'이냐 '카카오 왕국'이냐…K엔터 누가 거머쥘까</li>
-                        <li>사용후핵연료 저장시설 포화…이대론 7년 뒤 원전 멈춘다</li>
-                        <li>[단독] 원희룡 "해외건설 근로자 소득공제 월 500만원으로 상향할 것"</li>
-                        <li>태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]</li>
-                        <li>LG엔솔, 폴란드 자동차산업협회 가입…“유럽서 목소리 키운다”</li>
-                    </ui>
-                    <div>서울경제 언론사에서 직접 편집한 뉴스입니다.</div>
-                </div>
-
-            </div>
+        <div id="articlesNextButton" style="position: fixed; top: 430px; right: 103px;"><img
+                src="./static/assets/images/RightButton.svg" alt="Description of SVG"></div>
+        <div id="articlesPreviousButton" style="position: fixed; top: 430px; left: 103px"><img
+                src="./static/assets/images/LeftButton.svg" alt="Description of SVG">
         </div>
     </main>
     <script type="module" src="./static/js/index.js"></script>
