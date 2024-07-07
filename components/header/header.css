@@ -1,24 +1,24 @@
-#header-wrapper {
+.header-wrapper {
     align-items: center;
     width: 930px;
 }
 
-    #title-wrapper {
+    .title-wrapper {
         width: 136px;
         height: 29px;
         align-items: center;
     }
     
-        #news-paper {
+        .news-paper {
             filter: invert(70%) sepia(39%) saturate(4732%) hue-rotate(198deg) brightness(91%) contrast(98%);
         }
 
-        #title-text {
+        .title-text {
             font-size: 24px;
             color: #14212B;
         }
 
-    #date-text {
+    .date-text {
         font-size: 16px;
         line-height: 22px;
         color: #5F6E76;
