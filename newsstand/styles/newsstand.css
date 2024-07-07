@@ -192,10 +192,6 @@
     background-color: transparent;
 }
 
-.carousel-btn:hover {
-    filter: invert(45%) sepia(63%) saturate(10946%) hue-rotate(162deg) brightness(95%) contrast(101%);
-}
-
 .left-btn {
     left: -100px;
 }
