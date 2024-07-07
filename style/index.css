@@ -122,30 +122,34 @@
   gap: 60px;
 }
 
-.list {
+.paper {
   border: solid #D2DAE0 1px;
   height: 348px;
   padding: 24px;
   position: relative;
 }
 
-.list .subscrBar {
+.paper .subscribe-bar {
   margin-bottom: 16px;
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-.list .subscrBar img {
+.paper .subscribe-bar img {
   height: 20px;
 }
 
-.list .subscrBar span {
+.paper .subscribe-bar span {
   color: #5F6E76;
   font-size: 12px;
 }
 
-.list .subscrBar button {
+.paper .subscribe-bar img {
+  height: 20px;
+}
+
+.paper .subscribe-bar button {
   background-color: #F5F7F9;
   border: #D2DAE0 1px solid;
   display: flex;
@@ -158,39 +162,39 @@
   padding-right: 6px;
 }
 
-.list .bottom {
+.paper .bottom {
   display: flex;
   gap: 30px;
 }
 
-.list .headline {
+.paper .headline {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.list .headline img {
+.paper .headline img {
   height: 200px;
   width: 320px;
   object-fit: contain;
 }
 
-.list .leftscroll {
+.paper .leftscroll {
   position: absolute;
   left: -6%;
   top: 40%;
 }
 
-.list .leftscroll:hover {
+.paper .leftscroll:hover {
   cursor: pointer;
 }
 
-.list .rightscroll {
+.paper .rightscroll {
   position: absolute;
   right: -6%;
   top: 40%;
 }
 
-.list .rightscroll:hover {
+.paper .rightscroll:hover {
   cursor: pointer;
 }

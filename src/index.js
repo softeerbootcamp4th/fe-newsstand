@@ -3,6 +3,15 @@ import CategoriesAndNewsSection from "./news.js";
 
 const $viewDateDOM = document.querySelector(".date");
 
+let news = {};
+let newsCom = {};
+const loadNews = async () => {
+  news = await (await (await fetch("/data/news.json")).json()).ctg;
+  newsCom = await (await (await fetch("/data/company.json")).json()).company;
+  rollingNewsSection(news);
+  CategoriesAndNewsSection(news, newsCom);
+}
+
 const getDate = () => {
   const time = new Date();
   let year = time.getFullYear();
@@ -17,5 +26,4 @@ const getDate = () => {
 };
 
 getDate();
-rollingNewsSection();
-CategoriesAndNewsSection();
+loadNews();

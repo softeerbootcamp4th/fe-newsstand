@@ -1,7 +1,7 @@
 const $newsPreviewDOMList = document.querySelectorAll(".invisible-box span"); // 좌측 언론사, 좌측 기사제목, 우측 언론사, 우측 기사제목, 총 4개 DOM
 let mouseHover = [];
-let news = [];
 let newsLength;
+let news = [];
 
 const switchNewsWithAni = (newsIndex, DOMIndex, isFirst) => {
   const keyframes = [
@@ -21,10 +21,9 @@ const switchNewsWithAni = (newsIndex, DOMIndex, isFirst) => {
   $newsPreviewDOMList[DOMIndex + 1].title = news[newsIndex].title;
 };
 
-const loadNews = async () => {
-  let { ctg } = await (await fetch("/data/news.json")).json();
-  Object.keys(ctg).forEach((key) => {
-    news = [...news, ...ctg[key]];
+const loadNews = (_news) => {
+  Object.keys(_news).forEach((key) => {
+    news = [...news, ..._news[key]];
   });
   let leftNewsIndex = 0;
   let rightNewsIndex = Math.floor(Math.random() * 1000); // 0 ~ 999의 난수
@@ -61,7 +60,7 @@ const loadNews = async () => {
   requestAnimationFrame(execPerFrame);
 };
 
-export default function rollingNewsSection() {
+export default function rollingNewsSection(_news) {
   for (let i = 0; i < $newsPreviewDOMList.length; i++) {
     $newsPreviewDOMList[i].addEventListener("mouseenter", () => {
       mouseHover[i] = 1;
@@ -71,5 +70,5 @@ export default function rollingNewsSection() {
     });
   }
 
-  loadNews();
+  loadNews(_news);
 };

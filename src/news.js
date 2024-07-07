@@ -2,15 +2,15 @@ import { updateDOMstyle } from "./util.js";
 
 const $subscribeToggleDOM = document.querySelectorAll(".subscribeToggle span");
 const $newsgroupDOM = document.querySelector(".newsgroup");
-const $leftScrollDOM = document.querySelector(".list .leftscroll");
-const $rightScrollDOM = document.querySelector(".list .rightscroll");
+const $leftScrollDOM = document.querySelector(".paper .leftscroll");
+const $rightScrollDOM = document.querySelector(".paper .rightscroll");
 const categories = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
-const ctgScrollNum = 3;
+const ctgScrollNum = 6;
 
 let state = {
   subscribeToggle: "whole",
   ctg: 0,
-  ctgNews: 1,
+  comId: 1,
 };
 
 categories.forEach((ctg) => {
@@ -23,7 +23,8 @@ categories.forEach((ctg) => {
 
 const $ctgDOM = document.querySelectorAll(".newsgroup div");
 
-const ctgDOMFill = (DOM) => {
+const ctgFill = () => {
+  const DOM = $ctgDOM[state.ctg];
   const keyframes = [
     {
       backgroundPosition: "100%",
@@ -44,25 +45,27 @@ const ctgDOMFill = (DOM) => {
   });
 
   DOM.animate(keyframes, options).onfinish = () => {
-    ctgDOMLose($ctgDOM[state.ctg]);
-    state.ctgNews++;
-    if (state.ctgNews > ctgScrollNum) {
-      state.ctgNews = 1;
+    ctgLose();
+    state.comId++;
+    if (state.comId > ctgScrollNum) {
+      state.comId = 1;
       state.ctg++;
       if (state.ctg === categories.length) state.ctg = 0;
     }
-    ctgDOMFill($ctgDOM[state.ctg]);
+    ctgFill();
+    bottomFill();
   }
 
   if (DOM.childElementCount === 2) {
     DOM.removeChild(DOM.lastElementChild);
   }
   const newDOM = document.createElement("span");
-  newDOM.innerText = `${state.ctgNews}/${ctgScrollNum}`;
+  newDOM.innerText = `${state.comId}/${ctgScrollNum}`;
   DOM.appendChild(newDOM);
 };
 
-const ctgDOMLose = (DOM) => {
+const ctgLose = () => {
+  const DOM = $ctgDOM[state.ctg];
   const animations = DOM.getAnimations();
   animations.forEach(ani => ani.cancel());
 
@@ -77,7 +80,14 @@ const ctgDOMLose = (DOM) => {
   }
 };
 
-export default function CategoriesAndNewsSection() {
+const bottomFill = () => {
+  const $comImgDOM = document.querySelector(".paper .subscribe-bar img");
+  const $headlineImgDOM = document.querySelector(".paper .headline img");
+  $comImgDOM.setAttribute("src", `../img/${state.comId}.png`);
+  $headlineImgDOM.setAttribute("src", `../img/sample${state.comId}.jpg`);
+}
+
+export default function CategoriesAndNewsSection(_news, _newsCom) {
   $subscribeToggleDOM[0].addEventListener("click", () => {
     state.subscribeToggle = "whole";
     updateDOMstyle($subscribeToggleDOM[0], {
@@ -103,36 +113,40 @@ export default function CategoriesAndNewsSection() {
   })
 
   $leftScrollDOM.addEventListener("click", () => {
-    ctgDOMLose($ctgDOM[state.ctg]);
-    state.ctgNews--;
-    if (state.ctgNews === 0) {
-      state.ctgNews = ctgScrollNum;
+    ctgLose();
+    state.comId--;
+    if (state.comId === 0) {
+      state.comId = ctgScrollNum;
       state.ctg--;
       if (state.ctg < 0) state.ctg = categories.length - 1;
     }
-    ctgDOMFill($ctgDOM[state.ctg]);
+    ctgFill();
+    bottomFill();
   })
 
   $rightScrollDOM.addEventListener("click", () => {
-    ctgDOMLose($ctgDOM[state.ctg]);
-    state.ctgNews++;
-    if (state.ctgNews > ctgScrollNum) {
-      state.ctgNews = 1;
+    ctgLose();
+    state.comId++;
+    if (state.comId > ctgScrollNum) {
+      state.comId = 1;
       state.ctg++;
       if (state.ctg === categories.length) state.ctg = 0;
     }
-    ctgDOMFill($ctgDOM[state.ctg]);
+    ctgFill();
+    bottomFill();
   })
 
-  ctgDOMFill($ctgDOM[state.ctg]);
+  ctgFill();
+  bottomFill();
 
   for (let i = 0; i < $ctgDOM.length; i++) {
     $ctgDOM[i].addEventListener("click", () => {
       if (state.ctg !== i) {
-        ctgDOMLose($ctgDOM[state.ctg]);
+        ctgLose();
         state.ctg = i;
-        state.ctgNews = 1;
-        ctgDOMFill($ctgDOM[i]);
+        state.comId = 1;
+        ctgFill();
+        bottomFill();
       }
     })
   }
