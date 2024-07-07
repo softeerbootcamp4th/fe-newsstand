@@ -14,24 +14,33 @@
     --border-default: #D2DAE0;
 }
 
-
-body {
+/* 공통 CSS 클래스 */
+.center {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0;
-
 }
+
+.column-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+
+body {
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 930px;
+}
+
+/* header */
 
 header {
     display: flex;
     justify-content: space-between;
     text-align: center;
     margin-top: 58px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 930px;
+    width: 100%;
 
 }
 
@@ -40,7 +49,7 @@ header {
     gap : 8px;
 }
 
-.header-logo a {
+.header-logo > a {
     margin : 0;
     color: var(--text-strong);
     font-size: 24px;
@@ -56,9 +65,11 @@ header {
     height: fit-content;
 }
 
+/* section */
+
 section {
     display: flex;
-    width: 930px;
+    width: 100%;
     gap : 8px;
     justify-content: space-between;
     margin-top: 40px;
@@ -81,10 +92,6 @@ section {
 }
 
 .news-item:hover {
-    text-decoration: underline;
-}
-
-.news-item.hovered {
     text-decoration: underline;
 }
 
@@ -142,20 +149,19 @@ section {
 
 }
 
+/* main */
+
 main {
-    display: flex;
-    max-width: 930px;
-    flex-direction: column;
+    width: 100%;
     margin-top: 32px;
     align-items: center;
-    max-width: 930px;
     position: relative;
 }
 
 .main-header {
     display: flex;
     justify-content: space-between;
-    width: 930px;
+    width: 100%;
 }
 
 .main-header-tab {
@@ -163,16 +169,16 @@ main {
     font-size: 16px;
     line-height: 22px;
     gap: 24px;
-}
-
-#all {
     color: var(--text-weak);
+    cursor: pointer;
+    line-height: 22px;
 }
-#subscribe {
-    color: var(--text-strong);
 
+.selected-tab {
+    color: var(--text-strong);
+    font-weight: bold;
 }
-.main-header-tab p{
+.main-header-tab > p{
     margin: 0;
 }
 
@@ -180,7 +186,7 @@ main {
     display: flex;
 }
 
-.main-header-icons img {
+.main-header-icons > img {
     width: 24px;
     height: 24px;
 }
@@ -188,14 +194,10 @@ main {
 #grid-view {
     margin-left: 8px;
 }
-.all-cate-container {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    width: 930px;
-}
 
+.all-cate-container{
+    width: 100%;
+}
 .all-cate-header {
     display: flex;
     margin-top: 24px;
@@ -221,11 +223,24 @@ main {
     text-decoration: underline;
 }
 
+.selected-category {
+    display: flex;
+    justify-content: space-between;
+}
+
+.selected-category, .index-text {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
 .selected {
     width: 166px;
+    box-sizing: border-box;
     overflow: hidden;
     background-color: var(--surface-brand-alt);
     color: var(--text-white-default);
+    font-weight: bold;
 }
 
 .selected .progress-bar {
@@ -236,7 +251,6 @@ main {
     width: 0%;
     background-color: rgba(67, 98, 208, 0.5);
     z-index: 1;
-    animation: progressAnimation 20s linear forwards; 
 }
 
 .selected .category-text {
@@ -254,10 +268,10 @@ main {
 }
 
 .news-container {
-    display: flex;
-    flex-direction: column;
     gap: 16px;
-    border: 1px solid var(--border-default);
+    border-left: 1px solid var(--border-default);
+    border-right: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
     padding: 24px;
 }
 
@@ -293,10 +307,13 @@ main {
 
 }
 
-.subscribe-btn span {
-    margin-right: 4px;
-    font-size: 12px;
+.my-subscribe {
+    background-color: var(--surface-default);
+    width: 24px;
+    box-sizing: border-box;
+    justify-content: center;
 }
+
 
 .news-item-container {
     display: flex;
@@ -306,8 +323,6 @@ main {
 
 .main-news {
     width: 320px;
-    display: flex;
-    flex-direction: column;
     gap: 16px;
     cursor: pointer;
     color: var(--text-strong);
@@ -316,7 +331,6 @@ main {
 
 .main-news div:hover {
     text-decoration: underline;
-
 }
 
 .main-news img {
@@ -324,8 +338,6 @@ main {
     height: 200px;
 }
 .sub-news {
-   display: flex;
-   flex-direction: column;
    gap: 16px; 
    color: var(--text-bold);
    font-size: 16px;
@@ -341,23 +353,20 @@ main {
     font-size: 14px;
 }
 
-.left-btn {
+.arrow {
     display: flex;
     position: absolute;
-    left: -47px;
     top: 50%;
     width: 24px;
     height: 40px;
     cursor: pointer;
 }
 
+.left-btn {
+    left: -50px;
+}
+
 .right-btn {
-    display: flex;
-    position: absolute;
-    right: -47px;
-    top: 50%;
-    width: 24px;
-    height: 40px;
-    cursor: pointer;
+    right: -50px;
 
 }

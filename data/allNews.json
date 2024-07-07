@@ -6,6 +6,8 @@
             {
                 "id" : 1,
                 "company" : "연합뉴스",
+                "logoUrl" : "./src/images/yonhapNews.png",
+                "date" : "2024. 07. 03. 11:53",
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/014/2024/07/03/0005208091_001_20240703124715600.jpg?type=w647",
                 "newsItems" : [
                     {
@@ -48,13 +50,15 @@
             },
             {
                 "id" : 2,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/087/2024/07/05/0001054440_001_20240705101010144.jpg?type=w647",
                 "company" : "서울경제",
+                "logoUrl" : "/src/images/seoulEconomic.png",
+                "date" : "2024. 07. 03. 11:43",
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "벤츠, 국내 수입차 판매 1위 '재탈환'…BMW와 엎치락뒤치락",
-                        "url" : "https://n.news.naver.com/mnews/article/011/0004361289"
+                        "title" : "[속보]이원석 '민주당 검사 탄핵 불법행위…면밀히 조사하겠다'",
+                        "url" : "https://n.news.naver.com/article/087/0001054440?cds=news_media_pc&type=editn"
                     },
                     {
                         "id" : 2,
@@ -92,13 +96,15 @@
             },
             {
                 "id" : 3,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/658/2024/07/05/0000077810_001_20240705071910797.jpg?type=w647",
+                "company" : "데일리한국",
+                "logoUrl" : "/src/images/dailyKorea.png",
+                "date" : "2024. 07. 03. 11:07",
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "‘나노코리아 2024’ 개막…국제 나노기술 심포지엄 공개 강연 주목",
-                        "url" : "https://n.news.naver.com/mnews/article/215/0001169154"
+                        "title" : "밀양 알루미늄 공장서 불…대응 1단계 발령",
+                        "url" : "https://n.news.naver.com/article/658/0000077810?cds=news_media_pc&type=editn"
                     },
                     {
                         "id" : 2,
@@ -135,13 +141,15 @@
             },
             {
                 "id" : 4,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/055/2024/07/05/0001169379_001_20240705110711943.jpg?type=w647",
+                "company" : "파이낸스",
+                "logoUrl" : "/src/images/finance.png",
+                "date" : "2024. 07. 03. 11:05",
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "바이든 전방위 '사퇴 압박'에…오바마, 통화서 조언[2024 美대선]",
-                        "url" : "https://n.news.naver.com/mnews/article/003/0012645324"
+                        "title" : "'할부지 왔어!' 푸바오도 성큼…92일 만에 중국서 재회",
+                        "url" : "https://n.news.naver.com/article/055/0001169379?cds=news_media_pc&type=editn"
                     },
                     {
                         "id" : 2,
@@ -180,7 +188,10 @@
             {
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "company" : "아이뉴스",
+                "logoUrl" : "/src/images/iNews.png",
+                "date" : "2024. 07. 03. 11:12",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -223,13 +234,16 @@
             },
             {
                 "id" : 6,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
-                "company" : "YTN",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/014/2024/07/05/0005209104_001_20240705100915169.jpg?type=w647",
+                "company" : "시사위크",
+                "logoUrl" : "/src/images/sisaweek.png",
+                "date" : "2024. 07. 03. 11:16",
+
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "고개 숙인 바이든...미 대선, '고? 스톱?' [앵커리포트]",
-                        "url" : "https://n.news.naver.com/article/052/0002056085?ntype=RANKING"
+                        "title" : "'작작 해라'..허웅 전 여친, '청담동 아파트' 등기 공개했다",
+                        "url" : "https://n.news.naver.com/article/014/0005209104?cds=news_media_pc&type=editn"
                     },
                     {
                         "id" : 2,
@@ -266,7 +280,10 @@
             {
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "엑스포츠",
+                "logoUrl" : "/src/images/ecSportsNews.png",
+                "date" : "2024. 07. 04. 14:09",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -316,7 +333,9 @@
             {
                 "id" : 1,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
-                "company" : "서울경제",
+                "company" : "일간스포츠",
+                "logoUrl" : "/src/images/ilganSports.png",
+                "date" : "2024. 07. 03. 12:26",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -359,7 +378,9 @@
             },
             {
                 "id" : 2,
-                "company" : "연합뉴스",
+                "company" : "중앙일보",
+                "logoUrl" : "/src/images/joongangNews.png",
+                "date" : "2024. 07. 05. 11:52",
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/014/2024/07/03/0005208091_001_20240703124715600.jpg?type=w647",
                 "newsItems" : [
                     {
@@ -404,7 +425,9 @@
             {
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "여성경제신문",
+                "logoUrl" : "/src/images/womanEconomic.png",
+                "date" : "2024. 07. 03. 13:16",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -447,7 +470,9 @@
             {
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "company" : "인사이트",
+                "logoUrl" : "/src/images/insight.png",
+                "date" : "2024. 07. 05. 07:33",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -491,7 +516,10 @@
             {
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "company" : "데이터뉴스",
+                "logoUrl" : "/src/images/dataNews.png",
+                "date" : "2024. 07. 05. 03:00",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -535,7 +563,9 @@
             {
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
-                "company" : "YTN",
+                "company" : "JTBC",
+                "logoUrl" : "/src/images/JTBC.png",
+                "date" : "2024. 07. 03. 13:14",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -577,7 +607,9 @@
             {
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "KBSWorld",
+                "logoUrl" : "/src/images/KBSWorld.png",
+                "date" : "2024. 07. 02. 23:41",
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -626,13 +658,16 @@
         "news" : [
             {
                 "id" : 1,
-                "company" : "연합뉴스",
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/014/2024/07/03/0005208091_001_20240703124715600.jpg?type=w647",
+                "company" : "KNN",
+                "logoUrl" : "/src/images/KNN.png",
+                "date" : "2024. 07. 03. 13:16",
+
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/05/0004362471_001_20240705103617645.jpg?type=w647",
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "정부, 올해 韓성장률 2.2%→2.6% 상향…물가상승률 2.6%",
-                        "url" : "https://n.news.naver.com/mnews/article/014/0005208091"
+                        "title" : "韓 AI 스타트업 키우는 구글, '구글 포 스타트업 액셀러레이터: AI 퍼스트' 프로그램 성료",
+                        "url" : "https://n.news.naver.com/mnews/article/011/0004362471"
                     },
                     {
                         "id" : 2,
@@ -670,7 +705,10 @@
             {
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
-                "company" : "서울경제",
+                "company" : "국민일보",
+                "logoUrl" : "/src/images/koockminNews.png",
+                "date" : "2024. 07. 05. 14:05",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -713,13 +751,16 @@
             },
             {
                 "id" : 3,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/009/2024/07/05/0005329933_001_20240705092115268.jpeg?type=w647",
+                "company" : "매일경제",
+                "logoUrl" : "/src/images/mailEconomic.png",
+                "date" : "2024. 07. 05. 11:33",
+
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "‘나노코리아 2024’ 개막…국제 나노기술 심포지엄 공개 강연 주목",
-                        "url" : "https://n.news.naver.com/mnews/article/215/0001169154"
+                        "title" : "[단독] “울 엄마·누나 당장 통장 바꾸겠네”...‘선업튀’ 변우석 NH 새 얼굴로",
+                        "url" : "https://n.news.naver.com/article/009/0005329933?cds=news_media_pc&type=editn"
                     },
                     {
                         "id" : 2,
@@ -757,7 +798,10 @@
             {
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "company" : "MBN",
+                "logoUrl" : "/src/images/MBN.png",
+                "date" : "2024. 07. 03. 13:17",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -801,7 +845,10 @@
             {
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "company" : "마이데일리",
+                "logoUrl" : "/src/images/mydaily.png",
+                "date" : "2024. 07. 01. 09:20",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -845,7 +892,10 @@
             {
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
-                "company" : "YTN",
+                "company" : "뉴데일리",
+                "logoUrl" : "/src/images/newDaily.png",
+                "date" : "2024. 07. 03. 13:34",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -887,7 +937,10 @@
             {
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "OBS",
+                "logoUrl" : "/src/images/OBS.png",
+                "date" : "2024. 07. 02. 01:13",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -936,13 +989,16 @@
         "news" : [
             {
                 "id" : 1,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "서울경제",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/374/2024/07/05/0000391239_001_20240705091613796.jpg?type=w647",
+                "company" : "Digital Today",
+                "logoUrl" : "/src/images/digitalToday.png",
+                "date" : "2024. 07. 03. 09:25",
+
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "‘나노코리아 2024’ 개막…국제 나노기술 심포지엄 공개 강연 주목",
-                        "url" : "https://n.news.naver.com/mnews/article/215/0001169154"
+                        "title" : "'애플, 자사 기기에 구글 AI 모델 제미나이 탑재 9월 발표'",
+                        "url" : "https://n.news.naver.com/mnews/article/374/0000391239"
                     },
                     {
                         "id" : 2,
@@ -979,13 +1035,16 @@
             },
             {
                 "id" : 2,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
-                "company" : "서울경제",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/665/2024/07/05/0000003287_002_20240705092113195.jpg?type=w647",
+                "company" : "SBSBiz",
+                "logoUrl" : "/src/images/SBSBiz.png",
+                "date" : "2024. 07. 03. 03:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "벤츠, 국내 수입차 판매 1위 '재탈환'…BMW와 엎치락뒤치락",
-                        "url" : "https://n.news.naver.com/mnews/article/011/0004361289"
+                        "title" : "'똘똘한 한 채 제외? 투기 어찌 막으려고' 종부세 폐지론의 맹점",
+                        "url" : "https://n.news.naver.com/article/665/0000003287?cds=news_media_pc&type=editn"
                     },
                     {
                         "id" : 2,
@@ -1023,13 +1082,16 @@
             },
             {
                 "id" : 3,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/366/2024/07/05/0001002413_001_20240705102910553.jpg?type=w647",
+                "company" : "헤럴드 경제",
+                "logoUrl" : "/src/images/HEconimic.png",
+                "date" : "2024. 07. 03. 15:34",
+
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "‘나노코리아 2024’ 개막…국제 나노기술 심포지엄 공개 강연 주목",
-                        "url" : "https://n.news.naver.com/mnews/article/215/0001169154"
+                        "title" : "‘이재명 습격범’ 1심 징역 15년 선고",
+                        "url" : "https://n.news.naver.com/article/366/0001002413?cds=news_media_pc&type=editn"
                     },
                     {
                         "id" : 2,
@@ -1067,7 +1129,10 @@
             {
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "company" : "스포츠동아",
+                "logoUrl" : "/src/images/sportsDonga.png",
+                "date" : "2024. 07. 03. 15:34",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1110,13 +1175,16 @@
             },
             {
                 "id" : 5,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/005/2024/07/05/2024070420190512268_1720091945_1720083586_20240705040312435.jpg?type=w647",
+                "company" : "스포츠뉴스",
+                "logoUrl" : "/src/images/sportsNews.png",
+                "date" : "2024. 07. 03. 11:36",
+
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "신하균 복제인간설까지…쥐새끼 잡는 사이다 드라마 통할까(감사합니다)[종합]",
-                        "url" : "https://m.entertain.naver.com/article/609/0000871344"
+                        "title" : "재회한 시진핑-푸틴 “혼란 속 우호 견지”",
+                        "url" : "https://n.news.naver.com/mnews/article/005/0001708572"
                     },
                     {
                         "id" : 2,
@@ -1155,7 +1223,10 @@
             {
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
-                "company" : "YTN",
+                "company" : "MKSports",
+                "logoUrl" : "/src/images/MKSports.png",
+                "date" : "2024. 07. 03. 11:36",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1197,7 +1268,10 @@
             {
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "세계뉴스",
+                "logoUrl" : "/src/images/worldNews.png",
+                "date" : "2024. 07. 05. 19:07",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1246,13 +1320,16 @@
         "news" : [
             {
                 "id" : 1,
-                "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "thumbnailUrl" : "https://imgnews.pstatic.net/image/421/2024/07/05/0007645589_001_20240705104623332.jpg?type=w647",
+                "company" : "ZNDETKorea",
+                "logoUrl" : "/src/images/ZNDETKorea.png",
+                "date" : "2024. 07. 03. 11:38",
+
                 "newsItems" : [
                     {
                         "id" : 1,
-                        "title" : "바이든 전방위 '사퇴 압박'에…오바마, 통화서 조언[2024 美대선]",
-                        "url" : "https://n.news.naver.com/mnews/article/003/0012645324"
+                        "title" : "'인사이드 아웃2'VS'탈주', 엎치락뒤치락 1위 경쟁…주말 어떨까 [N이슈]",
+                        "url" : "https://m.entertain.naver.com/article/421/0007645589"
                     },
                     {
                         "id" : 2,
@@ -1291,7 +1368,10 @@
             {
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
-                "company" : "서울경제",
+                "company" : "전자뉴스",
+                "logoUrl" : "/src/images/junjaNews.png",
+                "date" : "2024. 07. 03. 11:38",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1335,7 +1415,10 @@
             {
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "에너지경제",
+                "logoUrl" : "/src/images/energyEconomy.png",
+                "date" : "2024. 07. 03. 15:30",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1378,7 +1461,10 @@
             {
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "company" : "일간스포츠",
+                "logoUrl" : "/src/images/ilganSports.png",
+                "date" : "2024. 07. 03. 15:30",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1422,7 +1508,10 @@
             {
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "company" : "데일리안",
+                "logoUrl" : "/src/images/dailyAn.png",
+                "date" : "2024. 07. 03. 17:19",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1467,6 +1556,9 @@
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
                 "company" : "YTN",
+                "logoUrl" : "/src/images/YTN.png",
+                "date" : "2024. 07. 03. 17:13",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1508,7 +1600,10 @@
             {
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "동아일보",
+                "logoUrl" : "/src/images/DonaANews.png",
+                "date" : "2024. 07. 03. 17:16",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1558,7 +1653,10 @@
             {
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "company" : "텐아시아",
+                "logoUrl" : "/src/images/10Asia.png",
+                "date" : "2024. 07. 03. 17:17",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1602,7 +1700,10 @@
             {
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
-                "company" : "서울경제",
+                "company" : "SBS",
+                "logoUrl" : "/src/images/SBS.png",
+                "date" : "2024. 07. 03. 16:13",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1646,7 +1747,10 @@
             {
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "서울신문",
+                "logoUrl" : "/src/images/seoulNews.png",
+                "date" : "2024. 07. 03. 16:17",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1689,7 +1793,10 @@
             {
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "company" : "조선Biz",
+                "logoUrl" : "/src/images/chosunBiz.png",
+                "date" : "2024. 07. 03. 16:19",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1733,7 +1840,10 @@
             {
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "company" : "조이뉴스24",
+                "logoUrl" : "/src/images/joyNews24.png",
+                "date" : "2024. 07. 03. 16:35",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1777,7 +1887,10 @@
             {
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
-                "company" : "YTN",
+                "company" : "TV리포트",
+                "logoUrl" : "/src/images/TVReport.png",
+                "date" : "2024. 07. 03. 02:34",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1819,7 +1932,10 @@
             {
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "e데일리",
+                "logoUrl" : "/src/images/eDaily.png",
+                "date" : "2024. 07. 03. 02:12",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1869,7 +1985,10 @@
             {
                 "id" : 1,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
-                "company" : "YTN",
+                "company" : "파이낸셜뉴스",
+                "logoUrl" : "/src/images/finacialNews.png",
+                "date" : "2024. 07. 03. 02:06",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1911,7 +2030,10 @@
             {
                 "id" : 2,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
-                "company" : "서울경제",
+                "company" : "it조선",
+                "logoUrl" : "/src/images/itChosun.png",
+                "date" : "2024. 07. 03. 02:05",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1955,7 +2077,10 @@
             {
                 "id" : 3,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "미디어오늘",
+                "logoUrl" : "/src/images/mediaToday.png",
+                "date" : "2024. 07. 03. 08:05",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -1998,7 +2123,10 @@
             {
                 "id" : 4,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/003/2024/07/03/NISI20240616_0001185203_web_20240616115159_20240703154135804.jpg?type=w647",
-                "company" : "뉴시스",
+                "company" : "오마이뉴스",
+                "logoUrl" : "/src/images/ohmyNews.png",
+                "date" : "2024. 07. 03. 08:03",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -2042,7 +2170,10 @@
             {
                 "id" : 5,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/609/2024/07/03/202407031410140410_51_20240703145113888.jpg?type=w647",
-                "company" : "뉴스엔",
+                "company" : "시사저널e",
+                "logoUrl" : "/src/images/sisajounalE.png",
+                "date" : "2024. 07. 03. 08:05",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -2086,7 +2217,10 @@
             {
                 "id" : 6,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/052/2024/07/03/202407031454215473_t_20240703145630145.jpg?type=w647",
-                "company" : "YTN",
+                "company" : "매일경제",
+                "logoUrl" : "/src/images/mailEconomic.png",
+                "date" : "2024. 07. 03. 08:23",
+
                 "newsItems" : [
                     {
                         "id" : 1,
@@ -2128,7 +2262,10 @@
             {
                 "id" : 7,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/025/2024/07/03/0003370954_001_20240703141017192.jpg?type=w647",
-                "company" : "연합뉴스",
+                "company" : "한국경제TV",
+                "logoUrl" : "/src/images/koreaEconomyTY.png",
+                "date" : "2024. 07. 03. 08:53",
+
                 "newsItems" : [
                     {
                         "id" : 1,
