@@ -6,30 +6,88 @@ import {
   SimpleElement,
 } from "./AppElement";
 import { Deque } from "./deque";
-import { debounceAnimationCallback, toStringAnything } from "./utils";
+import { debounceAnimationCallback, isPropsEqual } from "./utils";
 
-const effectCleanUps = new Map<number, () => void>();
-const effectDependencies = new Map<number, string[]>();
+const effectCleanUpsMap = new Map<string, Array<() => void>>();
+const effectsKeyMap = new Map<string, number>();
+const effectDependenciesMap = new Map<string, any[]>();
 const statesMap = new Map<string, Array<any>>();
 const statesKeyMap = new Map<string, number>();
-let effectsKey = 0;
+const callbacksMap = new Map<string, Array<() => void>>();
+const callbacksDependenciesMap = new Map<string, any[]>();
+const callbacksKeyMap = new Map<string, number>();
+const propsMap = new Map<string, any>();
 const createApp = () => {
-  const useEffect = (effectFunc: () => () => void, rawDependencies?: any[]) => {
-    const dependencies = rawDependencies?.map(toStringAnything) ?? [];
-    const lstDependencies = effectDependencies.get(effectsKey);
-    if (
-      lstDependencies == null ||
-      lstDependencies.length !== dependencies.length ||
-      lstDependencies.some((value, index) => value !== dependencies[index])
-    ) {
-      effectDependencies.set(effectsKey, dependencies);
-      const lstEffectCleanUp = effectCleanUps.get(effectsKey);
-      lstEffectCleanUp?.();
-      const effectCleanUp = effectFunc();
-      effectCleanUps.set(effectsKey, effectCleanUp);
+  const useEffect = (
+    {
+      effectFunc,
+      key,
+    }: {
+      effectFunc: () => () => void;
+      key: string;
+    },
+    rawDependencies?: any[],
+  ) => {
+    const dependencies = rawDependencies ?? [];
+    const localKey = effectsKeyMap.get(key) ?? 0;
+    if (effectsKeyMap.has(key)) {
+      effectsKeyMap.set(key, localKey + 1);
+    } else {
+      effectsKeyMap.set(key, 0);
+    }
+    if (!effectDependenciesMap.has(key)) {
+      effectDependenciesMap.set(key, []);
     }
 
-    effectsKey += 1;
+    if (!effectCleanUpsMap.has(key)) {
+      effectCleanUpsMap.set(key, []);
+    }
+    const effectCleanUps = effectCleanUpsMap.get(key)!;
+    const effectDependencies = effectDependenciesMap.get(key)!;
+    if (effectDependencies.length <= localKey) {
+      effectDependencies.push([]);
+    }
+    const lstDependencies = effectDependencies[localKey];
+    if (!isPropsEqual(dependencies, lstDependencies)) {
+      effectDependencies[localKey] = dependencies;
+      const lstEffectCleanUp = effectCleanUps[localKey];
+      lstEffectCleanUp?.();
+      const effectCleanUp = effectFunc();
+
+      effectCleanUps[localKey] = effectCleanUp;
+    }
+  };
+
+  const useCallback = <RawT = unknown>(
+    {
+      callback,
+      key,
+    }: {
+      callback: RawT;
+      key: string;
+    },
+    rawDependencies?: any[],
+  ) => {
+    type T = RawT extends unknown ? typeof callback : RawT;
+    const dependencies = rawDependencies ?? [];
+    if (!callbacksKeyMap.has(key)) {
+      callbacksKeyMap.set(key, 0);
+    }
+    const localCallbacksKey = callbacksKeyMap.get(key)!;
+    if (!callbacksMap.has(key)) {
+      callbacksMap.set(key, []);
+    }
+    const callbacks = callbacksMap.get(key)!;
+
+    if (callbacks.length <= localCallbacksKey) {
+      callbacks.push(callback as () => void);
+    }
+    if (!isPropsEqual(dependencies, callbacksDependenciesMap.get(key))) {
+      callbacks[localCallbacksKey] = callback as () => void;
+      callbacksDependenciesMap.set(key, dependencies);
+    }
+    callbacksKeyMap.set(key, localCallbacksKey + 1);
+    return callbacks[localCallbacksKey] as T;
   };
 
   const renderQueue = new Deque<() => void>();
@@ -49,54 +107,68 @@ const createApp = () => {
   };
 
   const _diffingRender = (cur: ChildNode, nxt: ChildNode) => {
+    if (!cur || !nxt) {
+      return;
+    }
+
     if (!(cur instanceof HTMLElement && nxt instanceof HTMLElement)) {
       if (cur.textContent !== nxt.textContent) {
         cur.replaceWith(nxt);
       }
       return;
     }
+
     if (cur.tagName !== nxt.tagName) {
+      cur.replaceWith(nxt);
+      return;
+    }
+
+    const forceUpdate = nxt.getAttribute("forced") === "true";
+    if (forceUpdate) {
       cur.replaceWith(nxt);
       return;
     }
 
     const curAttrs = cur.attributes ?? {};
     const nxtAttrs = nxt.attributes ?? {};
-    for (let i = 0; i < curAttrs.length; i++) {
-      const curAttr = curAttrs[i];
-      const nxtAttr = nxtAttrs.getNamedItem(curAttr.name);
-      if (nxtAttr == null) {
-        cur.removeAttribute(curAttr.name);
-      } else if (curAttr.value !== nxtAttr.value) {
-        curAttr.value = nxtAttr.value;
+
+    // Update attributes
+    for (const { name, value } of Array.from(nxtAttrs)) {
+      if (cur.getAttribute(name) !== value) {
+        cur.setAttribute(name, value);
       }
     }
-    for (let i = 0; i < nxtAttrs.length; i++) {
-      const nxtAttr = nxtAttrs[i];
-      if (curAttrs.getNamedItem(nxtAttr.name) == null) {
-        cur.setAttribute(nxtAttr.name, nxtAttr.value);
+    // Remove old attributes
+    for (const { name } of Array.from(curAttrs)) {
+      if (!nxtAttrs.getNamedItem(name)) {
+        cur.removeAttribute(name);
       }
     }
-    const curChildren = cur.childNodes;
-    const nxtChildren = nxt.childNodes;
-    for (let i = 0; i < curChildren.length; i++) {
+
+    // Update children
+    const curChildren = Array.from(cur.childNodes);
+    const nxtChildren = Array.from(nxt.childNodes);
+
+    const maxLen = Math.max(curChildren.length, nxtChildren.length);
+    for (let i = 0; i < maxLen; i++) {
       const curChild = curChildren[i];
       const nxtChild = nxtChildren[i];
-      if (nxtChild == null) {
+      if (curChild && nxtChild) {
+        _diffingRender(curChild, nxtChild);
+      } else if (!curChild && nxtChild) {
+        cur.appendChild(nxtChild);
+      } else if (curChild && !nxtChild) {
         cur.removeChild(curChild);
-      } else {
-        _diffingRender(curChild as HTMLElement, nxtChild as HTMLElement);
       }
     }
-    for (let i = curChildren.length; i < nxtChildren.length; i++) {
-      cur.appendChild(nxtChildren[i]);
-    }
   };
+
   const render = debounceAnimationCallback(() => {
     isRendering = true;
     if (root == null || app == null) return;
     statesKeyMap.clear();
-    effectsKey = 0;
+    callbacksKeyMap.clear();
+    effectsKeyMap.clear();
 
     const top = document.createElement("div");
 
@@ -116,8 +188,16 @@ const createApp = () => {
         parent.appendChild(_converRawElementToDom(currentElem.node));
         continue;
       }
-      if (currentElem.node instanceof HTMLElement) {
-        parent.appendChild(currentElem.node);
+      const idx = parent.children.length;
+      parent.appendChild(currentElem.node);
+      const key = `${parent.getAttribute("key") ?? ""}-${
+        currentElem.node.tagName
+      }[${idx}]`;
+      currentElem.node.setAttribute("key", key);
+
+      if (!isPropsEqual(propsMap.get(key), currentElem.props)) {
+        propsMap.set(key, currentElem.props);
+        currentElem.node.setAttribute("forced", "true");
       }
       currentElems.pushBack([...currentElem.children]);
     }
@@ -140,7 +220,13 @@ const createApp = () => {
     }
     render();
   };
-  function useState<RawT = unknown>(key: string, initalState: RawT) {
+  function useState<RawT = unknown>({
+    key,
+    initalState,
+  }: {
+    key: string;
+    initalState: RawT;
+  }) {
     type T = RawT extends unknown ? typeof initalState : RawT;
     type Updater = (updater: T | ((state: T) => T)) => void;
 
@@ -157,27 +243,28 @@ const createApp = () => {
       states.push(initalState);
     }
     const state = states[localStatesKey] as T;
-    function update(updater: Updater) {
-      const curLocalStatesKey = statesKeyMap.get(key)!;
-      const curState = states[curLocalStatesKey] as T;
+    const update = useCallback(
+      {
+        key: `${key}-SET_STATE`,
+        callback: (updater: Updater) => {
+          const newState =
+            typeof updater === "function" ? updater(state) : updater;
+          if (newState === state) {
+            return;
+          }
 
-      const newState =
-        typeof updater === "function"
-          ? (updater as (state: T) => T)(curState)
-          : updater;
-
-      if (curState == newState) {
-        return;
-      }
-      if (isRendering) {
-        fillRenderQueue(() => {
+          if (isRendering) {
+            fillRenderQueue(() => {
+              states[localStatesKey] = newState;
+            });
+            return;
+          }
           states[localStatesKey] = newState;
-        });
-        return;
-      }
-      states[localStatesKey] = newState;
-      render();
-    }
+          render();
+        },
+      },
+      [],
+    );
     statesKeyMap.set(key, localStatesKey + 1);
     return [state, update] as [T, Updater];
   }
@@ -186,8 +273,9 @@ const createApp = () => {
     init,
     useState,
     useEffect,
+    useCallback,
   };
 };
 
-const { init, useState, useEffect } = createApp();
-export { init, useState, useEffect };
+const { init, useState, useEffect, useCallback } = createApp();
+export { init, useState, useEffect, useCallback };

@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  height: 40px;
+  background: #F5F7F9;
+  border: 1px solid #D2DAE0;
+  overflow-x: scroll;
+
+
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}

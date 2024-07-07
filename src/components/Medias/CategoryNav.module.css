@@ -1,0 +1,38 @@
+@keyframes bg-fill {
+  from {
+    background-size: 0 100%;
+  }
+
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+
+
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  gap: 28px;
+  padding-left: 16px;
+  padding-right: 16px;
+  flex-shrink: 0;
+}
+
+
+.active {
+  color: #FFFFFF;
+
+  background-color: #7890E7;
+  background: linear-gradient(to right, #4362D0);
+  background-repeat: no-repeat;
+  background-size: 0 100%;
+  animation: bg-fill 5s forwards;
+}
+
+.in-active {
+  color: #879298;
+}

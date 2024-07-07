@@ -3,15 +3,24 @@ import styles from "./TopSection.module.css";
 import { RecentNewsRoll } from "./RecentNewsRoll";
 import { useEffect, useState } from "@/libs/createApp";
 export const TopSection = () => {
-  const [showDelayed, setShowDelayed] = useState("top-section", false);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowDelayed(true);
-    }, 1000);
-    return () => {
-      clearTimeout(timeout);
-    };
+  const [showDelayed, setShowDelayed] = useState({
+    key: "TopSection",
+    initalState: false,
   });
+  useEffect(
+    {
+      key: "TopSection",
+      effectFunc: () => {
+        const timeout = setTimeout(() => {
+          setShowDelayed(true);
+        }, 1000);
+        return () => {
+          clearTimeout(timeout);
+        };
+      },
+    },
+    [],
+  );
   return Section({
     className: `${styles.container}`,
     children: [
