@@ -1,0 +1,162 @@
+[
+    {
+        "category" : 0,
+        "pid": "0",
+        "pressType": "economy",
+        "pressImg": "../../image/grid.svg",
+        "edittime" : "2024.07.04 12:56 편집",
+        "pressName": "서울경제",
+        "mainphoto" : "https://newsimg.sedaily.com/2024/07/04/2DBLZL2FO4_2.jpg",
+        "maintitle" : "\"저가 매수 기회\"…SK하이닉스 순매수 1위 [주식 초고수는 지금]",
+        "news": [
+            {
+                "title": "이번엔 서울 강남서…70대 운전자 차량, 어린이집 돌진",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "경제 섹션의 두 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"  
+            },
+
+            {
+                "title": "경제 섹션의 세 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "경제 섹션의 네 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "경제 섹션의 여섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 0,
+        "pid": "1",
+        "pressType": "economy",
+        "pressImg": "../../image/grid1.svg",
+        "pressName": "데일리안",
+        "edittime" : "2024.05.31 12:56 편집",
+        "mainphoto" : "../image/Thumbnail.png",
+        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 2,
+        "pid": "0",
+        "pressType": "internet",
+        "pressImg": "../../image/grid8.svg",
+        "pressName": "아이뉴스24",
+        "edittime" : "2023.12.29 12:56 편집",
+        "mainphoto" : "https://wimg.mk.co.kr/news/cms/202407/04/news-p.v1.20240410.e544b897d89545e1ab9c0503c619bdcc_P1.jpg",
+        "maintitle" : "‘오픈AI 챗GPT’ 중국 해커한테 털렸다…AI 기술 설계·세부정보 탈취",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 1,
+        "pid": "0",
+        "pressType": "broadcast",
+        "pressImg": "../../image/grid16.svg",
+        "pressName": "법률방송뉴스",
+        "edittime" : "2023.11.15 12:00 편집",
+        "mainphoto" : "https://cdn.itbiznews.com/news/photo/202109/48169_43554_442.jpg",
+        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    }
+]
+ 
