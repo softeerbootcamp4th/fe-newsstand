@@ -4,6 +4,7 @@ const subscribedPress = document.getElementById("subscribedPress");
 const listViewIcon = document.getElementById('listViewIcon');
 const gridViewIcon = document.getElementById('gridViewIcon');
 
+
 const setColor = (element, color) => {
     element.setAttribute('fill', color);
 }
@@ -12,12 +13,16 @@ const setColor = (element, color) => {
 listViewIcon.addEventListener('click', () => {
     setColor(listViewIcon, '#4362D0');
     setColor(gridViewIcon, '#14212B');
+    const list = document.getElementById('NewsList');
+    list.classList.remove('gridShow');
 });
 
 
 gridViewIcon.addEventListener('click', () => {
     setColor(listViewIcon, '#14212B');
     setColor(gridViewIcon, '#4362D0');
+    const grid = document.getElementById('NewsList');
+    grid.classList.add('gridShow');
 });
 
 

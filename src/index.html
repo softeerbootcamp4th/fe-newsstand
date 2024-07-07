@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <title>NewsStand</title>
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
-  <link
-    rel="stylesheet"
-    href="/src/style/styles.css" />
-  <link
-    rel="stylesheet"
-    href="/src/style/fonts.css" />
-    <link
-    rel="stylesheet"
-    href="/src/style/global.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="/src/style/styles.css" />
+  <link rel="stylesheet" href="/src/style/fonts.css" />
+  <link rel="stylesheet" href="/src/style/global.css" />
 </head>
+
 <body>
   <div id="app">
     <header>
@@ -24,26 +18,33 @@
           <img src="/images/newspaper.svg" class="logoImage">
           <span class="display-bold24">뉴스스탠드</span>
         </div>
-        <div class="display-medium16" id="nowDate"></div>
+        <time class="display-medium16" id="nowDate"></time>
       </div>
     </header>
     <div id="newsTicker">
       <div class="newsTicker">
-        <div class="newsTickerEach">
+        <div class="newsTickerEach" id="ticker1">
           <span class="display-bold14">연합뉴스</span>
-          <span class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
+          <div class="newsTickerContainer">
+            <div id="newsTitleShown" class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div id="newsTitleHidden" class="available-medium14">[속보] 미국, '중동 양자 정상 회담' 제안…이란, 긍정적 반응</div>
+          </div>
         </div>
-        <div class="newsTickerEach">
+
+        <div class="newsTickerEach" id="ticker2">
           <span class="display-bold14">연합뉴스</span>
-          <span class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</span>
+          <div class="newsTickerContainer">
+            <div id="newsTitleShown2" class="available-medium14">[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출</div>
+            <div id="newsTitleHidden2" class="available-medium14">[속보] 미국, '중동 양자 정상 회담' 제안…이란, 긍정적 반응</div>
+          </div>
         </div>
       </div>
     </div>
     <div id="TopAndViewer">
       <div class="TopAndViewer">
         <div class="TapButton">
-          <span id="allPress" class="selected-bold16">전체 언론사</span>
-          <span id="subscribedPress" class="available-medium16">내가 구독한 언론사</span>
+          <button id="allPress" class="selected-bold16">전체 언론사</button>
+          <button id="subscribedPress" class="available-medium16">내가 구독한 언론사</button>
         </div>
         <div class="ViewerButton">
           <svg id="listViewIcon" class="listViewIcon">
@@ -55,24 +56,38 @@
         </div>
       </div>
     </div>
-    <main> 
+    <main>
       <div id="NewsList">
         <ul>
           <!-- 뉴스 카테고리의 내용이 들어간다 -->
         </ul>
-        <div>
-          
+        <div id="mainNews">
+          <div class="pressInfo">
+
+          </div>
+          <div id="news">
+            <div class="newsLeft">
+
+            </div>
+            <div class="newsRight">
+              <ul></ul>
+            </div>
+          </div>
         </div>
       </div>
     </main>
     <nav>
       <!-- 화살표 넣기 -->
     </nav>
+    <!-- snackBar 메세지 -->
+    <div id="snackBar"></div>
   </div>
 
   <script src="./app.js" type="module"></script>
   <script src="./components/date.js" type="module"></script>
   <script src="./components/topAndViewer.js" type="module"></script>
   <script src="./components/fieldTab.js" type="module"></script>
+  <script src="./components/autoRollingNews.js" type="module"></script>
 </body>
+
 </html>

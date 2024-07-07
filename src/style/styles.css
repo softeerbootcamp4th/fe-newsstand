@@ -58,7 +58,7 @@ header {
 
 
 .newsTickerEach {
-    border: 1px;
+    border: 1px solid;
     width: 461px;
     height: 100%;
     display: flex;
@@ -67,12 +67,64 @@ header {
     border-color: var(--border-default);
     border-style: solid;
     cursor: pointer;
+    overflow: hidden;
 }
 
+
+.newsTickerEach:hover {
+    text-decoration: underline;
+}
 
 .newsTickerEach span {
-    margin: 5%;
+    margin: 16px;
 }
+
+.newsTickerContainer {
+    overflow: hidden;
+    padding-top: 37px;
+
+    /* 텍스트 높이에 맞게 조정 */
+}
+
+
+#newsTitleShown {
+    opacity: 1
+}
+
+
+#newsTitleHidden {
+    opacity: 0
+}
+
+
+#newsTitleShown2 {
+    opacity: 1
+}
+
+
+#newsTitleHidden2 {
+    opacity: 0
+}
+
+.newsTickerContainer div:nth-child(1) {
+    white-space: nowrap;
+    height: 35px;
+}
+
+.autoRolling {
+    animation: autoRollingAnimation 0.5s linear forwards;
+}
+
+@keyframes autoRollingAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
 
 
 /*******************************************************************/
@@ -158,6 +210,9 @@ main {
     background-color: var(--surface-alt);
 }
 
+.gridShow {
+    display: none;
+}
 
 .notselectNews {
     width: fit-content;
@@ -173,7 +228,14 @@ main {
     color: var(--grayscale-200);
 }
 
+
+.notselectNews:hover {
+    text-decoration: underline;
+}
+
+
 .selectNews {
+    position: relative;
     width: 166px;
     height: 40px;
     display: flex;
@@ -182,4 +244,166 @@ main {
     cursor: pointer;
     background-color: var(--surface-brand-alt);
     padding: 0px 16px;
+    overflow: hidden;
+}
+
+.selectNews::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--blue-500);
+    transition: width 2s linear;
+}
+
+
+.selectNews.nowSelected::after {
+    width: 100%;
+}
+
+
+.selectNews>* {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+#mainNews {
+    padding: 24px;
+}
+
+
+
+.pressInfo {
+    display: flex;
+    height: 24px;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: center;
+}
+
+
+#news {
+    display: flex;
+    gap: 32px;
+    height: 260px;
+}
+
+
+.newsLeft {
+    width: 320px;
+}
+
+
+.newsLeft:hover {
+    text-decoration: underline;
+}
+
+
+.newsLeft:hover img {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
+
+.newsLeft p {
+    margin-top: 16px;
+}
+
+
+.newsRight {
+    margin-top: 5px;
+    width: 530px;
+    height: 245px;
+}
+
+
+.newsEach {
+    list-style: none;
+    margin-bottom: 17px;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--grayscale-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.newsEach:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+.pressInfoButton {
+    height: 24px;
+    border-radius: 50px;
+    border: 1px;
+    gap: 2px;
+    padding: 0 6px;
+    background-color: var(--surface-alt);
+    border-color: var(--border-default);
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: auto;
+    color: var(--grayscale-200);
+}
+
+
+.pressInfoButton:hover {
+    border-color: var(--grayscale-300);
+    text-decoration: underline;
+    color: var(--grayscale-500);
+}
+
+.pressInfoButton span {
+    padding-right: 4px;
+}
+
+
+.pressInfoButton:hover img {
+    filter: grayscale(100%) brightness(60%);
+}
+
+
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/* snackBar */
+
+#snackBar {
+    position: fixed;
+    visibility: hidden;
+    width: 286px;
+    height: 54px;
+    background-color: var(--surface-brand-default);
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: auto;
+    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
+        0 2px 18px hsla(var(--grayscale-black), 0.8);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: visibility 0s, opacity 0.5s linear;
+    opacity: 0;
+}
+
+#snackBar.show {
+    visibility: visible;
+    opacity: 1;
 }

@@ -5,12 +5,13 @@ export const data = [
         "company": [
             {
                 "companyId": 1,
-                "companyLogo": "https://newsstand.naver.com/824",
+                "companyLogo": "../../images/dailyahnLogo.svg",
                 "companyName": "서울파이낸스",
                 "updatedDate": "07월 03일 10:10 직접 편집",
+                "isSubscribe": false,
                 "mainNews": {
                     "id": 1,
-                    "src": "http://www.seoulfn.com/news/articleView.html?idxno=524732",
+                    "src": "../../images/thumbnail/Thumbnail.png",
                     "title": "LG전자, 앳홈 지분 80% 인수···스마트홈 생태계 구축 속도 낸다"
                 },
                 "news": [
@@ -24,12 +25,13 @@ export const data = [
             },
             {
                 "companyId": 1,
-                "companyLogo": "https://newsstand.naver.com/824",
+                "companyLogo": "../../images/dailyahnLogo.svg",
                 "companyName": "서울파이낸스",
-                "updatedDate": "07월 03일 10:10 직접 편집",
+                "updatedDate": "07월 03일 10:10 직접 편집222",
+                "isSubscribe": false,
                 "mainNews": {
                     "id": 1,
-                    "src": "http://www.seoulfn.com/news/articleView.html?idxno=524732",
+                    "src": "../../images/thumbnail/Thumbnail.png",
                     "title": "LG전자, 앳홈 지분 80% 인수···스마트홈 생태계 구축 속도 낸다"
                 },
                 "news": [
@@ -49,12 +51,13 @@ export const data = [
         "company": [
             {
                 "companyId": 1,
-                "companyLogo": "https://newsstand.naver.com/945",
+                "companyLogo": "../../images/dailyahnLogo.svg",
                 "companyName": "YTN사이언스",
                 "updatedDate": "07월 03일 10:24 직접 편집",
+                "isSubscribe": true,
                 "mainNews": {
                     "id": 1,
-                    "src": "https://science.ytn.co.kr/program/view.php?mcd=0082&key=202407021107311016",
+                    "src": "../../images/thumbnail/Thumbnail.png",
                     "title": "20초 만에 고꾸라져...'중국판 스페이스-X'의 굴욕?"
                 },
                 "news": [
@@ -74,12 +77,13 @@ export const data = [
         "company": [
             {
                 "companyId": 1,
-                "companyLogo": "https://newsstand.naver.com/681",
+                "companyLogo": "../../images/dailyahnLogo.svg",
                 "companyName": "ECONOTIMES",
                 "updatedDate": "07월 02일 23:51 직접 편집",
+                "isSubscribe": false,
                 "mainNews": {
                     "id": 1,
-                    "src": "https://www.econotimes.com/What-happens-next-in-Ukraines-debt-negotiations-could-change-the-course-of-the-war-1680642",
+                    "src": "../../images/thumbnail/Thumbnail.png",
                     "title": "What happens next in Ukraine’s debt negotiations could change the course of the war"
                 },
                 "news": [
@@ -99,12 +103,13 @@ export const data = [
         "company": [
             {
                 "companyId": 1,
-                "companyLogo": "https://newsstand.naver.com/681",
+                "companyLogo": "../../images/dailyahnLogo.svg",
                 "companyName": "ECONOTIMES",
                 "updatedDate": "07월 02일 23:51 직접 편집",
+                "isSubscribe": false,
                 "mainNews": {
                     "id": 1,
-                    "src": "https://www.econotimes.com/What-happens-next-in-Ukraines-debt-negotiations-could-change-the-course-of-the-war-1680642",
+                    "src": "../../images/thumbnail/Thumbnail.png",
                     "title": "What happens next in Ukraine’s debt negotiations could change the course of the war"
                 },
                 "news": [
@@ -125,11 +130,12 @@ export const data = [
             {
                 "companyId": 1,
                 "companyName": "일간스포츠",
-                "companyLogo": "https://s.pstatic.net/static/newsstand/up/2023/0112/nsd92558162.png",
+                "companyLogo": "../../images/dailyahnLogo.svg",
                 "updatedDate": "2024-07-03T01:15:00Z",
+                "isSubscribe": false,
                 "mainNews": {
                     "id": 782,
-                    "src": "https://isplus.com/article/view/isp202407030017",
+                    "src": "../../images/thumbnail/Thumbnail.png",
                     "title": "임영웅 단편영화 ‘인 악토버’, 6일 쿠팡플레이·티빙 공개"
                 },
                 "news": [
@@ -152,12 +158,13 @@ export const data = [
         "company": [
             {
                 "companyId": 1,
-                "companyLogo": "https://newsstand.naver.com/958",
+                "companyLogo": "../../images/dailyahnLogo.svg",
                 "companyName": "베리타스알파",
                 "updatedDate": "2024-07-03T01:20:00Z",
+                "isSubscribe": false,
                 "mainNews": {
                     "id": 341,
-                    "src": "http://www.veritas-a.com/news/articleView.html?idxno=511187",
+                    "src": "../../images/thumbnail/Thumbnail.png",
                     "title": "[단독][6월모평 실채점 배치표] 대성학원 자연 서울대 의예 435점, 인문"
                 },
                 "news": [
@@ -196,11 +203,12 @@ export const data = [
             {
                 "companyId": 1,
                 "companyName": "중부메일",
-                "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/983.png",
+                "companyLogo": "../../images/dailyahnLogo.svg",
                 "updatedDate": "2024-07-02T10:36:00Z",
+                "isSubscribe": false,
                 "mainNews": {
                     "id": 123,
-                    "src": "http://www.jbnews.com/news/articleView.html?idxno=1442635",
+                    "src": "../../images/thumbnail/Thumbnail.png",
                     "title": "경찰, 사직동 변사 사건 범인 친형 검거...부실수사로 2년 걸려"
                 },
                 "news": [
