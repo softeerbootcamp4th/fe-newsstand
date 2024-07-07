@@ -1,119 +1,185 @@
 import "./NewsViewer.css";
-import Button from "@/components/common/Button/Button";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
+import { getNews } from "@/mocks/news";
+import { CATEGORIES } from "@/constants/news";
+import ContentsBox from "./ContentsBox/ContentsBox";
 
-function NewsViewer({ $target, position = "beforeend", news }) {
+function NewsViewer({ $target, position = "beforeend" }) {
   this.$element = document.createElement("article");
   this.$element.className = "newsViewer";
   $target.insertAdjacentElement(position, this.$element);
 
   this.state = {
     page: 0,
+    category: 0,
   };
 
-  this.setState = ({ page }) => {
-    this.state = { page };
-
-    this.render();
+  this.setState = function ({ page, category }) {
+    this.state = {
+      page: page ?? this.state.page,
+      category: category ?? this.state.category,
+    };
+    this.render(getNews(this.state.category));
   };
 
-  function formatDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
+  this.render(getNews(this.state.category));
+  this.$element.addEventListener("click", this.handleClick.bind(this));
 
-    return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
+  this.initializeProgress();
+}
+
+NewsViewer.prototype.handleClick = function (event) {
+  const button = event.target.closest("button");
+
+  if (button) {
+    const { id } = button;
+
+    if (id === "nextButton") {
+      this.nextPage();
+
+      return;
+    }
+
+    if (id === "prevButton") {
+      this.prevPage();
+
+      return;
+    }
   }
 
-  const isLastPage = () => this.state.page === news.length - 1;
-  const isFirstPage = () => this.state.page === 0;
+  const listItem = event.target.closest("li.category");
 
-  const handleNextClick = () => {
-    this.setState({ page: this.state.page + 1 });
-  };
+  if (listItem) {
+    const category = Number(listItem.dataset.categoryNumber);
 
-  const handlePrevClick = () => {
-    this.setState({ page: this.state.page - 1 });
-  };
+    this.handleCategoryClick(category);
+  }
+};
 
-  const handleClick = (event) => {
-    const button = event.target.closest("button");
+NewsViewer.prototype.formatDate = function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
 
-    if (button && button.id === "nextButton") {
-      handleNextClick(event.target.closest("button"));
+  return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
+};
 
-      return;
-    }
-
-    if (button && button.id === "prevButton") {
-      handlePrevClick(event.target.closest("button"));
-
-      return;
-    }
-  };
-
-  this.render = () => {
-    this.$element.innerHTML = /* html */ `
-      <ul class="categoryFilter">
-        <li class="selected">
-          <span>종합/경제</span>
-          <span class="pageInfo">${this.state.page + 1}<span class="newsLength"> / ${
-      news.length
-    }</span></span>
+NewsViewer.prototype.getCategoryFilterTemplate = function (newsLength) {
+  return CATEGORIES.map((name, idx) => {
+    if (idx === this.state.category) {
+      return /* html */ ` 
+        <li data-category-number="${idx}" class="category selected">
+          <span>${name}</span>
+          <span class="pageInfo">${this.state.page + 1}
+          <span class="newsLength"> / ${newsLength}</span>
+          </span>
+          <progress class="progress progressTransition" value="0" min="0" max="100"></progress>
         </li>
-        <li>방송/통신</li>
-        <li>IT</li>
-        <li>영자지</li>
-        <li>스포츠/연예</li>
-        <li>매거진/전문지</li>
-        <li>지역</li>
-      </ul>
+        `;
+    }
 
-      <div class="contents">
-        <section class="companyInfo">
-          <img src="${news[this.state.page].companyLogo}"/>
-          <p>${formatDate(new Date())} 편집</p>
-        </section>
+    return /* html */ `
+      <li data-category-number="${idx}" class="category">
+        ${name}
+      </li>
+    `;
+  }).join("");
+};
 
-        <section class="articleInfo">
-          <div class="mainNews">
-            <div>
-              <img src="${news[this.state.page].imgUrl}"/>
-            </div>
-            <p>${news[this.state.page].title}</p>
-          </div>
+NewsViewer.prototype.handleCategoryClick = function (category) {
+  this.setState({ page: 0, category });
+};
 
-          <div class="subNews">
-            <ul>
-              ${news[this.state.page].headlines.map((str) => `<li>${str}</li>`).join("\n")}
-              <p>${news[this.state.page].company} 언론사에서 직접 편집한 뉴스입니다.</p>
-            </ul>
-          </div>
-        </section>
+NewsViewer.prototype.initializeProgress = function () {
+  const interval = setInterval(this.progressInterval.bind(this), 1000);
+};
 
-        <button id="prevButton" class="newsButton prev${
-          isFirstPage() ? " hide" : ""
-        }"><img src="${leftButton}"/></button>
-        <button id="nextButton" class="newsButton next${
-          isLastPage() ? " hide" : ""
-        }"><img src="${rightButton}"/></button>
-      </div>
-      `;
+NewsViewer.prototype.progressInterval = function () {
+  const $progress = this.$element.querySelector(".progress");
 
-    new Button({
-      $target: this.$element.querySelector(".companyInfo"),
-      text: "구독하기",
-      color: "gray",
-      icon: "plus",
-    });
-  };
+  if ($progress.value === 100) {
+    $progress.classList.remove("progressTransition");
+    $progress.value = 0;
 
-  this.render();
+    this.nextPage();
 
-  this.$element.addEventListener("click", handleClick.bind(this));
-}
+    $progress.classList.add("progressTransition");
+  }
+
+  $progress.value += 5;
+};
+
+NewsViewer.prototype.nextPage = function () {
+  const news = getNews(this.state.category);
+  const nextPage = this.state.page + 1;
+
+  if (nextPage >= news.length) {
+    this.nextCategory();
+
+    return;
+  }
+
+  this.setState({ page: nextPage });
+};
+
+NewsViewer.prototype.prevPage = function () {
+  const prevPage = this.state.page - 1;
+
+  if (prevPage < 0) {
+    this.prevCategory();
+
+    return;
+  }
+
+  this.setState({ page: prevPage });
+};
+
+NewsViewer.prototype.nextCategory = function () {
+  const nextCategory = this.state.category + 1;
+
+  if (nextCategory >= CATEGORIES.length) {
+    this.setState({ category: 0, page: 0 });
+
+    return;
+  }
+
+  this.setState({ category: nextCategory, page: 0 });
+};
+
+NewsViewer.prototype.prevCategory = function () {
+  const prevCategory = this.state.category - 1;
+
+  if (prevCategory < 0) {
+    this.setState({ category: 0, page: 0 });
+
+    return;
+  }
+
+  const news = getNews(prevCategory);
+
+  this.setState({ category: prevCategory, page: news.length - 1 });
+};
+
+NewsViewer.prototype.render = function (news) {
+  this.$element.innerHTML = /* html */ `
+    <ul class="categoryFilter">
+      ${this.getCategoryFilterTemplate(news.length)}
+    </ul>
+
+    <button id="prevButton" class="newsButton prev${
+      this.state.category === 0 && this.state.page === 0 ? " hide" : ""
+    }"><img src="${leftButton}"/></button>
+    <button id="nextButton" class="newsButton next"><img src="${rightButton}"/></button>
+  `;
+
+  new ContentsBox({
+    $target: this.$element.querySelector(".categoryFilter"),
+    position: "afterend",
+    news: getNews(this.state.category)[this.state.page],
+  });
+};
 
 export default NewsViewer;

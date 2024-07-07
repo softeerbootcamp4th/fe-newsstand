@@ -34,3 +34,13 @@ h2 {
 button {
   cursor: pointer;
 }
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hide {
+  display: none !important;
+}

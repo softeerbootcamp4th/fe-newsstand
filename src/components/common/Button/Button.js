@@ -7,42 +7,46 @@ function Button({ $target, position = "beforeend", icon, color, text }) {
   this.$element = document.createElement("button");
   this.$element.className = "button";
   this.$element.classList.add(color);
+  if (text) this.$element.classList.add("hasText");
   $target.insertAdjacentElement(position, this.$element);
 
-  function handleButtonHover() {
-    const svgDoc = svgObject.contentDocument;
-    const svgElement = svgDoc.querySelector("svg");
+  this.render(icon, text);
+}
 
-    this.$element.addEventListener("mouseenter", () => {
-      svgElement.querySelectorAll("path").forEach((el) => {
-        el.style.fill = "#4b5966";
-      });
+Button.prototype.handleButtonHover = function () {
+  const svgObject = this.$element.querySelector("object.buttonIcon");
+  const svgDoc = svgObject.contentDocument;
+  const svgElement = svgDoc.querySelector("svg");
+
+  this.$element.addEventListener("mouseenter", () => {
+    svgElement.querySelectorAll("path").forEach((el) => {
+      el.style.fill = "#4b5966";
     });
+  });
 
-    this.$element.addEventListener("mouseleave", () => {
-      svgElement.querySelectorAll("path").forEach((el) => {
-        el.style.fill = "#879298";
-      });
+  this.$element.addEventListener("mouseleave", () => {
+    svgElement.querySelectorAll("path").forEach((el) => {
+      el.style.fill = "#879298";
     });
-  }
+  });
+};
 
-  this.render = () => {
-    this.$element.innerHTML = /* html */ `
-    <object id="svgObject" class="buttonIcon" type="image/svg+xml" data="${
+Button.prototype.render = function (icon, text) {
+  this.$element.innerHTML = /* html */ `
+    <object class="buttonIcon" type="image/svg+xml" data="${
       icon === "plus" ? plus : closed
     }"></object>
-    ${text ?? ""}`;
+    ${text ?? ""}
+    `;
 
-    const svgObject = this.$element.querySelector("#svgObject");
-    svgObject.setAttribute("width", "12px");
-    svgObject.setAttribute("height", "12px");
+  const svgObject = this.$element.querySelector("object.buttonIcon");
 
-    changeFillColor(svgObject, "gray");
+  svgObject.setAttribute("width", "12px");
+  svgObject.setAttribute("height", "12px");
 
-    svgObject.addEventListener("load", handleButtonHover.bind(this));
-  };
+  changeFillColor(svgObject, "gray");
 
-  this.render();
-}
+  svgObject.addEventListener("load", this.handleButtonHover.bind(this));
+};
 
 export default Button;
