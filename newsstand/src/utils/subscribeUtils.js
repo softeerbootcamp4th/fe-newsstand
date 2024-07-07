@@ -1,32 +1,39 @@
-export const getSubscribedCompanies = () => {
+export const getSubscribedCompaniesId = () => {
     return JSON.parse(localStorage.getItem('subscribedCompanies')) || []
 }
 
-export const setSubscribedCompanies = (subscribedCompanies) => {
+export const setSubscribedCompaniesId = (subscribedCompanies) => {
     localStorage.setItem('subscribedCompanies', JSON.stringify(subscribedCompanies))
 }
 
-export const isSubscribed = (targetCompanyName) => {
-    const subscribedCompanies = getSubscribedCompanies()
-    return subscribedCompanies.includes(targetCompanyName)
+export const isSubscribed = (targetCompanyId) => {
+    const subscribedCompanies = getSubscribedCompaniesId()
+    return subscribedCompanies.includes(targetCompanyId)
 }
 
-export const handleSubscription = (targetCompanyName) => {
-    if (isSubscribed(targetCompanyName)) {
-        unSubscribe(targetCompanyName)
+export const handleSubscription = (targetCompanyId) => {
+    if (isSubscribed(targetCompanyId)) {
+        unSubscribe(targetCompanyId)
     } else {
-        subscribe(targetCompanyName)
+        subscribe(targetCompanyId)
     }
 }
 
-export const subscribe = (targetCompanyName) => {
-    let subscribedCompanies = getSubscribedCompanies()
-    subscribedCompanies.push(targetCompanyName)
-    setSubscribedCompanies(subscribedCompanies)
+export const subscribe = (targetCompanyId) => {
+    let subscribedCompaniesId = getSubscribedCompaniesId()
+    subscribedCompaniesId.push(targetCompanyId)
+    setSubscribedCompaniesId(subscribedCompaniesId)
 }
 
-export const unSubscribe = (targetCompanyName) => {
-    let subscribedCompanies = getSubscribedCompanies()
-    subscribedCompanies = subscribedCompanies.filter((company) => company !== targetCompanyName)
-    setSubscribedCompanies(subscribedCompanies)
+export const unSubscribe = (targetCompanyId) => {
+    let subscribedCompaniesId = getSubscribedCompaniesId()
+    subscribedCompaniesId = subscribedCompaniesId.filter((company) => company !== targetCompanyId)
+    setSubscribedCompaniesId(subscribedCompaniesId)
+}
+
+export const getSubscribedCompanies = (wholeCompanyData) => {
+    const subscribedIds = getSubscribedCompaniesId()
+    const subscribedCompanies = wholeCompanyData.filter((company) => subscribedIds.includes(company.id))
+
+    return subscribedCompanies
 }
