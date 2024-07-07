@@ -7,7 +7,6 @@
   margin-left: auto;
   margin-right: auto;
   /* border: solid red; */
-  gap: 20px;
 }
 
 .header {
@@ -15,10 +14,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .header img {
   height: 24px;
+  filter: invert(37%) sepia(47%) saturate(1493%) hue-rotate(200deg) brightness(90%) contrast(91%);
 }
 
 .header div {
@@ -35,50 +36,165 @@
 }
 
 .roll {
-  /* border: solid black; */
   display: flex;
-  gap:8px;
+  gap: 8px;
+  margin-bottom: 40px;
 }
 
-.roll div {
+.roll .graybox {
   flex: 1;
   background-color: #F5F7F9;
-  height: 17px;
-  border: solid #D2DAE0;
-  display: flex;
-  align-items: center;
+  border: 1px solid #D2DAE0;
   padding: 16px;
-  white-space: nowrap;
   overflow: hidden;
+  display: flex;
+  gap: 16px;
 }
 
-.roll span.com{
+.roll .invisible-box {
+  display: flex;
+  height: 18px;
   font-size: 14px;
-  width: 50px;
-  margin-right: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.roll .invisible-box.com {
+  min-width: 60px;
+  max-width: 60px;
+}
+
+.roll .invisible-box span.com {
   color: #14212B;
   font-weight: bold;
 }
 
-.roll span.title{
-  font-size: 14px;
+.roll .invisible-box span.title {
   color: #5F6E76;
 }
 
-.roll span.title:hover {
+.roll .invisible-box span.title:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.newslist {
-  border: solid black;
+.toggle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-@keyframes slideUp {
-  from {
+.toggle .subscribeToggle {
+  display: flex;
+  gap: 30px;
+}
 
-  }
-  to {
-    color: red;
-  }
+.toggle span {
+  color: #879298;
+  font-size: 16px;
+  letter-spacing: -1px;
+}
+
+.toggle .whole {
+  font-weight: bold;
+  color: black;
+}
+
+.toggle .list-view {
+  filter: invert(44%) sepia(40%) saturate(1022%) hue-rotate(190deg) brightness(83%) contrast(98%);
+}
+
+.newsgroup {
+  background-color: #F5F7F9;
+  border: solid #D2DAE0 1px;
+  display: flex;
+  align-items: center;
+  color: #879298;
+}
+
+.newsgroup div {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 14px;
+  gap: 60px;
+}
+
+.paper {
+  border: solid #D2DAE0 1px;
+  height: 348px;
+  padding: 24px;
+  position: relative;
+}
+
+.paper .subscribe-bar {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.paper .subscribe-bar img {
+  height: 20px;
+}
+
+.paper .subscribe-bar span {
+  color: #5F6E76;
+  font-size: 12px;
+}
+
+.paper .subscribe-bar img {
+  height: 20px;
+}
+
+.paper .subscribe-bar button {
+  background-color: #F5F7F9;
+  border: #D2DAE0 1px solid;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  height: 24px;
+  color: #879298;
+  border-radius: 12px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.paper .bottom {
+  display: flex;
+  gap: 30px;
+}
+
+.paper .headline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.paper .headline img {
+  height: 200px;
+  width: 320px;
+  object-fit: contain;
+}
+
+.paper .leftscroll {
+  position: absolute;
+  left: -6%;
+  top: 40%;
+}
+
+.paper .leftscroll:hover {
+  cursor: pointer;
+}
+
+.paper .rightscroll {
+  position: absolute;
+  right: -6%;
+  top: 40%;
+}
+
+.paper .rightscroll:hover {
+  cursor: pointer;
 }
