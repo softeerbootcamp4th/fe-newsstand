@@ -1,9 +1,17 @@
-import { getAvailableCompanyNumber } from "./article.js";
-import { drawArticles, drawTapList } from "./drawer.js";
+import { getSubscribeCompanies } from "./company.js";
+import { drawArticles, drawTabAnimationList, drawTabList } from "./drawer.js";
+import { getRightTabValidation } from "./tab.js";
+import { getTabLength } from "./tab.js";
+import { updateTabAnimationStyle } from "./tab.js";
 
-export function addSubscribeEvent(state) {
-    if(getAvailableCompanyNumber(state)===0)return;
-    const companyName = state.articleDataList[state.titleIndex].companies[state.selectedCompanyIndex].name;
+export function updateSubscribeButton(state) {
+    if(!getRightTabValidation(state))return;
+    let companyName = "";
+    if(state.toggleName === "left"){
+        companyName = state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].name;
+    }else{
+        companyName = getSubscribeCompanies(state)[state.selectedCompanyIndex].name;
+    }
     const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
 
     document.querySelector("#subscribe_button_wrapper").innerHTML =
@@ -23,17 +31,24 @@ export function addSubscribeEvent(state) {
     ;
 
     const subscribeButtonDom = document.querySelector("#subscribe_button");
-    subscribeButtonDom.addEventListener("click", eventFunction);
+    subscribeButtonDom.addEventListener("click", function() {
+        eventFunction(state,companyName,isSubscribed);
+    });
 
-    function eventFunction() {
-        const companyName = state.articleDataList[state.titleIndex].companies[state.selectedCompanyIndex].name;
-        const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
+    function eventFunction(state,companyName,isSubscribed) {
         if (isSubscribed) {
             state.subscribedCompanyNameSet.delete(companyName);
+            if(state.selectedCompanyIndex > (getTabLength(state)-1)){
+                state.selectedCompanyIndex-=1;
+            }
         } else {
             state.subscribedCompanyNameSet.add(companyName);
         }
-        drawTapList(state);
+        drawTabList(state);
+        if(state.toggleName === "right"){
+            drawTabAnimationList(state);
+        }
+        updateTabAnimationStyle(state);
         drawArticles(state);
     }
 
