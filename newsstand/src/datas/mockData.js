@@ -15,7 +15,7 @@ export const allNewsData = [
         company: [
             {
                 companyId: 1,
-                companyLogo: './assets/company/company_ico_1.svg',
+                companyIcon: './assets/company/company_ico_1.svg',
                 companyName: '시사저널',
                 updatedDate: '07월 03일 10:10 직접 편집',
                 mainNews: {
@@ -34,7 +34,7 @@ export const allNewsData = [
             },
             {
                 companyId: 2,
-                companyLogo: './assets/company/company_ico_2.svg',
+                companyIcon: './assets/company/company_ico_2.svg',
                 companyName: '법률방송뉴스',
                 updatedDate: '07월 03일 10:10 직접 편집222',
                 mainNews: {
@@ -53,7 +53,7 @@ export const allNewsData = [
             },
             {
                 companyId: 3,
-                companyLogo: './assets/company/company_ico_3.svg',
+                companyIcon: './assets/company/company_ico_3.svg',
                 companyName: 'ECONOTIMES',
                 updatedDate: '07월 02일 23:51 직접 편집',
                 mainNews: {
@@ -78,7 +78,7 @@ export const allNewsData = [
         company: [
             {
                 companyId: 1,
-                companyLogo: './assets/company/company_ico_4.svg',
+                companyIcon: './assets/company/company_ico_4.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
@@ -97,7 +97,7 @@ export const allNewsData = [
             },
             {
                 companyId: 2,
-                companyLogo: './assets/company/company_ico_5.svg',
+                companyIcon: './assets/company/company_ico_5.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
@@ -116,7 +116,7 @@ export const allNewsData = [
             },
             {
                 companyId: 3,
-                companyLogo: './assets/company/company_ico_6.svg',
+                companyIcon: './assets/company/company_ico_6.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
@@ -141,7 +141,7 @@ export const allNewsData = [
         company: [
             {
                 companyId: 1,
-                companyLogo: './assets/company/company_ico_7.svg',
+                companyIcon: './assets/company/company_ico_7.svg',
                 companyName: 'ECONOTIMES',
                 updatedDate: '07월 02일 23:51 직접 편집',
                 mainNews: {
@@ -160,7 +160,7 @@ export const allNewsData = [
             },
             {
                 companyId: 2,
-                companyLogo: './assets/company/company_ico_8.svg',
+                companyIcon: './assets/company/company_ico_8.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
@@ -185,7 +185,7 @@ export const allNewsData = [
         company: [
             {
                 companyId: 1,
-                companyLogo: './assets/company/company_ico_9.svg',
+                companyIcon: './assets/company/company_ico_9.svg',
                 companyName: 'ECONOTIMES',
                 updatedDate: '07월 02일 23:51 직접 편집',
                 mainNews: {
@@ -204,7 +204,7 @@ export const allNewsData = [
             },
             {
                 companyId: 2,
-                companyLogo: './assets/company/company_ico_10.svg',
+                companyIcon: './assets/company/company_ico_10.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
@@ -223,7 +223,7 @@ export const allNewsData = [
             },
             {
                 companyId: 3,
-                companyLogo: './assets/company/company_ico_11.svg',
+                companyIcon: './assets/company/company_ico_11.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
@@ -249,7 +249,7 @@ export const allNewsData = [
             {
                 companyId: 1,
                 companyName: '일간스포츠',
-                companyLogo: './assets/company/company_ico_12.svg',
+                companyIcon: './assets/company/company_ico_12.svg',
                 updatedDate: '2024-07-03T01:15:00Z',
                 mainNews: {
                     id: 782,
@@ -270,7 +270,7 @@ export const allNewsData = [
             },
             {
                 companyId: 2,
-                companyLogo: './assets/company/company_ico_13.svg',
+                companyIcon: './assets/company/company_ico_13.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
@@ -295,7 +295,7 @@ export const allNewsData = [
         company: [
             {
                 companyId: 1,
-                companyLogo: './assets/company/company_ico_14.svg',
+                companyIcon: './assets/company/company_ico_14.svg',
                 companyName: '베리타스알파',
                 updatedDate: '2024-07-03T01:20:00Z',
                 mainNews: {
@@ -332,7 +332,7 @@ export const allNewsData = [
             },
             {
                 companyId: 2,
-                companyLogo: './assets/company/company_ico_15.svg',
+                companyIcon: './assets/company/company_ico_15.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
@@ -357,7 +357,7 @@ export const allNewsData = [
         company: [
             {
                 companyId: 1,
-                companyLogo: './assets/company/company_ico_16.svg',
+                companyIcon: './assets/company/company_ico_16.svg',
                 companyName: '중부메일',
                 updatedDate: '2024-07-02T10:36:00Z',
                 mainNews: {
@@ -379,7 +379,7 @@ export const allNewsData = [
             },
             {
                 companyId: 2,
-                companyLogo: './assets/company/company_ico_17.svg',
+                companyIcon: './assets/company/company_ico_17.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '07월 03일 10:24 직접 편집',
                 mainNews: {
