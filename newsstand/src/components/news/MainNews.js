@@ -8,17 +8,17 @@ import { isSubscribed, handleSubscription } from '../../utils/subscribeUtils.js'
 const MainNews = (props) => {
     const companyIcon = createComponent(IconView, {
         id: generateRandomId(10),
-        icon: props.newsData.companyLogo || '',
+        icon: props.newsData.companyIcon || '',
     })
 
     const subscribeButton = createComponent(Button, {
         id: generateRandomId(10),
-        icon: isSubscribed(props.newsData.companyName) ? Icon.X : Icon.PLUS,
-        text: isSubscribed(props.newsData.companyName) ? '' : '구독하기',
+        icon: isSubscribed(props.newsData.companyId) ? Icon.X : Icon.PLUS,
+        text: isSubscribed(props.newsData.companyId) ? '' : '구독하기',
         style: 'height:10px;',
         variant: ButtonVariantProps.WHITE,
         onClick: () => {
-            handleSubscription(props.newsData.companyName)
+            handleSubscription(props.newsData.companyId)
         },
     })
 
