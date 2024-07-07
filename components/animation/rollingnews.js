@@ -7,14 +7,14 @@ export const leftnews = [
 ];
 
 export const rightnews = [
-    {name : "경향신문", news : "국내외 정치와 경제에 대한 깊이 있는 분석을 제공합니다."},
-    {name : "조선일보",news: "다양한 사회 이슈와 관련된 최신 뉴스를 다룹니다."},
-    {name : "한겨레",news:"사회적 이슈와 환경 문제에 대한 다양한 관점을 제공합니다."},
-    {name : "동아일보", news:"경제, 문화, 국제 뉴스 등 다양한 분야의 최신 뉴스를 보도합니다."},
-    {name : "중앙일보", news:"정치, 경제, 사회 등 다양한 분야의 깊이 있는 뉴스를 제공합니다."}
+    { name: "경향신문", news: "국내외 정치와 경제에 대한 깊이 있는 분석을 제공합니다." },
+    { name: "조선일보", news: "다양한 사회 이슈와 관련된 최신 뉴스를 다룹니다." },
+    { name: "한겨레", news: "사회적 이슈와 환경 문제에 대한 다양한 관점을 제공합니다." },
+    { name: "동아일보", news: "경제, 문화, 국제 뉴스 등 다양한 분야의 최신 뉴스를 보도합니다." },
+    { name: "중앙일보", news: "정치, 경제, 사회 등 다양한 분야의 깊이 있는 뉴스를 제공합니다." }
 ];
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let leftIndex = 0;
     let rightIndex = 0;
 
@@ -38,32 +38,41 @@ document.addEventListener('DOMContentLoaded', function() {
             //새로운 뉴스 - slidein
             press.style.animation = 'slideIn 0.5s ease forwards';
             article.style.animation = 'slideIn 0.5s ease forwards';
-        }, 500); 
+        }, 200);
     }
 
     function startTickerInterval(ticker, index, newsArray) {
         return setInterval(() => {
             index = (index + 1) % newsArray.length;
             updateTicker(ticker, index, newsArray);
-        }, 5000); //5초 간격으로 롤링
+        }, 5000); // 5초 간격
+    }
+
+    //마우스 떼면 바로 다음 기사 보이기
+    function mouseleaveing(ticker, index, newsArray) {
+        index = (index + 1) % newsArray.length;
+        updateTicker(ticker, index, newsArray);
+        return index;
     }
 
     leftInterval = startTickerInterval(leftTicker, leftIndex, leftnews);
-    
-    //오른쪽 롤링바 - 1초 지연 후 시작
+
+    // 오른쪽 롤링바 - 1초 지연 후 시작
     setTimeout(() => {
         rightInterval = startTickerInterval(rightTicker, rightIndex, rightnews);
     }, 1000);
 
-    leftTicker.addEventListener('mouseenter', () => 
+    leftTicker.addEventListener('mouseenter', () =>
         clearInterval(leftInterval));
     leftTicker.addEventListener('mouseleave', () => {
+        leftIndex = mouseleaveing(leftTicker, leftIndex, leftnews);
         leftInterval = startTickerInterval(leftTicker, leftIndex, leftnews);
     });
 
-    rightTicker.addEventListener('mouseenter', () => 
+    rightTicker.addEventListener('mouseenter', () =>
         clearInterval(rightInterval));
     rightTicker.addEventListener('mouseleave', () => {
+        rightIndex = mouseleaveing(rightTicker, rightIndex, rightnews);
         rightInterval = startTickerInterval(rightTicker, rightIndex, rightnews);
     });
 });
