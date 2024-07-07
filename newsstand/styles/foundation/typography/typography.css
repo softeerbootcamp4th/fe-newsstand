@@ -1,6 +1,5 @@
 /* Regular CSS variables to use everywhere else */
 @import "../colors/color.css";
-@import "../../../src/components/snackBar.css";
 
 @font-face {
     font-family: 'Pretendard-Regular';

@@ -1,0 +1,29 @@
+.press-category-container {
+    height: 40px;
+    background-color: var(--color-surface-alt);
+    border: var(--border-default);
+}
+
+.press-category-button {
+    height: 100%;
+    color: var(--color-text-weak);
+    text-align: center;
+
+    text-transform: uppercase;
+
+    position: relative;
+    cursor: pointer;
+    
+    z-index: 0;
+}
+
+.press-category-button-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: width 1s ease;
+
+    z-index: -100;
+}

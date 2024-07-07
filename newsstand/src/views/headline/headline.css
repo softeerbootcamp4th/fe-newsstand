@@ -1,0 +1,10 @@
+.headline-container {
+    margin: 0 auto;
+    width: calc(100% - 142px);
+    height: 49px;
+
+    padding-bottom: 32px;
+    
+    display: flex;
+    gap: 8px;
+}

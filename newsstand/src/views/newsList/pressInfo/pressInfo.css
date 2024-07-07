@@ -1,0 +1,19 @@
+.press-info-container {
+    margin: 24px 0 16px 0;
+
+    width:100%;
+    height:24px;
+    display:flex;
+    gap: 16px;
+    
+    align-items: center;
+}
+
+.press-info-edit-date {
+    height: 14px;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-default);
+
+    /* vertical-align: middle; */
+}
