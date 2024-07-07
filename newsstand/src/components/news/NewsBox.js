@@ -27,6 +27,7 @@ const NewsBox = (props) => {
         icon: isSubscribed(props.news.id) ? Icon.X : Icon.PLUS,
         text: isSubscribed(props.news.id) ? '구독해제' : '구독하기',
         variant: ButtonVariantProps.WHITE,
+        style: 'margin-right: 10px;',
         onClick: () => {
             handleSubscription(props.news.id)
         },
