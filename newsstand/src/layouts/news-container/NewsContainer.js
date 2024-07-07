@@ -25,6 +25,7 @@ const NewsContainer = () => {
 
     const gridNewsstandLayout = createComponent(GridNewsstand, {
         id: generateRandomId(10),
+        selectedSource: selectedSource,
         style: 'width:100%; height:70%;',
     })
 
