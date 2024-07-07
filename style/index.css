@@ -47,31 +47,33 @@
   border: 1px solid #D2DAE0;
   padding: 16px;
   overflow: hidden;
+  display: flex;
+  gap: 16px;
 }
 
 .roll .invisible-box {
   display: flex;
   height: 18px;
+  font-size: 14px;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.roll .invisible-box .com {
-  flex: 1;
-  font-size: 14px;
+.roll .invisible-box.com {
   min-width: 60px;
-  margin-right: 20px;
+  max-width: 60px;
+}
+
+.roll .invisible-box span.com {
   color: #14212B;
   font-weight: bold;
 }
 
-.roll .invisible-box .title {
-  flex: 1;
-  font-size: 14px;
+.roll .invisible-box span.title {
   color: #5F6E76;
 }
 
-.roll .invisible-box .title:hover {
+.roll .invisible-box span.title:hover {
   text-decoration: underline;
   cursor: pointer;
 }
