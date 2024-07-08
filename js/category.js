@@ -84,6 +84,8 @@ export const loadCurrentCategoryNews = (dataType) => {
 /* 현재 카테고리의 뉴스 정보로 div 생성하는 함수 */
 function displayNews(dataType) {
 
+    subscriptions = getSubscriptionList().reverse();
+
     const mainNewsDiv = document.querySelector('.main-news');
     const subNewsDiv = document.querySelector('.sub-news');
 
