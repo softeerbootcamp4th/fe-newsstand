@@ -17,7 +17,7 @@ const articleDataList = new Array(30).fill(0).map((d, i) => {
         })
     }
 });
-
+// console.log(JSON.stringify(articleDataList))
 //회사명 기준 아티클 정렬
 const companiesWithArticles = {};
 articleDataList.forEach(subjectObject => {
