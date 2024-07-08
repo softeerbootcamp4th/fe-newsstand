@@ -136,6 +136,9 @@ export const render = () =>
           children,
           key: parentKey,
         } = renderElementQueue.popFront()!;
+        if (element == null) {
+          continue;
+        }
         const idx = parent.children.length;
         const currentKey = parentKey + `_${element.tagName}[${idx}]`;
         element.setAttribute("key", currentKey);

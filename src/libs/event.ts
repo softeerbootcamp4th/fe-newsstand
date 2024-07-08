@@ -12,6 +12,7 @@ export type EventHandlers = {
   onResize: EventListener<Event>;
   onKeydown: EventListener<KeyboardEvent>;
   onKeyup: EventListener<KeyboardEvent>;
+  onAnimationIteration: EventListener<AnimationEvent>;
 };
 
 export const EventNameMap = {
@@ -25,6 +26,7 @@ export const EventNameMap = {
   onResize: "resize",
   onKeydown: "keydown",
   onKeyup: "keyup",
+  onAnimationIteration: "animationiteration",
 };
 
 export const EventNameMaps = new Map<string, string>([
@@ -38,6 +40,7 @@ export const EventNameMaps = new Map<string, string>([
   ["onResize", "resize"],
   ["onKeydown", "keydown"],
   ["onKeyup", "keyup"],
+  ["onAnimationIteration", "animationiteration"],
 ]);
 
 export const eventMap = new Map<string, Map<string, EventListener>>();
