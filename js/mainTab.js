@@ -1,16 +1,31 @@
+import { createCategory, loadCurrentCategoryNews } from "./category.js";
+import { category } from './data.js';
+import { getSubscriptionList } from "./subscribe.js";
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const allTab = document.querySelector('.all');
     const subscribeTab = document.querySelector('.subscribe');
 
-
     allTab.addEventListener('click', () => {
-        allTab.classList.add('selected-tab');
         subscribeTab.classList.remove('selected-tab');
+        allTab.classList.add('selected-tab');
+        createCategory(category, 'all');
+        loadCurrentCategoryNews('all');
     })
     subscribeTab.addEventListener('click', () => {
-        subscribeTab.classList.add('selected-tab');
-        allTab.classList.remove('selected-tab');
-
+        moveToSubscribeTab();
     })
 })
+
+export const moveToSubscribeTab = () => {
+    const allTab = document.querySelector('.all');
+    const subscribeTab = document.querySelector('.subscribe');
+
+    const subscriptions = getSubscriptionList().reverse();
+    allTab.classList.remove('selected-tab');
+    subscribeTab.classList.add('selected-tab');
+    createCategory(subscriptions, 'subscribe');
+    loadCurrentCategoryNews('subscribe');
+}
