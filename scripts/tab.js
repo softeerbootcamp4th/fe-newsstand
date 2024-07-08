@@ -26,21 +26,21 @@ export function getTabLength(state) {
 export function updateTabAnimationStyle(state) {
     switch (state.toggleName){
         case TOGGLE.ALL:
-            updateLeftTabAnimation(state);
+            updateAllTabAnimation(state);
             break;
         case TOGGLE.SUBSCRIBED:
-            updateRightTabAnimation(state);
+            updateSubscribedTabAnimation(state);
             break;
     }
 } 
 
-function updateRightTabAnimation(state) {
+function updateSubscribedTabAnimation(state) {
     const max = 1;
-    if(!getRightTabValidation(state))return;
+    if(!getSubscribedTabValidation(state))return;
     updateTabAnimation(state,max);
 }
 
-function updateLeftTabAnimation(state) {
+function updateAllTabAnimation(state) {
     const max = state.articleDataList[state.selectedArticleIndex].companies.length - 1;
     updateTabAnimation(state,max);
     
@@ -67,6 +67,6 @@ function updateTabAnimation(state,max) {
 }
 
 
-export function getRightTabValidation(state) {
+export function getSubscribedTabValidation(state) {
     return !(state.toggleName === TOGGLE.SUBSCRIBED && state.subscribedCompanyNameSet.size === 0);
 }

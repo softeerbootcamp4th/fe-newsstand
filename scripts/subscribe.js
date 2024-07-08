@@ -1,13 +1,10 @@
 import { getSubscribeCompanies } from "./company.js";
-import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
 import { addDeletePopup, addToastPopup } from "./popup.js";
-import { getRightTabValidation } from "./tab.js";
-import { getTabLength } from "./tab.js";
-import { updateTabAnimationStyle } from "./tab.js";
+import { getSubscribedTabValidation } from "./tab.js";
 import { TOGGLE } from "./magicNumber.js";
 
 export function updateSubscribeButton(state) {
-    if (!getRightTabValidation(state)) return;
+    if (!getSubscribedTabValidation(state)) return;
     let companyName = "";
     switch (state.toggleName) {
         case TOGGLE.ALL:
@@ -17,7 +14,7 @@ export function updateSubscribeButton(state) {
             companyName = getSubscribeCompanies(state)[state.selectedTabIndex].name;
             break;
     }
-    
+
     const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
 
     document.querySelector("#subscribe_button_wrapper").innerHTML =
@@ -43,10 +40,10 @@ export function updateSubscribeButton(state) {
 
     function eventFunction(state, companyName, isSubscribed) {
         if (isSubscribed) {
-            addDeletePopup(state,companyName);
+            addDeletePopup(state, companyName);
         } else {
             addToastPopup(state);
-            subscribeCompany(state,companyName);
+            subscribeCompany(state, companyName);
         }
     }
 }
