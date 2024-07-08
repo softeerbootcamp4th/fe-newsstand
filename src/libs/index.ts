@@ -1,4 +1,3 @@
-import { App } from "@/App";
 import { diffingRender } from "@/lab/diffing";
 import { Deque } from "./deque";
 import {
@@ -47,7 +46,7 @@ export const render = () => {
     render: initComponent!,
     props: {},
     parent: shadowRoot,
-    key: App.name,
+    key: initComponent!.name,
   });
   while (renderQueue.length) {
     const { render: component, props, parent, key } = renderQueue.popFront()!;
