@@ -188,9 +188,10 @@ export const render = () =>
             element.appendChild(document.createTextNode(child.toString()));
             return;
           }
-          if (child === false) {
+          if (child === false || child == null) {
             return;
           }
+
           if (isCreatedAppComponent(child)) {
             renderQueue.pushBack({
               render: child.render,

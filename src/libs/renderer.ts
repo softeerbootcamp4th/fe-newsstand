@@ -6,7 +6,9 @@ export type AppChild =
   | CreatedAppElement
   | string
   | number
-  | false;
+  | false
+  | null
+  | undefined;
 
 export type AppRender<P = any, R = object> = (props: P) => R;
 export type AppElementProps<T extends HTMLElement = HTMLElement> =
