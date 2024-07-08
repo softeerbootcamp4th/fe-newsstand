@@ -1,41 +1,74 @@
+import { diffingRender } from "./lab/diffing";
 import { Deque } from "./libs/deque";
 import { EventHandlers, EventNameMaps } from "./libs/event";
 
-type AppChild = AppComponent | AppElement | string | number | false;
+type AppChild =
+  | CreatedAppComponent<any>
+  | CreatedAppElement
+  | string
+  | number
+  | false;
+
+type AppRender<P = any, R = object> = (props: P) => R;
 export type AppElementProps<T extends HTMLElement = HTMLElement> =
   Partial<EventHandlers> &
     Omit<Partial<T>, "children" | "style"> & {
       children?: AppChild[];
       style?: Partial<CSSStyleDeclaration>;
     };
-type AppElement<T extends HTMLElement = HTMLElement> = (
-  props: AppElementProps<T>,
-) => HTMLElement;
+type AppElement<T extends HTMLElement = HTMLElement> = AppRender<
+  AppElementProps<T>,
+  CreatedAppElement<T>
+> & {
+  type: "element";
+};
 
 type CreatedAppElement<T extends HTMLElement = HTMLElement> = {
   element: T;
   eventListeners: Map<string, EventListener>;
   children?: AppChild[];
 };
+
+type RenderingAppElement<T extends HTMLElement = HTMLElement> =
+  CreatedAppElement<T> & {
+    key: string;
+    parent: HTMLElement;
+  };
+
 interface CreatedAppComponent<P = object> {
-  render: (props: P) => HTMLElement;
+  render: (props: P) => CreatedAppComponent<P> | CreatedAppElement;
   props: P;
 }
-type AppComponent<P = object> = (props: P) => HTMLElement;
-type RenderingAppComponent<P = object> = {
-  component: AppComponent<P>;
-  props: P;
-  key?: string;
-  parent?: HTMLElement;
+type AppComponent<P = object> = AppRender<
+  P,
+  CreatedAppComponent<P> | CreatedAppElement
+>;
+type RenderingAppComponent<P = object> = CreatedAppComponent<P> & {
+  key: string;
+  parent: HTMLElement;
 };
-const cc = <P>(
-  component: AppComponent<P>,
-  props: P,
-): CreatedAppComponent<P> => {
+
+function cc<P>(render: AppComponent<P>, props: P): CreatedAppComponent<P> {
   return {
-    render: component,
+    render,
     props,
   };
+}
+function ce<T extends HTMLElement>(
+  render: AppElement<T>,
+  props: AppElementProps<T>,
+): CreatedAppElement<T> {
+  return render(props);
+}
+
+const isCreatedAppComponent = (
+  created: CreatedAppComponent | CreatedAppElement,
+): created is CreatedAppComponent => {
+  return (created as CreatedAppComponent).render != null;
+};
+
+const isAppElement = (app: AppComponent | AppElement): app is AppElement => {
+  return (app as AppElement).type === "element";
 };
 
 const createElement = <T extends HTMLElement = HTMLElement>(
@@ -60,46 +93,116 @@ const createElement = <T extends HTMLElement = HTMLElement>(
     el.setAttribute(key, attr as string);
   });
   Object.assign(el.style, style);
-  el.className = className ?? "";
+  if (className != null) {
+    el.className = className;
+  }
   return {
     element: el,
     eventListeners,
     children,
   };
 };
-const div = (props: AppElementProps<HTMLDivElement>) => {
+const div: AppElement<HTMLDivElement> = (
+  props: AppElementProps<HTMLDivElement>,
+) => {
   return createElement<HTMLDivElement>("div", props);
 };
+div.type = "element";
 
 const createShadowRoot = () => {
   const shadowRoot = document.createElement("div");
   shadowRoot.id = "app";
   return shadowRoot;
 };
-const render = (App: AppComponent) => {
+const render = (App: AppComponent): HTMLElement => {
   const shadowRoot = createShadowRoot();
 
   const renderQueue = new Deque<RenderingAppComponent>();
   renderQueue.pushBack({
-    component: App,
+    render: App,
     props: {},
     parent: shadowRoot,
-    key: "root",
+    key: App.name,
   });
   while (renderQueue.length) {
-    const { component, props, parent, key } = renderQueue.popFront()!;
-    const renderElementQueue = new Deque<CreatedAppElement>();
+    const { render: component, props, parent, key } = renderQueue.popFront()!;
+    const renderElementQueue = new Deque<RenderingAppElement>();
     const createdComponent = component(props);
+
+    if (isCreatedAppComponent(createdComponent)) {
+      renderQueue.pushFront({
+        render: createdComponent.render,
+        props: createdComponent.props,
+        parent,
+        key,
+      });
+      continue;
+    }
+    renderElementQueue.pushBack({
+      ...createdComponent,
+      key,
+      parent,
+    });
+
+    while (renderElementQueue.length) {
+      const { element, eventListeners, children } =
+        renderElementQueue.popFront()!;
+      parent.appendChild(element);
+
+      (children ?? []).forEach((child, index) => {
+        if (typeof child === "string" || typeof child === "number") {
+          element.appendChild(document.createTextNode(child.toString()));
+          return;
+        }
+        if (child === false) {
+          return;
+        }
+        if (isCreatedAppComponent(child)) {
+          renderQueue.pushFront({
+            render: child.render,
+            props: child.props,
+            parent: element,
+            key: `${key}-${render.name}[${index}]`,
+          });
+          return;
+        }
+        renderElementQueue.pushFront({
+          ...child,
+          key: key,
+          parent: element,
+        });
+      });
+
+      eventListeners.forEach((listener, event) => {
+        element.addEventListener(event, listener);
+      });
+    }
   }
+  return shadowRoot;
 };
-const init = (app: () => HTMLElement, root: HTMLElement) => {
-  root.appendChild(app());
-  render();
+const init = (app: AppComponent, root: HTMLElement) => {
+  const newRoot = render(app);
+  diffingRender(root, newRoot);
 };
+
+interface TestProps {
+  text: string;
+}
+const Test: AppComponent<TestProps> = ({ text }: TestProps) => {
+  return ce(div, {
+    children: [text],
+  });
+};
+
 const App = () => {
-  return cc(div, {
+  return ce(div, {
     className: "container",
-    children: ["hi"],
+    children: [
+      "hi",
+      cc(Test, {
+        text: "test",
+      }),
+    ],
   });
 };
 const root = document.getElementById("app")!;
