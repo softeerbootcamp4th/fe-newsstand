@@ -1,6 +1,7 @@
 import { generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
 import { generateNewsList } from "../components/newsList.js";
+import { getTodayString } from "../utils/utils.js";
 const categoryList = [
   "종합/경제",
   "방송/통신",
@@ -245,19 +246,8 @@ function rollingCallback(time) {
     }, index * time);
   });
 }
-function stopRolling() {
-  clearInterval(rollingInterval);
-}
 
-function startRolling() {
-  rollingInterval = setInterval(() => {
-    rollingCallback(1000); // time interval between transitions
-  }, 2000); // rolling interval
-}
-
-bannerContainer.addEventListener("mouseenter", stopRolling);
-bannerContainer.addEventListener("mouseleave", startRolling);
-
+const today = document.querySelector(".today");
 const category = document.getElementById("category");
 const show = document.getElementById("show");
 const newsListContainer = document.getElementById("newsList_container");
@@ -267,29 +257,6 @@ const progresses = document.querySelectorAll(".progress");
 
 let selectedCategoryIndex = 0;
 let currentMediaIndex = 0;
-
-// 초기화 함수
-function initialize() {
-  //banner 초기화
-  category.children[0].classList.add("selected");
-  show.children[0].classList.add("selected");
-
-  //nav, newsList 초기화
-  categoryElements[selectedCategoryIndex].classList.add("selected");
-  currentMedia.innerHTML = data[categoryList[0]][0].media;
-  updateNewsList(categoryList[selectedCategoryIndex], currentMediaIndex);
-
-  // nav 카테고리 선택 시 클릭 이벤트 정의
-  categoryElements.forEach((element, index) => {
-    element.addEventListener("click", function () {
-      categoryElements[selectedCategoryIndex].classList.remove("selected");
-      element.classList.add("selected");
-
-      selectedCategoryIndex = index;
-      updateCategory(categoryList[index]);
-    });
-  });
-}
 
 // nav 진행도 표시
 function setProgress(categoryIndex, index) {
@@ -315,24 +282,58 @@ function updateCategory(category) {
   updateNewsList(category, currentMediaIndex);
 }
 
+//왜 전역변수로 설정해야 작동하는가??
+var intervalId;
 // 20초 마다 언론사 넘김
-setInterval(() => {
-  currentMediaIndex++;
-  if (currentMediaIndex >= data[categoryList[selectedCategoryIndex]].length) {
-    selectedCategoryIndex = (selectedCategoryIndex + 1) % categoryList.length;
-    categoryElements.forEach((element, index) => {
-      if (index === selectedCategoryIndex) {
-        element.classList.add("selected");
-      } else {
-        element.classList.remove("selected");
-      }
+function startInterval() {
+  intervalId = setInterval(() => {
+    currentMediaIndex++;
+    if (currentMediaIndex >= data[categoryList[selectedCategoryIndex]].length) {
+      selectedCategoryIndex = (selectedCategoryIndex + 1) % categoryList.length;
+      categoryElements.forEach((element, index) => {
+        if (index === selectedCategoryIndex) {
+          element.classList.add("selected");
+        } else {
+          element.classList.remove("selected");
+        }
+      });
+      updateCategory(categoryList[selectedCategoryIndex]);
+      currentMediaIndex = 0;
+    } else {
+      updateNewsList(categoryList[selectedCategoryIndex], currentMediaIndex);
+    }
+  }, 20000);
+}
+setInterval(() => rollingCallback(1000), 5000);
+
+// 초기화 함수
+function initialize() {
+  //header 초기화
+  today.innerHTML = getTodayString();
+  //banner 초기화
+  category.children[0].classList.add("selected");
+  show.children[0].classList.add("selected");
+
+  //nav, newsList 초기화
+  categoryElements[selectedCategoryIndex].classList.add("selected");
+  currentMedia.innerHTML = data[categoryList[0]][0].media;
+  updateNewsList(categoryList[selectedCategoryIndex], currentMediaIndex);
+
+  // nav 카테고리 선택 시 클릭 이벤트 정의
+  categoryElements.forEach((element, index) => {
+    element.addEventListener("click", function () {
+      categoryElements[selectedCategoryIndex].classList.remove("selected");
+      element.classList.add("selected");
+
+      selectedCategoryIndex = index;
+      updateCategory(categoryList[index]);
+
+      clearInterval(intervalId);
+      startInterval();
     });
-    updateCategory(categoryList[selectedCategoryIndex]);
-    currentMediaIndex = 0;
-  } else {
-    updateNewsList(categoryList[selectedCategoryIndex], currentMediaIndex);
-  }
-}, 20000);
+  });
+}
 
 // 초기화
 initialize();
+startInterval();

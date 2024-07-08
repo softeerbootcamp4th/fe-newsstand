@@ -13,3 +13,22 @@ export function generateNode(tagName, className) {
 
   return node;
 }
+
+export function getTodayString() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const date = today.getDate();
+  const days = [
+    "일요일",
+    "월요일",
+    "화요일",
+    "수요일",
+    "목요일",
+    "금요일",
+    "토요일",
+  ];
+  const dayName = days[today.getDay()];
+
+  return `${year}.${month}.${date}.${dayName}`;
+}

@@ -26,6 +26,9 @@ export function generateNav(container, categoryList) {
  * @param {String} category
  */
 function createNavElement(container, category) {
+  const progressBar = generateNode("div", "cover");
+  container.appendChild(progressBar);
+
   const textContent = generateNode("span");
   textContent.textContent = category;
   container.appendChild(textContent);

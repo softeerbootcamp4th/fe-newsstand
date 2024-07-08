@@ -12,33 +12,60 @@
   width: auto;
   height: 40px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   cursor: pointer;
   position: relative;
 }
 
-.cover {
+.contentList li .cover {
+  width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: hsl(240, 97%, 64%);
   position: absolute;
+  transition: none; /* This is to override the transition for selected items */
 }
 
-.contentList ul:hover {
+.contentList li.selected .cover {
+  animation: fillAnimation 20s ease;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fillAnimation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.contentList li:hover {
   text-decoration: underline;
 }
 
 .contentList li.selected {
   width: 166px;
   color: white;
+  background-color: #8a8aff;
   cursor: default;
   text-decoration: none;
   pointer-events: none;
   position: relative;
 }
 
-.contentList ul.selected span {
-  z-index: 1;
+.contentList li .progress {
+  display: none;
 }
 
-ul.selected .progress {
+.contentList li.selected .progress {
   margin-left: auto;
   display: block;
+}
+.contentList li span {
+  margin: 0 10px;
+  z-index: 1;
 }
