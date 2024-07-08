@@ -299,7 +299,7 @@ ul {
 	height: 100%;
 	z-index: -1;
 	background: linear-gradient(90deg, var(--surface-brand-default) 50%, var(--surface-brand-alt) 50%);
-	transform: translateX(var(--page-linear-grad));
+	transform: translateX(var(--page-linear-grad, 50%));
 	transition: transform 0.3s;
 }
 
@@ -310,6 +310,9 @@ ul {
 }
 .pagination-tooltip > .white {
 	color: var(--text-white-default);
+}
+.pagination-tooltip > svg {
+	vertical-align: sub;
 }
 
 .listContent {
