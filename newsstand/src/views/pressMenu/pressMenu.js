@@ -11,8 +11,7 @@ export const PressMenu = ({ onToggleAllPress, onToggleListView }) => {
 
     function toggleListView(event) {
         const button = event.target;
-
-        console.log("toggle");
+        
         onToggleListView(button.id === 'list-view');
     }
 
