@@ -10,6 +10,10 @@
     text-decoration: underline;
 }
 
+.non-display {
+    display: none !important;
+}
+
 .flexbox__space-between--center {
     display: flex;
     justify-content: space-between;

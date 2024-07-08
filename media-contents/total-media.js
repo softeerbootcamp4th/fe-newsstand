@@ -1,32 +1,49 @@
-import { CONTENTS_BY_CATEGORY } from "../static/data/media.js";
 import {
     REMOVE_TOTAL_ARROW,
     REMOVE_TOTAL_CATEGORY,
     removeMediaCategoryEvent,
     removeMediaArrowEvent
 } from "../utils/events.js";
+import { getData } from "../utils/fetch.js";
 import { 
     getSelectedCategoryItemDOMString, 
     getUnselectedCategoryItemDOMString,
     getSelectedCategoryContentsDOMString,
     setSubscribeButtonEvent,
+    getDisplayMode,
 } from "./util.js";
 
 const DEFAULT_CATEGORY_INDEX = 0;
 const DEFAULT_MEDIA_INDEX = 0;
 
+let categoryData = {};
+
 /**
  * @description 전체 언론사를 렌더링하는 함수
  */
-export function renderTotalMedia() {
-    renderMedia(DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
+export async function renderTotalMedia() {
+    categoryData = await getData('../static/data/media-by-category.json');
+
+    const displayMode = getDisplayMode();
+
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const listBoxDOM = document.querySelector(".media-contents__list-box")
+
+    if (displayMode === "list-display") {
+        renderListMedia(DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
+        gridBoxDOM.classList.add("non-display");
+        listBoxDOM.classList.remove("non-display");
+    } else if (displayMode === "grid-display") {
+        gridBoxDOM.classList.remove("non-display");
+        listBoxDOM.classList.add("non-display");
+    }
 }
 
 /**
  * @description 미디어 카테고리, 콘텐츠를 렌더링하는 함수
  */
-function renderMedia(categoryIdx, mediaIdx) {
-    const category = CONTENTS_BY_CATEGORY.data;
+function renderListMedia(categoryIdx, mediaIdx) {
+    const category = categoryData.data;
     const categoryListDOM = document.querySelector(".media-contents__category-list");
 
     /**
@@ -64,7 +81,7 @@ function renderMedia(categoryIdx, mediaIdx) {
     const contentsString = getSelectedCategoryContentsDOMString(category[categoryIdx].media[mediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(CONTENTS_BY_CATEGORY.data[categoryIdx].media[mediaIdx], () => renderMedia(categoryIdx, mediaIdx));
+    setSubscribeButtonEvent(category[categoryIdx].media[mediaIdx], () => renderListMedia(categoryIdx, mediaIdx));
 
     /**
      * prev, next 버튼 클릭 시 언론사 이동 이벤트
@@ -98,7 +115,7 @@ function clickCategoryList(e) {
         return;
     }
 
-    renderMedia(categoryIdx, 0);
+    renderListMedia(categoryIdx, 0);
 }
 
 /**
@@ -117,13 +134,13 @@ function navigatePrevMedia() {
 /**
  * @description prev, next 버튼 클릭 동작을 수행하는 함수
  */
-function clickNavigationButton(step) {
+async function clickNavigationButton(step) {
+    const category = categoryData.data;
     const selectedCategory = document.querySelector(".media-contents__category-item--selected");
 
     const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
     const selectedMediaIdx = parseInt(selectedCategory.dataset.selectedMediaIdx);
 
-    const category = CONTENTS_BY_CATEGORY.data;
     const currentCategory = category[selectedCategoryIdx];
 
     /**
@@ -138,7 +155,7 @@ function clickNavigationButton(step) {
             /**
              * 첫 카테고리에 다다른 경우 마지막 카테고리로 이동
              */
-            const categoryIdx = CONTENTS_BY_CATEGORY.length - 1;
+            const categoryIdx = categoryData.length - 1;
             selectedCategory.dataset.selectedCategoryIdx = categoryIdx;
             selectedCategory.dataset.selectedMediaIdx = category[categoryIdx].length - 1;
         } else {
@@ -147,7 +164,7 @@ function clickNavigationButton(step) {
         }
     } else if (nextMediaIdx === currentCategory.length) {
         const nextCategoryIdx = selectedCategoryIdx + 1;
-        if (nextCategoryIdx === CONTENTS_BY_CATEGORY.length) {
+        if (nextCategoryIdx === categoryData.length) {
             /**
              * 마지막 카테고리에 다다른 경우 첫 카테고리로 이동
              */
@@ -161,5 +178,5 @@ function clickNavigationButton(step) {
 
     const categoryIdxNumber = parseInt(selectedCategory.dataset.selectedCategoryIdx);
     const mediaIdxNumber = parseInt(selectedCategory.dataset.selectedMediaIdx);
-    renderMedia(categoryIdxNumber, mediaIdxNumber);
+    renderListMedia(categoryIdxNumber, mediaIdxNumber);
 }

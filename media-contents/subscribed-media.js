@@ -1,30 +1,46 @@
-import { CONTENTS_BY_MEDIA } from "../static/data/media.js";
 import { 
     REMOVE_MEDIA_CATEGORY,
     REMOVE_MEDIA_ARROW,
     removeTotalCategoryEvent,
     removeTotalArrowEvent
 } from "../utils/events.js";
+import { getData } from "../utils/fetch.js";
 import { getItem } from "../utils/local-storage.js";
 import { 
     getSelectedCategoryItemDOMString,
     getUnselectedCategoryItemDOMString,
     getSelectedCategoryContentsDOMString,
     setSubscribeButtonEvent,
+    getDisplayMode,
 } from "./util.js";
 
 const DEFAULT_MEDIA_INDEX = 0;
 
+let mediaData = {};
+
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
-export function renderSubscribedMedia() {
-    renderMedia();    
+export async function renderSubscribedMedia() {
+    mediaData = await getData('../static/data/media.json');
+
+    const displayMode = getDisplayMode();
+
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const listBoxDOM = document.querySelector(".media-contents__list-box")
+
+    if (displayMode === "list-display") {
+        renderListMedia();
+        gridBoxDOM.classList.add("non-display");
+        listBoxDOM.classList.remove("non-display");
+    } else if (displayMode === "grid-display") {
+        gridBoxDOM.classList.remove("non-display");
+        listBoxDOM.classList.add("non-display");
+    }
 }
 
-function renderMedia(mediaId) {
-    const media = CONTENTS_BY_MEDIA.data;
-
+function renderListMedia(mediaId) {
+    const media = mediaData.data;
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
 
@@ -92,7 +108,7 @@ function renderMedia(mediaId) {
     const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaIdx, DEFAULT_MEDIA_INDEX));
+    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderListMedia(selectedMediaId));
 }
 
 /**
@@ -113,7 +129,7 @@ function clickMediaList(e) {
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const mediaId = subscribeIdList.find((_, idx) => idx === mediaIdx);
 
-    renderMedia(mediaId);
+    renderListMedia(mediaId);
 }
 
 /**
@@ -160,5 +176,5 @@ function clickNavigationButton(step) {
 
     selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
     const nextCategoryId = subscribeIdList[nextCategoryIdx];
-    renderMedia(nextCategoryId);
+    renderListMedia(nextCategoryId);
 }

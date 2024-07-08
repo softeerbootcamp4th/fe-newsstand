@@ -1,15 +1,16 @@
-import { CURRENT_NEWS } from '../static/data/current-news.js'
+import { getData } from '../utils/fetch.js';
 import { rollingDOM } from './rolling.js';
 
-function initCurrentNews() {
+async function initCurrentNews() {
+    const currentNews = await getData("../static/data/current-news.json");
     const currentNewsBoxDOMs = document.querySelectorAll('.current-news__box');
     
     currentNewsBoxDOMs.forEach((newsBoxDOM, idx) => {
         const mediaTitleDOM = newsBoxDOM.querySelector('.current-news__media-title');
         const rollingBoxDOM = newsBoxDOM.querySelector('.current-news__rolling-box');
 
-        mediaTitleDOM.textContent = CURRENT_NEWS.data[idx].media;
-        rollingDOM(rollingBoxDOM, CURRENT_NEWS.data[idx], idx)
+        mediaTitleDOM.textContent = currentNews.data[idx].media;
+        rollingDOM(rollingBoxDOM, currentNews.data[idx], idx)
     });
 }
 
