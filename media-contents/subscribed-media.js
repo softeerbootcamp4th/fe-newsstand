@@ -11,6 +11,7 @@ import {
     getUnselectedCategoryItemDOMString,
     getSelectedCategoryContentsDOMString,
     setSubscribeButtonEvent,
+    getDisplayMode,
 } from "./util.js";
 
 const DEFAULT_MEDIA_INDEX = 0;
@@ -23,10 +24,22 @@ let mediaData = {};
 export async function renderSubscribedMedia() {
     mediaData = await getData('../static/data/media.json');
 
-    renderMedia();    
+    const displayMode = getDisplayMode();
+
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const listBoxDOM = document.querySelector(".media-contents__list-box")
+
+    if (displayMode === "list-display") {
+        renderListMedia();
+        gridBoxDOM.classList.add("non-display");
+        listBoxDOM.classList.remove("non-display");
+    } else if (displayMode === "grid-display") {
+        gridBoxDOM.classList.remove("non-display");
+        listBoxDOM.classList.add("non-display");
+    }
 }
 
-function renderMedia(mediaId) {
+function renderListMedia(mediaId) {
     const media = mediaData.data;
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
@@ -95,7 +108,7 @@ function renderMedia(mediaId) {
     const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderMedia(selectedMediaId));
+    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderListMedia(selectedMediaId));
 }
 
 /**
@@ -116,7 +129,7 @@ function clickMediaList(e) {
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const mediaId = subscribeIdList.find((_, idx) => idx === mediaIdx);
 
-    renderMedia(mediaId);
+    renderListMedia(mediaId);
 }
 
 /**
@@ -163,5 +176,5 @@ function clickNavigationButton(step) {
 
     selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
     const nextCategoryId = subscribeIdList[nextCategoryIdx];
-    renderMedia(nextCategoryId);
+    renderListMedia(nextCategoryId);
 }

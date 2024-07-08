@@ -10,6 +10,7 @@ import {
     getUnselectedCategoryItemDOMString,
     getSelectedCategoryContentsDOMString,
     setSubscribeButtonEvent,
+    getDisplayMode,
 } from "./util.js";
 
 const DEFAULT_CATEGORY_INDEX = 0;
@@ -23,13 +24,25 @@ let categoryData = {};
 export async function renderTotalMedia() {
     categoryData = await getData('../static/data/media-by-category.json');
 
-    renderMedia(DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
+    const displayMode = getDisplayMode();
+
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const listBoxDOM = document.querySelector(".media-contents__list-box")
+
+    if (displayMode === "list-display") {
+        renderListMedia(DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
+        gridBoxDOM.classList.add("non-display");
+        listBoxDOM.classList.remove("non-display");
+    } else if (displayMode === "grid-display") {
+        gridBoxDOM.classList.remove("non-display");
+        listBoxDOM.classList.add("non-display");
+    }
 }
 
 /**
  * @description 미디어 카테고리, 콘텐츠를 렌더링하는 함수
  */
-function renderMedia(categoryIdx, mediaIdx) {
+function renderListMedia(categoryIdx, mediaIdx) {
     const category = categoryData.data;
     const categoryListDOM = document.querySelector(".media-contents__category-list");
 
@@ -68,7 +81,7 @@ function renderMedia(categoryIdx, mediaIdx) {
     const contentsString = getSelectedCategoryContentsDOMString(category[categoryIdx].media[mediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(category[categoryIdx].media[mediaIdx], () => renderMedia(categoryIdx, mediaIdx));
+    setSubscribeButtonEvent(category[categoryIdx].media[mediaIdx], () => renderListMedia(categoryIdx, mediaIdx));
 
     /**
      * prev, next 버튼 클릭 시 언론사 이동 이벤트
@@ -102,7 +115,7 @@ function clickCategoryList(e) {
         return;
     }
 
-    renderMedia(categoryIdx, 0);
+    renderListMedia(categoryIdx, 0);
 }
 
 /**
@@ -165,5 +178,5 @@ async function clickNavigationButton(step) {
 
     const categoryIdxNumber = parseInt(selectedCategory.dataset.selectedCategoryIdx);
     const mediaIdxNumber = parseInt(selectedCategory.dataset.selectedMediaIdx);
-    renderMedia(categoryIdxNumber, mediaIdxNumber);
+    renderListMedia(categoryIdxNumber, mediaIdxNumber);
 }

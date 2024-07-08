@@ -227,3 +227,11 @@ function renderSnackbar(text, id) {
         bodyDOM.removeChild(snackbarWrapperDOM);
     }
 }
+
+/**
+ * @description 현재 display mode를 반환해주는 함수
+ */
+export function getDisplayMode() {
+    const mediaDisplayDOM = document.querySelector("#display-style");
+    return mediaDisplayDOM.dataset.selectedDisplay;
+}
