@@ -19,7 +19,13 @@
   background-color: var(--gray-50);
   box-sizing: border-box;
 
-  overflow-x: scroll;
+  overflow-x: auto;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .tab {
