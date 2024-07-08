@@ -6,6 +6,13 @@ import { cc } from "@/libs/components";
 export const CurrentNews = () => {
   return ce(Div, {
     className: styles.container,
-    children: [cc(RollingNews, {}), cc(RollingNews, {})],
+    children: [
+      cc(RollingNews, {
+        delayed: false,
+      }),
+      cc(RollingNews, {
+        delayed: true,
+      }),
+    ],
   });
 };

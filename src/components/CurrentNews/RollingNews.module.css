@@ -22,7 +22,14 @@
 
 .rolling {
   animation: rolling 5s linear infinite;
+}
 
+.rolling-delay {
+  animation: rolling 5s linear infinite 1s;
+}
+
+.rolling-delay:hover {
+  animation-play-state: paused;
 }
 
 .rolling:hover {
