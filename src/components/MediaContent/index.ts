@@ -18,6 +18,9 @@ export const MediaContent = () => {
   ]);
 
   const handleNext = () => {
+    if (currentDataIdx[0] + 1 >= currentData.length) {
+      return;
+    }
     setCurrentDataIdx(
       currentDataIdx[0] + 1 < currentData.length
         ? [currentDataIdx[0] + 1, 0]
@@ -50,9 +53,9 @@ export const MediaContent = () => {
             }),
             isActive: idx === currentDataIdx[0],
             onClick: () => {
-              console.log(idx, "click");
               handleClick([idx, 0]);
             },
+            onNext: handleNext,
           };
         }),
       }),

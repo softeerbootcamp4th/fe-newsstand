@@ -20,10 +20,27 @@
   padding-right: 16px;
 }
 
-.tab-active {
-  color: var(--text-text-white-default, #FFFFFF);
-  background-color: var(--surface-surface-brand-alt, #7890E7);
+@keyframes bg-fill {
+  from {
+    background-size: 0 100%;
+  }
+
+  to {
+    background-size: 100% 100%;
+  }
 }
+
+
+.tab-active {
+  gap: 16px;
+  position: relative;
+  color: var(--text-text-white-default, #FFFFFF);
+  background: linear-gradient(to right, var(--surface-surface-brand-alt, #7890E7), var(--surface-surface-brand-default, #4362D0));
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  animation: bg-fill 5s forwards;
+}
+
 
 .tab-inactive {
   color: var(--text-text-weak, #879298);

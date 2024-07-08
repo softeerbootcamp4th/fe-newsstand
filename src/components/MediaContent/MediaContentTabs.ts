@@ -8,6 +8,7 @@ interface MediaContentTabProps {
   sub: AppChild;
   onClick: () => void;
   isActive: boolean;
+  onNext: () => void;
 }
 
 const MediaContentTab = ({
@@ -15,6 +16,7 @@ const MediaContentTab = ({
   sub,
   onClick,
   isActive,
+  onNext,
 }: MediaContentTabProps) => {
   const activeStyle = `${styles["tab-active"]} ${typoStyles["selected-bold14"]}`;
   const inactiveStyle = `${styles["tab-inactive"]} ${typoStyles["available-medium14"]}`;
