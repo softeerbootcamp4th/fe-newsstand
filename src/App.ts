@@ -1,3 +1,4 @@
+import { AppHeader } from "./components/AppHeader";
 import { useState } from "./libs";
 import { cc } from "./libs/components";
 import { ce, Div } from "./libs/elements";
@@ -20,11 +21,6 @@ const Test: AppComponent<TestProps> = ({ text }: TestProps) => {
 export const App = () => {
   return ce(Div, {
     className: "container",
-    children: [
-      "hi",
-      cc(Test, {
-        text: "test",
-      }),
-    ],
+    children: ["hi", cc(AppHeader, {})],
   });
 };

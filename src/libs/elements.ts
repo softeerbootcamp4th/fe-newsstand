@@ -1,5 +1,16 @@
 import { EventNameMaps } from "./event";
 import { AppElement, AppElementProps, CreatedAppElement } from "./renderer";
+export const Raw = (data: string) => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(data, "text/xml");
+  const elem = () => ({
+    element: doc.documentElement,
+    props: {},
+    eventListeners: new Map(),
+  });
+  elem.type = "element" as const;
+  return elem;
+};
 
 export function ce<T extends HTMLElement>(
   render: AppElement<T>,
