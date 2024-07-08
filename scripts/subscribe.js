@@ -1,6 +1,6 @@
 import { getSubscribeCompanies } from "./company.js";
 import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
-import { addToastPopup } from "./popup.js";
+import { addDeletePopup, addToastPopup } from "./popup.js";
 import { getRightTabValidation } from "./tab.js";
 import { getTabLength } from "./tab.js";
 import { updateTabAnimationStyle } from "./tab.js";
@@ -14,7 +14,7 @@ export function updateSubscribeButton(state) {
             companyName = state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].name;
             break;
         case TOGGLE.SUBSCRIBED:
-            companyName = getSubscribeCompanies(state)[state.selectedCompanyIndex].name;
+            companyName = getSubscribeCompanies(state)[state.selectedTabIndex].name;
             break;
     }
     
@@ -43,25 +43,12 @@ export function updateSubscribeButton(state) {
 
     function eventFunction(state, companyName, isSubscribed) {
         if (isSubscribed) {
-            unSubscribeCompany(state,companyName);
-            if(state.toggleName === TOGGLE.SUBSCRIBED){
-                if (state.selectedTabIndex > (getTabLength(state) - 1)) {
-                    state.selectedTabIndex -= 1;
-                }
-            }
-            
+            addDeletePopup(state,companyName);
         } else {
             addToastPopup(state);
             subscribeCompany(state,companyName);
         }
-        renderTabList(state);
-        if (state.toggleName === TOGGLE.SUBSCRIBED) {
-            renderTabAnimationList(state);
-        }
-        updateTabAnimationStyle(state);
-        renderArticles(state);
     }
-
 }
 
 export function loadSubscribeCompanies(state) {

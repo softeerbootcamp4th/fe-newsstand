@@ -3,15 +3,15 @@ import { renderDefaultSceen } from "./render.js";
 
 export function addEventToToggle(state) {
     const toggleWrapperDom = document.querySelector(".toggle_wrapper");
-    toggleWrapperDom.addEventListener("click",(event) => handleToggleWithToggleDom(state,event.target));
+    toggleWrapperDom.addEventListener("click",(event) => switchToggleWithToggleDom(state,event.target));
 }
 
-export function handleToggleWithToggleDom(state,toggleDom) {
+export function switchToggleWithToggleDom(state,toggleDom) {
     const toggleName = toggleDom.id.split("_")[1];
-    handleToggleWithToggleName(state,toggleName);
+    switchToggleWithToggleName(state,toggleName);
 }
 
-export function handleToggleWithToggleName(state,toggleName) {
+export function switchToggleWithToggleName(state,toggleName) {
     switch (toggleName) {
         case TOGGLE.ALL:
             document.querySelector("#toggle_all").classList.add('toggle_item_active');

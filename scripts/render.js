@@ -319,7 +319,7 @@ export function renderTabAnimationList(state) {
     addDragEvent(state);
 }
 
-export function renderToastPopup(toastPopupDom) {
-    const toastPopupWrapperDom = document.querySelector("#toast_popup_wrapper");
+export function renderPopup(toastPopupDom) {
+    const toastPopupWrapperDom = document.querySelector("#popup_wrapper");
     toastPopupWrapperDom.appendChild(toastPopupDom);
 }

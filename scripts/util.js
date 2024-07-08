@@ -12,3 +12,9 @@ export function setUpCurrentTime() {
     const currentDateString = getCurrentDateString();
     document.getElementById("date_section").innerHTML = currentDateString;
 }
+
+export function createDomFromString(htmlString) {
+    const parser = new DOMParser();
+    const dom = parser.parseFromString(htmlString, 'text/html');
+    return dom;
+}

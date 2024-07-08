@@ -11,3 +11,8 @@ export const DIRECTION = {
 export const TIME = {
     SECOND: 1000
 }
+
+export const POPUP = {
+    ACCEPT: "accpet",
+    REJECT: "reject"
+}
