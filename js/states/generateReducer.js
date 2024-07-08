@@ -10,8 +10,8 @@ function generateReducer(fullList)
 	const subscribedLinkedList = new LinkedList();
 
 	// state
-	const subscribeFilterState = new State(false);
-	const viewTypeState = new State("list");
+	const subscribeFilterState = new State();
+	const viewTypeState = new State();
 	const subscribedListState = new LinkedListAdaptor(subscribedLinkedList);
 	const cursorState = new CursorAdaptor(fullLinkedList);
 
@@ -19,7 +19,7 @@ function generateReducer(fullList)
 
 	function getDelta()
 	{
-		return viewTypeState.value === "list" ? 1 : GRID_ITEMS_PER_PAGE;
+		return viewTypeState.value === "grid" ? GRID_ITEMS_PER_PAGE : 1;
 	}
 
 	// derived state
@@ -108,6 +108,12 @@ function generateReducer(fullList)
 			{
 				return cursorState.findOffset(getDelta());
 			},
+		},
+		// initializer
+		function() {
+			subscribeFilterState.change(false);
+			viewTypeState.change("grid");
+			cursorState.moveFirst();
 		}
 	];
 }

@@ -1,8 +1,8 @@
 import html from "../domParser.js";
 
-function ListHeaderAllComponent({pressId}, {moveTo}, listData, listMetaData)
+function ListHeaderAllComponent({cursor}, {moveTo}, listData, listMetaData)
 {
-	const index = listData.indexOf(pressId);
+	const index = listData.indexOf(cursor.value);
 
 	const items = listMetaData.map( ({pages, offset, name, destination})=>{
 		if(offset <= index && offset+pages > index) {

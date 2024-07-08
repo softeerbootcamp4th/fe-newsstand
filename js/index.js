@@ -9,12 +9,13 @@ import mountView from "./views/mainView.js";
 
 const {list: fullList, metadata} = processListPagination(rawData);
 
-const [state, reducer] = generateReducer(fullList);
+const [state, reducer, initialize] = generateReducer(fullList);
 
 mountLeftSelector(state.subFilter, reducer.setFullView, reducer.setSubscribedView);
 mountRightSelector(state.viewType, reducer.setListView, reducer.setGridView);
 mountPageMoverSelector(state, reducer);
 mountView(state, reducer, fullList, metadata);
+initialize();
 
 state.subFilter.addSideEffect( (e)=>console.log(`chnge sub filter : ${e}`) );
 state.viewType.addSideEffect( (e)=>console.log(`chnge view type : ${e}`) );

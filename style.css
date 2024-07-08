@@ -276,9 +276,10 @@ ul {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.listItem:hover {
-	background-color: var(--surface-brand-default);
-	color: var(--text-white-default);
+.listItem:not(.selected):hover {
+	text-decoration: underline;
+	color: var(--text-point);
+	cursor: pointer;
 }
 
 .listItem.selected {
