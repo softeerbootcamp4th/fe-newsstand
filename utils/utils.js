@@ -14,6 +14,18 @@ export function generateNode(tagName, className) {
   return node;
 }
 
+/**
+ * id를 가진 node 비우기
+ * @param {String} id
+ * @returns 빈 node
+ */
+export function deleteNodeById(id) {
+  const node = document.getElementById(id);
+  node.innerHTML = "";
+
+  return node;
+}
+
 export function getTodayString() {
   const today = new Date();
   const year = today.getFullYear();
