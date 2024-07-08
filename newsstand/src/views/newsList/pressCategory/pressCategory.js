@@ -1,4 +1,4 @@
-export const ProgressCategoryContainer = ({ selectedId: initialSelectedId, onChangeCategory }) => {
+export const ProgressCategoryContainer = ({ tabs, selectedId: initialSelectedId, onChangeCategory }) => {
     let element = document.createElement('div');
     element.className = 'press-category-container';
     let buttons = [];
@@ -7,15 +7,17 @@ export const ProgressCategoryContainer = ({ selectedId: initialSelectedId, onCha
     let progressInterval;
 
     const rootStyles = getComputedStyle(document.documentElement);
-    const categories = [
-        { id: 0, title: "종합/경제", nowIndex: 1, total: 4 },
-        { id: 1, title: "방송/통신", nowIndex: 1, total: 4 },
-        { id: 2, title: "IT", nowIndex: 1, total: 4 },
-        { id: 3, title: "영자지", nowIndex: 1, total: 4 },
-        { id: 4, title: "스포츠/연예", nowIndex: 1, total: 4 },
-        { id: 5, title: "매거진/전문지", nowIndex: 1, total: 4 },
-        { id: 6, title: "지역", nowIndex: 1, total: 4 }
-    ];
+    const categories = transformTabsToCategories(tabs);
+
+    function transformTabsToCategories(tabs) {
+        if (!tabs) { return; }
+        return tabs.map((tab, index) => ({
+            id: index,
+            title: tab,
+            nowIndex: 1,
+            total: 4
+        }));
+    }    
 
     function separateId(id) {
         const parts = id.split('-');

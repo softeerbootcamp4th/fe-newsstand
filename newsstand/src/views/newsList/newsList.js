@@ -6,8 +6,12 @@ export const NewsList = (props) => {
     let element = document.createElement('div');
     element.className = 'news-container';
 
+    const { tabs } = props;
+
     let selectedId = 'press-category-0';
+
     let pressCategoryContainer = PressCategoryContainer({
+        tabs,
         selectedId, 
         onChangeCategory: handleChangeCategory
     });
