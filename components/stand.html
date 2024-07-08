@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴스 스탠드-css</title>
     <link rel="stylesheet" href="../css/test.css" type="text/css" />
-    <script type="module" src="./mainscript.js"></script>
-    <script src="../components/testing/progressbutton.js"></script>
-    <script src="../components/fetch.js"></script>
+    <link rel="stylesheet" href="../css/globalfonts.css" type="text/css" />
+
 </head>
 <body>
     <div class="btn left-button disabled" id="btnLeft">
@@ -52,24 +51,30 @@
         </div>
         
         <div id="grid-icon" class="button">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="#879298" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 11V3H11V11H3ZM3 21V13H11V21H3ZM13 11V3H21V11H13ZM13 21V13H21V21H13ZM5 9H9V5H5V9ZM15 9H19V5H15V9ZM15 19H19V15H15V19ZM5 19H9V15H5V19Z" fill="#14212B"/>
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    .gray{
+                    fill: #879298;
+                    }
+                </style>
+                <path class =gray d="M3 11V3H11V11H3ZM3 21V13H11V21H3ZM13 11V3H21V11H13ZM13 21V13H21V21H13ZM5 9H9V5H5V9ZM15 9H19V5H15V9ZM15 19H19V15H15V19ZM5 19H9V15H5V19Z" fill="#14212B"/>
             </svg>       
         </div>
     </div>
+    <div id="submodal"></div>
     <div class="news-list-container">
         <div class="news-list-header">
-            <article class="text-button" id="economy">종합/경제</article>
-            <article class="text-button" id="broadcast">방송/통신</article>
-            <article class="text-button" id="internet">IT</article>
-            <article class="text-button" id="englishnews">영자지</article>
-            <article class="text-button" id="sportsentertain">스포츠/연예</article>
-            <article class="text-button" id="magazine">매거진/전문지</article>
-            <article class="text-button" id="region">지역</article>
+            <article class="text-button" id="economy" data-index="0">종합/경제</article>
+            <article class="text-button" id="broadcast" data-index="1">방송/통신</article>
+            <article class="text-button" id="internet" data-index="2">IT</article>
+            <article class="text-button" id="englishnews" data-index="3">영자지</article>
+            <article class="text-button" id="sportsentertain" data-index="4">스포츠/연예</article>
+            <article class="text-button" id="magazine" data-index="5">매거진/전문지</article>
+            <article class="text-button" id="region" data-index="6">지역</article>
         </div>
         <div class="news-press-container">
             <div class="news-press-img">
-                <img src="../image/asset 1 1.svg"/>
+                <img src="../image/데일리안.svg"/>
             </div>
             <div class="news-press-edit">2024.02.14. 18:53 편집</div>
             <div class="news-press-subscribe">
@@ -87,14 +92,20 @@
                 </div>
             </div>
             <div class="news-sub-container_right">
-                <div class="news-sub-titles">"위스키 사려고 이틀 전부터 줄 섰어요"</div>
-                <div class="news-sub-titles">"러, 젤렌스키 유럽 간 새 루한스크서 집중 공세"</div>
-                <div class="news-sub-titles">"“애들 키우려면 안먹일수도 없고”…2000원대 수입 ‘이것’ 사야하나"</div>
-                <div class="news-sub-titles">"3.5조원 AI분야 정책금융 신설한다···로봇·자율주행 등 전분야 지원"</div>
-                <div class="news-sub-titles">"[단독] "매니저라 불러주세요" HMM, 직급체계 5단계→2단계로 간소화"</div>
-                <div class="news-sub-titles">""저가 매수 기회"…SK하이닉스 순매수 1위 [주식 초고수는 지금]"</div>
+                <li class="news-sub-titles">"위스키 사려고 이틀 전부터 줄 섰어요"</li>
+                <li class="news-sub-titles">"러, 젤렌스키 유럽 간 새 루한스크서 집중 공세"</li>
+                <li class="news-sub-titles">"“애들 키우려면 안먹일수도 없고”…2000원대 수입 ‘이것’ 사야하나"</li>
+                <li class="news-sub-titles">"3.5조원 AI분야 정책금융 신설한다···로봇·자율주행 등 전분야 지원"</li>
+                <li class="news-sub-titles">"[단독] "매니저라 불러주세요" HMM, 직급체계 5단계→2단계로 간소화"</li>
+                <li class="news-sub-titles">""저가 매수 기회"…SK하이닉스 순매수 1위 [주식 초고수는 지금]"</li>
+                <div class="pressedby">데일리안 언론사에서 직접 편집한 뉴스입니다.</div>
             </div>
         </div>
     </div>
+    <script type="module" src="./mainscript.js"></script>
+    <script type="module" src="./animation/rollingnews.js"></script>
+    <script type="module" src ="displaynews/displayNews.js"></script>
+    <script type="module" src ="testing/progressbutton.js"></script>
+
 </body>
 </html>
