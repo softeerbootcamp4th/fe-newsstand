@@ -217,6 +217,8 @@ main {
     font-size: 14px;
     text-align: center;
     position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
 .category-item:hover {
@@ -233,6 +235,12 @@ main {
     justify-content: space-between;
     position: relative;
     z-index: 2;
+}
+
+.arrow-icon {
+    height: 14px;
+    margin: auto 0
+
 }
 .selected {
     width: 166px;
