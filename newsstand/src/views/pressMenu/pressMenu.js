@@ -1,4 +1,3 @@
-
 export const PressMenu = () => {
     let element = document.createElement('div');
     element.className = 'press-menu-container';
