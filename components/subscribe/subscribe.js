@@ -30,8 +30,6 @@ export const showsubscribe = (btntext) => {
   if (pressDataArray.includes(btntext)) {
       const btn = document.querySelector(`.news-press-subscribe`);
       btn.innerHTML = '<img src="../../icons/cancel.svg" alt="Cancel">';
-      //cancelsubscribe(btntext);
-      //showsubmodal();
   }
   else{
     const btn = document.querySelector(`.news-press-subscribe`);
