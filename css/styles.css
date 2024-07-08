@@ -165,6 +165,10 @@ header > span {
     color: black;
 }
 
+.vertical-list li span a:hover {
+    text-decoration: underline;
+}
+
 nav ul li {
     position: relative; /* 자식 요소의 위치를 상대적으로 설정 */
     padding: 8px 15px;
