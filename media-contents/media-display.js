@@ -1,3 +1,6 @@
+import { renderSubscribedMedia } from "./subscribed-media.js";
+import { renderTotalMedia } from "./total-media.js";
+
 /**
  * @description 언론사 필터를 렌더하는 함수
  */
@@ -15,22 +18,30 @@ export function renderMediaDisplay() {
 function clickMediaDisplay(e) {
     const displayId = e.target.id;
     const mediaDisplayDOM = document.querySelector("#display-style");
+    const mediaFilterDOM = document.querySelector("#media-filter");
+    const selectedFilter = mediaFilterDOM.dataset.selectedFilter;
 
-    if (displayId === "display-list") {
-        setSelectedDisplay("display-list");
-        setUnelectedDisplay("display-grid");
+    if (displayId === "list-display") {
+        setSelectedDisplay("list-display");
+        setUnelectedDisplay("grid-display");
         
-        mediaDisplayDOM.dataset.selectedDisplay = "display-list";
-    } else if (displayId === "display-grid") {
-        setSelectedDisplay("display-grid");
-        setUnelectedDisplay("display-list");
+        mediaDisplayDOM.dataset.selectedDisplay = "list-display";
+    } else if (displayId === "grid-display") {
+        setSelectedDisplay("grid-display");
+        setUnelectedDisplay("list-display");
 
-        mediaDisplayDOM.dataset.selectedDisplay = "display-grid";
+        mediaDisplayDOM.dataset.selectedDisplay = "grid-display";
+    }
+
+    if (selectedFilter === "total-media") {
+        renderTotalMedia();
+    } else if (selectedFilter === "subscribed-media") {
+        renderSubscribedMedia();
     }
 }
 
 /**
- * @description 선택된 형식을 처리하는 함수
+ * @description 선택된 보기 형식을 처리하는 함수
  */
 function setSelectedDisplay(targetId) {
     const selectedDisplayDOM = document.querySelector(`#${targetId}`);
@@ -40,7 +51,7 @@ function setSelectedDisplay(targetId) {
     selectedDisplayDOM.src = activeImgSrc;
 }
 /**
- * @description 선택되지 않은 형식을 처리하는 함수
+ * @description 선택되지 않은 보기 형식을 처리하는 함수
  */
 function setUnelectedDisplay(targetId) {
     const unselectedDisplayDOM = document.querySelector(`#${targetId}`);

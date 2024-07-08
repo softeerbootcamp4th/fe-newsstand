@@ -38,26 +38,29 @@
             </section>
         </section>
 
-        <section class="flexbox__column-direction gap24">
+        <section class="media-contents__container flexbox__column-direction gap24">
             <section class="flexbox__space-between--center gap24">
                 <section id="media-filter" class="flexbox__flex-start--center gap24" data-selected-filter="total-media">
                     <h2 id="total-media" class="clickable media--selected">전체 언론사</h2>
                     <h2 id="subscribed-media" class="clickable media--unselected">내가 구독한 언론사</h2>
                 </section>
-                <section id="display-style" class="flexbox__flex-start--center gap8" data-selected-display="display-grid">
-                    <img id="display-list" alt="리스트 아이콘" src="./static/icons/list-inactive.svg" />
-                    <img id="display-grid" alt="그리드 아이콘" src="./static/icons/grid-active.svg" />
+                <section id="display-style" class="flexbox__flex-start--center gap8" data-selected-display="grid-display">
+                    <img id="list-display" alt="리스트 아이콘" src="./static/icons/list-inactive.svg" />
+                    <img id="grid-display" alt="그리드 아이콘" src="./static/icons/grid-active.svg" />
                 </section>
             </section>
 
-            <section class="media-contents__container border">
-                <ul class="media-contents__category-list flexbox__flex-start--center surface--alt text__medium14"></ul>
+            <section class="media-contents__contents border">
+                <section class="media-contents__list-box">
+                    <ul class="media-contents__category-list flexbox__flex-start--center surface--alt text__medium14"></ul>
+                    <section class="media-contents__contents-box flexbox__column-direction gap16"></section>
+                </section>
 
-                <section class="media-contents__contents-box flexbox__column-direction gap16"></section>
-
-                <img class="media-contents__navigation-button media-contents__left-button" alt="이전 미디어 보기 버튼" src="./static/icons/leftbutton.svg" />
-                <img class="media-contents__navigation-button media-contents__right-button" alt="다음 미디어 보기 버튼" src="./static/icons/rightbutton.svg" />
+                <section class="media-contents__grid-box"></section>
             </section>
+
+            <img class="media-contents__navigation-button media-contents__left-button" alt="이전 미디어 보기 버튼" src="./static/icons/leftbutton.svg" />
+            <img class="media-contents__navigation-button media-contents__right-button" alt="다음 미디어 보기 버튼" src="./static/icons/rightbutton.svg" />
         </section>
     </main>
 </body>
