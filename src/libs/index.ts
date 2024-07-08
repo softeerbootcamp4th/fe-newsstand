@@ -90,9 +90,13 @@ const createShadowRoot = () => {
   shadowRoot.id = "app";
   return shadowRoot;
 };
+
+const preRender = () => {
+  stateIdxMap.clear();
+};
 export const render = () => {
   const shadowRoot = createShadowRoot();
-
+  preRender();
   const renderQueue = new Deque<RenderingAppComponent>();
   renderQueue.pushBack({
     render: initComponent!,
