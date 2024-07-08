@@ -1,6 +1,6 @@
 import html from "../domParser.js";
 
-function ListHeaderAllComponent(pressId, moveToFunc, listData, listMetaData)
+function ListHeaderAllComponent({pressId}, {moveTo}, listData, listMetaData)
 {
 	const index = listData.indexOf(pressId);
 
@@ -23,7 +23,7 @@ function ListHeaderAllComponent(pressId, moveToFunc, listData, listMetaData)
 	dom.addEventListener( "click", (e)=>{
 		const button = e.target.closest(".listItem");
 		if(button === null) return;
-		moveToFunc(button.dataset.moveDestination);
+		moveTo(button.dataset.moveDestination);
 	} )
 
 	return dom;

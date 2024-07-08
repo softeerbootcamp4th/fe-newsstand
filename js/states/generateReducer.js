@@ -84,9 +84,9 @@ function generateReducer(fullList)
 				viewTypeState.change("list");
 				cursorState.moveFirst();
 			},
-			addToSubscription(value)
+			addToSubscription(value, prevCache)
 			{
-				subscribedListState.add(value);
+				subscribedListState.add(value, prevCache);
 			},
 			removeFromSubscription(value)
 			{

@@ -13,23 +13,19 @@ function SubscribeButtonInner(isSubbed)
 	return deleteIcon;
 }
 
-function SubscribeButton(pressId, subList)
+function SubscribeButton({cursor, subList}, {addToSubscription, removeFromSubscription})
 {
+	const pressId = cursor.value;
 	const prevCache = subList.getPrev(pressId);
 	const dom = html`<button class="subscribeButton" data-force-replace="true" data-unique-key="subscribe-button-${pressId}">
 		${SubscribeButtonInner(subList.has(pressId))}
 	</button>`
 
 	dom.addEventListener( "click", ()=>{
-		if(!subList.has(pressId)) subList.add(pressId, prevCache);
-		else subList.delete(pressId);
+		if(!subList.has(pressId)) addToSubscription(pressId, prevCache);
+		else removeFromSubscription(pressId);
 		// subscribePopup(pressId);
 	} );
-
-	// subList.addSideEffect( (after, before)=>{
-	// 	if(after.includes(pressId) && !before.includes(pressId)) applyDiff(dom, SubscribeButtonInner(true));
-	// 	else if(before.includes(pressId) && !after.includes(pressId)) applyDiff(dom, SubscribeButtonInner(false));
-	// } );
 
 	return dom;
 }

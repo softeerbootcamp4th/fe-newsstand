@@ -16,8 +16,8 @@ function ListComponent(state, reducer, fullList, metadata)
 	// let header = ListHeaderAllComponent(paginationState, [{allPage:5, indexOffset:0, name:"종합"}, {allPage:3, indexOffset:5, name:"합성"}]);
 	// return html`${header}${ListContentComponent(pressId)}`;
 
-	const header = ListHeaderAllComponent(pressId, reducer.moveTo, fullList, metadata);
-	const content = ListContentComponent(pressId, state.subList);
+	const header = ListHeaderAllComponent(state, reducer, fullList, metadata);
+	const content = ListContentComponent(state, reducer);
 
 	return html`${header}${content}`
 }
