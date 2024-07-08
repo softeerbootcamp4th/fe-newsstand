@@ -1,5 +1,5 @@
 import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
-import { TOGGLE } from "./magicValues.js";
+import { TOGGLE } from "./magicNumber.js";
 
  export function getCurrentArticle(state) {
     switch(state.toggleName){
@@ -7,8 +7,7 @@ import { TOGGLE } from "./magicValues.js";
             return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles[state.selectedArticleIndex];
         case TOGGLE.SUBSCRIBED:
             return getCurrentCompany(state).articles[state.selectedArticleIndex];
-    }
-    
+    }  
  }
 
  export function getCurrentArticleList(state) {

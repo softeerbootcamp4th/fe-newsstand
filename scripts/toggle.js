@@ -1,4 +1,4 @@
-import { TOGGLE } from "./magicValues.js";
+import { TOGGLE } from "./magicNumber.js";
 import { renderDefaultSceen } from "./render.js";
 
 export function addEventToToggle(state) {

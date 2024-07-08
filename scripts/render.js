@@ -1,7 +1,7 @@
 import { addDragEvent } from "./addDragEvent.js";
-import { getCurrentArticle } from "./article.js";
-import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
-import { TOGGLE } from "./magicValues.js";
+import { getCurrentArticle, getCurrentArticleList } from "./article.js";
+import { getCurrentCompany, getSubscribeCompanies, getTotalCompanyLength } from "./company.js";
+import { TOGGLE } from "./magicNumber.js";
 import { generateToastPopupDom } from "./popup.js";
 import { resetstate } from "./reset.js";
 import { updateSubscribeButton } from "./subscribe.js";
@@ -250,7 +250,7 @@ export function renderArrow(state) {
 }
 
 function renderAllToggleArrow(state) {
-    const max = getTabLength(state) - 1;
+    const max = state.articleDataList[state.selectedArticleIndex].companies.length - 1;
     const min = 0;
     const tabLastIndex = getTabLength(state) - 1;
     let leftArrowDom = document.querySelector(".left_arrow");
@@ -278,11 +278,11 @@ function renderSubscribedToggleArrow(state) {
     leftArrowDom.src = "public/left_arrow.svg";
     rightArrowDom.classList.add("arrow_hover");
     leftArrowDom.classList.add("arrow_hover");
-    if (state.selectedTabIndex == max) {
+    if (state.selectedTabIndex === max) {
         rightArrowDom.src = "public/right_arrow_disabled.svg";
         rightArrowDom.classList.remove("arrow_hover");
     }
-    if (state.selectedTabIndex == min) {
+    if (state.selectedTabIndex === min) {
         leftArrowDom.src = "public/left_arrow_disabled.svg";
         leftArrowDom.classList.remove("arrow_hover");
     }
@@ -300,13 +300,12 @@ export function renderTabAnimationList(state) {
         tabAnimationHiderItemDom.style.overflowX = "hidden";
         tabAnimationHiderItemDom.style.backgroundColor = "#F5F7F9";
         if (state.selectedTabIndex === index) {
-            // tabAnimationItemDom.style.zIndex = 1;
+
             tabAnimationHiderItemDom.style.backgroundColor = "#7890E7";
             tabAnimationItemDom.style.transition = "transform 1.2s ease";
             tabAnimationItemDom.style.transform = "translate(-100%)"
             tabAnimationItemDom.style.backgroundColor = "#4362D0";
         } else {
-            // tabAnimationItemDom.style.zIndex = 2;
             tabAnimationItemDom.style.backgroundColor = "transparent";
         }
         tabAnimationHiderItemDom.style.minWidth = width;

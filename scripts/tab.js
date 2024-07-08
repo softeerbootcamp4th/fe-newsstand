@@ -1,4 +1,4 @@
-import { TOGGLE } from "./magicValues.js";
+import { TOGGLE } from "./magicNumber.js";
 import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
 import { resetstate } from "./reset.js";
 
@@ -41,7 +41,7 @@ function updateRightTabAnimation(state) {
 }
 
 function updateLeftTabAnimation(state) {
-    const max = getTabLength(state);
+    const max = state.articleDataList[state.selectedArticleIndex].companies.length - 1;
     updateTabAnimation(state,max);
     
 }

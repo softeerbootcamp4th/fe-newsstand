@@ -1,5 +1,5 @@
 import { initialize } from "./scripts/initialize.js";
-import { TOGGLE } from "./scripts/magicValues.js";
+import { TOGGLE } from "./scripts/magicNumber.js";
 import { fetchData } from "./scripts/fetchData.js";
 
 //store

@@ -1,4 +1,4 @@
-import { TOGGLE } from "./magicValues.js";
+import { TOGGLE } from "./magicNumber.js";
 
 export function getCurrentCompany(state) {
     switch (state.toggleName) {

@@ -1,7 +1,19 @@
 import { getSubscribeCompanies, getTotalCompanyLength } from "./company.js";
-import { DIRECTION, TOGGLE } from "./magicValues.js";
+import { DIRECTION, TOGGLE } from "./magicNumber.js";
 import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
 import { getTabLength, updateTabAnimationStyle } from "./tab.js";
+
+export function addEventToRotatingArrow(state) {
+    setInterval(function() {
+        handleCompanySwipe(state,DIRECTION.RIGHT);
+    },1000*1);
+    document.querySelector(".right_arrow").addEventListener("click",function() {
+        handleCompanySwipe(state,DIRECTION.RIGHT);
+    });
+    document.querySelector(".left_arrow").addEventListener("click",function() {
+        handleCompanySwipe(state,DIRECTION.LEFT);
+    });
+}
 
 export function handleCompanySwipe(state, direction) {
     let isNeedToResetAnimationStyle = rotate(state, direction);

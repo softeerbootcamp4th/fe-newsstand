@@ -4,7 +4,7 @@ import { addDeletePopup, addToastPopup } from "./popup.js";
 import { getRightTabValidation } from "./tab.js";
 import { getTabLength } from "./tab.js";
 import { updateTabAnimationStyle } from "./tab.js";
-import { TOGGLE } from "./magicValues.js";
+import { TOGGLE } from "./magicNumber.js";
 
 export function updateSubscribeButton(state) {
     if (!getRightTabValidation(state)) return;

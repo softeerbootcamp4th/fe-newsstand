@@ -1,4 +1,4 @@
-import { POPUP, TIME, TOGGLE } from "./magicValues.js";
+import { POPUP, TIME, TOGGLE } from "./magicNumber.js";
 import { renderArticles, renderPopup, renderTabAnimationList, renderTabList } from "./render.js";
 import { unSubscribeCompany } from "./subscribe.js";
 import { getTabLength, updateTabAnimationStyle } from "./tab.js";
@@ -17,9 +17,7 @@ export function addToastPopup(state) {
 export function addDeletePopup(state,companyName) {
     const deletePopupDom = generateDeletePopupDom(state,companyName);
     deletePopupDom
-    renderPopup(deletePopupDom);
-
-    
+    renderPopup(deletePopupDom);    
 }
 
 export function generateToastPopupDom(message) {
