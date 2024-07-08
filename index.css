@@ -24,6 +24,18 @@
     justify-content: space-between;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.h-16 {
+    height: 16.5px;
+}
+
 /* 컴포넌트 간 간격 */
 .header-area {
     margin-bottom: 40px;

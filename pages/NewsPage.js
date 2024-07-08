@@ -1,6 +1,6 @@
 import { createArticleList, initArticleList } from "../components/articleList/articleList.js"
 import { createHeader } from "../components/header/header.js"
-import { createNewsBar } from "../components/newsBar/newsBar.js"
+import { createNewsBar, initNewsBar } from "../components/newsBar/newsBar.js"
 import { fetchData } from "../utils/api.js";
 import { newsState } from "./state/newsState.js";
 import { menuInfo } from "./state/newsState.js";
@@ -34,6 +34,7 @@ const NewsBar = (app) => {
     
     app.appendChild(el)
     el.innerHTML = createNewsBar();
+    initNewsBar();
 }
 
 const ArticleList = (app) => {
