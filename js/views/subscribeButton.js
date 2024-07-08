@@ -13,9 +13,9 @@ function SubscribeButtonInner(isSubbed)
 	return deleteIcon;
 }
 
-function SubscribeButton({cursor, subList}, {addToSubscription, removeFromSubscription}, pressId=cursor.value)
+function SubscribeButton({cursor, subFilter, subList}, {addToSubscription, removeFromSubscription}, pressId=cursor.value)
 {
-	const prevCache = pressId === cursor.value ? cursor.findOffset(-1) : undefined;
+	const prevCache = pressId === cursor.value && subFilter.value ? cursor.findOffset(-1) : undefined;
 	const dom = html`<button class="subscribeButton" data-force-replace="true" data-unique-key="subscribe-button-${pressId}">
 		${SubscribeButtonInner(subList.has(pressId))}
 	</button>`

@@ -87,10 +87,17 @@ function generateReducer(fullList)
 			addToSubscription(value, prevCache)
 			{
 				subscribedListState.add(value, prevCache);
+				if(viewTypeState.value === "list")
+				{
+					subscribeFilterState.change(true);
+					cursorState.changeLinkedList(subscribedLinkedList);
+					cursorState.moveTo(value);
+				}
 			},
 			removeFromSubscription(value)
 			{
 				subscribedListState.delete(value);
+				//if(viewTypeState.value === "list") cursorState.moveNext(1); // 다르게 구현함(구독 해지해도 원래게 보이게)
 			},
 			// derived state
 			beforeCursor()
