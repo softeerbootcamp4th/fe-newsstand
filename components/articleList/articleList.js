@@ -80,6 +80,7 @@ const addEventListeners = () => {
     addModeSelectionEventListener();
     addViewSelectionEventListener();
     addCategorySelectionEventListener();
+    addSubscriptionEventListener();
 }
 
 const addModeSelectionEventListener = () => {
@@ -111,6 +112,14 @@ const addCategorySelectionEventListener = () => {
             setDataWithTab(btnWrapper, idx);
         }
     });
+}
+
+const addSubscriptionEventListener = () => {
+    document.querySelector('.subscribe-btn').addEventListener('click', () => {
+        localStorage.setItem(menuInfo[menuIdx].mediaData[menuCurrentPage-1].mediaName, true)
+        alert('구독')
+        // alert 띄우고 없애는 이벤트
+    })
 }
 
 // 콘텐츠 삽입 함수
