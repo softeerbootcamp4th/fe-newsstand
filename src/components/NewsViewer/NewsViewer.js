@@ -87,7 +87,7 @@ NewsViewer.prototype.nextPage = function () {
   const nextPage = this.state.page + 1;
 
   if (nextPage >= news.length) {
-    this.nextCategory();
+    this.nextTab();
 
     return;
   }
@@ -107,16 +107,16 @@ NewsViewer.prototype.prevPage = function () {
   this.setState({ page: prevPage });
 };
 
-NewsViewer.prototype.nextCategory = function () {
-  const nextCategory = this.state.tab + 1;
+NewsViewer.prototype.nextTab = function () {
+  const nextTab = this.state.tab + 1;
 
-  if (nextCategory >= CATEGORIES.length) {
+  if (nextTab >= CATEGORIES.length) {
     this.setState({ tab: 0, page: 0 });
 
     return;
   }
 
-  this.setState({ tab: nextCategory, page: 0 });
+  this.setState({ tab: nextTab, page: 0 });
 };
 
 NewsViewer.prototype.prevCategory = function () {
