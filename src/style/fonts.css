@@ -106,3 +106,11 @@
     line-height: auto;
     color: var(--grayscale-400);
 }
+
+
+.hover-medium16 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: auto;
+    color: var(--grayscale-400);
+}

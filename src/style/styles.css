@@ -255,12 +255,18 @@ main {
     width: 0%;
     height: 100%;
     background-color: var(--blue-500);
-    transition: width 2s linear;
+    animation: widthAnimation 20s linear infinite;
 }
 
 
-.selectNews.nowSelected::after {
-    width: 100%;
+@keyframes widthAnimation {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 
@@ -295,6 +301,11 @@ main {
 
 .newsLeft {
     width: 320px;
+}
+
+.newsLeft>img {
+    width: 320px;
+    height: 200px;
 }
 
 
@@ -373,6 +384,15 @@ main {
 }
 
 
+
+#currentNewsIndex {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: auto;
+    color: white;
+}
+
+
 /*******************************************************************/
 /*******************************************************************/
 /*******************************************************************/
@@ -406,4 +426,61 @@ main {
 #snackBar.show {
     visibility: visible;
     opacity: 1;
+}
+
+
+
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/* cancelAlert */
+
+
+#cancelAlert {
+    position: fixed;
+    width: 320px;
+    height: 140px;
+    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
+        0 2px 18px hsla(var(--grayscale-black), 0.8);
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    border: 1px;
+    border-style: solid;
+    border-color: var(--border-default);
+}
+
+
+#cancelAlertTop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-default);
+    border: 1px;
+    border-style: solid;
+    border-color: var(--border-default);
+}
+
+
+#positiveButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-default);
+    border: 1px;
+    border-style: solid;
+    border-color: var(--border-default);
+}
+
+
+#negativeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-default);
+    border: 1px;
+    border-style: solid;
+    border-color: var(--border-default);
 }
