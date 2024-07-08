@@ -9,14 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function handleModalBtnClick() {
     const modal = document.querySelector('.modal-container');
-    let subscriptor = getSubscriptionList();
+    
 
     document.querySelector('.modal-confirm-btn').addEventListener('click', () => {
         const company = document.getElementById('logo').getAttribute('alt');
         modal.classList.remove('show');
         document.querySelector('.company-name').remove();
+        let subscriptor = getSubscriptionList();
+        console.log(subscriptor, company);
 
         subscriptor = subscriptor.filter(item => item !== company);
+        console.log(subscriptor);
+
         setSubscriptionList(subscriptor);
         updateButton();
         moveToSubscribeTab();
@@ -55,7 +59,7 @@ function updateButton() {
 function handleSubscribeBtnClick() {
     document.querySelector('.subscribe-btn').addEventListener('click', () => {
         const company = document.getElementById('logo').getAttribute('alt');
-        const subscriptions = getSubscriptionList();
+        let subscriptions = getSubscriptionList();
         const toastAlert = document.querySelector('.toast-alert');
         const modal = document.querySelector('.modal-container');
 
@@ -74,7 +78,7 @@ function handleSubscribeBtnClick() {
             setTimeout(() => {
                 toastAlert.classList.remove('show');
                 moveToSubscribeTab();
-            }, 5000);
+            }, 500);
         }
     });
 }
