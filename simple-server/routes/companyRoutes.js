@@ -1,5 +1,5 @@
 const express = require('express')
-const { wholeCompanyData, getCompanyIcon, getCompanyName, getCompanyIdByName, getCompanyDataByPage, getMaxPage } = require('../data/companyData')
+const { wholeCompanyData, getCompanyIcon, getCompanyName, getCompanyIdByName, getCompanyDataByPage, getMaxPage } = require('../datas/companyData')
 
 const router = express.Router()
 

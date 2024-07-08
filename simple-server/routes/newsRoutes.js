@@ -8,7 +8,7 @@ const {
     getNewsData,
     getSubscribedCompanyNewsData,
     getNewsDataFromSubscribedCompany,
-} = require('../data/newsData')
+} = require('../datas/newsData')
 
 const router = express.Router()
 
