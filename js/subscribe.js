@@ -16,10 +16,8 @@ function handleModalBtnClick() {
         modal.classList.remove('show');
         document.querySelector('.company-name').remove();
         let subscriptor = getSubscriptionList();
-        console.log(subscriptor, company);
 
         subscriptor = subscriptor.filter(item => item !== company);
-        console.log(subscriptor);
 
         setSubscriptionList(subscriptor);
         updateButton();
