@@ -1,5 +1,7 @@
-import { App } from "./index";
-import { init } from "./libs/createApp";
+import { init } from "./libs";
+
+import { App } from "./App";
 
 const root = document.getElementById("app")!;
-init(root, App);
+
+init(App, root);

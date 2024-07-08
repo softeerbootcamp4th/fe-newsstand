@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  height: 40px;
+  background: var(--surface-surface-alt, #F5F7F9);
+  border: 1px solid var(--border-border-default, #D2DAE0)
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@keyframes bg-fill {
+  from {
+    background-size: 0 100%;
+  }
+
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+
+.tab-active {
+  gap: 16px;
+  position: relative;
+  color: var(--text-text-white-default, #FFFFFF);
+  background: linear-gradient(to right, var(--surface-surface-brand-alt, #7890E7), var(--surface-surface-brand-default, #4362D0));
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  animation: bg-fill 5s forwards;
+}
+
+
+.tab-inactive {
+  color: var(--text-text-weak, #879298);
+
+}
