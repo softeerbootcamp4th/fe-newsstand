@@ -1,9 +1,13 @@
 export const TOGGLE = {
-    ALL: "ALL",
-    SUBSCRIBED: "SUBSCRIBED"
+    ALL: "all",
+    SUBSCRIBED: "subscribed"
 }
 
 export const DIRECTION = {
-    LEFT: "LEFT",
-    RIGHT: "RIGHT"
+    LEFT: "left",
+    RIGHT: "right"
+}
+
+export const TIME = {
+    SECOND: 1000
 }

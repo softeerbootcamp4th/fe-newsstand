@@ -1,6 +1,7 @@
 import { addEventToRotatingArrow } from "./addEventToRotatingArrow.js";
 import { addEventToRotatingBox } from "./addEventToRotatingBox.js";
-import { addEventToToggle, renderDefaultSceen } from "./addEventToToggle.js";
+import { addEventToToggle } from "./addEventToToggle.js";
+import { renderDefaultSceen } from "./render.js";
 import { loadSubscribeCompanies } from "./subscribe.js";
 import { setUpCurrentTime } from "./util.js";
 

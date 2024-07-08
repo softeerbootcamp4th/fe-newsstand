@@ -2,8 +2,18 @@ import { addDragEvent } from "./addDragEvent.js";
 import { getCurrentArticle } from "./article.js";
 import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
 import { TOGGLE } from "./magicValues.js";
+import { generateToastPopupDom } from "./popup.js";
+import { resetstate } from "./reset.js";
 import { updateSubscribeButton } from "./subscribe.js";
-import { getTabLength, handleTabClick } from "./tab.js";
+import { getTabLength, handleTabClick, updateTabAnimationStyle } from "./tab.js";
+
+export function renderDefaultSceen(state) {
+    resetstate(state);
+    renderTabList(state);
+    renderArticles(state);
+    renderTabAnimationList(state);
+    updateTabAnimationStyle(state);
+}
 
 export function renderArticles(state) {
     updateSubscribeButton(state);
@@ -309,13 +319,7 @@ export function renderTabAnimationList(state) {
     addDragEvent(state);
 }
 
-export function renderToastPopup(message) {
-    let toastPopupWrapperDom = document.querySelector("#toast_popup_wrapper");
-    const toastDom = document.createElement('div');
-    toastDom.classList.add('toast_popup');
-    toastDom.textContent = message;
-    toastPopupWrapperDom.appendChild(toastDom);
-    setTimeout(function() {
-        toastDom.remove();
-    },3000);
+export function renderToastPopup(toastPopupDom) {
+    const toastPopupWrapperDom = document.querySelector("#toast_popup_wrapper");
+    toastPopupWrapperDom.appendChild(toastPopupDom);
 }
