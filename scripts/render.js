@@ -164,7 +164,7 @@ function renderLeftToggleTab(state) {
     renderTabItems(state, subjectNames);
 }
 
-function renderRightToggleTab(state, tabNames) {
+function renderRightToggleTab(state) {
     let subscribedCompanyNames = Object.keys(state.companiesWithArticles).filter(companyName => state.subscribedCompanyNameSet.has(companyName));
     renderTabItems(state, subscribedCompanyNames);
 }
@@ -184,7 +184,7 @@ function renderTabItems(state, tabNames) {
         if (state.selectedTabIndex == nameIndex) {
             let additionalCountString = ""
             if (state.toggleName === TOGGLE.ALL) {
-                const max = getTabLength(state);
+                const max = state.articleDataList[state.selectedArticleIndex].companies.length;
                 additionalCountString = `
                     <div class="counter_box" >
                         ${max == 0 ? 0 : state.selectedCompanyIndex + 1}/${max}

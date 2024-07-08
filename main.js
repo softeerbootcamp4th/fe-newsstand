@@ -7,7 +7,7 @@ const currentDateString = getCurrentDateString();
 document.getElementById("date_section").innerHTML = currentDateString;
 
 //타이틀 기준 회사 정렬(메인 데이터)
-const articleDataList = new Array(10).fill(0).map((d, i) => {
+const articleDataList = new Array(30).fill(0).map((d, i) => {
     return {
         index: i,
         subject: `${i}번 제목`,
@@ -42,6 +42,7 @@ articleDataList.forEach(subjectObject => {
     });
 });
 // console.log(JSON.stringify(articleDataList));
+console.log(companiesWithArticles)
 let state = {
     //togleName left right에서 all subscribed로 변경해야함
     toggleName: TOGGLE.ALL,
