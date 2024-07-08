@@ -150,7 +150,7 @@ export const render = () =>
             return;
           }
           if (isCreatedAppComponent(child)) {
-            renderQueue.pushFront({
+            renderQueue.pushBack({
               render: child.render,
               props: child.props,
               renderName: child.renderName,
@@ -159,7 +159,7 @@ export const render = () =>
             });
             return;
           }
-          renderElementQueue.pushFront({
+          renderElementQueue.pushBack({
             ...(child as CreatedAppElement),
             key: currentKey,
             parent: element,
