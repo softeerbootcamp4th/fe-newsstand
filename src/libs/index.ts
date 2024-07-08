@@ -128,9 +128,12 @@ export const render = () => {
     });
 
     while (renderElementQueue.length) {
-      const { element, eventListeners, children } =
-        renderElementQueue.popFront()!;
-      const parentKey = parent.getAttribute("key") ?? key;
+      const {
+        element,
+        eventListeners,
+        children,
+        key: parentKey,
+      } = renderElementQueue.popFront()!;
       const idx = parent.children.length;
       const currentKey = parentKey + `_${element.tagName}[${idx}]`;
       element.setAttribute("key", currentKey);
@@ -157,13 +160,12 @@ export const render = () => {
 
         renderElementQueue.pushFront({
           ...(child as CreatedAppElement),
-          key: key,
+          key: currentKey,
           parent: element,
         });
       });
     }
   }
-  console.log(eventMap);
   diffingRender(_root!, shadowRoot);
 };
 
