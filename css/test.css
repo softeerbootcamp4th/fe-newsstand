@@ -1,10 +1,10 @@
 :root {
     --main-color: #ff0000;
-  }
+}
   
-  h1 {
+h1 {
     color: var(--main-color);
-  }
+}
 
 @media (prefers-color-scheme: light) {
     .theme-a.adaptive {
@@ -246,9 +246,6 @@ h2 {
     flex-direction: column;
 }
 
-.news-sub-container_right{
-    margin-left: 20px;
-}
 .news-image-container {
     width: 320px;
     height: 200px;
@@ -295,9 +292,9 @@ h2 {
 .news-sub-titles{
     display: flex;
     gap: 16px;
-    margin-top: 16px;
+    margin-top: 17px;
     color:  #4B5966;
-
+    padding-left: 22px;
 }
 .news-sub-titles:hover {
     text-decoration: underline;
@@ -395,8 +392,8 @@ button:hover {
     100% { background-color: blue; } /* 종료 색 (파란색) */
 }
 
-/* 구독 시 나타남*/
-.toast {
+/* 구독 시 나타남 id - # */
+#toastmsg {
     position: fixed;
     bottom: 20px;
     left: 50%;
@@ -408,13 +405,53 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
     z-index: 1000;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 2s ease-in-out;
 }
 
-.toast.visible {
-    opacity: 1;
+#tost_message.active {
+    opacity: 100%;
+    bottom: 50px;
 }
+
 
 .hidden {
     display: none;
+}
+
+.ul{
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    color:  #4B5966;
+}
+
+.pressedby{
+    color:#879298;
+    margin-top: 15px;
+    margin-left: 25px;
+    font-size: 15px;
+}
+
+#submodal {
+    position: fixed;
+    width: 286px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-brand-default);
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: auto;
+    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
+        0 2px 18px hsla(var(--grayscale-black), 0.8);
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+    opacity: 0;
+}
+
+#submodal.active {
+    opacity: 1;
 }
