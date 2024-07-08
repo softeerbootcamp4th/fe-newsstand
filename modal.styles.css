@@ -1,0 +1,68 @@
+.modal-container {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top:50%;
+    visibility: hidden;
+    opacity: 0;
+}
+.modal-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    padding : 24px;
+    color : #5F6E76;
+    border : 1px solid #D2DAE0;
+    background-color: #FFFFFF;
+    font-size: 16px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 18px 0px rgba(20, 33, 43, 0.08);
+
+}
+
+.modal-content span {
+    color: #14212B;
+    font-weight: 700;
+}
+
+.modal-content p {
+    margin: 0;
+}
+
+.modal-btn {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: #F5F7F9;
+    border: 1px solid #D2DAE0;
+    cursor: pointer;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 22px;
+
+
+}
+
+.modal-confirm-btn, .modal-cancle-btn {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.modal-confirm-btn {
+    border-right: 1px solid #D2DAE0;
+}
+
+.modal-confirm-btn:hover, .modal-cancle-btn:hover {
+    text-decoration: underline;
+}

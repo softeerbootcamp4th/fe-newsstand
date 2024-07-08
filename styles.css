@@ -388,12 +388,20 @@ main {
 
 .toast-alert {
     position: absolute;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
     top : 50%;
     padding : 16px 24px 16px 24px;
     background-color: var(--surface-brand-default);
     color: var(--text-white-default);
     font-size: 16px;
     line-height: 22px;
+    transition: opacity 0.5s, visibility 0.5s;
+
+}
+
+.toast-alert.show { 
+    visibility: visible;
+    opacity: 1;
 
 }

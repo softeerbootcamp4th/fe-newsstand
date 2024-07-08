@@ -7,7 +7,7 @@ let curNewsIdx = 0;
 let prevCategoryType;
 const intervalTime = 20000;
 let progressBarTimeout;
-let subscriptions = getSubscriptionList();
+let subscriptions = getSubscriptionList().reverse();
 
 /* 다른 탭을 선택했을 때 초기화 함수 */
 function checkCurDataType(dataType) {
@@ -16,7 +16,7 @@ function checkCurDataType(dataType) {
         curCategoryIdx = 0;
         curNewsIdx = 0;
         prevCategoryType = dataType;
-        subscriptions = getSubscriptionList();
+        subscriptions = getSubscriptionList().reverse();
     }
 }
 
@@ -208,7 +208,7 @@ function startProgressBar() {
     clearTimeout(progressBarTimeout);
     progressBarTimeout = setTimeout(() => {
         if(prevCategoryType === 'subscribe') {
-            subscriptions = getSubscriptionList();
+            subscriptions = getSubscriptionList().reverse();
 
             if(curCategoryIdx < subscriptions.length-1){
                 curCategoryIdx++;

@@ -1,9 +1,33 @@
+import { loadCurrentCategoryNews } from "./category.js";
+import { moveToSubscribeTab } from "./mainTab.js";
+
 document.addEventListener('DOMContentLoaded', () => {
-    handleSubscribe();
     updateButton();
+    handleSubscribeBtnClick();
+    handleModalBtnClick();
 });
 
-export const getSubscriptionList =  () =>  {
+function handleModalBtnClick() {
+    const modal = document.querySelector('.modal-container');
+    let subscriptor = getSubscriptionList();
+
+    document.querySelector('.modal-confirm-btn').addEventListener('click', () => {
+        const company = document.getElementById('logo').getAttribute('alt');
+        modal.classList.remove('show');
+        document.querySelector('.company-name').remove();
+
+        subscriptor = subscriptor.filter(item => item !== company);
+        setSubscriptionList(subscriptor);
+        updateButton();
+        moveToSubscribeTab();
+    });
+
+    document.querySelector('.modal-cancle-btn').addEventListener('click', () => {
+        modal.classList.remove('show');
+    });
+}
+
+export const getSubscriptionList = () => {
     const subscriptionList = localStorage.getItem('subscriptions');
     return subscriptionList ? JSON.parse(subscriptionList) : [];
 }
@@ -17,30 +41,40 @@ function updateButton() {
     const company = document.getElementById('logo').getAttribute('alt');
     const subscriptions = getSubscriptionList();
 
-    if(subscriptions.includes(company)) {
+    if (subscriptions.includes(company)) {
+        subscribeBtn.classList.remove('unsub');
         subscribeBtn.classList.add('my-subscribe');
         subscribeBtn.textContent = 'x';
     } else {
         subscribeBtn.classList.remove('my-subscribe');
+        subscribeBtn.classList.add('unsub');
         subscribeBtn.textContent = '+ 구독하기';
     }
 }
 
-function handleSubscribe() {
-    let subscriptor = getSubscriptionList();
-
-    const subscribeBtn = document.querySelector('.subscribe-btn');
-
-    subscribeBtn.addEventListener('click', () => {
+function handleSubscribeBtnClick() {
+    document.querySelector('.subscribe-btn').addEventListener('click', () => {
         const company = document.getElementById('logo').getAttribute('alt');
+        const subscriptions = getSubscriptionList();
+        const toastAlert = document.querySelector('.toast-alert');
+        const modal = document.querySelector('.modal-container');
 
-        if(subscriptor.includes(company)) {
-            subscriptor = subscriptor.filter(item => item !== company);
+        if (subscriptions.includes(company)) {
+            // 구독 해지 모달을 띄움
+            document.querySelector('.modal-content').insertAdjacentHTML('afterbegin', `<div class="company-name"><span>${company}</span>을(를)</div>`);
+            modal.classList.add('show');
         } else {
-            subscriptor.push(company);
-        }
+            // 구독 추가
+            subscriptions.push(company);
+            setSubscriptionList(subscriptions);
+            updateButton();
 
-        setSubscriptionList(subscriptor);
-        updateButton(); // 버튼 상태 업데이트
+            // 토스트 알림 표시
+            toastAlert.classList.add('show');
+            setTimeout(() => {
+                toastAlert.classList.remove('show');
+                moveToSubscribeTab();
+            }, 5000);
+        }
     });
 }

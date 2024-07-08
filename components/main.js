@@ -31,8 +31,5 @@ export function renderMainContent() {
     <div class="arrow right-btn">
         <img src="./src/images/RightButton.png" alt="left-arrow">
     </div>
-    <div class="toast-alert">
-        내가 구독한 언론사에 추가되었습니다.
-    </div>
     `;
 }
