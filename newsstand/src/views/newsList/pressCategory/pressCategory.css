@@ -24,6 +24,7 @@
     width: 0;
     height: 100%;
     transition: width 1s ease;
+    /* background-color: var(--color-surface-brand-default);s */
 
     z-index: -100;
 }

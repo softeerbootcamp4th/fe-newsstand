@@ -5,7 +5,7 @@ export const ProgressCategoryContainer = ({ selectedId: initialSelectedId, onCha
     let progressButtons = [];
     let selectedId = initialSelectedId;
     let progressInterval;
-    let autoChangeCategoryTimeout;
+
     const rootStyles = getComputedStyle(document.documentElement);
     const categories = [
         { id: 0, title: "종합/경제", nowIndex: 1, total: 4 },
@@ -34,7 +34,6 @@ export const ProgressCategoryContainer = ({ selectedId: initialSelectedId, onCha
 
         if (categories[currentId].nowIndex < categories[currentId].total) {
             categories[currentId].nowIndex += 1;
-            console.log(categories[currentId].nowIndex);
             updateSelectedButtonStyle(buttons[currentId]);
         } else {
             const nextId = (currentId + 1) % categories.length;
@@ -45,27 +44,35 @@ export const ProgressCategoryContainer = ({ selectedId: initialSelectedId, onCha
 
     function onClickEvent(event) {
         clearCurrentInterval();
-        const id = `press-category-${separateId(event.target.id)}`;
+        const intId = separateId(event.target.id);
+        const id = `press-category-${intId}}`;
         if (id !== selectedId) {
             onChangeCategory(id);
+        } else {
+            updateSelectedButtonStyle(buttons[intId]);
         }
     }
 
     function updateSelectedButtonStyle(selectedButton) {
+        const id = separateId(selectedButton.id)
         const categoryCount = selectedButton.querySelector(`#category-count`);
+
         if (categoryCount) {
-            categoryCount.remove();
+            categoryCount.textContent = `${categories[id].nowIndex}/${categories[id].total}`;
+        } else {
+            addCountElement(selectedButton);
         }
+
         buttons.forEach((button, index) => {
             progressButtons[index].style.width = 0;
             progressButtons[index].style.backgroundColor = 'transparent';
             button.style.backgroundColor = 'transparent';
             button.style.color = rootStyles.getPropertyValue('--color-text-weak');
         });
+
         selectedButton.style.backgroundColor = rootStyles.getPropertyValue('--color-surface-brand-alt');
         selectedButton.style.color = rootStyles.getPropertyValue('--color-text-white-default');
         setProgress(selectedButton);
-        addCountElement(selectedButton);
     }
 
     function addCountElement(selectedButton) {
@@ -80,13 +87,17 @@ export const ProgressCategoryContainer = ({ selectedId: initialSelectedId, onCha
     function setProgress(selectedButton) {
         clearCurrentInterval();
         const progressElement = progressButtons[separateId(selectedButton.id)];
+        
         if (progressElement) {
             let progress = 0;
+            progressElement.style.transition = 'width 1s ease';
+            
             progressInterval = setInterval(() => {
                 if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    progressElement.style.transition = 'none';
                     progressElement.style.width = 0;
                     progressElement.style.backgroundColor = 'transparent';
-                    clearInterval(progressInterval);
                     autoChangeCategory();
                 } else {
                     progress += 2;
@@ -96,6 +107,7 @@ export const ProgressCategoryContainer = ({ selectedId: initialSelectedId, onCha
             }, 400);
         }
     }
+    
 
     function render() {
         const html = categories.map(category => `
