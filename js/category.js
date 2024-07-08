@@ -289,3 +289,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector('.all-cate-header');
+
+    header.addEventListener('wheel', (event) => {
+        if (event.deltaY !== 0) {
+            event.preventDefault();
+            header.scrollLeft += event.deltaY;
+        }
+    });
+});
+

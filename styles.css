@@ -199,12 +199,17 @@ main {
     width: 100%;
 }
 .all-cate-header {
+    width: 100%;
     display: flex;
     margin-top: 24px;
     border: 1px solid var(--border-default);
     background-color: var(--surface-alt);
     text-align: center;
     cursor: pointer;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-sizing: border-box;
+    scrollbar-width: none; 
 }
 
 
@@ -219,6 +224,7 @@ main {
     position: relative;
     display: flex;
     justify-content: space-between;
+    flex-shrink: 0;
 }
 
 .category-item:hover {
@@ -239,7 +245,8 @@ main {
 
 .arrow-icon {
     height: 14px;
-    margin: auto 0
+    margin: auto 0;
+    z-index: 2;
 
 }
 .selected {
