@@ -45,3 +45,90 @@ export const Div: AppElement<HTMLDivElement> = (
   return createElement<HTMLDivElement>("div", props);
 };
 Div.type = "element";
+
+export const Span: AppElement<HTMLSpanElement> = (
+  props: AppElementProps<HTMLSpanElement>,
+) => {
+  return createElement<HTMLSpanElement>("span", props);
+};
+Span.type = "element";
+
+export const Main: AppElement<HTMLElement> = (
+  props: AppElementProps<HTMLElement>,
+) => {
+  return createElement<HTMLElement>("main", props);
+};
+Main.type = "element";
+
+export const Section: AppElement<HTMLElement> = (
+  props: AppElementProps<HTMLElement>,
+) => {
+  return createElement<HTMLElement>("section", props);
+};
+Section.type = "element";
+
+export const Header: AppElement<HTMLElement> = (
+  props: AppElementProps<HTMLElement>,
+) => {
+  return createElement<HTMLElement>("header", props);
+};
+Header.type = "element";
+export const Article: AppElement<HTMLElement> = (
+  props: AppElementProps<HTMLElement>,
+) => {
+  return createElement<HTMLElement>("article", props);
+};
+Article.type = "element";
+
+export const Footer: AppElement<HTMLElement> = (
+  props: AppElementProps<HTMLElement>,
+) => {
+  return createElement<HTMLElement>("footer", props);
+};
+
+Footer.type = "element";
+
+export const Input: AppElement<HTMLInputElement> = (
+  props: AppElementProps<HTMLInputElement>,
+) => {
+  return createElement<HTMLInputElement>("input", props);
+};
+Input.type = "element";
+
+export const Button: AppElement<HTMLButtonElement> = (
+  props: AppElementProps<HTMLButtonElement>,
+) => {
+  return createElement<HTMLButtonElement>("button", props);
+};
+Button.type = "element";
+
+export const H1: AppElement<HTMLHeadingElement> = (
+  props: AppElementProps<HTMLHeadingElement>,
+) => {
+  return createElement<HTMLHeadingElement>("h1", props);
+};
+H1.type = "element";
+
+export const H2: AppElement<HTMLHeadingElement> = (
+  props: AppElementProps<HTMLHeadingElement>,
+) => {
+  return createElement<HTMLHeadingElement>("h2", props);
+};
+
+H2.type = "element";
+
+export const H3: AppElement<HTMLHeadingElement> = (
+  props: AppElementProps<HTMLHeadingElement>,
+) => {
+  return createElement<HTMLHeadingElement>("h3", props);
+};
+
+H3.type = "element";
+
+export const H4: AppElement<HTMLHeadingElement> = (
+  props: AppElementProps<HTMLHeadingElement>,
+) => {
+  return createElement<HTMLHeadingElement>("h4", props);
+};
+
+H4.type = "element";
