@@ -94,80 +94,81 @@ const createShadowRoot = () => {
 const preRender = () => {
   stateIdxMap.clear();
 };
-export const render = () => {
-  const shadowRoot = createShadowRoot();
-  preRender();
-  const renderQueue = new Deque<RenderingAppComponent>();
-  renderQueue.pushBack({
-    render: initComponent!,
-    props: {},
-    parent: shadowRoot,
-    renderName: "App",
-    key: "App",
-  });
-  while (renderQueue.length) {
-    const { render: component, props, parent, key } = renderQueue.popFront()!;
-    currentKey = key;
-    const renderElementQueue = new Deque<RenderingAppElement>();
-    const createdComponent = component(props);
-
-    if (isCreatedAppComponent(createdComponent)) {
-      renderQueue.pushFront({
-        render: createdComponent.render,
-        props: createdComponent.props,
-        parent,
-        renderName: createdComponent.renderName,
-        key,
-      });
-      continue;
-    }
-    renderElementQueue.pushBack({
-      ...createdComponent,
-      key,
-      parent,
+export const render = () =>
+  requestAnimationFrame(() => {
+    const shadowRoot = createShadowRoot();
+    preRender();
+    const renderQueue = new Deque<RenderingAppComponent>();
+    renderQueue.pushBack({
+      render: initComponent!,
+      props: {},
+      parent: shadowRoot,
+      renderName: "App",
+      key: "App",
     });
+    while (renderQueue.length) {
+      const { render: component, props, parent, key } = renderQueue.popFront()!;
+      currentKey = key;
+      const renderElementQueue = new Deque<RenderingAppElement>();
+      const createdComponent = component(props);
 
-    while (renderElementQueue.length) {
-      const {
-        element,
-        eventListeners,
-        children,
-        key: parentKey,
-      } = renderElementQueue.popFront()!;
-      const idx = parent.children.length;
-      const currentKey = parentKey + `_${element.tagName}[${idx}]`;
-      element.setAttribute("key", currentKey);
-      parent.appendChild(element);
-      eventMap.set(currentKey, eventListeners);
-      (children ?? []).forEach((child, index) => {
-        if (typeof child === "string" || typeof child === "number") {
-          element.appendChild(document.createTextNode(child.toString()));
-          return;
-        }
-        if (child === false) {
-          return;
-        }
-        if (isCreatedAppComponent(child)) {
-          renderQueue.pushFront({
-            render: child.render,
-            props: child.props,
-            renderName: child.renderName,
-            parent: element,
-            key: `${key}-${child.renderName}[${index}]`,
-          });
-          return;
-        }
-
-        renderElementQueue.pushFront({
-          ...(child as CreatedAppElement),
-          key: currentKey,
-          parent: element,
+      if (isCreatedAppComponent(createdComponent)) {
+        renderQueue.pushFront({
+          render: createdComponent.render,
+          props: createdComponent.props,
+          parent,
+          renderName: createdComponent.renderName,
+          key,
         });
+        continue;
+      }
+      renderElementQueue.pushBack({
+        ...createdComponent,
+        key,
+        parent,
       });
+
+      while (renderElementQueue.length) {
+        const {
+          element,
+          eventListeners,
+          children,
+          key: parentKey,
+        } = renderElementQueue.popFront()!;
+        const idx = parent.children.length;
+        const currentKey = parentKey + `_${element.tagName}[${idx}]`;
+        element.setAttribute("key", currentKey);
+        parent.appendChild(element);
+        eventMap.set(currentKey, eventListeners);
+        (children ?? []).forEach((child, index) => {
+          if (typeof child === "string" || typeof child === "number") {
+            element.appendChild(document.createTextNode(child.toString()));
+            return;
+          }
+          if (child === false) {
+            return;
+          }
+          if (isCreatedAppComponent(child)) {
+            renderQueue.pushFront({
+              render: child.render,
+              props: child.props,
+              renderName: child.renderName,
+              parent: element,
+              key: `${key}-${child.renderName}[${index}]`,
+            });
+            return;
+          }
+
+          renderElementQueue.pushFront({
+            ...(child as CreatedAppElement),
+            key: currentKey,
+            parent: element,
+          });
+        });
+      }
     }
-  }
-  diffingRender(_root!, shadowRoot);
-};
+    diffingRender(_root!, shadowRoot);
+  });
 
 export const init = (app: AppComponent, root: HTMLElement) => {
   initComponent = app;
