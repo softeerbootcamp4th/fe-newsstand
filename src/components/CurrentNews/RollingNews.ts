@@ -1,5 +1,5 @@
 import { useEffect, useState } from "@/libs";
-import { Div, H2, Span, ce } from "@/libs/elements";
+import { Anchor, Div, H2, Span, ce } from "@/libs/elements";
 import styles from "./RollingNews.module.css";
 import { getRecentNews } from "@/remotes/getRecentNews";
 import { RecentNews } from "@/models/News";
@@ -39,9 +39,10 @@ export const RollingNews = ({ delayed }: RollingNewsProps) => {
                 className: `${typoStyles["display-bold14"]} ${styles["media-name"]}`,
                 children: [media?.name],
               }),
-              ce(Span, {
+              ce(Anchor, {
                 className: `${typoStyles["available-medium14"]} ${styles["news-title"]}`,
                 children: [recentNews?.news.title],
+                href: recentNews?.news.href,
               }),
             ],
             onAnimationIteration: () => {

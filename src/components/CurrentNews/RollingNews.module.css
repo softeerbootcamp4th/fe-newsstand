@@ -47,7 +47,6 @@
   margin: 0px;
   display: flex;
   gap: 16px;
-
 }
 
 .media-name {
@@ -57,5 +56,9 @@
 
 .news-title {
   color: var(--text-text-default, #5F6E76);
+  text-decoration: none;
+}
 
+.news-title:hover {
+  text-decoration: underline;
 }
