@@ -18,17 +18,16 @@ const DEFAULT_MEDIA_INDEX = 0;
 /**
  * @description 전체 언론사를 렌더링하는 함수
  */
-export async function renderTotalMedia() {
-    const categoryData = await getData('../static/data/media-by-category.json');
-    const category = categoryData.data;
-
-    renderMedia(category, DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
+export function renderTotalMedia() {
+    renderMedia(DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
 }
 
 /**
  * @description 미디어 카테고리, 콘텐츠를 렌더링하는 함수
  */
-function renderMedia(category, categoryIdx, mediaIdx) {
+async function renderMedia(categoryIdx, mediaIdx) {
+    const categoryData = await getData('../static/data/media-by-category.json');
+    const category = categoryData.data;
     const categoryListDOM = document.querySelector(".media-contents__category-list");
 
     /**
