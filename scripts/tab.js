@@ -1,22 +1,23 @@
-import { drawArticles, drawTabAnimationList, drawTabList } from "./drawer.js";
+import { TOGGLE } from "./magicValues.js";
+import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
 import { resetstate } from "./reset.js";
 
 export function handleTabClick(selectedTabIndex,state,isDragging) {
     if(!isDragging){
         resetstate(state);
         state.selectedTabIndex = selectedTabIndex;
-        drawTabList(state);
-        drawArticles(state);
-        drawTabAnimationList(state);
+        renderTabList(state);
+        renderArticles(state);
+        renderTabAnimationList(state);
         updateTabAnimationStyle(state);
     }    
 } 
 
 export function getTabLength(state) {
     switch (state.toggleName) {
-        case "left": 
+        case TOGGLE.ALL: 
             return state.articleDataList.length;
-        case "right":
+        case TOGGLE.SUBSCRIBED:
             return state.subscribedCompanyNameSet.size;
     }
     
@@ -24,10 +25,10 @@ export function getTabLength(state) {
 
 export function updateTabAnimationStyle(state) {
     switch (state.toggleName){
-        case "left":
+        case TOGGLE.ALL:
             updateLeftTabAnimation(state);
             break;
-        case "right":
+        case TOGGLE.SUBSCRIBED:
             updateRightTabAnimation(state);
             break;
     }
@@ -52,10 +53,10 @@ function updateTabAnimation(state,max) {
         transform = "translate(-100%)";
     }else{
         switch(state.toggleName){
-            case "left": 
+            case TOGGLE.ALL: 
                 transform = `translate(-${100 - ((state.selectedCompanyIndex+1)/max*100)}%)`;
                 break;
-            case "right":
+            case TOGGLE.SUBSCRIBED:
                 transform = `translate(calc(-${100 - ((state.selectedCompanyIndex+1)/max*100)}% - 10px))`;
                 break;
         }
@@ -65,5 +66,5 @@ function updateTabAnimation(state,max) {
 
 
 export function getRightTabValidation(state) {
-    return !(state.toggleName === "right" && state.subscribedCompanyNameSet.size === 0);
+    return !(state.toggleName === TOGGLE.SUBSCRIBED && state.subscribedCompanyNameSet.size === 0);
 }

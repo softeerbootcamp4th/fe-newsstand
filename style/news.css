@@ -149,7 +149,6 @@
     height: 40px;
     width: 100%;;
     flex-wrap: nowrap;
-    border-bottom: 1px solid #D2DAE0;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
@@ -157,6 +156,7 @@
 }
 
 .scroll_x_wrapper {
+    border-bottom: 1px solid #D2DAE0;
     position: relative;
     overflow-x: scroll;
 }
@@ -280,4 +280,27 @@
     text-underline-offset: 2px;
     transform: scale(1.05);
     transition: transform 0.2s ease;
+}
+
+#toast_popup_wrapper {
+    position: fixed;
+    width: 200px;
+    height: 100px;
+    background-color: transparent;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px
+}
+
+.toast_popup {
+    width: 200px;
+    height: 80px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 16px;
+    background-color: blue;
 }

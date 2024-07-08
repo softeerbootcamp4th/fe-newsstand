@@ -1,28 +1,29 @@
 import { addDragEvent } from "./addDragEvent.js";
 import { getCurrentArticle } from "./article.js";
 import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
+import { TOGGLE } from "./magicValues.js";
 import { updateSubscribeButton } from "./subscribe.js";
 import { getTabLength, handleTabClick } from "./tab.js";
 
-export function drawArticles(state) {
+export function renderArticles(state) {
     updateSubscribeButton(state);
-    drawArrow(state);
+    renderArrow(state);
     switch (state.toggleName) {
-        case "left":
-            return drawAllToggleArticles(state);
-        case "right":
-            return drawSubscribedToggleArticles(state);
+        case TOGGLE.ALL:
+            return renderAllToggleArticles(state);
+        case TOGGLE.SUBSCRIBED:
+            return renderSubscribedToggleArticles(state);
     }
 
 }
 
-function drawAllToggleArticles(state) {
+function renderAllToggleArticles(state) {
     let articleBoxDom = document.querySelector(".news_letter_subject_box");
     articleBoxDom.innerHTML = "";
 
     let selectedSubject = state.articleDataList[state.selectedTabIndex];
     let companies = selectedSubject.companies.filter((company) => {
-        if (state.toggleName == "right") return state.subscribedCompanyNameSet.has(company.name);
+        if (state.toggleName == TOGGLE.SUBSCRIBED) return state.subscribedCompanyNameSet.has(company.name);
         else return true;
     });
 
@@ -73,7 +74,7 @@ function drawAllToggleArticles(state) {
             articleDom.textContent = article.title;
             articleDom.addEventListener("click", function () {
                 state.selectedArticleIndex = articleIndex;
-                drawArticles(state);
+                renderArticles(state);
             });
             articleBoxDom.appendChild(articleDom);
         });
@@ -85,7 +86,7 @@ function drawAllToggleArticles(state) {
     articleBoxDom.appendChild(articleCopyRightDom);
 }
 
-function drawSubscribedToggleArticles(state) {
+function renderSubscribedToggleArticles(state) {
     let articleBoxDom = document.querySelector(".news_letter_subject_box");
     articleBoxDom.innerHTML = "";
 
@@ -135,7 +136,7 @@ function drawSubscribedToggleArticles(state) {
             articleDom.textContent = article.title;
             articleDom.addEventListener("click", function () {
                 state.selectedArticleIndex = articleIndex;
-                drawArticles(state);
+                renderArticles(state);
             });
             articleBoxDom.appendChild(articleDom);
         });
@@ -147,25 +148,25 @@ function drawSubscribedToggleArticles(state) {
     articleBoxDom.appendChild(articleCopyRightDom);
 }
 
-export function drawTabList(state) {
+export function renderTabList(state) {
     switch (state.toggleName) {
-        case "left":
-            drawLeftToggleTab(state);
+        case TOGGLE.ALL:
+            renderLeftToggleTab(state);
             break;
-        case "right":
-            drawRightToggleTab(state);
+        case TOGGLE.SUBSCRIBED:
+            renderRightToggleTab(state);
             break;
     }
 }
 
-function drawLeftToggleTab(state) {
+function renderLeftToggleTab(state) {
     let subjectNames = state.articleDataList.map(data => data.subject);
-    drawTabItems(state, subjectNames);
+    renderTabItems(state, subjectNames);
 }
 
-function drawRightToggleTab(state, tabNames) {
+function renderRightToggleTab(state, tabNames) {
     let subscribedCompanyNames = Object.keys(state.companiesWithArticles).filter(companyName => state.subscribedCompanyNameSet.has(companyName));
-    drawTabItems(state, subscribedCompanyNames);
+    renderTabItems(state, subscribedCompanyNames);
 }
 
 function getTabDomWithCleanUp() {
@@ -174,7 +175,7 @@ function getTabDomWithCleanUp() {
     return tabDom;
 }
 
-function drawTabItems(state, tabNames) {
+function renderTabItems(state, tabNames) {
     let mouseDownDate = new Date();
     let isMouseMoved = true;
     let tabDom = getTabDomWithCleanUp();
@@ -182,7 +183,7 @@ function drawTabItems(state, tabNames) {
         const tabItemDom = document.createElement('div');
         if (state.selectedTabIndex == nameIndex) {
             let additionalCountString = ""
-            if (state.toggleName === "left") {
+            if (state.toggleName === TOGGLE.ALL) {
                 const max = getTabLength(state);
                 additionalCountString = `
                     <div class="counter_box" >
@@ -229,16 +230,16 @@ function drawTabItems(state, tabNames) {
 
 
 
-export function drawArrow(state) {
+export function renderArrow(state) {
     switch (state.toggleName) {
-        case "left":
-            return drawAllToggleArrow(state);
-        case "right":
-            return drawSubscribedToggleArrow(state);
+        case TOGGLE.ALL:
+            return renderAllToggleArrow(state);
+        case TOGGLE.SUBSCRIBED:
+            return renderSubscribedToggleArrow(state);
     }
 }
 
-function drawAllToggleArrow(state) {
+function renderAllToggleArrow(state) {
     const max = getTabLength(state) - 1;
     const min = 0;
     const tabLastIndex = getTabLength(state) - 1;
@@ -258,7 +259,7 @@ function drawAllToggleArrow(state) {
     }
 }
 
-function drawSubscribedToggleArrow(state) {
+function renderSubscribedToggleArrow(state) {
     const max = getTabLength(state) - 1;
     const min = 0;
     let leftArrowDom = document.querySelector(".left_arrow");
@@ -277,7 +278,7 @@ function drawSubscribedToggleArrow(state) {
     }
 }
 
-export function drawTabAnimationList(state) {
+export function renderTabAnimationList(state) {
     let tabAnimationDom = document.querySelector("#tab_animation_wrapper");
     tabAnimationDom.innerHTML = "";
     let tabDom = document.querySelector("#tab_wrapper");
@@ -291,7 +292,7 @@ export function drawTabAnimationList(state) {
         if (state.selectedTabIndex === index) {
             // tabAnimationItemDom.style.zIndex = 1;
             tabAnimationHiderItemDom.style.backgroundColor = "#7890E7";
-            tabAnimationItemDom.style.transition = "transform 0.2s ease";
+            tabAnimationItemDom.style.transition = "transform 1.2s ease";
             tabAnimationItemDom.style.transform = "translate(-100%)"
             tabAnimationItemDom.style.backgroundColor = "#4362D0";
         } else {
@@ -306,4 +307,15 @@ export function drawTabAnimationList(state) {
         tabAnimationDom.appendChild(tabAnimationHiderItemDom);
     });
     addDragEvent(state);
+}
+
+export function renderToastPopup(message) {
+    let toastPopupWrapperDom = document.querySelector("#toast_popup_wrapper");
+    const toastDom = document.createElement('div');
+    toastDom.classList.add('toast_popup');
+    toastDom.textContent = message;
+    toastPopupWrapperDom.appendChild(toastDom);
+    setTimeout(function() {
+        toastDom.remove();
+    },3000);
 }

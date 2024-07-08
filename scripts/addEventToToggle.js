@@ -1,4 +1,5 @@
-import { drawArticles, drawTabAnimationList, drawTabList } from "./drawer.js";
+import { TOGGLE } from "./magicValues.js";
+import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js"
 import { resetstate } from "./reset.js";
 import { updateTabAnimationStyle } from "./tab.js";
 
@@ -6,23 +7,23 @@ export function addEventToToggle(state) {
     let leftToggleDom = document.querySelector("#toggle_left");
     let rightToggleDom =document.querySelector("#toggle_right");
     leftToggleDom.addEventListener("click",function() {
-        state.toggleName="left";
+        state.toggleName=TOGGLE.ALL;
         document.querySelector("#toggle_left").classList.add('toggle_item_active');
         document.querySelector("#toggle_right").classList.remove('toggle_item_active');
-        drawDefaultSceen(state);
+        renderDefaultSceen(state);
     });
     rightToggleDom.addEventListener("click",function() {
-        state.toggleName="right";
+        state.toggleName=TOGGLE.SUBSCRIBED;
         document.querySelector("#toggle_right").classList.add('toggle_item_active');
         document.querySelector("#toggle_left").classList.remove('toggle_item_active');
-        drawDefaultSceen(state);
+        renderDefaultSceen(state);
     });
 }
 
-export function drawDefaultSceen(state) {
+export function renderDefaultSceen(state) {
     resetstate(state);
-    drawTabList(state);
-    drawArticles(state);
-    drawTabAnimationList(state);
+    renderTabList(state);
+    renderArticles(state);
+    renderTabAnimationList(state);
     updateTabAnimationStyle(state);
 }

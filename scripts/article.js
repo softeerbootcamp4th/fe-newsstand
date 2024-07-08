@@ -1,10 +1,11 @@
 import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
+import { TOGGLE } from "./magicValues.js";
 
  export function getCurrentArticle(state) {
     switch(state.toggleName){
-        case "left":
+        case TOGGLE.ALL:
             return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles[state.selectedArticleIndex];
-        case "right":
+        case TOGGLE.SUBSCRIBED:
             return getCurrentCompany(state).articles[state.selectedArticleIndex];
     }
     
@@ -12,9 +13,9 @@ import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
 
  export function getCurrentArticleList(state) {
     switch(state.toggleName){
-        case "left":
+        case TOGGLE.ALL:
             return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles;
-        case "right":
+        case TOGGLE.SUBSCRIBED:
             return state.companiesWithArticles[getCurrentCompany(state).name].articles;
     }
  }

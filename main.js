@@ -1,13 +1,13 @@
 import { addEventToRotatingArrow } from "./scripts/addEventToRotatingArrow.js";
 import { addEventToRotatingBox } from "./scripts/addEventToRotatingBox.js";
-import { addEventToToggle, drawDefaultSceen } from "./scripts/addEventToToggle.js";
-import { drawTabAnimationList } from "./scripts/drawer.js";
-import { getCurrentDateString } from "./scripts/getCurrentDateString.js";
+import { addEventToToggle, renderDefaultSceen } from "./scripts/addEventToToggle.js";
+import { getCurrentDateString } from "./scripts/util.js";
+import { TOGGLE } from "./scripts/magicValues.js";
 const currentDateString = getCurrentDateString();
 document.getElementById("date_section").innerHTML = currentDateString;
 
 //타이틀 기준 회사 정렬(메인 데이터)
-const articleDataList = new Array(30).fill(0).map((d, i) => {
+const articleDataList = new Array(10).fill(0).map((d, i) => {
     return {
         index: i,
         subject: `${i}번 제목`,
@@ -41,10 +41,10 @@ articleDataList.forEach(subjectObject => {
         companiesWithArticles[company.name].articles =companiesWithArticles[company.name].articles.concat(company.articles);
     });
 });
-
+// console.log(JSON.stringify(articleDataList));
 let state = {
     //togleName left right에서 all subscribed로 변경해야함
-    toggleName: "left",
+    toggleName: TOGGLE.ALL,
     selectedTabIndex: 0,
     selectedArticleIndex: 0,
     selectedCompanyIndex: 0,
@@ -54,9 +54,20 @@ let state = {
     companiesWithArticles: companiesWithArticles,
 }
 
+//신기능
+// document.querySelector("a").querySelector("b").querySelector("wow").querySelector
+// document.querySelector("a").dataset DOM에 데이터 저장하는거
 
-drawDefaultSceen(state);
+
+// concat때리면 쉽게 한방에 스타일 가능
+// Object.assign(exampleElement.style, {
+//     backgroundColor: 'blue',
+//     color: 'white',
+//     border: '2px solid black'
+// });
+
+
+renderDefaultSceen(state);
 addEventToRotatingBox(state);
 addEventToToggle(state);
 addEventToRotatingArrow(state);
-
