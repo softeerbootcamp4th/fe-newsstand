@@ -451,3 +451,55 @@
         top: -17px;
     }
 }
+
+.alert_Container {
+    flex-direction: column;
+    position: absolute;
+    display: flex;
+    z-index: 500;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.alert_unsubscribe {
+    background-color: #FFFFFF;
+    border: #D2DAE0 1px solid;
+    width: 320px;
+    height: 140px;
+}
+
+.alert_subscribe {
+    color: white;
+    justify-content: center;
+    text-align: center;
+    width: 286px;
+    height: 54px;
+    background-color: #4362D0;
+}
+
+
+.alert_title {
+    color: #5F6E76;
+    flex-grow: 1;
+    align-content: center;
+    text-align: center;
+}
+
+.alert_button {
+    align-content: center;
+    text-align: center;
+    width: 50%;
+    height: 48px;
+    background-color: #F5F7F9;
+    border-top: #D2DAE0 1px solid;
+}
+
+.alert_button.left {
+    border-right: #D2DAE0 1px solid;
+}
+
+
+.hover-underline:hover {
+    text-decoration: underline;
+}
