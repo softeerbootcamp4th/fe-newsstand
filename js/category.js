@@ -27,8 +27,6 @@ export const createCategory = (data, dataType) => {
 
     checkCurDataType(dataType);
 
-    console.log('createCategory :', dataType);
-
     // 카테고리 아이템 생성 및 추가
     data?.forEach((cat, idx) => {
         const divElement = document.createElement('div');
@@ -46,7 +44,6 @@ export const createCategory = (data, dataType) => {
             curCategoryIdx = idx;
             curNewsIdx = 0;
             resetProgressBar();
-            if(prevCategoryType === 'subscribe') newsData = [];
             loadCurrentCategoryNews(dataType);
         });
     });
@@ -56,7 +53,6 @@ export const createCategory = (data, dataType) => {
 /* 조회한 카테고리의 전체 뉴스 가져오는 함수 */
 export const loadCurrentCategoryNews = (dataType) => {
 
-    console.log(dataType, newsData.length);
     checkCurDataType(dataType);
 
     if(!newsData.length) {
@@ -68,10 +64,7 @@ export const loadCurrentCategoryNews = (dataType) => {
             return response.json();
         })
         .then(data => {
-            newsData = dataType === 'all' ? data : data.flatMap(category => 
-                category.news.filter(newsItem => newsItem.company === subscriptions[curCategoryIdx] )
-            );
-            console.log(newsData);
+            newsData = data;
             displayNews(dataType);
             updateBtnVisibility();
             updateCategoryDisplay();
@@ -97,10 +90,7 @@ function displayNews(dataType) {
     mainNewsDiv.innerHTML = '';
     subNewsDiv.innerHTML = '';
 
-    const news = dataType === 'all' ?  newsData[curCategoryIdx].news[curNewsIdx] : newsData[0];
-
-    console.log('displayNews', news);
-
+    const news = dataType === 'all' ?  newsData[curCategoryIdx].news[curNewsIdx] : newsData.flatMap(category => category.news.filter(newsItem => newsItem.company === subscriptions[curCategoryIdx]))[0];
     const subscribeBtn = document.querySelector('.subscribe-btn');
 
     if(subscriptions.includes(news.company)) {
@@ -200,12 +190,9 @@ function updateProgressBar() {
 
 function startProgressBar() {
     clearTimeout(progressBarTimeout);
-    console.log('hi');
     progressBarTimeout = setTimeout(() => {
         if(prevCategoryType === 'subscribe') {
-            const subscriptions = getSubscriptionList();
-            newsData = [];
-            console.log('startProgressBar', curCategoryIdx, subscriptions.length);
+            subscriptions = getSubscriptionList();
 
             if(curCategoryIdx < subscriptions.length-1){
                 curCategoryIdx++;
@@ -224,7 +211,6 @@ function startProgressBar() {
                 curNewsIdx = 0;
             }
     
-
         }
         updateBtnVisibility();
         loadCurrentCategoryNews(prevCategoryType);
@@ -235,7 +221,6 @@ function showCategory(index) {
     const parentDiv = document.querySelector('.all-cate-header');
     const selectedDiv = parentDiv.children[index];
     selectedDiv.classList.add('selected');
-    //selectedDiv.querySelector('.category-text').textContent = category[index];
 }
 
 function updateBtnVisibility() {
