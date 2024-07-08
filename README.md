@@ -7,3 +7,4 @@ FE 1,2 주 프로젝트
 - feat/#3 : components/articleList 구현
 - feat/#4 : components/newsBar 구현
 - feat/#5 : 구독하기 버튼 구현
+- feat/#6 : grid 생성

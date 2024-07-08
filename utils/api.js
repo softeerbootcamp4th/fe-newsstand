@@ -5,3 +5,13 @@ export const fetchData = async (src) => {
     }
     return res.json();
 }
+
+export const extractMedias = (data) => {
+    const mediaList = [];
+    data.forEach(categoryEl => {
+        categoryEl.mediaData.forEach((d) => {
+            mediaList.push(d.mediaName);
+        })
+    });
+    return mediaList;
+}
