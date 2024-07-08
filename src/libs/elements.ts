@@ -39,9 +39,9 @@ const createElement = <T extends HTMLElement = HTMLElement>(
     children,
   };
 };
-export const div: AppElement<HTMLDivElement> = (
+export const Div: AppElement<HTMLDivElement> = (
   props: AppElementProps<HTMLDivElement>,
 ) => {
   return createElement<HTMLDivElement>("div", props);
 };
-div.type = "element";
+Div.type = "element";

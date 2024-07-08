@@ -1,6 +1,6 @@
 import { useState } from "./libs";
 import { cc } from "./libs/components";
-import { ce, div } from "./libs/elements";
+import { ce, Div } from "./libs/elements";
 import { AppComponent } from "./libs/renderer";
 
 interface TestProps {
@@ -11,14 +11,14 @@ const Test: AppComponent<TestProps> = ({ text }: TestProps) => {
   const onClick = () => {
     setState(state + 1);
   };
-  return ce(div, {
+  return ce(Div, {
     children: [text, state],
     onClick,
   });
 };
 
 export const App = () => {
-  return ce(div, {
+  return ce(Div, {
     className: "container",
     children: [
       "hi",
