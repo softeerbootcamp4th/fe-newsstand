@@ -1,6 +1,7 @@
 import rawData from "./rawData.js";
 import processListPagination from "./processData/processListPagination.js";
 import generateReducer from "./states/generateReducer.js";
+
 import mountLeftSelector from "./views/mountLeftSelector.js";
 import mountRightSelector from "./views/mountRightSelector.js";
 import mountPageMoverSelector from "./views/mountPageMoverSelector.js";

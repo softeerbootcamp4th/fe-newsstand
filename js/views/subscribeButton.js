@@ -1,6 +1,8 @@
 import html from "../domParser.js";
 import applyDiff from "../diffing.js";
+
 import unsubscribePopup from "./unsubscribePopup.js";
+import showToast from "./showToast.js";
 
 function SubscribeButtonInner(isSubbed)
 {
@@ -17,13 +19,15 @@ function SubscribeButtonInner(isSubbed)
 function SubscribeButton({cursor, subFilter, subList}, {addToSubscription, removeFromSubscription}, pressId=cursor.value)
 {
 	const prevCache = pressId === cursor.value && subFilter.value ? cursor.getPrevKey() : undefined;
-	console.log("prevCache : ", prevCache);
 	const dom = html`<button class="subscribeButton" data-force-replace="true" data-unique-key="subscribe-button-${pressId}">
 		${SubscribeButtonInner(subList.has(pressId))}
 	</button>`
 
 	dom.addEventListener( "click", ()=>{
-		if(!subList.has(pressId)) addToSubscription(pressId, prevCache);
+		if(!subList.has(pressId)) {
+			addToSubscription(pressId, prevCache);
+			showToast();
+		}
 		else unsubscribePopup(pressId, removeFromSubscription);
 	} );
 
