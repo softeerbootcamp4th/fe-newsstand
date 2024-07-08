@@ -20,6 +20,11 @@ export function generateNav(container, categoryList) {
   container.appendChild(nav);
 }
 
+export function deleteNav() {
+  const nav = document.getElementById("nav_container");
+  nav.innerHTML = "";
+}
+
 /**
  * container에 category와 progress node를 추가함
  * @param {Node} container

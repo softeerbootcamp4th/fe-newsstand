@@ -1,4 +1,4 @@
-import { generateNav } from "../components/nav.js";
+import { deleteNav, generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
 import { generateNewsList } from "../components/newsList.js";
 import { getTodayString } from "../utils/utils.js";
@@ -248,13 +248,14 @@ function rollingCallback(time) {
 }
 
 const today = document.querySelector(".today");
-const category = document.getElementById("category");
-const show = document.getElementById("show");
+const headerCategory = document.querySelectorAll(".headerCategory");
+const headerShow = document.querySelectorAll(".headerShow");
 const newsListContainer = document.getElementById("newsList_container");
 const categoryElements = document.querySelectorAll(".contentList li");
 const currentMedia = document.querySelector(".media");
 const progresses = document.querySelectorAll(".progress");
 
+let selectedHeaderCategoryIndex = 0;
 let selectedCategoryIndex = 0;
 let currentMediaIndex = 0;
 
@@ -310,9 +311,24 @@ setInterval(() => rollingCallback(1000), 5000);
 function initialize() {
   //header 초기화
   today.innerHTML = getTodayString();
-  //banner 초기화
-  category.children[0].classList.add("selected");
-  show.children[0].classList.add("selected");
+  //header_selected 초기화
+  headerCategory[0].classList.add("selected");
+  headerShow[0].classList.add("selected");
+  headerCategory.forEach((element, index) => {
+    element.addEventListener("click", () => {
+      headerCategory[selectedHeaderCategoryIndex].classList.remove("selected");
+      element.classList.add("selected");
+
+      selectedHeaderCategoryIndex = index;
+
+      //nav 삭제후 재생성
+      deleteNav();
+      if (selectedHeaderCategoryIndex === 0)
+        generateNav(navContainer, categoryList);
+      else if (selectedHeaderCategoryIndex === 1)
+        generateNav(navContainer, myList);
+    });
+  });
 
   //nav, newsList 초기화
   categoryElements[selectedCategoryIndex].classList.add("selected");
