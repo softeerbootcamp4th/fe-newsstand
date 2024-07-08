@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  height: 40px;
+  background: var(--surface-surface-alt, #F5F7F9);
+  border: 1px solid var(--border-border-default, #D2DAE0)
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.tab-active {
+  color: var(--text-text-white-default, #FFFFFF);
+  background-color: var(--surface-surface-brand-alt, #7890E7);
+}
+
+.tab-inactive {
+  color: var(--text-text-weak, #879298);
+
+}
