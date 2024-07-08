@@ -1,7 +1,53 @@
-.snackBar {
+/* .snack-bar {
+    visibility: hidden;
+
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s, visibility 0s 0.5s;
+    opacity: 0;
+
     width: max-content  ;
     color: var(--color-text-white-default);
     box-shadow: var(--box-shadow);
     padding: 16px 24px 16px 24px;
     background-color: var(--color-surface-brand-default);
+} */
+
+.snackbar-container {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.snack-bar {
+    visibility: hidden;
+    text-align: center;
+    transition: opacity 0.5s, visibility 0s 0.5s;
+    opacity: 0;
+
+    width: max-content  ;
+    color: var(--color-text-white-default);
+    box-shadow: var(--box-shadow);
+    padding: 16px 24px 16px 24px;
+    background-color: var(--color-surface-brand-default);
+
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-medium);
+}
+
+
+.snack-bar.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s, visibility 0s 0s;
+}
+
+.snack-bar.hide {
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0s 0.5s;
 }

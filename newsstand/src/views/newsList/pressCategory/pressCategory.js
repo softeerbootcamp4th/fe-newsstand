@@ -1,136 +1,147 @@
-export const ProgressCategoryContainer = ({ selectedId: initialSelectedId, onChangeCategory }) => {
-    let element = document.createElement('div');
+import { separateId } from "../../../utils/utils.js";
+
+const ProgressCategoryContainer = ({ 
+    tabs, 
+    timerIntervalRef,  // Use a ref to manage the timer interval
+    selectedId: initialSelectedId, 
+    selectedPressIndex: initialSelectedPressIndex, 
+    onChangeCategory, 
+    onChangePress 
+    }) => {
+
+    const element = document.createElement('div');
     element.className = 'press-category-container';
+
     let buttons = [];
-    let progressButtons = [];
+    let progressBars = [];
+    let selectedPressIndex = initialSelectedPressIndex;
     let selectedId = initialSelectedId;
-    let progressInterval;
-    let autoChangeCategoryTimeout;
-    const rootStyles = getComputedStyle(document.documentElement);
-    const categories = [
-        { id: 0, title: "종합/경제", nowIndex: 1, total: 4 },
-        { id: 1, title: "방송/통신", nowIndex: 1, total: 4 },
-        { id: 2, title: "IT", nowIndex: 1, total: 4 },
-        { id: 3, title: "영자지", nowIndex: 1, total: 4 },
-        { id: 4, title: "스포츠/연예", nowIndex: 1, total: 4 },
-        { id: 5, title: "매거진/전문지", nowIndex: 1, total: 4 },
-        { id: 6, title: "지역", nowIndex: 1, total: 4 }
-    ];
-
-    function separateId(id) {
-        const parts = id.split('-');
-        const lastPart = parts[parts.length - 1];
-        return parseInt(lastPart);
-    }
-
-    function clearCurrentInterval() {
-        if (progressInterval) {
-            clearInterval(progressInterval);
-        }
-    }
 
     function autoChangeCategory() {
-        const currentId = separateId(selectedId);
+        console.log('auto');
+        const currentIndex = separateId(selectedId);
+        const currentCategory = tabs[currentIndex];
 
-        if (categories[currentId].nowIndex < categories[currentId].total) {
-            categories[currentId].nowIndex += 1;
-            console.log(categories[currentId].nowIndex);
-            updateSelectedButtonStyle(buttons[currentId]);
+        if (selectedPressIndex < currentCategory.tabDataCount - 1) {
+            selectedPressIndex += 1;
+            onChangePress(selectedPressIndex);
         } else {
-            const nextId = (currentId + 1) % categories.length;
+            const nextId = (currentIndex + 1) % tabs.length;
             const newSelectedId = `press-category-${nextId}`;
             onChangeCategory(newSelectedId);
+            onChangePress(0);
         }
+
+        updateSelectedButtonStyle(currentIndex);
     }
 
     function onClickEvent(event) {
-        clearCurrentInterval();
-        const id = `press-category-${separateId(event.target.id)}`;
+        setTimer();
+
+        const intId = separateId(event.target.id);
+        const id = `press-category-${intId}`;
+
         if (id !== selectedId) {
             onChangeCategory(id);
+            onChangePress(0);
+        } else {
+            updateSelectedButtonStyle(intId);
         }
     }
 
-    function updateSelectedButtonStyle(selectedButton) {
-        const categoryCount = selectedButton.querySelector(`#category-count`);
-        if (categoryCount) {
-            categoryCount.remove();
-        }
+    function updateSelectedButtonStyle(id) {
+        const rootStyles = getComputedStyle(document.documentElement);
+
         buttons.forEach((button, index) => {
-            progressButtons[index].style.width = 0;
-            progressButtons[index].style.backgroundColor = 'transparent';
-            button.style.backgroundColor = 'transparent';
-            button.style.color = rootStyles.getPropertyValue('--color-text-weak');
+            const isSelected = index === id;
+
+            button.style.backgroundColor = isSelected ? rootStyles.getPropertyValue('--color-surface-brand-alt') : 'transparent';
+            button.style.color = isSelected ? rootStyles.getPropertyValue('--color-text-white-default') : rootStyles.getPropertyValue('--color-text-weak');
+
+            const categoryCountSpan = button.querySelector('.press-count-span');
+            if (categoryCountSpan) {
+                button.style.width = isSelected ? "166px" : "max-content";
+                categoryCountSpan.textContent = isSelected ? `${selectedPressIndex + 1}/${tabs[index].tabDataCount}` : "";
+            }
+
+            if (isSelected) {
+                progressBars[index].classList.add('selected');
+            } else {
+                progressBars[index].classList.remove('selected');
+            }
         });
-        selectedButton.style.backgroundColor = rootStyles.getPropertyValue('--color-surface-brand-alt');
-        selectedButton.style.color = rootStyles.getPropertyValue('--color-text-white-default');
-        setProgress(selectedButton);
-        addCountElement(selectedButton);
     }
 
-    function addCountElement(selectedButton) {
-        const spanElement = document.createElement('span');
-        spanElement.id = "category-count";
-        let id = separateId(selectedButton.id)
-        spanElement.textContent = `${categories[id].nowIndex}/${categories[id].total}`;
-        selectedButton.appendChild(spanElement);
-        selectedButton.style.width = 'max-content';
+    function createButton(category, index) {
+        const button = document.createElement('button');
+        button.className = 'press-category-button';
+        button.id = `press-category-${index}`;
+
+        const progressBar = document.createElement('div');
+        progressBar.className = 'press-category-button-progress';
+        progressBar.id = `press-category-${index}`;
+
+        const container = document.createElement('div');
+        container.className = 'press-category-span-container';
+        container.id = `press-category-${index}`;
+
+        const tabNameSpan = document.createElement('span');
+        tabNameSpan.id = `press-category-${index}`;
+        tabNameSpan.textContent = category.tabName;
+
+        const countSpan = document.createElement('span');
+        countSpan.id = `press-category-${index}`;
+        countSpan.className = `press-count-span`;
+        countSpan.textContent = '';
+
+        container.appendChild(tabNameSpan);
+        container.appendChild(countSpan);
+
+        button.appendChild(progressBar);
+        button.appendChild(container);
+        return button;
     }
 
-    function setProgress(selectedButton) {
-        clearCurrentInterval();
-        const progressElement = progressButtons[separateId(selectedButton.id)];
-        if (progressElement) {
-            let progress = 0;
-            progressInterval = setInterval(() => {
-                if (progress >= 100) {
-                    progressElement.style.width = 0;
-                    progressElement.style.backgroundColor = 'transparent';
-                    clearInterval(progressInterval);
-                    autoChangeCategory();
-                } else {
-                    progress += 2;
-                    progressElement.style.width = `${progress}%`;
-                    progressElement.style.backgroundColor = rootStyles.getPropertyValue('--color-surface-brand-default');
-                }
-            }, 400);
+    function setTimer() {
+        if (timerIntervalRef.current) {
+            console.log("clearTimer", timerIntervalRef.current);
+            clearInterval(timerIntervalRef.current);
         }
+        timerIntervalRef.current = setInterval(autoChangeCategory, 20000);
+        console.log("settimer:", timerIntervalRef.current);
     }
 
-    function render() {
-        const html = categories.map(category => `
-            <button class="press-category-button" id="press-category-${category.id}">
-                <div class="press-category-button-progress" id="press-category-progress-${category.id}"></div>
-                <span id="press-category-span-${category.id}">${category.title}</span>
-            </button>
-        `).join('');
-        element.innerHTML = html;
-        buttons = Array.from(element.querySelectorAll('.press-category-button'));
-        progressButtons = Array.from(element.querySelectorAll('.press-category-button-progress'));
+    function renderButtons() {
+        element.innerHTML = '';
+        buttons = [];
+        progressBars = [];
+        tabs.forEach((category, index) => {
+            const button = createButton(category, index);
+            element.appendChild(button);
+            buttons.push(button);
+            progressBars.push(button.querySelector('.press-category-button-progress'));
+        });
+    }
+
+    function addEventListeners() {
         buttons.forEach(button => {
             button.addEventListener('click', onClickEvent);
         });
-        const initiallySelectedButton = buttons[separateId(selectedId)];
-        if (initiallySelectedButton) {
-            updateSelectedButtonStyle(initiallySelectedButton);
-        }
     }
 
-    function updateSelectedId(newSelectedId) {
-        if (newSelectedId !== selectedId) {
-            selectedId = newSelectedId;
-            const selectedButton = buttons[separateId(selectedId)];
-            if (selectedButton) {
-                updateSelectedButtonStyle(selectedButton);
-            }
-        }
+    function render() {
+        renderButtons();
+        addEventListeners();
+        updateSelectedButtonStyle(separateId(selectedId));
     }
 
     render();
+    setTimer();
 
     return {
         element,
-        updateSelectedId
+        setTimer
     };
-}
+};
+
 export default ProgressCategoryContainer;

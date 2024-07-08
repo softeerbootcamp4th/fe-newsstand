@@ -63,9 +63,7 @@ export const AutoRollingNews = (props) => {
 
         const html = `
             <p class="autoRollingNews-company">${press}</p>
-            <div class="autoRollingNews-item animate-out">
-                <a class="autoRollingNews-title" href="${link}">${title}</a>
-            </div>
+            <a class="autoRollingNews-item animate-out" href="${link}">${title}</a>
         `;
         element.innerHTML = html;
 

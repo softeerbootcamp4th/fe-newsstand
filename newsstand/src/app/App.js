@@ -1,8 +1,7 @@
 import AutoRollingNews from "../components/autoRollingNews/autoRollingNews.js";
 import Header from "../views/header/header.js";
 import Headline from "../views/headline/headline.js";
-import NewsList from "../views/newsList/newsList.js";
-import { PressMenu } from "../views/pressMenu/pressMenu.js";
+import Main from "../views/main/main.js";
 
 // App 컴포넌트
 export const App = () => {
@@ -13,8 +12,7 @@ export const App = () => {
         <div class="main-container">
             <div class="header"></div>
             <div class="headline"></div>
-            <div class="press-menu"></div>
-            <div class="newsList"></div>
+            <div class="main"></div>
         </div>
     `;
 
@@ -45,32 +43,17 @@ export const App = () => {
         headlineContainer.appendChild(headline.element);
     }
 
-    function makePressMenu(appContainer) {
-        const className ="press-menu"
-        const pressMenuContainer = appContainer.querySelector(`.${className}`);
+    function makeMain(appContainer) {
+        const className = "main"
+        const mainContainer = appContainer.querySelector(`.${className}`);
 
-        if (!pressMenuContainer) {
-            console.log(`not founded pressMenu container with className ${className}`)
+        if (!mainContainer) {
+            console.log(`not founded main container with className ${className}`)
             return;
         }
 
-        const pressMenu = PressMenu();
-    
-        pressMenuContainer.appendChild(pressMenu.element);
-    }
-
-    function makeNewsList(appContainer) {
-        const className = "newsList"
-        const newsListContainer = appContainer.querySelector(`.${className}`);
-
-        if (!newsListContainer) {
-            console.log(`not founded newsList container with className ${className}`)
-            return;
-        }
-
-        const newsList = NewsList();
-
-        newsListContainer.appendChild(newsList.element);
+        const main = Main();
+        mainContainer.appendChild(main.element);
     }
 
     function initializeApp() {
@@ -78,8 +61,7 @@ export const App = () => {
 
         makeHeader(appContainer);
         makeHeadline(appContainer);
-        makePressMenu(appContainer);
-        makeNewsList(appContainer);
+        makeMain(appContainer);
 
         const appDiv = document.getElementById('app');
         if (appDiv) {
