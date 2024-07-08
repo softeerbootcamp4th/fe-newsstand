@@ -39,22 +39,22 @@ const buttonVariant = (type) => {
 const Button = (props) => {
     const [isHover, setIsHover] = useState(false)
 
-    const handleMouseOver = () => {
+    const handleMouseEnter = () => {
         setIsHover(true)
     }
 
-    const handleMouseOut = () => {
+    const handleMouseLeave = () => {
         setIsHover(false)
     }
 
     const handleMouseClick = () => {
-        console.log('CLICKED')
+        props.onClick()
     }
 
     const bindEvents = () => {
-        const button = document.getElementById(`button-${props.id}`)
-        button.addEventListener('mouseover', handleMouseOver)
-        button.addEventListener('mouseout', handleMouseOut)
+        const button = document.getElementById(`button${props.id}`)
+        button.addEventListener('mouseenter', handleMouseEnter)
+        button.addEventListener('mouseleave', handleMouseLeave)
         button.addEventListener('click', handleMouseClick)
     }
 
@@ -62,7 +62,7 @@ const Button = (props) => {
 
     return {
         element: `
-        <div class="button" id="button-${props.id}" style="background-color: ${isHover ? hoverdColor : backgroundColor}; color: ${color};">
+        <div class="button" id="button${props.id}" style="background-color: ${isHover ? hoverdColor : backgroundColor}; color: ${color};">
             <img class="button-left-icon" src=${props.icon} alt="icon"/>
             ${props.text}
         </div>

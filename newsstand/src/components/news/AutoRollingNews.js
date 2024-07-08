@@ -1,5 +1,5 @@
-import { shuffle } from '../utils/listUtils.js'
-import { newsItems } from '../datas/mockData.js'
+import { shuffle } from '../../utils/listUtils.js'
+import { newsItems } from '../../datas/mockData.js'
 
 const AutoRollingNews = (props) => {
     let interval = ''
