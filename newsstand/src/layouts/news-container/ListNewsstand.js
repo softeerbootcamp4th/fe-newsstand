@@ -3,44 +3,74 @@ import MainNews from '../../components/news/MainNews.js'
 import MediaCategories from '../../components/category/MediaCategories.js'
 import createComponent from '../../core/component/component.js'
 import useState from '../../core/hooks/useState.js'
-import { mediaCategoryData, getNewsData, getCompanyCount } from '../../datas/mockData.js'
+import { isIn } from '../../utils/listUtils.js'
+import { mediaCategoryData, getNewsData, getCompanyCount, getNewsDataFromSubscribedCompany } from '../../datas/mockData.js'
 import { generateRandomId } from '../../utils/idGenerator.js'
 import { getPrevIndexInList, getNextIndexInList } from '../../utils/listUtils.js'
+import { getSubscribedCompaniesId } from '../../utils/subscribeUtils.js'
+import { getCompanyName, getCompanyIdByName } from '../../datas/companyData.js'
 
-const ListNewsstand = () => {
-    const [selectedCategory, setSelectedCategory] = useState(mediaCategoryData[0])
+const ListNewsstand = (props) => {
     const [currentNewsId, setCurrentNewsId] = useState(1)
-    const newsData = getNewsData(selectedCategory, currentNewsId)
-
     const lastIndex = 6
     const lastCategoryCompanyCount = getCompanyCount(mediaCategoryData[lastIndex])
+    let newsData = []
+    let subscribedCompanyIdList = getSubscribedCompaniesId()
+
+    if (props.selectedSource === '전체 언론사') {
+        let category = props.selectedCategory
+        if (!isIn(category, mediaCategoryData)) {
+            category = '종합/경제'
+            setCurrentNewsId(1)
+        }
+        newsData = getNewsData(category, currentNewsId)
+    } else {
+        let category = props.selectedCategory
+        if (isIn(category, mediaCategoryData)) {
+            category = getCompanyName(subscribedCompanyIdList[0])
+        }
+
+        newsData = getNewsDataFromSubscribedCompany(subscribedCompanyIdList, category)
+    }
 
     const handleRightButtonClick = () => {
-        const currentCategoryCompanyCount = getCompanyCount(selectedCategory)
+        if (props.selectedSource === '전체 언론사') {
+            const currentCategoryCompanyCount = getCompanyCount(props.selectedCategory)
 
-        if (currentNewsId === currentCategoryCompanyCount) {
-            setCurrentNewsId(1)
+            if (currentNewsId === currentCategoryCompanyCount) {
+                setCurrentNewsId(1)
 
-            const nextIndex = getNextIndexInList(selectedCategory, mediaCategoryData)
-            const nextCategory = mediaCategoryData[nextIndex]
+                const nextIndex = getNextIndexInList(props.selectedCategory, mediaCategoryData)
+                const nextCategory = mediaCategoryData[nextIndex]
 
-            setSelectedCategory(nextCategory)
+                props.setSelectedCategory(nextCategory)
+            } else {
+                setCurrentNewsId(currentNewsId + 1)
+            }
         } else {
-            setCurrentNewsId(currentNewsId + 1)
+            const nextIndex = getNextIndexInList(getCompanyIdByName(props.selectedCategory), subscribedCompanyIdList)
+            const nextCategory = subscribedCompanyIdList[nextIndex]
+            props.setSelectedCategory(getCompanyName(nextCategory))
         }
     }
 
     const handleLeftButtonClick = () => {
-        if (currentNewsId === 1) {
-            const prevIndex = getPrevIndexInList(selectedCategory, mediaCategoryData)
-            const prevCategory = mediaCategoryData[prevIndex]
+        if (props.selectedSource === '전체 언론사') {
+            if (currentNewsId === 1) {
+                const prevIndex = getPrevIndexInList(props.selectedCategory, mediaCategoryData)
+                const prevCategory = mediaCategoryData[prevIndex]
 
-            setSelectedCategory(prevCategory)
+                props.setSelectedCategory(prevCategory)
 
-            const prevCategoryCompanyCount = getCompanyCount(prevCategory)
-            setCurrentNewsId(prevCategoryCompanyCount)
+                const prevCategoryCompanyCount = getCompanyCount(prevCategory)
+                setCurrentNewsId(prevCategoryCompanyCount)
+            } else {
+                setCurrentNewsId(currentNewsId - 1)
+            }
         } else {
-            setCurrentNewsId(currentNewsId - 1)
+            const prevIndex = getPrevIndexInList(getCompanyIdByName(props.selectedCategory), subscribedCompanyIdList)
+            const prevCategory = subscribedCompanyIdList[prevIndex]
+            props.setSelectedCategory(getCompanyName(prevCategory))
         }
     }
 
@@ -55,8 +85,9 @@ const ListNewsstand = () => {
     const mediaCategories = createComponent(MediaCategories, {
         id: generateRandomId(10),
         style: 'width:100%; height:10%;',
-        selectedCategory: selectedCategory,
-        setSelectedCategory: setSelectedCategory,
+        selectedSource: props.selectedSource,
+        selectedCategory: props.selectedCategory,
+        setSelectedCategory: props.setSelectedCategory,
         currentNewsId: currentNewsId,
         setCurrentNewsId: setCurrentNewsId,
         onFillComplete: handleRightButtonClick,
@@ -80,25 +111,23 @@ const ListNewsstand = () => {
         color: 'blue',
     })
 
-    const newsListElements = newsData.news.map((newsItem) => `<a class="news-content">${newsItem.title}</a>`).join('')
+    const newsListElements = newsData && newsData.news.map((newsItem) => `<a class="news-content">${newsItem.title}</a>`).join('')
 
     return {
         element: `
         <div class="carousel-container">
             <button class="carousel-btn left-btn">
-                ${currentNewsId === 1 && selectedCategory === mediaCategoryData[0] ? '' : leftButtonIcon.element}
+                ${currentNewsId === 1 && props.selectedCategory === mediaCategoryData[0] ? '' : leftButtonIcon.element}
             </button>
             <div class="list-news-container">
                 ${mediaCategories.element}
                 <div class="list-news-body">
                     ${mainNewsComponent.element}
-                    <div class="list-news-right-container">
-                        ${newsListElements}
-                    </div>
+                    ${newsListElements ? `<div class="list-news-right-container">${newsListElements}</div>` : ''}
                 </div>
             </div>
             <button class="carousel-btn right-btn">
-                ${currentNewsId === lastCategoryCompanyCount && selectedCategory === mediaCategoryData[lastIndex] ? '' : rightButtonIcon.element}
+                ${currentNewsId === lastCategoryCompanyCount && props.selectedCategory === mediaCategoryData[lastIndex] ? '' : rightButtonIcon.element}
             </button>
         </div>
         `,

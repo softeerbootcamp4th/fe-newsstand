@@ -4,8 +4,10 @@ import createComponent from '../../core/component/component.js'
 import ListNewsstand from './ListNewsstand.js'
 import GridNewsstand from './GridNewsstand.js'
 import { generateRandomId } from '../../utils/idGenerator.js'
+import { mediaCategoryData } from '../../datas/mockData.js'
 
 const NewsContainer = () => {
+    const [selectedCategory, setSelectedCategory] = useState(mediaCategoryData[0])
     const [selectedSource, setSelectedSource] = useState('전체 언론사')
     const [viewType, setViewType] = useState('list')
 
@@ -14,12 +16,16 @@ const NewsContainer = () => {
         style: 'width:100%; height:8%;',
         selectedSource: selectedSource,
         setSelectedSource: setSelectedSource,
+        setSelectedCategory: setSelectedCategory,
         viewType: viewType,
         setViewType: setViewType,
     })
 
     const listNewsstandLayout = createComponent(ListNewsstand, {
         id: generateRandomId(10),
+        selectedSource: selectedSource,
+        selectedCategory: selectedCategory,
+        setSelectedCategory: setSelectedCategory,
         style: 'width:100%;',
     })
 
