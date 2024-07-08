@@ -7,12 +7,16 @@ import {
   RenderingAppElement,
   isCreatedAppComponent,
 } from "./renderer";
+import { isPropsEqual } from "./utils";
 
 let currentKey: string = "";
 let initComponent: AppComponent | null = null;
 let _root: HTMLElement | null = null;
 const statesMap = new Map<string, Array<unknown>>();
 const stateIdxMap = new Map<string, number>();
+const effectCleanupsMap = new Map<string, Array<() => void>>();
+const effectDepsMap = new Map<string, Array<unknown>>();
+const effectIdxMap = new Map<string, number>();
 
 export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
   if (!cur || !nxt) {
@@ -65,6 +69,40 @@ export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
   }
 };
 
+export const useEffect = (
+  effect: () => void | (() => void),
+  deps?: Array<unknown>,
+) => {
+  const currentDeps = deps ?? [];
+  const prevDeps = effectDepsMap.get(currentKey);
+  if (!effectIdxMap.has(currentKey)) {
+    effectIdxMap.set(currentKey, 0);
+  }
+  if (!effectCleanupsMap.has(currentKey)) {
+    effectCleanupsMap.set(currentKey, []);
+  }
+  const effectsCleanups = effectCleanupsMap.get(currentKey)!;
+  const effectIdx = effectIdxMap.get(currentKey)!;
+  if (isPropsEqual(prevDeps, currentDeps)) {
+    return;
+  }
+  const cleanup = effect();
+
+  if (effectIdx >= effectsCleanups.length) {
+    if (cleanup != null) {
+      effectsCleanups.push(cleanup);
+    }
+  } else {
+    effectsCleanups[effectIdx]?.();
+    if (cleanup != null) {
+      effectsCleanups[effectIdx] = cleanup;
+    }
+  }
+  effectDepsMap.set(currentKey, currentDeps);
+
+  effectIdxMap.set(currentKey, effectIdx + 1);
+};
+
 export const useState = <T>(initialState: T) => {
   if (!stateIdxMap.has(currentKey)) {
     stateIdxMap.set(currentKey, 0);
@@ -82,6 +120,7 @@ export const useState = <T>(initialState: T) => {
     states[stateIdx] = newState;
     render();
   };
+  stateIdxMap.set(currentKey, stateIdx + 1);
   return [state, setState] as [T, (newState: T) => void];
 };
 
