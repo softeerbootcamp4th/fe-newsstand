@@ -43,7 +43,7 @@ export const EventNameMaps = new Map<string, string>([
 export const eventMap = new Map<string, Map<string, EventListener>>();
 
 const rootEventHandler = (e: Event) => {
-  const target = e.currentTarget as HTMLElement;
+  const target = e.target as HTMLElement;
   const handler = eventMap.get(target.getAttribute("key") ?? "")?.get(e.type);
   if (handler == null) {
     return;
