@@ -1,5 +1,6 @@
 import html from "../domParser.js";
 import applyDiff from "../diffing.js";
+import unsubscribePopup from "./unsubscribePopup.js";
 
 function SubscribeButtonInner(isSubbed)
 {
@@ -22,7 +23,7 @@ function SubscribeButton({cursor, subFilter, subList}, {addToSubscription, remov
 
 	dom.addEventListener( "click", ()=>{
 		if(!subList.has(pressId)) addToSubscription(pressId, prevCache);
-		else removeFromSubscription(pressId);
+		else unsubscribePopup(pressId, removeFromSubscription);
 	} );
 
 	return dom;
