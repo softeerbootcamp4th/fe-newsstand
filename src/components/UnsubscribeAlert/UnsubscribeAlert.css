@@ -19,6 +19,7 @@
 
 .alert > .textSection {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -27,6 +28,14 @@
   padding: 16px 24px;
   border-bottom: 1px solid var(--gray-100);
   box-sizing: border-box;
+
+  color: var(--gray-400);
+  line-height: 18.75px;
+}
+
+.textSection .bold {
+  font-weight: bold;
+  color: var(--black);
 }
 
 .alert > .buttonSection {
@@ -44,8 +53,16 @@
   border: none;
 
   background-color: var(--gray-50);
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .buttonSection > button:first-child {
   border-right: 1px solid var(--gray-100);
+}
+
+button.primary {
+  color: var(--gray-400);
 }
