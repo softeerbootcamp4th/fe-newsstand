@@ -1,13 +1,79 @@
 import "./ContentsBox.css";
-import Button from "@/components/common/Button/Button";
+import { isSubscribeCompany, subscribeCompany } from "../../../data/storageHandler";
+import UnsubscribeAlert from "../../UnsubscribeAlert/UnsubscribeAlert";
+import Button from "../../common/Button/Button";
+import SnackBar from "../../common/SnackBar/SnackBar";
 
-function ContentsBox({ $target, position = "beforeend", news }) {
+function ContentsBox({ $target, position = "beforeend", news, onSubscribeCompany }) {
   this.$element = document.createElement("div");
   this.$element.className = "contentsBox";
   $target.insertAdjacentElement(position, this.$element);
 
-  this.render(news);
+  this.props = {
+    news,
+    onSubscribeCompany,
+  };
+
+  this.render();
+
+  this.components = {
+    SubscribeButton: new Button({
+      $target: this.$element.querySelector(".companyInfo"),
+      text: "구독하기",
+      color: "gray",
+      icon: "plus",
+      onClick: this.handleSubscribe.bind(this),
+    }),
+
+    UnsubscribeButton: new Button({
+      $target: this.$element.querySelector(".companyInfo"),
+      color: "white",
+      icon: "closed",
+      onClick: this.showUnsubscribeAlert.bind(this),
+    }),
+
+    SnackBar: new SnackBar({
+      $target: this.$element,
+      text: "내가 구독한 언론사에 추가되었습니다.",
+    }),
+
+    UnsubscribeAlert: new UnsubscribeAlert({
+      $target: this.$element,
+      company: news.company,
+      onConfirm: this.handleUnsubscribe.bind(this),
+    }),
+  };
+
+  this.renderSubscribeButton();
 }
+
+ContentsBox.prototype.handleSubscribe = function () {
+  subscribeCompany(this.props.news.company);
+
+  this.components.SnackBar.show();
+  this.showUnsubscribeButton();
+};
+
+ContentsBox.prototype.handleUnsubscribe = function () {
+  this.props.onSubscribeCompany(this.props.news.company);
+
+  this.components.UnsubscribeAlert.show();
+  this.showSubscribeButton();
+};
+
+ContentsBox.prototype.showSubscribeButton = function () {
+  this.components.UnsubscribeButton.$element.classList.add("hide");
+  this.components.SubscribeButton.$element.classList.remove("hide");
+};
+
+ContentsBox.prototype.showUnsubscribeButton = function () {
+  this.components.SubscribeButton.$element.classList.add("hide");
+  this.components.UnsubscribeButton.$element.classList.remove("hide");
+};
+
+ContentsBox.prototype.showUnsubscribeAlert = function () {
+  this.components.UnsubscribeAlert.show();
+};
 
 ContentsBox.prototype.formatDate = function formatDate(date) {
   const year = date.getFullYear();
@@ -19,7 +85,9 @@ ContentsBox.prototype.formatDate = function formatDate(date) {
   return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
 };
 
-ContentsBox.prototype.render = function (news) {
+ContentsBox.prototype.render = function () {
+  const { news } = this.props;
+
   this.$element.innerHTML = /* html */ `
     <section class="companyInfo">
       <img src="${news.companyLogo}"/>
@@ -42,13 +110,16 @@ ContentsBox.prototype.render = function (news) {
       </div>
     </section>
   `;
+};
 
-  new Button({
-    $target: this.$element.querySelector(".companyInfo"),
-    text: "구독하기",
-    color: "gray",
-    icon: "plus",
-  });
+ContentsBox.prototype.renderSubscribeButton = function () {
+  if (isSubscribeCompany(this.props.news.company)) {
+    this.showUnsubscribeButton();
+
+    return;
+  }
+
+  this.showSubscribeButton();
 };
 
 export default ContentsBox;

@@ -13,7 +13,7 @@ export function subscribeCompany(company) {
   );
 }
 
-export function unsubscribeCompany(company) {
+export function unSubscribeCompany(company) {
   const companies = getSubscribedCompanies();
 
   const updatedCompanies = companies.filter((name) => name !== company);

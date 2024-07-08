@@ -1,33 +1,58 @@
 import "./NewsViewer.css";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
-import { getNews } from "@/mocks/news";
-import { CATEGORIES } from "@/constants/news";
 import ContentsBox from "./ContentsBox/ContentsBox";
+import { CATEGORIES, getNews } from "../../mocks/news";
+import { getSubscribedCompanies, unSubscribeCompany } from "../../data/storageHandler";
 
-function NewsViewer({ $target, position = "beforeend" }) {
+function NewsViewer({ $target, position = "beforeend", filter = "category" }) {
   this.$element = document.createElement("article");
   this.$element.className = "newsViewer";
   $target.insertAdjacentElement(position, this.$element);
+
+  this.props = {
+    filter,
+  };
 
   this.state = {
     page: 0,
     tab: 0,
   };
 
-  this.setState = function ({ page, tab }) {
-    this.state = {
-      page: page ?? this.state.page,
-      tab: tab ?? this.state.tab,
-    };
-    this.render(getNews(this.state.tab));
-  };
-
-  this.render(getNews(this.state.tab));
+  this.render();
   this.$element.addEventListener("click", this.handleClick.bind(this));
 
   this.initializeProgress();
 }
+
+NewsViewer.prototype.setState = function ({ page, tab }) {
+  this.state = {
+    page: page ?? this.state.page,
+    tab: tab ?? this.state.tab,
+  };
+
+  this.render();
+};
+
+NewsViewer.prototype.getCurrentNews = function () {
+  if (this.props.filter === "category") {
+    return getNews({ category: this.state.tab });
+  }
+
+  if (this.props.filter === "company") {
+    return getNews({ company: getSubscribedCompanies()[this.state.tab] });
+  }
+};
+
+NewsViewer.prototype.getCurrentNewsTabs = function () {
+  if (this.props.filter === "category") {
+    return CATEGORIES;
+  }
+
+  if (this.props.filter === "company") {
+    return getSubscribedCompanies();
+  }
+};
 
 NewsViewer.prototype.handleClick = function (event) {
   const button = event.target.closest("button");
@@ -83,7 +108,8 @@ NewsViewer.prototype.progressInterval = function () {
 };
 
 NewsViewer.prototype.nextPage = function () {
-  const news = getNews(this.state.tab);
+  const news = this.getCurrentNews();
+
   const nextPage = this.state.page + 1;
 
   if (nextPage >= news.length) {
@@ -110,7 +136,7 @@ NewsViewer.prototype.prevPage = function () {
 NewsViewer.prototype.nextTab = function () {
   const nextTab = this.state.tab + 1;
 
-  if (nextTab >= CATEGORIES.length) {
+  if (nextTab >= this.getCurrentNewsTabs().length) {
     this.setState({ tab: 0, page: 0 });
 
     return;
@@ -128,9 +154,17 @@ NewsViewer.prototype.prevCategory = function () {
     return;
   }
 
-  const news = getNews(prevCategory);
+  const news = this.getCurrentNews();
 
   this.setState({ tab: prevCategory, page: news.length - 1 });
+};
+
+NewsViewer.prototype.handleUnsubscribeCompany = function (company) {
+  unSubscribeCompany(company);
+
+  if (this.props.filter === "company") {
+    this.setState({ page: 0, tab: 0 });
+  }
 };
 
 NewsViewer.prototype.MoveToSelectedTab = function () {
@@ -151,11 +185,15 @@ NewsViewer.prototype.formatDate = function formatDate(date) {
   return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
 };
 
-NewsViewer.prototype.render = function (news) {
+NewsViewer.prototype.render = function () {
+  const news = this.getCurrentNews();
+  const tabs = this.getCurrentNewsTabs();
+
   this.$element.innerHTML = /* html */ `
     <ul class="tabs">
-      ${CATEGORIES.map(
-        (name, idx) => /* html */ `
+      ${tabs
+        .map(
+          (name, idx) => /* html */ `
           <li data-tab-number="${idx}" class="tab${this.state.tab === idx ? " selected" : ""}">
             <p class="tabInfo">
               <span>${name}</span>
@@ -166,7 +204,8 @@ NewsViewer.prototype.render = function (news) {
             <progress class="progress progressTransition" value="0" min="0" max="100"></progress>
           </li>
         `
-      ).join("")}
+        )
+        .join("")}
     </ul>
 
     <button id="prevButton" class="newsButton prev${
@@ -180,7 +219,8 @@ NewsViewer.prototype.render = function (news) {
   new ContentsBox({
     $target: this.$element.querySelector(".tabs"),
     position: "afterend",
-    news: getNews(this.state.tab)[this.state.page],
+    news: news[this.state.page],
+    onSubscribeCompany: this.handleUnsubscribeCompany.bind(this),
   });
 };
 
