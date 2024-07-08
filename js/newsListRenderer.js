@@ -11,12 +11,7 @@ async function renderNewsList({ indexInfo = 1, gridListInfo, categoryInfo, subAl
     const newsList = await fetchNewsList(subAllInfo);
     const headerNewsElement = generateHeaderNewsElement(newsList[categoryInfo][indexInfo * 7])
     const newsListElement = generateNewsListElement(newsList[categoryInfo].slice(indexInfo * 7 + 1, indexInfo * 7 + 7));
-
-    const mainElement = document.querySelector(".news-list__main")
-    mainElement.innerHTML = ''; // 모든 자식 노드 제거
-
-    mainElement.innerHTML += headerNewsElement;
-    mainElement.innerHTML += newsListElement;
+    appendElementToHTML(headerNewsElement, newsListElement);
 }
 
 /**
@@ -53,6 +48,19 @@ function generateHeaderNewsElement(headerNews) {
                 <img src="./images/default.jpg" alt="default" class="news-list__main__heading__image">
                 <li class="news-list__main__heading__title">${headerNews.title}</li>
             </ul>`
+}
+
+/**
+ * HTML에 뉴스 DOM Element를 표시한다.
+ * @param {String} headerNewsElement 
+ * @param {String} newsListElement 
+ */
+function appendElementToHTML(headerNewsElement, newsListElement) {
+    const mainElement = document.querySelector(".news-list__main")
+    mainElement.innerHTML = ''; // 모든 자식 노드 제거
+
+    mainElement.innerHTML += headerNewsElement;
+    mainElement.innerHTML += newsListElement;
 }
 
 export { renderNewsList }
