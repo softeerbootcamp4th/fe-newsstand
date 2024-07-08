@@ -11,6 +11,7 @@
 }
 .media-contents__category-item {
     padding: 0 16px;
+    white-space: nowrap;
 }
 .media-contents__category-item--selected {
     position: relative;
