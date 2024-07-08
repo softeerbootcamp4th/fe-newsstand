@@ -299,6 +299,7 @@ h2 {
 .news-sub-titles:hover {
     text-decoration: underline;
 }
+
 button {
     width:166px;
     padding: 10px 0px 10px 0px;
@@ -326,7 +327,6 @@ button:hover {
     color: #4B5966; 
     cursor: pointer;
     font-size: 15px; 
-    /*border-right: 0.5px solid #4B5966; */
 }
 
 .text-button:hover {
@@ -361,10 +361,11 @@ button:hover {
     left: 1100px;
 }
 
-/* progress button - tab*/
+/* progress button - tab
+/*
 .progress-button{
     cursor: pointer;
-    /*background: var(--surface-surface-brand-alt, #7890E7); */
+    /*background: var(--surface-surface-brand-alt, #7890E7); 
     width: 166px;
     height: 17px;
     background: #7890E7;
@@ -372,24 +373,55 @@ button:hover {
     color: white;
     overflow: hidden;
 }
-
-/*눌린 후 탭*/
-.selected::after{
-    content: "";
-    position: absolute;
-    top:0;
-    left:0;
-    width:0%;
-    height: 100%;
-    transition: width 5s linear;
+*/
+.progress-button{
+    cursor: pointer;
+    width: 166px;
+    height: 17px;
+    display: flex;
+    background: linear-gradient(to right,var(--blue-500) 50%,#7890E7 50%);
+    font-size: 15px;
+    padding: 12px 12px;
+    color: white;
+    position: relative;
+    background-size: 200% 100%;
 }
 
-.selected.nowSelected::after{
-    width: 100%;
+.progress-button.animate {
+    background-position: left bottom;
+    animation: fillAnimation 2s ease-in;
 }
-@keyframes colorChange {
-    0% { background-color: #66b3ff; } /* 시작 색 (하늘색) */
-    100% { background-color: blue; } /* 종료 색 (파란색) */
+
+.progress-button:hover{
+    text-decoration: underline;
+}
+
+/* 구독 탭바  */
+.sub-button{
+    cursor: pointer;
+    width: 166px;
+    height: 17px;
+    display: flex;
+    background: linear-gradient(to right,var(--blue-500) 50%,#7890E7 50%);
+    font-size: 15px;
+    padding: 12px 12px;
+    color: white;
+    position: relative;
+    background-size: 200% 100%;
+}
+
+.sub-button.animate {
+    background-position: left bottom;
+    animation: fillAnimation 2s ease-in;
+}
+
+.sub-button:hover{
+    text-decoration: underline;
+}
+
+@keyframes fillAnimation {
+    0% { background-position: right bottom; }
+    100% { background-position: left bottom; }
 }
 
 /* 구독 시 나타남 id - # */
@@ -444,8 +476,8 @@ button:hover {
     font-weight: 500;
     font-size: 16px;
     line-height: auto;
-    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
-        0 2px 18px hsla(var(--grayscale-black), 0.8);
+    transform: translate(-50%, -50%); /* 중앙 정렬*/
+    box-shadow: 3px 4px 11px 0px #00000040;
     z-index: 10;
     left: 50%;
     top: 50%;
@@ -453,5 +485,29 @@ button:hover {
 }
 
 #submodal.active {
+    opacity: 1;
+}
+
+#cancelmodal {
+    width: 320px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: var(--grayscale-300);
+    font-weight: 500;
+    font-size: 16px;
+    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
+                0 2px 18px hsla(var(--grayscale-black), 0.8);
+    border: 1px solid var(--gray-400);
+    opacity: 0;
+    gap: 0px;
+    z-index: 10;
+    left: 50%;
+    top: 50%;
+}
+
+#cancelmodal.active {
     opacity: 1;
 }
