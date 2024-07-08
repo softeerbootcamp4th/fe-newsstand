@@ -5,29 +5,28 @@
   height: 40px;
   background-color: #f5f7f9;
   align-items: center;
-  list-style: none;
 }
 
-.contentList ul {
+.contentList li {
+  list-style: none;
   width: auto;
   height: 40px;
-  padding: 16px;
   display: flex;
   align-items: center;
   cursor: pointer;
+  position: relative;
 }
 
-.progress {
-  display: none;
+.cover {
+  position: absolute;
 }
 
 .contentList ul:hover {
   text-decoration: underline;
 }
 
-.contentList ul.selected {
+.contentList li.selected {
   width: 166px;
-  background-color: #7890e7;
   color: white;
   cursor: default;
   text-decoration: none;
@@ -35,15 +34,8 @@
   position: relative;
 }
 
-.contentList ul.selected::after {
-  width: 0%;
-  content: "";
-  display: block;
-  background-color: #002ac0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: width 4s ease;
+.contentList ul.selected span {
+  z-index: 1;
 }
 
 ul.selected .progress {

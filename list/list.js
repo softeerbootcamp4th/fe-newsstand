@@ -1,6 +1,6 @@
-import { generateNav } from "./nav.js";
-import { generateBanner } from "./newsBanner.js";
-import { generateNewsList } from "./newsList.js";
+import { generateNav } from "../components/nav.js";
+import { generateBanner } from "../components/newsBanner.js";
+import { generateNewsList } from "../components/newsList.js";
 const categoryList = [
   "종합/경제",
   "방송/통신",
@@ -216,14 +216,14 @@ generateBanner(bannerContainer, headlineData[1]);
 
 //각 배너는 time delay를 가지고 롤링
 function rollingCallback(time) {
-  const prevElements = document.querySelectorAll(".prev");
+  const prevElements = bannerContainer.querySelectorAll(".prev");
   prevElements.forEach((prev, index) => {
     setTimeout(() => {
       prev.classList.remove("prev");
     }, index * time);
   });
 
-  const currentElements = document.querySelectorAll(".current");
+  const currentElements = bannerContainer.querySelectorAll(".current");
   currentElements.forEach((current, index) => {
     setTimeout(() => {
       current.classList.remove("current");
@@ -231,7 +231,7 @@ function rollingCallback(time) {
     }, index * time);
   });
 
-  const nextElements = document.querySelectorAll(".next");
+  const nextElements = bannerContainer.querySelectorAll(".next");
   nextElements.forEach((next, index) => {
     setTimeout(() => {
       next.classList.remove("next");
@@ -245,11 +245,23 @@ function rollingCallback(time) {
     }, index * time);
   });
 }
+function stopRolling() {
+  clearInterval(rollingInterval);
+}
+
+function startRolling() {
+  rollingInterval = setInterval(() => {
+    rollingCallback(1000); // time interval between transitions
+  }, 2000); // rolling interval
+}
+
+bannerContainer.addEventListener("mouseenter", stopRolling);
+bannerContainer.addEventListener("mouseleave", startRolling);
 
 const category = document.getElementById("category");
 const show = document.getElementById("show");
 const newsListContainer = document.getElementById("newsList_container");
-const categoryElements = document.querySelectorAll(".contentList ul");
+const categoryElements = document.querySelectorAll(".contentList li");
 const currentMedia = document.querySelector(".media");
 const progresses = document.querySelectorAll(".progress");
 
@@ -293,11 +305,7 @@ function updateNewsList(category, mediaIndex) {
   const mediaList = data[category];
   setProgress(selectedCategoryIndex, mediaIndex);
 
-  generateNewsList(
-    newsListContainer,
-    mediaList[mediaIndex].media,
-    mediaList[mediaIndex].news
-  );
+  generateNewsList(newsListContainer, mediaList[mediaIndex]);
   currentMedia.innerHTML = mediaList[mediaIndex].media;
 }
 
@@ -325,11 +333,6 @@ setInterval(() => {
     updateNewsList(categoryList[selectedCategoryIndex], currentMediaIndex);
   }
 }, 20000);
-
-//5초마다 롤링
-setInterval(() => {
-  rollingCallback(1000);
-}, 5000);
 
 // 초기화
 initialize();
