@@ -48,7 +48,11 @@ export const eventMap = new Map<string, Map<string, EventListener>>();
 const rootEventHandler = (e: Event) => {
   const target = e.target as HTMLElement;
   const handler = eventMap.get(target.getAttribute("key") ?? "")?.get(e.type);
+
   if (handler == null) {
+    if (target.parentElement != document.body) {
+      target.parentElement?.dispatchEvent(new Event(e.type, e));
+    }
     return;
   }
   handler(e);
