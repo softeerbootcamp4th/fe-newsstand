@@ -1,8 +1,17 @@
 import { TOGGLE } from "./magicValues.js";
 import { renderDefaultSceen } from "./render.js";
 
-export function handleToggle(state,target) {
-    const toggleName = target.id.split("_")[1];
+export function addEventToToggle(state) {
+    const toggleWrapperDom = document.querySelector(".toggle_wrapper");
+    toggleWrapperDom.addEventListener("click",(event) => handleToggleWithToggleDom(state,event.target));
+}
+
+export function handleToggleWithToggleDom(state,toggleDom) {
+    const toggleName = toggleDom.id.split("_")[1];
+    handleToggleWithToggleName(state,toggleName);
+}
+
+export function handleToggleWithToggleName(state,toggleName) {
     switch (toggleName) {
         case TOGGLE.ALL:
             document.querySelector("#toggle_all").classList.add('toggle_item_active');

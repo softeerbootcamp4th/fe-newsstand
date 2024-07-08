@@ -297,13 +297,13 @@
 }
 
 .toast_popup {
-    width: 200px;
-    height: 80px;
-    border-radius: 20px;
+    width: 286px;
+    height: 54px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     padding: 16px;
-    background-color: blue;
+    color: #FFFFFF;
+    background-color: #4362D0;
 }

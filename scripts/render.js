@@ -41,8 +41,8 @@ function renderAllToggleArticles(state) {
     let cardTitle = "";
 
     if (companies.length !== 0) {
-        let currentCompany = getCurrentCompany(state);
-        let currentArticle = getCurrentArticle(state);
+        const currentCompany = getCurrentCompany(state);
+        const currentArticle = getCurrentArticle(state);
         document.querySelector("#register_date").textContent = currentArticle.registerDate;
         document.querySelector("#company_img").src = currentCompany.image;
         cardImage = companies[state.selectedCompanyIndex]
@@ -106,8 +106,8 @@ function renderSubscribedToggleArticles(state) {
     let cardTitle = "";
 
     if (companies.length !== 0) {
-        let currentCompany = getCurrentCompany(state);
-        let currentArticle = getCurrentArticle(state);
+        const currentCompany = getCurrentCompany(state);
+        const currentArticle = getCurrentArticle(state);
         document.querySelector("#register_date").textContent = currentArticle.registerDate;
         document.querySelector("#company_img").src = currentCompany.image;
         cardImage = currentArticle.image;
