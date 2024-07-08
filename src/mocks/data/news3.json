@@ -1,5 +1,6 @@
 [
   {
+    "category": 3,
     "company": "연합뉴스",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/946.png",
     "title": "DP seeks to pass controversial special probe bill on Marine's death at plenary session",
@@ -14,6 +15,7 @@
     ]
   },
   {
+    "category": 3,
     "company": "TheKoreaTimes",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/040.png",
     "title": "Korean-British couple left in blind spot for adoption",
@@ -28,6 +30,7 @@
     ]
   },
   {
+    "category": 3,
     "company": "ECONOTIMES",
     "companyLogo": "https://s.pstatic.net/static/newsstand/up/2022/0615/nsd7244919.png",
     "title": "Why Russia still has friends on the world stage",

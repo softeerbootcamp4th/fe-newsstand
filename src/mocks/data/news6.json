@@ -1,5 +1,6 @@
 [
   {
+    "category": 6,
     "company": "국제신문",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/332.png",
     "title": "‘명지 중금속 오염토’ 1100억 들여 덜어낸다",
@@ -14,6 +15,7 @@
     ]
   },
   {
+    "category": 6,
     "company": "대전일보",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/089.png",
     "title": "대통령실 세종 이전 규정 추진...\"2027년 입주\"",
@@ -28,6 +30,7 @@
     ]
   },
   {
+    "category": 6,
     "company": "경기신문",
     "companyLogo": "https://s.pstatic.net/static/newsstand/up/2022/1017/nsd20268714.png",
     "title": "“녹화·녹음 중입니다”…교권 보호 위한 ‘민원면담실’ 조성에 ‘박차’",

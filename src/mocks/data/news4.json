@@ -1,5 +1,6 @@
 [
   {
+    "category": 4,
     "company": "스포츠월드",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/396.png",
     "title": "허웅 前여친 “3억 요구? 다툼 중 나온 말…이후 여행도”",
@@ -14,6 +15,7 @@
     ]
   },
   {
+    "category": 4,
     "company": "일간스포츠",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/241.png",
     "title": "'얼짱 농구스타'에서 '내조의 여왕'으로 신혜인 \"우리 집은 용인 아방궁\"",
@@ -28,6 +30,7 @@
     ]
   },
   {
+    "category": 4,
     "company": "스포츠춘추",
     "companyLogo": "https://s.pstatic.net/static/newsstand/up/2022/0116/nsd194523259.png",
     "title": "두산, 외국인 투수 교체 승부수…MLB 특급 유망주 출신 발라조빅 영입 [춘추 이슈]",

@@ -1,5 +1,6 @@
 [
   {
+    "category": 2,
     "company": "IT동아",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/818.png",
     "title": "[리뷰] M4 칩 기반으로 더 얇고 강력해진 아이패드 프로 7세대",
@@ -14,6 +15,7 @@
     ]
   },
   {
+    "category": 2,
     "company": "보안뉴스",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/952.png",
     "title": "3년 전에 패치된 취약점, 공격자들이 재발굴해 스파이웨어 퍼트리는 중",
@@ -28,6 +30,7 @@
     ]
   },
   {
+    "category": 2,
     "company": "전자신문",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/030.png",
     "title": "지자체 데이터센터 프로젝트 28개…강원도 압도적",

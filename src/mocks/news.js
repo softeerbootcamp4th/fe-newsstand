@@ -1,28 +1,26 @@
-import news0 from "@/mocks/data/news0.json";
-import news1 from "@/mocks/data/news1.json";
-import news2 from "@/mocks/data/news2.json";
-import news3 from "@/mocks/data/news3.json";
-import news4 from "@/mocks/data/news4.json";
-import news5 from "@/mocks/data/news5.json";
-import news6 from "@/mocks/data/news6.json";
+import news from "./data/news.json";
+import { getSubscribedCompanies } from "../data/storageHandler";
 
-export function getNews(category) {
-  switch (category) {
-    case 0:
-      return news0;
-    case 1:
-      return news1;
-    case 2:
-      return news2;
-    case 3:
-      return news3;
-    case 4:
-      return news4;
-    case 5:
-      return news5;
-    case 6:
-      return news6;
-    default:
-      return news0;
+export const CATEGORIES = [
+  "종합/경제",
+  "방송/통신",
+  "IT",
+  "영자지",
+  "스포츠/연예",
+  "매거진/전문지",
+  "지역",
+];
+
+export function getNews({ category, company }) {
+  let newsList = news;
+
+  if (category !== undefined) {
+    newsList = newsList.filter((ele) => ele.category === category);
   }
+
+  if (company !== undefined) {
+    newsList = newsList.filter((ele) => ele.company === company);
+  }
+
+  return newsList;
 }

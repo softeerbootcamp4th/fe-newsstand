@@ -1,5 +1,6 @@
 [
   {
+    "category": 0,
     "company": "아주경제",
     "companyLogo": "https://s.pstatic.net/static/newsstand/up/2023/0731/nsd133759965.png",
     "title": "물가안정·생계비 지원에 5.6조 투입…中企 근로자 소득세 감면 확대",
@@ -14,6 +15,7 @@
     ]
   },
   {
+    "category": 0,
     "company": "나우뉴스",
     "companyLogo": "https://s.pstatic.net/static/newsstand/up/2022/0804/nsd13457540.png",
     "title": "최악의 자책골…“러軍, 자국 영토에 ‘실수로’ 활공폭탄 투하” [핫이슈]",
@@ -28,6 +30,7 @@
     ]
   },
   {
+    "category": 0,
     "company": "미주한국일보",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/814.png",
     "title": "민주 의원, 첫 공개 사퇴 요구 vs 바이든측 “언론 과잉보도탓”",

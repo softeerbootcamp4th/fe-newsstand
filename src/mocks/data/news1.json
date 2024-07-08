@@ -1,5 +1,6 @@
 [
   {
+    "category": 1,
     "company": "한국경제TV",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/215.png",
     "title": "코스피, 연중최고치 경신…외국인, 선물 1.8조원 '매집'",
@@ -14,6 +15,7 @@
     ]
   },
   {
+    "category": 1,
     "company": "TBC뉴스",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/989.png",
     "title": "[굿모닝 날씨]낮기온 33도 안팎...저녁부터 장맛비",
@@ -28,6 +30,7 @@
     ]
   },
   {
+    "category": 1,
     "company": "MBC뉴스",
     "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/214.png",
     "title": "주진우, 채 상병 순직 '장비손괴' 비유‥야당 \"사람이 장비인가\"",
