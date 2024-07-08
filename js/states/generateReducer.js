@@ -10,8 +10,8 @@ function generateReducer(fullList)
 	const subscribedLinkedList = new LinkedList();
 
 	// state
-	const subscribeFilterState = new State(false);
-	const viewTypeState = new State("list");
+	const subscribeFilterState = new State();
+	const viewTypeState = new State();
 	const subscribedListState = new LinkedListAdaptor(subscribedLinkedList);
 	const cursorState = new CursorAdaptor(fullLinkedList);
 
@@ -19,7 +19,7 @@ function generateReducer(fullList)
 
 	function getDelta()
 	{
-		return viewTypeState.value === "list" ? 1 : GRID_ITEMS_PER_PAGE;
+		return viewTypeState.value === "grid" ? GRID_ITEMS_PER_PAGE : 1;
 	}
 
 	// derived state
@@ -84,13 +84,20 @@ function generateReducer(fullList)
 				viewTypeState.change("list");
 				cursorState.moveFirst();
 			},
-			addToSubscription(value)
+			addToSubscription(value, prevCache)
 			{
-				subscribedListState.add(value);
+				subscribedListState.add(value, prevCache);
+				if(viewTypeState.value === "list")
+				{
+					subscribeFilterState.change(true);
+					cursorState.changeLinkedList(subscribedLinkedList);
+					cursorState.moveTo(value);
+				}
 			},
 			removeFromSubscription(value)
 			{
 				subscribedListState.delete(value);
+				//if(viewTypeState.value === "list") cursorState.moveNext(1); // 다르게 구현함(구독 해지해도 원래게 보이게)
 			},
 			// derived state
 			beforeCursor()
@@ -101,6 +108,12 @@ function generateReducer(fullList)
 			{
 				return cursorState.findOffset(getDelta());
 			},
+		},
+		// initializer
+		function() {
+			subscribeFilterState.change(false);
+			viewTypeState.change("grid");
+			cursorState.moveFirst();
 		}
 	];
 }

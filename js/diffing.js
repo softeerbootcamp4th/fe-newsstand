@@ -37,6 +37,7 @@ function makeRelativeNodePositionMap(children)
 	for(let i=0; i<length; i++)
 	{
 		let uniqueKey = map.get(filteredChildren[i]);
+		if(uniqueKey === undefined) continue;
 		let nextUniqueKey = map.get(filteredChildren[i+1]) ?? null;
 		nodeNextMap.set(uniqueKey, nextUniqueKey);
 	}
@@ -91,17 +92,20 @@ function applyDiffChildren(targetDom, childList)
 
 	// 자식의 상대적 위치를 저장하는 별도의 맵을 만듭니다.
 	// 모든 dom에 대해, 재조정 과정을 거칩니다.
+	const tempNodeKeyMap = makeUniqueKeyMap(targetDom.childNodes);
 	const oldNodeNextMap = makeRelativeNodePositionMap(targetDom.childNodes);
 	
 	// 기존 dom의 자식의 상대적인 위치를 변경합니다.
-	for(let [uniqueKey, child] of oldNodeKeyMap)
-	{
-		if(oldNodeNextMap.get(uniqueKey) !== newNodeNextMap.get(uniqueKey) ){
-			const nextNode = oldNodeKeyMap.get(newNodeNextMap.get(uniqueKey)) ?? null;
-			targetDom.insertBefore(child, nextNode);
+	const newNodeNextMapArray = [...newNodeNextMap].reverse();
+	newNodeNextMapArray.forEach( ([uniqueKey, nextKey])=>{
+		if(tempNodeKeyMap.get(uniqueKey) !== nextKey) {
+			const nextNode = tempNodeKeyMap.get(nextKey) ?? null;
+			const currentNode = tempNodeKeyMap.get(uniqueKey);
+			targetDom.insertBefore(currentNode, nextNode);
 		}
-	}
+	} );
 
+	// 자식에 대해 재귀적으로 key-map을 변경시킵니다.
 	for(let [uniqueKey, child] of newNodeKeyMap)
 	{
 		if(oldNodeKeyMap.has(uniqueKey)) {

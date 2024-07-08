@@ -56,6 +56,11 @@ CursorAdaptor.prototype.findOffset = function(offset)
 	return this.cursor.findOffset(offset);
 }
 
+CursorAdaptor.prototype.getPrevKey = function()
+{
+	return this.cursor.neighbor.prev;
+}
+
 CursorAdaptor.prototype.isOutOfList = function()
 {
 	return this.cursor.isOutOfList();

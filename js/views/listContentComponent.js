@@ -14,8 +14,9 @@ function getDateFormat(dateMillis)
 	return `${year}-${month}-${day} ${hour}:${minute}`;
 }
 
-function ListContentComponent(pressId, subscribeState)
+function ListContentComponent(state, reducer)
 {
+	const pressId = state.cursor.value;
 	const {name, logo, lastEditDate, headArticle, articleList} = db[pressId];
 
 	const dom = html`
@@ -23,7 +24,7 @@ function ListContentComponent(pressId, subscribeState)
 		<div class="contentHeader">
 			<img src="${logo}" alt="${name}" class="logoImage" loading="lazy" />
 			<p class="lastEditDate">${getDateFormat(lastEditDate)} 편집</p>
-			${SubscribeButton(pressId, subscribeState)}
+			${SubscribeButton(state, reducer)}
 		</div>
 		<div class="contentBody">
 			<div class="headlineArticle">

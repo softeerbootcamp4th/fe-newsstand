@@ -1,6 +1,9 @@
 import html from "../domParser.js";
 import applyDiff from "../diffing.js";
 
+import unsubscribePopup from "./unsubscribePopup.js";
+import showToast from "./showToast.js";
+
 function SubscribeButtonInner(isSubbed)
 {
 	const addIcon = html`<svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="inherit" xmlns="http://www.w3.org/2000/svg">
@@ -13,23 +16,20 @@ function SubscribeButtonInner(isSubbed)
 	return deleteIcon;
 }
 
-function SubscribeButton(pressId, subList)
+function SubscribeButton({cursor, subFilter, subList}, {addToSubscription, removeFromSubscription}, pressId=cursor.value)
 {
-	const prevCache = subList.getPrev(pressId);
+	const prevCache = pressId === cursor.value && subFilter.value ? cursor.getPrevKey() : undefined;
 	const dom = html`<button class="subscribeButton" data-force-replace="true" data-unique-key="subscribe-button-${pressId}">
 		${SubscribeButtonInner(subList.has(pressId))}
 	</button>`
 
 	dom.addEventListener( "click", ()=>{
-		if(!subList.has(pressId)) subList.add(pressId, prevCache);
-		else subList.delete(pressId);
-		// subscribePopup(pressId);
+		if(!subList.has(pressId)) {
+			addToSubscription(pressId, prevCache);
+			showToast();
+		}
+		else unsubscribePopup(pressId, removeFromSubscription);
 	} );
-
-	// subList.addSideEffect( (after, before)=>{
-	// 	if(after.includes(pressId) && !before.includes(pressId)) applyDiff(dom, SubscribeButtonInner(true));
-	// 	else if(before.includes(pressId) && !after.includes(pressId)) applyDiff(dom, SubscribeButtonInner(false));
-	// } );
 
 	return dom;
 }

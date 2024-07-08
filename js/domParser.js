@@ -28,7 +28,7 @@ function makePlainHTML(plains, elems)
 	for(let i=0; i<elems.length; i++)
 	{
 		if(elems[i] instanceof Node || Array.isArray(elems[i])) result += "<placeholder></placeholder>";
-		else result += `${elems[i]}`.replace("<", "&lt;").replace(">", "&gt;");
+		else if(elems[i] !== null) result += `${elems[i]}`.replace("<", "&lt;").replace(">", "&gt;");
 		result += plains[i+1];
 	}
 	result.replace(/\>\s+\</, "><");
@@ -82,10 +82,14 @@ function domMaker(plains, ...elems)
 	const dom = parser(plainHTML);
 	const holders = [...dom.querySelectorAll("placeholder")];
 	const nodes = elems.filter( e=>e instanceof Node || Array.isArray(e) );
+
+	if(dom.tagName === "PLACEHOLDER") return nodes[0];
+
 	for(let i=0; i<nodes.length; i++)
 	{
 		let node = nodes[i];
 		if(Array.isArray(node)) node = convertArrayToFragment(node);
+
 		holders[i].parentNode.insertBefore(node, holders[i]);
 		holders[i].remove();
 	}

@@ -1,4 +1,4 @@
-function mountPageMoverSelector(state, reducers)
+function mountPageMoverSelector(state, {moveLeft, moveRight})
 {
 	const leftMover = document.getElementById("leftMoveButton");
 	const rightMover = document.getElementById("rightMoveButton");
@@ -10,8 +10,8 @@ function mountPageMoverSelector(state, reducers)
 		rightMover.classList.toggle("hidden", value);
 	} );
 
-	leftMover.addEventListener("click", ()=>reducers.moveLeft());
-	rightMover.addEventListener("click", ()=>reducers.moveRight());
+	leftMover.addEventListener("click", ()=>moveLeft());
+	rightMover.addEventListener("click", ()=>moveRight());
 }
 
 export default mountPageMoverSelector;
