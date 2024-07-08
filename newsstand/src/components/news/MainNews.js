@@ -6,9 +6,21 @@ import { generateRandomId } from '../../utils/idGenerator.js'
 import { isSubscribed, handleSubscription } from '../../utils/subscribeUtils.js'
 
 const MainNews = (props) => {
+    if (!props.newsData) {
+        return {
+            element: `
+                <h5>
+                    구독한 언론사가 없습니다.
+                    언론사 구독 설정에서 관심 있는 언론사를 구독하시면
+                    언론사가 직접 편집한 뉴스들을 네이버 홈에서 바로 보실 수 있습니다.
+                </h5>
+            `,
+        }
+    }
+
     const companyIcon = createComponent(IconView, {
         id: generateRandomId(10),
-        icon: props.newsData.companyIcon || '',
+        icon: props.newsData ? props.newsData.companyIcon : '',
     })
 
     const subscribeButton = createComponent(Button, {
