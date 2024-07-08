@@ -1,3 +1,9 @@
+/** global */
+.border-box {
+  border: 1px solid var(--border-default);
+  box-sizing: border-box;
+}
+
 /* content container */
 body {
   width: 100%;
@@ -44,9 +50,14 @@ header {
   gap: 20px;
 }
 
+/** news container */
+
 main {
   display: flex;
   flex-direction: column;
 
   gap: 24px;
+
+  position: relative;
+  width: 100%;
 }
