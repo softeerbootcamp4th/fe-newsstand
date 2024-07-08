@@ -137,16 +137,16 @@ const handleCategoryEvent = (thisBtn, menuInfo) => {
     
     const timeoutId = setTimeout(() => {
         if (menuCurrentPage === menuLastPage) {
-            moveNextCategory();
+            moveNextCategory(thisBtn, nextBtn, totalMenuLength);
         } else {
-            moveNextPage();
+            moveNextPage(thisBtn);
         }
         insertContent(menuIdx, menuCurrentPage, menuLastPage);
     }, CATEGORY_TIMEOUT);
     newsState.setCategoryTimeoutId(timeoutId);
 }
 
-const moveNextCategory = () => {
+const moveNextCategory = (thisBtn, nextBtn, totalMenuLength) => {
     newsState.setMenuCurrentPage(1);
     newsState.setMenuIdx(menuIdx+1);
     if (menuIdx === totalMenuLength) {
@@ -157,7 +157,7 @@ const moveNextCategory = () => {
     handleCategoryEvent(nextBtn, menuInfo);
 }
 
-const moveNextPage = () => {
+const moveNextPage = (thisBtn) => {
     newsState.setMenuCurrentPage(menuCurrentPage+1);
     thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
     thisBtn.querySelector('.fill-background').remove();
