@@ -15,17 +15,19 @@ import {
 
 const DEFAULT_MEDIA_INDEX = 0;
 
+let mediaData = {};
+
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
-export function renderSubscribedMedia() {
+export async function renderSubscribedMedia() {
+    mediaData = await getData('../static/data/media.json');
+
     renderMedia();    
 }
 
-async function renderMedia(mediaId) {
-    const mediaData = await getData('../static/data/media.json');
+function renderMedia(mediaId) {
     const media = mediaData.data;
-
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
 

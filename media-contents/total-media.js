@@ -15,18 +15,21 @@ import {
 const DEFAULT_CATEGORY_INDEX = 0;
 const DEFAULT_MEDIA_INDEX = 0;
 
+let categoryData = {};
+
 /**
  * @description 전체 언론사를 렌더링하는 함수
  */
-export function renderTotalMedia() {
+export async function renderTotalMedia() {
+    categoryData = await getData('../static/data/media-by-category.json');
+
     renderMedia(DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX);
 }
 
 /**
  * @description 미디어 카테고리, 콘텐츠를 렌더링하는 함수
  */
-async function renderMedia(categoryIdx, mediaIdx) {
-    const categoryData = await getData('../static/data/media-by-category.json');
+function renderMedia(categoryIdx, mediaIdx) {
     const category = categoryData.data;
     const categoryListDOM = document.querySelector(".media-contents__category-list");
 
@@ -119,9 +122,7 @@ function navigatePrevMedia() {
  * @description prev, next 버튼 클릭 동작을 수행하는 함수
  */
 async function clickNavigationButton(step) {
-    const categoryData = await getData('../static/data/media-by-category.json');
     const category = categoryData.data;
-
     const selectedCategory = document.querySelector(".media-contents__category-item--selected");
 
     const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
@@ -164,5 +165,5 @@ async function clickNavigationButton(step) {
 
     const categoryIdxNumber = parseInt(selectedCategory.dataset.selectedCategoryIdx);
     const mediaIdxNumber = parseInt(selectedCategory.dataset.selectedMediaIdx);
-    renderMedia(category, categoryIdxNumber, mediaIdxNumber);
+    renderMedia(categoryIdxNumber, mediaIdxNumber);
 }
