@@ -2,6 +2,7 @@ import { addEventToRotatingArrow } from "./scripts/addEventToRotatingArrow.js";
 import { addEventToRotatingBox } from "./scripts/addEventToRotatingBox.js";
 import { addEventToToggle, renderDefaultSceen } from "./scripts/addEventToToggle.js";
 import { getCurrentDateString } from "./scripts/util.js";
+import { initialize } from "./scripts/initialize.js";
 import { TOGGLE } from "./scripts/magicValues.js";
 const currentDateString = getCurrentDateString();
 document.getElementById("date_section").innerHTML = currentDateString;
@@ -67,7 +68,7 @@ let state = {
 //     border: '2px solid black'
 // });
 
-
+initialize(state);
 renderDefaultSceen(state);
 addEventToRotatingBox(state);
 addEventToToggle(state);

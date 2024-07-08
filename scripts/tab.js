@@ -61,7 +61,9 @@ function updateTabAnimation(state,max) {
                 break;
         }
     }
-    animationTabDom.style.transform = transform;
+    if(animationTabDom){
+        animationTabDom.style.transform = transform;
+    }
 }
 
 

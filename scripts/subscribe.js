@@ -43,13 +43,13 @@ export function updateSubscribeButton(state) {
 
     function eventFunction(state, companyName, isSubscribed) {
         if (isSubscribed) {
-            state.subscribedCompanyNameSet.delete(companyName);
+            unSubscribeCompany(state,companyName);
             if (state.selectedCompanyIndex > (getTabLength(state) - 1)) {
                 state.selectedCompanyIndex -= 1;
             }
         } else {
             addToastPopup(companyName);
-            state.subscribedCompanyNameSet.add(companyName);
+            subscribeCompany(state,companyName);
         }
         renderTabList(state);
         if (state.toggleName === TOGGLE.SUBSCRIBED) {
@@ -62,10 +62,12 @@ export function updateSubscribeButton(state) {
 }
 
 export function loadSubscribeCompanies(state) {
-    state.subscribedCompanyNameSet = new Set(parseSetData(loadSubscribeCompaniesFromLocalStorage()));
+    let tmp = parseSetData(loadSubscribeCompaniesFromLocalStorage());
+    state.subscribedCompanyNameSet = tmp;
 }
 
 export function subscribeCompany(state, company) {
+    console.log(state)
     state.subscribedCompanyNameSet.add(company);
     saveSubscribeCompaniesToLocalStorage(state.subscribedCompanyNameSet);
 }
