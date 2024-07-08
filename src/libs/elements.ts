@@ -3,14 +3,13 @@ import { AppElement, AppElementProps, CreatedAppElement } from "./renderer";
 export const Raw = (data: string) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(data, "text/xml");
-  const elem = () => ({
+  return {
     element: doc.documentElement,
-    props: {},
+    children: [],
     eventListeners: new Map(),
-  });
-  elem.type = "element" as const;
-  return elem;
+  };
 };
+Raw.type = "element";
 
 export function ce<T extends HTMLElement>(
   render: AppElement<T>,
