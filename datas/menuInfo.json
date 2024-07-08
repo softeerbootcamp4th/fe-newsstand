@@ -4,50 +4,47 @@
             "categoryIdx": 0,
             "category": "종합/경제",
             "totalPages": 3,
-            "thumbnailDatas": [
+            "mediaData": [
                 {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "스포츠동아",
-                    "thumbnailUpdatedDate": "2023.02.10. 18:27",
+                    "mediaName": "서울경제",
+                    "updatedDate": "2024.01.05. 09:15",
                     "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "또 국민연금의 몽니..현대차 지주사 불발",
+                    "thumbnailDetail": "현대차, 미래 전략 발표",
                     "articleList": [
-                        "위스키 사려고 이틀 전부터 줄 섰어요",
-                        "'방시혁 제국'이냐 '카카오 왕국'이냐…K엔터 누가 거머쥘까",
-                        "사용후핵연료 저장시설 포화…이대론 7년 뒤 원전 멈춘다",
-                        "[단독] 원희룡 \"해외건설 근로자 소득공제 월 500만원으로 상향할 것\"",
-                        "태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]",
-                        "LG엔솔, 폴란드 자동차산업협회 가입…“유럽서 목소리 키운다”"
+                        "주가 상승, 미래를 낙관하다",
+                        "현대차, 전기차 시장 선도",
+                        "현대차의 자율주행 기술",
+                        "CEO 인터뷰: 지속 가능한 성장 전략",
+                        "자동차 산업의 글로벌 경쟁",
+                        "신차 발표와 미래 비전"
                     ]
                 },
                 {
-                    "pageIdx": 1,
-                    "thumbnailMediaName": "서울경제",
-                    "thumbnailUpdatedDate": "2023.02.11. 09:15",
+                    "mediaName": "헤럴드경제",
+                    "updatedDate": "2024.01.10. 10:20",
                     "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "국민연금 논란, 현대차의 대응은?",
+                    "thumbnailDetail": "국민연금 개혁, 경제에 미치는 영향",
                     "articleList": [
-                        "주가 상승에 대한 기대감 높아져",
-                        "'자동차 산업의 새로운 패러다임'",
-                        "현대차의 미래 전략 분석",
-                        "[인터뷰] 현대차 CEO가 말하는 미래",
-                        "자동차 산업의 글로벌 트렌드",
-                        "현대차의 신차 발표"
+                        "국민연금, 개혁 필요성 증가",
+                        "현대차의 대응 전략",
+                        "전기차와 친환경 자동차의 미래",
+                        "글로벌 자동차 시장 분석",
+                        "CEO 인터뷰: 전기차의 비전",
+                        "미래 자동차 기술 혁신"
                     ]
                 },
                 {
-                    "pageIdx": 2,
-                    "thumbnailMediaName": "세계일보",
-                    "thumbnailUpdatedDate": "2023.02.12. 16:30",
+                    "mediaName": "파이낸셜뉴스",
+                    "updatedDate": "2024.01.15. 08:30",
                     "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "현대차, 새로운 도전에 직면하다",
+                    "thumbnailDetail": "현대차, 새로운 시장 도전",
                     "articleList": [
-                        "미래 자동차 산업의 방향성",
-                        "'기술 혁신의 중심에 선 현대차'",
-                        "전기차 시장의 경쟁 구도",
-                        "[기고] 자동차 산업의 변화와 전망",
-                        "현대차의 글로벌 시장 전략",
-                        "미래 자동차의 혁신"
+                        "현대차, 전기차 시대의 선두주자",
+                        "주가 상승 배경과 전망",
+                        "자동차 산업의 패러다임 전환",
+                        "CEO 인터뷰: 혁신과 도전",
+                        "글로벌 시장에서의 현대차",
+                        "신차 발표와 전략적 방향"
                     ]
                 }
             ]
@@ -56,65 +53,61 @@
             "categoryIdx": 1,
             "category": "방송/통신",
             "totalPages": 4,
-            "thumbnailDatas": [
+            "mediaData": [
                 {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "헤럴드경제",
-                    "thumbnailUpdatedDate": "2023.03.12. 14:10",
+                    "mediaName": "KBS",
+                    "updatedDate": "2024.02.20. 14:10",
                     "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "5G 시대, 방송 통신 융합의 미래",
+                    "thumbnailDetail": "5G 시대, 방송 통신의 융합",
                     "articleList": [
-                        "5G의 현재와 미래",
-                        "'방송 통신 융합의 중요성'",
-                        "5G 기술의 발전",
-                        "[특집] 방송과 통신의 융합 사례",
+                        "5G 기술, 어디까지 왔나",
+                        "방송과 통신의 경계 허물기",
+                        "5G 기술의 혁신 사례",
+                        "특집: 융합 서비스의 미래",
+                        "글로벌 5G 기술 트렌드",
+                        "새로운 서비스의 가능성"
+                    ]
+                },
+                {
+                    "mediaName": "SBS",
+                    "updatedDate": "2024.02.25. 15:20",
+                    "thumbnailImgPath": "/icons/newspaper.png",
+                    "thumbnailDetail": "방송 통신 융합의 미래 전망",
+                    "articleList": [
+                        "현재와 미래의 5G",
+                        "통신 기술과 방송의 만남",
+                        "5G로 인한 변화와 도전",
+                        "특집: 방송과 통신의 융합 사례",
                         "미래의 방송 통신 기술",
-                        "5G 시대의 새로운 서비스"
+                        "새로운 시대의 서비스"
                     ]
                 },
                 {
-                    "pageIdx": 1,
-                    "thumbnailMediaName": "파이낸셜뉴스",
-                    "thumbnailUpdatedDate": "2023.03.13. 10:45",
+                    "mediaName": "YTN",
+                    "updatedDate": "2024.03.01. 11:00",
                     "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "통신 산업의 새로운 패러다임",
+                    "thumbnailDetail": "방송과 통신의 경계 허물기",
                     "articleList": [
-                        "통신 기술의 혁신",
-                        "'미래 통신 산업의 전망'",
-                        "5G와 통신의 미래",
-                        "[인터뷰] 통신 전문가가 말하는 미래",
-                        "통신 산업의 글로벌 동향",
-                        "미래 통신 기술의 방향성"
+                        "5G 기술의 현재와 전망",
+                        "융합의 중요성",
+                        "방송 통신 융합 사례 분석",
+                        "특집: 기술의 발전과 변화",
+                        "미래 기술 트렌드",
+                        "새로운 서비스 혁신"
                     ]
                 },
                 {
-                    "pageIdx": 2,
-                    "thumbnailMediaName": "조선일보",
-                    "thumbnailUpdatedDate": "2023.03.14. 08:20",
+                    "mediaName": "JTBC",
+                    "updatedDate": "2024.03.05. 16:00",
                     "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "방송 통신 융합의 실제 사례",
+                    "thumbnailDetail": "미래 방송 통신의 청사진",
                     "articleList": [
-                        "융합 기술의 사례",
-                        "'방송과 통신의 경계가 사라진다'",
-                        "미래 융합 기술",
-                        "[기고] 융합 기술의 중요성",
-                        "융합 기술의 발전 방향",
-                        "미래 융합 기술의 전망"
-                    ]
-                },
-                {
-                    "pageIdx": 3,
-                    "thumbnailMediaName": "스포츠서울",
-                    "thumbnailUpdatedDate": "2023.03.15. 12:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "통신 산업의 글로벌 트렌드",
-                    "articleList": [
-                        "글로벌 통신 산업의 동향",
-                        "'통신 기술의 발전과 미래'",
-                        "5G 시대의 글로벌 경쟁",
-                        "[분석] 글로벌 통신 산업의 미래",
-                        "통신 산업의 글로벌 전략",
-                        "미래 통신 기술의 혁신"
+                        "5G 기술의 발전",
+                        "방송과 통신의 융합",
+                        "미래 서비스의 방향성",
+                        "특집: 융합 기술의 사례",
+                        "글로벌 기술 트렌드",
+                        "혁신 서비스의 가능성"
                     ]
                 }
             ]
@@ -123,35 +116,33 @@
             "categoryIdx": 2,
             "category": "IT",
             "totalPages": 2,
-            "thumbnailDatas": [
+            "mediaData": [
                 {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "이데일리",
-                    "thumbnailUpdatedDate": "2023.04.10. 17:00",
+                    "mediaName": "Digital Today",
+                    "updatedDate": "2024.04.10. 17:00",
                     "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "IT 산업의 혁신과 발전",
                     "articleList": [
-                        "IT 기술의 현재와 미래",
-                        "'IT 산업의 혁신 사례'",
-                        "미래 IT 기술의 전망",
-                        "[특집] IT 산업의 발전과 방향",
-                        "IT 기술의 글로벌 동향",
-                        "미래 IT 산업의 전략"
+                        "AI와 클라우드 기술의 현재",
+                        "미래의 IT 산업 전망",
+                        "혁신적인 기술 사례",
+                        "특집: IT 산업의 발전 방향",
+                        "글로벌 IT 동향",
+                        "신기술의 도입과 적용"
                     ]
                 },
                 {
-                    "pageIdx": 1,
-                    "thumbnailMediaName": "데일리안",
-                    "thumbnailUpdatedDate": "2023.04.11. 14:30",
+                    "mediaName": "ZDNET Korea",
+                    "updatedDate": "2024.04.11. 14:30",
                     "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "IT 기술의 혁신과 변혁",
                     "articleList": [
-                        "혁신적인 IT 기술",
-                        "'미래 IT 기술의 동향'",
-                        "IT 산업의 발전",
-                        "[기고] IT 기술의 중요성",
-                        "IT 기술의 발전 방향",
-                        "미래 IT 기술의 전망"
+                        "AI와 빅데이터의 혁신",
+                        "미래 IT 기술 트렌드",
+                        "산업의 발전과 변혁",
+                        "기고: IT 기술의 중요성",
+                        "기술 발전 방향성",
+                        "미래 기술 전망"
                     ]
                 }
             ]
@@ -160,20 +151,19 @@
             "categoryIdx": 3,
             "category": "영자지",
             "totalPages": 1,
-            "thumbnailDatas": [
+            "mediaData": [
                 {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "스포츠동아",
-                    "thumbnailUpdatedDate": "2023.05.01. 11:00",
+                    "mediaName": "The Korea Herald",
+                    "updatedDate": "2024.05.01. 11:00",
                     "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "영자지의 새로운 도전",
                     "articleList": [
-                        "영자지의 변화",
-                        "'영자지의 미래'",
-                        "영자지의 발전",
-                        "[특집] 영자지의 새로운 시도",
-                        "영자지의 글로벌 동향",
-                        "미래 영자지의 방향성"
+                        "영자지의 변화와 혁신",
+                        "미래 영자지의 방향성",
+                        "글로벌 미디어 트렌드",
+                        "특집: 영자지의 새로운 시도",
+                        "영자지의 역할과 전망",
+                        "미래 언론의 방향"
                     ]
                 }
             ]
@@ -182,50 +172,47 @@
             "categoryIdx": 4,
             "category": "스포츠/연예",
             "totalPages": 3,
-            "thumbnailDatas": [
+            "mediaData": [
                 {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "조선일보",
-                    "thumbnailUpdatedDate": "2023.06.10. 09:00",
+                    "mediaName": "스포츠동아",
+                    "updatedDate": "2024.06.10. 09:00",
                     "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "스포츠와 연예의 세계",
+                    "thumbnailDetail": "스포츠와 연예의 융합",
                     "articleList": [
-                        "스포츠의 미래",
-                        "'연예계의 변화'",
-                        "스포츠와 연예의 융합",
-                        "[인터뷰] 스포츠 스타의 이야기",
+                        "스포츠 스타 인터뷰",
                         "연예계의 새로운 트렌드",
-                        "미래 스포츠의 방향성"
+                        "스포츠와 연예의 만남",
+                        "미래 스포츠 산업 전망",
+                        "연예계의 변화와 도전",
+                        "스포츠와 연예의 글로벌 동향"
                     ]
                 },
                 {
-                    "pageIdx": 1,
-                    "thumbnailMediaName": "헤럴드경제",
-                    "thumbnailUpdatedDate": "2023.06.11. 10:30",
+                    "mediaName": "스포츠서울",
+                    "updatedDate": "2024.06.11. 10:30",
                     "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "연예계의 변화와 도전",
                     "articleList": [
-                        "연예계의 새로운 시도",
-                        "'스포츠와 연예의 만남'",
-                        "미래 연예계의 전망",
-                        "[기고] 연예계의 변혁",
-                        "스포츠와 연예의 글로벌 동향",
-                        "미래 연예계의 전략"
+                        "새로운 연예 트렌드",
+                        "스포츠와 연예의 융합",
+                        "미래 연예계 전망",
+                        "기고: 연예계의 변화",
+                        "글로벌 연예계 동향",
+                        "연예계의 전략적 방향"
                     ]
                 },
                 {
-                    "pageIdx": 2,
-                    "thumbnailMediaName": "세계일보",
-                    "thumbnailUpdatedDate": "2023.06.12. 08:15",
+                    "mediaName": "스포츠조선",
+                    "updatedDate": "2024.06.15. 10:30",
                     "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "스포츠와 연예의 혁신",
+                    "thumbnailDetail": "미래 연예계의 전략",
                     "articleList": [
-                        "혁신적인 스포츠",
-                        "'연예계의 발전'",
-                        "스포츠와 연예의 변혁",
-                        "[특집] 스포츠와 연예의 융합",
-                        "스포츠의 글로벌 트렌드",
-                        "미래 스포츠와 연예의 방향성"
+                        "연예계의 새로운 시도",
+                        "스포츠와 연예의 만남",
+                        "연예계의 혁신 사례",
+                        "기고: 변혁의 시기",
+                        "스포츠와 연예의 동향",
+                        "미래 연예계의 비전"
                     ]
                 }
             ]
@@ -234,20 +221,19 @@
             "categoryIdx": 5,
             "category": "매거진/전문지",
             "totalPages": 1,
-            "thumbnailDatas": [
+            "mediaData": [
                 {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "헤럴드경제",
-                    "thumbnailUpdatedDate": "2023.07.01. 12:00",
+                    "mediaName": "맥스무비",
+                    "updatedDate": "2024.07.01. 12:00",
                     "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "매거진과 전문지의 미래",
                     "articleList": [
                         "매거진의 변화",
-                        "'전문지의 발전'",
+                        "전문지의 발전",
                         "매거진과 전문지의 융합",
-                        "[특집] 매거진의 새로운 시도",
-                        "전문지의 글로벌 동향",
-                        "미래 매거진과 전문지의 방향성"
+                        "특집: 새로운 시도",
+                        "글로벌 미디어 동향",
+                        "미래 매거진의 방향성"
                     ]
                 }
             ]
@@ -255,66 +241,34 @@
         {
             "categoryIdx": 6,
             "category": "지역",
-            "totalPages": 4,
-            "thumbnailDatas": [
+            "totalPages": 2,
+            "mediaData": [
                 {
-                    "pageIdx": 0,
-                    "thumbnailMediaName": "파이낸셜뉴스",
-                    "thumbnailUpdatedDate": "2023.08.10. 14:00",
+                    "mediaName": "한국농어촌방송",
+                    "updatedDate": "2024.08.10. 14:00",
                     "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "지역 경제의 변화",
                     "articleList": [
                         "지역 경제의 미래",
-                        "'지역 경제의 발전'",
-                        "지역 경제의 동향",
-                        "[특집] 지역 경제의 새로운 시도",
-                        "지역 경제의 글로벌 동향",
-                        "미래 지역 경제의 방향성"
+                        "지역 경제 발전 사례",
+                        "글로벌 경제 동향",
+                        "특집: 새로운 시도",
+                        "지역 경제의 중요성",
+                        "미래 경제 전망"
                     ]
                 },
                 {
-                    "pageIdx": 1,
-                    "thumbnailMediaName": "세계일보",
-                    "thumbnailUpdatedDate": "2023.08.11. 11:30",
+                    "mediaName": "KNN",
+                    "updatedDate": "2024.08.15. 11:30",
                     "thumbnailImgPath": "/icons/newspaper.png",
                     "thumbnailDetail": "지역 경제의 혁신",
                     "articleList": [
-                        "혁신적인 지역 경제",
-                        "'미래 지역 경제의 전망'",
-                        "지역 경제의 발전",
-                        "[기고] 지역 경제의 중요성",
-                        "지역 경제의 발전 방향",
-                        "미래 지역 경제의 전망"
-                    ]
-                },
-                {
-                    "pageIdx": 2,
-                    "thumbnailMediaName": "아시아경제",
-                    "thumbnailUpdatedDate": "2023.08.12. 09:45",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "지역 경제의 글로벌 동향",
-                    "articleList": [
-                        "글로벌 지역 경제",
-                        "'지역 경제의 글로벌화'",
-                        "미래 지역 경제의 글로벌 동향",
-                        "[특집] 지역 경제의 글로벌 전략",
-                        "지역 경제의 글로벌 트렌드",
-                        "미래 지역 경제의 혁신"
-                    ]
-                },
-                {
-                    "pageIdx": 3,
-                    "thumbnailMediaName": "이데일리",
-                    "thumbnailUpdatedDate": "2023.08.13. 13:00",
-                    "thumbnailImgPath": "/icons/newspaper.png",
-                    "thumbnailDetail": "지역 경제의 새로운 도전",
-                    "articleList": [
-                        "지역 경제의 도전",
-                        "'지역 경제의 새로운 시도'",
-                        "미래 지역 경제의 전략",
-                        "[인터뷰] 지역 경제 전문가의 의견",
-                        "지역 경제의 글로벌 전략",
-                        "미래 지역 경제의 발전"
+                        "지역 경제의 혁신 사례",
+                        "미래 경제 전망",
+                        "경제 발전 방향",
+                        "기고: 지역 경제의 중요성",
+                        "지역 경제 발전 전략",
+                        "미래 경제의 방향성"
                     ]
                 }
             ]

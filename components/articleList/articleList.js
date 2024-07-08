@@ -7,7 +7,6 @@ export const initArticleList = async () => {
     try {
         addEventListeners();
         // 첫번째 카테고리 버튼에 class 부여
-        console.log(document.querySelector('.article-menu-wrapper'))
         setDataWithTab(document.querySelectorAll('.menu-btn-wrapper')[0], 0);
     } catch (error) {
         console.log(error)
@@ -116,11 +115,11 @@ const addCategorySelectionEventListener = () => {
 
 // 콘텐츠 삽입 함수
 const insertContent = (menuIdx, menuCurrentPage, menuLastPage) => {
-    const nowInfo = menuInfo[menuIdx].thumbnailDatas[menuCurrentPage - 1];
+    const nowInfo = menuInfo[menuIdx].mediaData[menuCurrentPage - 1];
     
     document.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
-    document.querySelector('.media-img').src = `/images/logos/${nowInfo.thumbnailMediaName}.png`;
-    document.querySelector('.updated-date-tag').innerText = `${nowInfo.thumbnailUpdatedDate} 편집`;
+    document.querySelector('.media-img').src = `/images/logos/${nowInfo.mediaName}.png`;
+    document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
     document.querySelector('.thumbnail-img').src = `/images/logos/${MEDIA_LIST[menuCurrentPage]}.png`;
     document.querySelector('.thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
     document.querySelector('.article-li-part').innerHTML = `
