@@ -1,5 +1,4 @@
 import news from "./data/news.json";
-import { getSubscribedCompanies } from "../data/storageHandler";
 
 export const CATEGORIES = [
   "종합/경제",
