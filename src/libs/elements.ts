@@ -142,3 +142,11 @@ export const H4: AppElement<HTMLHeadingElement> = (
 };
 
 H4.type = "element";
+
+export const Anchor: AppElement<HTMLAnchorElement> = (
+  props: AppElementProps<HTMLAnchorElement>,
+) => {
+  return createElement<HTMLAnchorElement>("a", props);
+};
+
+Anchor.type = "element";
