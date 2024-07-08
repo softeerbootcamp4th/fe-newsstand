@@ -1,10 +1,10 @@
-import { CONTENTS_BY_MEDIA } from "../static/data/media.js";
 import { 
     REMOVE_MEDIA_CATEGORY,
     REMOVE_MEDIA_ARROW,
     removeTotalCategoryEvent,
     removeTotalArrowEvent
 } from "../utils/events.js";
+import { getData } from "../utils/fetch.js";
 import { getItem } from "../utils/local-storage.js";
 import { 
     getSelectedCategoryItemDOMString,
@@ -22,8 +22,9 @@ export function renderSubscribedMedia() {
     renderMedia();    
 }
 
-function renderMedia(mediaId) {
-    const media = CONTENTS_BY_MEDIA.data;
+async function renderMedia(mediaId) {
+    const mediaData = await getData('../static/data/media.json');
+    const media = mediaData.data;
 
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
