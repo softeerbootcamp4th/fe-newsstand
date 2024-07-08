@@ -332,8 +332,8 @@
             {
                 "id" : 1,
                 "thumbnailUrl" : "https://imgnews.pstatic.net/image/011/2024/07/03/0004361289_001_20240703104510953.jpg?type=w647",
-                "company" : "일간스포츠",
-                "logoUrl" : "/src/images/ilganSports.png",
+                "company" : "소년한국일보",
+                "logoUrl" : "/src/images/boyKoreaNews.png",
                 "date" : "2024. 07. 03. 12:26",
                 "newsItems" : [
                     {
