@@ -25,3 +25,12 @@
   color: var(--black);
   font-weight: bold;
 }
+
+.emptyView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  height: 388px;
+}

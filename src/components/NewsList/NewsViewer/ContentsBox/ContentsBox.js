@@ -1,8 +1,8 @@
 import "./ContentsBox.css";
-import { isSubscribeCompany, subscribeCompany } from "../../../data/storageHandler";
-import UnsubscribeAlert from "../../UnsubscribeAlert/UnsubscribeAlert";
-import Button from "../../common/Button/Button";
-import SnackBar from "../../common/SnackBar/SnackBar";
+import { isSubscribeCompany, subscribeCompany } from "@/data/storageHandler";
+import UnsubscribeAlert from "../../../UnsubscribeAlert/UnsubscribeAlert";
+import Button from "../../../common/Button/Button";
+import SnackBar from "../../../common/SnackBar/SnackBar";
 
 function ContentsBox({ $target, position = "beforeend", news, onSubscribeCompany }) {
   this.$element = document.createElement("div");

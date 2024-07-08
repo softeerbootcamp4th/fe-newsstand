@@ -1,5 +1,7 @@
-import NewsViewer from "@/components/NewsViewer/NewsViewer";
 import "./NewsList.css";
+import NewsViewer from "./NewsViewer/NewsViewer";
+import EmptyNewsViewer from "./EmptyNewsViewer/EmptyNewsViewer";
+import { getSubscribedCompanies } from "../../data/storageHandler";
 
 function NewsList({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");
@@ -48,9 +50,16 @@ NewsList.prototype.render = function () {
 
   const filter = this.state.tabIndex === 0 ? "category" : "company";
 
+  if (this.state.tabIndex === 1 && getSubscribedCompanies().length < 1) {
+    new EmptyNewsViewer({ $target: this.$element });
+
+    return;
+  }
+
   new NewsViewer({
     $target: this.$element,
     filter: filter,
+    changeFilter: this.setState.bind(this),
   });
 };
 

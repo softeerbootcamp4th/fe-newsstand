@@ -3,16 +3,17 @@ import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
 import chevronRight from "@/assets/icons/chevronRight.svg";
 import ContentsBox from "./ContentsBox/ContentsBox";
-import { CATEGORIES, getNews } from "../../mocks/news";
-import { getSubscribedCompanies, unSubscribeCompany } from "../../data/storageHandler";
+import { CATEGORIES, getNews } from "@/mocks/news";
+import { getSubscribedCompanies, unSubscribeCompany } from "@/data/storageHandler";
 
-function NewsViewer({ $target, position = "beforeend", filter = "category" }) {
+function NewsViewer({ $target, position = "beforeend", filter = "category", changeFilter }) {
   this.$element = document.createElement("article");
   this.$element.className = "newsViewer";
   $target.insertAdjacentElement(position, this.$element);
 
   this.props = {
     filter,
+    changeFilter,
   };
 
   this.state = {
@@ -21,6 +22,7 @@ function NewsViewer({ $target, position = "beforeend", filter = "category" }) {
   };
 
   this.render();
+
   this.$element.addEventListener("click", this.handleClick.bind(this));
 
   this.initializeProgress();
@@ -164,6 +166,12 @@ NewsViewer.prototype.handleUnsubscribeCompany = function (company) {
   unSubscribeCompany(company);
 
   if (this.props.filter === "company") {
+    if (getSubscribedCompanies().length < 1) {
+      this.props.changeFilter(0);
+
+      return;
+    }
+
     this.setState({ page: 0, tab: 0 });
   }
 };
