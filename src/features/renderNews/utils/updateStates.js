@@ -1,4 +1,4 @@
-import { allCompanies, subscribedCompanies } from "../../../data/news.js";
+import { allCompanies, subscribedCompanies } from "../../../data/companies.js";
 import { render } from "./renderView.js";
 import { MainNewsState } from "../../../types/news.js";
 
@@ -7,6 +7,7 @@ import { MainNewsState } from "../../../types/news.js";
  */
 const state = {
   currentView: "list-view",
+  currentDataType: "all-news-tab",
   currentCategoryIndex: 0,
   currentCompanyIndex: 0,
   data: [],
@@ -19,10 +20,11 @@ function resetIndexes() {
 
 /**
  * 전체 언론사 보기 / 내가 구독한 언론사 보기 탭 선택 시
- * @param {"all-news-tab" | "subscribed-news-tab"} id
+ * @param {MainNewsState.currentDataType} id
  */
 function switchCompanyTab(id) {
-  state.data = state.data = id === "all-news-tab" ? allCompanies : subscribedCompanies;
+  state.currentDataType = id;
+  state.data = id === "all-news-tab" ? allCompanies : subscribedCompanies;
   resetIndexes();
   render(state);
 }
@@ -41,16 +43,45 @@ function updateCompanyType(index) {
   render(state);
 }
 
+/** 내가 구독한 언론사 페이지에서 company 선택 시 */
+function updateCompany(companyIndex) {
+  state.currentCompanyIndex = companyIndex;
+  render(state);
+}
+
+const updateCompanyState = {
+  ["list-view"]: {
+    ["all-news-tab"]: {
+      prev: () => updateListViewCompanyInAllNewTab(-1),
+      next: () => updateListViewCompanyInAllNewTab(1),
+    },
+    ["subscribed-news-tab"]: {
+      prev: () => updateListViewCompanyInSubscribedTab(-1),
+      next: () => updateListViewCompanyInSubscribedTab(1),
+    },
+  },
+};
+
 function updatePrev() {
-  state.currentView == "list-view" && updateCompany(-1);
+  updateCompanyState[state.currentView][state.currentDataType].prev();
 }
 
 function updateNext() {
-  state.currentView == "list-view" && updateCompany(1);
+  updateCompanyState[state.currentView][state.currentDataType].next();
 }
 
-/** 리스트 뷰 상태일 때 prev, next button 클릭 시 */
-function updateCompany(offset) {
+function updateListViewCompanyInSubscribedTab(offset) {
+  state.currentCompanyIndex += offset;
+  if (state.currentCompanyIndex < 0) {
+    state.currentCompanyIndex = state.data.length - 1;
+  } else if (state.currentCompanyIndex >= state.data.length) {
+    state.currentCompanyIndex = 0;
+  }
+
+  render(state);
+}
+
+function updateListViewCompanyInAllNewTab(offset) {
   const currentType = state.data[state.currentCategoryIndex];
   state.currentCompanyIndex += offset;
 
@@ -66,4 +97,11 @@ function updateCompany(offset) {
   render(state);
 }
 
-export { switchCompanyView, updatePrev, updateNext, updateCompanyType, switchCompanyTab };
+export {
+  updateCompany,
+  switchCompanyView,
+  updatePrev,
+  updateNext,
+  updateCompanyType,
+  switchCompanyTab,
+};
