@@ -1,9 +1,7 @@
 import { updateDOMstyle } from "./util.js";
 
-const $subscribeToggleDOM = document.querySelectorAll(".subscribeToggle span");
+const $subscribeToggleDOM = document.querySelectorAll(".subscribe-toggle span");
 const $newsgroupDOM = document.querySelector(".newsgroup");
-const $leftScrollDOM = document.querySelector(".paper .leftscroll");
-const $rightScrollDOM = document.querySelector(".paper .rightscroll");
 const categories = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
 const ctgScrollNum = 6;
 
@@ -88,53 +86,42 @@ const bottomFill = () => {
 }
 
 export default function CategoriesAndNewsSection(_news, _newsCom) {
-  $subscribeToggleDOM[0].addEventListener("click", () => {
-    state.subscribeToggle = "whole";
+  document.querySelector(".subscribe-toggle").addEventListener("click", (e) => {
+    state.subscribeToggle = e.target.className;
     updateDOMstyle($subscribeToggleDOM[0], {
-      fontWeight: "bold",
-      color: "black",
+      fontWeight: `${state.subscribeToggle === "whole" ? "bold" : "normal"}`,
+      color: `${state.subscribeToggle === "whole" ? "black" : "#879298"}`
     });
     updateDOMstyle($subscribeToggleDOM[1], {
-      fontWeight: "normal",
-      color: "#879298",
+      fontWeight: `${state.subscribeToggle === "my" ? "bold" : "normal"}`,
+      color: `${state.subscribeToggle === "my" ? "black" : "#879298"}`
     })
-  })
+  });
 
-  $subscribeToggleDOM[1].addEventListener("click", () => {
-    state.subscribeToggle = "my";
-    updateDOMstyle($subscribeToggleDOM[0], {
-      fontWeight: "normal",
-      color: "#879298",
-    });
-    updateDOMstyle($subscribeToggleDOM[1], {
-      fontWeight: "bold",
-      color: "black",
-    })
-  })
+  document.querySelector(".paper").addEventListener("click", (e) => {
+    const targetClassName = e.target.className;
+    if (targetClassName !== "leftscroll" && targetClassName !== "rightscroll") return;
 
-  $leftScrollDOM.addEventListener("click", () => {
     ctgLose();
-    state.comId--;
-    if (state.comId === 0) {
-      state.comId = ctgScrollNum;
-      state.ctg--;
-      if (state.ctg < 0) state.ctg = categories.length - 1;
+    if (targetClassName === "leftscroll") {
+      state.comId--;
+      if (state.comId === 0) {
+        state.comId = ctgScrollNum;
+        state.ctg--;
+        if (state.ctg < 0) state.ctg = categories.length - 1;
+      }
+    }
+    else {
+      state.comId++;
+      if (state.comId > ctgScrollNum) {
+        state.comId = 1;
+        state.ctg++;
+        if (state.ctg === categories.length) state.ctg = 0;
+      }
     }
     ctgFill();
     bottomFill();
-  })
-
-  $rightScrollDOM.addEventListener("click", () => {
-    ctgLose();
-    state.comId++;
-    if (state.comId > ctgScrollNum) {
-      state.comId = 1;
-      state.ctg++;
-      if (state.ctg === categories.length) state.ctg = 0;
-    }
-    ctgFill();
-    bottomFill();
-  })
+  });
 
   ctgFill();
   bottomFill();
