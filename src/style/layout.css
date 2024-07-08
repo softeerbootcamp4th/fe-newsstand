@@ -61,3 +61,8 @@ main {
   position: relative;
   width: 100%;
 }
+
+.empty-text {
+  padding: 20px;
+  text-align: center;
+}
