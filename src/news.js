@@ -6,6 +6,7 @@ const $headlineTitleDOM = document.querySelector(".paper .headline span");
 const $newsListDOM = document.querySelector(".paper .list");
 const $comImgDOM = document.querySelector(".paper .subscribe-bar img");
 const $headlineImgDOM = document.querySelector(".paper .headline img");
+const $subscribeButtonDOM = document.querySelector(".paper .subscribe-button");
 const categories = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
 const ctgScrollNum = 6;
 let newsList;
@@ -39,7 +40,7 @@ const ctgFill = () => {
     }
   ];
   const options = {
-    duration: 5000,
+    duration: 20000,
   };
 
   DOM.setAttribute("class", "selected");
@@ -96,6 +97,33 @@ const bottomFill = () => {
   const newDOM = document.createElement("caption");
   newDOM.innerText = `${currentComName} 언론사에서 직접 편집한 뉴스입니다.`;
   $newsListDOM.appendChild(newDOM);
+
+  const subscribeList = getSubscribeList();
+  if (!subscribeList.includes(state.comId)) {
+    $subscribeButtonDOM.innerText = "+ 구독하기";
+  }
+  else {
+    $subscribeButtonDOM.innerText = "×";
+  }
+};
+
+const getSubscribeList = () => {
+  let JSONData = localStorage.getItem("subscribe-list");
+  return JSONData ? JSON.parse(JSONData) : [];
+};
+
+const pushCurrentSubscribe = () => {
+  let subscribeList = getSubscribeList();
+  if (!subscribeList.includes(state.comId)) {
+    subscribeList = [...subscribeList, state.comId];
+    localStorage.setItem("subscribe-list", JSON.stringify(subscribeList));
+  }
+};
+
+const removeCurrentSubscribe = () => {
+  let subscribeList = getSubscribeList();
+  subscribeList = subscribeList.filter(com => com !== state.comId);
+  localStorage.setItem("subscribe-list", JSON.stringify(subscribeList));
 }
 
 export default function CategoriesAndNewsSection(_news, _newsCom) {
@@ -139,8 +167,20 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
       ctgFill();
       bottomFill();
     }
-    else if(targetClassName === "subscribe-button"){
-
+    else if (targetClassName === "subscribe-button") {
+      const subscribeList = getSubscribeList();
+      if (!subscribeList.includes(state.comId)) {
+        if (confirm("구독하시겠습니까?")) {
+          pushCurrentSubscribe();
+          $subscribeButtonDOM.innerText = "×";
+        }
+      }
+      else {
+        if (confirm("구독을 해지하시겠습니까?")) {
+          removeCurrentSubscribe();
+          $subscribeButtonDOM.innerText = "+ 구독하기";
+        }
+      }
     }
   });
 
