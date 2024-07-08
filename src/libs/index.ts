@@ -131,6 +131,7 @@ export const render = () =>
       while (renderElementQueue.length) {
         const {
           element,
+          parent,
           eventListeners,
           children,
           key: parentKey,
@@ -158,7 +159,6 @@ export const render = () =>
             });
             return;
           }
-
           renderElementQueue.pushFront({
             ...(child as CreatedAppElement),
             key: currentKey,
