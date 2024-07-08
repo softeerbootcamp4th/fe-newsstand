@@ -22,6 +22,26 @@
 					{ "id": 5, "title": "유튜브도 뛰어들었다···'콘텐츠 커머스' 경쟁 본격화" },
 					{ "id": 6, "title": "상반기 전국 청약경쟁률 6.22대 1···서울은 105.8대 1" }
 				]
+			},
+			{
+				"companyId": 1,
+				"companyLogo": "../../images/dailyahnLogo.svg",
+				"companyName": "서울파이낸스",
+				"updatedDate": "07월 03일 10:10 직접 편집",
+				"isSubscribe": false,
+				"mainNews": {
+					"id": 1,
+					"src": "../../images/thumbnail/Thumbnail.png",
+					"title": "LG전자, 앳홈 지분 80% 인수···스마트홈 생태계 구축 속도 낸다"
+				},
+				"news": [
+					{ "id": 1, "title": "4대 금융그룹, 지난해 평균 이직률 '뚝'·근속연수 '쑥'" },
+					{ "id": 2, "title": "건설업계 vs 시멘트업계, 가격 조정 놓고 신경전" },
+					{ "id": 3, "title": "공장 가동률 100% 넘겼지만, 판매량 '뚝'···현대차 인니서 무슨 일" },
+					{ "id": 4, "title": "파리올림픽, 개막 전부터 '시끌'···삼성 갤럭시 마케팅 이상없나?" },
+					{ "id": 5, "title": "유튜브도 뛰어들었다···'콘텐츠 커머스' 경쟁 본격화" },
+					{ "id": 6, "title": "상반기 전국 청약경쟁률 6.22대 1···서울은 105.8대 1" }
+				]
 			}
 		]
 	},
@@ -29,6 +49,26 @@
 		"id": 2,
 		"type": "방송/통신",
 		"company": [
+			{
+				"companyId": 2,
+				"companyLogo": "../../images/dailyahnLogo.svg",
+				"companyName": "YTN사이언스",
+				"updatedDate": "07월 03일 10:24 직접 편집",
+				"isSubscribe": true,
+				"mainNews": {
+					"id": 1,
+					"src": "../../images/thumbnail/Thumbnail.png",
+					"title": "20초 만에 고꾸라져...'중국판 스페이스-X'의 굴욕?"
+				},
+				"news": [
+					{ "id": 1, "title": "폭우·태풍에 좌우될 한 해 농사...피해 줄이려면?" },
+					{ "id": 2, "title": "운전자 \"급발진\"...목격자 \"브레이크 밟고 멈춰\"" },
+					{ "id": 3, "title": "라인야후, 네이버 자본관계 재검토에 \"단기적 자본이동 곤란\"" },
+					{ "id": 4, "title": "EU, 빅테크에 천문학적 과징금 예고...삼성전자 불똥?" },
+					{ "id": 5, "title": "지난해 국민 10명 중 4명꼴 '의료용 마약류' 처방받아" },
+					{ "id": 6, "title": "10대 뇌전증 환자 뇌에 처음으로 신경자극기 이식...\"발작 80%까지 감소\"해..." }
+				]
+			},
 			{
 				"companyId": 2,
 				"companyLogo": "../../images/dailyahnLogo.svg",
@@ -74,6 +114,26 @@
 					{ "id": 5, "title": "Standing out to fit in: How new employees can set themselves up for success at a new workplace" },
 					{ "id": 6, "title": "Fast fashion is harming our planet — these 4 tips can help you build a more sustainable wardrobe" }
 				]
+			},
+			{
+				"companyId": 3,
+				"companyLogo": "../../images/dailyahnLogo.svg",
+				"companyName": "ECONOTIMES",
+				"updatedDate": "07월 02일 23:51 직접 편집",
+				"isSubscribe": false,
+				"mainNews": {
+					"id": 1,
+					"src": "../../images/thumbnail/Thumbnail.png",
+					"title": "What happens next in Ukraine’s debt negotiations could change the course of the war"
+				},
+				"news": [
+					{ "id": 1, "title": "Supreme Court kicks cases about tech companies’ First Amendment rights back to lower courts" },
+					{ "id": 2, "title": "Record labels are suing tech companies for copying classic songs" },
+					{ "id": 3, "title": "Bitcoin Shows High Volatility Amid Unexpected U.S. Manufacturing PMI Data" },
+					{ "id": 4, "title": "Homestays can help refugee women get to grips with life in a new country" },
+					{ "id": 5, "title": "Standing out to fit in: How new employees can set themselves up for success at a new workplace" },
+					{ "id": 6, "title": "Fast fashion is harming our planet — these 4 tips can help you build a more sustainable wardrobe" }
+				]
 			}
 		]
 	},
@@ -82,7 +142,27 @@
 		"type": "IT",
 		"company": [
 			{
-				"companyId": 3,
+				"companyId": 4,
+				"companyLogo": "../../images/dailyahnLogo.svg",
+				"companyName": "ECONOTIMES",
+				"updatedDate": "07월 02일 23:51 직접 편집",
+				"isSubscribe": false,
+				"mainNews": {
+					"id": 1,
+					"src": "../../images/thumbnail/Thumbnail.png",
+					"title": "What happens next in Ukraine’s debt negotiations could change the course of the war"
+				},
+				"news": [
+					{ "id": 1, "title": "Supreme Court kicks cases about tech companies’ First Amendment rights back to lower courts" },
+					{ "id": 2, "title": "Record labels are suing tech companies for copying classic songs" },
+					{ "id": 3, "title": "Bitcoin Shows High Volatility Amid Unexpected U.S. Manufacturing PMI Data" },
+					{ "id": 4, "title": "Homestays can help refugee women get to grips with life in a new country" },
+					{ "id": 5, "title": "Standing out to fit in: How new employees can set themselves up for success at a new workplace" },
+					{ "id": 6, "title": "Fast fashion is harming our planet — these 4 tips can help you build a more sustainable wardrobe" }
+				]
+			},
+			{
+				"companyId": 4,
 				"companyLogo": "../../images/dailyahnLogo.svg",
 				"companyName": "ECONOTIMES",
 				"updatedDate": "07월 02일 23:51 직접 편집",
@@ -108,7 +188,7 @@
 		"type": "스포츠/연예",
 		"company": [
 			{
-				"companyId": 4,
+				"companyId": 5,
 				"companyName": "일간스포츠",
 				"companyLogo": "../../images/dailyahnLogo.svg",
 				"updatedDate": "2024-07-03T01:15:00Z",
@@ -137,7 +217,7 @@
 		"type": "매거진/전문지",
 		"company": [
 			{
-				"companyId": 5,
+				"companyId": 6,
 				"companyLogo": "../../images/dailyahnLogo.svg",
 				"companyName": "베리타스알파",
 				"updatedDate": "2024-07-03T01:20:00Z",
@@ -181,7 +261,7 @@
 		"type": "지역",
 		"company": [
 			{
-				"companyId": 6,
+				"companyId": 7,
 				"companyLogo": "../../images/dailyahnLogo.svg",
 				"companyName": "중부메일",
 				"updatedDate": "2024-07-02T10:36:00Z",

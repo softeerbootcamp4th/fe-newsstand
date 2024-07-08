@@ -1,3 +1,10 @@
+/*
+*날짜를 가져오는 함수들
+*/
+
+/*
+* 다음 정각까지 남은 시간 계산
+*/
 function	timeToSleep()
 {
 	const	now = new Date();
@@ -8,6 +15,9 @@ function	timeToSleep()
 	return (sleepTime);
 }
 
+/*
+*날짜를 가져오는 함수
+*/
 export function	getTodaysDate() {
 	const	daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 	const	today = new Date();
