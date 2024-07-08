@@ -6,6 +6,7 @@ interface RollingNewsProps {
 }
 export const RollingNews = ({ delayed }: RollingNewsProps) => {
   const [idx, setIdx] = useState(0);
+
   return ce(Span, {
     className: `${styles["rolling-container"]}`,
     children: [
