@@ -45,4 +45,4 @@ const ArticleList = (app) => {
     app.appendChild(el)
     el.innerHTML = createArticleList(menuInfo);
     initArticleList();
-}
+} 

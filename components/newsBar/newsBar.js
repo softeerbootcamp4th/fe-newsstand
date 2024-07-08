@@ -7,11 +7,13 @@ export const createNewsBar = () => {
     return `
         <div class="news-bar-wrapper flex-row-between">
             <div class="news-bar flex-row">
-                <div class="left-rolling-banner">
-                    <div class="title">속보 > </div>
+                <div class="rolling-banner left-rolling-banner">
+                    <div class="title flex-row-between-center">
+                        연합뉴스
+                    </div>
                     <div class="wrap">
                         <ul>
-                            <li class="current"><a href="#">노바백스 백신 2월중순부터 접종</a></li>
+                            <li class="current flex-row-between-center"><a href="#">노바백스 백신 2월중순부터 접종</a></li>
                             <li class="next"><a href="#">얼어붙은 투심에…현대엔지니어링 상장 철회</a></li>
                             <li><a href="#">"일본 정부, 사도광산 세계유산 추천 방침 굳혀, 일본과 갈등 첨예화 예상"</a></li>
                             <li><a href="#">"공법변경 구조검토 요구, 현산 측이 묵살했다"</a></li>
@@ -21,8 +23,10 @@ export const createNewsBar = () => {
                 </div>
             </div>
             <div class="news-bar flex-row">
-                <div class="right-rolling-banner">
-                    <div class="title">속보 > </div>
+                <div class="rolling-banner right-rolling-banner">
+                    <div class="title flex-row-between-center">
+                        연합뉴스
+                    </div>
                     <div class="wrap">
                         <ul>
                             <li class="current"><a href="#">노바백스 백신 2월중순부터 접종</a></li>
