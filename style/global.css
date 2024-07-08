@@ -44,3 +44,7 @@ button {
 .hide {
   display: none !important;
 }
+
+object {
+  pointer-events: none;
+}
