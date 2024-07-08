@@ -1,10 +1,10 @@
-import { CONTENTS_BY_MEDIA } from "../static/data/media.js";
 import { 
     REMOVE_MEDIA_CATEGORY,
     REMOVE_MEDIA_ARROW,
     removeTotalCategoryEvent,
     removeTotalArrowEvent
 } from "../utils/events.js";
+import { getData } from "../utils/fetch.js";
 import { getItem } from "../utils/local-storage.js";
 import { 
     getSelectedCategoryItemDOMString,
@@ -15,16 +15,19 @@ import {
 
 const DEFAULT_MEDIA_INDEX = 0;
 
+let mediaData = {};
+
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
-export function renderSubscribedMedia() {
+export async function renderSubscribedMedia() {
+    mediaData = await getData('../static/data/media.json');
+
     renderMedia();    
 }
 
 function renderMedia(mediaId) {
-    const media = CONTENTS_BY_MEDIA.data;
-
+    const media = mediaData.data;
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
 
