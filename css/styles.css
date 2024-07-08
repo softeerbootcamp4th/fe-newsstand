@@ -278,3 +278,20 @@ nav ul li.active a {
 .navItem.active.progress > div::after {
     transform: scaleX(1); /* 최종 너비를 100%로 설정 */
 }
+
+.articleImage > img {
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .5s ease-in-out;
+	transition: .5s ease-in-out;
+}
+
+.articleImage > img:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.articleImage > strong:hover {
+    text-decoration: underline;
+}
