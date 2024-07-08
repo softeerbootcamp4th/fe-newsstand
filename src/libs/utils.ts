@@ -25,6 +25,9 @@ export const debounce = (callback: () => void, delay: number) => {
 };
 
 export const isPropsEqual = (prevProps: any, nextProps: any) => {
+  if (prevProps == null && nextProps != null) {
+    return false;
+  }
   const prevKeys = Object.keys(prevProps ?? {});
   const nextKeys = Object.keys(nextProps ?? {});
   if (prevKeys.length !== nextKeys.length) {
