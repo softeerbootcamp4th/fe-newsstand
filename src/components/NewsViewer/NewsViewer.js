@@ -1,6 +1,7 @@
 import "./NewsViewer.css";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
+import chevronRight from "@/assets/icons/chevronRight.svg";
 import ContentsBox from "./ContentsBox/ContentsBox";
 import { CATEGORIES, getNews } from "../../mocks/news";
 import { getSubscribedCompanies, unSubscribeCompany } from "../../data/storageHandler";
@@ -197,9 +198,16 @@ NewsViewer.prototype.render = function () {
           <li data-tab-number="${idx}" class="tab${this.state.tab === idx ? " selected" : ""}">
             <p class="tabInfo">
               <span>${name}</span>
-              <span class="pageInfo">${this.state.page + 1}
-                <span class="maxPage"> / ${news.length}</span>
-              </span>
+              ${
+                this.props.filter === "category"
+                  ? /* html */ `
+                  <span class="pageInfo">${this.state.page + 1}
+                    <span class="maxPage"> / ${news.length}</span>
+                  </span>`
+                  : /* html */ `
+                  <object class="pageInfo" type="image/svg+xml" data="${chevronRight}"></object>
+                  `
+              }
             </p>
             <progress class="progress progressTransition" value="0" min="0" max="100"></progress>
           </li>
