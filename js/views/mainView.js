@@ -28,7 +28,7 @@ function mountView(state, reducer, fullList, metadata)
 
 	function render(current)
 	{
-		if(state.viewType.value === "grid") applyDiff(el, GridViewComponent(state.cursor.getDataList(24), state.subList));
+		if(state.viewType.value === "grid") applyDiff(el, GridViewComponent(state, reducer));
 		else applyDiff(el, ListComponent(state, reducer, fullList, metadata));
 	}
 
