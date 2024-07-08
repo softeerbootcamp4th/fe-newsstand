@@ -42,28 +42,26 @@ export const Main = () => {
     const newsList = NewsList({tabs});
 
     element.appendChild(newsList.element);
-
-    console.log("46");
   }
 
   function makePressGrid(element) {
     element.innerHTML = "";
     element.appendChild();
-
-    console.log("53");
   }
 
   function getAllPressTabs() {
-    const filteredTabNames = TAB_NEWS_DATA.data
-      .map((tab) => {
-        return tab.newsTabs.map((newsTab) => {
-          return newsTab.tabName;
-        });
-      })
-      .flat();
-
-    return filteredTabNames;
-  }
+    const tabDataWithCounts = TAB_NEWS_DATA.data.flatMap((tab) => {
+      return tab.newsTabs.map((newsTab) => {
+        return {
+          tabName: newsTab.tabName,
+          tabDataIndex: 0,
+          tabDataCount: newsTab.tabData.length
+        };
+      });
+    });
+  
+    return tabDataWithCounts;
+  }  
 
   function getSubscribedPressTabs() {
     const subscribedPressTabsString = localStorage.getItem("pressId");

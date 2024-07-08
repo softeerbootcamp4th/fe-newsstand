@@ -10,10 +10,10 @@ export const NewsList = (props) => {
 
     const { tabs } = props;
 
+    let timerIntervalRef = { current: null };
     let selectedCategoryIndex = 0;
     let selectedPressIndex = 0;
     let lastSelectedCategoryIndex = null;
-
     let pressCategoryContainer;
 
     function render() {
@@ -27,13 +27,14 @@ export const NewsList = (props) => {
 
         const newsContentContainer = element.querySelector('.news-content-container');
 
-        if (!pressCategoryContainer || lastSelectedCategoryIndex !== selectedCategoryIndex) {
-            pressCategoryContainer = PressCategoryContainer({
-                tabs,
-                selectedId: `press-category-${selectedCategoryIndex}`,
-                onChangeCategory: handleChangeCategory
-            });
-        }
+        pressCategoryContainer = PressCategoryContainer({
+            tabs,
+            timerIntervalRef,
+            selectedId: `press-category-${selectedCategoryIndex}`,
+            selectedPressIndex: selectedPressIndex,
+            onChangeCategory: handleChangeCategory,
+            onChangePress: handleChangePress
+        });
 
         const pressInfoContainer = PressInfoContainer({
             imageSrc: "",
@@ -60,18 +61,21 @@ export const NewsList = (props) => {
         newsContentContainer.appendChild(pressInfoContainer.element);
         newsContentContainer.appendChild(pressNewsContainer.element);
 
-
         addEventListenerToArrowButton();
 
         lastSelectedCategoryIndex = selectedCategoryIndex;
     }
 
     function handleChangeCategory(newSelectedId) {
-        console.log(selectedCategoryIndex);
-        console.log(newSelectedId);
         if (newSelectedId !== `press-category-${selectedCategoryIndex}`) {
             selectedCategoryIndex = separateId(newSelectedId);
-            console.log(selectedCategoryIndex);
+            render();
+        }
+    }
+
+    function handleChangePress(newSelectedId) { 
+        if (selectedPressIndex !== newSelectedId) {
+            selectedPressIndex = newSelectedId;
             render();
         }
     }
@@ -80,7 +84,10 @@ export const NewsList = (props) => {
         const buttons = element.querySelectorAll('.arrow-button');
 
         buttons.forEach(button => {
-            button.addEventListener('click', changePressCategory);
+            button.addEventListener('click', (event) => {
+                changePressCategory(event);
+                pressCategoryContainer.setTimer(); // 화살표 버튼 클릭 시 타이머 초기화
+            });
         });
     }
 
@@ -95,16 +102,41 @@ export const NewsList = (props) => {
             default:
                 break;
         }
-    }
 
+        if (timerIntervalRef.current) {
+            console.log("clearTimer", timerIntervalRef.current);
+            clearInterval(timerIntervalRef.current);
+        }
+    }
+    
+    function changeToNextPress() {
+        selectedPressIndex += 1;
+
+        if (selectedPressIndex >= tabs[selectedCategoryIndex].tabDataCount) {
+            selectedPressIndex = 0;
+            changeToNextCategory();
+        }
+
+        render();
+    }
+    
+    function changeToPrevPress() {
+        selectedPressIndex -= 1;
+
+        if (selectedPressIndex < 0) {
+            selectedPressIndex = 0;
+            changeToPrevCategory();
+        }
+
+        render();
+    }
+    
     function changeToNextCategory() {
         selectedCategoryIndex += 1;
 
         if (selectedCategoryIndex >= tabs.length) {
             selectedCategoryIndex = 0;
         }
-
-        console.log(selectedCategoryIndex);
 
         render();
     }
@@ -116,27 +148,7 @@ export const NewsList = (props) => {
             selectedCategoryIndex = tabs.length - 1;
         }
 
-        console.log(selectedCategoryIndex);
         render();
-    }
-
-    function changeToNextPress() {
-        selectedPressIndex += 1;
-
-        if (selectedPressIndex > 3) {
-            selectedPressIndex = 0;
-            changeToNextCategory();
-        }
-    }
-
-    function changeToPrevPress() {
-        console.log("press prev");
-        selectedPressIndex -= 1;
-
-        if (selectedPressIndex < 0) {
-            selectedPressIndex = 0;
-            changeToPrevCategory();
-        }
     }
 
     render();

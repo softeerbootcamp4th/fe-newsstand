@@ -21,7 +21,7 @@ export const PressInfoContainer = (props) => {
 
     function makeChipButton() {
         const icon = isSubscribed ? '/newsstand/assets/icons/xmark.svg' : '/newsstand/assets/icons/plus.svg';
-        const title = isSubscribed ? '구독 취소' : '구독하기';
+        const title = isSubscribed ? '' : '구독하기';
         const chipButton = ChipButton({ icon: icon, title: title });
 
         chipButton.element.addEventListener('click', subscribePress);
