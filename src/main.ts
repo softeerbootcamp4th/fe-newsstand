@@ -1,5 +1,5 @@
 import { useState, init } from "./libs";
-import { ce, div } from "./libs/Elements";
+import { ce, div } from "./libs/elements";
 import { cc } from "./libs/components";
 
 import { AppComponent } from "./libs/renderer";

@@ -39,3 +39,19 @@ export const EventNameMaps = new Map<string, string>([
   ["onKeydown", "keydown"],
   ["onKeyup", "keyup"],
 ]);
+
+export const eventMap = new Map<string, Map<string, EventListener>>();
+
+const rootEventHandler = (e: Event) => {
+  const target = e.target as HTMLElement;
+  const handler = eventMap.get(target.getAttribute("key") ?? "")?.get(e.type);
+  if (handler == null) {
+    return;
+  }
+  handler(e);
+};
+export const addRootEvent = (element: HTMLElement) => {
+  EventNameMaps.forEach((value) => {
+    element.addEventListener(value, rootEventHandler);
+  });
+};

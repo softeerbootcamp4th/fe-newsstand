@@ -7,5 +7,6 @@ export function cc<P>(
   return {
     render,
     props,
+    renderName: render.name,
   };
 }

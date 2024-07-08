@@ -37,6 +37,7 @@ export type RenderingAppElement<T extends HTMLElement = HTMLElement> =
 export interface CreatedAppComponent<P = object> {
   render: (props: P) => CreatedAppComponent<P> | CreatedAppElement;
   props: P;
+  renderName: string;
 }
 export type AppComponent<P = object> = AppRender<
   P,
