@@ -7,18 +7,21 @@ function SnackBar({ $target, position = "beforeend", text, duration = 5000, onSu
 
   $target.insertAdjacentElement(position, this.$element);
 
-  this.render(text, duration, onSuccess);
+  this.render(text);
+
+  this.show = function () {
+    this.$element.classList.remove("hide");
+
+    setTimeout(() => {
+      this.$element.classList.add("hide");
+
+      if (onSuccess) onSuccess();
+    }, duration);
+  };
 }
 
-SnackBar.prototype.render = function (text, duration = 5000, onSuccess) {
+SnackBar.prototype.render = function (text) {
   this.$element.innerText = text;
-  this.$element.classList.remove("hide");
-
-  setTimeout(() => {
-    this.$element.classList.add("hide");
-
-    if (onSuccess) onSuccess();
-  }, duration);
 };
 
 export default SnackBar;
