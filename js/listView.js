@@ -7,7 +7,7 @@ let curNewsIdx = 0;
 let prevCategoryType;
 const intervalTime = 20000;
 let progressBarTimeout;
-let subscriptions = getSubscriptionList().reverse();
+let subscriptions;
 
 /* 다른 탭을 선택했을 때 초기화 함수 */
 function checkCurDataType(dataType) {
@@ -22,7 +22,7 @@ function checkCurDataType(dataType) {
 
 /* 카테고리 초기화 및 클릭 이벤트 추가 함수 */
 export const createCategory = (data, dataType) => {
-    const parentDiv = document.querySelector('.all-cate-header');
+    const parentDiv = document.querySelector('.list-view-header');
     parentDiv.innerHTML = '';
 
     checkCurDataType(dataType);
@@ -63,6 +63,7 @@ export const createCategory = (data, dataType) => {
 export const loadCurrentCategoryNews = (dataType) => {
 
     checkCurDataType(dataType);
+    subscriptions = getSubscriptionList().reverse();
 
     if(!newsData.length) {
         fetch("./data/allNews.json")
@@ -251,7 +252,7 @@ function startProgressBar() {
 }
 
 function showCategory(index) {
-    const parentDiv = document.querySelector('.all-cate-header');
+    const parentDiv = document.querySelector('.list-view-header');
     const selectedDiv = parentDiv.children[index];
     selectedDiv.classList.add('selected');
 }
@@ -280,11 +281,7 @@ function updateBtnVisibility() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    // 초기에 무조건 모든 카테고리 탭 데이터 가져오기
-    createCategory(category, 'all');
-    loadCurrentCategoryNews('all');
-
+export const initializeArrowBtn = () => {
     const leftBtn = document.querySelector('.left-btn');
     const rightBtn = document.querySelector('.right-btn');
 
@@ -305,15 +302,30 @@ document.addEventListener("DOMContentLoaded", () => {
             loadCurrentCategoryNews(prevCategoryType);
         }
     });
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-    const header = document.querySelector('.all-cate-header');
+}
+
+function initalizeHeaderScroll() {
+    const header = document.querySelector('.list-view-header');
 
     header.addEventListener('wheel', (event) => {
         if (event.deltaY === 0) return;
         event.preventDefault();
         header.scrollLeft += event.deltaY;
 });
+}
+
+export const initlizeListViewFunction = () => {
+    createCategory(category, 'all');
+    loadCurrentCategoryNews('all');
+    initalizeHeaderScroll();
+    initializeArrowBtn();
+
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    if(!document.querySelector('.list-view-container')) return;
+    initlizeListViewFunction();
 });
+
 

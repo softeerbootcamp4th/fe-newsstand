@@ -1,11 +1,19 @@
-import { createCategory, showInformation, loadCurrentCategoryNews } from "./category.js";
+import { createCategory, showInformation, loadCurrentCategoryNews } from "./listView.js";
 import { moveToSubscribeTab } from './mainTab.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+
+export function initalizeSubscribeFunction() {
     updateButton();
     handleSubscribeBtnClick();
     handleModalBtnClick();
-});
+}
+
+export const getSubscriptionList = () => {
+    const subscriptionList = localStorage.getItem('subscriptions');
+    return subscriptionList ? JSON.parse(subscriptionList) : [];
+}
+
+
 
 function handleModalBtnClick() {
     const modal = document.querySelector('.modal-container');
@@ -31,11 +39,6 @@ function handleModalBtnClick() {
         modal.classList.remove('show');
         document.querySelector('.company-name').remove();
     });
-}
-
-export const getSubscriptionList = () => {
-    const subscriptionList = localStorage.getItem('subscriptions');
-    return subscriptionList ? JSON.parse(subscriptionList) : [];
 }
 
 function setSubscriptionList(subscriptionList) {
@@ -84,3 +87,9 @@ function handleSubscribeBtnClick() {
         }
     });
 }
+document.addEventListener('DOMContentLoaded', () => {
+    if(!document.querySelector('.list-view-container')) return;
+    updateButton();
+    handleSubscribeBtnClick();
+    handleModalBtnClick();
+});

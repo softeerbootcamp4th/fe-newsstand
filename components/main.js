@@ -6,25 +6,11 @@ export function renderMainContent() {
                 <p class="subscribe">내가 구독한 언론사</p>
             </div>
             <div class="main-header-icons">
-                <img src="src/icons/list-view-checked.svg"> 
-                <img src="src/icons/grid-view.svg" id="grid-view"> 
+                <img src="src/icons/list-view.svg" class="list-view"> 
+                <img src="src/icons/grid-view-checked.svg" class="grid-view selected-icon "> 
             </div>
         </div>
-        <div class="all-cate-container column-flex">
-            <div class="all-cate-header"></div>
-            <div class="info hidden">구독한 언론사가 없습니다.</div>
-            <div class="news-container column-flex">
-                <div class="container-header">
-                    <img alt="company-logo" id="logo">
-                    <p class="edit-date"></p>
-                    <div class="subscribe-btn"><span>+</span>구독하기</div>
-                </div>
-                <div class="news-item-container">
-                    <div class="main-news column-flex"></div>
-                    <div class="sub-news column-flex"></div>
-                </div>
-            </div>
-        </div>
+        <div class="grid-view-container selected-view"></div>
         <div class="subscribe-cate-container"></div>
             <div class="arrow left-btn">
         <img src="./src/images/LeftButton.png" alt="left-arrow">

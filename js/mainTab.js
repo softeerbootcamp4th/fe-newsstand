@@ -1,4 +1,4 @@
-import { createCategory, loadCurrentCategoryNews } from "./category.js";
+import { createCategory, loadCurrentCategoryNews } from "./listView.js";
 import { category } from './data.js';
 import { getSubscriptionList } from "./subscribe.js";
 
