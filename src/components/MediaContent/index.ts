@@ -14,7 +14,20 @@ export const MediaContent = () => {
   const [currentFilter, setCurrentFilter] =
     useState<MediaContentFilterType>("전체 언론사");
 
-  const [currentData, setCurrentData] = useState<MediaIdByCategories>([]);
+  const [currentData, setCurrentData] = useState<MediaIdByCategories | null>(
+    null,
+  );
+  const loadData = async () => {
+    const data = await getMediaIdByCategories();
+    setCurrentData(data);
+  };
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  if (currentData === null) {
+    return null;
+  }
   const [currentDataIdx, setCurrentDataIdx] = useState<[number, number]>([
     0, 0,
   ]);
@@ -36,13 +49,6 @@ export const MediaContent = () => {
   const handleClick = (idx: [number, number]) => {
     setCurrentDataIdx(idx);
   };
-  const loadData = async () => {
-    const data = await getMediaIdByCategories();
-    setCurrentData(data);
-  };
-  useEffect(() => {
-    loadData();
-  }, []);
 
   const currentMediaId =
     currentData[currentDataIdx[0]].mediaIds[currentDataIdx[1]];
