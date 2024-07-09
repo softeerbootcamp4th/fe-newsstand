@@ -8,6 +8,7 @@ function mountDraggable(el)
 	let scrollLeftBase = 0;
 	function onDragStart(e)
 	{
+		isDragged = false;
 		isMouseHolding = true;
 		startOffset = e.pageX;
 		scrollLeftBase = this.scrollLeft;
@@ -34,6 +35,7 @@ function mountDraggable(el)
 	function preventClick(e)
 	{
 		if(isDragged) {
+			isDragged = false;
 			e.stopPropagation();
 			e.stopImmediatePropagation();
 		}
