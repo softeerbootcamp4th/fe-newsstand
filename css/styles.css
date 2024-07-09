@@ -165,6 +165,10 @@ header > span {
     color: black;
 }
 
+.vertical-list li span a:hover {
+    text-decoration: underline;
+}
+
 nav ul li {
     position: relative; /* 자식 요소의 위치를 상대적으로 설정 */
     padding: 8px 15px;
@@ -178,10 +182,6 @@ nav ul li a {
     position: relative; /* a 태그의 위치 설정 */
     z-index: 1; /* 다른 요소들보다 위에 나타나도록 설정 */
 }
-
-/* nav ul li.active {
-    background-color: #7890E7;
-} */
 
 .leftButton {
     position: fixed;
@@ -244,15 +244,6 @@ nav ul li a {
     cursor: pointer;
 }
 
-/* @keyframes fillColor {
-    from {
-      background-size: 0 100%;
-    }
-    to {
-      background-size: 100% 100%;
-    }
-  } */
-
 nav ul li.active a {
     color: white;
 }
@@ -277,4 +268,21 @@ nav ul li.active a {
 
 .navItem.active.progress > div::after {
     transform: scaleX(1); /* 최종 너비를 100%로 설정 */
+}
+
+.articleImage > img {
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .5s ease-in-out;
+	transition: .5s ease-in-out;
+}
+
+.articleImage > img:hover {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.articleImage > strong:hover {
+    text-decoration: underline;
 }

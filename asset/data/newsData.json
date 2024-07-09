@@ -1,0 +1,173 @@
+{
+    "newsList": [
+        {
+            "id": 0,
+            "type": "종합/경제",
+            "press": [
+                {
+                    "pressId": 0,
+                    "pressLogo": "/asset/images/서울경제.svg",
+                    "pressName": "서울경제",
+                    "editDate": "2023.02.10 18:27 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "또 국민연금의 몽니…현대百 지주사 불발"
+                    },
+                    "subNews": [
+                        {"subNewsId": 0, "subNewsTitle": "\"위스키 사려고 이틀 전부터 줄 섰어요\""},
+                        {"subNewsId": 1, "subNewsTitle": "'방시혁 제국'이냐 '카카오 왕국'이냐…K엔터 누가 거머쥘까"},
+                        {"subNewsId": 2, "subNewsTitle": "사용후핵연료 저장시설 포화…이대론 7년 뒤 원전 멈춘다"},
+                        {"subNewsId": 3, "subNewsTitle": "[단독] 원희룡 \"해외건설 근로자 소득공제 월 500만원으로 상향할 것\""},
+                        {"subNewsId": 4, "subNewsTitle": "태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]"},
+                        {"subNewsId": 5, "subNewsTitle": "LG엔솔, 폴란드 자동차산업협회 가입…\"유럽서 목소리 키운다\""}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "type": "방송/통신",
+            "press": [
+                {
+                    "pressId": 0,
+                    "pressLogo": "/asset/images/sbs.svg",
+                    "pressName": "SBS",
+                    "editDate": "2023.03.12 13:17 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "`연두색 번호판` 효과ㅏ 봤나...상반기 법인 외제차 확 줄었다"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "정부 \"모든 전공의 복귀 여부 상관없이 행정처분 안 해\""},
+                        {"subNewsId":1, "subNewsTitle": "[단독] `김건희 문자` 논란에…국민의힘 \"선거 이후도 생각하라\""},
+                        {"subNewsId":2, "subNewsTitle": "박지원 \"윤한갈등 아닌 김한갈등…국정농단으로 갈 수도\""},
+                        {"subNewsId":3, "subNewsTitle": "`best`가 아닌 `goodest`?…바이든, 인터뷰 `실언` 논란"},
+                        {"subNewsId":4, "subNewsTitle": "경찰, 임성근 전 사단장 `혐의 없음` 불송치 결정"},
+                        {"subNewsId":5, "subNewsTitle": "`1천 명 집단 식중독` 남원 초중고, 내일부터 급식 재개"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "type": "IT",
+            "press": [
+                {
+                    "pressId": 0,
+                    "pressLogo": "/asset/images/제드넷코리아.svg",
+                    "pressName": "ZDNET KOREA",
+                    "editDate": "2023.08.03 08:27 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "LG엔솔, 2분기 IRA 세액공제 빼면 2525억원 적자"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "2명 중 1명은 `정신질환에 걸리면 몇몇 친구는 나에게 등을 돌릴 것` 생각"},
+                        {"subNewsId":1, "subNewsTitle": "삼성전자, 차세대 메모리 테스터 도입...엑시콘·네오셈에 `러브콜`"},
+                        {"subNewsId":2, "subNewsTitle": "KAIST `AI 가속기`에 잇단 러브콜…\"엔비디아 2배 성능\""},
+                        {"subNewsId":3, "subNewsTitle": "\"애플워치10, 화면 커지고 두께 얇아져\"…건강기능은?"},
+                        {"subNewsId":4, "subNewsTitle": "\"갤럭시버즈3·버즈3 프로, 가격 유출\"…얼마나 오르나"},
+                        {"subNewsId":5, "subNewsTitle": "엔비디아 투자 등급 내렸다…이유는?"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "type": "영자지",
+            "press": [
+                {
+                    "pressId": 0,
+                    "pressLogo": "/asset/images/더코리아해럴드.svg",
+                    "pressName": "The Korea Herald",
+                    "editDate": "2024.03.15 16:31 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "Yoon set to travel to US for NATO summit"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "Samsung workers' union kicks off first-ever strike"},
+                        {"subNewsId":1, "subNewsTitle": "SK chief inspects chip materials, biopharma affiliates in US"},
+                        {"subNewsId":2, "subNewsTitle": "Heavy rain batters central regions; 1 resident missing"},
+                        {"subNewsId":3, "subNewsTitle": "Patterns build up identity, originality: Hanbok illustrator"},
+                        {"subNewsId":4, "subNewsTitle": "K-pop groups produced by K-pop artists: Better chances of success?"},
+                        {"subNewsId":5, "subNewsTitle": "JobKorea launches Klik app for foreign job seekers"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "type": "스포츠/연예",
+            "press": [
+                {
+                    "pressId": 0,
+                    "pressLogo": "/asset/images/스포츠서울.svg",
+                    "pressName": "스포츠서울",
+                    "editDate": "2024.04.27 21:53 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "인터밀란, 김민재 영입 위해 세부 계획까지 마련…뮌헨 떠나 세리에A 복귀 임박하나"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "김대호, 순수함과 초심 잃었나...\"연출된 방송 모습 반성\""},
+                        {"subNewsId":1, "subNewsTitle": "안재현, 건강 적신호로 병원 갔다...정밀검사 결과에 충격"},
+                        {"subNewsId":2, "subNewsTitle": "전현무 \"지석진에 대역죄 지었다\"...무슨 일?"},
+                        {"subNewsId":3, "subNewsTitle": "`007작전` 방불케한 홍명보 선임...울산 구단주 대승적 결단→KFA 30분 뒤 발표 "},
+                        {"subNewsId":4, "subNewsTitle": "퓨처스 올스타전 도중 코칭스태프 개편 발표, 삼성은 뭐가 급했나"},
+                        {"subNewsId":5, "subNewsTitle": "울산에 고개 숙인 이임생 \"입이 열개라도 할 말이 없다\""}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "type": "매거진/전문지",
+            "press": [
+                {
+                    "pressId": 0,
+                    "pressLogo": "/asset/images/정신의학신문.svg",
+                    "pressName": "정신의학신문",
+                    "editDate": "2024.01.06 19:08 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "AI, 인간을 대체할 수 있을까?"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "[치매] 치매와 관련된 오해들"},
+                        {"subNewsId":1, "subNewsTitle": "배가 불러도 자꾸만 음식을 찾아요"},
+                        {"subNewsId":2, "subNewsTitle": "[무대공포증] 발표하거나 무대에 설 때 공포를 느끼시나요?"},
+                        {"subNewsId":3, "subNewsTitle": "상대방의 이야기를 경청하는 방법 4가지"},
+                        {"subNewsId":4, "subNewsTitle": "식이장애 치료 방법"},
+                        {"subNewsId":5, "subNewsTitle": "누군가를 신뢰한다는 것"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "type": "지역",
+            "press": [
+                {
+                    "pressId": 0,
+                    "pressLogo": "/asset/images/대전방송.svg",
+                    "pressName": "대전방송",
+                    "editDate": "2024.05.30 10:28 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "쏟아지는 폭우에 충청권 비 피해 속출"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "세종 읍면동 28개 전 노선 운행 중지"},
+                        {"subNewsId":1, "subNewsTitle": "공개된 김건희 문자 5건… 해석 분분"},
+                        {"subNewsId":2, "subNewsTitle": "천안의료원, 특수건강진단기관 2회 연속 `A등급`"},
+                        {"subNewsId":3, "subNewsTitle": "尹대통령, 나토정상회의 참석차 출국"},
+                        {"subNewsId":4, "subNewsTitle": "초등래퍼 부자가 전한 `울림`"},
+                        {"subNewsId":5, "subNewsTitle": "`성추행 의혹` 대전시의원, 징계 앞두고 국민의힘 탈당"}
+                    ]
+                }
+            ]
+        }
+    ]
+}
+    
