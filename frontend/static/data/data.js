@@ -22,7 +22,8 @@ const articleTitles = [
     "기후 변화, 글로벌 대응이 필요한 시점"
 ];
 
-export const NEWS = Array.from({ length: 100 }, () => ({
+export let NEWS = Array.from({ length: 100 }, (_, index) => ({
+    "id": index,
     "category": getRandomElement(categories),
     "lastDate": "2023.02.10. 18:27",
     "mediaCompanyImageURL": "https://s.pstatic.net/static/newsstand/2019/logo/011.png",

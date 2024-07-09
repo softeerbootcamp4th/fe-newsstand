@@ -1,4 +1,3 @@
-
 export function rollingNews(currentDom, template, isLeft) {
     const futureDom = document.querySelector(isLeft ? ".futureDom_left" : ".futureDom_right");
     while (futureDom.firstChild) {
@@ -8,7 +7,7 @@ export function rollingNews(currentDom, template, isLeft) {
     futureDom.insertAdjacentHTML('beforeend', template);
     futureDom.classList.add("futureDomStart");
 
-    setTimeout(function () {
+    setTimeout(() => {
         while (currentDom.firstChild) {
             currentDom.removeChild(currentDom.firstChild);
         }
