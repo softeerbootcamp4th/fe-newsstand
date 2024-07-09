@@ -1,5 +1,7 @@
 import { updateNext } from "../../../utils/updateStates.js";
 
+const PROGRESS_DURATION_SEC = 20;
+
 const classes = {
   base: "list-tab-item",
   unselected: "available-medium14",
@@ -34,6 +36,7 @@ export function createTabItem({ innerText, children, isSelected }) {
 function startProgressBar(selectedButton) {
   const progressBar = document.createElement("div");
   progressBar.className = "tab-progress";
+  progressBar.style.animationDuration = `${PROGRESS_DURATION_SEC}s`;
   selectedButton.appendChild(progressBar);
 
   progressBar.addEventListener("animationend", updateNext, { once: true });
