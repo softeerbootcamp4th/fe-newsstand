@@ -6,6 +6,7 @@ import { addCompany, getSubscribedCompanies, removeCompany } from "@/data/storag
 import { CATEGORIES } from "@/data/constants";
 import { getNews } from "@/apis/news";
 import { getSVGTemplate } from "@/components/SVG/SVG";
+import { shuffleArray } from "@/utils/array";
 
 function NewsViewer({
   $target,
@@ -54,7 +55,9 @@ NewsViewer.prototype.loadNews = async function (tab, page) {
   if (this.props.filter === "category") {
     const news = await getNews({ category: tab });
 
-    this.setState({ tab, page, news, tabs: CATEGORIES });
+    const shuffledNews = shuffleArray(news);
+
+    this.setState({ tab, page, news: shuffledNews, tabs: CATEGORIES });
   }
 
   if (this.props.filter === "company") {
