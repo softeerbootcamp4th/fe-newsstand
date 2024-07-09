@@ -1,4 +1,4 @@
-import { createCategory, displayInformation, loadCurrentCategoryNews } from "./category.js";
+import { createCategory, showInformation, loadCurrentCategoryNews } from "./category.js";
 import { moveToSubscribeTab } from './mainTab.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,7 +23,7 @@ function handleModalBtnClick() {
         setSubscriptionList(subscriptor);
         updateButton();
         createCategory(subscriptor.reverse(), 'subscribe');
-        subscriptor.length === 0 ? displayInformation() : loadCurrentCategoryNews('subscribe');
+        subscriptor.length === 0 ? showInformation() : loadCurrentCategoryNews('subscribe');
         
     });
 
