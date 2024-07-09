@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
       renderNews(leftNewsContainer, leftNews, leftIndex);
       renderNews(rightNewsContainer, rightNews, rightIndex);
 
-      createInterval(leftNewsContainer, leftTimer, leftNews, leftIndex, 'left');
+      leftTimer = createInterval(leftNewsContainer, leftNews, leftIndex, 'left');
 
       setTimeout(() => {
-        createInterval(rightNewsContainer, rightTimer, rightNews, rightIndex, 'right');
+        rightTimer = createInterval(rightNewsContainer, rightNews, rightIndex, 'right');
       }, 1000);
 
       // 마우스 호버 시 롤링 일시정지 및 밑줄 표시
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         leftNewsContainer
           .querySelector(".news-item")
           .classList.remove("hovered");
-        createInterval(leftNewsContainer, leftTimer, leftNews, leftIndex, 'left');
+        leftTimer = createInterval(leftNewsContainer, leftNews, leftIndex, 'left');
       });
 
       rightNewsContainer.addEventListener("mouseenter", () => {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         rightNewsContainer
           .querySelector(".news-item")
           .classList.remove("hovered");
-        createInterval(rightNewsContainer, rightTimer, rightNews, rightIndex, 'right');
+        rightTimer = createInterval(rightNewsContainer, rightNews, rightIndex, 'right');
       });
     })
     .catch((error) => {
@@ -79,11 +79,13 @@ function createNewsItem(news, classname = "") {
   return newsItem;
 }
 
-function createInterval(container, timer, news, index, type) {
-  timer = setInterval(() => {
-    rollingNews(container, news, index);
-    index = (index + 1) % news.length;
-    type === 'left' ? leftIndex = (index + 1) % news.length : rightIndex = (index + 1) % news.length ;
+function createInterval(container, news, index, type) {
+  return setInterval(() => {
+    if (type === 'left') {
+      leftIndex = rollingNews(container, news, leftIndex);
+    } else {
+      rightIndex = rollingNews(container, news, rightIndex);
+    }
   }, intervalTime);
 }
 
@@ -102,18 +104,24 @@ function rollingNews(container, news, index) {
   const curNewsItem = container.querySelector(".news-item.show");
   const nextNewsItem = container.querySelector(".news-item.hidden");
 
-  curNewsItem.classList.remove("show");
-  curNewsItem.classList.add("exit");
+  if (curNewsItem) {
+    curNewsItem.classList.remove("show");
+    curNewsItem.classList.add("exit");
+  }
 
-  nextNewsItem.classList.remove("hidden");
-  nextNewsItem.classList.add("show");
+  if (nextNewsItem) {
+    nextNewsItem.classList.remove("hidden");
+    nextNewsItem.classList.add("show");
+  }
 
   setTimeout(() => {
-    curNewsItem.remove();
+    if (curNewsItem) curNewsItem.remove();
     const newNewsItem = createNewsItem(
       news[(index + 2) % news.length],
       "hidden"
     );
     container.appendChild(newNewsItem);
   }, 1000);
+
+  return (index + 1) % news.length;
 }
