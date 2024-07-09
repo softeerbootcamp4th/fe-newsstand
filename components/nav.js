@@ -1,5 +1,5 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
-import { updateMyNewsList } from "./myNewsList.js";
+import { getMyDataLength, updateMyNewsList } from "./myNewsList.js";
 import { getMaxMediaIndex, updateNewsList } from "./newsList.js";
 
 const categoryList = [
@@ -14,7 +14,8 @@ const categoryList = [
 
 const myList = ["언론사1", "언론사5", "언론사9", "언론사11", "언론사12"];
 
-var intervalId; //왜 전역변수로 설정해야 작동하는가??
+var newsInterval; //왜 전역변수로 설정해야 작동하는가??
+var myInterval;
 let currentCategoryIndex = 0;
 let currentMediaIndex = 0;
 
@@ -36,8 +37,8 @@ export function generateNav(container, currentHeaderCategoryIndex) {
   function navInit(selectedList) {
     currentCategoryIndex = 0;
     currentMediaIndex = 0;
-    clearInterval(intervalId);
-    startInterval();
+    clearInterval(newsInterval);
+    clearInterval(myInterval);
 
     const nav = generateNode("nav", "content_navigator");
     const ul = generateNode("ul", "contentList");
@@ -70,12 +71,14 @@ function generateNavForNewsList() {
       element.classList.add("selected");
       currentCategoryIndex = index;
 
-      clearInterval(intervalId);
-      startInterval();
+      clearInterval(newsInterval);
+      clearInterval(myInterval);
+      startNewsInterval();
 
       updateCategory(categoryList[index], currentCategoryIndex);
     });
   });
+  startNewsInterval();
 }
 function generateNavForMyList() {
   updateMyNewsList(currentCategoryIndex);
@@ -88,12 +91,14 @@ function generateNavForMyList() {
       element.classList.add("selected");
       currentCategoryIndex = index;
 
-      clearInterval(intervalId);
-      startInterval();
+      clearInterval(newsInterval);
+      clearInterval(myInterval);
+      startMyNewsInterval();
 
       updateMyMedia(currentCategoryIndex);
     });
   });
+  startMyNewsInterval();
 }
 
 /**
@@ -151,8 +156,8 @@ function updateMyMedia(newCategoryIndex) {
 /**
  * 20초 마다 categoryList의 다음 요소로 넘김
  */
-function startInterval() {
-  intervalId = setInterval(() => {
+function startNewsInterval() {
+  newsInterval = setInterval(() => {
     const categoryElements = document.querySelectorAll(".contentList li");
     currentMediaIndex++;
     if (
@@ -175,5 +180,22 @@ function startInterval() {
         currentMediaIndex
       );
     }
+  }, 20000);
+}
+
+function startMyNewsInterval() {
+  myInterval = setInterval(() => {
+    const categoryElements = document.querySelectorAll(".contentList li");
+    currentCategoryIndex++;
+    if (currentCategoryIndex >= getMyDataLength())
+      currentCategoryIndex = currentCategoryIndex % getMyDataLength();
+    categoryElements.forEach((element, index) => {
+      if (index === currentCategoryIndex) {
+        element.classList.add("selected");
+      } else {
+        element.classList.remove("selected");
+      }
+    });
+    updateMyNewsList(currentCategoryIndex);
   }, 20000);
 }

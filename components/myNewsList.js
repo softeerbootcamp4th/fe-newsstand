@@ -63,7 +63,7 @@ const myData = [
  * @param {Node} container
  * @param {Object} content {media: String, news: Array}
  */
-function generateNewsList(container, content) {
+function generateMyNewsList(container, content) {
   const list = generateNode("ul", "newsList");
 
   content.news.slice(0, 6).forEach((category) => {
@@ -100,7 +100,11 @@ export function updateMyNewsList(currentCategoryIndex) {
 
   setMedia(mediaList, currentCategoryIndex);
 
-  generateNewsList(newsListContainer, myData[currentCategoryIndex]);
+  generateMyNewsList(newsListContainer, myData[currentCategoryIndex]);
+}
+
+export function getMyDataLength() {
+  return myData.length;
 }
 
 /**

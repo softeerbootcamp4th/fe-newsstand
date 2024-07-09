@@ -61,6 +61,7 @@ body {
 #show button.selected {
   font-weight: 700;
   color: black;
+  pointer-events: none;
 }
 
 main {
