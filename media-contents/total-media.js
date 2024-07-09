@@ -38,7 +38,6 @@ export async function renderTotalMedia() {
         gridBoxDOM.classList.remove("non-display");
         listBoxDOM.classList.add("non-display");
 
-        gridBoxDOM.dataset.gridPage = DEFAULT_PAGE;
         renderGridMedia(DEFAULT_PAGE);
     }
 
@@ -67,6 +66,12 @@ export function resetTotalMedia() {
      */
     const gridListDOM = document.querySelector(".media-contents__grid-list");
     gridListDOM.removeEventListener("click", clickGridList);
+
+    /**
+     * 그리드 페이지 초기화
+     */
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    gridBoxDOM.dataset.gridPage = DEFAULT_PAGE;
 
     /**
      * 카테고리 목록 이벤트 remove
