@@ -35,6 +35,7 @@ export type RenderingAppElement<T extends HTMLElement = HTMLElement> =
     parentKey: string;
     componentKey: string;
     parent: HTMLElement;
+    forced: boolean;
   };
 
 export interface CreatedAppComponent<P = object> {
@@ -57,6 +58,7 @@ export type AppComponent<P = object> = AppRender<
 export type RenderingAppComponent<P = object> = CreatedAppComponent<P> & {
   key: string;
   parent: HTMLElement;
+  forced: boolean;
 };
 
 export type RenderingAppNode = {

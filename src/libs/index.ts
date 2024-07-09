@@ -22,7 +22,7 @@ const stateIdxMap = new Map<string, number>();
 const effectCleanupsMap = new Map<string, Array<() => void>>();
 const effectDepsMap = new Map<string, Array<Array<unknown> | null>>();
 const effectIdxMap = new Map<string, number>();
-
+const cachedProps = new Map<string, object>();
 export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
   if (!cur || !nxt) {
     return;
@@ -34,7 +34,7 @@ export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
     }
     return;
   }
-  const forceUpdate = nxt.getAttribute("forced") === "true";
+  const forceUpdate = false; //nxt.getAttribute("forced") === "true";
   if (cur.tagName !== nxt.tagName || forceUpdate) {
     cur.replaceWith(nxt);
     return;
@@ -177,11 +177,17 @@ export const render = () =>
       parent: shadowRoot,
       renderName: "App",
       key: "App",
+      forced: false,
     });
     while (renderQueue.length) {
       const cur = renderQueue.popFront()!;
       if (isRenderingAppComponent(cur)) {
-        const { render: component, props, parent, key } = cur;
+        const { render: component, props, parent, key, forced } = cur;
+        const prevProps = cachedProps.get(key);
+        let curForced = forced;
+        if (!curForced && !isPropsEqual(prevProps, props)) {
+          curForced = true;
+        }
         currentKey = key;
         const createdComponent = component(props);
         if (createdComponent == null || createdComponent === false) {
@@ -204,6 +210,7 @@ export const render = () =>
             parent,
             renderName: createdComponent.renderName,
             key: key,
+            forced: curForced,
           });
           continue;
         }
@@ -212,6 +219,7 @@ export const render = () =>
           parentKey: key,
           componentKey: key,
           parent,
+          forced: curForced,
         });
         continue;
       }
@@ -228,13 +236,16 @@ export const render = () =>
         children,
         parentKey,
         componentKey,
+        forced,
       } = cur;
+
       if (element == null) {
         continue;
       }
       const idx = parent.children.length;
       const curKey = parentKey + `_${element.tagName}[${idx}]`;
       element.setAttribute("key", curKey);
+      element.setAttribute("forced", `${forced}`);
       parent.appendChild(element);
       eventMap.set(curKey, eventListeners);
       (children ?? []).forEach((child, index) => {
@@ -256,6 +267,7 @@ export const render = () =>
             renderName: child.renderName,
             parent: element,
             key: `${componentKey}-${child.renderName}[${index}]`,
+            forced: forced,
           });
           return;
         }
@@ -264,6 +276,7 @@ export const render = () =>
           parentKey: curKey,
           componentKey: componentKey,
           parent: element,
+          forced: forced,
         });
       });
     }
