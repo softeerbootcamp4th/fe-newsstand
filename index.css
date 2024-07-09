@@ -44,3 +44,10 @@
 .news-bar-area {
     margin-bottom: 30px;
 }
+
+/* app */
+#app {
+    position: relative;
+    left: 200px;
+    top: 200px;
+}

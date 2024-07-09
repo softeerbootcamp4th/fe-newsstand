@@ -7,7 +7,6 @@ export const initArticleList = async () => {
     try {
         addEventListeners();
         // 첫번째 카테고리 버튼에 class 부여
-        console.log(document.querySelector('.article-menu-wrapper'))
         setDataWithTab(document.querySelectorAll('.menu-btn-wrapper')[0], 0);
     } catch (error) {
         console.log(error)
@@ -130,20 +129,37 @@ const insertContent = (menuIdx, menuCurrentPage, menuLastPage) => {
 }
 
 // 페이지 이동 함수
-const handleCategoryEvent = (thisBtn, menuInfo) => {
+export const handleNextPageEvent = (thisBtn, menuInfo, isNow) => {
+    // param에서 thisBtn 제거
+    thisBtn = document.querySelector('.menu-btn-wrapper-clicked')
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
     const totalMenuLength = menuInfo.length;
     newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
-    
-    const timeoutId = setTimeout(() => {
-        if (menuCurrentPage === menuLastPage) {
-            moveNextCategory(thisBtn, nextBtn, totalMenuLength);
-        } else {
-            moveNextPage(thisBtn);
-        }
-        insertContent(menuIdx, menuCurrentPage, menuLastPage);
-    }, CATEGORY_TIMEOUT);
-    newsState.setCategoryTimeoutId(timeoutId);
+
+    if (isNow) {
+        clearTimeout(categoryTimeoutId);
+        const timeoutId = setTimeout(() => {
+            if (menuCurrentPage === menuLastPage) {
+                console.log('nextCategory')
+                moveNextCategory(thisBtn, nextBtn, totalMenuLength);
+            } else {
+                console.log('nextPage')
+                moveNextPage(thisBtn);
+            }
+            insertContent(menuIdx, menuCurrentPage, menuLastPage);
+        }, 1);
+        newsState.setCategoryTimeoutId(timeoutId);
+    } else {
+        const timeoutId = setTimeout(() => {
+            if (menuCurrentPage === menuLastPage) {
+                moveNextCategory(thisBtn, nextBtn, totalMenuLength);
+            } else {
+                moveNextPage(thisBtn);
+            }
+            insertContent(menuIdx, menuCurrentPage, menuLastPage);
+        }, CATEGORY_TIMEOUT);
+        newsState.setCategoryTimeoutId(timeoutId);
+    }
 }
 
 const moveNextCategory = (thisBtn, nextBtn, totalMenuLength) => {
@@ -152,12 +168,22 @@ const moveNextCategory = (thisBtn, nextBtn, totalMenuLength) => {
     if (menuIdx === totalMenuLength) {
         newsState.setMenuIdx(0);
     }
+    nextBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[menuIdx].totalPages}`;
     thisBtn.classList.remove('menu-btn-wrapper-clicked');
     nextBtn.classList.add('menu-btn-wrapper-clicked');
-    handleCategoryEvent(nextBtn, menuInfo);
+    handleNextPageEvent(nextBtn, menuInfo);
+}
+
+const movePreCategory = (thisBtn, preBtn, totalMenuLength) => {
+    newsState.setMenuIdx(menuIdx-1);
+    if (menuIdx === -1) {
+        newsState.setMenuIdx(totalMenuLength-1)
+    }
+    newsState.setMenuCurrentPage(menuInfo[menuIdx])
 }
 
 const moveNextPage = (thisBtn) => {
+    console.log(thisBtn)
     newsState.setMenuCurrentPage(menuCurrentPage+1);
     thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
     thisBtn.querySelector('.fill-background').remove();
@@ -166,7 +192,7 @@ const moveNextPage = (thisBtn) => {
     fillBackground.classList.add('fill-background');
     thisBtn.appendChild(fillBackground);
     
-    handleCategoryEvent(thisBtn, menuInfo);
+    handleNextPageEvent(thisBtn, menuInfo);
 }
 
 // 탭 데이터 설정 함수
@@ -186,5 +212,5 @@ const setDataWithTab = (btnWrapper, menuIdx) => {
     document.querySelectorAll('.menu-btn-wrapper').forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
     btnWrapper.classList.add('menu-btn-wrapper-clicked');
 
-    handleCategoryEvent(btnWrapper, menuInfo);
+    handleNextPageEvent(btnWrapper, menuInfo);
 }

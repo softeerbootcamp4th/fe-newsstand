@@ -1,3 +1,4 @@
+import { createArrow, initArrow } from "../components/arrow/arrow.js";
 import { createArticleList, initArticleList } from "../components/articleList/articleList.js"
 import { createHeader } from "../components/header/header.js"
 import { createNewsBar, initNewsBar } from "../components/newsBar/newsBar.js"
@@ -14,6 +15,7 @@ export const NewsPage = async (app) => {
     Header(app);
     NewsBar(app);
     ArticleList(app);
+    Arrow(app);
 }
 
 const fetchNewsPageData = async ({ menuInfoSrc }) => {
@@ -44,4 +46,13 @@ const ArticleList = (app) => {
     app.appendChild(el)
     el.innerHTML = createArticleList(menuInfo);
     initArticleList();
+}
+
+const Arrow = (app) => {
+    const el = document.createElement('div')
+    el.setAttribute('class', 'arrow-area')
+    
+    app.appendChild(el)
+    el.innerHTML = createArrow();
+    initArrow();
 }

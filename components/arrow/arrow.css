@@ -1,0 +1,24 @@
+.arrow-wrapper {
+    top: -200px;
+    width: 1025px;
+    left: -47px;
+    position: relative;
+}
+
+.left-arrow-btn {
+    cursor: pointer;
+}
+
+.right-arrow-btn {
+    cursor: pointer;
+}
+
+.left-arrow-wrapper {
+    position: absolute;
+    left: 0;
+}
+
+.right-arrow-wrapper {
+    position: absolute;
+    right: 0;
+}
