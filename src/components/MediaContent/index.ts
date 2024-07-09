@@ -32,7 +32,7 @@ export const MediaContent = () => {
     0, 0,
   ]);
 
-  const hasNext = currentDataIdx[0] <= currentData.length;
+  const hasNext = currentDataIdx[0] < currentData.length;
   const hasPrev = currentDataIdx[0] >= 1;
 
   const handleNext = () => {
@@ -97,7 +97,10 @@ export const MediaContent = () => {
         children: [
           cc(MediaContentTabs, {
             tabs: tabData,
-            hasNext,
+            hasNext:
+              hasNext &&
+              currentDataIdx[1] + 1 <
+                currentData[currentDataIdx[0]].mediaIds.length,
           }),
           cc(MediaContentMain, {
             mediaId: currentMediaId,
