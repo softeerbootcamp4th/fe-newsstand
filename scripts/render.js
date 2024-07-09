@@ -1,28 +1,39 @@
 import { addDragEvent } from "./addDragEvent.js";
-import { getCurrentArticle } from "./article.js";
-import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
+import { getCurrentArticle, getCurrentArticleList } from "./article.js";
+import { getCurrentCompany, getSubscribeCompanies, getTotalCompanyLength } from "./company.js";
+import { TOGGLE } from "./magicNumber.js";
+import { generateToastPopupDom } from "./popup.js";
+import { resetstate } from "./reset.js";
 import { updateSubscribeButton } from "./subscribe.js";
-import { getTabLength, handleTabClick } from "./tab.js";
+import { getTabLength, handleTabClick, updateTabAnimationStyle } from "./tab.js";
 
-export function drawArticles(state) {
+export function renderDefaultSceen(state) {
+    resetstate(state);
+    renderTabList(state);
+    renderArticles(state);
+    renderTabAnimationList(state);
+    updateTabAnimationStyle(state);
+}
+
+export function renderArticles(state) {
     updateSubscribeButton(state);
-    drawArrow(state);
+    renderArrow(state);
     switch (state.toggleName) {
-        case "left":
-            return drawAllToggleArticles(state);
-        case "right":
-            return drawSubscribedToggleArticles(state);
+        case TOGGLE.ALL:
+            return renderAllToggleArticles(state);
+        case TOGGLE.SUBSCRIBED:
+            return renderSubscribedToggleArticles(state);
     }
 
 }
 
-function drawAllToggleArticles(state) {
+function renderAllToggleArticles(state) {
     let articleBoxDom = document.querySelector(".news_letter_subject_box");
     articleBoxDom.innerHTML = "";
 
     let selectedSubject = state.articleDataList[state.selectedTabIndex];
     let companies = selectedSubject.companies.filter((company) => {
-        if (state.toggleName == "right") return state.subscribedCompanyNameSet.has(company.name);
+        if (state.toggleName == TOGGLE.SUBSCRIBED) return state.subscribedCompanyNameSet.has(company.name);
         else return true;
     });
 
@@ -30,8 +41,8 @@ function drawAllToggleArticles(state) {
     let cardTitle = "";
 
     if (companies.length !== 0) {
-        let currentCompany = getCurrentCompany(state);
-        let currentArticle = getCurrentArticle(state);
+        const currentCompany = getCurrentCompany(state);
+        const currentArticle = getCurrentArticle(state);
         document.querySelector("#register_date").textContent = currentArticle.registerDate;
         document.querySelector("#company_img").src = currentCompany.image;
         cardImage = companies[state.selectedCompanyIndex]
@@ -73,7 +84,7 @@ function drawAllToggleArticles(state) {
             articleDom.textContent = article.title;
             articleDom.addEventListener("click", function () {
                 state.selectedArticleIndex = articleIndex;
-                drawArticles(state);
+                renderArticles(state);
             });
             articleBoxDom.appendChild(articleDom);
         });
@@ -85,7 +96,7 @@ function drawAllToggleArticles(state) {
     articleBoxDom.appendChild(articleCopyRightDom);
 }
 
-function drawSubscribedToggleArticles(state) {
+function renderSubscribedToggleArticles(state) {
     let articleBoxDom = document.querySelector(".news_letter_subject_box");
     articleBoxDom.innerHTML = "";
 
@@ -95,8 +106,8 @@ function drawSubscribedToggleArticles(state) {
     let cardTitle = "";
 
     if (companies.length !== 0) {
-        let currentCompany = getCurrentCompany(state);
-        let currentArticle = getCurrentArticle(state);
+        const currentCompany = getCurrentCompany(state);
+        const currentArticle = getCurrentArticle(state);
         document.querySelector("#register_date").textContent = currentArticle.registerDate;
         document.querySelector("#company_img").src = currentCompany.image;
         cardImage = currentArticle.image;
@@ -135,37 +146,36 @@ function drawSubscribedToggleArticles(state) {
             articleDom.textContent = article.title;
             articleDom.addEventListener("click", function () {
                 state.selectedArticleIndex = articleIndex;
-                drawArticles(state);
+                renderArticles(state);
             });
             articleBoxDom.appendChild(articleDom);
         });
     const articleCopyRightDom = document.createElement('div');
     articleCopyRightDom.classList.add('display-medium14');
     articleCopyRightDom.classList.add('color_879298');
-    articleCopyRightDom.textContent = `${state.articleDataList[state.selectedTabIndex]
-        .companies[state.selectedCompanyIndex].name} 언론사에서 직접 편집한 뉴스입니다.`;
+    articleCopyRightDom.textContent = `${companies[state.selectedTabIndex].name} 언론사에서 직접 편집한 뉴스입니다.`;
     articleBoxDom.appendChild(articleCopyRightDom);
 }
 
-export function drawTabList(state) {
+export function renderTabList(state) {
     switch (state.toggleName) {
-        case "left":
-            drawLeftToggleTab(state);
+        case TOGGLE.ALL:
+            renderLeftToggleTab(state);
             break;
-        case "right":
-            drawRightToggleTab(state);
+        case TOGGLE.SUBSCRIBED:
+            renderRightToggleTab(state);
             break;
     }
 }
 
-function drawLeftToggleTab(state) {
+function renderLeftToggleTab(state) {
     let subjectNames = state.articleDataList.map(data => data.subject);
-    drawTabItems(state, subjectNames);
+    renderTabItems(state, subjectNames);
 }
 
-function drawRightToggleTab(state, tabNames) {
+function renderRightToggleTab(state) {
     let subscribedCompanyNames = Object.keys(state.companiesWithArticles).filter(companyName => state.subscribedCompanyNameSet.has(companyName));
-    drawTabItems(state, subscribedCompanyNames);
+    renderTabItems(state, subscribedCompanyNames);
 }
 
 function getTabDomWithCleanUp() {
@@ -174,7 +184,7 @@ function getTabDomWithCleanUp() {
     return tabDom;
 }
 
-function drawTabItems(state, tabNames) {
+function renderTabItems(state, tabNames) {
     let mouseDownDate = new Date();
     let isMouseMoved = true;
     let tabDom = getTabDomWithCleanUp();
@@ -182,8 +192,8 @@ function drawTabItems(state, tabNames) {
         const tabItemDom = document.createElement('div');
         if (state.selectedTabIndex == nameIndex) {
             let additionalCountString = ""
-            if (state.toggleName === "left") {
-                const max = getTabLength(state);
+            if (state.toggleName === TOGGLE.ALL) {
+                const max = state.articleDataList[state.selectedArticleIndex].companies.length;
                 additionalCountString = `
                     <div class="counter_box" >
                         ${max == 0 ? 0 : state.selectedCompanyIndex + 1}/${max}
@@ -229,17 +239,17 @@ function drawTabItems(state, tabNames) {
 
 
 
-export function drawArrow(state) {
+export function renderArrow(state) {
     switch (state.toggleName) {
-        case "left":
-            return drawAllToggleArrow(state);
-        case "right":
-            return drawSubscribedToggleArrow(state);
+        case TOGGLE.ALL:
+            return renderAllToggleArrow(state);
+        case TOGGLE.SUBSCRIBED:
+            return renderSubscribedToggleArrow(state);
     }
 }
 
-function drawAllToggleArrow(state) {
-    const max = getTabLength(state) - 1;
+function renderAllToggleArrow(state) {
+    const max = state.articleDataList[state.selectedArticleIndex].companies.length - 1;
     const min = 0;
     const tabLastIndex = getTabLength(state) - 1;
     let leftArrowDom = document.querySelector(".left_arrow");
@@ -258,7 +268,7 @@ function drawAllToggleArrow(state) {
     }
 }
 
-function drawSubscribedToggleArrow(state) {
+function renderSubscribedToggleArrow(state) {
     const max = getTabLength(state) - 1;
     const min = 0;
     let leftArrowDom = document.querySelector(".left_arrow");
@@ -267,17 +277,17 @@ function drawSubscribedToggleArrow(state) {
     leftArrowDom.src = "public/left_arrow.svg";
     rightArrowDom.classList.add("arrow_hover");
     leftArrowDom.classList.add("arrow_hover");
-    if (state.selectedTabIndex == max) {
+    if (state.selectedTabIndex === max) {
         rightArrowDom.src = "public/right_arrow_disabled.svg";
         rightArrowDom.classList.remove("arrow_hover");
     }
-    if (state.selectedTabIndex == min) {
+    if (state.selectedTabIndex === min) {
         leftArrowDom.src = "public/left_arrow_disabled.svg";
         leftArrowDom.classList.remove("arrow_hover");
     }
 }
 
-export function drawTabAnimationList(state) {
+export function renderTabAnimationList(state) {
     let tabAnimationDom = document.querySelector("#tab_animation_wrapper");
     tabAnimationDom.innerHTML = "";
     let tabDom = document.querySelector("#tab_wrapper");
@@ -289,13 +299,12 @@ export function drawTabAnimationList(state) {
         tabAnimationHiderItemDom.style.overflowX = "hidden";
         tabAnimationHiderItemDom.style.backgroundColor = "#F5F7F9";
         if (state.selectedTabIndex === index) {
-            // tabAnimationItemDom.style.zIndex = 1;
+
             tabAnimationHiderItemDom.style.backgroundColor = "#7890E7";
-            tabAnimationItemDom.style.transition = "transform 0.2s ease";
+            tabAnimationItemDom.style.transition = "transform 1.2s ease";
             tabAnimationItemDom.style.transform = "translate(-100%)"
             tabAnimationItemDom.style.backgroundColor = "#4362D0";
         } else {
-            // tabAnimationItemDom.style.zIndex = 2;
             tabAnimationItemDom.style.backgroundColor = "transparent";
         }
         tabAnimationHiderItemDom.style.minWidth = width;
@@ -306,4 +315,9 @@ export function drawTabAnimationList(state) {
         tabAnimationDom.appendChild(tabAnimationHiderItemDom);
     });
     addDragEvent(state);
+}
+
+export function renderPopup(toastPopupDom) {
+    const toastPopupWrapperDom = document.querySelector("#popup_wrapper");
+    toastPopupWrapperDom.appendChild(toastPopupDom);
 }

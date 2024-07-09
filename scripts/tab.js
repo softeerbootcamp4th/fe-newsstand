@@ -1,22 +1,23 @@
-import { drawArticles, drawTabAnimationList, drawTabList } from "./drawer.js";
+import { TOGGLE } from "./magicNumber.js";
+import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
 import { resetstate } from "./reset.js";
 
 export function handleTabClick(selectedTabIndex,state,isDragging) {
     if(!isDragging){
         resetstate(state);
         state.selectedTabIndex = selectedTabIndex;
-        drawTabList(state);
-        drawArticles(state);
-        drawTabAnimationList(state);
+        renderTabList(state);
+        renderArticles(state);
+        renderTabAnimationList(state);
         updateTabAnimationStyle(state);
     }    
 } 
 
 export function getTabLength(state) {
     switch (state.toggleName) {
-        case "left": 
+        case TOGGLE.ALL: 
             return state.articleDataList.length;
-        case "right":
+        case TOGGLE.SUBSCRIBED:
             return state.subscribedCompanyNameSet.size;
     }
     
@@ -24,23 +25,23 @@ export function getTabLength(state) {
 
 export function updateTabAnimationStyle(state) {
     switch (state.toggleName){
-        case "left":
-            updateLeftTabAnimation(state);
+        case TOGGLE.ALL:
+            updateAllTabAnimation(state);
             break;
-        case "right":
-            updateRightTabAnimation(state);
+        case TOGGLE.SUBSCRIBED:
+            updateSubscribedTabAnimation(state);
             break;
     }
 } 
 
-function updateRightTabAnimation(state) {
+function updateSubscribedTabAnimation(state) {
     const max = 1;
-    if(!getRightTabValidation(state))return;
+    if(!getSubscribedTabValidation(state))return;
     updateTabAnimation(state,max);
 }
 
-function updateLeftTabAnimation(state) {
-    const max = getTabLength(state);
+function updateAllTabAnimation(state) {
+    const max = state.articleDataList[state.selectedArticleIndex].companies.length - 1;
     updateTabAnimation(state,max);
     
 }
@@ -52,18 +53,20 @@ function updateTabAnimation(state,max) {
         transform = "translate(-100%)";
     }else{
         switch(state.toggleName){
-            case "left": 
+            case TOGGLE.ALL: 
                 transform = `translate(-${100 - ((state.selectedCompanyIndex+1)/max*100)}%)`;
                 break;
-            case "right":
+            case TOGGLE.SUBSCRIBED:
                 transform = `translate(calc(-${100 - ((state.selectedCompanyIndex+1)/max*100)}% - 10px))`;
                 break;
         }
     }
-    animationTabDom.style.transform = transform;
+    if(animationTabDom){
+        animationTabDom.style.transform = transform;
+    }
 }
 
 
-export function getRightTabValidation(state) {
-    return !(state.toggleName === "right" && state.subscribedCompanyNameSet.size === 0);
+export function getSubscribedTabValidation(state) {
+    return !(state.toggleName === TOGGLE.SUBSCRIBED && state.subscribedCompanyNameSet.size === 0);
 }

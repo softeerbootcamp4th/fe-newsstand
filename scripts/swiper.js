@@ -1,14 +1,27 @@
 import { getSubscribeCompanies, getTotalCompanyLength } from "./company.js";
-import { drawArticles, drawTabAnimationList, drawTabList } from "./drawer.js";
+import { DIRECTION, TIME, TOGGLE } from "./magicNumber.js";
+import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
 import { getTabLength, updateTabAnimationStyle } from "./tab.js";
+
+export function addEventToRotatingArrow(state) {
+    setInterval(function() {
+        handleCompanySwipe(state,DIRECTION.RIGHT);
+    },TIME.SECOND*1);
+    document.querySelector(".right_arrow").addEventListener("click",function() {
+        handleCompanySwipe(state,DIRECTION.RIGHT);
+    });
+    document.querySelector(".left_arrow").addEventListener("click",function() {
+        handleCompanySwipe(state,DIRECTION.LEFT);
+    });
+}
 
 export function handleCompanySwipe(state, direction) {
     let isNeedToResetAnimationStyle = rotate(state, direction);
-    drawTabList(state);
+    renderTabList(state);
     updateTabAnimationStyle(state);
-    drawArticles(state);
+    renderArticles(state);
     if (isNeedToResetAnimationStyle) {
-        drawTabAnimationList(state);
+        renderTabAnimationList(state);
         updateTabAnimationStyle(state);
     }
 }
@@ -16,9 +29,9 @@ export function handleCompanySwipe(state, direction) {
 function rotate(state, direction, animationResetPointer = { isNeed: false }) {
     state.selectedArticleIndex = 0;
     switch (state.toggleName) {
-        case "left":
+        case TOGGLE.ALL:
             return rotateAllToglePage(state, direction, animationResetPointer);
-        case "right":
+        case TOGGLE.SUBSCRIBED:
             return rotateSubscribedTogglePage(state, direction, animationResetPointer);
     }
 }
@@ -26,13 +39,13 @@ function rotate(state, direction, animationResetPointer = { isNeed: false }) {
 function rotateSubscribedTogglePage(state, direction, animationResetPointer) {
     let { maxIndex, minIndex, tabLastIndex } = getRotateIndexes(state);
     switch (direction) {
-        case "left":
+        case DIRECTION.LEFT:
             if (state.selectedTabIndex > 0) {
                 pageGoBack(state, true);
                 animationResetPointer.isNeed = true;
             }
             break;
-        case "right":
+        case DIRECTION.RIGHT:
             if (state.selectedTabIndex < tabLastIndex) {
                 pageGoForward(state);
                 animationResetPointer.isNeed = true;
@@ -46,7 +59,7 @@ function rotateAllToglePage(state, direction, animationResetPointer) {
     //코드 분리 가능하면 추후에 진행
     let { maxIndex, minIndex, tabLastIndex } = getRotateIndexes(state);
     switch (direction) {
-        case "left":
+        case DIRECTION.LEFT:
             if (maxIndex === -1 && state.selectedTabIndex !== 0) {
                 pageGoBack(state);
                 rotate(state);
@@ -61,7 +74,7 @@ function rotateAllToglePage(state, direction, animationResetPointer) {
                 }
             }
             break;
-        case "right":
+        case DIRECTION.RIGHT:
             if (maxIndex === -1 && state.selectedTabIndex !== tabLastIndex) {
                 animationResetPointer.isNeed = true;
                 pageGoForward(state);
@@ -106,9 +119,9 @@ function getRotateIndexes(state) {
 
 function getSwipeMaxPageNumber(state) {
     switch (state.toggleName) {
-        case "left":
+        case TOGGLE.ALL:
             return getTotalCompanyLength(state);
-        case "right":
+        case TOGGLE.SUBSCRIBED:
             return 1;
     }
 }

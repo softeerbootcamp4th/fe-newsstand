@@ -1,8 +1,10 @@
+import { TOGGLE } from "./magicNumber.js";
+
 export function getCurrentCompany(state) {
     switch (state.toggleName) {
-        case "left":
+        case TOGGLE.ALL:
             return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex];
-        case "right":
+        case TOGGLE.SUBSCRIBED:
             return getSubscribeCompanies(state)[state.selectedTabIndex];
     }
 }

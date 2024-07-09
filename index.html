@@ -13,14 +13,18 @@
 </head>
 <body>
 
-  <div class="paper">
 
+  <div id="new_test" >
+
+  </div>
+  <div class="paper">
+    
     <div class="news_wrapper">
 
       <div class="content_wrapper">
         <div class="subject_wrapper">
           <img src="public/newspaper.svg" />
-          <div class="display-bold24">뉴스 스텐드</div>
+          <div class="display-bold24">뉴스 스탠드</div>
         </div>
         <div class="display-medium16" id="date_section"></div>
       </div>
@@ -57,10 +61,10 @@
 
       <div class="content_wrapper">
         <div class="toggle_wrapper">
-          <div class="toggle_item toggle_item_active" id="toggle_left">
+          <div class="toggle_item toggle_item_active" id="toggle_all">
             전체 언론사
           </div>
-          <div class="toggle_item" id="toggle_right">
+          <div class="toggle_item" id="toggle_subscribed">
             내가 구독한 언론사
           </div>
         </div>
@@ -73,6 +77,8 @@
       <div class="vertical_space_24"></div>
 
       <div class="content_wrapper">
+        <div id="popup_wrapper" >
+        </div>
         <div class="news_detail_box">
           <div class="scroll_x_wrapper" id="draggable_wrapper" >
             <div class="available-medium14 news_detail_tab_box" id="tab_wrapper"></div>
