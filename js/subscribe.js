@@ -22,7 +22,7 @@ function handleModalBtnClick() {
 
         setSubscriptionList(subscriptor);
         updateButton();
-        createCategory(subscriptor, 'subscribe');
+        createCategory(subscriptor.reverse(), 'subscribe');
         subscriptor.length === 0 ? displayInformation() : loadCurrentCategoryNews('subscribe');
         
     });
