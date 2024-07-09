@@ -1,5 +1,5 @@
 import { menuInfo } from "../../pages/state/newsState.js"
-import { handleNextPageEvent, handlePrePageEvent } from "../articleList/articleList.js"
+import { handleNextPageEvent, handlePrePageEvent } from "../articleList/event/pageEvent.js"
 
 export const createArrow = () => {
     return `
@@ -19,7 +19,6 @@ export const createArrow = () => {
 }
 
 export const initArrow = () => {
-    console.log('실행')
     addEventListeners();
 }
 
@@ -31,7 +30,9 @@ const addEventListeners = () => {
 const addEventListenerLeftArrow = () => {
     const leftArrow = document.querySelector('.left-arrow-btn');
     const thisBtn = document.querySelector('.menu-btn-wrapper-clicked') !== null ? document.querySelector('.menu-btn-wrapper-clicked') : document.querySelectorAll('.menu-btn-wrapper')[0]
-    leftArrow.addEventListener('click', () => handlePrePageEvent(thisBtn, menuInfo, true))
+    leftArrow.addEventListener('click', () => {
+        handlePrePageEvent({ isNow: true })
+    })
 }
 
 const addEventListenerRightArrow = () => {
@@ -39,6 +40,6 @@ const addEventListenerRightArrow = () => {
     const thisBtn = document.querySelector('.menu-btn-wrapper-clicked');
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
     rightArrow.addEventListener('click', () => {
-        handleNextPageEvent(thisBtn, menuInfo, true)
+        handleNextPageEvent({ isNow: true })
     })
 }

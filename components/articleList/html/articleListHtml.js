@@ -1,4 +1,4 @@
-import { menuInfo, menuIdx, menuCurrentPage, menuLastPage } from "../../../pages/state/newsState.js";
+import { menuInfo, menuIdx, menuCurrentPage, menuLastPage, isMediaWhole } from "../../../pages/state/newsState.js";
 import { extractDataWithMedia } from "../../../utils/api.js";
 
 // 메뉴 리스트 생성 함수
@@ -28,21 +28,29 @@ export const createSubscriptionMenuList = () => {
 
 // 기사 리스트 생성 함수
 export const createArticleLiPart = () => {
-    const articleData = menuInfo[menuIdx].mediaData[menuCurrentPage - 1].articleList;
-    return articleData.map((articleItem) => `<li>${articleItem}</li>`).join('');
+    if (isMediaWhole) {
+        const articleData = menuInfo[menuIdx].mediaData[menuCurrentPage - 1].articleList;
+        return articleData.map((articleItem) => `<li>${articleItem}</li>`).join('');
+    } else {
+        const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+        const mediaName = subList[menuIdx];
+        const articleData = extractDataWithMedia(menuInfo)[mediaName].articleList;
+        return articleData.map((articleItem) => `<li>${articleItem}</li>`).join('');
+    }
 }
 
 export const insertSubscriptionContent = () => {
     const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
     const mediaName = subList[menuIdx];
     const nowInfo = extractDataWithMedia(menuInfo)[mediaName]
+
     document.querySelector('.media-img').src = `/images/logos/${mediaName}.png`;
     document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
     document.querySelector('.thumbnail-img').src = `https://picsum.photos/500/300?img=95`;
     document.querySelector('.thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
     document.querySelector('.article-li-part').innerHTML = `
-        ${createArticleLiPart(nowInfo.articleList)}
-        <p class="li-part-info">${nowInfo.thumbnailMediaName}에서 직접 편집한 뉴스입니다.</p>
+        ${createArticleLiPart()}
+        <p class="li-part-info">${nowInfo.mediaName}에서 직접 편집한 뉴스입니다.</p>
     `;
 }
 
@@ -60,5 +68,50 @@ export const insertWholeContent = () => {
     document.querySelector('.article-li-part').innerHTML = `
         ${createArticleLiPart()}
         <p class="li-part-info">${nowInfo.mediaName}에서 직접 편집한 뉴스입니다.</p>
+    `;
+}
+
+export const createArticleList = ({ isSubscription }) => {
+    return `
+        <div class="articleList-wrapper">
+            <div class="article-header-wrapper flex-row-between">
+                <div class="media-wrapper inline-tag">
+                    <button class="btn whole-media-btn mode-selection-btn mode-selection-btn-clicked">전체 언론사</button>
+                    <button class="btn subscription-media-btn mode-selection-btn">내가 구독한 언론사</button>
+                </div>
+                <div class="icon-wrapper inline-tag flex-row-between">
+                    <button class="btn list-btn view-btn view-btn-clicked">
+                        <img src="/icons/list-view.png" alt="" width="24px" height="24px">
+                    </button>
+                    <button class="btn grid-btn view-btn">
+                        <img src="/icons/grid-view.png" alt="" width="24px" height="24px">
+                    </button>
+                </div>
+            </div>
+            <div class="article-body-wrapper">
+                <div class="article-menu-wrapper">
+                    ${ isSubscription ? createSubscriptionMenuList() : createMenuList() }
+                </div>
+                <div class="article-wrapper">
+                    <div class="article-selection-wrapper"></div>
+                    <div class="article-content-wrapper">
+                        <div class="content-header-wrapper flex-row">
+                            <img class="media-img" src="" alt="">
+                            <h4 class="updated-date-tag" style="font-size: 12px; font-weight: 400;"> 편집</h4>
+                            <button class="subscribe-btn btn">+ 구독하기</button>
+                        </div>
+                        <div class="content-body-wrapper flex-row-between">
+                            <aside class="thumbnail-part">
+                                <img class="thumbnail-img" src="" alt="" width="320px" height="200px">
+                                <p class="thumbnail-detail">ABC</p>
+                            </aside>
+                            <ul class="article-li-part flex-col-between">
+                                <p class="li-part-info"></p>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     `;
 }

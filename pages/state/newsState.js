@@ -10,6 +10,7 @@ export let leftRollingId;
 export let rightRollingId;
 export let isMediaWhole = true;
 export let isGrid = false;
+export let CATEGORY_TIMEOUT = 1000 * 20;
 
 export const newsState = {
     setMenuInfo: (info) => { menuInfo = info },
