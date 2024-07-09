@@ -2,10 +2,10 @@ import "./NewsViewer.css";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
 import chevronRight from "@/assets/icons/chevronRight.svg";
-import ContentsBox from "./ContentsBox/ContentsBox";
-import { CATEGORIES } from "@/mocks/news";
+import ContentsBox from "@/components/NewsList/NewsViewer/ContentsBox/ContentsBox";
 import { getSubscribedCompanies, unSubscribeCompany } from "@/data/storageHandler";
-import { getNews } from "../../../apis/news";
+import { CATEGORIES } from "@/data/constants";
+import { getNews } from "@/apis/news";
 
 function NewsViewer({ $target, position = "beforeend", filter = "category", changeFilter }) {
   this.$element = document.createElement("article");

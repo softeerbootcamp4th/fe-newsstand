@@ -1,7 +1,8 @@
 import "./NewsList.css";
-import NewsViewer from "./NewsViewer/NewsViewer";
-import EmptyNewsViewer from "./EmptyNewsViewer/EmptyNewsViewer";
-import { getSubscribedCompanies } from "../../data/storageHandler";
+import EmptyNewsViewer from "@/components/NewsList/EmptyNewsViewer/EmptyNewsViewer";
+import NewsViewer from "@/components/NewsList/NewsViewer/NewsViewer";
+
+import { getSubscribedCompanies } from "@/data/storageHandler";
 
 function NewsList({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");

@@ -1,5 +1,5 @@
-import { getBreakingNews } from "../../apis/news";
 import "./AutoRollingNews.css";
+import { getBreakingNews } from "@/apis/news";
 
 function AutoRollingNews({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");
