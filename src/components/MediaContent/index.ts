@@ -46,6 +46,17 @@ export const MediaContent = () => {
     }
   };
 
+  const handlePrev = () => {
+    if (currentDataIdx[1] - 1 >= 0) {
+      setCurrentDataIdx([currentDataIdx[0], currentDataIdx[1] - 1]);
+      return;
+    }
+    if (currentDataIdx[0] - 1 >= 0) {
+      setCurrentDataIdx([currentDataIdx[0] - 1, 0]);
+      return;
+    }
+  };
+
   const handleClick = (idx: [number, number]) => {
     setCurrentDataIdx(idx);
   };
@@ -86,6 +97,8 @@ export const MediaContent = () => {
           cc(MediaContentMain, {
             mediaId: currentMediaId,
             category: currentCategory,
+            handleNext: handleNext,
+            handlePrev,
           }),
         ],
       }),
