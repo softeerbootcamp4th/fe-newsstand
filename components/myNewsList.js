@@ -1,4 +1,5 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
+import { setRightArrow } from "./nav.js";
 
 const myData = [
   {
@@ -99,6 +100,8 @@ export function updateMyNewsList(currentCategoryIndex) {
   const mediaList = myData.map((element) => element.media);
 
   setMedia(mediaList, currentCategoryIndex);
+
+  setRightArrow(currentCategoryIndex);
 
   generateMyNewsList(newsListContainer, myData[currentCategoryIndex]);
 }

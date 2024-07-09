@@ -138,6 +138,11 @@ export function setProgress(categoryIndex, currentMediaIndex, maxMediaIndex) {
   }/${maxMediaIndex}`;
 }
 
+export function setRightArrow(currentCategoryIndex) {
+  const progresses = document.querySelectorAll(".progress");
+  progresses[currentCategoryIndex].innerHTML = ">";
+}
+
 /**
  * 새로 변경될 카테고리를 설정하고 언론사를 처음부터 시작
  * @param {String} newCategory
