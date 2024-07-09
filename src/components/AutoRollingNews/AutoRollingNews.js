@@ -1,21 +1,42 @@
+import { getBreakingNews } from "../../apis/news";
 import "./AutoRollingNews.css";
 
-function AutoRollingNews({ $target, position = "beforeend", news }) {
+function AutoRollingNews({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");
   this.$element.className = "viewer";
   $target.insertAdjacentElement(position, this.$element);
 
-  this.render(news);
+  this.state = {
+    news: [],
+  };
+
+  this.leftTimer = null;
+  this.rightTimer = null;
+
+  this.render();
+  this.load();
+}
+
+AutoRollingNews.prototype.setState = function ({ news }) {
+  this.state = { news };
+
+  this.render();
+};
+
+AutoRollingNews.prototype.load = async function () {
+  const data = await getBreakingNews();
+
+  this.setState({ news: data });
 
   const $leftBanner = this.$element.querySelector("#leftBanner");
   const $rightBanner = this.$element.querySelector("#rightBanner");
 
-  this.initializeBanner($leftBanner);
+  this.initializeBanner($leftBanner, this.leftTimer);
 
   setTimeout(() => {
-    this.initializeBanner($rightBanner);
+    this.initializeBanner($rightBanner, this.rightTimer);
   }, 1000);
-}
+};
 
 AutoRollingNews.prototype.getNewsTitleTemplate = function (str, idx) {
   const classList = ["newsTitle", "ellipsis"];
@@ -46,23 +67,25 @@ AutoRollingNews.prototype.rollingBanner = function ($banner) {
   next.classList.add("current");
 };
 
-AutoRollingNews.prototype.initializeBanner = function ($banner) {
-  let interval = window.setInterval(() => {
+AutoRollingNews.prototype.initializeBanner = function ($banner, timer) {
+  timer = window.setInterval(() => {
     this.rollingBanner($banner);
   }, 5000);
 
   $banner.addEventListener("mouseenter", () => {
-    window.clearInterval(interval);
+    window.clearInterval(timer);
   });
 
   $banner.addEventListener("mouseleave", () => {
-    interval = window.setInterval(() => {
+    timer = window.setInterval(() => {
       this.rollingBanner($banner);
     }, 5000);
   });
 };
 
-AutoRollingNews.prototype.render = function (news) {
+AutoRollingNews.prototype.render = function () {
+  const { news } = this.state;
+
   this.$element.innerHTML = /* html */ `
     <section class="breakingNews">
       <p class="company">연합뉴스</p>
@@ -70,7 +93,7 @@ AutoRollingNews.prototype.render = function (news) {
         <ul>
           ${news
             .slice(0, Math.floor(news.length / 2))
-            .map(this.getNewsTitleTemplate)
+            .map(({ title }, idx) => this.getNewsTitleTemplate(title, idx))
             .join("\n")}
         </ul>
       </div>
@@ -81,7 +104,7 @@ AutoRollingNews.prototype.render = function (news) {
         <ul>
           ${news
             .slice(Math.floor(news.length / 2))
-            .map(this.getNewsTitleTemplate)
+            .map(({ title }, idx) => this.getNewsTitleTemplate(title, idx))
             .join("\n")}
         </ul>
       </div>
