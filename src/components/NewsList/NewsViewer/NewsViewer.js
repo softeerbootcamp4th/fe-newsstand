@@ -175,7 +175,13 @@ NewsViewer.prototype.handleUnsubscribeCompany = function (company) {
       return;
     }
 
-    this.loadNews(0, 0);
+    if (this.state.tab < this.state.tabs.length - 1) {
+      this.loadNews(this.state.tab, 0);
+
+      return;
+    }
+
+    this.loadNews(this.state.tab - 1, 0);
   }
 };
 
