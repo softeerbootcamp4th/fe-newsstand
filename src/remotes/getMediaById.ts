@@ -7,5 +7,6 @@ export const getMediaById = async (mediaId: number): Promise<Media> => {
     id: mediaId,
     name: `뉴스 ${mediaId}`,
     imgSrc: "https://via.placeholder.com/150",
+    lastEdited: new Date().toISOString(),
   };
 };
