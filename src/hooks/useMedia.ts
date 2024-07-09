@@ -10,5 +10,5 @@ export const useMedia = (mediaId: number) => {
       setMedia(data);
     });
   }, [mediaId]);
-  return media;
+  return [media, setMedia] as const;
 };

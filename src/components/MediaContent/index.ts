@@ -33,7 +33,7 @@ export const MediaContent = () => {
   ]);
 
   const hasNext = currentDataIdx[0] <= currentData.length;
-  const hasPrev = currentDataIdx[0] >= 0;
+  const hasPrev = currentDataIdx[0] >= 1;
 
   const handleNext = () => {
     if (

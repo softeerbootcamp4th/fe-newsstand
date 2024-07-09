@@ -21,7 +21,7 @@ export const MediaContentMain = ({
   handleNext,
   handlePrev,
 }: MediaContentMainProps) => {
-  const media = useMedia(mediaId);
+  const [media, setMedia] = useMedia(mediaId);
   const newsList = useMediaRecentNews(mediaId, category.id);
   return ce(Div, {
     className: styles.container,
@@ -33,6 +33,7 @@ export const MediaContentMain = ({
       }),
       cc(MediaContentMainHeader, {
         media,
+        setMedia,
       }),
       cc(MediaContentView, {
         newsList: newsList,

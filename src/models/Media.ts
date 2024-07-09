@@ -3,4 +3,5 @@ export interface Media {
   name: string;
   imgSrc: string;
   lastEdited: string;
+  isSubscribed: boolean;
 }

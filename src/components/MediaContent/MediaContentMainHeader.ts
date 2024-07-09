@@ -5,6 +5,8 @@ import { cc } from "@/libs/components";
 import { formatDetailDate } from "@/utils/formatDate";
 import { PlucIcon } from "@/assets/PlucIocn";
 import { Media } from "@/models/Media";
+import { CloseIcon } from "@/assets/CloseIcon";
+import { updateMediaSubscribe } from "@/remotes/updateMediaSubscibe";
 
 const Logo = ({ src }: { src?: string }) => {
   return ce(Span, {
@@ -24,19 +26,37 @@ const LastEditedDate = ({ date }: { date?: string }) => {
   });
 };
 
-const subscribeButton = () => {
+interface SubscribeButtonProps {
+  isSubscribed: boolean;
+  onClick: () => void;
+}
+const SubscribeButton = ({ isSubscribed, onClick }: SubscribeButtonProps) => {
+  if (isSubscribed) {
+    ce(Button, {
+      className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
+      children: [Raw(PlucIcon), "구독하기"],
+      onClick: onClick,
+    });
+  }
   return ce(Button, {
     className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
-    children: [Raw(PlucIcon), "구독하기"],
+    children: [Raw(CloseIcon)],
+    onClick: onClick,
   });
 };
 
 interface MediaContentMainHeaderProps {
   media: Media | null;
+  setMedia: (media: Media) => void;
 }
 export const MediaContentMainHeader = ({
   media,
+  setMedia,
 }: MediaContentMainHeaderProps) => {
+  if (media === null) {
+    return null;
+  }
+  const isSubscribed = media.isSubscribed;
   return ce(Div, {
     className: styles.header,
     children: [
@@ -46,7 +66,16 @@ export const MediaContentMainHeader = ({
       cc(LastEditedDate, {
         date: media?.lastEdited,
       }),
-      cc(subscribeButton, {}),
+      cc(SubscribeButton, {
+        isSubscribed: isSubscribed,
+        onClick: () => {
+          if (media === null) {
+            return;
+          }
+          updateMediaSubscribe(media.id, !isSubscribed);
+          setMedia({ ...media, isSubscribed: !isSubscribed });
+        },
+      }),
     ],
   });
 };
