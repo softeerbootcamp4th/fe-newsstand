@@ -42,40 +42,38 @@
 }
 
 
-@media (prefers-color-scheme: light) {
-	:root{
-		--text-strong: var(--grayscale-black, #14212b);
-		--text-bold: var(--grayscale-500, #4b5966);
-		--text-default: var(--grayscale-400, #5f6e76);
-		--text-weak: var(--grayscale-200, #879298);
-		--text-white-default: var(--grayscale-white, #ffffff);
-		--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
-		--text-point: var(--blue-500, #4362d0);
-		--surface-default: var(--grayscale-white, #ffffff);
-		--surface-alt: var(--grayscale-50, #f5f7f9);
-		--surface-brand-default: var(--blue-500, #4362d0);
-		--surface-brand-alt: var(--blue-100, #7890e7);
-		--border-bold: var(--grayscale-300, #6e8091);
-		--border-default: var(--grayscale-100, #d2dae0);
-	}
+:root {
+	color-scheme: light;
+	--text-strong: var(--grayscale-black, #14212b);
+	--text-bold: var(--grayscale-500, #4b5966);
+	--text-default: var(--grayscale-400, #5f6e76);
+	--text-weak: var(--grayscale-200, #879298);
+	--text-white-default: var(--grayscale-white, #ffffff);
+	--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
+	--text-point: var(--blue-500, #4362d0);
+	--surface-default: var(--grayscale-white, #ffffff);
+	--surface-alt: var(--grayscale-50, #f5f7f9);
+	--surface-brand-default: var(--blue-500, #4362d0);
+	--surface-brand-alt: var(--blue-100, #7890e7);
+	--border-bold: var(--grayscale-300, #6e8091);
+	--border-default: var(--grayscale-100, #d2dae0);
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--text-strong: var(--grayscale-white, #ffffff);
-		--text-bold: var(--grayscale-50, #f5f7f9);
-		--text-default: var(--grayscale-100, #d2dae0);
-		--text-weak: var(--grayscale-white-alt, #ffffffb3);
-		--text-white-default: var(--grayscale-white, #ffffff);
-		--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
-		--text-point: var(--blue-500, #4362d0);
-		--surface-default: var(--grayscale-black, #14212b);
-		--surface-alt: var(--grayscale-500, #4b5966);
-		--surface-brand-default: var(--blue-500, #4362d0);
-		--surface-brand-alt: var(--blue-100, #7890e7);
-		--border-bold: var(--grayscale-white-alt, #ffffffb3);
-		--border-default: var(--grayscale-400, #5f6e76);
-	}
+:root.dark {
+	color-scheme: dark;
+	--text-strong: var(--grayscale-white, #ffffff);
+	--text-bold: var(--grayscale-50, #f5f7f9);
+	--text-default: var(--grayscale-100, #d2dae0);
+	--text-weak: var(--grayscale-white-alt, #ffffffb3);
+	--text-white-default: var(--grayscale-white, #ffffff);
+	--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
+	--text-point: var(--blue-500, #4362d0);
+	--surface-default: var(--grayscale-black, #14212b);
+	--surface-alt: var(--grayscale-500, #4b5966);
+	--surface-brand-default: var(--blue-500, #4362d0);
+	--surface-brand-alt: var(--blue-100, #7890e7);
+	--border-bold: var(--grayscale-white-alt, #ffffffb3);
+	--border-default: var(--grayscale-400, #5f6e76);
 }
 
 html, body, p {
