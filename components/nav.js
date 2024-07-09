@@ -47,12 +47,30 @@ export function generateNav(container, currentHeaderCategoryIndex) {
       ul.appendChild(li);
 
       createNavElement(li, category);
+
       if (index === currentCategoryIndex) li.classList.add("selected");
     });
 
     nav.appendChild(ul);
     container.appendChild(nav);
   }
+}
+
+/**
+ * container에 cover, category, progress node를 추가함
+ * @param {Node} container
+ * @param {String} category
+ */
+function createNavElement(container, category) {
+  const progressBar = generateNode("div", "cover");
+  container.appendChild(progressBar);
+
+  const textContent = generateNode("span");
+  textContent.textContent = category;
+  container.appendChild(textContent);
+
+  const progress = generateNode("span", "progress");
+  container.appendChild(progress);
 }
 
 /**
@@ -67,18 +85,8 @@ function generateNavForNewsList() {
 
   const navElementNodes = document.querySelectorAll(".contentList li");
 
-  navElementNodes.forEach((element, index) => {
-    element.addEventListener("click", function () {
-      navElementNodes[currentCategoryIndex].classList.remove("selected");
-      element.classList.add("selected");
-      currentCategoryIndex = index;
+  setupNavElements(navElementNodes, startNewsInterval, updateCategoryByIndex);
 
-      resetInterval();
-      startNewsInterval();
-
-      updateCategory(categoryList[index], currentCategoryIndex);
-    });
-  });
   startNewsInterval();
 }
 
@@ -90,6 +98,19 @@ function generateNavForMyList() {
 
   const navElementNodes = document.querySelectorAll(".contentList li");
 
+  setupNavElements(navElementNodes, startMyNewsInterval, updateMyMedia);
+
+  startMyNewsInterval();
+}
+
+/**
+ * navElementNodes에 이벤트 리스너를 추가하고 Interval 을 시작하는 함수
+ */
+function setupNavElements(
+  navElementNodes,
+  intervalStartFunction,
+  updateFunction
+) {
   navElementNodes.forEach((element, index) => {
     element.addEventListener("click", function () {
       navElementNodes[currentCategoryIndex].classList.remove("selected");
@@ -97,12 +118,11 @@ function generateNavForMyList() {
       currentCategoryIndex = index;
 
       resetInterval();
-      startMyNewsInterval();
+      intervalStartFunction();
 
-      updateMyMedia(currentCategoryIndex);
+      updateFunction(currentCategoryIndex);
     });
   });
-  startMyNewsInterval();
 }
 
 /**
@@ -110,23 +130,6 @@ function generateNavForMyList() {
  */
 export function deleteNav() {
   deleteNodeById("nav_container");
-}
-
-/**
- * container에 cover, category, progress node를 추가함
- * @param {Node} container
- * @param {String} category
- */
-export function createNavElement(container, category) {
-  const progressBar = generateNode("div", "cover");
-  container.appendChild(progressBar);
-
-  const textContent = generateNode("span");
-  textContent.textContent = category;
-  container.appendChild(textContent);
-
-  const progress = generateNode("span", "progress");
-  container.appendChild(progress);
 }
 
 /**
@@ -148,15 +151,28 @@ export function setRightArrow(currentCategoryIndex) {
 }
 
 /**
- * 새로 변경될 카테고리를 설정하고 언론사를 처음부터 시작
+ * 새로 선택될 카테고리를 설정하고 언론사를 처음부터 시작
  * @param {String} newCategory
  * @param {int} currentCategoryIndex
  */
-export function updateCategory(newCategory, currentCategoryIndex) {
+function updateCategory(newCategory, currentCategoryIndex) {
   currentMediaIndex = 0;
   updateNewsList(newCategory, currentCategoryIndex, currentMediaIndex);
 }
 
+/**
+ * index만으로 새로 선택될 카테고리를 설정
+ * @param {int} index
+ */
+function updateCategoryByIndex(index) {
+  const newCategory = categoryList[index];
+  updateCategory(newCategory, index);
+}
+
+/**
+ * nav에서 선택될 구독된 언론사 설정
+ * @param {int} newCategoryIndex
+ */
 function updateMyMedia(newCategoryIndex) {
   currentCategoryIndex = newCategoryIndex;
   updateMyNewsList(currentCategoryIndex);

@@ -27,9 +27,10 @@ export function generateBanner(container, content) {
  * @param {Node} list list node
  */
 function animationInit(list) {
-  list.children[0].classList.add("prev");
-  list.children[1].classList.add("current");
-  list.children[2].classList.add("next");
+  const classes = ["prev", "current", "next"];
+  for (let i = 0; i < list.children.length && i < classes.length; i++) {
+    list.children[i].classList.add(classes[i]);
+  }
 }
 
 /**
