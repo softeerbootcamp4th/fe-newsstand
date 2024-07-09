@@ -23,10 +23,16 @@ function generateReducer(fullList)
 	}
 
 	// derived state
-	const isFirstPage = new DerivedState( ()=>{
+	const isFirstPage = new DerivedState( ([cursor, viewType, subscFilter])=>{
+		// 리스트에서 구독이 취소되었을 때, 다음 버튼이 존재했다면 그것을 유지시키기 위함.
+		// 그리드에서는 동적으로 내용이 바뀌므로 필요없음
+		if(subscFilter && viewType === "list" && cursorState.isOutOfList()) {
+			return cursorState.getPrevKey() === null;
+		}
 		return cursorState.findOffset(-getDelta()) === null;
 	}, [cursorState, viewTypeState, subscribeFilterState, subscribedListState] );
-	const isLastPage = new DerivedState( ([cursor, viewType, subscFilter, subscList])=>{
+
+	const isLastPage = new DerivedState( ([cursor, viewType, subscFilter])=>{
 		// 리스트에서 구독이 취소되었을 때, 다음 버튼이 존재했다면 그것을 유지시키기 위함.
 		// 그리드에서는 동적으로 내용이 바뀌므로 필요없음
 		if(subscFilter && viewType === "list" && cursorState.isOutOfList()) {
