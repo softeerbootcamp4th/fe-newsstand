@@ -22,7 +22,10 @@ function ListContentComponent(state, reducer)
 	const dom = html`
 	<article class="listContent">
 		<div class="contentHeader">
-			<img src="${logo}" alt="${name}" class="logoImage" loading="lazy" />
+			<div class="logo logoImage">
+				<img class="light" src="${db[pressId].logo.light}" alt="${db[pressId].name}" loading="lazy" >
+				<img class="dark" src="${db[pressId].logo.dark}" alt="${db[pressId].name}" loading="lazy" >
+			</div>
 			<p class="lastEditDate">${getDateFormat(lastEditDate)} 편집</p>
 			${SubscribeButton(state, reducer)}
 		</div>

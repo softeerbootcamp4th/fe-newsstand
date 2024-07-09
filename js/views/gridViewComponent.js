@@ -7,7 +7,10 @@ function GridViewComponent(state, reducer)
 	const pressList = state.cursor.getDataList(24);
 	const dom = html`<article class="gridContent">
 		${ pressList.map( pressId=>html`<div class="gridItem" data-unique-key="grid-item-${pressId}">
-			<img class="gridLogo" src="${db[pressId].logo}" alt="${db[pressId].name}">
+			<div class="logo gridLogo">
+				<img class="light" src="${db[pressId].logo.light}" alt="${db[pressId].name}" loading="lazy" >
+				<img class="dark" src="${db[pressId].logo.dark}" alt="${db[pressId].name}" loading="lazy" >
+			</div>
 			<div class="subscribeHoverer">
 				${SubscribeButton(state, reducer, pressId)}
 			</div>

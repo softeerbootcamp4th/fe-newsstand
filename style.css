@@ -371,6 +371,9 @@ ul {
 .logoImage {
 	width: 53px;
 	height: 20px;
+}
+
+.logoImage > img {
 	overflow: hidden;
 	object-fit: none;
 	object-position: center;
@@ -496,6 +499,9 @@ ul {
 .gridLogo {
 	width: 100%;
 	height: 100%;
+}
+
+.gridLogo > img {
 	overflow: hidden;
 	object-fit: cover;
 	object-position: center;
@@ -608,4 +614,14 @@ ul {
 	position: fixed;
 	right: 30px;
 	bottom: 30px;
+}
+
+.logo > .light, :root.dark .logo > .dark {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.logo > .dark, :root.dark .logo > .light {
+	display: none;
 }
