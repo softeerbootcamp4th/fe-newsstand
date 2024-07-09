@@ -111,12 +111,12 @@ header > span {
     position: relative;
     border: 1px solid #D2DAE0;
     height: 300px;
-    padding: 10px 20px;
+    padding: 10px 20px 15px 20px;
     overflow: hidden;
 }
 
 .articleTop {
-    padding: 10px 0px;
+    padding: 10px;
     display: flex;
     align-items: center;
 }
@@ -147,19 +147,16 @@ header > span {
     overflow: hidden;
 }
 
-.articleImage img {
-    margin-bottom: 10px;
-}
-
 .articleOther {
     padding: 0px 40px;
 }
 
 .vertical-list {
-    list-style: none;
+    list-style-type: none;
     padding: 0;
     margin: 0;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     border: none !important;
 }
@@ -259,7 +256,7 @@ nav ul li.active a {
 
 .navItem.active {
     position: relative;
-    background-color: #7890E7; /* 기존 배경색 */
+    background-color: #7890E7; /* 선택된 nav item의 기존 배경색 */
 }
 
 .navItem.active > div::after {
@@ -269,7 +266,7 @@ nav ul li.active a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #4362D0; /* 덮어씌울 색상 */
+    background-color: #4362D0; /* 선택된 nav item에 덮어씌울 색상 */
     transform: scaleX(0); /* 초기 너비를 0으로 설정 */
     transform-origin: left; /* 왼쪽에서 시작 */
     transition: transform 20s linear; /* 20초 동안 서서히 변화 */
@@ -279,19 +276,32 @@ nav ul li.active a {
     transform: scaleX(1); /* 최종 너비를 100%로 설정 */
 }
 
-.articleImage > img {
+.articleImage {
+    display: flex;
+    flex-direction: column;
+}
+
+#mainNewsImage {
+    width: 320px;
+    height: 200px;
+    padding: 10px;
     -webkit-transform: scale(1);
 	transform: scale(1);
 	-webkit-transition: .5s ease-in-out;
 	transition: .5s ease-in-out;
 }
 
-.articleImage > img:hover {
+#mainNewsImage:hover {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     cursor: pointer;
 }
 
-.articleImage > strong:hover {
+#mainNewsTitle {
+    width: 320px;
+    padding-left: 10px;
+}
+
+#mainNewsTitle:hover {
     text-decoration: underline;
 }
