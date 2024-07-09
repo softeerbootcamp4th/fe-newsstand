@@ -1,6 +1,5 @@
 
 .news-list {
-    border: 1px solid var(--color-border);
     padding: 20px;
     background-color: #FFFFFF;
 }
@@ -13,17 +12,24 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    gap: 20px;
+    gap: 10px;
+    height: 25px;
+}
+
+.news-source {
+    height: 20px;
+    width: 80px;
 }
 
 .news-date {
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-regular);
     color: var(--color-text-second);
+    width: 130px;
 }
 
 .subscribe-button {
-    padding: 5px 10px;
+    padding: 5px 9px;
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-regular);
     color: var(--color-text-muted);
@@ -31,9 +37,13 @@
     border-radius: 50px;
     cursor: pointer;
     border: 1px solid var(--color-border);
+
+    &:hover {
+        border: 2px solid var(--color-border);
+    }
 }
 
-.news-content {
+.news-main-content {
     display: flex;
     gap: 20px;
 }
@@ -48,12 +58,27 @@
     width: 320px;
     height: 200px;
     object-fit: cover; /* 화면 채움 */
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
 }
 
 .news-description {
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-regular);
     color: var(--color-text-first);
+    width: 320px;
+    &:hover {
+        text-decoration: underline;
+        text-decoration-color: var(--color-decoration);
+    }
+}
+
+.news-sub-content {
+    width: 440px;
 }
 
 .news-headlines {
@@ -63,11 +88,16 @@
 }
 
 .headline {
-    margin-bottom: 16px;
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-regular);
-    color: #4B5966;
+    margin-bottom: 16px;
+    color: var(--color-decoration);
     cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-color: var(--color-decoration);
+    }
 }
 
 .news-disclaimer {
