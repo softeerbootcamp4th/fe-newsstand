@@ -1,6 +1,6 @@
 export const SUBSCRIBE_COMPANIES_LOCAL_STORAGE_KEYS = "subscribe_companies";
 
-export function subscribeCompany(company) {
+export function addCompany(company) {
   const companies = getSubscribedCompanies();
 
   companies.push(company);
@@ -13,7 +13,7 @@ export function subscribeCompany(company) {
   );
 }
 
-export function unSubscribeCompany(company) {
+export function removeCompany(company) {
   const companies = getSubscribedCompanies();
 
   const updatedCompanies = companies.filter((name) => name !== company);

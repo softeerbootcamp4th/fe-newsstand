@@ -3,23 +3,29 @@ import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
 import chevronRight from "@/assets/icons/chevronRight.svg";
 import ContentsBox from "@/components/NewsList/NewsViewer/ContentsBox/ContentsBox";
-import { getSubscribedCompanies, unSubscribeCompany } from "@/data/storageHandler";
+import { addCompany, getSubscribedCompanies, removeCompany } from "@/data/storageHandler";
 import { CATEGORIES } from "@/data/constants";
 import { getNews } from "@/apis/news";
 
-function NewsViewer({ $target, position = "beforeend", filter = "category", changeFilter }) {
+function NewsViewer({
+  $target,
+  position = "beforeend",
+  filter = "category",
+  changeTab,
+  initialTab = 0,
+}) {
   this.$element = document.createElement("article");
   this.$element.className = "newsViewer";
   $target.insertAdjacentElement(position, this.$element);
 
   this.props = {
     filter,
-    changeFilter,
+    changeTab,
   };
 
   this.state = {
     page: 0,
-    tab: 0,
+    tab: initialTab,
     news: [],
     tabs: [],
   };
@@ -165,12 +171,12 @@ NewsViewer.prototype.prevTab = function () {
   this.loadNews(prevTab, this.state.news.length - 1);
 };
 
-NewsViewer.prototype.handleUnsubscribeCompany = function (company) {
-  unSubscribeCompany(company);
+NewsViewer.prototype.unsubscribeCompany = function (company) {
+  removeCompany(company);
 
   if (this.props.filter === "company") {
     if (getSubscribedCompanies().length < 1) {
-      this.props.changeFilter(0);
+      this.props.changeTab(0, 0);
 
       return;
     }
@@ -183,6 +189,16 @@ NewsViewer.prototype.handleUnsubscribeCompany = function (company) {
 
     this.loadNews(this.state.tab - 1, 0);
   }
+};
+
+NewsViewer.prototype.subscribeCompany = function (company) {
+  addCompany(company);
+
+  const tabLength = getSubscribedCompanies().length;
+
+  setTimeout(() => {
+    this.props.changeTab(1, tabLength - 1);
+  }, 2000);
 };
 
 NewsViewer.prototype.MoveToSelectedTab = function () {
@@ -245,7 +261,8 @@ NewsViewer.prototype.render = function () {
       $target: this.$element.querySelector(".tabs"),
       position: "afterend",
       news: news[page],
-      onSubscribeCompany: this.handleUnsubscribeCompany.bind(this),
+      onUnsubscribeCompany: this.unsubscribeCompany.bind(this),
+      onSubscribeCompany: this.subscribeCompany.bind(this),
     });
   }
 };

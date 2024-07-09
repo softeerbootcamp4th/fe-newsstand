@@ -2,15 +2,22 @@ import "./ContentsBox.css";
 import Button from "@/components/common/Button/Button";
 import SnackBar from "@/components/common/SnackBar/SnackBar";
 import UnsubscribeAlert from "@/components/UnsubscribeAlert/UnsubscribeAlert";
-import { isSubscribeCompany, subscribeCompany } from "@/data/storageHandler";
+import { isSubscribeCompany } from "@/data/storageHandler";
 
-function ContentsBox({ $target, position = "beforeend", news, onSubscribeCompany }) {
+function ContentsBox({
+  $target,
+  position = "beforeend",
+  news,
+  onUnsubscribeCompany,
+  onSubscribeCompany,
+}) {
   this.$element = document.createElement("div");
   this.$element.className = "contentsBox";
   $target.insertAdjacentElement(position, this.$element);
 
   this.props = {
     news,
+    onUnsubscribeCompany,
     onSubscribeCompany,
   };
 
@@ -22,7 +29,7 @@ function ContentsBox({ $target, position = "beforeend", news, onSubscribeCompany
       text: "구독하기",
       color: "gray",
       icon: "plus",
-      onClick: this.handleSubscribe.bind(this),
+      onClick: this.handleSubscribeButtonClick.bind(this),
     }),
 
     UnsubscribeButton: new Button({
@@ -47,15 +54,15 @@ function ContentsBox({ $target, position = "beforeend", news, onSubscribeCompany
   this.renderSubscribeButton();
 }
 
-ContentsBox.prototype.handleSubscribe = function () {
-  subscribeCompany(this.props.news.company);
+ContentsBox.prototype.handleSubscribeButtonClick = function () {
+  this.props.onSubscribeCompany(this.props.news.company);
 
   this.components.SnackBar.show();
   this.showUnsubscribeButton();
 };
 
 ContentsBox.prototype.handleUnsubscribe = function () {
-  this.props.onSubscribeCompany(this.props.news.company);
+  this.props.onUnsubscribeCompany(this.props.news.company);
 
   this.components.UnsubscribeAlert.show();
   this.showSubscribeButton();
