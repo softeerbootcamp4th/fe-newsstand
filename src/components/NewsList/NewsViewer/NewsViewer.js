@@ -94,6 +94,7 @@ NewsViewer.prototype.handleTabClick = function (tab) {
 };
 
 NewsViewer.prototype.initializeProgress = function () {
+  if (this.state.tabs.length <= 1) return;
   if (this.timer) clearInterval(this.timer);
 
   this.timer = setInterval(this.progressInterval.bind(this), 1000);
