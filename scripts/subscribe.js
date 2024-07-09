@@ -44,6 +44,7 @@ export function updateSubscribeButton(state) {
         } else {
             addToastPopup(state);
             subscribeCompany(state, companyName);
+            updateSubscribeButton(state);
         }
     }
 }

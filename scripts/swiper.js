@@ -4,9 +4,9 @@ import { renderArticles, renderTabAnimationList, renderTabList } from "./render.
 import { getTabLength, updateTabAnimationStyle } from "./tab.js";
 
 export function addEventToRotatingArrow(state) {
-    // setInterval(function() {
-    //     handleCompanySwipe(state,DIRECTION.RIGHT);
-    // },TIME.SECOND*1);
+    setInterval(function() {
+        handleCompanySwipe(state,DIRECTION.RIGHT);
+    },TIME.SECOND*1);
     document.querySelector(".right_arrow").addEventListener("click",function() {
         handleCompanySwipe(state,DIRECTION.RIGHT);
     });
