@@ -1,6 +1,7 @@
-import { allCompanies, subscribedCompanies } from "../../../data/companies.js";
+import { allCompanies } from "../../../data/companies.js";
 import { render } from "./renderView.js";
 import { MainNewsState } from "../../../types/news.js";
+import { getArraySubscribedCompanies } from "../../subscriptionButton/utils/localStorage.js";
 
 /**
  * @type {MainNewsState}
@@ -23,8 +24,11 @@ function resetIndexes() {
  * @param {MainNewsState.currentDataType} id
  */
 function switchCompanyTab(id) {
+  const tab = document.getElementById(id);
+  tab.checked = true;
+
   state.currentDataType = id;
-  state.data = id === "all-news-tab" ? allCompanies : subscribedCompanies;
+  state.data = id === "all-news-tab" ? allCompanies : getArraySubscribedCompanies();
   resetIndexes();
   render(state);
 }
@@ -52,8 +56,8 @@ function updateCompany(companyIndex) {
 const updateCompanyState = {
   ["list-view"]: {
     ["all-news-tab"]: {
-      prev: () => updateListViewCompanyInAllNewTab(-1),
-      next: () => updateListViewCompanyInAllNewTab(1),
+      prev: () => updateListViewCompanyInAllTab(-1),
+      next: () => updateListViewCompanyInAllTab(1),
     },
     ["subscribed-news-tab"]: {
       prev: () => updateListViewCompanyInSubscribedTab(-1),
@@ -71,17 +75,18 @@ function updateNext() {
 }
 
 function updateListViewCompanyInSubscribedTab(offset) {
+  state.data = getArraySubscribedCompanies();
+
   state.currentCompanyIndex += offset;
   if (state.currentCompanyIndex < 0) {
     state.currentCompanyIndex = state.data.length - 1;
   } else if (state.currentCompanyIndex >= state.data.length) {
     state.currentCompanyIndex = 0;
   }
-
   render(state);
 }
 
-function updateListViewCompanyInAllNewTab(offset) {
+function updateListViewCompanyInAllTab(offset) {
   const currentType = state.data[state.currentCategoryIndex];
   state.currentCompanyIndex += offset;
 
@@ -97,6 +102,10 @@ function updateListViewCompanyInAllNewTab(offset) {
   render(state);
 }
 
+function rerenderListViewCompanyInSubscribedTab() {
+  updateListViewCompanyInSubscribedTab(0);
+}
+
 export {
   updateCompany,
   switchCompanyView,
@@ -104,4 +113,5 @@ export {
   updateNext,
   updateCompanyType,
   switchCompanyTab,
+  rerenderListViewCompanyInSubscribedTab,
 };
