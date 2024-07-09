@@ -419,3 +419,4 @@ const setDataWithTab = (btnWrapper, menuIdx) => {
 
     handleNextPageEvent(btnWrapper, menuInfo);
 }
+

@@ -15,3 +15,12 @@ export const extractMedias = (data) => {
     });
     return mediaList;
 }
+
+export const extractDataWithMedia = (data) => {
+    return data?.reduce((acc, item) => {
+        item.mediaData?.forEach((obj) => {
+            acc[obj.mediaName] = obj;
+        });
+        return acc;
+    }, {});
+}

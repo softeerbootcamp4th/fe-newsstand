@@ -2,7 +2,7 @@ import { createArrow, initArrow } from "../components/arrow/arrow.js";
 import { createArticleList, initArticleList } from "../components/articleList/articleList.js"
 import { createHeader } from "../components/header/header.js"
 import { createNewsBar, initNewsBar } from "../components/newsBar/newsBar.js"
-import { fetchData } from "../utils/api.js";
+import { extractDataWithMedia, fetchData } from "../utils/api.js";
 import { newsState } from "./state/newsState.js";
 import { menuInfo } from "./state/newsState.js";
 
@@ -16,6 +16,7 @@ export const NewsPage = async (app) => {
     NewsBar(app);
     ArticleList(app);
     Arrow(app);
+    console.log(extractDataWithMedia(menuInfo))
 }
 
 const fetchNewsPageData = async ({ menuInfoSrc }) => {
