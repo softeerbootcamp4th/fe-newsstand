@@ -1,7 +1,7 @@
 [
     {
         "category" : 0,
-        "pid": "0",
+        "pid": 0,
         "pressType": "economy",
         "pressImg": "../../image/서울경제.svg",
         "edittime" : "2024.07.04 12:56 편집",
@@ -40,7 +40,7 @@
     },
     {
         "category" : 0,
-        "pid": "1",
+        "pid": 1,
         "pressType": "economy",
         "pressImg": "../../image/데일리안.svg",
         "pressName": "데일리안",
@@ -80,7 +80,7 @@
     },
     {
         "category" : 2,
-        "pid": "0",
+        "pid": 0,
         "pressType": "internet",
         "pressImg": "../../image/아이뉴스24.svg",
         "pressName": "아이뉴스24",
@@ -94,7 +94,7 @@
             },
 
             {
-                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "title": "게임 업계 2분기 실적 시즌 개봉박두… 넷마블·크래프톤만 웃을까",
                 "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
                 
             },
@@ -109,18 +109,18 @@
                 "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "title": "경제 섹션의 다섯 번째 기사 제목",
+                "title": "차세대 HBM 경쟁 3파전… 앞서가는 SK하이닉스, 뒤쫓는 마이크론, 칼가는 삼성전자",
                 "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             },
             {
-                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "title": "애플 中 판매 회복·환율 수혜… 실적 기대감 높아진 ‘LG이노텍’",
                 "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
             }
         ]
     },
     {
         "category" : 1,
-        "pid": "0",
+        "pid": 0,
         "pressType": "broadcast",
         "pressImg": "../../image/시사저널e.svg",
         "pressName": "시사저널e",
@@ -160,7 +160,7 @@
     },
     {
         "category": 1,
-        "pid": "1",
+        "pid": 1,
         "pressType": "broadcast",
         "pressImg": "../../image/이데일리.svg",
         "edittime": "2024.07.06 14:40 편집",
@@ -192,12 +192,12 @@
     },
     {
         "category" : 3,
-        "pid": "0",
+        "pid": 0,
         "pressType": "englishnews",
         "pressImg": "../../image/에너지경제.svg",
         "pressName": "에너지경제",
         "edittime" : "2023.11.15 07:59 편집",
-        "mainphoto" : "https://cdn.itbiznews.com/news/photo/202109/48169_43554_442.jpg",
+        "mainphoto" : "https://newsimg.koreatimes.co.kr/2024/07/09/d05259a3-566d-413a-a1b6-e661b6e6ba74.jpg",
         "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
         "news": [
             {
@@ -232,13 +232,12 @@
     },
     {
         "category" : 4,
-        "pid": "0",
+        "pid": 0,
         "pressType": "sportsentertain",
         "pressImg": "../../image/CEO스코어데일리.svg",
         "pressName": "CEO스코어데일리",
         "edittime" : "2023.11.15 07:59 편집",
-        "mainphoto" : "https://cdn.itbiznews.com/news/photo/202109/48169_43554_442.jpg",
-        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
+        "mainphoto" : "https://lh3.googleusercontent.com/p/AF1QipMnIHpnZHXm5kiVcXKLAWe79Sdop7NAXlNgTPUe=s1360-w1360-h1020",
         "news": [
             {
                 "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
@@ -272,12 +271,12 @@
     },
     {
         "category" : 5,
-        "pid": "0",
+        "pid": 0,
         "pressType": "magazine",
         "pressImg": "../../image/인사이트.svg",
         "pressName": "인사이트",
         "edittime" : "2023.11.15 07:59 편집",
-        "mainphoto" : "https://cdn.itbiznews.com/news/photo/202109/48169_43554_442.jpg",
+        "mainphoto" : "https://cdn.psnews.co.kr/news/photo/202112/2003891_45268_1448.jpg",
         "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
         "news": [
             {
@@ -312,12 +311,12 @@
     },
     {
         "category" : 6,
-        "pid": "0",
+        "pid": 0,
         "pressType": "region",
         "pressImg": "../../image/조선일보.svg",
         "pressName": "조선일보",
         "edittime" : "2023.11.15 07:59 편집",
-        "mainphoto" : "https://cdn.itbiznews.com/news/photo/202109/48169_43554_442.jpg",
+        "mainphoto" : "https://play-lh.googleusercontent.com/kbGBQv_HUpcbYYwEF_4eu9Ta3AAitTPoMN0FhjlC6m3mbVsxQMWsGYmkHMqM-7PWhQ=w526-h296-rw",
         "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
         "news": [
             {
