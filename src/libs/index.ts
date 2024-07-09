@@ -209,7 +209,7 @@ export const render = () =>
         }
         renderQueue.pushBack({
           ...(child as CreatedAppElement),
-          parentKey: currentKey,
+          parentKey: curKey,
           componentKey: componentKey,
           parent: element,
         });
