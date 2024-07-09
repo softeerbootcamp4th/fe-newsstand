@@ -135,6 +135,7 @@ const createShadowRoot = () => {
 
 const preRender = () => {
   stateIdxMap.clear();
+  effectIdxMap.clear();
 };
 export const render = () =>
   requestAnimationFrame(() => {
@@ -156,6 +157,19 @@ export const render = () =>
         const { render: component, props, parent, key } = cur;
         currentKey = key;
         const createdComponent = component(props);
+        if (createdComponent == null || createdComponent === false) {
+          continue;
+        }
+        if (
+          typeof createdComponent === "string" ||
+          typeof createdComponent === "number"
+        ) {
+          renderQueue.pushFront({
+            node: document.createTextNode(`${createdComponent}`),
+            parent,
+          });
+          continue;
+        }
         if (isCreatedAppComponent(createdComponent)) {
           renderQueue.pushBack({
             render: createdComponent.render,
