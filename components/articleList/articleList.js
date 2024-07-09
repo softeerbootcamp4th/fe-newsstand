@@ -2,12 +2,17 @@ import { MEDIA_LIST, CATEGORY_TIMEOUT } from "../../pages/NewsPage.js";
 import { newsState } from "../../pages/state/newsState.js";
 import { menuInfo, menuCurrentPage, menuLastPage, menuIdx, categoryTimeoutId, isGrid, isMediaWhole } from "../../pages/state/newsState.js";
 import { extractDataWithMedia, extractMedias } from "../../utils/api.js";
+import { createMenuList,
+    insertSubscriptionContent,
+    createSubscriptionMenuList,
+    createArticleLiPart,
+    insertWholeContent,
+} from "./html/articleListHtml.js";
 
 // 초기화 함수
 export const initArticleList = async () => {
     try {
         addEventListeners();
-        // 첫번째 카테고리 버튼에 class 부여
         setWholeData(document.querySelectorAll('.menu-btn-wrapper')[0], 0);
     } catch (error) {
         console.log(error)
@@ -15,7 +20,7 @@ export const initArticleList = async () => {
 }
 
 // 초기 UI 렌더링 함수
-export const createArticleList = (menuInfo) => {
+export const createArticleList = () => {
     return `
         <div class="articleList-wrapper">
             <div class="article-header-wrapper flex-row-between">
@@ -34,7 +39,7 @@ export const createArticleList = (menuInfo) => {
             </div>
             <div class="article-body-wrapper">
                 <div class="article-menu-wrapper">
-                    ${createMenuList(menuInfo)}
+                    ${createMenuList()}
                 </div>
                 <div class="article-wrapper">
                     <div class="article-selection-wrapper"></div>
@@ -59,36 +64,8 @@ export const createArticleList = (menuInfo) => {
         </div>
     `;
 }
-
-// 메뉴 리스트 생성 함수
-const createMenuList = (menuInfo) => {
-    return menuInfo?.map((info, idx) => `
-        <div class="menu-btn-wrapper">
-            <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
-                <h5>${info?.category}</h5>
-                <h5 class="article-menu-pages display-none">1 / ${info?.totalPages}</h5>
-            </button>
-            <div class="fill-background"></div>
-        </div>
-        `).join('');
-    }
     
-const createSubscriptionMenuList = () => {
-    const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
-    return subList?.map((sub, idx) => `
-        <div class="menu-btn-wrapper">
-            <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
-                <h5>${sub}</h5>
-            </button>
-            <div class="fill-background"></div>
-        </div>
-    `) .join('');
-}
 
-// 기사 리스트 생성 함수
-const createArticleLiPart = (articleData) => {
-    return articleData.map((articleItem) => `<li>${articleItem}</li>`).join('');
-}
 
 // 이벤트 리스너 추가 함수
 const addEventListeners = () => {
@@ -159,14 +136,14 @@ const addSubscriptionEventListener = () => {
 const addWholeListBtnEventListener = () => {
     document.querySelector('.whole-media-btn').addEventListener('click', () => {
         if (!isGrid && isMediaWhole) {
-            document.querySelector('.article-body-wrapper').innerHTML = createArticleList(menuInfo);
+            document.querySelector('.article-body-wrapper').innerHTML = createArticleList();
             document.querySelectorAll('.article-header-wrapper')[1].remove();
             initArticleList();
         }
     })
     document.querySelector('.list-btn').addEventListener('click', () => {
         if (!isGrid && isMediaWhole) {
-            document.querySelector('.article-body-wrapper').innerHTML = createArticleList(menuInfo);
+            document.querySelector('.article-body-wrapper').innerHTML = createArticleList();
             document.querySelectorAll('.article-header-wrapper')[1].remove();
             initArticleList();
         }
@@ -380,36 +357,22 @@ const addWholeGridEventListener = () => {
     });
 }
 
-// 콘텐츠 삽입 함수
-const insertWholeContent = (menuIdx, menuCurrentPage, menuLastPage) => {
-    const nowInfo = menuInfo[menuIdx].mediaData[menuCurrentPage - 1];
+// // 콘텐츠 삽입 함수
+// const insertWholeContent = (menuIdx, menuCurrentPage, menuLastPage) => {
+//     const nowInfo = menuInfo[menuIdx].mediaData[menuCurrentPage - 1];
     
-    if (document.querySelector('.article-menu-pages') !== null) {
-        document.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
-    }
-    document.querySelector('.media-img').src = `/images/logos/${nowInfo.mediaName}.png`;
-    document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
-    document.querySelector('.thumbnail-img').src = `/images/logos/${MEDIA_LIST[menuCurrentPage]}.png`;
-    document.querySelector('.thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
-    document.querySelector('.article-li-part').innerHTML = `
-        ${createArticleLiPart(nowInfo.articleList)}
-        <p class="li-part-info">${nowInfo.thumbnailMediaName}에서 직접 편집한 뉴스입니다.</p>
-    `;
-}
-
-const insertSubscriptionContent = (menuIdx) => {
-    const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
-    const mediaName = subList[menuIdx];
-    const nowInfo = extractDataWithMedia(menuInfo)[mediaName]
-    document.querySelector('.media-img').src = `/images/logos/${mediaName}.png`;
-    document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
-    document.querySelector('.thumbnail-img').src = `/images/logos/${MEDIA_LIST[menuCurrentPage]}.png`;
-    document.querySelector('.thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
-    document.querySelector('.article-li-part').innerHTML = `
-        ${createArticleLiPart(nowInfo.articleList)}
-        <p class="li-part-info">${nowInfo.thumbnailMediaName}에서 직접 편집한 뉴스입니다.</p>
-    `;
-}
+//     if (document.querySelector('.article-menu-pages') !== null) {
+//         document.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
+//     }
+//     document.querySelector('.media-img').src = `/images/logos/${nowInfo.mediaName}.png`;
+//     document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
+//     document.querySelector('.thumbnail-img').src = `/images/logos/${MEDIA_LIST[menuCurrentPage]}.png`;
+//     document.querySelector('.thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
+//     document.querySelector('.article-li-part').innerHTML = `
+//         ${createArticleLiPart()}
+//         <p class="li-part-info">${nowInfo.mediaName}에서 직접 편집한 뉴스입니다.</p>
+//     `;
+// }
 
 // 페이지 이동 함수
 export const handleNextPageEvent = (thisBtn, menuInfo, isNow) => {
@@ -434,9 +397,9 @@ export const handleNextPageEvent = (thisBtn, menuInfo, isNow) => {
                 moveNextPage(thisBtn);
             }
             if (isMediaWhole) {
-                insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+                insertWholeContent();
             } else {
-                insertSubscriptionContent(menuIdx);
+                insertSubscriptionContent();
             }
         }, 1);
         newsState.setCategoryTimeoutId(timeoutId);
@@ -448,9 +411,9 @@ export const handleNextPageEvent = (thisBtn, menuInfo, isNow) => {
                 moveNextPage(thisBtn);
             }
             if (isMediaWhole) {
-                insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+                insertWholeContent();
             } else {
-                insertSubscriptionContent(menuIdx);
+                insertSubscriptionContent();
             }
         }, CATEGORY_TIMEOUT);
         newsState.setCategoryTimeoutId(timeoutId);
@@ -474,9 +437,9 @@ export const handlePrePageEvent = (thisBtn, menuInfo, isNow) => {
                 movePrePage(thisBtn)
             }
             if (isMediaWhole) {
-                insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+                insertWholeContent();
             } else {
-                insertSubscriptionContent(menuIdx)
+                insertSubscriptionContent()
             }
         }, 1);
         newsState.setCategoryTimeoutId(timeoutId);
@@ -490,9 +453,9 @@ export const handlePrePageEvent = (thisBtn, menuInfo, isNow) => {
                 movePrePage(thisBtn)
             }
             if (isMediaWhole) {
-                insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+                insertWholeContent();
             } else {
-                insertSubscriptionContent(menuIdx)
+                insertSubscriptionContent()
             }
         }, CATEGORY_TIMEOUT);
         newsState.setCategoryTimeoutId(timeoutId);
@@ -570,9 +533,9 @@ const setWholeData = (btnWrapper, menuIdx) => {
     newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
     
     if (isMediaWhole) {
-        insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+        insertWholeContent();
     } else {
-        insertSubscriptionContent(menuIdx);
+        insertSubscriptionContent();
     }
 
     document.querySelectorAll('.menu-btn-wrapper').forEach((btnWrapper, idx) => {
@@ -595,7 +558,7 @@ const setSubscriptionData = (btnWrapper, menuIdx) => {
     newsState.setMenuCurrentPage(1);
     newsState.setMenuLastPage(1);
     
-    insertSubscriptionContent(menuIdx);
+    insertSubscriptionContent();
     
     console.log(btnWrapper)
     

@@ -16,12 +16,10 @@ export const NewsPage = async (app) => {
     NewsBar(app);
     ArticleList(app);
     Arrow(app);
-    console.log(extractDataWithMedia(menuInfo))
 }
 
 const fetchNewsPageData = async ({ menuInfoSrc }) => {
     newsState.setMenuInfo((await fetchData(menuInfoSrc)).data);
-    console.log(menuInfo[0].mediaData["스포츠동아"])
 }
 
 const Header = (app) => {
