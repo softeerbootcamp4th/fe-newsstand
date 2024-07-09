@@ -1,24 +1,33 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
-import { getMyDataLength, updateMyNewsList } from "./myNewsList.js";
-import { getMaxMediaLength, updateNewsList } from "./newsList.js";
-
-const categoryList = [
-  "종합/경제",
-  "방송/통신",
-  "IT",
-  "영자지",
-  "스포츠/연예",
-  "매거진/전문지",
-  "지역",
-];
-
-const myList = ["언론사1", "언론사2", "언론사9", "언론사11", "언론사12"];
+import { updateMyNewsList } from "./myNewsList.js";
+import { updateNewsList } from "./newsList.js";
+import {
+  categoryList,
+  myList,
+  getMaxMediaLength,
+  getMyDataLength,
+} from "../resources/data.js";
 
 var newsInterval; //왜 전역변수로 설정해야 작동하는가??
 var myInterval;
 let currentCategoryIndex = 0;
 let currentMediaIndex = 0;
 let headerCategory = 0;
+
+export const getCurrentCategoryIndex = () => currentCategoryIndex;
+export const setCurrentCategoryIndex = (index) => {
+  currentCategoryIndex = index;
+};
+
+export const getCurrentMediaIndex = () => currentMediaIndex;
+export const setCurrentMediaIndex = (index) => {
+  currentMediaIndex = index;
+};
+
+export const getHeaderCategory = () => headerCategory;
+export const setHeaderCategory = (category) => {
+  headerCategory = category;
+};
 
 /**
  * Nav목록으로 네비게이션 바를 container의 child로 생성 후 초기화
@@ -169,7 +178,7 @@ function updateCategory(newCategory, index) {
  * index만으로 새로 선택될 카테고리를 설정
  * @param {int} index
  */
-function updateCategoryByIndex(index) {
+export function updateCategoryByIndex(index) {
   const newCategory = categoryList[index];
   updateCategory(newCategory, index);
 }
@@ -178,7 +187,7 @@ function updateCategoryByIndex(index) {
  * nav에서 선택될 구독된 언론사 설정
  * @param {int} newCategoryIndex
  */
-function updateMyMedia(newCategoryIndex) {
+export function updateMyMedia(newCategoryIndex) {
   currentCategoryIndex = newCategoryIndex;
   updateMyNewsList(currentCategoryIndex);
 }
@@ -187,7 +196,7 @@ function updateMyMedia(newCategoryIndex) {
  * li 배열에 선택된 node에 selected class추가
  * @param {node Array} navElementNodes
  */
-function updateNavElements(navElementNodes) {
+export function updateNavElements(navElementNodes) {
   navElementNodes.forEach((element, index) => {
     if (index === currentCategoryIndex) {
       element.classList.add("selected");
@@ -271,111 +280,4 @@ function startMyNewsInterval() {
 function resetInterval() {
   clearInterval(newsInterval);
   clearInterval(myInterval);
-}
-
-const leftButton = document.querySelector(".leftButton");
-const rightButton = document.querySelector(".rightButton");
-
-leftButton.addEventListener("click", movePrevNewsMedia);
-rightButton.addEventListener("click", moveNextNewsMedia);
-
-/**
- * 왼쪽 화살표 이동 함수
- */
-function movePrevNewsMedia() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-  resetCover();
-
-  if (headerCategory === 0) handleNewsMovePrev(navElementNodes);
-  else if (headerCategory === 1) handleMyMovePrev(navElementNodes);
-}
-
-/**
- * newsList 일 때 왼쪽 이동
- * @param {node Array} navElementNodes
- */
-function handleNewsMovePrev(navElementNodes) {
-  currentMediaIndex--;
-
-  if (currentMediaIndex < 0) {
-    currentCategoryIndex--;
-
-    if (currentCategoryIndex < 0)
-      currentCategoryIndex = categoryList.length - 1;
-
-    currentMediaIndex =
-      getMaxMediaLength(categoryList[currentCategoryIndex]) - 1;
-  }
-
-  updateNavElements(navElementNodes);
-  updateCategoryByIndex(currentCategoryIndex);
-}
-
-/**
- * myList 일 때 왼쪽 이동
- * @param {node Array} navElementNodes
- */
-function handleMyMovePrev(navElementNodes) {
-  currentCategoryIndex--;
-  if (currentCategoryIndex < 0) currentCategoryIndex = myList.length - 1;
-
-  updateNavElements(navElementNodes);
-  updateMyMedia(currentCategoryIndex);
-}
-
-/**
- * 오른쪽 화살표 이동 함수
- */
-function moveNextNewsMedia() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-  resetCover();
-
-  if (headerCategory === 0) handleNewsMoveNext(navElementNodes);
-  else if (headerCategory === 1) handleMyMoveNext(navElementNodes);
-}
-
-/**
- * newsList 일 때 오른쪽 이동
- * @param {node Array} navElementNodes
- */
-function handleNewsMoveNext(navElementNodes) {
-  currentMediaIndex++;
-
-  if (
-    currentMediaIndex >
-    getMaxMediaLength(categoryList[currentCategoryIndex]) - 1
-  ) {
-    currentCategoryIndex++;
-
-    if (currentCategoryIndex > categoryList.length - 1)
-      currentCategoryIndex = 0;
-
-    currentMediaIndex = 0;
-  }
-
-  updateNavElements(navElementNodes);
-  updateCategoryByIndex(currentCategoryIndex);
-}
-
-/**
- * myList 일 때 오른쪽 이동
- * @param {node Array} navElementNodes
- */
-function handleMyMoveNext(navElementNodes) {
-  currentCategoryIndex++;
-
-  if (currentCategoryIndex > myList.length - 1) currentCategoryIndex = 0;
-
-  updateNavElements(navElementNodes);
-  updateMyMedia(currentCategoryIndex);
-}
-
-/**
- * 페이지가 넘어갈 때 progress animation을 재시작
- */
-function resetCover() {
-  const cover = document.querySelector(".contentList li.selected .cover");
-  cover.classList.remove("cover");
-  void cover.offsetWidth;
-  cover.classList.add("cover");
 }
