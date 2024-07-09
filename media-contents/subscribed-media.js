@@ -99,8 +99,6 @@ function renderGridMedia(page) {
     });
 
     gridListDOM.innerHTML = mediaListDOMString;
-
-    // TODO: 구독/구독취소 이벤트 붙이기
 }
 
 /**
@@ -144,6 +142,11 @@ function renderListMedia(mediaId) {
     mediaListDOM.innerHTML = mediaListDOMString;
     const progressAnimationDOM = document.querySelector(".media-contents__category-item-background");
     progressAnimationDOM.addEventListener("animationiteration", navigateNextMedia);
+
+    /**
+     * 카테고리 이벤트 리스너 등록
+     */
+    mediaListDOM.addEventListener('click', clickMediaList);
 
     /**
      * 선택된 카테고리의 콘텐츠 렌더링
