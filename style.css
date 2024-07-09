@@ -132,13 +132,17 @@ ul {
 
 .roller {
 	width: 50%;
+	height: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+	position: relative;
 	flex-basis: 50%;
 	flex-shrink: 1;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	gap: 16px;
-	padding: 16px;
+	padding: 0px 16px;
 	background-color: var(--surface-alt);
 	border: 1px solid var(--border-default);
 }
@@ -149,9 +153,35 @@ ul {
 	font-weight: 700;
 }
 
+.rollerSection {
+	position: relative;
+	height: 200%;
+	top: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+.rollerSection.rolling {
+	animation: 0.5s ease-in-out 1 rollerAnim;
+}
+
 .rollerDesc {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 	color: var(--text-default);
 	font-size: 0.875rem;
+}
+
+@keyframes rollerAnim{
+	from {
+		transform: translateY(0%);
+	}
+	to {
+		transform: translateY(-50%);
+	}
 }
 
 .mainWrapper {
