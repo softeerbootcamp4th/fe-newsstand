@@ -5,8 +5,5 @@ export const updateMediaSubscribe = async (
   isSubscribed: boolean,
 ): Promise<void> => {
   await sleep();
-  console.log(
-    `updateMediaSubscribe: mediaId=${mediaId}, isSubscribed=${isSubscribed}`,
-  );
   localStorage.setItem(`media-${mediaId}`, isSubscribed ? "true" : "false");
 };

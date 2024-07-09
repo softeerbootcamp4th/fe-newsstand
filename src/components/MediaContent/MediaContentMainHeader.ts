@@ -32,7 +32,7 @@ interface SubscribeButtonProps {
 }
 const SubscribeButton = ({ isSubscribed, onClick }: SubscribeButtonProps) => {
   if (isSubscribed) {
-    ce(Button, {
+    return ce(Button, {
       className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
       children: [Raw(PlucIcon), "구독하기"],
       onClick: onClick,
