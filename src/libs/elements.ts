@@ -150,3 +150,11 @@ export const Anchor: AppElement<HTMLAnchorElement> = (
 };
 
 Anchor.type = "element";
+
+export const Img: AppElement<HTMLImageElement> = (
+  props: AppElementProps<HTMLImageElement>,
+) => {
+  return createElement<HTMLImageElement>("img", props);
+};
+
+Img.type = "element";
