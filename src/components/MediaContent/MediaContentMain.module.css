@@ -1,0 +1,8 @@
+.container {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  flex-direction: column;
+  border: 1px solid var(--border-border-default, #D2DAE0);
+}

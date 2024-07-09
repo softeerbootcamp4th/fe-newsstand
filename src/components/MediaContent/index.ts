@@ -1,4 +1,4 @@
-import { Div, ce } from "@/libs/elements";
+import { Div, Main, ce } from "@/libs/elements";
 import { MediaContentFilter } from "./MediaContentFilter";
 import { useEffect, useState } from "@/libs";
 import { cc } from "@/libs/components";
@@ -7,6 +7,7 @@ import { MediaIdByCategories } from "@/models/Newsstand";
 import { MediaContentTabs } from "./MediaContentTabs";
 import styles from "./index.module.css";
 import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
+import { MediaContentMain } from "./MediaContentMain";
 export type MediaContentFilterType = "전체 언론사" | "내가 구독한 언론사";
 
 export const MediaContent = () => {
@@ -42,6 +43,28 @@ export const MediaContent = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  const currentMediaId =
+    currentData[currentDataIdx[0]].mediaIds[currentDataIdx[1]];
+  const currentCategory = currentData[currentDataIdx[0]].category;
+  const tabData = currentData.map((data, idx) => {
+    const isActive = idx === currentDataIdx[0];
+    return {
+      main: data.category.name,
+      sub: isActive
+        ? cc(CategoryTabActiveBadge, {
+            curIdx: currentDataIdx[1],
+            total: data.mediaIds.length,
+          })
+        : null,
+      isActive: isActive,
+      onClick: () => {
+        handleClick([idx, 0]);
+      },
+      onNext: handleNext,
+    };
+  });
+
   return ce(Div, {
     className: styles.container,
     children: [
@@ -49,24 +72,16 @@ export const MediaContent = () => {
         currentFilter: currentFilter,
         setCurrentFilter: setCurrentFilter,
       }),
-      cc(MediaContentTabs, {
-        tabs: currentData.map((data, idx) => {
-          const isActive = idx === currentDataIdx[0];
-          return {
-            main: data.category.name,
-            sub: isActive
-              ? cc(CategoryTabActiveBadge, {
-                  curIdx: currentDataIdx[1],
-                  total: data.mediaIds.length,
-                })
-              : null,
-            isActive: isActive,
-            onClick: () => {
-              handleClick([idx, 0]);
-            },
-            onNext: handleNext,
-          };
-        }),
+      ce(Main, {
+        children: [
+          cc(MediaContentTabs, {
+            tabs: tabData,
+          }),
+          cc(MediaContentMain, {
+            mediaId: currentMediaId,
+            category: currentCategory,
+          }),
+        ],
       }),
     ],
   });
