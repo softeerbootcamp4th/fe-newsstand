@@ -11,7 +11,7 @@ const bindEventsAfterRender = (componentInstance, componentId) => {
 const createComponent = (component, props) => {
     const previousComponent = currentComponent
 
-    currentComponent = { id: component.name, stateIndex: 0, component, props }
+    currentComponent = { id: component.name, component: component, componentProps: props }
 
     if (props) {
         currentComponent.id += props.id
