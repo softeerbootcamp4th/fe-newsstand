@@ -30,7 +30,7 @@ export const Alert = ({ pressName, handleOkButtonClick }) => {
       document.body.removeChild(alertElement);
   };
 
-  const show = () => {
+  const showAlert = () => {
       document.body.appendChild(alertElement);
   };
 
@@ -38,7 +38,7 @@ export const Alert = ({ pressName, handleOkButtonClick }) => {
 
   return {
       element: alertElement,
-      show
+      show: showAlert
   };
 };
 

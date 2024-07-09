@@ -2,18 +2,18 @@ import ChipButton from "../../../components/chipButton/chipButton.js";
 import SnackBar from "../../../components/snackBar/snackBar.js";
 import Alert from "../../../components/alert/alert.js";
 
-export const PressInfoContainer = (props) => {
+export const PressInfoContainer = ({press}) => {
     let element = document.createElement('div');
     element.className = 'press-info-container';
 
-    let isSubscribed = props.isSubscribed;  
+    let isSubscribed = press.subscribe == 'Y';  
 
     function render() {
         const chipButton = makeChipButton();
         
         const html = `
-            <img src="${props.imageSrc}" alt="press image"/>
-            <span class="press-info-edit-date">${props.editTime}</span>
+            <img src="${press.sourceLogo}" alt="press image"/>
+            <span class="press-info-edit-date">${press.newsDate}</span>
         `;
     
         element.innerHTML = html;
@@ -46,30 +46,34 @@ export const PressInfoContainer = (props) => {
     }
 
     function showAlert() {
-        const alert = Alert({ pressName: '경제신문', handleOkButtonClick: handleUnsubscribe});
+        const alert = Alert({ pressName: press.mediaName, handleOkButtonClick: handleUnsubscribe});
         alert.show();
     }
 
     function handleUnsubscribe() {
         deletePressFromStorage()
+        isSubscribed = false;
         render();
     }
 
     function savePressToStorage() {
-        let pressId = "경제신문";
+        const name = press.mediaName;
         let subscribedPress = localStorage.getItem('subscribed');
-
-        subscribedPress += pressId;
-        localStorage.setItem('subscribed', pressId);
+        subscribedPress += subscribedPress ? ","+name : name;
+        localStorage.setItem('subscribed', subscribedPress);
     }
 
     function deletePressFromStorage() {
-        let pressId = "경제신문";
+        const name = press.mediaName;
         let subscribedPress = localStorage.getItem('subscribed');
-
-        subscribedPress = subscribedPress.replace(pressId, "");
-        localStorage.setItem('subscribed', subscribePress);
+    
+        const subscribedPressArray = subscribedPress.split(',');
+        const updatedSubscribedPressArray = subscribedPressArray.filter(item => item.trim() !== name);
+        const updatedSubscribedPress = updatedSubscribedPressArray.join(',');
+    
+        localStorage.setItem('subscribed', updatedSubscribedPress);
     }
+    
 
     render();
 

@@ -50,8 +50,7 @@ export const NewsList = (props) => {
         });
 
         const pressInfoContainer = PressInfoContainer({
-            imageSrc: "",
-            editTime: "2023.02.10. 18:57 편집"
+            press: tabs[selectedCategoryIndex].tabData[selectedPressIndex],
         });
 
         const pressNewsContainer = PressNewsContainer({

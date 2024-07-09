@@ -31,7 +31,10 @@ export const Main = () => {
   };
 
   function createTabs() {
-    let tabs = isAllPress ? getAllPressTabs() : getSubscribedPressTabs();
+    let tabs = getAllPressTabs();
+    let subscribedPress = getSubscribedPressTabs(tabs);
+
+    tabs = isAllPress ? getAllPressTabs() : subscribedPress;
     return tabs;
   }
 
@@ -55,31 +58,45 @@ export const Main = () => {
         return {
           tabName: newsTab.tabName,
           tabDataIndex: 0,
-          tabDataCount: newsTab.tabData.length
+          tabDataCount: newsTab.tabData.length,
+          tabData: newsTab.tabData
         };
       });
     });
   
     return tabDataWithCounts;
-  }  
+  }
+  
 
-  function getSubscribedPressTabs() {
-    const subscribedPressTabsString = localStorage.getItem("pressId");
+  function getSubscribedPressTabs(tabs) {
+    const subscribedPressTabsString = localStorage.getItem("subscribed");
 
+  
     if (!subscribedPressTabsString) {
       console.log("no subscribed press");
       return [];
     }
-
+  
     try {
-      const subscribedPressTabsArray = JSON.parse(subscribedPressTabsString);
-      return subscribedPressTabsArray;
+      const subscribedPressTabs = subscribedPressTabsString.split(',');
+      console.log(subscribedPressTabs);
+  
+      tabs.forEach(tab => {
+        tab.tabData.forEach(data => {
+          if (subscribedPressTabs.includes(data.mediaName.trim())) {
+            data.subscribe = 'Y';
+          }
+        });
+      });
+  
+      console.log(tabs);
+      return subscribedPressTabs;
     } catch (error) {
       console.error("Error parsing subscribed press tabs:", error);
       return [];
     }
   }
-
+  
   function onToggleAllPress(newValue) {
     isAllPress = newValue;
     render();
@@ -87,7 +104,6 @@ export const Main = () => {
 
   function onToggleListView(newValue) {
     isList = newValue;
-    console.log(isList);
     render();
   }
 };
