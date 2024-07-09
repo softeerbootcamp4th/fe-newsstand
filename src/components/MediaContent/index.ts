@@ -32,10 +32,13 @@ export const MediaContent = () => {
     0, 0,
   ]);
 
-  const hasNext = currentDataIdx[0] < currentData.length;
+  const hasNext =
+    currentDataIdx[0] < currentData.length - 1 ||
+    currentDataIdx[1] < currentData[currentDataIdx[0]].mediaIds.length - 1;
   const hasPrev = currentDataIdx[0] >= 1;
 
   const handleNext = () => {
+    if (!hasNext) return;
     if (
       currentDataIdx[1] + 1 <
       currentData[currentDataIdx[0]].mediaIds.length
@@ -43,10 +46,7 @@ export const MediaContent = () => {
       setCurrentDataIdx([currentDataIdx[0], currentDataIdx[1] + 1]);
       return;
     }
-    if (hasNext) {
-      setCurrentDataIdx([currentDataIdx[0] + 1, 0]);
-      return;
-    }
+    setCurrentDataIdx([currentDataIdx[0] + 1, 0]);
   };
 
   const handlePrev = () => {
@@ -97,10 +97,7 @@ export const MediaContent = () => {
         children: [
           cc(MediaContentTabs, {
             tabs: tabData,
-            hasNext:
-              hasNext &&
-              currentDataIdx[1] + 1 <
-                currentData[currentDataIdx[0]].mediaIds.length,
+            hasNext: hasNext,
           }),
           cc(MediaContentMain, {
             mediaId: currentMediaId,
