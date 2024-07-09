@@ -1,5 +1,5 @@
-import { renderSubscribedMedia } from "./subscribed-media.js";
-import { renderTotalMedia } from "./total-media.js";
+import { renderSubscribedMedia, resetSubscribedMedia } from "./subscribed-media.js";
+import { renderTotalMedia, resetTotalMedia } from "./total-media.js";
 
 /**
  * @description 언론사 필터를 렌더하는 함수
@@ -34,8 +34,10 @@ function clickMediaDisplay(e) {
     }
 
     if (selectedFilter === "total-media") {
+        resetSubscribedMedia();
         renderTotalMedia();
     } else if (selectedFilter === "subscribed-media") {
+        resetTotalMedia();
         renderSubscribedMedia();
     }
 }

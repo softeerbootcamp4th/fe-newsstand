@@ -92,6 +92,30 @@ export function resetSubscribedMedia() {
 
     prevMediaButton.removeEventListener("click", navigatePrevMedia);
     nextMediaButton.removeEventListener("click", navigateNextMedia);
+    prevMediaButton.classList.remove("non-display");
+    nextMediaButton.classList.remove("non-display");
+}
+
+/**
+ * @description 화살표의 가시성 조절하는 함수
+ */
+function setArrowDisplayInGrid(page) {
+    const prevMediaButton = document.querySelector(".media-contents__left-button");
+    const nextMediaButton = document.querySelector(".media-contents__right-button");
+
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
+    const maxPage = Math.floor((subscribeIdList.length - 1) / DATA_COUNT_PER_GRID);
+
+    if (page === 0) {
+        prevMediaButton.classList.add("non-display");
+    } else {
+        prevMediaButton.classList.remove("non-display");
+    }
+    if (page === maxPage) {
+        nextMediaButton.classList.add("non-display");
+    } else {
+        nextMediaButton.classList.remove("non-display");
+    }
 }
 
 /**
@@ -109,6 +133,8 @@ function renderGridMedia(page) {
     });
 
     gridListDOM.innerHTML = mediaListDOMString;
+
+    setArrowDisplayInGrid(page);
 }
 
 /**
