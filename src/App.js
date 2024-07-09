@@ -1,5 +1,5 @@
 import "./App.css";
-import Header from "@/components/Header/Header";
+import Header from "@/components/layout/Header/Header";
 import AutoRollingNews from "@/components/AutoRollingNews/AutoRollingNews";
 import NewsList from "@/components/NewsList/NewsList";
 
@@ -8,11 +8,11 @@ function App({ $target }) {
   this.$element.className = "app";
   $target.appendChild(this.$element);
 
+  this.checkTheme();
+
   new Header({ $target: this.$element });
   new AutoRollingNews({ $target: this.$element });
   new NewsList({ $target: this.$element });
-
-  this.checkTheme();
 }
 
 App.prototype.checkTheme = function () {
