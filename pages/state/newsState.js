@@ -8,6 +8,8 @@ export let nowDay = ['일요일', '월요일', '화요일', '수요일', '목요
 export let dateText = `${nowDate.getFullYear()}.${nowDate.getMonth()+1}.${nowDate.getDate()}.${nowDay}`
 export let leftRollingId;
 export let rightRollingId;
+export let isMediaWhole = true;
+export let isGrid = false;
 
 export const newsState = {
     setMenuInfo: (info) => { menuInfo = info },
@@ -17,4 +19,6 @@ export const newsState = {
     setCategoryTimeoutId: (id) => { categoryTimeoutId = id },
     setleftRollingId: (id) => { leftRollingId = id },
     setRightRollingId: (id) => { rightRollingId = id },
+    setIsMediaWhole: (bool) => { isMediaWhole = bool },
+    setIsGrid: (bool) => { isGrid = bool },
 };

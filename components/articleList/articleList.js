@@ -1,10 +1,7 @@
 import { MEDIA_LIST, CATEGORY_TIMEOUT } from "../../pages/NewsPage.js";
 import { newsState } from "../../pages/state/newsState.js";
-import { menuInfo, menuCurrentPage, menuLastPage, menuIdx, categoryTimeoutId } from "../../pages/state/newsState.js";
+import { menuInfo, menuCurrentPage, menuLastPage, menuIdx, categoryTimeoutId, isGrid, isMediaWhole } from "../../pages/state/newsState.js";
 import { extractDataWithMedia, extractMedias } from "../../utils/api.js";
-
-let isMediaWhole = true;
-let isGrid = false;
 
 // 초기화 함수
 export const initArticleList = async () => {
@@ -96,16 +93,16 @@ const createArticleLiPart = (articleData) => {
 // 이벤트 리스너 추가 함수
 const addEventListeners = () => {
     document.querySelector('.whole-media-btn').addEventListener('click', () => {
-        isMediaWhole = true;
+        newsState.setIsMediaWhole(true);
     })
     document.querySelector('.subscription-media-btn').addEventListener('click', () => {
-        isMediaWhole = false;
+        newsState.setIsMediaWhole(false);
     })
     document.querySelector('.list-btn').addEventListener('click', () => {
-        isGrid = false;
+        newsState.setIsGrid(false);
     })
     document.querySelector('.grid-btn').addEventListener('click', () => {
-        isGrid = true;
+        newsState.setIsGrid(true);
     })
     
 
