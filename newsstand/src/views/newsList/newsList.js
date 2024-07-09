@@ -1,41 +1,22 @@
-// newsList.js
+import intervalManager from '../../manager/intervalManager.js';
 import PressCategoryContainer from './pressCategory/pressCategory.js';
 import PressInfoContainer from './pressInfo/pressInfo.js';
 import PressNewsContainer from './pressNews/pressNews.js';
 
-export const NewsList = (props) => {
+export const NewsList = ({ isAllPress, tabs }) => {
     const element = document.createElement('div');
     element.className = 'news-container';
 
-    const { tabs } = props;
-    let timerIntervalRef = null;
     let selectedCategoryIndex = 0;
     let selectedPressIndex = 0;
 
-    function updateTabs() {
-        tabs.forEach((tab, index) => {
-            if (index === selectedCategoryIndex) {
-                tab.selectedIndex = selectedPressIndex;
-                tab.selectedCount = selectedPressIndex + 1;
-            } else {
-                delete tab.selectedIndex;
-                delete tab.selectedCount;
-            }
-        });
-    }
-
     function startTimer() {
-        if (timerIntervalRef) {
-            clearInterval(timerIntervalRef);
-        }
-        timerIntervalRef = setInterval(() => {
+        intervalManager.startTimer(() => {
             changeToNextPress();
         }, 20000);
     }
 
     function render() {
-        updateTabs();
-
         element.innerHTML = `
             <img id="left-arrow" class="arrow-button" src="../../assets/icons/left-arrow-button.svg" alt="left arrow icon">
             <div class="news-content-container"></div>
@@ -44,11 +25,16 @@ export const NewsList = (props) => {
 
         const newsContentContainer = element.querySelector('.news-content-container');
 
+        const countInfo = isAllPress ? `${selectedPressIndex + 1}/${tabs[selectedCategoryIndex].tabData.length}` : null;
         const pressCategoryContainer = PressCategoryContainer({
-            tabs,
-            onChangeCategory: handleChangeCategoryByClick
+            isAllPress: isAllPress,
+            tabFields: tabs,
+            selectedIndex: selectedCategoryIndex,
+            onChangeCategory: handleChangeCategoryByClick,
+            countInfo: countInfo
         });
 
+        console.log(tabs, selectedCategoryIndex, selectedPressIndex);
         const pressInfoContainer = PressInfoContainer({
             press: tabs[selectedCategoryIndex].tabData[selectedPressIndex],
         });
@@ -85,7 +71,7 @@ export const NewsList = (props) => {
 
     function changeToNextPress() {
         selectedPressIndex += 1;
-        if (selectedPressIndex >= tabs[selectedCategoryIndex].tabDataCount) {
+        if (selectedPressIndex >= tabs[selectedCategoryIndex].tabData.length) {
             selectedPressIndex = 0;
             changeToNextCategory();
         } else {

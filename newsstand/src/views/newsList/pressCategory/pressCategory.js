@@ -1,7 +1,13 @@
 // pressCategory.js
 import { separateId } from "../../../utils/utils.js";
 
-const PressCategoryContainer = ({ tabs, onChangeCategory }) => {
+const PressCategoryContainer = ({ 
+    isAllPress, 
+    tabFields,
+    selectedIndex,
+    onChangeCategory,
+    countInfo,
+}) => {
     const element = document.createElement('div');
     element.className = 'press-category-container';
 
@@ -18,23 +24,34 @@ const PressCategoryContainer = ({ tabs, onChangeCategory }) => {
         const rootStyles = getComputedStyle(document.documentElement);
 
         buttons.forEach((button, index) => {
-            const isSelected = tabs[index].selectedIndex !== undefined;
+            const isSelected = index === selectedIndex;
 
             button.style.backgroundColor = isSelected ? rootStyles.getPropertyValue('--color-surface-brand-alt') : 'transparent';
             button.style.color = isSelected ? rootStyles.getPropertyValue('--color-text-white-default') : rootStyles.getPropertyValue('--color-text-weak');
 
-            const categoryCountSpan = button.querySelector('.press-count-span');
-            if (categoryCountSpan) {
-                button.style.width = isSelected ? "166px" : "max-content";
-                categoryCountSpan.textContent = isSelected ? `${tabs[index].selectedIndex + 1}/${tabs[index].tabDataCount}` : "";
-            }
-
-            if (isSelected) {
-                progressBars[index].classList.add('selected');
-            } else {
-                progressBars[index].classList.remove('selected');
-            }
+            updateInfoSpanStyle(button, isSelected);
+            updateProgressBarStyle(index, isSelected);
         });
+    }
+
+    function updateInfoSpanStyle(button, isSelected) {
+        const infoSpan = button.querySelector('.press-count-span');
+        if (infoSpan) {
+            button.style.width = isSelected ? "166px" : "max-content";
+            if (isAllPress) {
+                infoSpan.textContent = isSelected ? `${countInfo}` : "";
+            } else {
+                infoSpan.textContent = ">"
+            }
+        }
+    }
+
+    function updateProgressBarStyle(index, isSelected) {
+        if (isSelected) {
+            progressBars[index].classList.add('selected');
+        } else {
+            progressBars[index].classList.remove('selected');
+        }
     }
 
     function createButton(category, index) {
@@ -43,7 +60,7 @@ const PressCategoryContainer = ({ tabs, onChangeCategory }) => {
         button.id = `press-category-${index}`;
 
         const progressBar = document.createElement('div');
-        progressBar.className = 'press-category-button-progress';
+        progressBar.className = 'press-category-button-progress';   
         progressBar.id = `press-category-${index}`;
 
         const container = document.createElement('div');
@@ -71,7 +88,7 @@ const PressCategoryContainer = ({ tabs, onChangeCategory }) => {
         element.innerHTML = '';
         buttons = [];
         progressBars = [];
-        tabs.forEach((category, index) => {
+        tabFields.forEach((category, index) => {
             const button = createButton(category, index);
             element.appendChild(button);
             buttons.push(button);

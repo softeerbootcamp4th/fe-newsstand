@@ -6,6 +6,7 @@ export const PressInfoContainer = ({press}) => {
     let element = document.createElement('div');
     element.className = 'press-info-container';
 
+    console.log(press);
     let isSubscribed = press.subscribe == 'Y';  
 
     function render() {
