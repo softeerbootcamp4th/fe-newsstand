@@ -51,6 +51,11 @@ export type RenderingAppComponent<P = object> = CreatedAppComponent<P> & {
   parent: HTMLElement;
 };
 
+export type RenderingAppNode = {
+  node: Node;
+  parent: HTMLElement;
+};
+
 export const isCreatedAppComponent = (
   created: CreatedAppComponent | CreatedAppElement,
 ): created is CreatedAppComponent => {
@@ -64,7 +69,13 @@ export const isAppElement = (
 };
 
 export const isRenderingAppComponent = (
-  created: RenderingAppComponent | RenderingAppElement,
+  created: RenderingAppComponent | RenderingAppElement | RenderingAppNode,
 ): created is RenderingAppComponent => {
   return (created as RenderingAppComponent).render != null;
+};
+
+export const isRenderingAppNode = (
+  created: RenderingAppComponent | RenderingAppElement | RenderingAppNode,
+): created is RenderingAppNode => {
+  return (created as RenderingAppNode).node != null;
 };

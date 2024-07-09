@@ -5,8 +5,10 @@ import {
   CreatedAppElement,
   RenderingAppComponent,
   RenderingAppElement,
+  RenderingAppNode,
   isCreatedAppComponent,
   isRenderingAppComponent,
+  isRenderingAppNode,
 } from "./renderer";
 import { isPropsEqual } from "./utils";
 
@@ -139,7 +141,7 @@ export const render = () =>
     const shadowRoot = createShadowRoot();
     preRender();
     const renderQueue = new Deque<
-      RenderingAppComponent | RenderingAppElement
+      RenderingAppComponent | RenderingAppElement | RenderingAppNode
     >();
     renderQueue.pushBack({
       render: initComponent!,
@@ -172,6 +174,12 @@ export const render = () =>
         });
         continue;
       }
+
+      if (isRenderingAppNode(cur)) {
+        const { node, parent } = cur;
+        parent.appendChild(node);
+        continue;
+      }
       const {
         element,
         parent,
@@ -190,7 +198,10 @@ export const render = () =>
       eventMap.set(curKey, eventListeners);
       (children ?? []).forEach((child, index) => {
         if (typeof child === "string" || typeof child === "number") {
-          element.appendChild(document.createTextNode(child.toString()));
+          renderQueue.pushBack({
+            node: document.createTextNode(String(child)),
+            parent: element,
+          });
           return;
         }
         if (child === false || child == null) {
