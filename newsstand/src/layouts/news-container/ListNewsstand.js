@@ -11,7 +11,7 @@ import { getSubscribedCompaniesId } from '../../utils/subscribeUtils.js'
 import { getCompanyName, getCompanyIdByName } from '../../datas/companyData.js'
 
 const ListNewsstand = (props) => {
-    const [currentNewsId, setCurrentNewsId] = useState(1)
+    const [currentNewsId, setCurrentNewsId] = useState({ stateId: 1, initialValue: 1 })
     const lastIndex = 6
     const lastCategoryCompanyCount = getCompanyCount(mediaCategoryData[lastIndex])
     let newsData = []

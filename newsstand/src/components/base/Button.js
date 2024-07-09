@@ -37,7 +37,7 @@ const buttonVariant = (type) => {
 }
 
 const Button = (props) => {
-    const [isHover, setIsHover] = useState(false)
+    const [isHover, setIsHover] = useState({ stateId: 1, initialValue: false })
 
     const handleMouseEnter = () => {
         setIsHover(true)
