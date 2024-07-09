@@ -1,0 +1,354 @@
+[
+    {
+        "category" : 0,
+        "pid": 0,
+        "pressType": "economy",
+        "pressImg": "../../image/서울경제.svg",
+        "edittime" : "2024.07.04 12:56 편집",
+        "pressName": "서울경제",
+        "mainphoto" : "https://newsimg.sedaily.com/2024/07/04/2DBLZL2FO4_2.jpg",
+        "maintitle" : "\"저가 매수 기회\"…SK하이닉스 순매수 1위 [주식 초고수는 지금]",
+        "news": [
+            {
+                "title": "이번엔 서울 강남서…70대 운전자 차량, 어린이집 돌진",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "한달 만에 또 급등한 전기요금…올해 10% 이상 폭등 예상",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"  
+            },
+
+            {
+                "title": "美 금리 인상 속도 늦춰야…한국 경제 위기 상황",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "윤석열 정부, 올해 세금 3조원 감면…근로소득계산방식 개선도 추진",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[이슈포인트] 석유값 급등 속에 정부의 대응은?",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "주택담보대출 금리 0.25% 인상…전문가들 \"부동산 시장 위축 우려\"",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 0,
+        "pid": 1,
+        "pressType": "economy",
+        "pressImg": "../../image/데일리안.svg",
+        "pressName": "데일리안",
+        "edittime" : "2024.05.31 12:56 편집",
+        "mainphoto" : "../image/Thumbnail.png",
+        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "5년 전 경고 무시하더니… ‘한우값 폭락’ 예고된 참사였다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "LG 모든 가전제품에 공감기능 탑재",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 2,
+        "pid": 0,
+        "pressType": "internet",
+        "pressImg": "../../image/아이뉴스24.svg",
+        "pressName": "아이뉴스24",
+        "edittime" : "2023.12.29 12:56 편집",
+        "mainphoto" : "https://wimg.mk.co.kr/news/cms/202407/04/news-p.v1.20240410.e544b897d89545e1ab9c0503c619bdcc_P1.jpg",
+        "maintitle" : "‘오픈AI 챗GPT’ 중국 해커한테 털렸다…AI 기술 설계·세부정보 탈취",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "게임 업계 2분기 실적 시즌 개봉박두… 넷마블·크래프톤만 웃을까",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "차세대 HBM 경쟁 3파전… 앞서가는 SK하이닉스, 뒤쫓는 마이크론, 칼가는 삼성전자",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "애플 中 판매 회복·환율 수혜… 실적 기대감 높아진 ‘LG이노텍’",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 1,
+        "pid": 0,
+        "pressType": "broadcast",
+        "pressImg": "../../image/시사저널e.svg",
+        "pressName": "시사저널e",
+        "edittime" : "2023.11.15 07:59 편집",
+        "mainphoto" : "https://cdn.itbiznews.com/news/photo/202109/48169_43554_442.jpg",
+        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "방송 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category": 1,
+        "pid": 1,
+        "pressType": "broadcast",
+        "pressImg": "../../image/이데일리.svg",
+        "edittime": "2024.07.06 14:40 편집",
+        "pressName": "이데일리",
+        "mainphoto": "https://image.chosun.com/site/data/html_dir/2024/01/25/2024012500885.jpg",
+        "maintitle": "2024년 7월 6일 방송/통신 주요 뉴스",
+        "news": [
+          {
+            "title": "방송통신위, '구글, 넷플릭스'도 온라인 영상 판매 수익 10% 떼어낼 것",
+            "url": "https://www.chosun.com/economy/media/2024/07/06/7L6S2522352320/"
+          },
+          {
+            "title": "방탄소년단, 월간 가요차트 8관왕…'Butter' 4개월 연속 1위",
+            "url": "https://www.mk.co.kr/culture/view/2024/07/06/0180122/"
+          },
+          {
+            "title": "LG헬로비전, '스마트홈 시대' 열다…CES 2024 출품",
+            "url": "https://www.sedaily.com/NewsView/2DBLZL2FO4"
+          },
+          {
+            "title": "'오징어 게임' 시즌2, 12월 공개…이정재·정우성·이지하 출연",
+            "url": "https://www.sedaily.com/NewsView/2DBLZL2FO4"
+          },
+          {
+            "title": "유튜브, 프리미엄 콘텐츠 구독 서비스 '유튜브 프리미엄' 가격 인상",
+            "url": "https://www.sedaily.com/NewsView/2DBLZL2FO4"
+          }
+        ]
+    },
+    {
+        "category" : 3,
+        "pid": 0,
+        "pressType": "englishnews",
+        "pressImg": "../../image/에너지경제.svg",
+        "pressName": "에너지경제",
+        "edittime" : "2023.07.28 07:59 편집",
+        "mainphoto" : "https://newsimg.koreatimes.co.kr/2024/07/09/d05259a3-566d-413a-a1b6-e661b6e6ba74.jpg",
+        "maintitle" : "2차례 추락 사고 이후 … 보잉, 사기 혐의 '유죄 인정'",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "방송 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 4,
+        "pid": 0,
+        "pressType": "sportsentertain",
+        "pressImg": "../../image/CEO스코어데일리.svg",
+        "pressName": "CEO스코어데일리",
+        "edittime" : "2023.11.15 07:59 편집",
+        "maintitle": "UEFA 유로 2024: 조 추첨 결과, 경기 일정, 우승 후보팀은?",
+        "mainphoto" : "https://lh3.googleusercontent.com/p/AF1QipMnIHpnZHXm5kiVcXKLAWe79Sdop7NAXlNgTPUe=s1360-w1360-h1020",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "방송 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 5,
+        "pid": 0,
+        "pressType": "magazine",
+        "pressImg": "../../image/인사이트.svg",
+        "pressName": "인사이트",
+        "edittime" : "2023.11.15 07:59 편집",
+        "mainphoto" : "https://cdn.psnews.co.kr/news/photo/202112/2003891_45268_1448.jpg",
+        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "방송 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    },
+    {
+        "category" : 6,
+        "pid": 0,
+        "pressType": "region",
+        "pressImg": "../../image/조선일보.svg",
+        "pressName": "조선일보",
+        "edittime" : "2023.11.15 07:59 편집",
+        "mainphoto" : "https://play-lh.googleusercontent.com/kbGBQv_HUpcbYYwEF_4eu9Ta3AAitTPoMN0FhjlC6m3mbVsxQMWsGYmkHMqM-7PWhQ=w526-h296-rw",
+        "maintitle" : "“엔화값 쌀때 일본 가자”…여행객 급증, 엔화 사모으고, 부동산 투자도 꿈틀",
+        "news": [
+            {
+                "title": "이재명 공개소환, 회술레같은 수치…검찰 비공개 출석 요구하지도 않았다",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "민주, 이재명 검찰 출석 당일에 尹정권 맹폭… 50억 클럽 방치, 李 수사 올인 ",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+                
+            },
+
+            {
+                "title": "[단독] \"매니저라 불러주세요\" HMM, 직급체계 5단계→2단계로 간소화",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+
+            {
+                "title": "'멍투성이' 초등생 사망 친부 \"학대, 아내가 다 했다\"…10일 구속여부 결정",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "방송 섹션의 다섯 번째 기사 제목",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            },
+            {
+                "title": "[충격]경제 섹션의 여섯 번째 기사...",
+                "url":"https://www.sedaily.com/NewsView/2DBLZL2FO4"
+            }
+        ]
+    }
+]
+ 
