@@ -1,7 +1,7 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
 import { setProgress } from "./nav.js";
 
-const data = {
+const categoryData = {
   "종합/경제": [
     {
       media: "언론사1",
@@ -172,12 +172,37 @@ const data = {
   ],
 };
 
+const myData = [
+  {
+    media: "언론사1",
+    news: [
+      "경제 성장률, 기대 이상의 상승",
+      "코로나19 백신 접종률, 예상을 웃도는 증가",
+      "기후 변화 대응, 세계 각국 공조 모색",
+      "디지털 트랜스포메이션 가속화, 기업들 반응",
+      "스포츠 이벤트 취소 소식에 팬들 실망",
+      "신규 취업자 수, 코로나19 이전 수준 회복",
+    ],
+  },
+  {
+    media: "언론사2",
+    news: [
+      "주식 시장 급락, 투자자들 불안 증가",
+      "금리 인상 기대에 부동산 시장 영향",
+      "글로벌 무역 갈등 재점화 가능성",
+      "기술 기업들의 인공지능 연구 경쟁",
+      "산업 혁신을 위한 정부 정책 발표",
+      "디지털 화폐 도입, 금융 시스템 변화 예상",
+    ],
+  },
+];
+
 /**
  * 언론사 별 뉴스 목록을 container하위에 생성
  * @param {Node} container
  * @param {Object} content {media: String, news: Array}
  */
-export function generateNewsList(container, content) {
+function generateNewsList(container, content) {
   const list = generateNode("ul", "newsList");
 
   content.news.slice(0, 6).forEach((category) => {
@@ -214,15 +239,35 @@ export function updateNewsList(
   currentMediaIndex
 ) {
   const newsListContainer = deleteNodeById("newsList_container");
-  const currentMedia = document.querySelector(".media");
+  const mediaList = categoryData[category].map((element) => element.media);
+  const contentList = categoryData[category];
 
-  const mediaList = data[category];
   setProgress(
     currentCategoryIndex,
     currentMediaIndex,
-    data[Object.keys(data)[currentCategoryIndex]].length
+    getMaxMediaIndex(category)
   );
 
-  generateNewsList(newsListContainer, mediaList[currentMediaIndex]);
-  currentMedia.innerHTML = mediaList[currentMediaIndex].media;
+  setMedia(mediaList, currentMediaIndex);
+
+  generateNewsList(newsListContainer, contentList[currentMediaIndex]);
+}
+
+/**
+ * category이름의 최대 media 숫자
+ * @param {String} category
+ * @returns 최대 media 수 반환
+ */
+export function getMaxMediaIndex(category) {
+  return categoryData[category].length;
+}
+
+/**
+ * 언론사 목록과 현재 언론사 index를 받아 언론사 이름 출력
+ * @param {Array} mediaList
+ * @param {int} mediaIndex
+ */
+function setMedia(mediaList, mediaIndex) {
+  const currentMedia = document.querySelector(".media");
+  currentMedia.innerHTML = mediaList[mediaIndex];
 }

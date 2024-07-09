@@ -1,5 +1,5 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
-import { generateNewsList, updateNewsList } from "./newsList.js";
+import { getMaxMediaIndex, updateNewsList } from "./newsList.js";
 
 const categoryList = [
   "종합/경제",
@@ -20,17 +20,17 @@ let currentMediaIndex = 0;
 /**
  * Nav목록으로 네비게이션 바를 container의 child로 생성 후 초기화
  * @param {Node} container Nav가 붙을 돔 객체
- * @param {Array} categoryList Nav 목록
+ * @param {Array} currentHeaderCategoryIndex Nav에 보여질 현재 선택된 리스트
  */
 export function generateNav(container, currentHeaderCategoryIndex) {
-  let category;
-  if (currentHeaderCategoryIndex === 0) category = categoryList;
-  else if (currentHeaderCategoryIndex === 1) category = myList;
+  let selectedList;
+  if (currentHeaderCategoryIndex === 0) selectedList = categoryList;
+  else if (currentHeaderCategoryIndex === 1) selectedList = myList;
 
   const nav = generateNode("nav", "content_navigator");
   const ul = generateNode("ul", "contentList");
 
-  categoryList.forEach((category, index) => {
+  selectedList.forEach((category, index) => {
     const li = generateNode("li");
     ul.appendChild(li);
 
@@ -42,7 +42,7 @@ export function generateNav(container, currentHeaderCategoryIndex) {
   container.appendChild(nav);
 
   updateNewsList(
-    categoryList[currentCategoryIndex],
+    selectedList[currentCategoryIndex],
     currentCategoryIndex,
     currentMediaIndex
   );
@@ -55,13 +55,13 @@ export function generateNav(container, currentHeaderCategoryIndex) {
       element.classList.add("selected");
 
       currentCategoryIndex = index;
-      updateCategory(categoryList[index]);
+      updateCategory(selectedList[index], currentCategoryIndex);
 
       clearInterval(intervalId);
       startInterval();
     });
   });
-  startInterval();
+  startInterval(selectedList);
 }
 
 /**
@@ -91,32 +91,42 @@ export function createNavElement(container, category) {
 /**
  * progress class를 가진 html을 category의 몇 번째 언론사인지 몇/몇 으로 표시
  * @param {int} categoryIndex
- * @param {int} mediaIndex
+ * @param {int} currentMediaIndex
  * @param {int} maxMediaIndex
  */
-export function setProgress(categoryIndex, mediaIndex, maxMediaIndex) {
+export function setProgress(categoryIndex, currentMediaIndex, maxMediaIndex) {
   const progresses = document.querySelectorAll(".progress");
-  progresses[categoryIndex].innerHTML = `${mediaIndex + 1}/${maxMediaIndex}`;
+  progresses[categoryIndex].innerHTML = `${
+    currentMediaIndex + 1
+  }/${maxMediaIndex}`;
 }
 
 /**
  * 새로 변경될 카테고리를 설정하고 언론사를 처음부터 시작
  * @param {String} newCategory
+ * @param {int} currentCategoryIndex
  */
-export function updateCategory(newCategory) {
-  const newMediaIndex = 0;
-  updateNewsList(newCategory, currentCategoryIndex, newMediaIndex);
+export function updateCategory(newCategory, currentCategoryIndex) {
+  currentMediaIndex = 0;
+  updateNewsList(newCategory, currentCategoryIndex, currentMediaIndex);
 }
 
 /**
- * 20초 마다 언론사 넘김
+ * 20초 마다 selectedList의 다음 요소로 넘김
+ * @param selectedList
  */
-function startInterval() {
+function startInterval(selectedList) {
   intervalId = setInterval(() => {
     const categoryElements = document.querySelectorAll(".contentList li");
     currentMediaIndex++;
-    if (currentMediaIndex >= 2) {
-      currentCategoryIndex = (currentCategoryIndex + 1) % categoryList.length;
+    console.log(
+      currentMediaIndex,
+      getMaxMediaIndex(selectedList[currentCategoryIndex])
+    );
+    if (
+      currentMediaIndex >= getMaxMediaIndex(selectedList[currentCategoryIndex])
+    ) {
+      currentCategoryIndex = (currentCategoryIndex + 1) % selectedList.length;
       categoryElements.forEach((element, index) => {
         if (index === currentCategoryIndex) {
           element.classList.add("selected");
@@ -125,13 +135,13 @@ function startInterval() {
         }
       });
 
-      updateCategory(categoryList[currentCategoryIndex]);
+      updateCategory(selectedList[currentCategoryIndex], currentCategoryIndex);
     } else {
       updateNewsList(
-        categoryList[currentCategoryIndex],
+        selectedList[currentCategoryIndex],
         currentCategoryIndex,
         currentMediaIndex
       );
     }
-  }, 20000);
+  }, 2000);
 }

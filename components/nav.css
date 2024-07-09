@@ -26,11 +26,11 @@
   cursor: pointer;
   background-color: hsl(240, 97%, 64%);
   position: absolute;
-  transition: none; /* This is to override the transition for selected items */
+  transition: none;
 }
 
 .contentList li.selected .cover {
-  animation: fillAnimation 20s ease;
+  animation: fillAnimation 20s linear;
   animation-iteration-count: infinite;
 }
 

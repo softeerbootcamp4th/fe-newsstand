@@ -1,6 +1,6 @@
-import { deleteNav, generateNav, setProgress } from "../components/nav.js";
+import { deleteNav, generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
-import { getTodayString, deleteNodeById } from "../utils/utils.js";
+import { getTodayString } from "../utils/utils.js";
 
 const headlineData = [
   {
