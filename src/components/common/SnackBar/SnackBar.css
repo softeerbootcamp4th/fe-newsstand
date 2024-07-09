@@ -15,8 +15,8 @@
   box-shadow: 0px 2px 18px 0px #14212b14, 0px 4px 2px 0px #14212b05;
 
   white-space: pre-wrap;
-  color: var(--white);
-  background-color: var(--blue-500);
+  color: var(--text-white-default);
+  background-color: var(--surface-brand-default);
 
   animation: fadeout 3s;
 }

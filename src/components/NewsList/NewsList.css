@@ -16,13 +16,13 @@
 
 .newsFilter > .filterTab {
   font-size: 16px;
-  color: var(--gray-200);
+  color: var(--text-weak);
 
   cursor: pointer;
 }
 
 .newsFilter > .selected {
-  color: var(--black);
+  color: var(--text-strong);
   font-weight: bold;
 }
 

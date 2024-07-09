@@ -6,7 +6,7 @@
 
   position: relative;
 
-  border: 1px solid var(--gray-100);
+  border: 1px solid var(--border-default);
   box-sizing: border-box;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .emptyView > .bold {
-  color: var(--black);
+  color: var(--text-strong);
   font-weight: bold;
 }
 

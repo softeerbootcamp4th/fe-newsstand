@@ -21,13 +21,19 @@ Button.prototype.handleButtonHover = function () {
 
   this.$element.addEventListener("mouseenter", () => {
     svgElement.querySelectorAll("path").forEach((el) => {
-      el.style.fill = "#4b5966";
+      if (document.body.classList.contains("dark")) {
+        el.style.fill = "--text-bold";
+
+        return;
+      }
+
+      el.style.fill = "--text-bold";
     });
   });
 
   this.$element.addEventListener("mouseleave", () => {
     svgElement.querySelectorAll("path").forEach((el) => {
-      el.style.fill = "#879298";
+      el.style.fill = "--text-weak";
     });
   });
 };

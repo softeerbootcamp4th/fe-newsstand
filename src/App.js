@@ -11,6 +11,23 @@ function App({ $target }) {
   new Header({ $target: this.$element });
   new AutoRollingNews({ $target: this.$element });
   new NewsList({ $target: this.$element });
+
+  this.checkTheme();
 }
+
+App.prototype.checkTheme = function () {
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    window.document.body.classList.add("dark");
+  }
+
+  const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+  mediaQueryList.addEventListener("change", (e) => {
+    if (e.matches) {
+      window.document.body.classList.add("dark");
+    } else {
+      window.document.body.classList.remove("dark");
+    }
+  });
+};
 
 export default App;

@@ -3,32 +3,67 @@
     Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 
-  --white: #ffffff;
-  --white-weak: rgba(255, 255, 255, 0.7);
+  --grayscale-white-alt: #ffffffb2;
+  --grayscale-white: #ffffff;
 
-  --gray-50: #f5f7f9;
-  --gray-100: #d2dae0;
-  --gray-200: #879298;
-  --gray-300: #6e8091;
-  --gray-400: #5f6e76;
-  --gray-500: #4b5966;
+  --grayscale-50: #f5f7f9;
+  --grayscale-100: #d2dae0;
+  --grayscale-200: #879298;
+  --grayscale-300: #6e8091;
+  --grayscale-400: #5f6e76;
+  --grayscale-500: #4b5966;
 
-  --black: #14212b;
+  --grayscale-black: #14212b;
 
   --blue-100: #7890e7;
   --blue-500: #4362d0;
+}
 
-  color: var(--gray-400);
+body {
+  --text-strong: var(--grayscale-black);
+  --text-bold: var(--grayscale-500);
+  --text-default: var(--grayscale-400);
+  --text-weak: var(--grayscale-200);
+  --text-white-default: var(--grayscale-white);
+  --text-white-weak: var(--grayscale-white-alt);
+  --text-point: var(--blue-500);
+
+  --surface-default: var(--grayscale-white);
+  --surface-alt: var(--grayscale-50);
+  --surface-brand-default: var(--blue-500);
+  --surface-brand-alt: var(--blue-100);
+
+  --border-bold: var(--grayscale-300);
+  --border-default: var(--grayscale-100);
+
+  color: var(--grayscale-400);
+  background-color: #fefefe;
+}
+
+body.dark {
+  --text-strong: var(--grayscale-white);
+  --text-bold: var(--grayscale-50);
+  --text-default: var(--grayscale-100);
+  --text-weak: var(--grayscale-white-alt);
+  --text-white-default: var(--grayscale-white);
+  --text-white-weak: var(--grayscale-white-alt);
+  --text-point: var(--blue-500);
+
+  --surface-default: var(--grayscale-black);
+  --surface-alt: var(--grayscale-500);
+  --surface-brand-default: var(--blue-500);
+  --surface-brand-alt: var(--blue-100);
+
+  --border-bold: var(--grayscale-white-alt);
+  --border-default: var(--grayscale-400);
+
+  color: var(--grayscale-100);
+  background-color: var(--surface-default);
 }
 
 #app {
   width: 100%;
   height: 100%;
-}
-
-h2 {
-  font-size: 24px;
-  font-weight: bold;
 }
 
 button {
