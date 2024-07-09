@@ -98,7 +98,7 @@ function applyDiffChildren(targetDom, childList)
 	// 기존 dom의 자식의 상대적인 위치를 변경합니다.
 	const newNodeNextMapArray = [...newNodeNextMap].reverse();
 	newNodeNextMapArray.forEach( ([uniqueKey, nextKey])=>{
-		if(oldNodeNextMap.get(uniqueKey) !== nextKey) {
+		if(oldNodeNextMap.get(uniqueKey) !== nextKey) {  
 			const nextNode = tempNodeKeyMap.get(nextKey) ?? null;
 			const currentNode = tempNodeKeyMap.get(uniqueKey);
 			targetDom.insertBefore(currentNode, nextNode);
