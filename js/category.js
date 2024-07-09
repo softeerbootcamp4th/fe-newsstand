@@ -27,7 +27,7 @@ export const createCategory = (data, dataType) => {
 
     checkCurDataType(dataType);
 
-    if(dataType === 'subscribe' && subscriptions.length === 0) {
+    if(dataType === 'subscribe' && data.length === 0) {
         const divElement = document.createElement('div');
         divElement.classList.add('category-item');
         parentDiv.appendChild(divElement);
@@ -90,7 +90,7 @@ export const loadCurrentCategoryNews = (dataType) => {
 
 }
 
-function displayInformation (){
+export const displayInformation = () => {
     document.querySelector('.news-container').classList.add('hidden');
     document.querySelector('.info').classList.remove('hidden');
 }

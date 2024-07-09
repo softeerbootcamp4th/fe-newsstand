@@ -1,5 +1,5 @@
-import { loadCurrentCategoryNews } from "./category.js";
-import { moveToSubscribeTab } from "./mainTab.js";
+import { createCategory, displayInformation, loadCurrentCategoryNews } from "./category.js";
+import { moveToSubscribeTab } from './mainTab.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     updateButton();
@@ -22,7 +22,9 @@ function handleModalBtnClick() {
 
         setSubscriptionList(subscriptor);
         updateButton();
-        moveToSubscribeTab();
+        createCategory(subscriptor, 'subscribe');
+        subscriptor.length === 0 ? displayInformation() : loadCurrentCategoryNews('subscribe');
+        
     });
 
     document.querySelector('.modal-cancle-btn').addEventListener('click', () => {
