@@ -166,6 +166,7 @@ button {
                     color: #879298;
                     text-align: center;
                     font-size: 12px;
+                    cursor: pointer;
                 }
 
             .content-body-wrapper {

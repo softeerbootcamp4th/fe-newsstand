@@ -1,6 +1,10 @@
 import { MEDIA_LIST, CATEGORY_TIMEOUT } from "../../pages/NewsPage.js";
 import { newsState } from "../../pages/state/newsState.js";
 import { menuInfo, menuCurrentPage, menuLastPage, menuIdx, categoryTimeoutId } from "../../pages/state/newsState.js";
+import { extractMedias } from "../../utils/api.js";
+
+let isMediaWhole = true;
+let isGrid = false;
 
 // 초기화 함수
 export const initArticleList = async () => {
@@ -19,37 +23,39 @@ export const createArticleList = (menuInfo) => {
         <div class="articleList-wrapper">
             <div class="article-header-wrapper flex-row-between">
                 <div class="media-wrapper inline-tag">
-                    <button class="btn mode-selection-btn mode-selection-btn-clicked">전체 언론사</button>
-                    <button class="btn mode-selection-btn">내가 구독한 언론사</button>
+                    <button class="btn whole-media-btn mode-selection-btn mode-selection-btn-clicked">전체 언론사</button>
+                    <button class="btn subscription-media-btn mode-selection-btn">내가 구독한 언론사</button>
                 </div>
                 <div class="icon-wrapper inline-tag flex-row-between">
-                    <button class="btn view-btn view-btn-clicked">
+                    <button class="btn list-btn view-btn view-btn-clicked">
                         <img src="/icons/list-view.png" alt="" width="24px" height="24px">
                     </button>
-                    <button class="btn view-btn">
+                    <button class="btn grid-btn view-btn">
                         <img src="/icons/grid-view.png" alt="" width="24px" height="24px">
                     </button>
                 </div>
             </div>
-            <div class="article-menu-wrapper">
-                ${createMenuList(menuInfo)}
-            </div>
-            <div class="article-wrapper">
-                <div class="article-selection-wrapper"></div>
-                <div class="article-content-wrapper">
-                    <div class="content-header-wrapper flex-row">
-                        <img class="media-img" src="" alt="">
-                        <h4 class="updated-date-tag" style="font-size: 12px; font-weight: 400;"> 편집</h4>
-                        <button class="subscribe-btn btn">+ 구독하기</button>
-                    </div>
-                    <div class="content-body-wrapper flex-row-between">
-                        <aside class="thumbnail-part">
-                            <img class="thumbnail-img" src="" alt="" width="320px" height="200px">
-                            <p class="thumbnail-detail">ABC</p>
-                        </aside>
-                        <ul class="article-li-part flex-col-between">
-                            <p class="li-part-info"></p>
-                        </ul>
+            <div class="article-body-wrapper">
+                <div class="article-menu-wrapper">
+                    ${createMenuList(menuInfo)}
+                </div>
+                <div class="article-wrapper">
+                    <div class="article-selection-wrapper"></div>
+                    <div class="article-content-wrapper">
+                        <div class="content-header-wrapper flex-row">
+                            <img class="media-img" src="" alt="">
+                            <h4 class="updated-date-tag" style="font-size: 12px; font-weight: 400;"> 편집</h4>
+                            <button class="subscribe-btn btn">+ 구독하기</button>
+                        </div>
+                        <div class="content-body-wrapper flex-row-between">
+                            <aside class="thumbnail-part">
+                                <img class="thumbnail-img" src="" alt="" width="320px" height="200px">
+                                <p class="thumbnail-detail">ABC</p>
+                            </aside>
+                            <ul class="article-li-part flex-col-between">
+                                <p class="li-part-info"></p>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,9 +83,27 @@ const createArticleLiPart = (articleData) => {
 
 // 이벤트 리스너 추가 함수
 const addEventListeners = () => {
+    document.querySelector('.whole-media-btn').addEventListener('click', () => {
+        isMediaWhole = true;
+    })
+    document.querySelector('.subscription-media-btn').addEventListener('click', () => {
+        isMediaWhole = false;
+    })
+    document.querySelector('.list-btn').addEventListener('click', () => {
+        isGrid = false;
+    })
+    document.querySelector('.grid-btn').addEventListener('click', () => {
+        isGrid = true;
+    })
+    
+
     addModeSelectionEventListener();
     addViewSelectionEventListener();
     addCategorySelectionEventListener();
+    addSubscriptionEventListener();
+    addSubscriptionGridBtnEventListener();
+    addWholeGridEventListener();
+    addWholeListBtnEventListener();
 }
 
 const addModeSelectionEventListener = () => {
@@ -112,14 +136,143 @@ const addCategorySelectionEventListener = () => {
         }
     });
 }
+ 
+const addSubscriptionEventListener = () => {
+    document.querySelector('.subscribe-btn').addEventListener('click', () => {
+        localStorage.setItem(menuInfo[menuIdx].mediaData[menuCurrentPage-1].mediaName, true)
+        alert('구독')
+        // alert 띄우고 없애는 이벤트
+    })
+}
+
+const addWholeListBtnEventListener = () => {
+    document.querySelector('.whole-media-btn').addEventListener('click', () => {
+        if (!isGrid && isMediaWhole) {
+            document.querySelector('.article-body-wrapper').innerHTML = createArticleList(menuInfo);
+            document.querySelectorAll('.article-header-wrapper')[1].remove();
+            initArticleList();
+        }
+    })
+    document.querySelector('.list-btn').addEventListener('click', () => {
+        if (!isGrid && isMediaWhole) {
+            document.querySelector('.article-body-wrapper').innerHTML = createArticleList(menuInfo);
+            document.querySelectorAll('.article-header-wrapper')[1].remove();
+            initArticleList();
+        }
+    })
+}
+
+const addSubscriptionGridBtnEventListener = () => {
+    document.querySelector('.subscription-media-btn').addEventListener('click', () => {
+        console.log(isGrid, isMediaWhole)
+        if (isGrid && !isMediaWhole) {
+            const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+            
+            // Generate grid items from the subList
+            const gridItems = subList.map(mediaName => `
+                <div class="grid-item">
+                    <img src="/images/logos/${mediaName}.png" height="20px" />
+                </div>
+            `).join('');
+            
+            // Add remaining empty grid items to complete the 24 items (if necessary)
+            const totalGridItems = 24;
+            const emptyGridItemsCount = totalGridItems - subList.length;
+            const emptyGridItems = new Array(emptyGridItemsCount).fill('<div class="grid-item"></div>').join('');
+    
+            document.querySelector('.article-body-wrapper').innerHTML = `
+                <div class="grid-container">
+                    ${gridItems}
+                    ${emptyGridItems}
+                </div>
+            `;
+        }
+    });
+    document.querySelector('.grid-btn').addEventListener('click', () => {
+        console.log(isGrid, isMediaWhole)
+        if (isGrid && !isMediaWhole) {
+            const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+            
+            // Generate grid items from the subList
+            const gridItems = subList.map(mediaName => `
+                <div class="grid-item">
+                    <img src="/images/logos/${mediaName}.png" height="20px" />
+                </div>
+            `).join('');
+            
+            // Add remaining empty grid items to complete the 24 items (if necessary)
+            const totalGridItems = 24;
+            const emptyGridItemsCount = totalGridItems - subList.length;
+            const emptyGridItems = new Array(emptyGridItemsCount).fill('<div class="grid-item"></div>').join('');
+    
+            document.querySelector('.article-body-wrapper').innerHTML = `
+                <div class="grid-container">
+                    ${gridItems}
+                    ${emptyGridItems}
+                </div>
+            `;
+        }
+    });
+}
+
+const addWholeGridEventListener = () => {
+    document.querySelector('.whole-media-btn').addEventListener('click', () => {
+        if (isGrid && isMediaWhole) {
+            const subList = extractMedias(menuInfo);
+            
+            // Generate grid items from the subList
+            const gridItems = subList.map(mediaName => `
+                <div class="grid-item">
+                    <img src="/images/logos/${mediaName}.png" height="20px" />
+                </div>
+            `).join('');
+            
+            // Add remaining empty grid items to complete the 24 items (if necessary)
+            const totalGridItems = 24;
+            const emptyGridItemsCount = totalGridItems - subList.length;
+            const emptyGridItems = new Array(emptyGridItemsCount).fill('<div class="grid-item"></div>').join('');
+    
+            document.querySelector('.article-body-wrapper').innerHTML = `
+                <div class="grid-container">
+                    ${gridItems}
+                    ${emptyGridItems}
+                </div>
+            `;
+        }
+    });
+    document.querySelector('.grid-btn').addEventListener('click', () => {
+        if (isGrid && isMediaWhole) {
+            const subList = extractMedias(menuInfo);
+            
+            // Generate grid items from the subList
+            const gridItems = subList.map(mediaName => `
+                <div class="grid-item">
+                    <img src="/images/logos/${mediaName}.png" height="20px" />
+                </div>
+            `).join('');
+            
+            // Add remaining empty grid items to complete the 24 items (if necessary)
+            const totalGridItems = 24;
+            const emptyGridItemsCount = totalGridItems - subList.length;
+            const emptyGridItems = new Array(emptyGridItemsCount).fill('<div class="grid-item"></div>').join('');
+    
+            document.querySelector('.article-body-wrapper').innerHTML = `
+                <div class="grid-container">
+                    ${gridItems}
+                    ${emptyGridItems}
+                </div>
+            `;
+        }
+    });
+}
 
 // 콘텐츠 삽입 함수
 const insertContent = (menuIdx, menuCurrentPage, menuLastPage) => {
-    const nowInfo = menuInfo[menuIdx].thumbnailDatas[menuCurrentPage - 1];
+    const nowInfo = menuInfo[menuIdx].mediaData[menuCurrentPage - 1];
     
     document.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
-    document.querySelector('.media-img').src = `/images/logos/${nowInfo.thumbnailMediaName}.png`;
-    document.querySelector('.updated-date-tag').innerText = `${nowInfo.thumbnailUpdatedDate} 편집`;
+    document.querySelector('.media-img').src = `/images/logos/${nowInfo.mediaName}.png`;
+    document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
     document.querySelector('.thumbnail-img').src = `/images/logos/${MEDIA_LIST[menuCurrentPage]}.png`;
     document.querySelector('.thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
     document.querySelector('.article-li-part').innerHTML = `

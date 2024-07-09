@@ -30,7 +30,7 @@
 
 
 /* rolling */
-.left-rolling-banner {
+.rolling-banner {
     position: relative;
     width: 380px;
     height: 32px;
@@ -41,13 +41,14 @@
     border-radius: 16px;
 }
 /* 타이틀 */
-.left-rolling-banner > .title{
+.rolling-banner > .title{
     font-weight: bold;
     float: left;
     padding-right: 10px;
+    color: #14212B;
 }
 /* 롤링 배너 */
-.left-rolling-banner > .wrap{
+.rolling-banner > .wrap{
     position: relative;
     width: auto;
     height: 100%;
@@ -57,78 +58,24 @@
 .rolling ul{
     list-style: none;
 }
-.left-rolling-banner li{
+.rolling-banner li{
     position: absolute;
     top: -36px;
     left: 0;
 }
 /* 이전, 현재, 다음 롤링 배너 표시 */
-.left-rolling-banner li.prev{
+.rolling-banner li.prev{
     top: -36px;
     transition: top 0.5s ease;
 }
-.left-rolling-banner li.current{
+.rolling-banner li.current{
     top: 0;
     transition: top 0.5s ease;
 }
-.left-rolling-banner li.next{
+.rolling-banner li.next{
     top: 36px;
 }
-.left-rolling-banner li a{
-    display: block;
-    display: -webkit-box;
-    text-decoration: none;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient:vertical;
-    overflow: hidden;
-    color: #000;
-}
-
-.right-rolling-banner {
-    position: relative;
-    width: 380px;
-    height: 32px;
-    font-size: .875rem;
-    letter-spacing: -1px;
-    padding: 7px 15px;
-    box-sizing: border-box;
-    border-radius: 16px;
-}
-/* 타이틀 */
-.right-rolling-banner > .title{
-    font-weight: bold;
-    float: left;
-    padding-right: 10px;
-}
-/* 롤링 배너 */
-.right-rolling-banner > .wrap{
-    position: relative;
-    width: auto;
-    height: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-}        
-.rolling ul{
-    list-style: none;
-}
-.right-rolling-banner li{
-    position: absolute;
-    top: -36px;
-    left: 0;
-}
-/* 이전, 현재, 다음 롤링 배너 표시 */
-.right-rolling-banner li.prev{
-    top: -36px;
-    transition: top 0.5s ease;
-}
-.right-rolling-banner li.current{
-    top: 0;
-    transition: top 0.5s ease;
-}
-.right-rolling-banner li.next{
-    top: 36px;
-}
-.right-rolling-banner a{
+.rolling-banner li a{
     display: block;
     display: -webkit-box;
     text-decoration: none;
