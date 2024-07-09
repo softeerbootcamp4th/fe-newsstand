@@ -1,10 +1,12 @@
 import { AppHeader } from "./components/AppHeader";
-import { Medias } from "./components/Medias/Medias";
-import { Div } from "./libs/Elements";
+import { CurrentNews } from "./components/CurrentNews";
+import { cc } from "./libs/components";
+import { ce, Div } from "./libs/elements";
 import styles from "./App.module.css";
+import { MediaContent } from "./components/MediaContent";
 export const App = () => {
-  return Div({
+  return ce(Div, {
     className: styles.container,
-    children: [AppHeader(), Medias()],
+    children: [cc(AppHeader, {}), cc(CurrentNews, {}), cc(MediaContent, {})],
   });
 };

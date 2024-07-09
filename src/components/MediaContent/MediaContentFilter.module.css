@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.nav {
+  cursor: pointer;
+
+}
+
+.active {
+  color: var(--text-text-strong, #14212B);
+}
+
+.inactive {
+  color: var(--text-text-weak, #879298);
+}

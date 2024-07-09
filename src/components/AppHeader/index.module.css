@@ -1,5 +1,19 @@
 .container {
   display: flex;
-  flex-direction: column;
-  gap: 40px;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.sub-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.date {
+  color: var(--text-text-default, #5F6E76);
+
 }

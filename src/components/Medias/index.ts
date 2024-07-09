@@ -1,1 +1,0 @@
-export { Medias } from "./Medias";

@@ -1,14 +1,15 @@
+import { sleep } from "@/utils/sleep";
 import { RecentNews } from "../models/News";
 
-// TODO change file name
 interface GetRecentNewsProps {
   from: number;
   limit?: number;
 }
-export const getRecentNews = ({
+export const getRecentNews = async ({
   from,
   limit = 2,
-}: GetRecentNewsProps): RecentNews => {
+}: GetRecentNewsProps): Promise<RecentNews> => {
+  await sleep();
   return {
     mediaId: 1,
     news: {
