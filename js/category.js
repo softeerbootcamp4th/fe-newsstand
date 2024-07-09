@@ -74,7 +74,7 @@ export const loadCurrentCategoryNews = (dataType) => {
         })
         .then(data => {
             newsData = data;
-            dataType === 'subscribe' && subscriptions.length === 0 ? displayInformation() :displayNews(dataType);
+            dataType === 'subscribe' && subscriptions.length === 0 ? showInformation() :displayNews(dataType);
             updateBtnVisibility();
             updateCategoryDisplay();
             startProgressBar(); // 첫 데이터 로드 후 프로그래스바 시작
@@ -83,7 +83,7 @@ export const loadCurrentCategoryNews = (dataType) => {
             console.error(error);
         });
     } else {
-        dataType === 'subscribe' && subscriptions.length === 0 ? displayInformation() :displayNews(dataType);
+        dataType === 'subscribe' && subscriptions.length === 0 ? showInformation() :displayNews(dataType);
         updateBtnVisibility();
         updateCategoryDisplay();
         startProgressBar(); // 데이터 갱신 후 프로그래스바 시작
