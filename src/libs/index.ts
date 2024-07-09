@@ -6,6 +6,7 @@ import {
   RenderingAppComponent,
   RenderingAppElement,
   isCreatedAppComponent,
+  isRenderingAppComponent,
 } from "./renderer";
 import { isPropsEqual } from "./utils";
 
@@ -137,7 +138,9 @@ export const render = () =>
   requestAnimationFrame(() => {
     const shadowRoot = createShadowRoot();
     preRender();
-    const renderQueue = new Deque<RenderingAppComponent>();
+    const renderQueue = new Deque<
+      RenderingAppComponent | RenderingAppElement
+    >();
     renderQueue.pushBack({
       render: initComponent!,
       props: {},
@@ -146,69 +149,71 @@ export const render = () =>
       key: "App",
     });
     while (renderQueue.length) {
-      const { render: component, props, parent, key } = renderQueue.popFront()!;
-      currentKey = key;
-      const renderElementQueue = new Deque<RenderingAppElement>();
-      const createdComponent = component(props);
-
-      if (isCreatedAppComponent(createdComponent)) {
+      const cur = renderQueue.popFront()!;
+      if (isRenderingAppComponent(cur)) {
+        const { render: component, props, parent, key } = cur;
+        currentKey = key;
+        const createdComponent = component(props);
+        if (isCreatedAppComponent(createdComponent)) {
+          renderQueue.pushBack({
+            render: createdComponent.render,
+            props: createdComponent.props,
+            parent,
+            renderName: createdComponent.renderName,
+            key: key,
+          });
+          continue;
+        }
         renderQueue.pushFront({
-          render: createdComponent.render,
-          props: createdComponent.props,
+          ...createdComponent,
+          parentKey: key,
+          componentKey: key,
           parent,
-          renderName: createdComponent.renderName,
-          key,
         });
         continue;
       }
-      renderElementQueue.pushBack({
-        ...createdComponent,
-        key,
+      const {
+        element,
         parent,
-      });
-
-      while (renderElementQueue.length) {
-        const {
-          element,
-          parent,
-          eventListeners,
-          children,
-          key: parentKey,
-        } = renderElementQueue.popFront()!;
-        if (element == null) {
-          continue;
-        }
-        const idx = parent.children.length;
-        const currentKey = parentKey + `_${element.tagName}[${idx}]`;
-        element.setAttribute("key", currentKey);
-        parent.appendChild(element);
-        eventMap.set(currentKey, eventListeners);
-        (children ?? []).forEach((child, index) => {
-          if (typeof child === "string" || typeof child === "number") {
-            element.appendChild(document.createTextNode(child.toString()));
-            return;
-          }
-          if (child === false || child == null) {
-            return;
-          }
-
-          if (isCreatedAppComponent(child)) {
-            renderQueue.pushBack({
-              render: child.render,
-              props: child.props,
-              renderName: child.renderName,
-              parent: element,
-              key: `${key}-${child.renderName}[${index}]`,
-            });
-            return;
-          }
-          renderElementQueue.pushBack({
-            ...(child as CreatedAppElement),
-            key: currentKey,
-            parent: element,
-          });
-        });
+        eventListeners,
+        children,
+        parentKey,
+        componentKey,
+      } = cur;
+      if (element == null) {
+        continue;
       }
+      const idx = parent.children.length;
+      const curKey = parentKey + `_${element.tagName}[${idx}]`;
+      element.setAttribute("key", curKey);
+      parent.appendChild(element);
+      eventMap.set(curKey, eventListeners);
+      (children ?? []).forEach((child, index) => {
+        if (typeof child === "string" || typeof child === "number") {
+          element.appendChild(document.createTextNode(child.toString()));
+          return;
+        }
+        if (child === false || child == null) {
+          return;
+        }
+
+        if (isCreatedAppComponent(child)) {
+          renderQueue.pushBack({
+            render: child.render,
+            props: child.props,
+            renderName: child.renderName,
+            parent: element,
+            key: `${componentKey}-${child.renderName}[${index}]`,
+          });
+          return;
+        }
+        renderQueue.pushBack({
+          ...(child as CreatedAppElement),
+          parentKey: currentKey,
+          componentKey: componentKey,
+          parent: element,
+        });
+      });
     }
     diffingRender(_root!, shadowRoot);
   });

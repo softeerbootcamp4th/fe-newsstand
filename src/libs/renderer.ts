@@ -32,7 +32,8 @@ export type CreatedAppElement<T extends HTMLElement = HTMLElement> = {
 
 export type RenderingAppElement<T extends HTMLElement = HTMLElement> =
   CreatedAppElement<T> & {
-    key: string;
+    parentKey: string;
+    componentKey: string;
     parent: HTMLElement;
   };
 
@@ -60,4 +61,10 @@ export const isAppElement = (
   app: AppComponent | AppElement,
 ): app is AppElement => {
   return (app as AppElement).type === "element";
+};
+
+export const isRenderingAppComponent = (
+  created: RenderingAppComponent | RenderingAppElement,
+): created is RenderingAppComponent => {
+  return (created as RenderingAppComponent).render != null;
 };
