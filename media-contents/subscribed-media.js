@@ -1,6 +1,7 @@
 import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
 import { getItem } from "../utils/local-storage.js";
+import { DATA_COUNT_PER_GRID, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
 import { 
     getSelectedCategoryItemDOMString,
     getUnselectedCategoryItemDOMString,
@@ -10,9 +11,6 @@ import {
     getGridMediaItem,
     clickGridItem,
 } from "./util.js";
-
-const DEFAULT_MEDIA_INDEX = 0;
-const DEFAULT_PAGE = 0;
 
 let mediaData = {};
 let mediaListData = {};
@@ -41,6 +39,13 @@ export async function renderSubscribedMedia() {
         renderGridMedia(DEFAULT_PAGE);
     }
 
+    setClickEvent();
+}
+
+/**
+ * @description 클릭 이벤트를 붙여주는 함수
+ */
+function setClickEvent() {
     /**
      * prev, next 버튼 클릭 시 언론사 이동 이벤트
      */
@@ -54,7 +59,7 @@ export async function renderSubscribedMedia() {
      * 그리드 목록 클릭 이벤트
      */
     const gridListDOM = document.querySelector(".media-contents__grid-list");   
-    gridListDOM.addEventListener("click", clickGridList);    
+    gridListDOM.addEventListener("click", clickGridList);
 }
 
 /**
@@ -89,7 +94,6 @@ export function resetSubscribedMedia() {
     nextMediaButton.removeEventListener("click", navigateNextMedia);
 }
 
-
 /**
  * @description 내가 구독한 언론사를 그리드 형식으로 렌더링하는 함수
  */
@@ -100,7 +104,7 @@ function renderGridMedia(page) {
     const media = subscribeIdList.map((subscribedId) => mediaListData.data.find((_media) => _media.id === subscribedId));
 
     let mediaListDOMString = '';
-    media.slice(page * 24, (page + 1) * 24).forEach((_media) => {
+    media.slice(page * DATA_COUNT_PER_GRID, (page + 1) * DATA_COUNT_PER_GRID).forEach((_media) => {
         mediaListDOMString += getGridMediaItem(_media);
     });
 
@@ -253,12 +257,15 @@ function clickGridNavigationButton(step) {
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const media = subscribeIdList.map((subscribedId) => mediaListData.data.find((_media) => _media.id === subscribedId));
     const mediaLength = media.length;
-    const nextPage = getBoundNumber(currentPage + step, 0, Math.floor((mediaLength - 1) / 24));
+    const nextPage = getBoundNumber(currentPage + step, 0, Math.floor((mediaLength - 1) / DATA_COUNT_PER_GRID));
 
     gridBoxDOM.dataset.gridPage = nextPage;
     renderGridMedia(nextPage);
 }
 
+/**
+ * @description 그리드 클릭 이벤트 리스너
+ */
 function clickGridList(e) {
     const displayMode = getDisplayMode();
 
