@@ -1,39 +1,53 @@
+// newsList.js
 import PressCategoryContainer from './pressCategory/pressCategory.js';
 import PressInfoContainer from './pressInfo/pressInfo.js';
 import PressNewsContainer from './pressNews/pressNews.js';
-
 import { separateId } from '../../utils/utils.js';
 
 export const NewsList = (props) => {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
     element.className = 'news-container';
 
     const { tabs } = props;
-
-    let timerIntervalRef = { current: null };
+    let timerIntervalRef = null;
     let selectedCategoryIndex = 0;
     let selectedPressIndex = 0;
-    let lastSelectedCategoryIndex = null;
-    let pressCategoryContainer;
+
+    function updateTabs() {
+        tabs.forEach((tab, index) => {
+            if (index === selectedCategoryIndex) {
+                tab.selectedIndex = selectedPressIndex;
+                tab.selectedCount = selectedPressIndex + 1;
+            } else {
+                delete tab.selectedIndex;
+                delete tab.selectedCount;
+            }
+        });
+    }
+
+    function startTimer() {
+        if (timerIntervalRef) {
+            clearInterval(timerIntervalRef);
+        }
+        timerIntervalRef = setInterval(() => {
+            changeToNextPress();
+        }, 20000);
+    }
 
     function render() {
-        const html = `
+        updateTabs();
+
+        element.innerHTML = `
             <img id="left-arrow" class="arrow-button" src="../../assets/icons/left-arrow-button.svg" alt="left arrow icon">
             <div class="news-content-container"></div>
             <img id="right-arrow" class="arrow-button" src="../../assets/icons/right-arrow-button.svg" alt="right arrow icon">
         `;
 
-        element.innerHTML = html;
-
         const newsContentContainer = element.querySelector('.news-content-container');
 
-        pressCategoryContainer = PressCategoryContainer({
+        const pressCategoryContainer = PressCategoryContainer({
             tabs,
-            timerIntervalRef,
-            selectedId: `press-category-${selectedCategoryIndex}`,
-            selectedPressIndex: selectedPressIndex,
-            onChangeCategory: handleChangeCategory,
-            onChangePress: handleChangePress
+            onChangeCategory: handleChangeCategoryByClick
         });
 
         const pressInfoContainer = PressInfoContainer({
@@ -62,93 +76,64 @@ export const NewsList = (props) => {
         newsContentContainer.appendChild(pressNewsContainer.element);
 
         addEventListenerToArrowButton();
-
-        lastSelectedCategoryIndex = selectedCategoryIndex;
+        startTimer();
     }
 
-    function handleChangeCategory(newSelectedId) {
-        if (newSelectedId !== `press-category-${selectedCategoryIndex}`) {
-            selectedCategoryIndex = separateId(newSelectedId);
-            render();
-        }
+    function handleChangeCategoryByClick(index) {
+        selectedCategoryIndex = index;
+        selectedPressIndex = 0;
+        render();
     }
 
-    function handleChangePress(newSelectedId) { 
-        if (selectedPressIndex !== newSelectedId) {
-            selectedPressIndex = newSelectedId;
-            render();
-        }
-    }
-
-    function addEventListenerToArrowButton() {
-        const buttons = element.querySelectorAll('.arrow-button');
-
-        buttons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                changePressCategory(event);
-                pressCategoryContainer.setTimer(); // 화살표 버튼 클릭 시 타이머 초기화
-            });
-        });
-    }
-
-    function changePressCategory(event) {
-        switch (event.target.id) {
-            case "left-arrow":
-                changeToPrevPress();
-                break;
-            case "right-arrow":
-                changeToNextPress();
-                break;
-            default:
-                break;
-        }
-
-        if (timerIntervalRef.current) {
-            console.log("clearTimer", timerIntervalRef.current);
-            clearInterval(timerIntervalRef.current);
-        }
-    }
-    
     function changeToNextPress() {
         selectedPressIndex += 1;
-
         if (selectedPressIndex >= tabs[selectedCategoryIndex].tabDataCount) {
             selectedPressIndex = 0;
             changeToNextCategory();
+        } else {
+            render();
         }
-
-        render();
     }
-    
+
     function changeToPrevPress() {
         selectedPressIndex -= 1;
-
         if (selectedPressIndex < 0) {
-            selectedPressIndex = 0;
+            selectedPressIndex = tabs[selectedCategoryIndex].tabDataCount - 1;
             changeToPrevCategory();
+        } else {
+            render();
         }
-
-        render();
     }
-    
+
     function changeToNextCategory() {
         selectedCategoryIndex += 1;
-
         if (selectedCategoryIndex >= tabs.length) {
             selectedCategoryIndex = 0;
         }
-
+        selectedPressIndex = 0;
         render();
     }
 
     function changeToPrevCategory() {
         selectedCategoryIndex -= 1;
-
         if (selectedCategoryIndex < 0) {
             selectedCategoryIndex = tabs.length - 1;
         }
-
+        selectedPressIndex = 0;
         render();
+    }
+
+    function addEventListenerToArrowButton() {
+        const buttons = element.querySelectorAll('.arrow-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                if (event.target.id === "left-arrow") {
+                    changeToPrevPress();
+                } else if (event.target.id === "right-arrow") {
+                    changeToNextPress();
+                }
+            });
+        });
     }
 
     render();
