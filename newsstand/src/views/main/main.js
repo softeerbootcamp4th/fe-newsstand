@@ -91,7 +91,8 @@ export const Main = () => {
                           sourceLogo: data.sourceLogo,
                           newsDate: data.newsDate,
                           subscribe: 'Y',
-                          mainNews: data.mainNews // Assuming mainNews is an object
+                          mainNews: data.mainNews,
+                          subNews: data.subNews
                       }]
                   };
                   newTabs.push(newTab);
