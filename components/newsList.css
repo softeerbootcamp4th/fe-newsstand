@@ -5,6 +5,11 @@
 
 .newsList li {
   margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.newsList :hover {
+  text-decoration: underline;
 }
 
 .newsList_footer {
