@@ -24,7 +24,7 @@ export function createTabItem({ innerText, children, isSelected }) {
   button.innerHTML = `<p>${innerText}</p>`;
 
   if (isSelected) {
-    button.insertAdjacentHTML("beforeend", children);
+    button.insertAdjacentHTML("beforeend", `<p>${children}</p>`);
     startProgressBar(button);
   }
 

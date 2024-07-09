@@ -16,9 +16,7 @@ export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDa
       const categoryElement = createTabItem({
         innerText: category,
         isSelected: categoryIndex === currentCategoryIndex,
-        children: `<p>${currentCompanyIndex + 1}/${
-          data[currentCategoryIndex].companies.length
-        }</p>`,
+        children: `${currentCompanyIndex + 1}/${data[currentCategoryIndex].companies.length}`,
       });
       categoryElement.addEventListener("click", () => updateCompanyType(categoryIndex));
       categories.appendChild(categoryElement);
