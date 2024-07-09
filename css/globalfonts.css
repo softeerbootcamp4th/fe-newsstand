@@ -1,0 +1,18 @@
+:root {
+    --grayscale-white-alt: rgba(255, 255, 255, 0.7);
+    --grayscale-white: #FFFFFF;
+    --grayscale-50: #F5F7F9;
+    --grayscale-100: #D2DAE0;
+    --grayscale-200: #879298;
+    --grayscale-300: #6E8091;
+    --grayscale-400: #5F6E76;
+    --grayscale-500: #4B5966;
+    --grayscale-black: #14212B;
+    --blue-100: #7890E7;
+    --blue-500: #4362D0;
+
+    --surface-alt: #F5F7F9;
+    --border-default: #D2DAE0;
+    --surface-brand-alt: #7890E7;
+    --surface-brand-default: #4362D0;
+}
