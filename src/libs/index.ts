@@ -15,10 +15,12 @@ import { isPropsEqual } from "./utils";
 let currentKey: string = "";
 let initComponent: AppComponent | null = null;
 let _root: HTMLElement | null = null;
+let isRendering = false;
+const updateQueue = new Deque<() => void>();
 const statesMap = new Map<string, Array<unknown>>();
 const stateIdxMap = new Map<string, number>();
 const effectCleanupsMap = new Map<string, Array<() => void>>();
-const effectDepsMap = new Map<string, Array<unknown>>();
+const effectDepsMap = new Map<string, Array<Array<unknown> | null>>();
 const effectIdxMap = new Map<string, number>();
 
 export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
@@ -76,19 +78,29 @@ export const useEffect = (
   effect: () => void | (() => void),
   deps?: Array<unknown>,
 ) => {
-  const currentDeps = deps ?? [];
-  const prevDeps = effectDepsMap.get(currentKey);
+  const currentDeps = deps ?? null;
+
   if (!effectIdxMap.has(currentKey)) {
     effectIdxMap.set(currentKey, 0);
   }
   if (!effectCleanupsMap.has(currentKey)) {
     effectCleanupsMap.set(currentKey, []);
   }
+  if (!effectDepsMap.has(currentKey)) {
+    effectDepsMap.set(currentKey, []);
+  }
+  const effectDeps = effectDepsMap.get(currentKey)!;
   const effectsCleanups = effectCleanupsMap.get(currentKey)!;
   const effectIdx = effectIdxMap.get(currentKey)!;
-  if (isPropsEqual(prevDeps, currentDeps)) {
+  if (effectDeps.length <= effectIdx) {
+    effectDeps.push(null);
+  }
+  const prevDeps = effectDeps[effectIdx];
+  if (currentDeps != null && isPropsEqual(prevDeps, currentDeps)) {
+    effectIdxMap.set(currentKey, effectIdx + 1);
     return;
   }
+  effectDeps[effectIdx] = currentDeps;
   const cleanup = effect();
 
   if (effectIdx >= effectsCleanups.length) {
@@ -101,7 +113,6 @@ export const useEffect = (
       effectsCleanups[effectIdx] = cleanup;
     }
   }
-  effectDepsMap.set(currentKey, currentDeps);
 
   effectIdxMap.set(currentKey, effectIdx + 1);
 };
@@ -120,6 +131,11 @@ export const useState = <T>(initialState: T) => {
   }
   const state = states[stateIdx];
   const setState = (newState: T) => {
+    if (isRendering) {
+      updateQueue.pushBack(() => {
+        states[stateIdx] = newState;
+      });
+    }
     states[stateIdx] = newState;
     render();
   };
@@ -136,6 +152,17 @@ const createShadowRoot = () => {
 const preRender = () => {
   stateIdxMap.clear();
   effectIdxMap.clear();
+};
+
+const afterRender = () => {
+  isRendering = false;
+  if (updateQueue.length == 0) {
+    return;
+  }
+  while (updateQueue.length) {
+    updateQueue.popFront()!();
+  }
+  render();
 };
 export const render = () =>
   requestAnimationFrame(() => {
@@ -240,7 +267,9 @@ export const render = () =>
         });
       });
     }
+    isRendering = true;
     diffingRender(_root!, shadowRoot);
+    afterRender();
   });
 
 export const init = (app: AppComponent, root: HTMLElement) => {

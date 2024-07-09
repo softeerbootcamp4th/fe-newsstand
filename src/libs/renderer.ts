@@ -38,13 +38,21 @@ export type RenderingAppElement<T extends HTMLElement = HTMLElement> =
   };
 
 export interface CreatedAppComponent<P = object> {
-  render: (props: P) => CreatedAppComponent<P> | CreatedAppElement;
+  render: (
+    props: P,
+  ) =>
+    | CreatedAppComponent<P>
+    | CreatedAppElement
+    | string
+    | number
+    | false
+    | null;
   props: P;
   renderName: string;
 }
 export type AppComponent<P = object> = AppRender<
   P,
-  CreatedAppComponent<P> | CreatedAppElement
+  CreatedAppComponent<P> | CreatedAppElement | string | number | false | null
 >;
 export type RenderingAppComponent<P = object> = CreatedAppComponent<P> & {
   key: string;
