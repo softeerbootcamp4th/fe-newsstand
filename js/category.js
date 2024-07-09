@@ -27,6 +27,13 @@ export const createCategory = (data, dataType) => {
 
     checkCurDataType(dataType);
 
+    if(dataType === 'subscribe' && subscriptions.length === 0) {
+        const divElement = document.createElement('div');
+        divElement.classList.add('category-item');
+        parentDiv.appendChild(divElement);
+
+    }
+
     // 카테고리 아이템 생성 및 추가
     data?.forEach((cat, idx) => {
         const divElement = document.createElement('div');
@@ -65,7 +72,8 @@ export const loadCurrentCategoryNews = (dataType) => {
         })
         .then(data => {
             newsData = data;
-            displayNews(dataType);
+            console.log(curCategoryIdx);
+            dataType === 'subscribe' && subscriptions.length === 0 ? displayInformation() :displayNews(dataType);
             updateBtnVisibility();
             updateCategoryDisplay();
             startProgressBar(); // 첫 데이터 로드 후 프로그래스바 시작
@@ -79,13 +87,24 @@ export const loadCurrentCategoryNews = (dataType) => {
         updateCategoryDisplay();
         startProgressBar(); // 데이터 갱신 후 프로그래스바 시작
     }
+
 }
 
+function displayInformation (){
+    document.querySelector('.news-container').classList.add('hidden');
+    document.querySelector('.info').classList.remove('hidden');
+}
+;
 /* 현재 카테고리의 뉴스 정보로 div 생성하는 함수 */
 function displayNews(dataType) {
 
     subscriptions = getSubscriptionList().reverse();
 
+    document.querySelector('.news-container').classList.remove('hidden');
+    document.querySelector('.info').classList.add('hidden');
+
+
+    
     const mainNewsDiv = document.querySelector('.main-news');
     const subNewsDiv = document.querySelector('.sub-news');
 
