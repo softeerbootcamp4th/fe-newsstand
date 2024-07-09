@@ -1,9 +1,3 @@
-import { 
-    REMOVE_MEDIA_CATEGORY,
-    REMOVE_MEDIA_ARROW,
-    removeTotalCategoryEvent,
-    removeTotalArrowEvent
-} from "../utils/events.js";
 import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
 import { getItem } from "../utils/local-storage.js";
@@ -52,16 +46,30 @@ export async function renderSubscribedMedia() {
     const prevMediaButton = document.querySelector(".media-contents__left-button");
     const nextMediaButton = document.querySelector(".media-contents__right-button");
 
-    function resetNavigationButton() {
-        prevMediaButton.removeEventListener("click", navigatePrevMedia);
-        nextMediaButton.removeEventListener("click", navigateNextMedia);
-    }
-    document.addEventListener(REMOVE_MEDIA_ARROW, resetNavigationButton);
-    document.dispatchEvent(removeTotalArrowEvent);
-
     prevMediaButton.addEventListener("click", navigatePrevMedia);
     nextMediaButton.addEventListener("click", navigateNextMedia);
 }
+
+/**
+ * @description 내가 구독한 언론사 화면이 사라질 때 관련 작업을 초기화해주는 함수
+ */
+export function resetSubscribedMedia() {
+    /**
+     * 미디어 카테고리 이벤트 초기화
+     */
+    const mediaListDOM = document.querySelector(".media-contents__category-list");
+    mediaListDOM.removeEventListener('click', clickMediaList);
+
+    /**
+     * 화살표 이벤트 초기화
+     */
+    const prevMediaButton = document.querySelector(".media-contents__left-button");
+    const nextMediaButton = document.querySelector(".media-contents__right-button");
+
+    prevMediaButton.removeEventListener("click", navigatePrevMedia);
+    nextMediaButton.removeEventListener("click", navigateNextMedia);
+}
+
 
 /**
  * @description 내가 구독한 언론사를 그리드 형식으로 렌더링하는 함수
@@ -123,13 +131,6 @@ function renderListMedia(mediaId) {
     mediaListDOM.innerHTML = mediaListDOMString;
     const progressAnimationDOM = document.querySelector(".media-contents__category-item-background");
     progressAnimationDOM.addEventListener("animationiteration", navigateNextMedia);
-
-    /**
-     * 카테고리 이벤트 초기화 후 이벤트 리스너 등록
-     */
-    document.addEventListener(REMOVE_MEDIA_CATEGORY, () => mediaListDOM.removeEventListener('click', clickMediaList))
-    document.dispatchEvent(removeTotalCategoryEvent);
-    mediaListDOM.addEventListener('click', clickMediaList);
 
     /**
      * 선택된 카테고리의 콘텐츠 렌더링

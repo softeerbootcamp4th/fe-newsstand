@@ -1,9 +1,3 @@
-import {
-    REMOVE_TOTAL_ARROW,
-    REMOVE_TOTAL_CATEGORY,
-    removeMediaCategoryEvent,
-    removeMediaArrowEvent
-} from "../utils/events.js";
 import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
 import { 
@@ -13,6 +7,7 @@ import {
     setSubscribeButtonEvent,
     getDisplayMode,
     getGridMediaItem,
+    clickGridItem,
 } from "./util.js";
 
 const DEFAULT_CATEGORY_INDEX = 0;
@@ -52,15 +47,40 @@ export async function renderTotalMedia() {
     const prevMediaButton = document.querySelector(".media-contents__left-button");
     const nextMediaButton = document.querySelector(".media-contents__right-button");
 
-    function resetNavigationButton() {
-        prevMediaButton.removeEventListener("click", navigatePrevMedia);
-        nextMediaButton.removeEventListener("click", navigateNextMedia);
-    }
-    document.addEventListener(REMOVE_TOTAL_ARROW, resetNavigationButton)
-    document.dispatchEvent(removeMediaArrowEvent);
-
     prevMediaButton.addEventListener("click", navigatePrevMedia);
     nextMediaButton.addEventListener("click", navigateNextMedia);
+
+    /**
+     * 그리드 목록 클릭 이벤트
+     */
+    const gridListDOM = document.querySelector(".media-contents__grid-list");   
+    gridListDOM.addEventListener("click", clickGridList);
+}
+
+/**
+ * @description 전체 언론사 화면이 사라질 때 관련 작업을 초기화해주는 함수
+ */
+export function resetTotalMedia() {
+    /**
+     * 그리드 리스트 클릭 이벤트 remove
+     */
+    const gridListDOM = document.querySelector(".media-contents__grid-list");
+    gridListDOM.removeEventListener("click", clickGridList);
+
+    /**
+     * 카테고리 목록 이벤트 remove
+     */
+    const categoryListDOM = document.querySelector(".media-contents__category-list");
+    categoryListDOM.removeEventListener('click', clickCategoryList);
+
+    /**
+     * 화살표 이벤트 초기화
+     */
+    const prevMediaButton = document.querySelector(".media-contents__left-button");
+    const nextMediaButton = document.querySelector(".media-contents__right-button");
+
+    prevMediaButton.removeEventListener("click", navigatePrevMedia);
+    nextMediaButton.removeEventListener("click", navigateNextMedia);
 }
 
 /**
@@ -76,8 +96,6 @@ function renderGridMedia(page) {
     });
 
     gridListDOM.innerHTML = mediaListDOMString;
-
-    // TODO: 구독/구독취소 이벤트 붙이기
 }
 
 /**
@@ -109,10 +127,8 @@ function renderListMedia(categoryIdx, mediaIdx) {
     progressAnimationDOM.addEventListener("animationiteration", navigateNextMedia);
 
     /**
-     * 카테고리 이벤트 초기화 후 이벤트 리스너 등록
+     * 카테고리 이벤트 이벤트 리스너 등록
      */
-    document.addEventListener(REMOVE_TOTAL_CATEGORY, () => categoryListDOM.removeEventListener('click', clickCategoryList));
-    document.dispatchEvent(removeMediaCategoryEvent);
     categoryListDOM.addEventListener('click', clickCategoryList);
 
     /**
@@ -230,4 +246,16 @@ function clickGridNavigationButton(step) {
 
     gridBoxDOM.dataset.gridPage = nextPage;
     renderGridMedia(nextPage);
+}
+
+function clickGridList(e) {
+    const displayMode = getDisplayMode();
+
+    if (displayMode === "list-display") {
+        return;
+    }
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
+
+    return clickGridItem(e, mediaListData.data, () => renderGridMedia(currentPage));
 }
