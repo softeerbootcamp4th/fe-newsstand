@@ -153,8 +153,7 @@ function renderSubscribedToggleArticles(state) {
     const articleCopyRightDom = document.createElement('div');
     articleCopyRightDom.classList.add('display-medium14');
     articleCopyRightDom.classList.add('color_879298');
-    articleCopyRightDom.textContent = `${state.articleDataList[state.selectedTabIndex]
-        .companies[state.selectedCompanyIndex].name} 언론사에서 직접 편집한 뉴스입니다.`;
+    articleCopyRightDom.textContent = `${companies[state.selectedTabIndex].name} 언론사에서 직접 편집한 뉴스입니다.`;
     articleBoxDom.appendChild(articleCopyRightDom);
 }
 

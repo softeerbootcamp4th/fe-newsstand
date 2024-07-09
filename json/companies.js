@@ -1,4 +1,4 @@
-{
+export const companies = {
     "문화일보": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/021.png",
     "KBS World": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/326.png",
     "노컷뉴스": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/079.png",

@@ -1,7 +1,8 @@
 import { initialize } from "./scripts/initialize.js";
 import { TOGGLE } from "./scripts/magicNumber.js";
 import { fetchData } from "./scripts/fetchData.js";
-
+import { companies } from "./json/companies.js";
+import { articles } from "./json/articles.js";
 //store
 let state = {
     toggleName: TOGGLE.ALL,
@@ -19,18 +20,4 @@ fetchData().then((res) => {
     initialize(state);
 });
                 
-
-
-
-//신기능
-// document.querySelector("a").querySelector("b").querySelector("wow").querySelector
-// document.querySelector("a").dataset DOM에 데이터 저장하는거
-
-
-// concat때리면 쉽게 한방에 스타일 가능
-// Object.assign(exampleElement.style, {
-//     backgroundColor: 'blue',
-//     color: 'white',
-//     border: '2px solid black'
-// });
 

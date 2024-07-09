@@ -1,4 +1,4 @@
-import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
+import { getCurrentCompany } from "./company.js";
 import { TOGGLE } from "./magicNumber.js";
 
  export function getCurrentArticle(state) {
