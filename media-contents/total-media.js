@@ -38,6 +38,7 @@ export async function renderTotalMedia() {
         gridBoxDOM.classList.remove("non-display");
         listBoxDOM.classList.add("non-display");
 
+        gridBoxDOM.dataset.gridPage = DEFAULT_PAGE;
         renderGridMedia(DEFAULT_PAGE);
     }
 
