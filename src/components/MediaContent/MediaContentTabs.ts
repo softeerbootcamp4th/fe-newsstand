@@ -7,6 +7,7 @@ interface MediaContentTabProps {
   sub: AppChild;
   onClick: () => void;
   isActive: boolean;
+  hasNext: boolean;
   onNext: () => void;
 }
 
@@ -16,8 +17,11 @@ const MediaContentTab = ({
   onClick,
   isActive,
   onNext,
+  hasNext,
 }: MediaContentTabProps) => {
-  const activeStyle = `${styles["tab-active"]} ${typoStyles["selected-bold14"]}`;
+  const activeStyle = `${styles["tab-active"]} ${
+    typoStyles["selected-bold14"]
+  } ${hasNext ? styles["tab-animate"] : ""}`;
   const inactiveStyle = `${styles["tab-inactive"]} ${typoStyles["available-medium14"]}`;
   return ce(Span, {
     className: `${styles.tab} ${isActive ? activeStyle : inactiveStyle}`,
@@ -27,15 +31,17 @@ const MediaContentTab = ({
   });
 };
 interface MediaContentTabsProps {
-  tabs: MediaContentTabProps[];
+  tabs: Omit<MediaContentTabProps, "hasNext">[];
+  hasNext: boolean;
 }
 
-export const MediaContentTabs = ({ tabs }: MediaContentTabsProps) => {
+export const MediaContentTabs = ({ tabs, hasNext }: MediaContentTabsProps) => {
   return ce(Div, {
     className: styles.container,
     children: tabs.map((tab) =>
       MediaContentTab({
         ...tab,
+        hasNext: hasNext,
       }),
     ),
   });

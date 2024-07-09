@@ -36,6 +36,10 @@
   gap: 16px;
   position: relative;
   color: var(--text-text-white-default, #FFFFFF);
+  background-color: var(--surface-surface-brand-default, #4362D0);
+}
+
+.tab-animate {
   background: linear-gradient(to right, var(--surface-surface-brand-default, #4362D0) 50%, var(--surface-surface-brand-alt, #7890E7) 50%);
   background-size: 200% 100%;
   animation: bg-fill 5s infinite;
