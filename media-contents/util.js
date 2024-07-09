@@ -54,10 +54,12 @@ export function getSelectedCategoryContentsDOMString(media) {
         <p class="text__medium12">${editDate}</p>
         ${isSubscribed ? `
             <section class="button__container subscribe-button__${id}--unsubscribe" data-media-id="${id}">
-                <img class="subscribe-button__icon--unsubscribe" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
+                <img class="subscribe-button__icon--unsubscribe subscribe-button--default" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
+                <img class="subscribe-button__icon--unsubscribe subscribe-button--active" alt="구독 취소 아이콘" src="./static/icons/close-hover.svg" />
             </section>` : `
             <section class="button__container subscribe-button__${id}--subscribe" data-media-id="${id}">
-                <img class="subscribe-button__icon" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
+                <img class="subscribe-button__icon subscribe-button--default" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
+                <img class="subscribe-button__icon subscribe-button--active" alt="구독 클릭 아이콘" src="./static/icons/plus-hover.svg" />
                 <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
             </section>`}
     </section>
@@ -91,19 +93,11 @@ export function setSubscribeButtonEvent(media, triggerRender) {
     if (subscribeButtonDOM) {
         const subscribeMediaId = parseInt(subscribeButtonDOM.dataset.mediaId);
         subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(subscribeMediaId, triggerRender));
-
-        const subscribeButtonIconDOM = subscribeButtonDOM.querySelector(".subscribe-button__icon");
-        subscribeButtonDOM.addEventListener("mouseover", () => subscribeButtonIconDOM.src = "./static/icons/plus-hover.svg");
-        subscribeButtonDOM.addEventListener("mouseout", () => subscribeButtonIconDOM.src = "./static/icons/plus-default.svg");
     }
 
     const unsubscribeButtonDOM = document.querySelector(`.subscribe-button__${media.id}--unsubscribe`);
     if (unsubscribeButtonDOM) {
         unsubscribeButtonDOM.addEventListener("click", () => clickUnsubscribeButton(media, triggerRender));
-        
-        const unsubscribeButtonIconDOM = unsubscribeButtonDOM.querySelector(".subscribe-button__icon--unsubscribe");
-        unsubscribeButtonDOM.addEventListener("mouseover", () => unsubscribeButtonIconDOM.src = "./static/icons/close-hover.svg");
-        unsubscribeButtonDOM.addEventListener("mouseout", () => unsubscribeButtonIconDOM.src = "./static/icons/close-default.svg");
     }
 }
 
@@ -160,11 +154,13 @@ export function getGridMediaItem(media) {
                 <img class="media-contents__grid-item-icon" alt="${media.name} 언론사 아이콘" src="${media.icon}"/>
                 ${isSubscribed ? `
                 <section class="button__container subscribe-button__${media.id}--unsubscribe" data-media-id="${media.id}">
-                    <img class="subscribe-button__icon--unsubscribe" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
+                    <img class="subscribe-button__icon--unsubscribe subscribe-button--default" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
+                    <img class="subscribe-button__icon--unsubscribe subscribe-button--active" alt="구독 취소 아이콘" src="./static/icons/close-hover.svg" />
                     <p class="button__text subscribe-button__text text__medium12 text--weak">해지하기</p>
                 </section>` : `
                 <section class="button__container subscribe-button__${media.id}--subscribe" data-media-id="${media.id}">
-                    <img class="subscribe-button__icon" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
+                    <img class="subscribe-button__icon subscribe-button--default" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
+                    <img class="subscribe-button__icon subscribe-button--active" alt="구독 클릭 아이콘" src="./static/icons/plus-hover.svg" />
                     <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
                 </section>`}
             </li>`
