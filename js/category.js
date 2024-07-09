@@ -46,6 +46,8 @@ export const createCategory = (data, dataType) => {
         divElement.appendChild(textElement);
         parentDiv.appendChild(divElement);
 
+        curCategoryIdx = 0;
+
         // 카테고리명 선택하면 선택한 카테고리의 인덱스 가져옴
         divElement.addEventListener('click', () => {
             curCategoryIdx = idx;
@@ -72,7 +74,6 @@ export const loadCurrentCategoryNews = (dataType) => {
         })
         .then(data => {
             newsData = data;
-            console.log(curCategoryIdx);
             dataType === 'subscribe' && subscriptions.length === 0 ? displayInformation() :displayNews(dataType);
             updateBtnVisibility();
             updateCategoryDisplay();
