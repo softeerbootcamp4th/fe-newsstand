@@ -3,7 +3,7 @@ import plus from "@/assets/icons/plus.svg";
 import closed from "@/assets/icons/closed.svg";
 import { changeFillColor } from "@/utils/svg";
 
-function Button({ $target, position = "beforeend", icon, color, text }) {
+function Button({ $target, position = "beforeend", icon, color, text, onClick }) {
   this.$element = document.createElement("button");
   this.$element.className = "button";
   this.$element.classList.add(color);
@@ -11,6 +11,7 @@ function Button({ $target, position = "beforeend", icon, color, text }) {
   $target.insertAdjacentElement(position, this.$element);
 
   this.render(icon, text);
+  this.$element.addEventListener("click", onClick);
 }
 
 Button.prototype.handleButtonHover = function () {
@@ -44,7 +45,7 @@ Button.prototype.render = function (icon, text) {
   svgObject.setAttribute("width", "12px");
   svgObject.setAttribute("height", "12px");
 
-  changeFillColor(svgObject, "gray");
+  changeFillColor(svgObject, "#879298");
 
   svgObject.addEventListener("load", this.handleButtonHover.bind(this));
 };

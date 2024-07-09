@@ -14,7 +14,7 @@
   margin-top: 32px;
 }
 
-.newsFilter > li {
+.newsFilter > .filterTab {
   font-size: 16px;
   color: var(--gray-200);
 
@@ -24,4 +24,13 @@
 .newsFilter > .selected {
   color: var(--black);
   font-weight: bold;
+}
+
+.emptyView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  height: 388px;
 }

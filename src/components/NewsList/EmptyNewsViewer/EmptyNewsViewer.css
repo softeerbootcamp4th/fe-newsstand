@@ -1,0 +1,30 @@
+.newsViewer {
+  display: flex;
+  flex-direction: column;
+
+  height: 388px;
+
+  position: relative;
+
+  border: 1px solid var(--gray-100);
+  box-sizing: border-box;
+}
+
+.emptyView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+.emptyView > .bold {
+  color: var(--black);
+  font-weight: bold;
+}
+
+.emptyView > p {
+  line-height: 20px;
+}

@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 
-.categoryFilter {
+.tabs {
   display: flex;
 
   width: 100%;
@@ -18,9 +18,17 @@
   border-bottom: 1px solid var(--gray-100);
   background-color: var(--gray-50);
   box-sizing: border-box;
+
+  overflow-x: auto;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.categoryFilter > li {
+.tab {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +42,7 @@
   cursor: pointer;
 }
 
-.categoryFilter > .selected {
+.tab.selected {
   justify-content: space-between;
 
   position: relative;
@@ -46,12 +54,31 @@
   font-weight: 600;
 }
 
-.categoryFilter > li:not(.selected):hover {
-  text-decoration: underline;
+.tab.selected .tabInfo {
+  z-index: 1;
 }
 
-.categoryFilter span {
-  z-index: 1;
+.tab.selected .tabInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 166px;
+}
+
+.tabInfo span {
+  overflow: hidden;
+  word-break: nowrap;
+  white-space: nowrap;
+}
+
+.tab:not(.selected) .pageInfo,
+.tab:not(.selected) progress {
+  display: none;
+}
+
+.tab:not(.selected):hover {
+  text-decoration: underline;
 }
 
 .progress {
@@ -73,17 +100,15 @@
   background: var(--blue-500);
 }
 
-.progressTransition {
-  &::-webkit-progress-value {
-    transition: width 1s linear;
-  }
+.progressTransition::-webkit-progress-value {
+  transition: width 1s linear;
 }
 
 .pageInfo {
   font-size: 12px;
 }
 
-.newsLength {
+.maxPage {
   color: var(--white-weak);
 }
 
