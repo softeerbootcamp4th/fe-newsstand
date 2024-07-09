@@ -315,6 +315,41 @@ export const handleNextPageEvent = (thisBtn, menuInfo, isNow) => {
     }
 }
 
+export const handlePrePageEvent = (thisBtn, menuInfo, isNow) => {
+    console.log(thisBtn)
+    thisBtn = document.querySelector('.menu-btn-wrapper-clicked')
+    const preBtn = thisBtn.previousElementSibling !== null ? thisBtn.previousElementSibling : thisBtn.parentElement.lastElementChild;
+    const totalMenuLength = menuInfo.length;
+    newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
+
+    if (isNow) {
+        clearTimeout(categoryTimeoutId);
+        const timeoutId = setTimeout(() => {
+            if (menuCurrentPage === 1) {
+                console.log('preCategory')
+                movePreCategory(thisBtn, preBtn, totalMenuLength);
+            } else {
+                console.log('prePage')
+                movePrePage(thisBtn)
+            }
+            insertContent(menuIdx, menuCurrentPage, menuLastPage);
+        }, 1);
+        newsState.setCategoryTimeoutId(timeoutId);
+    } else {
+        const timeoutId = setTimeout(() => {
+            if (menuCurrentPage === 1) {
+                console.log('preCategory')
+                movePreCategory(thisBtn, preBtn, totalMenuLength);
+            } else {
+                console.log('prePage')
+                movePrePage(thisBtn)
+            }
+            insertContent(menuIdx, menuCurrentPage, menuLastPage);
+        }, CATEGORY_TIMEOUT);
+        newsState.setCategoryTimeoutId(timeoutId);
+    }
+}
+
 const moveNextCategory = (thisBtn, nextBtn, totalMenuLength) => {
     newsState.setMenuCurrentPage(1);
     newsState.setMenuIdx(menuIdx+1);
@@ -332,12 +367,29 @@ const movePreCategory = (thisBtn, preBtn, totalMenuLength) => {
     if (menuIdx === -1) {
         newsState.setMenuIdx(totalMenuLength-1)
     }
-    newsState.setMenuCurrentPage(menuInfo[menuIdx])
+    newsState.setMenuCurrentPage(menuInfo[menuIdx].mediaData.length)
+    preBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[menuIdx].totalPages}`;
+    thisBtn.classList.remove('menu-btn-wrapper-clicked');
+    preBtn.classList.add('menu-btn-wrapper-clicked');
+    const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
+    handleNextPageEvent(nextBtn, menuInfo);
 }
 
 const moveNextPage = (thisBtn) => {
     console.log(thisBtn)
     newsState.setMenuCurrentPage(menuCurrentPage+1);
+    thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
+    thisBtn.querySelector('.fill-background').remove();
+    
+    const fillBackground = document.createElement('div');
+    fillBackground.classList.add('fill-background');
+    thisBtn.appendChild(fillBackground);
+    
+    handleNextPageEvent(thisBtn, menuInfo);
+}
+
+const movePrePage = (thisBtn) => {
+    newsState.setMenuCurrentPage(menuCurrentPage-1);
     thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
     thisBtn.querySelector('.fill-background').remove();
     
