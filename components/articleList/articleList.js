@@ -1,7 +1,7 @@
 import { MEDIA_LIST, CATEGORY_TIMEOUT } from "../../pages/NewsPage.js";
 import { newsState } from "../../pages/state/newsState.js";
 import { menuInfo, menuCurrentPage, menuLastPage, menuIdx, categoryTimeoutId } from "../../pages/state/newsState.js";
-import { extractMedias } from "../../utils/api.js";
+import { extractDataWithMedia, extractMedias } from "../../utils/api.js";
 
 let isMediaWhole = true;
 let isGrid = false;
@@ -11,7 +11,7 @@ export const initArticleList = async () => {
     try {
         addEventListeners();
         // 첫번째 카테고리 버튼에 class 부여
-        setDataWithTab(document.querySelectorAll('.menu-btn-wrapper')[0], 0);
+        setWholeData(document.querySelectorAll('.menu-btn-wrapper')[0], 0);
     } catch (error) {
         console.log(error)
     }
@@ -73,7 +73,19 @@ const createMenuList = (menuInfo) => {
             </button>
             <div class="fill-background"></div>
         </div>
-    `).join('');
+        `).join('');
+    }
+    
+const createSubscriptionMenuList = () => {
+    const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+    return subList?.map((sub, idx) => `
+        <div class="menu-btn-wrapper">
+            <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
+                <h5>${sub}</h5>
+            </button>
+            <div class="fill-background"></div>
+        </div>
+    `) .join('');
 }
 
 // 기사 리스트 생성 함수
@@ -104,6 +116,7 @@ const addEventListeners = () => {
     addSubscriptionGridBtnEventListener();
     addWholeGridEventListener();
     addWholeListBtnEventListener();
+    addSubscriptionListBtnEventListener();
 }
 
 const addModeSelectionEventListener = () => {
@@ -129,10 +142,11 @@ const addViewSelectionEventListener = () => {
 const addCategorySelectionEventListener = () => {
     // Category selection event
     document.querySelector('.article-menu-wrapper').addEventListener('click', (event) => {
+        console.log('click')
         if (event.target.closest('.menu-btn-wrapper')) {
             const btnWrapper = event.target.closest('.menu-btn-wrapper');
             const idx = Array.from(btnWrapper.parentNode.children).indexOf(btnWrapper);
-            setDataWithTab(btnWrapper, idx);
+            setWholeData(btnWrapper, idx);
         }
     });
 }
@@ -215,6 +229,109 @@ const addSubscriptionGridBtnEventListener = () => {
     });
 }
 
+const addSubscriptionListBtnEventListener = () => {
+    document.querySelector('.subscription-media-btn').addEventListener('click', () => {
+        if (!isGrid && !isMediaWhole) {
+            document.querySelector('.article-body-wrapper').innerHTML = `
+        <div class="articleList-wrapper">
+            <div class="article-header-wrapper flex-row-between">
+                <div class="media-wrapper inline-tag">
+                    <button class="btn whole-media-btn mode-selection-btn mode-selection-btn-clicked">전체 언론사</button>
+                    <button class="btn subscription-media-btn mode-selection-btn">내가 구독한 언론사</button>
+                </div>
+                <div class="icon-wrapper inline-tag flex-row-between">
+                    <button class="btn list-btn view-btn view-btn-clicked">
+                        <img src="/icons/list-view.png" alt="" width="24px" height="24px">
+                    </button>
+                    <button class="btn grid-btn view-btn">
+                        <img src="/icons/grid-view.png" alt="" width="24px" height="24px">
+                    </button>
+                </div>
+            </div>
+            <div class="article-body-wrapper">
+                <div class="article-menu-wrapper">
+                    ${createSubscriptionMenuList()}
+                </div>
+                <div class="article-wrapper">
+                    <div class="article-selection-wrapper"></div>
+                    <div class="article-content-wrapper">
+                        <div class="content-header-wrapper flex-row">
+                            <img class="media-img" src="" alt="">
+                            <h4 class="updated-date-tag" style="font-size: 12px; font-weight: 400;"> 편집</h4>
+                            <button class="subscribe-btn btn">+ 구독하기</button>
+                        </div>
+                        <div class="content-body-wrapper flex-row-between">
+                            <aside class="thumbnail-part">
+                                <img class="thumbnail-img" src="" alt="" width="320px" height="200px">
+                                <p class="thumbnail-detail">ABC</p>
+                            </aside>
+                            <ul class="article-li-part flex-col-between">
+                                <p class="li-part-info"></p>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+        }
+        document.querySelectorAll('.article-header-wrapper')[1].remove();
+        addModeSelectionEventListener();
+        setSubscriptionData(document.querySelectorAll('.menu-btn-wrapper')[0], 0)
+        addCategorySelectionEventListener();
+    })
+    document.querySelector('.list-btn').addEventListener('click', () => {
+        if (!isGrid && !isMediaWhole) {
+            document.querySelector('.article-body-wrapper').innerHTML = `
+        <div class="articleList-wrapper">
+            <div class="article-header-wrapper flex-row-between">
+                <div class="media-wrapper inline-tag">
+                    <button class="btn whole-media-btn mode-selection-btn mode-selection-btn-clicked">전체 언론사</button>
+                    <button class="btn subscription-media-btn mode-selection-btn">내가 구독한 언론사</button>
+                </div>
+                <div class="icon-wrapper inline-tag flex-row-between">
+                    <button class="btn list-btn view-btn view-btn-clicked">
+                        <img src="/icons/list-view.png" alt="" width="24px" height="24px">
+                    </button>
+                    <button class="btn grid-btn view-btn">
+                        <img src="/icons/grid-view.png" alt="" width="24px" height="24px">
+                    </button>
+                </div>
+            </div>
+            <div class="article-body-wrapper">
+                <div class="article-menu-wrapper">
+                    ${createSubscriptionMenuList()}
+                </div>
+                <div class="article-wrapper">
+                    <div class="article-selection-wrapper"></div>
+                    <div class="article-content-wrapper">
+                        <div class="content-header-wrapper flex-row">
+                            <img class="media-img" src="" alt="">
+                            <h4 class="updated-date-tag" style="font-size: 12px; font-weight: 400;"> 편집</h4>
+                            <button class="subscribe-btn btn">+ 구독하기</button>
+                        </div>
+                        <div class="content-body-wrapper flex-row-between">
+                            <aside class="thumbnail-part">
+                                <img class="thumbnail-img" src="" alt="" width="320px" height="200px">
+                                <p class="thumbnail-detail">ABC</p>
+                            </aside>
+                            <ul class="article-li-part flex-col-between">
+                                <p class="li-part-info"></p>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+        }
+        document.querySelectorAll('.article-header-wrapper')[1].remove();
+        addModeSelectionEventListener();
+        setSubscriptionData(document.querySelectorAll('.menu-btn-wrapper')[0], 0)
+        addCategorySelectionEventListener();
+    })
+}
+
 const addWholeGridEventListener = () => {
     document.querySelector('.whole-media-btn').addEventListener('click', () => {
         if (isGrid && isMediaWhole) {
@@ -267,11 +384,27 @@ const addWholeGridEventListener = () => {
 }
 
 // 콘텐츠 삽입 함수
-const insertContent = (menuIdx, menuCurrentPage, menuLastPage) => {
+const insertWholeContent = (menuIdx, menuCurrentPage, menuLastPage) => {
     const nowInfo = menuInfo[menuIdx].mediaData[menuCurrentPage - 1];
     
-    document.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
+    if (document.querySelector('.article-menu-pages') !== null) {
+        document.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
+    }
     document.querySelector('.media-img').src = `/images/logos/${nowInfo.mediaName}.png`;
+    document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
+    document.querySelector('.thumbnail-img').src = `/images/logos/${MEDIA_LIST[menuCurrentPage]}.png`;
+    document.querySelector('.thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
+    document.querySelector('.article-li-part').innerHTML = `
+        ${createArticleLiPart(nowInfo.articleList)}
+        <p class="li-part-info">${nowInfo.thumbnailMediaName}에서 직접 편집한 뉴스입니다.</p>
+    `;
+}
+
+const insertSubscriptionContent = (menuIdx) => {
+    const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+    const mediaName = subList[menuIdx];
+    const nowInfo = extractDataWithMedia(menuInfo)[mediaName]
+    document.querySelector('.media-img').src = `/images/logos/${mediaName}.png`;
     document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
     document.querySelector('.thumbnail-img').src = `/images/logos/${MEDIA_LIST[menuCurrentPage]}.png`;
     document.querySelector('.thumbnail-detail').innerText = `${nowInfo.thumbnailDetail}`;
@@ -286,8 +419,12 @@ export const handleNextPageEvent = (thisBtn, menuInfo, isNow) => {
     // param에서 thisBtn 제거
     thisBtn = document.querySelector('.menu-btn-wrapper-clicked')
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
-    const totalMenuLength = menuInfo.length;
-    newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
+    const totalMenuLength = isMediaWhole ? menuInfo.length : localStorage.length;
+    if (isMediaWhole) {
+        newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
+    } else {
+        newsState.setMenuLastPage(1);
+    }
 
     if (isNow) {
         clearTimeout(categoryTimeoutId);
@@ -299,7 +436,11 @@ export const handleNextPageEvent = (thisBtn, menuInfo, isNow) => {
                 console.log('nextPage')
                 moveNextPage(thisBtn);
             }
-            insertContent(menuIdx, menuCurrentPage, menuLastPage);
+            if (isMediaWhole) {
+                insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+            } else {
+                insertSubscriptionContent(menuIdx);
+            }
         }, 1);
         newsState.setCategoryTimeoutId(timeoutId);
     } else {
@@ -309,17 +450,20 @@ export const handleNextPageEvent = (thisBtn, menuInfo, isNow) => {
             } else {
                 moveNextPage(thisBtn);
             }
-            insertContent(menuIdx, menuCurrentPage, menuLastPage);
+            if (isMediaWhole) {
+                insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+            } else {
+                insertSubscriptionContent(menuIdx);
+            }
         }, CATEGORY_TIMEOUT);
         newsState.setCategoryTimeoutId(timeoutId);
     }
 }
 
 export const handlePrePageEvent = (thisBtn, menuInfo, isNow) => {
-    console.log(thisBtn)
     thisBtn = document.querySelector('.menu-btn-wrapper-clicked')
     const preBtn = thisBtn.previousElementSibling !== null ? thisBtn.previousElementSibling : thisBtn.parentElement.lastElementChild;
-    const totalMenuLength = menuInfo.length;
+    const totalMenuLength = isMediaWhole ? menuInfo.length : localStorage.length;
     newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
 
     if (isNow) {
@@ -332,7 +476,11 @@ export const handlePrePageEvent = (thisBtn, menuInfo, isNow) => {
                 console.log('prePage')
                 movePrePage(thisBtn)
             }
-            insertContent(menuIdx, menuCurrentPage, menuLastPage);
+            if (isMediaWhole) {
+                insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+            } else {
+                insertSubscriptionContent(menuIdx)
+            }
         }, 1);
         newsState.setCategoryTimeoutId(timeoutId);
     } else {
@@ -344,31 +492,45 @@ export const handlePrePageEvent = (thisBtn, menuInfo, isNow) => {
                 console.log('prePage')
                 movePrePage(thisBtn)
             }
-            insertContent(menuIdx, menuCurrentPage, menuLastPage);
+            if (isMediaWhole) {
+                insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+            } else {
+                insertSubscriptionContent(menuIdx)
+            }
         }, CATEGORY_TIMEOUT);
         newsState.setCategoryTimeoutId(timeoutId);
     }
 }
 
-const moveNextCategory = (thisBtn, nextBtn, totalMenuLength) => {
+const moveNextCategory = (thisBtn, nextBtn) => {
+    const totalMenuLength = isMediaWhole ? menuInfo.length : localStorage.length;
     newsState.setMenuCurrentPage(1);
     newsState.setMenuIdx(menuIdx+1);
     if (menuIdx === totalMenuLength) {
         newsState.setMenuIdx(0);
     }
-    nextBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[menuIdx].totalPages}`;
+    if (nextBtn.querySelector('.article-menu-pages') !== null) {
+        nextBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[menuIdx].totalPages}`;
+    }
     thisBtn.classList.remove('menu-btn-wrapper-clicked');
     nextBtn.classList.add('menu-btn-wrapper-clicked');
     handleNextPageEvent(nextBtn, menuInfo);
 }
 
-const movePreCategory = (thisBtn, preBtn, totalMenuLength) => {
+const movePreCategory = (thisBtn, preBtn) => {
+    const totalMenuLength = isMediaWhole ? menuInfo.length : localStorage.length;
     newsState.setMenuIdx(menuIdx-1);
     if (menuIdx === -1) {
         newsState.setMenuIdx(totalMenuLength-1)
     }
-    newsState.setMenuCurrentPage(menuInfo[menuIdx].mediaData.length)
-    preBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[menuIdx].totalPages}`;
+    if (isMediaWhole) {
+        newsState.setMenuCurrentPage(menuInfo[menuIdx].mediaData.length)
+    } else {
+        newsState.setMenuCurrentPage(1)
+    }
+    if (preBtn.querySelector('.article-menu-pages')) {
+        preBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[menuIdx].totalPages}`;
+    }
     thisBtn.classList.remove('menu-btn-wrapper-clicked');
     preBtn.classList.add('menu-btn-wrapper-clicked');
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
@@ -378,7 +540,9 @@ const movePreCategory = (thisBtn, preBtn, totalMenuLength) => {
 const moveNextPage = (thisBtn) => {
     console.log(thisBtn)
     newsState.setMenuCurrentPage(menuCurrentPage+1);
-    thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
+    if (thisBtn.querySelector('.article-menu-pages') !== null) {
+        thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
+    }
     thisBtn.querySelector('.fill-background').remove();
     
     const fillBackground = document.createElement('div');
@@ -390,7 +554,9 @@ const moveNextPage = (thisBtn) => {
 
 const movePrePage = (thisBtn) => {
     newsState.setMenuCurrentPage(menuCurrentPage-1);
-    thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
+    if (thisBtn.querySelector('.article-menu-pages')) {
+        thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
+    }
     thisBtn.querySelector('.fill-background').remove();
     
     const fillBackground = document.createElement('div');
@@ -401,15 +567,21 @@ const movePrePage = (thisBtn) => {
 }
 
 // 탭 데이터 설정 함수
-const setDataWithTab = (btnWrapper, menuIdx) => {
+const setWholeData = (btnWrapper, menuIdx) => {
     newsState.setMenuIdx(menuIdx);
     newsState.setMenuCurrentPage(1);
     newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
     
-    insertContent(menuIdx, menuCurrentPage, menuLastPage);
+    if (isMediaWhole) {
+        insertWholeContent(menuIdx, menuCurrentPage, menuLastPage);
+    } else {
+        insertSubscriptionContent(menuIdx);
+    }
 
     document.querySelectorAll('.menu-btn-wrapper').forEach((btnWrapper, idx) => {
-        btnWrapper.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[idx].totalPages}`;
+        if (btnWrapper.querySelector('.article-menu-pages')) {
+            btnWrapper.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[idx].totalPages}`;
+        }
     });
 
     clearTimeout(categoryTimeoutId);
@@ -420,3 +592,20 @@ const setDataWithTab = (btnWrapper, menuIdx) => {
     handleNextPageEvent(btnWrapper, menuInfo);
 }
 
+const setSubscriptionData = (btnWrapper, menuIdx) => {
+    const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+    newsState.setMenuIdx(menuIdx)
+    newsState.setMenuCurrentPage(1);
+    newsState.setMenuLastPage(1);
+    
+    insertSubscriptionContent(menuIdx);
+    
+    console.log(btnWrapper)
+    
+    clearTimeout(categoryTimeoutId);
+    
+    document.querySelectorAll('.menu-btn-wrapper').forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
+    btnWrapper.classList.add('menu-btn-wrapper-clicked');
+    
+    handleNextPageEvent(btnWrapper, menuInfo);
+}
