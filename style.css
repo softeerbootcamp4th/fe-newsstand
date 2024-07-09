@@ -603,3 +603,9 @@ ul {
 .toast.active {
 	opacity: 1;
 }
+
+.bottomRightButton {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+}

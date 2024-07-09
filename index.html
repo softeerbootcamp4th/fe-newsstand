@@ -6,6 +6,10 @@
 	<link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+	<script>
+		const systemDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+		document.documentElement.classList.toggle("dark", systemDarkMode);
+	</script>
 	<div class="overallWrapper">
 		<header class="titleWrapper">
 			<h2 class="title bold24">
@@ -77,6 +81,7 @@
 			</div>
 		</main>
 	</div>
+	<div id="darkModeToggle" class="bottomRightButton">다크모드 토글하기</div>
 	<script src="./js/index.js" type="module"></script>
 </body>
 </html>
