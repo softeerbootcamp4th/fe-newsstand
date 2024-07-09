@@ -275,7 +275,7 @@ nav ul li.active a {
     transition: transform 20s linear; /* 20초 동안 서서히 변화 */
 }
 
-.navItem.active.progress > div::after {
+.navItem.progress > div::after {
     transform: scaleX(1); /* 최종 너비를 100%로 설정 */
 }
 
