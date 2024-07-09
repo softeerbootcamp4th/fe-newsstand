@@ -63,7 +63,7 @@ const Button = (props) => {
     return {
         element: `
         <div class="button" id="button${props.id}" style="background-color: ${isHover.value ? hoverdColor : backgroundColor}; color: ${color};">
-            <img class="button-left-icon" src=${props.icon} alt="icon"/>
+            ${props.icon ? `<img class="button-left-icon" src=${props.icon} alt="icon"/>` : ''}
             ${props.text}
         </div>
         `,
