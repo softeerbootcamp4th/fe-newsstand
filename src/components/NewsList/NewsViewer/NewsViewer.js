@@ -3,8 +3,9 @@ import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
 import chevronRight from "@/assets/icons/chevronRight.svg";
 import ContentsBox from "./ContentsBox/ContentsBox";
-import { CATEGORIES, getNews } from "@/mocks/news";
+import { CATEGORIES } from "@/mocks/news";
 import { getSubscribedCompanies, unSubscribeCompany } from "@/data/storageHandler";
+import { getNews } from "../../../apis/news";
 
 function NewsViewer({ $target, position = "beforeend", filter = "category", changeFilter }) {
   this.$element = document.createElement("article");
@@ -19,42 +20,45 @@ function NewsViewer({ $target, position = "beforeend", filter = "category", chan
   this.state = {
     page: 0,
     tab: 0,
+    news: [],
+    tabs: [],
   };
+
+  this.timer = null;
 
   this.render();
 
-  this.$element.addEventListener("click", this.handleClick.bind(this));
+  this.loadNews(this.state.tab, this.state.page);
 
-  this.initializeProgress();
+  this.$element.addEventListener("click", this.handleClick.bind(this));
 }
 
-NewsViewer.prototype.setState = function ({ page, tab }) {
+NewsViewer.prototype.setState = function ({ page, tab, news, tabs }) {
   this.state = {
     page: page ?? this.state.page,
     tab: tab ?? this.state.tab,
+    news: news ?? this.state.news,
+    tabs: tabs ?? this.state.tabs,
   };
 
   this.render();
 };
 
-NewsViewer.prototype.getCurrentNews = function () {
+NewsViewer.prototype.loadNews = async function (tab, page) {
   if (this.props.filter === "category") {
-    return getNews({ category: this.state.tab });
+    const news = await getNews({ category: tab });
+
+    this.setState({ tab, page, news, tabs: CATEGORIES });
   }
 
   if (this.props.filter === "company") {
-    return getNews({ company: getSubscribedCompanies()[this.state.tab] });
-  }
-};
+    const companies = getSubscribedCompanies();
+    const news = await getNews({ company: companies[tab] });
 
-NewsViewer.prototype.getCurrentNewsTabs = function () {
-  if (this.props.filter === "category") {
-    return CATEGORIES;
+    this.setState({ tab, page, news, tabs: companies });
   }
 
-  if (this.props.filter === "company") {
-    return getSubscribedCompanies();
-  }
+  this.initializeProgress();
 };
 
 NewsViewer.prototype.handleClick = function (event) {
@@ -81,16 +85,18 @@ NewsViewer.prototype.handleClick = function (event) {
   if (listItem) {
     const tab = Number(listItem.dataset.tabNumber);
 
-    this.handleCategoryClick(tab);
+    this.handleTabClick(tab);
   }
 };
 
-NewsViewer.prototype.handleCategoryClick = function (tab) {
-  this.setState({ page: 0, tab });
+NewsViewer.prototype.handleTabClick = function (tab) {
+  this.loadNews(tab, 0);
 };
 
 NewsViewer.prototype.initializeProgress = function () {
-  const interval = setInterval(this.progressInterval.bind(this), 1000);
+  if (this.timer) clearInterval(this.timer);
+
+  this.timer = setInterval(this.progressInterval.bind(this), 1000);
 };
 
 NewsViewer.prototype.progressInterval = function () {
@@ -111,55 +117,51 @@ NewsViewer.prototype.progressInterval = function () {
 };
 
 NewsViewer.prototype.nextPage = function () {
-  const news = this.getCurrentNews();
-
   const nextPage = this.state.page + 1;
 
-  if (nextPage >= news.length) {
+  if (nextPage >= this.state.news.length) {
     this.nextTab();
 
     return;
   }
 
-  this.setState({ page: nextPage });
+  this.loadNews(this.state.tab, nextPage);
 };
 
 NewsViewer.prototype.prevPage = function () {
   const prevPage = this.state.page - 1;
 
   if (prevPage < 0) {
-    this.prevCategory();
+    this.prevTab();
 
     return;
   }
 
-  this.setState({ page: prevPage });
+  this.loadNews(this.state.tab, prevPage);
 };
 
 NewsViewer.prototype.nextTab = function () {
   const nextTab = this.state.tab + 1;
 
-  if (nextTab >= this.getCurrentNewsTabs().length) {
-    this.setState({ tab: 0, page: 0 });
+  if (nextTab >= this.state.tabs.length) {
+    this.loadNews(0, 0);
 
     return;
   }
 
-  this.setState({ tab: nextTab, page: 0 });
+  this.loadNews(nextTab, 0);
 };
 
-NewsViewer.prototype.prevCategory = function () {
-  const prevCategory = this.state.tab - 1;
+NewsViewer.prototype.prevTab = function () {
+  const prevTab = this.state.tab - 1;
 
-  if (prevCategory < 0) {
-    this.setState({ tab: 0, page: 0 });
+  if (prevTab < 0) {
+    this.loadNews(0, 0);
 
     return;
   }
 
-  const news = this.getCurrentNews();
-
-  this.setState({ tab: prevCategory, page: news.length - 1 });
+  this.loadNews(prevTab, this.state.news.length - 1);
 };
 
 NewsViewer.prototype.handleUnsubscribeCompany = function (company) {
@@ -172,7 +174,7 @@ NewsViewer.prototype.handleUnsubscribeCompany = function (company) {
       return;
     }
 
-    this.setState({ page: 0, tab: 0 });
+    this.loadNews(0, 0);
   }
 };
 
@@ -195,21 +197,20 @@ NewsViewer.prototype.formatDate = function formatDate(date) {
 };
 
 NewsViewer.prototype.render = function () {
-  const news = this.getCurrentNews();
-  const tabs = this.getCurrentNewsTabs();
+  const { news, tabs, tab, page } = this.state;
 
   this.$element.innerHTML = /* html */ `
     <ul class="tabs">
       ${tabs
         .map(
           (name, idx) => /* html */ `
-          <li data-tab-number="${idx}" class="tab${this.state.tab === idx ? " selected" : ""}">
+          <li data-tab-number="${idx}" class="tab${tab === idx ? " selected" : ""}">
             <p class="tabInfo">
               <span>${name}</span>
               ${
                 this.props.filter === "category"
                   ? /* html */ `
-                  <span class="pageInfo">${this.state.page + 1}
+                  <span class="pageInfo">${page + 1}
                     <span class="maxPage"> / ${news.length}</span>
                   </span>`
                   : /* html */ `
@@ -225,19 +226,21 @@ NewsViewer.prototype.render = function () {
     </ul>
 
     <button id="prevButton" class="newsButton prev${
-      this.state.tab === 0 && this.state.page === 0 ? " hide" : ""
+      tab === 0 && page === 0 ? " hide" : ""
     }"><img src="${leftButton}"/></button>
     <button id="nextButton" class="newsButton next"><img src="${rightButton}"/></button>
   `;
 
   this.MoveToSelectedTab();
 
-  new ContentsBox({
-    $target: this.$element.querySelector(".tabs"),
-    position: "afterend",
-    news: news[this.state.page],
-    onSubscribeCompany: this.handleUnsubscribeCompany.bind(this),
-  });
+  if (news.length > 0) {
+    new ContentsBox({
+      $target: this.$element.querySelector(".tabs"),
+      position: "afterend",
+      news: news[page],
+      onSubscribeCompany: this.handleUnsubscribeCompany.bind(this),
+    });
+  }
 };
 
 export default NewsViewer;
