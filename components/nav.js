@@ -1,4 +1,5 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
+import { updateMyNewsList } from "./myNewsList.js";
 import { getMaxMediaIndex, updateNewsList } from "./newsList.js";
 
 const categoryList = [
@@ -27,22 +28,36 @@ export function generateNav(container, currentHeaderCategoryIndex) {
   if (currentHeaderCategoryIndex === 0) selectedList = categoryList;
   else if (currentHeaderCategoryIndex === 1) selectedList = myList;
 
-  const nav = generateNode("nav", "content_navigator");
-  const ul = generateNode("ul", "contentList");
+  navInit(selectedList);
 
-  selectedList.forEach((category, index) => {
-    const li = generateNode("li");
-    ul.appendChild(li);
+  if (currentHeaderCategoryIndex === 0) generateNavForNewsList();
+  else if (currentHeaderCategoryIndex === 1) generateNavForMyList();
 
-    createNavElement(li, category);
-    if (index === 0) li.classList.add("selected");
-  });
+  function navInit(selectedList) {
+    currentCategoryIndex = 0;
+    currentMediaIndex = 0;
+    clearInterval(intervalId);
+    startInterval();
 
-  nav.appendChild(ul);
-  container.appendChild(nav);
+    const nav = generateNode("nav", "content_navigator");
+    const ul = generateNode("ul", "contentList");
 
+    selectedList.forEach((category, index) => {
+      const li = generateNode("li");
+      ul.appendChild(li);
+
+      createNavElement(li, category);
+      if (index === currentCategoryIndex) li.classList.add("selected");
+    });
+
+    nav.appendChild(ul);
+    container.appendChild(nav);
+  }
+}
+
+function generateNavForNewsList() {
   updateNewsList(
-    selectedList[currentCategoryIndex],
+    categoryList[currentCategoryIndex],
     currentCategoryIndex,
     currentMediaIndex
   );
@@ -53,15 +68,32 @@ export function generateNav(container, currentHeaderCategoryIndex) {
     element.addEventListener("click", function () {
       categoryElements[currentCategoryIndex].classList.remove("selected");
       element.classList.add("selected");
-
       currentCategoryIndex = index;
-      updateCategory(selectedList[index], currentCategoryIndex);
 
       clearInterval(intervalId);
       startInterval();
+
+      updateCategory(categoryList[index], currentCategoryIndex);
     });
   });
-  startInterval(selectedList);
+}
+function generateNavForMyList() {
+  updateMyNewsList(currentCategoryIndex);
+
+  const categoryElements = document.querySelectorAll(".contentList li");
+
+  categoryElements.forEach((element, index) => {
+    element.addEventListener("click", function () {
+      categoryElements[currentCategoryIndex].classList.remove("selected");
+      element.classList.add("selected");
+      currentCategoryIndex = index;
+
+      clearInterval(intervalId);
+      startInterval();
+
+      updateMyMedia(currentCategoryIndex);
+    });
+  });
 }
 
 /**
@@ -111,22 +143,22 @@ export function updateCategory(newCategory, currentCategoryIndex) {
   updateNewsList(newCategory, currentCategoryIndex, currentMediaIndex);
 }
 
+function updateMyMedia(newCategoryIndex) {
+  currentCategoryIndex = newCategoryIndex;
+  updateMyNewsList(currentCategoryIndex);
+}
+
 /**
- * 20초 마다 selectedList의 다음 요소로 넘김
- * @param selectedList
+ * 20초 마다 categoryList의 다음 요소로 넘김
  */
-function startInterval(selectedList) {
+function startInterval() {
   intervalId = setInterval(() => {
     const categoryElements = document.querySelectorAll(".contentList li");
     currentMediaIndex++;
-    console.log(
-      currentMediaIndex,
-      getMaxMediaIndex(selectedList[currentCategoryIndex])
-    );
     if (
-      currentMediaIndex >= getMaxMediaIndex(selectedList[currentCategoryIndex])
+      currentMediaIndex >= getMaxMediaIndex(categoryList[currentCategoryIndex])
     ) {
-      currentCategoryIndex = (currentCategoryIndex + 1) % selectedList.length;
+      currentCategoryIndex = (currentCategoryIndex + 1) % categoryList.length;
       categoryElements.forEach((element, index) => {
         if (index === currentCategoryIndex) {
           element.classList.add("selected");
@@ -135,13 +167,13 @@ function startInterval(selectedList) {
         }
       });
 
-      updateCategory(selectedList[currentCategoryIndex], currentCategoryIndex);
+      updateCategory(categoryList[currentCategoryIndex], currentCategoryIndex);
     } else {
       updateNewsList(
-        selectedList[currentCategoryIndex],
+        categoryList[currentCategoryIndex],
         currentCategoryIndex,
         currentMediaIndex
       );
     }
-  }, 2000);
+  }, 20000);
 }
