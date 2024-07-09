@@ -2,11 +2,10 @@ import Button, { ButtonVariantProps } from '../base/Button.js'
 import IconView, { Icon } from '../base/IconView.js'
 import createComponent from '../../core/component/component.js'
 import ImageView from '../base/ImageView.js'
-import { generateRandomId } from '../../utils/idGenerator.js'
-import { isSubscribed, handleSubscription } from '../../utils/subscribeUtils.js'
+import { isSubscribed, subscribe } from '../../utils/subscribeUtils.js'
 
 const MainNews = (props) => {
-    if (!props.newsData) {
+    if (props.newsData.value.news.length === 0) {
         return {
             element: `
                 <h5>
@@ -18,25 +17,33 @@ const MainNews = (props) => {
         }
     }
 
+    const handleSubscriptionButtonClick = () => {
+        if (isSubscribed(props.newsData.value.companyId)) {
+            props.setIsShowAlert(true)
+        } else {
+            subscribe(props.newsData.value.companyId)
+        }
+    }
+
     const companyIcon = createComponent(IconView, {
-        id: generateRandomId(10),
-        icon: props.newsData ? props.newsData.companyIcon : '',
+        id: 1,
+        icon: props.newsData.value ? props.newsData.value.companyIcon : '',
     })
 
     const subscribeButton = createComponent(Button, {
-        id: generateRandomId(10),
-        icon: isSubscribed(props.newsData.companyId) ? Icon.X : Icon.PLUS,
-        text: isSubscribed(props.newsData.companyId) ? '' : '구독하기',
+        id: `${props.selectedSource.value}-sub-btn-${props.newsData.value.companyId}-${props.id}`,
+        icon: isSubscribed(props.newsData.value.companyId) ? Icon.X : Icon.PLUS,
+        text: isSubscribed(props.newsData.value.companyId) ? '' : '구독하기',
         style: 'height:10px;',
         variant: ButtonVariantProps.WHITE,
         onClick: () => {
-            handleSubscription(props.newsData.companyId)
+            handleSubscriptionButtonClick()
         },
     })
 
     const ImageComponent = createComponent(ImageView, {
-        id: generateRandomId(10),
-        src: props.newsData.mainNews.src,
+        id: 1,
+        src: props.newsData.value.mainNews.src,
         style: 'width: 100%; height:100%',
     })
 
@@ -46,7 +53,7 @@ const MainNews = (props) => {
                 <div class="list-news-left-top">
                     ${companyIcon.element}
                     <h5>
-                        ${props.newsData.updatedDate}
+                        ${props.newsData.value.updatedDate}
                     </h5>
                     ${subscribeButton.element}
                 </div>
@@ -55,7 +62,7 @@ const MainNews = (props) => {
                 </div>
                 <div class="list-news-left-bottom">
                     <h4 class="news-content">
-                        ${props.newsData.mainNews.title}
+                        ${props.newsData.value.mainNews.title}
                     </h4>
                 </div>
             </div>
