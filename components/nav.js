@@ -1,6 +1,6 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
 import { getMyDataLength, updateMyNewsList } from "./myNewsList.js";
-import { getMaxMediaIndex, updateNewsList } from "./newsList.js";
+import { getMaxMediaLength, updateNewsList } from "./newsList.js";
 
 const categoryList = [
   "종합/경제",
@@ -18,6 +18,7 @@ var newsInterval; //왜 전역변수로 설정해야 작동하는가??
 var myInterval;
 let currentCategoryIndex = 0;
 let currentMediaIndex = 0;
+let headerCategory = 0;
 
 /**
  * Nav목록으로 네비게이션 바를 container의 child로 생성 후 초기화
@@ -26,8 +27,13 @@ let currentMediaIndex = 0;
  */
 export function generateNav(container, currentHeaderCategoryIndex) {
   let selectedList;
-  if (currentHeaderCategoryIndex === 0) selectedList = categoryList;
-  else if (currentHeaderCategoryIndex === 1) selectedList = myList;
+  if (currentHeaderCategoryIndex === 0) {
+    selectedList = categoryList;
+    headerCategory = 0;
+  } else if (currentHeaderCategoryIndex === 1) {
+    selectedList = myList;
+    headerCategory = 1;
+  }
 
   navInit(selectedList);
 
@@ -155,9 +161,8 @@ export function setRightArrow(currentCategoryIndex) {
  * @param {String} newCategory
  * @param {int} currentCategoryIndex
  */
-function updateCategory(newCategory, currentCategoryIndex) {
-  currentMediaIndex = 0;
-  updateNewsList(newCategory, currentCategoryIndex, currentMediaIndex);
+function updateCategory(newCategory, index) {
+  updateNewsList(newCategory, index, currentMediaIndex);
 }
 
 /**
@@ -199,7 +204,7 @@ function updateNavElements(navElementNodes) {
 function handleNewsInterval(navElementNodes) {
   currentMediaIndex++;
   if (
-    currentMediaIndex >= getMaxMediaIndex(categoryList[currentCategoryIndex])
+    currentMediaIndex >= getMaxMediaLength(categoryList[currentCategoryIndex])
   ) {
     currentCategoryIndex = (currentCategoryIndex + 1) % categoryList.length;
     currentMediaIndex = 0;
@@ -266,4 +271,111 @@ function startMyNewsInterval() {
 function resetInterval() {
   clearInterval(newsInterval);
   clearInterval(myInterval);
+}
+
+const leftButton = document.querySelector(".leftButton");
+const rightButton = document.querySelector(".rightButton");
+
+leftButton.addEventListener("click", movePrevNewsMedia);
+rightButton.addEventListener("click", moveNextNewsMedia);
+
+/**
+ * 왼쪽 화살표 이동 함수
+ */
+function movePrevNewsMedia() {
+  const navElementNodes = document.querySelectorAll(".contentList li");
+  resetCover();
+
+  if (headerCategory === 0) handleNewsMovePrev(navElementNodes);
+  else if (headerCategory === 1) handleMyMovePrev(navElementNodes);
+}
+
+/**
+ * newsList 일 때 왼쪽 이동
+ * @param {node Array} navElementNodes
+ */
+function handleNewsMovePrev(navElementNodes) {
+  currentMediaIndex--;
+
+  if (currentMediaIndex < 0) {
+    currentCategoryIndex--;
+
+    if (currentCategoryIndex < 0)
+      currentCategoryIndex = categoryList.length - 1;
+
+    currentMediaIndex =
+      getMaxMediaLength(categoryList[currentCategoryIndex]) - 1;
+  }
+
+  updateNavElements(navElementNodes);
+  updateCategoryByIndex(currentCategoryIndex);
+}
+
+/**
+ * myList 일 때 왼쪽 이동
+ * @param {node Array} navElementNodes
+ */
+function handleMyMovePrev(navElementNodes) {
+  currentCategoryIndex--;
+  if (currentCategoryIndex < 0) currentCategoryIndex = myList.length - 1;
+
+  updateNavElements(navElementNodes);
+  updateMyMedia(currentCategoryIndex);
+}
+
+/**
+ * 오른쪽 화살표 이동 함수
+ */
+function moveNextNewsMedia() {
+  const navElementNodes = document.querySelectorAll(".contentList li");
+  resetCover();
+
+  if (headerCategory === 0) handleNewsMoveNext(navElementNodes);
+  else if (headerCategory === 1) handleMyMoveNext(navElementNodes);
+}
+
+/**
+ * newsList 일 때 오른쪽 이동
+ * @param {node Array} navElementNodes
+ */
+function handleNewsMoveNext(navElementNodes) {
+  currentMediaIndex++;
+
+  if (
+    currentMediaIndex >
+    getMaxMediaLength(categoryList[currentCategoryIndex]) - 1
+  ) {
+    currentCategoryIndex++;
+
+    if (currentCategoryIndex > categoryList.length - 1)
+      currentCategoryIndex = 0;
+
+    currentMediaIndex = 0;
+  }
+
+  updateNavElements(navElementNodes);
+  updateCategoryByIndex(currentCategoryIndex);
+}
+
+/**
+ * myList 일 때 오른쪽 이동
+ * @param {node Array} navElementNodes
+ */
+function handleMyMoveNext(navElementNodes) {
+  currentCategoryIndex++;
+
+  if (currentCategoryIndex > myList.length - 1) currentCategoryIndex = 0;
+
+  updateNavElements(navElementNodes);
+  updateMyMedia(currentCategoryIndex);
+}
+
+/**
+ * 페이지가 넘어갈 때 progress animation을 재시작
+ */
+function resetCover() {
+  const cover = document.querySelector(".contentList li.selected .cover");
+  cover.classList.remove("cover");
+  void cover.offsetWidth;
+  cover.classList.add("cover");
 }

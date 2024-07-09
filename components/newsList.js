@@ -220,7 +220,7 @@ export function updateNewsList(
   setProgress(
     currentCategoryIndex,
     currentMediaIndex,
-    getMaxMediaIndex(category)
+    getMaxMediaLength(category)
   );
 
   setMedia(mediaList, currentMediaIndex);
@@ -233,7 +233,7 @@ export function updateNewsList(
  * @param {String} category
  * @returns 최대 media 수 반환
  */
-export function getMaxMediaIndex(category) {
+export function getMaxMediaLength(category) {
   return categoryData[category].length;
 }
 
