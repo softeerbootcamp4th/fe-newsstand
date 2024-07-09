@@ -199,12 +199,17 @@ main {
     width: 100%;
 }
 .all-cate-header {
+    width: 100%;
     display: flex;
     margin-top: 24px;
     border: 1px solid var(--border-default);
     background-color: var(--surface-alt);
     text-align: center;
     cursor: pointer;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-sizing: border-box;
+    scrollbar-width: none; 
 }
 
 
@@ -217,6 +222,9 @@ main {
     font-size: 14px;
     text-align: center;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 0;
 }
 
 .category-item:hover {
@@ -233,6 +241,13 @@ main {
     justify-content: space-between;
     position: relative;
     z-index: 2;
+}
+
+.arrow-icon {
+    height: 14px;
+    margin: auto 0;
+    z-index: 2;
+
 }
 .selected {
     width: 166px;
@@ -368,5 +383,25 @@ main {
 
 .right-btn {
     right: -50px;
+
+}
+
+.toast-alert {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    top : 50%;
+    padding : 16px 24px 16px 24px;
+    background-color: var(--surface-brand-default);
+    color: var(--text-white-default);
+    font-size: 16px;
+    line-height: 22px;
+    transition: opacity 0.5s, visibility 0.5s;
+
+}
+
+.toast-alert.show { 
+    visibility: visible;
+    opacity: 1;
 
 }

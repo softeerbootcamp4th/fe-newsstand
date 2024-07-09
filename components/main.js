@@ -31,6 +31,5 @@ export function renderMainContent() {
     <div class="arrow right-btn">
         <img src="./src/images/RightButton.png" alt="left-arrow">
     </div>
-
     `;
 }
