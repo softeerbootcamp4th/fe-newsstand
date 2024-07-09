@@ -1,4 +1,4 @@
-import { addDragEvent } from "./addDragEvent.js";
+import { addDragEvent } from "./drag.js";
 import { getCurrentArticle, getCurrentArticleList } from "./article.js";
 import { getCurrentCompany, getSubscribeCompanies, getTotalCompanyLength } from "./company.js";
 import { TOGGLE } from "./magicNumber.js";

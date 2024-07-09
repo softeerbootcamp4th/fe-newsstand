@@ -1,8 +1,5 @@
-import { initialize } from "./scripts/initialize.js";
+import { initializeData, initializeEvent, initializeScreen } from "./scripts/initialize.js";
 import { TOGGLE } from "./scripts/magicNumber.js";
-import { fetchData } from "./scripts/fetchData.js";
-import { companies } from "./json/companies.js";
-import { articles } from "./json/articles.js";
 //store
 let state = {
     toggleName: TOGGLE.ALL,
@@ -11,14 +8,17 @@ let state = {
     selectedCompanyIndex: 0,
     isDragging: false,
     subscribedCompanyNameSet: new Set(),
+    previewArticleData: {},
     articleDataList: [],
     companiesWithArticles: {},
 }
 
-fetchData().then((res) => {
-    Object.assign(state,res);
-    initialize(state);
-});
+initializeData(state)
+.then(_ => {
+    initializeEvent(state);
+    initializeScreen(state);
+})
+
 
 
                 
