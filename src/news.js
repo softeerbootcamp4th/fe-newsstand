@@ -7,8 +7,10 @@ const $newsListDOM = document.querySelector(".paper .list");
 const $comImgDOM = document.querySelector(".paper .subscribe-bar img");
 const $headlineImgDOM = document.querySelector(".paper .headline img");
 const $subscribeButtonDOM = document.querySelector(".paper .subscribe-button");
+let $ctgDOM;
 const categories = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
-const ctgScrollNum = 6;
+const scrollNum = 6;
+
 let newsList;
 let newsCom;
 
@@ -18,16 +20,51 @@ let state = {
   comId: 1,
 };
 
-categories.forEach((ctg) => {
+const insertDOM = (text) => {
   const newDOM = document.createElement("div");
   const newnewDOM = document.createElement("span");
-  newnewDOM.innerText = ctg;
+  newnewDOM.innerText = text;
   newDOM.appendChild(newnewDOM);
   newDOM.setAttribute("class", "unselected");
   $newsgroupDOM.appendChild(newDOM);
-});
+};
 
-const $ctgDOM = document.querySelectorAll(".newsgroup div");
+const groupRefill = () => {
+  if ($ctgDOM) ctgLose();
+  while ($newsgroupDOM.firstChild) {
+    $newsgroupDOM.removeChild($newsgroupDOM.firstChild);
+  }
+  state.ctg = 0;
+  state.comId = 1;
+  if (state.subscribeToggle === "whole") {
+    categories.forEach((ctg) => {
+      insertDOM(ctg);
+    });
+  }
+  else if (state.subscribeToggle === "my") {
+    const subscribeList = getSubscribeList();
+    let subscribeNameList = [];
+    subscribeList.forEach((comId) => {
+      subscribeNameList = [...subscribeNameList, newsCom.find((com) => com.id === comId).name];
+    });
+    subscribeNameList.forEach((comName) => {
+      insertDOM(comName);
+    });
+  }
+  $ctgDOM = document.querySelectorAll(".newsgroup div");
+  for (let i = 0; i < $ctgDOM.length; i++) {
+    $ctgDOM[i].addEventListener("click", () => {
+      if (state.ctg !== i) {
+        ctgLose();
+        state.ctg = i;
+        state.comId = 1;
+        ctgFill();
+        bottomFill();
+      }
+    })
+  }
+  ctgFill();
+};
 
 const ctgFill = () => {
   const DOM = $ctgDOM[state.ctg];
@@ -47,7 +84,7 @@ const ctgFill = () => {
   DOM.animate(keyframes, options).onfinish = () => {
     ctgLose();
     state.comId++;
-    if (state.comId > ctgScrollNum) {
+    if (state.comId > scrollNum) {
       state.comId = 1;
       state.ctg++;
       if (state.ctg === categories.length) state.ctg = 0;
@@ -56,11 +93,13 @@ const ctgFill = () => {
     bottomFill();
   }
 
-  if (DOM.childElementCount === 2) {
-    DOM.removeChild(DOM.lastElementChild);
-  }
   const newDOM = document.createElement("span");
-  newDOM.innerText = `${state.comId}/${ctgScrollNum}`;
+  if (state.subscribeToggle === "whole") {
+    newDOM.innerText = `${state.comId}/${scrollNum}`;
+  }
+  else if (state.subscribeToggle === "my") {
+    newDOM.innerHTML = "<img src='../img/chevron-right.png'>"
+  }
   DOM.appendChild(newDOM);
 };
 
@@ -130,8 +169,15 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
   newsList = _news;
   newsCom = _newsCom;
 
+  groupRefill();
+  bottomFill();
+
   document.querySelector(".subscribe-toggle").addEventListener("click", (e) => {
-    state.subscribeToggle = e.target.className;
+    if (e.target.className !== "whole" && e.target.className !== "my") return;
+    if (state.subscribeToggle !== e.target.className) {
+      state.subscribeToggle = e.target.className;
+      groupRefill();
+    }
     updateDOMstyle($subscribeToggleDOM[0], {
       fontWeight: `${state.subscribeToggle === "whole" ? "bold" : "normal"}`,
       color: `${state.subscribeToggle === "whole" ? "black" : "#879298"}`
@@ -139,7 +185,7 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
     updateDOMstyle($subscribeToggleDOM[1], {
       fontWeight: `${state.subscribeToggle === "my" ? "bold" : "normal"}`,
       color: `${state.subscribeToggle === "my" ? "black" : "#879298"}`
-    })
+    });
   });
 
   document.querySelector(".paper").addEventListener("click", (e) => {
@@ -147,22 +193,34 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
 
     if (targetClassName === "leftscroll") {
       ctgLose();
-      state.comId--;
-      if (state.comId === 0) {
-        state.comId = ctgScrollNum;
+      if (state.subscribeToggle === "whole") {
+        state.comId--;
+        if (state.comId === 0) {
+          state.comId = scrollNum;
+          state.ctg--;
+          if (state.ctg < 0) state.ctg = categories.length - 1;
+        }
+      }
+      else if (state.subscribeToggle === "my") {
         state.ctg--;
-        if (state.ctg < 0) state.ctg = categories.length - 1;
+        if (state.ctg < 0) state.ctg = getSubscribeList().length - 1;
       }
       ctgFill();
       bottomFill();
     }
     else if (targetClassName === "rightscroll") {
       ctgLose();
-      state.comId++;
-      if (state.comId > ctgScrollNum) {
-        state.comId = 1;
+      if (state.subscribeToggle === "whole") {
+        state.comId++;
+        if (state.comId > scrollNum) {
+          state.comId = 1;
+          state.ctg++;
+          if (state.ctg === categories.length) state.ctg = 0;
+        }
+      }
+      else if (state.subscribeToggle === "my") {
         state.ctg++;
-        if (state.ctg === categories.length) state.ctg = 0;
+        if (state.ctg === getSubscribeList().length) state.ctg = 0;
       }
       ctgFill();
       bottomFill();
@@ -173,29 +231,16 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
         if (confirm("구독하시겠습니까?")) {
           pushCurrentSubscribe();
           $subscribeButtonDOM.innerText = "×";
+          groupRefill();
         }
       }
       else {
         if (confirm("구독을 해지하시겠습니까?")) {
           removeCurrentSubscribe();
           $subscribeButtonDOM.innerText = "+ 구독하기";
+          groupRefill();
         }
       }
     }
   });
-
-  ctgFill();
-  bottomFill();
-
-  for (let i = 0; i < $ctgDOM.length; i++) {
-    $ctgDOM[i].addEventListener("click", () => {
-      if (state.ctg !== i) {
-        ctgLose();
-        state.ctg = i;
-        state.comId = 1;
-        ctgFill();
-        bottomFill();
-      }
-    })
-  }
 }
