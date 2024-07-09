@@ -67,7 +67,7 @@ export async function renderSubscribedMedia() {
  * @description 내가 구독한 언론사를 그리드 형식으로 렌더링하는 함수
  */
 function renderGridMedia(page) {
-    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const gridListDOM = document.querySelector(".media-contents__grid-list");
 
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
     const media = subscribeIdList.map((subscribedId) => mediaListData.data.find((_media) => _media.id === subscribedId));
@@ -77,7 +77,7 @@ function renderGridMedia(page) {
         mediaListDOMString += getGridMediaItem(_media);
     });
 
-    gridBoxDOM.innerHTML = mediaListDOMString;
+    gridListDOM.innerHTML = mediaListDOMString;
 
     // TODO: 구독/구독취소 이벤트 붙이기
 }

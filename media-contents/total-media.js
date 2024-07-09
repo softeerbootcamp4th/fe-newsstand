@@ -68,14 +68,14 @@ export async function renderTotalMedia() {
  */
 function renderGridMedia(page) {
     const media = mediaListData.data;
-    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const gridListDOM = document.querySelector(".media-contents__grid-list");
 
     let mediaListDOMString = '';
     media.slice(page * 24, (page + 1) * 24).forEach((_media) => {
         mediaListDOMString += getGridMediaItem(_media);
     });
 
-    gridBoxDOM.innerHTML = mediaListDOMString;
+    gridListDOM.innerHTML = mediaListDOMString;
 
     // TODO: 구독/구독취소 이벤트 붙이기
 }
