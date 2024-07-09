@@ -8,6 +8,7 @@ import {
     setSubscribeButtonEvent,
     getDisplayMode,
     getGridMediaItem,
+    clickGridItem,
 } from "./util.js";
 
 const DEFAULT_MEDIA_INDEX = 0;
@@ -48,12 +49,24 @@ export async function renderSubscribedMedia() {
 
     prevMediaButton.addEventListener("click", navigatePrevMedia);
     nextMediaButton.addEventListener("click", navigateNextMedia);
+
+    /**
+     * 그리드 목록 클릭 이벤트
+     */
+    const gridListDOM = document.querySelector(".media-contents__grid-list");   
+    gridListDOM.addEventListener("click", clickGridList);    
 }
 
 /**
  * @description 내가 구독한 언론사 화면이 사라질 때 관련 작업을 초기화해주는 함수
  */
 export function resetSubscribedMedia() {
+    /**
+     * 그리드 리스트 클릭 이벤트 remove
+     */
+    const gridListDOM = document.querySelector(".media-contents__grid-list");
+    gridListDOM.removeEventListener("click", clickGridList);
+
     /**
      * 미디어 카테고리 이벤트 초기화
      */
@@ -235,4 +248,16 @@ function clickGridNavigationButton(step) {
 
     gridBoxDOM.dataset.gridPage = nextPage;
     renderGridMedia(nextPage);
+}
+
+function clickGridList(e) {
+    const displayMode = getDisplayMode();
+
+    if (displayMode === "list-display") {
+        return;
+    }
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
+
+    return clickGridItem(e, mediaListData.data, () => renderGridMedia(currentPage));
 }
