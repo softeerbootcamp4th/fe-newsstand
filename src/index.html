@@ -74,16 +74,29 @@
             </div>
           </div>
         </div>
+        <nav>
+          <!-- 화살표 넣기 -->
+          <img src="/images/leftButton.svg" id="leftButton">
+          <img src="/images/rightButton.svg" id="rightButton">
+        </nav>
       </div>
     </main>
-    <nav>
-      <!-- 화살표 넣기 -->
-    </nav>
+
     <!-- snackBar 메세지 -->
     <div id="snackBar"></div>
+    <!-- cancelAlert 메세지 -->
+    <div id="cancelAlert">
+      <div id="cancelAlertTop">
+        <p class="display-bold16"></p>
+      </div>
+      <div id="cancelAlertBottom">
+        <button id="positiveButton" class="available-medium16">예, 해지합니다.</button>
+        <button id="negativeButton" class="available-medium16">아니오</button>
+      </div>
+    </div>
   </div>
 
-  <script src="./app.js" type="module"></script>
+  <!-- <script src="./app.js" type="module"></script> -->
   <script src="./components/date.js" type="module"></script>
   <script src="./components/topAndViewer.js" type="module"></script>
   <script src="./components/fieldTab.js" type="module"></script>
