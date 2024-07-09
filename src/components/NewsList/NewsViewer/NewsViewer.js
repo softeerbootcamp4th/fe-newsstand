@@ -1,11 +1,11 @@
 import "./NewsViewer.css";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
-import chevronRight from "@/assets/icons/chevronRight.svg";
 import ContentsBox from "@/components/NewsList/NewsViewer/ContentsBox/ContentsBox";
 import { addCompany, getSubscribedCompanies, removeCompany } from "@/data/storageHandler";
 import { CATEGORIES } from "@/data/constants";
 import { getNews } from "@/apis/news";
+import { getSVGTemplate } from "@/components/SVG/SVG";
 
 function NewsViewer({
   $target,
@@ -233,12 +233,11 @@ NewsViewer.prototype.render = function () {
               ${
                 this.props.filter === "category"
                   ? /* html */ `
-                  <span class="pageInfo">${page + 1}
-                    <span class="maxPage"> / ${news.length}</span>
-                  </span>`
-                  : /* html */ `
-                  <object class="pageInfo" type="image/svg+xml" data="${chevronRight}"></object>
+                    <span class="pageInfo">${page + 1}
+                      <span class="maxPage"> / ${news.length}</span>
+                    </span>
                   `
+                  : getSVGTemplate({ className: "svg", iconId: "chevron-right" })
               }
             </p>
             <progress class="progress progressTransition" value="0" min="0" max="100"></progress>

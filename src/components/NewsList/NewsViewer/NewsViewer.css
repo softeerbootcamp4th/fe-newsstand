@@ -73,12 +73,18 @@
 }
 
 .tab:not(.selected) .pageInfo,
+.tab:not(.selected) svg,
 .tab:not(.selected) progress {
   display: none;
 }
 
 .tab:not(.selected):hover {
   text-decoration: underline;
+}
+
+.tabInfo svg {
+  width: 14px;
+  height: 14px;
 }
 
 .progress {
