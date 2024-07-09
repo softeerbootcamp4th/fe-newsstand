@@ -78,7 +78,6 @@ function renderGridMedia(page) {
     gridBoxDOM.innerHTML = mediaListDOMString;
 
     // TODO: 구독/구독취소 이벤트 붙이기
-
 }
 
 /**
@@ -149,7 +148,6 @@ function clickCategoryList(e) {
  */
 function navigateNextMedia() {
     const displayMode = getDisplayMode();
-    console.log(displayMode)
 
     if (displayMode === "list-display") {
         clickListNavigationButton(1);

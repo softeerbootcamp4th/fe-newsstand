@@ -5,6 +5,7 @@ import {
     removeTotalArrowEvent
 } from "../utils/events.js";
 import { getData } from "../utils/fetch.js";
+import { getBoundNumber } from "../utils/get-number.js";
 import { getItem } from "../utils/local-storage.js";
 import { 
     getSelectedCategoryItemDOMString,
@@ -12,17 +13,21 @@ import {
     getSelectedCategoryContentsDOMString,
     setSubscribeButtonEvent,
     getDisplayMode,
+    getGridMediaItem,
 } from "./util.js";
 
 const DEFAULT_MEDIA_INDEX = 0;
+const DEFAULT_PAGE = 0;
 
 let mediaData = {};
+let mediaListData = {};
 
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
 export async function renderSubscribedMedia() {
     mediaData = await getData('../static/data/media-detail.json');
+    mediaListData = await getData('../static/data/media.json');
 
     const displayMode = getDisplayMode();
 
@@ -38,28 +43,8 @@ export async function renderSubscribedMedia() {
         gridBoxDOM.classList.remove("non-display");
         listBoxDOM.classList.add("non-display");
 
-        renderGridMedia();
+        renderGridMedia(DEFAULT_PAGE);
     }
-}
-
-/**
- * @description 내가 구독한 언론사를 그리드 형식으로 렌더링하는 함수
- */
-function renderGridMedia(mediaId) {
-    const media = mediaData.data;
-
-}
-
-/**
- * @description 내가 구독한 언론사를 리스트 형식으로 렌더링하는 함수
- */
-function renderListMedia(mediaId) {
-    const media = mediaData.data;
-    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
-    const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
-
-    const mediaListDOM = document.querySelector(".media-contents__category-list");
-    const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
 
     /**
      * prev, next 버튼 클릭 시 언론사 이동 이벤트
@@ -76,7 +61,37 @@ function renderListMedia(mediaId) {
 
     prevMediaButton.addEventListener("click", navigatePrevMedia);
     nextMediaButton.addEventListener("click", navigateNextMedia);
+}
 
+/**
+ * @description 내가 구독한 언론사를 그리드 형식으로 렌더링하는 함수
+ */
+function renderGridMedia(page) {
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
+    const media = subscribeIdList.map((subscribedId) => mediaListData.data.find((_media) => _media.id === subscribedId));
+
+    let mediaListDOMString = '';
+    media.slice(page * 24, (page + 1) * 24).forEach((_media) => {
+        mediaListDOMString += getGridMediaItem(_media);
+    });
+
+    gridBoxDOM.innerHTML = mediaListDOMString;
+
+    // TODO: 구독/구독취소 이벤트 붙이기
+}
+
+/**
+ * @description 내가 구독한 언론사를 리스트 형식으로 렌더링하는 함수
+ */
+function renderListMedia(mediaId) {
+    const media = mediaData.data;
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
+    const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
+
+    const mediaListDOM = document.querySelector(".media-contents__category-list");
+    const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
 
     if (subscribedMediaList.length === 0) {
         mediaListDOM.innerHTML = "";
@@ -150,19 +165,31 @@ function clickMediaList(e) {
  * @description 다음 페이지로 이동하는 함수
  */
 function navigateNextMedia() {
-    clickNavigationButton(1);
+    const displayMode = getDisplayMode();
+
+    if (displayMode === "list-display") {
+        clickListNavigationButton(1);
+    } else if (displayMode === "grid-display") {
+        clickGridNavigationButton(1);
+    }
 }
 /**
  * @description 이전 페이지로 이동하는 함수
  */
 function navigatePrevMedia() {
-    clickNavigationButton(-1);
+    const displayMode = getDisplayMode();
+
+    if (displayMode === "list-display") {
+        clickListNavigationButton(-1);
+    } else if (displayMode === "grid-display") {
+        clickGridNavigationButton(-1);
+    }
 }
 
 /**
- * @description prev, next 버튼 클릭 동작을 수행하는 함수
+ * @description 리스트 보기에서 prev, next 버튼 클릭 동작을 수행하는 함수
  */
-function clickNavigationButton(step) {
+function clickListNavigationButton(step) {
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
 
     if (subscribeIdList.length === 0) {
@@ -191,4 +218,20 @@ function clickNavigationButton(step) {
     selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
     const nextCategoryId = subscribeIdList[nextCategoryIdx];
     renderListMedia(nextCategoryId);
+}
+
+/**
+ * @description 그리드 보기에서 prev, next 버튼 클릭 동작을 수행하는 함수
+ */
+function clickGridNavigationButton(step) {
+    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
+    const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
+
+    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
+    const media = subscribeIdList.map((subscribedId) => mediaListData.data.find((_media) => _media.id === subscribedId));
+    const mediaLength = media.length;
+    const nextPage = getBoundNumber(currentPage + step, 0, Math.floor((mediaLength - 1) / 24));
+
+    gridBoxDOM.dataset.gridPage = nextPage;
+    renderGridMedia(nextPage);
 }
