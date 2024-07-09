@@ -55,6 +55,9 @@ export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
       cur.removeAttribute(name);
     }
   }
+  if (cur.innerHTML !== nxt.innerHTML) {
+    cur.innerHTML = nxt.innerHTML;
+  }
 
   // Update children
   const curChildren = Array.from(cur.childNodes);
