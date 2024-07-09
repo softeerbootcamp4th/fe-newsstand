@@ -83,7 +83,7 @@ export const loadCurrentCategoryNews = (dataType) => {
             console.error(error);
         });
     } else {
-        displayNews(dataType);
+        dataType === 'subscribe' && subscriptions.length === 0 ? displayInformation() :displayNews(dataType);
         updateBtnVisibility();
         updateCategoryDisplay();
         startProgressBar(); // 데이터 갱신 후 프로그래스바 시작

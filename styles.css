@@ -299,6 +299,8 @@ main {
     border-left: 1px solid var(--border-default);
     border-right: 1px solid var(--border-default);
     border-bottom: 1px solid var(--border-default);
+    font-size: 16px;
+    color: var(--text-weak);
 
 }
 .news-container.hidden , .info.hidden {
