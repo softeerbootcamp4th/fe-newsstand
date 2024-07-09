@@ -20,6 +20,11 @@
   }
 }
 
+.button > .svg {
+  width: 12px;
+  height: 12px;
+}
+
 .hasText {
   width: auto;
 
