@@ -1,6 +1,5 @@
 import useState from '../../core/hooks/useState.js'
 import Button, { ButtonVariantProps } from '../base/Button.js'
-import { generateRandomId } from '../../utils/idGenerator.js'
 import createComponent from '../../core/component/component.js'
 import IconView, { Icon } from '../base/IconView.js'
 import { isSubscribed, handleSubscription } from '../../utils/subscribeUtils.js'
@@ -23,7 +22,7 @@ const NewsBox = (props) => {
     }
 
     const subscribeButton = createComponent(Button, {
-        id: generateRandomId(10),
+        id: props.news.id + props.id,
         icon: isSubscribed(props.news.id) ? Icon.X : Icon.PLUS,
         text: isSubscribed(props.news.id) ? '구독해제' : '구독하기',
         variant: ButtonVariantProps.WHITE,
@@ -34,14 +33,14 @@ const NewsBox = (props) => {
     })
 
     const companyIcon = createComponent(IconView, {
-        id: generateRandomId(10),
+        id: props.id,
         icon: props.news.icon,
     })
 
     return {
         element: `
         <div class="news-box-container" id="news-box${props.id}">
-            ${isHover ? subscribeButton.element : companyIcon.element}
+            ${isHover.value ? subscribeButton.element : companyIcon.element}
         </div>
         `,
         bindEvents,

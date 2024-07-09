@@ -2,12 +2,11 @@ import createComponent from './core/component/component.js'
 import Header from './layouts/header/Header.js'
 import SubHeader from './layouts/sub-header/SubHeader.js'
 import NewsContainer from './layouts/news-container/NewsContainer.js'
-import { generateRandomId } from './utils/idGenerator.js'
 
 const App = () => {
-    const headerLayout = createComponent(Header, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
-    const subHeaderLayout = createComponent(SubHeader, { id: generateRandomId(10), style: 'width:100%; height:8%;' })
-    const newsContainerLayout = createComponent(NewsContainer, { id: generateRandomId(10), style: 'width:100%; height:80%;' })
+    const headerLayout = createComponent(Header, { id: 1, style: 'width:100%; height:8%;' })
+    const subHeaderLayout = createComponent(SubHeader, { id: 1, style: 'width:100%; height:8%;' })
+    const newsContainerLayout = createComponent(NewsContainer, { id: 1, style: 'width:100%; height:80%;' })
 
     return {
         element: `

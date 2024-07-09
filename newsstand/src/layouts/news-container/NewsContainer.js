@@ -3,7 +3,6 @@ import useState from '../../core/hooks/useState.js'
 import createComponent from '../../core/component/component.js'
 import ListNewsstand from './ListNewsstand.js'
 import GridNewsstand from './GridNewsstand.js'
-import { generateRandomId } from '../../utils/idGenerator.js'
 import { mediaCategoryData } from '../../datas/mockData.js'
 
 const NewsContainer = () => {
@@ -12,7 +11,7 @@ const NewsContainer = () => {
     const [viewType, setViewType] = useState({ stateId: 3, initialValue: 'list' })
 
     const newsSourceSelectorLayout = createComponent(NewsSourceSelector, {
-        id: generateRandomId(10),
+        id: 1,
         style: 'width:100%; height:8%;',
         selectedSource: selectedSource,
         setSelectedSource: setSelectedSource,
@@ -22,23 +21,26 @@ const NewsContainer = () => {
     })
 
     const listNewsstandLayout = createComponent(ListNewsstand, {
-        id: generateRandomId(10),
+        id: 1,
         selectedSource: selectedSource,
         selectedCategory: selectedCategory,
         setSelectedCategory: setSelectedCategory,
+        viewType: viewType,
+        setViewType: setViewType,
         style: 'width:100%;',
     })
 
     const gridNewsstandLayout = createComponent(GridNewsstand, {
-        id: generateRandomId(10),
+        id: 1,
         selectedSource: selectedSource,
+        viewType: viewType,
         style: 'width:100%; height:70%;',
     })
 
     return {
         element: `
         ${newsSourceSelectorLayout.element}
-        ${viewType === 'list' ? listNewsstandLayout.element : gridNewsstandLayout.element}
+        ${viewType.value === 'list' ? listNewsstandLayout.element : gridNewsstandLayout.element}
         `,
     }
 }

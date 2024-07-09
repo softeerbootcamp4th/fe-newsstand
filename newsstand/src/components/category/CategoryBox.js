@@ -4,7 +4,7 @@ let intervalId = null
 
 const CategoryBox = (props) => {
     const companyCount = isIn(props.text, mediaCategoryData) ? getCompanyCount(props.text) : 1
-    const countText = props.selectedSource === '전체 언론사' ? `${props.currentNewsId}/${companyCount}` : `>`
+    const countText = props.selectedSource.value === '전체 언론사' ? `${props.currentNewsId.value}/${companyCount}` : `>`
 
     const handleMouseClick = () => {
         props.setState(props.text)
@@ -40,7 +40,7 @@ const CategoryBox = (props) => {
         intervalId = null
     }
 
-    if (props.state === props.text) {
+    if (props.state.value === props.text) {
         clearIntervalForce()
         setTimeout(fillGauge, 0)
     } else {
@@ -50,16 +50,16 @@ const CategoryBox = (props) => {
     return {
         element: `
             <div class="category-box-wrap"
-                style="background-color: ${props.state === props.text ? '#7890E7' : 'transparent'};"
+                style="background-color: ${props.state.value === props.text ? '#7890E7' : 'transparent'};"
             >
                 <div class="category-box-fill" id="category-fill-${props.id}"></div>
                 <li class="category-text" id="category-text-${props.id}"
-                    style="font-weight: ${props.state === props.text ? 'bold' : 400};
-                    color: ${props.state === props.text ? 'white' : 'black'};"
+                    style="font-weight: ${props.state.value === props.text ? 'bold' : 400};
+                    color: ${props.state.value === props.text ? 'white' : 'black'};"
                 >
                     ${props.text} 
                     <span style="font-size: 14px; padding-left: 12px">
-                        ${companyCount > 0 && props.state === props.text ? countText : ''}
+                        ${companyCount > 0 && props.state.value === props.text ? countText : ''}
                     </span>
                 </li>
             </div>

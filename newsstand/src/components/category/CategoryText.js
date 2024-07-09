@@ -25,7 +25,7 @@ const CategoryText = (props) => {
     return {
         element: `
         <div class="category-text" id="category-text-${props.id}" 
-            style="font-weight: ${isHover || props.state === props.text ? 'bold' : 400}; padding-left: 1px;"
+            style="font-weight: ${isHover.value || props.state.value === props.text ? 'bold' : 400}; padding-left: 1px;"
         >
             ${props.text}
         </div>
