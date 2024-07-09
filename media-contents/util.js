@@ -1,5 +1,6 @@
-import { convertToMarkdown } from "../utils/convert-to-markdown.js";
 import { getItem, setItem } from "../utils/local-storage.js";
+import { renderAlert } from "../utils/render-alert.js";
+import { renderSnackbar } from "../utils/render-snackbar.js";
 
 /**
  * @description 선택된 카테고리 아이템 DOM string을 반환해주는 함수
@@ -141,93 +142,6 @@ function clickUnsubscribeButton(media, triggerRender) {
 }
 
 /**
- * @description alert를 렌더하는 함수
- */
-export function renderAlert(text, id, leftButtonText, rightButtonText, leftButtonEventHandler, rightButtonEventHandler) {
-    const markdownText = convertToMarkdown(text, 16);
-
-    const bodyDOM = document.querySelector("body");
-    const alertDOMString = `
-    <section id="alert-${id}" class="alert__wrapper">
-        <section class="alert__container">
-            <section class="alert__contents">${markdownText}</section>
-        
-            <section class="alert__buttons">
-                <p class="alert__button alert__button--left text__medium16">${leftButtonText}</p>
-                <p class="alert__button alert__button--right text__medium16 text--strong">${rightButtonText}</p>
-            </section>
-        </section>
-    </section>`;
-
-    bodyDOM.insertAdjacentHTML("beforeend", alertDOMString);
-
-    /**
-     * alert 이벤트 리스너 부착
-     */
-    const leftButtonDOM = document.querySelector(".alert__button--left");
-    const rightButtonDOM = document.querySelector(".alert__button--right");
-    leftButtonDOM.addEventListener("click", leftButtonEventHandler);
-    rightButtonDOM.addEventListener("click", rightButtonEventHandler);
-
-    /**
-     * alert 외부 영역 클릭 시 alert 삭제 로직
-     */
-    const alertWrapperDOM = document.querySelector(`#alert-${id}`);
-    alertWrapperDOM.addEventListener("click", clickAlertOutside);
-    function clickAlertOutside(e) {
-        if (e.target !== alertWrapperDOM) {
-            return;
-        }
-
-        const bodyDOM = document.querySelector("body");
-        bodyDOM.removeChild(alertWrapperDOM);
-    }
-}
-
-/**
- * @description snackbar를 렌더하는 함수
- */
-function renderSnackbar(text, id) {
-    const bodyDOM = document.querySelector("body");
-    const snackbarDOMString = `
-    <section id="snackbar-${id}" class="snackbar__wrapper">
-        <section class="snackbar__container">
-            <p class="text__medium16 text__white--default">${text}</p>
-        </section>
-    </section>`;
-    
-    bodyDOM.insertAdjacentHTML("beforeend", snackbarDOMString);
-
-    /**
-     * 5초 후 snackbar 삭제 로직
-     */
-    let snackbarId = null;
-    const snackbarWrapperDOM = document.querySelector(`#snackbar-${id}`);
-    snackbarId = setTimeout(() => {
-        bodyDOM.removeChild(snackbarWrapperDOM);
-        snackbarId = null;
-    }, 5000);
-
-    /**
-     * snackbar 외부 영역 클릭 시 snackbar 삭제 로직
-     */
-    snackbarWrapperDOM.addEventListener("click", clickSnackbarOutside);
-    function clickSnackbarOutside(e) {
-        if (e.target !== snackbarWrapperDOM) {
-            return;
-        }
-
-        if (snackbarId !== null) {
-            clearTimeout(snackbarId);
-            snackbarId = null;
-        }
-
-        const bodyDOM = document.querySelector("body");
-        bodyDOM.removeChild(snackbarWrapperDOM);
-    }
-}
-
-/**
  * @description 현재 display mode를 반환해주는 함수
  */
 export function getDisplayMode() {
@@ -276,6 +190,7 @@ export function clickGridItem(e, media, renderTrigger) {
         clickSubscribeButton(mediaId, renderTrigger);
     }
 }
+
 /**
  * @description 타겟의 media id를 반환하는 함수
  */
