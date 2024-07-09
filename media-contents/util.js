@@ -52,10 +52,10 @@ export function getSelectedCategoryContentsDOMString(media) {
         <img alt="언론사 아이콘" src="${iconUrl}"/>
         <p class="text__medium12">${editDate}</p>
         ${isSubscribed ? `
-            <section class="button__container subscribe-button--unsubscribe" data-media-id="${id}">
+            <section class="button__container subscribe-button__${id}--unsubscribe" data-media-id="${id}">
                 <img class="subscribe-button__icon--unsubscribe" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
             </section>` : `
-            <section class="button__container subscribe-button--subscribe" data-media-id="${id}">
+            <section class="button__container subscribe-button__${id}--subscribe" data-media-id="${id}">
                 <img class="subscribe-button__icon" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
                 <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
             </section>`}
@@ -86,7 +86,7 @@ export function getSelectedCategoryContentsDOMString(media) {
  * @description 구독/구독취소 이벤트 등록하는 함수
  */
 export function setSubscribeButtonEvent(media, triggerRender) {  
-    const subscribeButtonDOM = document.querySelector('.subscribe-button--subscribe');
+    const subscribeButtonDOM = document.querySelector(`.subscribe-button__${media.id}--subscribe`);
     if (subscribeButtonDOM) {
         const subscribeMediaId = parseInt(subscribeButtonDOM.dataset.mediaId);
         subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(subscribeMediaId, triggerRender));
@@ -96,7 +96,7 @@ export function setSubscribeButtonEvent(media, triggerRender) {
         subscribeButtonDOM.addEventListener("mouseout", () => subscribeButtonIconDOM.src = "./static/icons/plus-default.svg");
     }
 
-    const unsubscribeButtonDOM = document.querySelector('.subscribe-button--unsubscribe');
+    const unsubscribeButtonDOM = document.querySelector(`.subscribe-button__${media.id}--unsubscribe`);
     if (unsubscribeButtonDOM) {
         const unsubscribeMediaId = parseInt(unsubscribeButtonDOM.dataset.mediaId);
         unsubscribeButtonDOM.addEventListener("click", () => clickUnsubscribeButton(media, unsubscribeMediaId, triggerRender));
@@ -234,4 +234,21 @@ function renderSnackbar(text, id) {
 export function getDisplayMode() {
     const mediaDisplayDOM = document.querySelector("#display-style");
     return mediaDisplayDOM.dataset.selectedDisplay;
+}
+
+export function getGridMediaItem(media) {
+    const subscribeList = getItem("newsstand-subscribe") ?? [];
+    const isSubscribed = subscribeList.includes(media.id);
+
+    return `<li class="media-contents__grid-item">
+                <img class="media-contents__grid-item-icon" alt="${media.name} 언론사 아이콘" src="${media.icon}"/>
+                ${isSubscribed ? `
+                <section class="button__container subscribe-button__${media.id}--unsubscribe" data-media-id="${media.id}">
+                    <img class="subscribe-button__icon--unsubscribe" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
+                </section>` : `
+                <section class="button__container subscribe-button__${media.id}--subscribe" data-media-id="${media.id}">
+                    <img class="subscribe-button__icon" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
+                    <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
+                </section>`}
+            </li>`
 }

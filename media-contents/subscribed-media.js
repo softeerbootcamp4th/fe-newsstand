@@ -22,7 +22,7 @@ let mediaData = {};
  * @description 구독한 언론사를 렌더링하는 함수
  */
 export async function renderSubscribedMedia() {
-    mediaData = await getData('../static/data/media.json');
+    mediaData = await getData('../static/data/media-detail.json');
 
     const displayMode = getDisplayMode();
 
@@ -30,15 +30,29 @@ export async function renderSubscribedMedia() {
     const listBoxDOM = document.querySelector(".media-contents__list-box")
 
     if (displayMode === "list-display") {
-        renderListMedia();
         gridBoxDOM.classList.add("non-display");
         listBoxDOM.classList.remove("non-display");
+
+        renderListMedia();
     } else if (displayMode === "grid-display") {
         gridBoxDOM.classList.remove("non-display");
         listBoxDOM.classList.add("non-display");
+
+        renderGridMedia();
     }
 }
 
+/**
+ * @description 내가 구독한 언론사를 그리드 형식으로 렌더링하는 함수
+ */
+function renderGridMedia(mediaId) {
+    const media = mediaData.data;
+
+}
+
+/**
+ * @description 내가 구독한 언론사를 리스트 형식으로 렌더링하는 함수
+ */
 function renderListMedia(mediaId) {
     const media = mediaData.data;
     const subscribeIdList = getItem("newsstand-subscribe") ?? [];
