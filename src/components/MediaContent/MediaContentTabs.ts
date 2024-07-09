@@ -1,8 +1,7 @@
 import { Div, Span, ce } from "@/libs/elements";
 import styles from "./MediaContentTabs.module.css";
 import typoStyles from "@/styles/typo.module.css";
-import { AppChild, AppComponent, AppElement } from "@/libs/renderer";
-import { cc } from "@/libs/components";
+import { AppChild } from "@/libs/renderer";
 interface MediaContentTabProps {
   main: string;
   sub: AppChild;
@@ -24,6 +23,7 @@ const MediaContentTab = ({
     className: `${styles.tab} ${isActive ? activeStyle : inactiveStyle}`,
     onClick,
     children: [ce(Span, { children: [main] }), ce(Span, { children: [sub] })],
+    onAnimationIteration: onNext,
   });
 };
 interface MediaContentTabsProps {

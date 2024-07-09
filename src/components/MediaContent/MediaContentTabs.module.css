@@ -18,6 +18,7 @@
   flex-shrink: 0;
   padding-left: 16px;
   padding-right: 16px;
+  cursor: pointer;
 }
 
 @keyframes bg-fill {
@@ -37,7 +38,7 @@
   color: var(--text-text-white-default, #FFFFFF);
   background: linear-gradient(to right, var(--surface-surface-brand-default, #4362D0) 50%, var(--surface-surface-brand-alt, #7890E7) 50%);
   background-size: 200% 100%;
-  animation: bg-fill 5s forwards;
+  animation: bg-fill 5s infinite;
 }
 
 .tab-inactive {

@@ -1,11 +1,12 @@
-import { Div, Span, ce } from "@/libs/elements";
+import { Div, ce } from "@/libs/elements";
 import { MediaContentFilter } from "./MediaContentFilter";
 import { useEffect, useState } from "@/libs";
 import { cc } from "@/libs/components";
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { MediaIdByCategories } from "@/models/Newsstand";
 import { MediaContentTabs } from "./MediaContentTabs";
-
+import styles from "./index.module.css";
+import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
 export type MediaContentFilterType = "전체 언론사" | "내가 구독한 언론사";
 
 export const MediaContent = () => {
@@ -18,14 +19,17 @@ export const MediaContent = () => {
   ]);
 
   const handleNext = () => {
-    if (currentDataIdx[0] + 1 >= currentData.length) {
+    if (
+      currentDataIdx[1] + 1 <
+      currentData[currentDataIdx[0]].mediaIds.length
+    ) {
+      setCurrentDataIdx([currentDataIdx[0], currentDataIdx[1] + 1]);
       return;
     }
-    setCurrentDataIdx(
-      currentDataIdx[0] + 1 < currentData.length
-        ? [currentDataIdx[0] + 1, 0]
-        : [0, 0],
-    );
+    if (currentDataIdx[0] + 1 < currentData.length) {
+      setCurrentDataIdx([currentDataIdx[0] + 1, 0]);
+      return;
+    }
   };
 
   const handleClick = (idx: [number, number]) => {
@@ -39,6 +43,7 @@ export const MediaContent = () => {
     loadData();
   }, []);
   return ce(Div, {
+    className: styles.container,
     children: [
       cc(MediaContentFilter, {
         currentFilter: currentFilter,
@@ -46,12 +51,16 @@ export const MediaContent = () => {
       }),
       cc(MediaContentTabs, {
         tabs: currentData.map((data, idx) => {
+          const isActive = idx === currentDataIdx[0];
           return {
             main: data.category.name,
-            sub: ce(Span, {
-              children: [`${data.mediaIds.length}`],
-            }),
-            isActive: idx === currentDataIdx[0],
+            sub: isActive
+              ? cc(CategoryTabActiveBadge, {
+                  curIdx: currentDataIdx[1],
+                  total: data.mediaIds.length,
+                })
+              : null,
+            isActive: isActive,
             onClick: () => {
               handleClick([idx, 0]);
             },
