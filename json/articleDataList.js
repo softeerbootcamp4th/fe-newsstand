@@ -1033,7 +1033,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -1111,7 +1111,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -1177,7 +1177,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           }
@@ -1213,7 +1213,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -1417,7 +1417,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -1453,7 +1453,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -1651,7 +1651,7 @@ let articleDataList = [
         "articles": [
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -1711,7 +1711,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -1765,7 +1765,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           }
@@ -1801,7 +1801,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -1843,7 +1843,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           },
@@ -2017,7 +2017,7 @@ let articleDataList = [
           },
           {
             "subject": "연예",
-            "image": "ttps://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
+            "image": "https://image.munhwa.com/gen_news/202407/20240708MW071517236906_b.jpg?v=20240708181341",
             "title": "‘63세 연하킬러’ 최화정 “남친 ‘엄마’ 호칭에 정신이 ‘번쩍’”",
             "registerDate": "2024-07-08 15:57"
           }
