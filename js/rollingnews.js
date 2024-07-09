@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
       renderNews(leftNewsContainer, leftNews, leftIndex);
       renderNews(rightNewsContainer, rightNews, rightIndex);
 
-      createInterval(leftNewsContainer, leftTimer, leftNews, leftIndex);
+      createInterval(leftNewsContainer, leftTimer, leftNews, leftIndex, 'left');
 
       setTimeout(() => {
-        createInterval(rightNewsContainer, rightTimer, rightNews, rightIndex);
+        createInterval(rightNewsContainer, rightTimer, rightNews, rightIndex, 'right');
       }, 1000);
 
       // 마우스 호버 시 롤링 일시정지 및 밑줄 표시
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         leftNewsContainer
           .querySelector(".news-item")
           .classList.remove("hovered");
-        createInterval(leftNewsContainer, leftTimer, leftNews, leftIndex);
+        createInterval(leftNewsContainer, leftTimer, leftNews, leftIndex, 'left');
       });
 
       rightNewsContainer.addEventListener("mouseenter", () => {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         rightNewsContainer
           .querySelector(".news-item")
           .classList.remove("hovered");
-        createInterval(rightNewsContainer, rightTimer, rightNews, rightIndex);
+        createInterval(rightNewsContainer, rightTimer, rightNews, rightIndex, 'right');
       });
     })
     .catch((error) => {
@@ -79,10 +79,11 @@ function createNewsItem(news, classname = "") {
   return newsItem;
 }
 
-function createInterval(container, timer, news, index) {
+function createInterval(container, timer, news, index, type) {
   timer = setInterval(() => {
     rollingNews(container, news, index);
     index = (index + 1) % news.length;
+    type === 'left' ? leftIndex = (index + 1) % news.length : rightIndex = (index + 1) % news.length ;
   }, intervalTime);
 }
 
