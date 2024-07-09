@@ -34,8 +34,8 @@ export const unSubscribe = (targetCompanyId) => {
     setSubscribedCompaniesId(subscribedCompaniesId)
 }
 
-export const getSubscribedCompanies = (wholeCompanyData) => {
-    const subscribedIds = getSubscribedCompaniesId()
+export const getSubscribedCompanies = async (wholeCompanyData) => {
+    const subscribedIds = await Promise.resolve(getSubscribedCompaniesId())
     const subscribedCompanies = wholeCompanyData.filter((company) => subscribedIds.includes(company.id))
 
     return subscribedCompanies
