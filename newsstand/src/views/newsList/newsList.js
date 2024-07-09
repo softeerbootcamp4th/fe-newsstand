@@ -2,7 +2,6 @@
 import PressCategoryContainer from './pressCategory/pressCategory.js';
 import PressInfoContainer from './pressInfo/pressInfo.js';
 import PressNewsContainer from './pressNews/pressNews.js';
-import { separateId } from '../../utils/utils.js';
 
 export const NewsList = (props) => {
     const element = document.createElement('div');
