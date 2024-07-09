@@ -12,7 +12,7 @@ const categoryList = [
   "지역",
 ];
 
-const myList = ["언론사1", "언론사5", "언론사9", "언론사11", "언론사12"];
+const myList = ["언론사1", "언론사2", "언론사9", "언론사11", "언론사12"];
 
 var newsInterval; //왜 전역변수로 설정해야 작동하는가??
 var myInterval;
@@ -37,8 +37,7 @@ export function generateNav(container, currentHeaderCategoryIndex) {
   function navInit(selectedList) {
     currentCategoryIndex = 0;
     currentMediaIndex = 0;
-    clearInterval(newsInterval);
-    clearInterval(myInterval);
+    resetInterval();
 
     const nav = generateNode("nav", "content_navigator");
     const ul = generateNode("ul", "contentList");
@@ -56,6 +55,9 @@ export function generateNav(container, currentHeaderCategoryIndex) {
   }
 }
 
+/**
+ * newsList를 생성하는 함수
+ */
 function generateNavForNewsList() {
   updateNewsList(
     categoryList[currentCategoryIndex],
@@ -63,16 +65,15 @@ function generateNavForNewsList() {
     currentMediaIndex
   );
 
-  const categoryElements = document.querySelectorAll(".contentList li");
+  const navElementNodes = document.querySelectorAll(".contentList li");
 
-  categoryElements.forEach((element, index) => {
+  navElementNodes.forEach((element, index) => {
     element.addEventListener("click", function () {
-      categoryElements[currentCategoryIndex].classList.remove("selected");
+      navElementNodes[currentCategoryIndex].classList.remove("selected");
       element.classList.add("selected");
       currentCategoryIndex = index;
 
-      clearInterval(newsInterval);
-      clearInterval(myInterval);
+      resetInterval();
       startNewsInterval();
 
       updateCategory(categoryList[index], currentCategoryIndex);
@@ -80,19 +81,22 @@ function generateNavForNewsList() {
   });
   startNewsInterval();
 }
+
+/**
+ * 구독 newsList를 생성하는 함수
+ */
 function generateNavForMyList() {
   updateMyNewsList(currentCategoryIndex);
 
-  const categoryElements = document.querySelectorAll(".contentList li");
+  const navElementNodes = document.querySelectorAll(".contentList li");
 
-  categoryElements.forEach((element, index) => {
+  navElementNodes.forEach((element, index) => {
     element.addEventListener("click", function () {
-      categoryElements[currentCategoryIndex].classList.remove("selected");
+      navElementNodes[currentCategoryIndex].classList.remove("selected");
       element.classList.add("selected");
       currentCategoryIndex = index;
 
-      clearInterval(newsInterval);
-      clearInterval(myInterval);
+      resetInterval();
       startMyNewsInterval();
 
       updateMyMedia(currentCategoryIndex);
@@ -159,48 +163,91 @@ function updateMyMedia(newCategoryIndex) {
 }
 
 /**
- * 20초 마다 categoryList의 다음 요소로 넘김
+ * li 배열에 선택된 node에 selected class추가
+ * @param {node Array} navElementNodes
  */
-function startNewsInterval() {
-  newsInterval = setInterval(() => {
-    const categoryElements = document.querySelectorAll(".contentList li");
-    currentMediaIndex++;
-    if (
-      currentMediaIndex >= getMaxMediaIndex(categoryList[currentCategoryIndex])
-    ) {
-      currentCategoryIndex = (currentCategoryIndex + 1) % categoryList.length;
-      categoryElements.forEach((element, index) => {
-        if (index === currentCategoryIndex) {
-          element.classList.add("selected");
-        } else {
-          element.classList.remove("selected");
-        }
-      });
-
-      updateCategory(categoryList[currentCategoryIndex], currentCategoryIndex);
+function updateNavElements(navElementNodes) {
+  navElementNodes.forEach((element, index) => {
+    if (index === currentCategoryIndex) {
+      element.classList.add("selected");
     } else {
-      updateNewsList(
-        categoryList[currentCategoryIndex],
-        currentCategoryIndex,
-        currentMediaIndex
-      );
+      element.classList.remove("selected");
     }
-  }, 20000);
+  });
 }
 
+/**
+ * news List 자동 전환
+ * @param {node Array} navElementNodes
+ */
+function handleNewsInterval(navElementNodes) {
+  currentMediaIndex++;
+  if (
+    currentMediaIndex >= getMaxMediaIndex(categoryList[currentCategoryIndex])
+  ) {
+    currentCategoryIndex = (currentCategoryIndex + 1) % categoryList.length;
+    currentMediaIndex = 0;
+  }
+
+  updateNavElements(navElementNodes);
+  updateNewsList(
+    categoryList[currentCategoryIndex],
+    currentCategoryIndex,
+    currentMediaIndex
+  );
+}
+
+/**
+ * my news List 자동 전환
+ * @param {node Array} navElementNodes
+ */
+function handleMyInterval(navElementNodes) {
+  currentCategoryIndex++;
+  if (currentCategoryIndex >= getMyDataLength()) {
+    currentCategoryIndex = 0;
+  }
+
+  updateNavElements(navElementNodes);
+  updateMyNewsList(currentCategoryIndex);
+}
+
+/**
+ * news면 newsList, my면 myList 자동 전환
+ * @param {String} intervalType
+ */
+function startInterval(intervalType) {
+  const navElementNodes = document.querySelectorAll(".contentList li");
+  const isNewsInterval = intervalType === "news";
+  const isMyInterval = intervalType === "my";
+
+  if (isNewsInterval) {
+    newsInterval = setInterval(
+      () => handleNewsInterval(navElementNodes),
+      20000
+    );
+  } else if (isMyInterval) {
+    myInterval = setInterval(() => handleMyInterval(navElementNodes), 20000);
+  }
+}
+
+/**
+ * news list Interval 시작
+ */
+function startNewsInterval() {
+  startInterval("news");
+}
+
+/**
+ * my list Interval 시작
+ */
 function startMyNewsInterval() {
-  myInterval = setInterval(() => {
-    const categoryElements = document.querySelectorAll(".contentList li");
-    currentCategoryIndex++;
-    if (currentCategoryIndex >= getMyDataLength())
-      currentCategoryIndex = currentCategoryIndex % getMyDataLength();
-    categoryElements.forEach((element, index) => {
-      if (index === currentCategoryIndex) {
-        element.classList.add("selected");
-      } else {
-        element.classList.remove("selected");
-      }
-    });
-    updateMyNewsList(currentCategoryIndex);
-  }, 20000);
+  startInterval("my");
+}
+
+/**
+ * news list, my list Interval 삭제
+ */
+function resetInterval() {
+  clearInterval(newsInterval);
+  clearInterval(myInterval);
 }
