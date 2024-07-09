@@ -1,0 +1,22 @@
+.list-tab {
+  background-color: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  overflow: auto;
+}
+
+.list-tab-item {
+  height: 40px;
+  padding: 0 16px;
+  color: var(--text-weak);
+}
+
+.selected-tab {
+  background-color: var(--surface-brand-alt);
+  color: var(--text-white-default);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}

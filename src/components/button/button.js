@@ -1,3 +1,5 @@
+import { createIconTemplateStrings } from "../icon/icon.js";
+
 /**
  * @typedef {Object} ButtonProps
  * @property {'white' | 'gray'} [color='white']
@@ -18,15 +20,12 @@ export function createButton({ iconId, text = "", color = "white" }) {
   }
 
   const button = document.createElement("button");
-  button.className = `button button-${color}`;
+  button.className = `button button-${color} border-box`;
 
-  const svg = `<div>
-                  <svg class="button-icon">
-                    <use xlink:href=src/assets/sprite.svg#${iconId}></use>
-                  </svg>
-                </div>`;
+  const icon = document.createElement("div");
+  icon.innerHTML = createIconTemplateStrings({ className: "button-icon", iconId });
 
-  button.insertAdjacentHTML("beforeend", svg);
+  button.appendChild(icon);
 
   if (text) {
     button.insertAdjacentHTML(

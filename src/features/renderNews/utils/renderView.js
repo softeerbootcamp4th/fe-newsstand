@@ -1,6 +1,6 @@
 import { MainNewsState } from "../../../types/news.js";
-import { renderGridView } from "../components/grid/renderNewsGrid.js";
-import { renderListView } from "../components/list/renderNewsList.js";
+import { renderGridView } from "../components/grid/index.js";
+import { renderListView } from "../components/list/index.js";
 
 const renderView = {
   ["list-view"]: renderListView,
@@ -12,6 +12,7 @@ const renderView = {
  */
 export function render(state) {
   const container = document.getElementById("news-container");
+  container.className = "border-box";
   container.innerHTML = "";
   renderView[state.currentView](container, state);
 }

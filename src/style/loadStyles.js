@@ -7,6 +7,7 @@ const stylesheets = [
   "src/components/button/button.css",
   "src/components/newsTicker/newsTicker.css",
   "src/components/switcher/switcher.css",
+  "src/components/icon/icon.css",
 
   "src/components/overlays/overlay.css",
   "src/components/overlays/dialog/dialog.css",
@@ -14,7 +15,10 @@ const stylesheets = [
 
   "src/features/unsubscribeDialog/unsubscribeDialog.css",
 
-  "src/features/renderNEws/components/list/company/company.css",
+  "src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.css",
+
+  "src/features/renderNews/components/list/company/company.css",
+  "src/features/renderNews/components/list/tab/tab.css",
 ];
 
 stylesheets.forEach(loadCSS);

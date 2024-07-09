@@ -12,7 +12,7 @@
  */
 export function createNewsTicker({ tag, newsItems }, scrollDelay = 0) {
   const ticker = document.createElement("ul");
-  ticker.className = `news-ticker`;
+  ticker.className = `news-ticker border-box`;
 
   newsItems.forEach((item, index) => {
     const newsItem = createNewsItem(item, tag);
@@ -42,7 +42,7 @@ function createNewsItem({ title, link }, tag) {
 
   container.insertAdjacentHTML(
     "beforeend",
-    `<a href=${link} class='available-medium14'>${title}</a>`
+    `<a href=${link} class='available-medium14 ellipsis'>${title}</a>`
   );
 
   return container;
