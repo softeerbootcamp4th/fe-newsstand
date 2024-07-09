@@ -1,11 +1,24 @@
-import { getTimetoString } from "./getTimeToString.js";
+import { dateFormatter } from "../utils/dateFormatter.js";
 
-export function initNewsstandHeaderTime() {
-    const currentDateString = getTimetoString("yyyy. MM. dd. DDD요일");
-    const currentDateDOM = document.querySelector('#headerDate');
+const id = "newstandTitle"
+function init() {
+    const generateTemplate = () => {
+        return `<header id="header" class="Layout__row-between">
+                        <img src="./static/assets/images/headerTitle.svg" alt="Description of SVG">
+                       <div id="headerDate" class="datetext">${getTimetoString("yyyy. MM. dd. DDD")}</div>
+                    </header>
+                    `
+    }
 
-    currentDateDOM.textContent = currentDateString;
+    return generateTemplate()
 }
 
-initNewsstandHeaderTime();
+function actions() { return new Map() }
+
+function getTimetoString(format) {
+    const currentTime = new Date();
+    return dateFormatter(currentTime, format);
+}
+
+export { actions, id, init };
 
