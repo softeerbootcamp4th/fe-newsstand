@@ -1,6 +1,6 @@
 import { createArticleList, initArticleList } from "../components/articleList/articleList.js"
 import { createHeader } from "../components/header/header.js"
-import { createNewsBar } from "../components/newsBar/newsBar.js"
+import { createNewsBar, initNewsBar } from "../components/newsBar/newsBar.js"
 import { fetchData } from "../utils/api.js";
 import { newsState } from "./state/newsState.js";
 import { menuInfo } from "./state/newsState.js";
@@ -18,6 +18,7 @@ export const NewsPage = async (app) => {
 
 const fetchNewsPageData = async ({ menuInfoSrc }) => {
     newsState.setMenuInfo((await fetchData(menuInfoSrc)).data);
+    console.log(menuInfo[0].mediaData["스포츠동아"])
 }
 
 const Header = (app) => {
@@ -34,6 +35,7 @@ const NewsBar = (app) => {
     
     app.appendChild(el)
     el.innerHTML = createNewsBar();
+    initNewsBar();
 }
 
 const ArticleList = (app) => {
@@ -43,4 +45,4 @@ const ArticleList = (app) => {
     app.appendChild(el)
     el.innerHTML = createArticleList(menuInfo);
     initArticleList();
-}
+} 

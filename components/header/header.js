@@ -1,4 +1,4 @@
-import { dateText } from "../../pages/state/newsState";
+import { dateText } from "../../pages/state/newsState.js";
 
 export const createHeader = () => {
     return `
