@@ -4,35 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="list.css" />
-    <link rel="stylesheet" href="nav.css" />
-    <link rel="stylesheet" href="newsBanner.css" />
-    <link rel="stylesheet" href="newsList.css" />
-    <script type="module" src="./nav.js"></script>
-    <script type="module" src="./newsBanner.js"></script>
-    <script type="module" src="./newsList.js"></script>
-    <script type="module" src="./list.js"></script>
+    <link rel="stylesheet" href="./list.css" />
+    <link rel="stylesheet" href="../components/nav.css" />
+    <link rel="stylesheet" href="../components/newsBanner.css" />
+    <link rel="stylesheet" href="../components/newsList.css" />
+    <script defer type="module" src="./list.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <div class="header">
         <h3 class="header_title">
           <img src="../resources/newspaper.png" alt="" />뉴스스탠드
-          <div class="today">오늘 날짜</div>
+          <span class="today"></span>
         </h3>
-        <div id="banner_container"></div>
       </div>
+
+      <div id="banner_container"></div>
+
       <div class="header_selected">
         <div id="category">
-          <button>전체 언론사</button>
-          <button>내가 구독한 언론사</button>
+          <button class="headerCategory">전체 언론사</button>
+          <button class="headerCategory">내가 구독한 언론사</button>
         </div>
         <div id="show">
-          <button>리스트</button>
-          <button>그리드</button>
+          <button class="headerShow">리스트</button>
+          <button class="headerShow">그리드</button>
         </div>
       </div>
+
       <div id="nav_container"></div>
+
       <main>
         <button class="leftButton">&lt;</button>
         <div class="body_wrapper">
