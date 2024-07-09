@@ -27,7 +27,7 @@ const useState = ({ stateId, initialValue }) => {
         }
     }
 
-    return [state, setState]
+    return [{ stateId: stateId, value: state }, setState]
 }
 
 export default useState
