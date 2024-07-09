@@ -3,8 +3,8 @@ import { isIn } from '../../utils/listUtils.js'
 let intervalId = null
 
 const CategoryBox = (props) => {
-    const companyCount = isIn(props.text, mediaCategoryData) ? getCompanyCount(props.text) : 0
-    const countText = `${props.currentNewsId}/${companyCount}`
+    const companyCount = isIn(props.text, mediaCategoryData) ? getCompanyCount(props.text) : 1
+    const countText = props.selectedSource === '전체 언론사' ? `${props.currentNewsId}/${companyCount}` : `>`
 
     const handleMouseClick = () => {
         props.setState(props.text)

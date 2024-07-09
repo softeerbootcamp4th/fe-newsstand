@@ -1,7 +1,7 @@
 import useState from '../../core/hooks/useState.js'
 
 const CategoryText = (props) => {
-    const [isHover, setIsHover] = useState(false)
+    const [isHover, setIsHover] = useState({ stateId: 1, initialValue: false })
 
     const handleMouseOver = () => {
         setIsHover(true)

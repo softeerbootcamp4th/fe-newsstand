@@ -1,32 +1,29 @@
 import { currentComponent } from '../component/component.js'
 import render from '../component/render.js'
+import { deepEqual } from '../../utils/deepEqual.js'
 
-const componentsState = {}
+export const componentsState = new Map()
 
-const useState = (initialValue) => {
-    const { id, stateIndex, component, props } = currentComponent
+const useState = ({ stateId, initialValue }) => {
+    const { id, component, componentProps } = currentComponent
+    const uniqueId = `${id}_${stateId}`
 
-    if (!componentsState[id]) {
-        componentsState[id] = []
+    if (!componentsState.has(uniqueId)) {
+        componentsState.set(uniqueId, initialValue)
     }
 
-    if (componentsState[id][stateIndex] === undefined) {
-        componentsState[id][stateIndex] = initialValue
-    }
-
-    currentComponent.stateIndex += 1
-
-    const state = componentsState[id][stateIndex]
+    const state = componentsState.get(uniqueId)
 
     const setState = (newValue) => {
-        const currentState = componentsState[id][stateIndex]
-
+        const currentState = state
         const updatedState = typeof newValue === 'function' ? newValue(currentState) : newValue
 
-        if (currentState !== updatedState) {
-            componentsState[id][stateIndex] = updatedState
+        const shouldUpdate = deepEqual(currentState, updatedState)
 
-            render(component, props)
+        if (!shouldUpdate) {
+            componentsState.set(uniqueId, newValue)
+
+            render(component, componentProps)
         }
     }
 

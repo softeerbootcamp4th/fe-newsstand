@@ -1,6 +1,6 @@
-export const mediaCategoryData = ['종합/경제', '방송/통신', 'IT', '영자지', '스포츠/연예', '매거진/전문지', '지역']
+const mediaCategoryData = ['종합/경제', '방송/통신', 'IT', '영자지', '스포츠/연예', '매거진/전문지', '지역']
 
-export const newsItems = [
+const rollingNewsItems = [
     '노바백스 백신 2월중순부터 접종',
     '얼어붙은 투심에…현대엔지니어링 상장 철회',
     '"일본 정부, 사도광산 세계유산 추천 방침 굳혀, 일본과 갈등 첨예화 예상"',
@@ -8,7 +8,7 @@ export const newsItems = [
     '12월 주담대 금리 연 3.63%…7년7개월 만에 최고',
 ]
 
-export const allNewsData = [
+const allNewsData = [
     {
         category: '종합/경제',
         company: [
@@ -1936,17 +1936,17 @@ export const allNewsData = [
     },
 ]
 
-export const getCategoryNewsData = (category) => {
+const getCategoryNewsData = (category) => {
     let newsDatas = allNewsData.filter((news) => news.category === category)
     return newsDatas
 }
 
-export const getCompanyCount = (category) => {
+const getCompanyCount = (category) => {
     let newsDatas = allNewsData.filter((news) => news.category === category)
     return newsDatas[0].company.length
 }
 
-export const getNewsData = (category, id) => {
+const getNewsData = (category, id) => {
     let newsDatas = allNewsData.filter((news) => news.category === category)
     if (newsDatas.length === 0) return null
 
@@ -1954,7 +1954,7 @@ export const getNewsData = (category, id) => {
     return companyData ? companyData : null
 }
 
-export const getSubscribedCompanyNewsData = (subscribedCompanyIdList) => {
+const getSubscribedCompanyNewsData = (subscribedCompanyIdList) => {
     let subscribedCompanyNews = []
 
     allNewsData.forEach((category) => {
@@ -1983,11 +1983,22 @@ export const getSubscribedCompanyNewsData = (subscribedCompanyIdList) => {
     return subscribedCompanyNews
 }
 
-export const getNewsDataFromSubscribedCompany = (subscribedCompanyIdList, category) => {
+const getNewsDataFromSubscribedCompany = (subscribedCompanyIdList, category) => {
     let allDatas = getSubscribedCompanyNewsData(subscribedCompanyIdList)
     let newsDatas = allDatas.filter((news) => news.category === category)
 
     if (newsDatas.length === 0) return null
     let companyData = newsDatas[0].company
     return companyData ? companyData : null
+}
+
+module.exports = {
+    mediaCategoryData,
+    rollingNewsItems,
+    allNewsData,
+    getCategoryNewsData,
+    getCompanyCount,
+    getNewsData,
+    getSubscribedCompanyNewsData,
+    getNewsDataFromSubscribedCompany,
 }

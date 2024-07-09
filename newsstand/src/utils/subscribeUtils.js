@@ -1,5 +1,8 @@
 export const getSubscribedCompaniesId = () => {
-    return JSON.parse(localStorage.getItem('subscribedCompanies')) || []
+    let subscribedCompanies = JSON.parse(localStorage.getItem('subscribedCompanies')) || []
+    subscribedCompanies.sort((a, b) => a - b)
+
+    return subscribedCompanies
 }
 
 export const setSubscribedCompaniesId = (subscribedCompanies) => {

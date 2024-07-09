@@ -1,4 +1,4 @@
-export const wholeCompanyData = [
+const wholeCompanyData = [
     {
         id: 1,
         icon: './assets/company/company_ico_1.svg',
@@ -481,29 +481,38 @@ export const wholeCompanyData = [
     },
 ]
 
-export const getCompanyIcon = (id) => {
+const getCompanyIcon = (id) => {
     const company = wholeCompanyData.find((company) => company.id === id)
     return company ? company.icon : null
 }
 
-export const getCompanyName = (id) => {
+const getCompanyName = (id) => {
     const company = wholeCompanyData.find((company) => company.id === id)
     return company ? company.name : null
 }
 
-export const getCompanyIdByName = (name) => {
+const getCompanyIdByName = (name) => {
     const company = wholeCompanyData.find((company) => company.name === name)
     return company ? company.id : null
 }
 
-export const getCompanyDataByPage = (page) => {
+const getCompanyDataByPage = (page) => {
     const itemsPerPage = 24
     const startIndex = (page - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
     return wholeCompanyData.slice(startIndex, endIndex)
 }
 
-export const getMaxPage = () => {
+const getMaxPage = () => {
     const itemsPerPage = 24
     return Math.ceil(wholeCompanyData.length / itemsPerPage)
+}
+
+module.exports = {
+    wholeCompanyData,
+    getCompanyIcon,
+    getCompanyName,
+    getCompanyIdByName,
+    getCompanyDataByPage,
+    getMaxPage,
 }
