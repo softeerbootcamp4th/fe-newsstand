@@ -1,3 +1,16 @@
+import { updateNext } from "../../../utils/updateStates.js";
+
+const classes = {
+  base: "list-tab-item",
+  unselected: "available-medium14",
+  selected: "selected-bold14 selected-tab",
+};
+
+const classMapping = {
+  true: `${classes.base} ${classes.selected}`,
+  false: `${classes.base} ${classes.unselected}`,
+};
+
 /**
  * @param {Object} props
  * @param {string} props.innerText
@@ -12,18 +25,16 @@ export function createTabItem({ innerText, children, isSelected }) {
 
   if (isSelected) {
     button.insertAdjacentHTML("beforeend", children);
+    startProgressBar(button);
   }
 
   return button;
 }
 
-const classes = {
-  base: "list-tab-item",
-  unselected: "available-medium14",
-  selected: "selected-bold14 selected-tab",
-};
+function startProgressBar(selectedButton) {
+  const progressBar = document.createElement("div");
+  progressBar.className = "tab-progress";
+  selectedButton.appendChild(progressBar);
 
-const classMapping = {
-  true: `${classes.base} ${classes.selected}`,
-  false: `${classes.base} ${classes.unselected}`,
-};
+  progressBar.addEventListener("animationend", updateNext, { once: true });
+}
