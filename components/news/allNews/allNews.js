@@ -1,6 +1,6 @@
 import { cateData } from "../../../data/cateData.js";
 import { shortenStr } from "../../../util/shortenStr.js";
-import { renderSubscribeBtn } from "../../subscribe/renderSubscribeBtn.js";
+import { renderSubscribeBtn } from "../../subscription/renderSubscriptionBtn.js";
 
 export const allNews = (cateIdx, brandIdx) => {
   const newsData = cateData[cateIdx].data[brandIdx];

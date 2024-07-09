@@ -1,6 +1,6 @@
 import { brandData } from "../../../data/brandData.js";
 import { shortenStr } from "../../../util/shortenStr.js";
-import { getSubscribeList } from "../../..//util/getSubscribeList.js";
+import { getSubscribeList } from "../../../util/getSubscribeList.js";
 
 /**
  *

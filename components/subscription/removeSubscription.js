@@ -91,7 +91,7 @@ const handleClickYesRemove = (
   renderToast(`${brandData[brandId].brandName}을(를) 구독해지하였습니다`);
 
   // 구독 해지를 적용한 화면을 바로 렌더링 해주어야 함
-  if (cateIdx === -1) fieldTab("subscribe");
+  if (cateIdx === -1) fieldTab("subscribeTabPress");
   else allNews(cateIdx, brandIdx);
 };
 

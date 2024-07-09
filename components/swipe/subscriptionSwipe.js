@@ -1,6 +1,6 @@
 import { brandData } from "../../data/brandData.js";
 import { getSubscribeList } from "../../util/getSubscribeList.js";
-import { subscribeNews } from "../news/subscribeNews/subscribeNews.js";
+import { subscribeNews } from "../news/subscriptionNews/subscriptionNews.js";
 import { handleClickAllLeftBtn, handleClickAllRightBtn } from "./allSwipe.js";
 
 // 구독한 언론사 탭에서의 스와이프

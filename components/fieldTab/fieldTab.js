@@ -2,11 +2,11 @@ import { cateData } from "../../data/cateData.js";
 import { brandData } from "../../data/brandData.js";
 import { getSubscribeList } from "../../util/getSubscribeList.js";
 import { allNews } from "../news/allNews/allNews.js";
-import { subscribeNews } from "../news/subscribeNews/subscribeNews.js";
+import { subscribeNews } from "../news/subscriptionNews/subscriptionNews.js";
 
 /**
  *
- * @param {"all" | "subscribe"} mode
+ * @param {"allTabPress" | "subscribeTabPress"} mode
  */
 export const fieldTab = (mode) => {
   const fieldTab = document.querySelector(".field-tab");
@@ -14,7 +14,7 @@ export const fieldTab = (mode) => {
   fieldTab.innerHTML = "";
 
   // 전체 언론사 버튼이 눌렸을 때
-  if (mode === "all") {
+  if (mode === "allTabPress") {
     // field-tab-btn 렌더링
     renderAllFieldTab(fieldTab);
 
@@ -26,7 +26,7 @@ export const fieldTab = (mode) => {
   }
 
   // 구독한 언론사 버튼이 눌렸을 때
-  if (mode === "subscribe") {
+  if (mode === "subscribeTabPress") {
     // 기존의 이벤트 제거
     fieldTab.removeEventListener("click", handleClickAllField);
 
@@ -43,24 +43,24 @@ export const fieldTab = (mode) => {
 };
 
 const renderAllFieldTab = (fieldTab) => {
-  cateData.forEach((newsData, cateIdx) => {
-    const fieldTabBtn = `
-      <button class="field-tab-btn text-weak available-medium14 pointer ${
+  fieldTab.innerHTML += cateData.reduce(
+    (accData, newsData, cateIdx) =>
+      accData +
+      `  <button class="field-tab-btn text-weak available-medium14 pointer ${
         cateIdx === 0 ? "active" : ""
       } " data-cate-idx=${cateIdx} data-brand-idx = 0>
-        ${newsData.cate}
-        <div class = "brand-page-wrap ${
-          cateIdx === 0 ? "" : "hidden"
-        } display-bold12">
-         <span class = "cur-brand-page text-white-default">1</span> 
-         <span class = "total-brand-page text-white-weak}">/${
-           newsData.data.length
-         }</span>
-        </div>
-      </button>
-    `;
-    fieldTab.innerHTML += fieldTabBtn;
-  });
+    ${newsData.cate}
+    <div class = "brand-page-wrap ${
+      cateIdx === 0 ? "" : "hidden"
+    } display-bold12">
+     <span class = "cur-brand-page text-white-default">1</span> 
+     <span class = "total-brand-page text-white-weak}">/${
+       newsData.data.length
+     }</span>
+    </div>
+  </button>`,
+    ""
+  );
 };
 
 const renderSubscribeFieldTab = (fieldTab) => {

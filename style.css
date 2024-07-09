@@ -1,9 +1,9 @@
 @import url("./style/variable.css");
 @import url("./style/common.css");
 @import url("./style/reset.css");
-@import url("./components/subscribeSwitchBtn/style.css");
+@import url("./components/subscriptionSwitchBtn/style.css");
 @import url("./components/fieldTab/style.css");
-@import url("./components/subscribe/style.css");
+@import url("./components/subscription/style.css");
 @import url("./components/toast/style.css");
 
 .news-stand {

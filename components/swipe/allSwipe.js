@@ -1,11 +1,11 @@
 import { cateData } from "../../data/cateData.js";
 import { brandData } from "../../data/brandData.js";
 import { allNews } from "../news/allNews/allNews.js";
-import { subscribeNews } from "../news/subscribeNews/subscribeNews.js";
+import { subscribeNews } from "../news/subscriptionNews/subscriptionNews.js";
 import {
   handleClickSubscribeLeftBtn,
   handleClickSubscribeRightBtn,
-} from "./subscribeSwipe.js";
+} from "./subscriptionSwipe.js";
 
 // 전체 언론사 탭에서의 스와이프
 export const allSwipe = () => {
