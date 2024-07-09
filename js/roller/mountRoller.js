@@ -4,11 +4,10 @@ const ROLLER_INTERVAL = 3 * 1000; // 5초
 
 function rollNews(roller)
 {
-	console.log("yes");
 	roller.classList.add("rolling");
 }
 
-function mountRollerSection(element, data)
+function mountRollerSection(element, data, delay)
 {
 	let dataIndex = 1;
 	const roller = element.querySelector(".rollerSection");
@@ -21,10 +20,15 @@ function mountRollerSection(element, data)
 	});
 
 	const intervalController = new IntervalController(ROLLER_INTERVAL);
-	element.addEventListener("mouseover", ()=>intervalController.pause());
-	element.addEventListener("mouseout", ()=>intervalController.resume());
-	intervalController.addEventListener("interval", ()=>rollNews(roller));
-	intervalController.start();
+
+	setTimeout(
+		()=>{
+			element.addEventListener("mouseover", ()=>intervalController.pause());
+			element.addEventListener("mouseout", ()=>intervalController.resume());
+			intervalController.addEventListener("interval", ()=>rollNews(roller));
+			intervalController.start();
+		}, delay * 1000
+	);
 }
 
 export default mountRollerSection;

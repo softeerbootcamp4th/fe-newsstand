@@ -1,5 +1,6 @@
 import rawData from "./rawData.js";
 import processListPagination from "./processData/processListPagination.js";
+import getRollerData from "./processData/getRollerData.js";
 import generateReducer from "./states/generateReducer.js";
 
 import mountLeftSelector from "./views/mountLeftSelector.js";
@@ -10,6 +11,7 @@ import mountRoller from "./roller/mountRoller.js"
 import mountView from "./views/mainView.js";
 
 const {list: fullList, metadata} = processListPagination(rawData);
+const [firstRoller, secondRoller]= getRollerData();
 const [state, reducer, initialize] = generateReducer(fullList);
 
 const rollers = document.getElementsByClassName("roller");
@@ -18,10 +20,8 @@ mountLeftSelector(state.subFilter, reducer.setFullView, reducer.setSubscribedVie
 mountRightSelector(state.viewType, reducer.setListView, reducer.setGridView);
 mountPageMoverSelector(state, reducer);
 mountView(state, reducer, fullList, metadata);
-mountRoller(rollers[0], ["hello", "world", "yes", "fourth", "fifth"]);
-setTimeout(()=>{
-	mountRoller(rollers[1], ["hello2", "world2", "yes2", "fourth2", "fifth2"]);
-}, 1000);
+mountRoller(rollers[0], firstRoller);
+mountRoller(rollers[1], secondRoller, 1);
 initialize();
 
 state.subFilter.addSideEffect( (e)=>console.log(`chnge sub filter : ${e}`) );

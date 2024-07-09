@@ -151,6 +151,7 @@ ul {
 	color: var(--text-strong);
 	font-size: 0.875rem;
 	font-weight: 700;
+	flex-shrink: 0;
 }
 
 .rollerSection {
@@ -163,6 +164,11 @@ ul {
 
 .rollerSection.rolling {
 	animation: 0.5s ease-in-out 1 rollerAnim;
+}
+
+.rollerSection:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .rollerDesc {
