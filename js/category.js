@@ -27,6 +27,13 @@ export const createCategory = (data, dataType) => {
 
     checkCurDataType(dataType);
 
+    if(dataType === 'subscribe' && data.length === 0) {
+        const divElement = document.createElement('div');
+        divElement.classList.add('category-item');
+        parentDiv.appendChild(divElement);
+        return;
+    }
+
     // 카테고리 아이템 생성 및 추가
     data?.forEach((cat, idx) => {
         const divElement = document.createElement('div');
@@ -38,6 +45,8 @@ export const createCategory = (data, dataType) => {
         
         divElement.appendChild(textElement);
         parentDiv.appendChild(divElement);
+
+        curCategoryIdx = 0;
 
         // 카테고리명 선택하면 선택한 카테고리의 인덱스 가져옴
         divElement.addEventListener('click', () => {
@@ -65,7 +74,7 @@ export const loadCurrentCategoryNews = (dataType) => {
         })
         .then(data => {
             newsData = data;
-            displayNews(dataType);
+            dataType === 'subscribe' && subscriptions.length === 0 ? displayInformation() :displayNews(dataType);
             updateBtnVisibility();
             updateCategoryDisplay();
             startProgressBar(); // 첫 데이터 로드 후 프로그래스바 시작
@@ -74,17 +83,31 @@ export const loadCurrentCategoryNews = (dataType) => {
             console.error(error);
         });
     } else {
-        displayNews(dataType);
+        dataType === 'subscribe' && subscriptions.length === 0 ? displayInformation() :displayNews(dataType);
         updateBtnVisibility();
         updateCategoryDisplay();
         startProgressBar(); // 데이터 갱신 후 프로그래스바 시작
     }
+
 }
 
+export const showInformation = () => {
+    document.querySelector('.news-container').classList.add('hidden');
+    document.querySelector('.info').classList.remove('hidden');
+}
+;
+
+const showNews = () => {
+    document.querySelector('.news-container').classList.remove('hidden');
+    document.querySelector('.info').classList.add('hidden');
+
+}
 /* 현재 카테고리의 뉴스 정보로 div 생성하는 함수 */
 function displayNews(dataType) {
 
     subscriptions = getSubscriptionList().reverse();
+
+    showNews();
 
     const mainNewsDiv = document.querySelector('.main-news');
     const subNewsDiv = document.querySelector('.sub-news');
@@ -94,6 +117,7 @@ function displayNews(dataType) {
 
     const news = dataType === 'all' ?  newsData[curCategoryIdx].news[curNewsIdx] : newsData.flatMap(category => category.news.filter(newsItem => newsItem.company === subscriptions[curCategoryIdx]))[0];
     const subscribeBtn = document.querySelector('.subscribe-btn');
+
 
     if(subscriptions.includes(news.company)) {
         subscribeBtn.classList.add('my-subscribe');
@@ -145,7 +169,7 @@ function updateCategoryDisplay() {
         }
 
         if(prevCategoryType === 'all') {
-                    // 새로운 인덱스 요소 생성 및 추가
+            // 새로운 인덱스 요소 생성 및 추가
             const textElement = document.createElement('span');
             textElement.classList.add('index-text');
 
@@ -157,8 +181,6 @@ function updateCategoryDisplay() {
             }
 
             item.appendChild(textElement);
-
-
         }
         else {
             const imgElement = document.createElement('img');
@@ -167,15 +189,11 @@ function updateCategoryDisplay() {
                 imgElement.src = './src/icons/chevron-right.svg';
                 imgElement.style.display = 'block';
                 item.classList.remove('selected-category'); 
-
             } else {
                 item.classList.remove('selected-category'); 
             }
             item.appendChild(imgElement);
         }
-
-        
-
     });
 }
 
@@ -211,12 +229,10 @@ function startProgressBar() {
     progressBarTimeout = setTimeout(() => {
         if(prevCategoryType === 'subscribe') {
             subscriptions = getSubscriptionList().reverse();
-
             if(curCategoryIdx < subscriptions.length-1){
                 curCategoryIdx++;
             }
             else curCategoryIdx = 0;
-
         }
         else {
             if(curNewsIdx < newsData[curCategoryIdx].news.length - 1) {
@@ -228,7 +244,6 @@ function startProgressBar() {
                 curCategoryIdx = 0;
                 curNewsIdx = 0;
             }
-    
         }
         updateBtnVisibility();
         loadCurrentCategoryNews(prevCategoryType);
@@ -296,10 +311,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector('.all-cate-header');
 
     header.addEventListener('wheel', (event) => {
-        if (event.deltaY !== 0) {
-            event.preventDefault();
-            header.scrollLeft += event.deltaY;
-        }
-    });
+        if (event.deltaY === 0) return;
+        event.preventDefault();
+        header.scrollLeft += event.deltaY;
+});
 });
 

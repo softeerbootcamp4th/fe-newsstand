@@ -12,6 +12,7 @@ export function renderMainContent() {
         </div>
         <div class="all-cate-container column-flex">
             <div class="all-cate-header"></div>
+            <div class="info hidden">구독한 언론사가 없습니다.</div>
             <div class="news-container column-flex">
                 <div class="container-header">
                     <img alt="company-logo" id="logo">
