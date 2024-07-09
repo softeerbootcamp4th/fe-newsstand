@@ -1,5 +1,5 @@
-import { renderSubscribedMedia } from "./subscribed-media.js";
-import { renderTotalMedia } from "./total-media.js"
+import { renderSubscribedMedia, resetSubscribedMedia } from "./subscribed-media.js";
+import { renderTotalMedia, resetTotalMedia } from "./total-media.js"
 
 /**
  * @description 언론사 필터를 렌더하는 함수
@@ -36,12 +36,14 @@ function renderMediaContents(mediaId) {
         setSelectedMedia("total-media");
         setUnselectedMedia("subscribed-media");
 
+        resetSubscribedMedia();
         renderTotalMedia();
     } else if (mediaId === "subscribed-media") {
         filterMediaDOM.dataset.selectedFilter = "subscribed-media";
         setSelectedMedia("subscribed-media");
         setUnselectedMedia("total-media");
         
+        resetTotalMedia();
         renderSubscribedMedia();
     }
 }
