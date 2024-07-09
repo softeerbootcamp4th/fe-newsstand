@@ -7,9 +7,9 @@ import { generateRandomId } from '../../utils/idGenerator.js'
 import { mediaCategoryData } from '../../datas/mockData.js'
 
 const NewsContainer = () => {
-    const [selectedCategory, setSelectedCategory] = useState(mediaCategoryData[0])
-    const [selectedSource, setSelectedSource] = useState('전체 언론사')
-    const [viewType, setViewType] = useState('list')
+    const [selectedCategory, setSelectedCategory] = useState({ stateId: 1, initialValue: mediaCategoryData[0] })
+    const [selectedSource, setSelectedSource] = useState({ stateId: 2, initialValue: '전체 언론사' })
+    const [viewType, setViewType] = useState({ stateId: 3, initialValue: 'list' })
 
     const newsSourceSelectorLayout = createComponent(NewsSourceSelector, {
         id: generateRandomId(10),

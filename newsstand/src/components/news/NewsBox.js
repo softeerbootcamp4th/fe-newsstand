@@ -6,7 +6,7 @@ import IconView, { Icon } from '../base/IconView.js'
 import { isSubscribed, handleSubscription } from '../../utils/subscribeUtils.js'
 
 const NewsBox = (props) => {
-    const [isHover, setIsHover] = useState(false)
+    const [isHover, setIsHover] = useState({ stateId: 1, initialValue: false })
 
     const handleMouseEnter = () => {
         setIsHover(true)

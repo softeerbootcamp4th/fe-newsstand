@@ -7,7 +7,7 @@ import { generateRandomId } from '../../utils/idGenerator.js'
 import { getSubscribedCompanies } from '../../utils/subscribeUtils.js'
 
 const GridNewsstand = (props) => {
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState({ stateId: 1, initialValue: 1 })
     const maxPage = getMaxPage()
 
     let companyData = []
