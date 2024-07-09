@@ -32,27 +32,30 @@ export const MediaContent = () => {
     0, 0,
   ]);
 
-  const hasNext =
-    currentDataIdx[1] + 1 < currentData[currentDataIdx[0]].mediaIds.length;
-  const hasPrev = currentDataIdx[1] - 1 >= 0;
+  const hasNext = currentDataIdx[0] <= currentData.length;
+  const hasPrev = currentDataIdx[0] >= 0;
 
   const handleNext = () => {
-    if (hasNext) {
+    if (
+      currentDataIdx[1] + 1 <
+      currentData[currentDataIdx[0]].mediaIds.length
+    ) {
       setCurrentDataIdx([currentDataIdx[0], currentDataIdx[1] + 1]);
       return;
     }
-    if (currentDataIdx[0] + 1 < currentData.length) {
+    if (hasNext) {
       setCurrentDataIdx([currentDataIdx[0] + 1, 0]);
       return;
     }
   };
 
   const handlePrev = () => {
-    if (hasPrev) {
+    if (currentDataIdx[1] - 1 >= 0) {
       setCurrentDataIdx([currentDataIdx[0], currentDataIdx[1] - 1]);
       return;
     }
-    if (currentDataIdx[0] - 1 >= 0) {
+
+    if (hasPrev) {
       setCurrentDataIdx([currentDataIdx[0] - 1, 0]);
       return;
     }
