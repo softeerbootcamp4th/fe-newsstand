@@ -2,8 +2,7 @@ import Button, { ButtonVariantProps } from '../base/Button.js'
 import IconView, { Icon } from '../base/IconView.js'
 import createComponent from '../../core/component/component.js'
 import ImageView from '../base/ImageView.js'
-import { isSubscribed, handleSubscription } from '../../utils/subscribeUtils.js'
-import useEffect from '../../core/hooks/useEffect.js'
+import { isSubscribed, subscribe } from '../../utils/subscribeUtils.js'
 
 const MainNews = (props) => {
     if (props.newsData.value.news.length === 0) {
@@ -15,6 +14,14 @@ const MainNews = (props) => {
                     언론사가 직접 편집한 뉴스들을 네이버 홈에서 바로 보실 수 있습니다.
                 </h5>
             `,
+        }
+    }
+
+    const handleSubscriptionButtonClick = () => {
+        if (isSubscribed(props.newsData.value.companyId)) {
+            props.setIsShowAlert(true)
+        } else {
+            subscribe(props.newsData.value.companyId)
         }
     }
 
@@ -30,7 +37,7 @@ const MainNews = (props) => {
         style: 'height:10px;',
         variant: ButtonVariantProps.WHITE,
         onClick: () => {
-            handleSubscription(props.newsData.value.companyId)
+            handleSubscriptionButtonClick()
         },
     })
 

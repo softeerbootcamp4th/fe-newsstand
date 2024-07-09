@@ -46,6 +46,8 @@ const GridNewsstand = (props) => {
         return createComponent(NewsBox, {
             id: `${props.viewType}-${index}`,
             news: news,
+            setIsShowAlert: props.setIsShowAlert,
+            setCurrentCompanyInfo: props.setCurrentCompanyInfo,
             style: 'width: 100%; height:100%;',
         })
     })

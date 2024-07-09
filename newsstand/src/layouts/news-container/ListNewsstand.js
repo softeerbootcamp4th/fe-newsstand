@@ -68,6 +68,7 @@ const ListNewsstand = (props) => {
             fetchSubNewsList().then((res) => {
                 setSubNewsListElements(res)
             })
+            props.setCurrentCompanyInfo({ id: newsData.value.companyId, name: newsData.value.companyName })
         },
         [newsData],
         1,
@@ -137,6 +138,7 @@ const ListNewsstand = (props) => {
         id: 1,
         newsData: newsData,
         selectedSource: props.selectedSource,
+        setIsShowAlert: props.setIsShowAlert,
         style: 'width:40%; padding:2%;',
     })
 
