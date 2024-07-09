@@ -1,6 +1,6 @@
 import "./SnackBar.css";
 
-function SnackBar({ $target, position = "beforeend", text, duration = 3000, onSuccess }) {
+function SnackBar({ $target, position = "beforeend", text, duration = 2000, onSuccess }) {
   this.$element = document.createElement("div");
   this.$element.className = "snackBar";
   this.$element.classList.add("hide");
