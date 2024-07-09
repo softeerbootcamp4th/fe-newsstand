@@ -6,15 +6,14 @@
     <link rel="stylesheet" href="./style.css" />
     <title>뉴스스탠드</title>
   </head>
-  <body>
-    <div class="news-stand center surface-default">
+  <body class="surface-default">
+    <div class="news-stand center">
       <!-- 뉴스스탠드 헤더 -->
       <header class="flex-between">
         <div class="flex-center gap-8">
           <img src="./asset/icons/newspaper.svg" />
           <h1 class="display-bold24 text-strong">뉴스스탠드</h1>
         </div>
-
         <!-- 오늘 날짜 -->
         <span class="text-default display-medium16 header-today-date"></span>
       </header>
@@ -47,8 +46,10 @@
           <div class="tab-and-viewer">
             <div class="flex-between">
               <div class="flex-center gap-24">
-                <span class="press-tab-btn active">전체 언론사</span>
-                <span class="press-tab-btn">내가 구독한 언론사</span>
+                <span class="press-tab-btn all-brand-tab-btn">전체 언론사</span>
+                <span class="press-tab-btn subscribe-brand-tab-btn"
+                  >내가 구독한 언론사</span
+                >
               </div>
               <div class="flex-center gap-4">
                 <img
@@ -69,35 +70,39 @@
             <!-- 필드 탭 -->
             <div class="field-tab surface-alt"></div>
 
-            <div class="p-24">
+            <div class="press-news p-24">
               <div class="press-info flex gap-16">
-                <h1 class="brand">서울경제</h1>
-                <div class="edit-date text-default display-medium12">
-                  2023.02.10. 18:27 편집
-                </div>
+                <img class="brand-logo" />
+                <div
+                  class="brand-edit-date text-default display-medium12"
+                ></div>
                 <button
-                  class="subscribe-btn radius-50 border-default surface-alt"
+                  class="subscribe-btn radius-50 border-default surface-alt pointer"
                 >
-                  <img src="asset\icons\plus.svg" />
-                  <span class="available-medium12 text-weak pointer"
-                    >구독하기</span
-                  >
+                  <img src="asset/icons/plus.svg" />
+                  <span class="available-medium12 text-weak">구독하기</span>
+                </button>
+
+                <button
+                  class="remove-subscribe-btn radius-50 border-default surface-default pointer flex-col"
+                >
+                  <img src="asset/icons/closed.svg" class="text-weak" />
                 </button>
               </div>
 
               <div class="space-16"></div>
 
-              <!-- 대표 뉴스 -->
-              <div class="news flex gap-32">
+              <div class="flex gap-32">
+                <!-- 대표 뉴스 -->
                 <div class="main-news flex-col gap-16">
                   <img
-                    class="pointer"
+                    class="main-news-thumbnail pointer"
+                    width="320"
                     height="200"
-                    src="asset\imgs\newsThumbnail.svg"
                   />
-                  <a href="#" class="available-medium16 text-strong"
-                    >또 국민연금의 몽니…현대百 지주사 불발</a
-                  >
+                  <a class="main-news-title available-medium16 text-strong"
+                    >또 국민연금의 몽니…현대百 지주사 불발
+                  </a>
                 </div>
 
                 <!-- 뉴스 기사 리스트 -->
@@ -106,6 +111,9 @@
                 </div>
               </div>
             </div>
+
+            <img class="left-btn" src="./asset/icons/leftButton.svg" />
+            <img class="right-btn" src="./asset/icons/rightButton.svg" />
           </div>
         </section>
       </main>

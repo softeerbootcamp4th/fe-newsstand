@@ -1,11 +1,12 @@
 @import url("./style/variable.css");
 @import url("./style/common.css");
 @import url("./style/reset.css");
-@import url("./style/newsBar.css");
+@import url("./components/subscribeSwitchBtn/style.css");
+@import url("./components/fieldTab/style.css");
 
 .news-stand {
   width: 930px;
-  padding-top: 100px;
+  margin-top: 100px;
 }
 
 .news-bar {
@@ -13,20 +14,6 @@
 }
 
 .tab-and-viewer {
-  .press-tab-btn {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 22px;
-    color: var(--text-weak);
-    cursor: pointer;
-
-    &.active {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-strong);
-    }
-  }
-
   .list-view-btn,
   .grid-view-btn {
     filter: invert(56%) sepia(12%) saturate(253%) hue-rotate(157deg)
@@ -39,21 +26,46 @@
 }
 
 .news-list {
-  .field-tab {
-    border-bottom: 1px solid var(--border-default);
-
-    .field-tab-btn {
-      padding: 11.5px 16px;
-    }
-  }
+  position: relative;
 
   .press-info {
     .subscribe-btn {
       padding: 2px 8px;
     }
+
+    .remove-subscribe-btn {
+      padding: 7px;
+    }
   }
 
   .news {
     align-items: start;
+  }
+
+  .left-btn,
+  .right-btn {
+    filter: invert(49%) sepia(8%) saturate(944%) hue-rotate(168deg)
+      brightness(97%) contrast(83%);
+
+    cursor: pointer;
+    position: absolute;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .left-btn,
+    .right-btn {
+      filter: invert(95%) sepia(0%) saturate(1%) hue-rotate(159deg)
+        brightness(94%) contrast(91%);
+    }
+  }
+
+  .left-btn {
+    left: -70px;
+    top: 50%;
+  }
+
+  .right-btn {
+    right: -70px;
+    top: 50%;
   }
 }

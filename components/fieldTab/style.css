@@ -1,0 +1,20 @@
+.field-tab {
+  border-bottom: 1px solid var(--border-default);
+
+  .field-tab-btn {
+    padding: 11.5px 16px;
+    display: inline-flex;
+    align-items: center;
+
+    &.active {
+      font-size: 14px;
+      font-weight: 700;
+      background-color: var(--surface-brand-alt);
+      color: var(--text-white-default);
+    }
+
+    .brand-page-wrap {
+      margin-left: 80px;
+    }
+  }
+}
