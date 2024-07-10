@@ -109,7 +109,6 @@
 .media-contents__navigation-button {
     position: absolute;
     top: 50%;
-    cursor: pointer;
 }
 .media-contents__left-button {
     left: -70px;
@@ -186,4 +185,21 @@
     background-color: var(--gray100);
 
     position: absolute;
+}
+
+.button__container .subscribe-button--default {
+    display: block;
+}
+.button__container .subscribe-button--active {
+    display: none;
+}
+.button__container:hover .subscribe-button--default {
+    display: none;
+}
+.button__container:hover .subscribe-button--active {
+    display: block;
+}
+
+.dark-mode .subscribe-button--active {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg) brightness(102%) contrast(102%);
 }

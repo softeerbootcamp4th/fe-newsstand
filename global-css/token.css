@@ -17,6 +17,17 @@
     font-family: "Pretendard";
 }
 
+.dark-mode {
+    --white: #14212B;
+    --black: #FFFFFF;
+    --gray50: #4B5966;
+    --gray100: #5F6E76;
+    --gray200: rgba(255,255,255,0.7);
+    --gray300: rgba(255,255,255,0.7);
+    --gray400: #D2DAE0;
+    --gray500: #F5F7F9;
+}
+
 .text__bold24 {
     font-weight: 700;
     font-size: 24px;
@@ -71,7 +82,7 @@
     color: var(--gray200);
 }
 .text__white--default {
-    color: var(--white);
+    color: #ffffff;
 }
 .text__white--weak {
     color: var(--white-alt);
