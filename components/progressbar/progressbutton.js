@@ -2,17 +2,7 @@ import { testingpages, indexstate } from "../displaynews/displayNews.js";
 import { newstype } from "../newstab/newstab.js";
 import { updateNewsDisplay } from "../displaynews/displayNews.js";
 
-let animationTimer;
-
-document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.text-button');
-    buttons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            resetProgress(); // 버튼 상태 초기화
-            transformToProgress(event.currentTarget); 
-        });
-    });
-});
+export let animationTimer;
 
 export const transformToProgress = (element) => {
     element.setAttribute('data-original-text', element.textContent);
@@ -26,7 +16,7 @@ export const transformToProgress = (element) => {
         
         setTimeout(() => {
             element.classList.remove('animate');
-        }, 2000);
+        }, 4000);
     };
 
     const updateProgress = () => {
@@ -49,13 +39,14 @@ export const transformToProgress = (element) => {
         startAnimation();
     };
 
+    clearInterval(animationTimer); // 기존 애니메이션 타이머 초기화
     updateButtonText(element);
     startAnimation();
 
-    animationTimer = setInterval(updateProgress, 2100);
+    animationTimer = setInterval(updateProgress, 4100);
 }
 
-export const updateButtonText = (element) =>{
+export const updateButtonText = (element) => {
     const originalText = element.getAttribute('data-original-text').replace(/\s+\d+\/\d+$/, '');
     let spanElement = element.querySelector('span');
     if (!spanElement){
@@ -65,11 +56,11 @@ export const updateButtonText = (element) =>{
     const iii = element.dataset.index;
     const snum = Number(iii);
     spanElement.textContent = `${indexstate.pageIndex + 1}/${testingpages[snum]}`;
-    element.textContent = originalText + ' ';
+    element.textContent = originalText;
     element.appendChild(spanElement);
 }
 
-export const resetProgress = () =>  {
+export const resetProgress = () => {
     clearInterval(animationTimer);
 
     const progressButtons = document.querySelectorAll('.progress-button');
