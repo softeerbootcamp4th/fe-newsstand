@@ -439,8 +439,13 @@ ul {
 	transition: transform 0.5s;
 }
 
-.headlineArticle img:hover {
-	transform: scale(1.2);
+.headlineArticle:hover{
+	& img {
+		transform: scale(1.05);
+	}
+	& p {
+		text-decoration: underline;
+	}
 }
 
 .headlineArticle p {
@@ -464,6 +469,10 @@ ul {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	text-wrap: nowrap;
+	&:hover {
+		text-decoration: underline;
+		cursor: pointer;
+	}
 }
 
 .articleFooter {
