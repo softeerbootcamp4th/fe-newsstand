@@ -26,7 +26,10 @@ export function showUnSubsribeAlert(companyName, action) {
 
     alertContainer.insertAdjacentHTML("beforeend", render());
     alertContainer.querySelector(".alert_button.right").addEventListener('click', cancelAction)
-    alertContainer.querySelector(".alert_button.left").addEventListener('click', action)
+    alertContainer.querySelector(".alert_button.left").addEventListener('click', () => {
+        document.querySelector(".alert_Container").remove()
+        action()
+    })
 
     document.body.appendChild(alertContainer);
 }
