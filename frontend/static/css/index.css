@@ -21,15 +21,24 @@
 }
 
 #mainContentNav {
+    display: flex;
+    overflow: scroll;
+
     background-color: var(--background-color-sub-gray);
     border-bottom: var(--main-border);
 }
 
 .mainContentNavElement {
+    flex-shrink: 0;
     position: relative;
     display: inline-flex;
     padding: 16px 12px;
     margin: 0;
+}
+
+#mainContentNav::-webkit-scrollbar {
+    display: none;
+    /* 웹킷 브라우저(Chrome, Safari 등)에서 스크롤바 숨기기 */
 }
 
 .absolute {
