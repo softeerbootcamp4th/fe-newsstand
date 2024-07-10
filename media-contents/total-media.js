@@ -131,7 +131,7 @@ function renderGridMedia(page) {
 
     gridListDOM.innerHTML = mediaListDOMString;
 
-    subscribedMediaList.addCallback(() => renderGridMedia(page));
+    subscribedMediaList.setCallback(() => renderGridMedia(page));
     setArrowDisplayInGrid(page);
 }
 
@@ -175,7 +175,7 @@ function renderListMedia(categoryIdx, mediaIdx) {
     const contentsString = getSelectedCategoryContentsDOMString(category[categoryIdx].media[mediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    subscribedMediaList.addCallback(() => renderListMedia(categoryIdx, mediaIdx));
+    subscribedMediaList.setCallback(() => renderListMedia(categoryIdx, mediaIdx));
     setSubscribeButtonEvent(category[categoryIdx].media[mediaIdx]);
 }
 

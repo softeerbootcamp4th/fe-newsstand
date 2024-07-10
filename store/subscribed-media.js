@@ -12,15 +12,15 @@ class SubscribedMedia {
         this.data = this.data.filter((_data) => _data.id !== media.id);
         this.processCallback();
     }
+
     isSubscribed(mediaId) {
         return !!this.data.find((_data) => _data.id === mediaId);
     }
-
     getSubscribedMediaLength() {
         return this.data.length;
     }
 
-    addCallback(callback) {
+    setCallback(callback) {
         this.callback = callback;
     }
     processCallback() {
