@@ -1,8 +1,10 @@
 @import url("./style/variable.css");
 @import url("./style/common.css");
 @import url("./style/reset.css");
-@import url("./components/subscribeSwitchBtn/style.css");
+@import url("./components/subscriptionSwitchBtn/style.css");
 @import url("./components/fieldTab/style.css");
+@import url("./components/subscription/style.css");
+@import url("./components/toast/style.css");
 
 .news-stand {
   width: 930px;
@@ -27,16 +29,6 @@
 
 .news-list {
   position: relative;
-
-  .press-info {
-    .subscribe-btn {
-      padding: 2px 8px;
-    }
-
-    .remove-subscribe-btn {
-      padding: 7px;
-    }
-  }
 
   .news {
     align-items: start;

@@ -1,16 +1,20 @@
-import { allNewsData } from "../../data/allNewsData.js";
-import { subscribeData } from "../../data/subscribeData.js";
+import { cateData } from "../../data/cateData.js";
+import { brandData } from "../../data/brandData.js";
 import { getSubscribeList } from "../../util/getSubscribeList.js";
 import { allNews } from "../news/allNews/allNews.js";
-import { subscribeNews } from "../news/subscribeNews/subscribeNews.js";
+import { subscribeNews } from "../news/subscriptionNews/subscriptionNews.js";
 
+/**
+ *
+ * @param {"allTabPress" | "subscribeTabPress"} mode
+ */
 export const fieldTab = (mode) => {
   const fieldTab = document.querySelector(".field-tab");
 
   fieldTab.innerHTML = "";
 
   // 전체 언론사 버튼이 눌렸을 때
-  if (mode === "all") {
+  if (mode === "allTabPress") {
     // field-tab-btn 렌더링
     renderAllFieldTab(fieldTab);
 
@@ -22,12 +26,13 @@ export const fieldTab = (mode) => {
   }
 
   // 구독한 언론사 버튼이 눌렸을 때
-  if (mode === "subscribe") {
-    // field-tab-btn 렌더링
-    renderSubscribeFieldTab(fieldTab);
-
+  if (mode === "subscribeTabPress") {
     // 기존의 이벤트 제거
     fieldTab.removeEventListener("click", handleClickAllField);
+
+    // field-tab-btn 렌더링
+    // 구독한 언론사가 없는 경우 렌더링하지 않음
+    if (renderSubscribeFieldTab(fieldTab) === -1) return;
 
     // 이벤트 위임을 사용하여 클릭 이벤트 리스너 추가
     fieldTab.addEventListener("click", handleClickSubscribeField);
@@ -38,35 +43,41 @@ export const fieldTab = (mode) => {
 };
 
 const renderAllFieldTab = (fieldTab) => {
-  allNewsData.forEach((newsData, cateIdx) => {
-    const fieldTabBtn = `
-      <button class="field-tab-btn text-weak available-medium14 pointer ${
+  fieldTab.innerHTML += cateData.reduce(
+    (accData, newsData, cateIdx) =>
+      accData +
+      `  <button class="field-tab-btn text-weak available-medium14 pointer ${
         cateIdx === 0 ? "active" : ""
       } " data-cate-idx=${cateIdx} data-brand-idx = 0>
-        ${newsData.cate}
-        <div class = "brand-page-wrap ${
-          cateIdx === 0 ? "" : "hidden"
-        } display-bold12">
-         <span class = "cur-brand-page text-white-default">1</span> 
-         <span class = "total-brand-page text-white-weak}">/${
-           newsData.data.length
-         }</span>
-        </div>
-      </button>
-    `;
-    fieldTab.innerHTML += fieldTabBtn;
-  });
+    ${newsData.cate}
+    <div class = "brand-page-wrap ${
+      cateIdx === 0 ? "" : "hidden"
+    } display-bold12">
+     <span class = "cur-brand-page text-white-default">1</span> 
+     <span class = "total-brand-page text-white-weak}">/${
+       newsData.data.length
+     }</span>
+    </div>
+  </button>`,
+    ""
+  );
 };
 
 const renderSubscribeFieldTab = (fieldTab) => {
   let subscribeBrandIdList = getSubscribeList();
 
+  // 구독한 언론사가 없는 경우
+  if (subscribeBrandIdList.length === 0) {
+    subscribeNews(-1);
+    return -1;
+  }
+
   subscribeBrandIdList.forEach((brandId, brandIdx) => {
     const fieldTabBtn = `
       <button class="field-tab-btn text-weak available-medium14 pointer ${
         brandIdx === 0 ? "active" : ""
-      }" data-brand-idx="${brandIdx}">
-        ${subscribeData[brandId].brandName}
+      }" data-brand-idx=${brandIdx} data-brand-id=${Number(brandId)}>
+        ${brandData[brandId].brandName}
       </button>
     `;
     fieldTab.innerHTML += fieldTabBtn;

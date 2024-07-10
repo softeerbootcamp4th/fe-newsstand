@@ -1,11 +1,11 @@
-import { allNewsData } from "../../data/allNewsData.js";
-import { subscribeData } from "../../data/subscribeData.js";
+import { cateData } from "../../data/cateData.js";
+import { brandData } from "../../data/brandData.js";
 import { allNews } from "../news/allNews/allNews.js";
-import { subscribeNews } from "../news/subscribeNews/subscribeNews.js";
+import { subscribeNews } from "../news/subscriptionNews/subscriptionNews.js";
 import {
   handleClickSubscribeLeftBtn,
   handleClickSubscribeRightBtn,
-} from "./subscribeSwipe.js";
+} from "./subscriptionSwipe.js";
 
 // 전체 언론사 탭에서의 스와이프
 export const allSwipe = () => {
@@ -71,7 +71,7 @@ const calcPrevId = (curCateIdx, curBrandIdx) => {
     curBrandIdx === 0
       ? // curCateIdx === 0 이면 마지막 카테고리로 넘어가야 함
         curCateIdx === 0
-        ? allNewsData.length - 1
+        ? cateData.length - 1
         : curCateIdx - 1
       : curCateIdx;
 
@@ -86,10 +86,10 @@ const calcNextId = (curCateIdx, curBrandIdx) => {
   let nextCateIdx, nextBrandIdx;
 
   // curBrandIdx가 마지막 언론사인 경우 cateIdx + 1
-  if (curBrandIdx === allNewsData[curCateIdx].data.length - 1) {
+  if (curBrandIdx === cateData[curCateIdx].data.length - 1) {
     // 이 때, 마지막 카테고리라면 첫 번째 카테고리로 이동해야 함
     nextCateIdx =
-      curCateIdx === allNewsData.length - 1 ? (curCateIdx = 0) : curCateIdx + 1;
+      curCateIdx === cateData.length - 1 ? (curCateIdx = 0) : curCateIdx + 1;
     nextBrandIdx = 0;
   }
   // 마지막 언론사가 아니라면 cateIdx는 그대로, brandIdx + 1

@@ -140,6 +140,22 @@
   border: 1px solid var(--border-default);
 }
 
+.border-default-top {
+  border-top: 1px solid var(--border-default);
+}
+
+.border-default-left {
+  border-left: 1px solid var(--border-default);
+}
+
+.border-default-right {
+  border-right: 1px solid var(--border-default);
+}
+
+.border-default-bottom {
+  border-bottom: 1px solid var(--border-default);
+}
+
 .border-bold {
   border: 1px solid var(--border-bold);
 }

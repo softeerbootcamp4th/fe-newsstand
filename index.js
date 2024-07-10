@@ -1,9 +1,9 @@
-import { subscribeSwitchBtn } from "./components/subscribeSwitchBtn/subscribeSwitchBtn.js";
+import { subscribeSwitchBtn } from "./components/subscriptionSwitchBtn/subscriptionSwitchBtn.js";
 import { header } from "./components/header/header.js";
-import { addSubscribe } from "./components/subscribe/addSubscribe.js";
-import { removeSubscribtion } from "./components/subscribe/removeSubscribtion.js";
+import { addSubscribe } from "./components/subscription/addsubscription.js";
+import { removeSubscribe } from "./components/subscription/removeSubscription.js";
 
 header();
 subscribeSwitchBtn();
 addSubscribe();
-removeSubscribtion();
+removeSubscribe();

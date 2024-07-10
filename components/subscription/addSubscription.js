@@ -1,11 +1,19 @@
+import { brandData } from "../../data/brandData.js";
 import { getSubscribeList } from "../../util/getSubscribeList.js";
 import { allNews } from "../news/allNews/allNews.js";
+import { renderToast } from "../toast/renderToast.js";
 import { isSubscribe } from "./isSubscribe.js";
 
 /**
  * 구독하기 버튼을 누르면 해당 언론사를 구독하는 함수
  */
-export const removeSubscribe = () => {
+
+// 1. 구독하기 버튼을 찾는다
+// 2. 클릭 이벤트 리스너 부착
+// 3. pressNews에서 brandId 찾는다
+// 4. addSubscribe(brandId) 호출
+
+export const addSubscribe = () => {
   const subscribeBtn = document.querySelector(".subscribe-btn");
   subscribeBtn.addEventListener("click", handleClickSubscribeBtn);
 };
@@ -27,6 +35,8 @@ const handleClickSubscribeBtn = () => {
 
   // 화면에 구독여부를 즉시 반영하기 위해 뉴스데이터 리렌더링
   allNews(cateIdx, brandIdx);
+
+  renderToast(`${brandData[brandId].brandName}을(를) 구독하였습니다`);
 };
 
 /**

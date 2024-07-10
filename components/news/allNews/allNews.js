@@ -1,9 +1,9 @@
-import { allNewsData } from "../../../data/allNewsData.js";
+import { cateData } from "../../../data/cateData.js";
 import { shortenStr } from "../../../util/shortenStr.js";
-import { renderSubscribeBtn } from "../../subscribe/renderSubscribeBtn.js";
+import { renderSubscribeBtn } from "../../subscription/renderSubscriptionBtn.js";
 
 export const allNews = (cateIdx, brandIdx) => {
-  const newsData = allNewsData[cateIdx].data[brandIdx];
+  const newsData = cateData[cateIdx].data[brandIdx];
 
   // press news selector
   const pressNews = document.querySelector(".press-news");
@@ -20,7 +20,11 @@ export const allNews = (cateIdx, brandIdx) => {
   const subNewsList = pressNews.querySelector(".sub-news-list");
 
   // brandId
-  const brandId = allNewsData[cateIdx].data[brandIdx].brandId;
+  const brandId = cateData[cateIdx].data[brandIdx].brandId;
+
+  // 구독한 언론사가 없는 경우 예외처리
+  pressNews.classList.remove("hidden");
+  document.querySelector(".no-subscribe").classList.add("hidden");
 
   // brand-idx 저장
   pressNews.dataset.brandIdx = brandIdx;

@@ -1,6 +1,4 @@
-// 내가 구독한 언론사
-
-export const subscribeData = [
+export const brandData = [
   {
     brandId: 0,
     brandName: "서울경제",

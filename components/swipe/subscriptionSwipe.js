@@ -1,6 +1,6 @@
-import { subscribeData } from "../../data/subscribeData.js";
+import { brandData } from "../../data/brandData.js";
 import { getSubscribeList } from "../../util/getSubscribeList.js";
-import { subscribeNews } from "../news/subscribeNews/subscribeNews.js";
+import { subscribeNews } from "../news/subscriptionNews/subscriptionNews.js";
 import { handleClickAllLeftBtn, handleClickAllRightBtn } from "./allSwipe.js";
 
 // 구독한 언론사 탭에서의 스와이프
@@ -17,10 +17,14 @@ export const subscribeSwipe = () => {
 };
 
 export const handleClickSubscribeLeftBtn = () => {
-  const {
+  let {
     dataset: { brandIdx },
   } = document.querySelector(".press-news");
+  brandIdx = Number(brandIdx);
   const fieldTabBtns = document.querySelectorAll(".field-tab-btn");
+
+  // 구독한 언론사가 없다면 스와이프 차단
+  if (brandIdx === -1) return;
 
   let subscribeList = getSubscribeList();
   let curBrandIdx = Number(brandIdx);
@@ -37,11 +41,15 @@ export const handleClickSubscribeLeftBtn = () => {
 };
 
 export const handleClickSubscribeRightBtn = () => {
-  const {
+  let {
     dataset: { brandIdx },
   } = document.querySelector(".press-news");
+  brandIdx = Number(brandIdx);
+
   let subscribeList = getSubscribeList();
   const fieldTabBtns = document.querySelectorAll(".field-tab-btn");
+
+  if (brandIdx === -1) return;
 
   let curBrandIdx = Number(brandIdx);
 

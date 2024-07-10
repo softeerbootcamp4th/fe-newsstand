@@ -70,6 +70,7 @@
             <!-- 필드 탭 -->
             <div class="field-tab surface-alt"></div>
 
+            <!-- 선택된 언론사의 뉴스 -->
             <div class="press-news p-24">
               <div class="press-info flex gap-16">
                 <img class="brand-logo" />
@@ -100,8 +101,7 @@
                     width="320"
                     height="200"
                   />
-                  <a class="main-news-title available-medium16 text-strong"
-                    >또 국민연금의 몽니…현대百 지주사 불발
+                  <a class="main-news-title available-medium16 text-strong">
                   </a>
                 </div>
 
@@ -110,8 +110,21 @@
                   <ul class="flex-col gap-16 sub-news-list"></ul>
                 </div>
               </div>
+
+              <!-- Toast UI -->
+              <div class="toast surface-brand-default"></div>
+
+              <!-- 구독해지 모달 -->
+              <div
+                class="remove-subscribe-modal text-default border-default-right border-default-bottom hidden"
+              ></div>
+              <div class="remove-subscribe-overlay hidden"></div>
             </div>
 
+            <!-- 구독한 언론사가 없을 시 -->
+            <div class="no-subscribe hidden flex-center text-bold">
+              구독한 언론사가 없습니다. 관심있는 언론사를 구독해보세요.
+            </div>
             <img class="left-btn" src="./asset/icons/leftButton.svg" />
             <img class="right-btn" src="./asset/icons/rightButton.svg" />
           </div>

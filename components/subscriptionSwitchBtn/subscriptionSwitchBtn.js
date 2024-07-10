@@ -1,6 +1,6 @@
 import { fieldTab } from "../fieldTab/fieldTab.js";
 import { allSwipe } from "../swipe/allSwipe.js";
-import { subscribeSwipe } from "../swipe/subscribeSwipe.js";
+import { subscribeSwipe } from "../swipe/subscriptionSwipe.js";
 
 export const subscribeSwitchBtn = () => {
   const allBrandTabBtn = document.querySelector(".all-brand-tab-btn");
@@ -26,7 +26,7 @@ const handleClickAllBrandTabBtn = (allBrandTabBtn, subscribeBrandTabBtn) => {
   allBrandTabBtn.classList.add("active");
 
   // 전체 언론사 탭 버튼 렌더링
-  fieldTab("all");
+  fieldTab("allTabPress");
 
   // 전체 언론사일때의 스와이프 기능 작동
   allSwipe();
@@ -41,7 +41,7 @@ const handleClickSubscribeBrandTabBtn = (
   subscribeBrandTabBtn.classList.add("active");
 
   // 구독한 언론사 탭 버튼 렌더링
-  fieldTab("subscribe");
+  fieldTab("subscribeTabPress");
 
   // 구독한 언론사일때의 스와이프 기능 작동
   subscribeSwipe();

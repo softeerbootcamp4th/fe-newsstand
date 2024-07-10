@@ -1,0 +1,51 @@
+.subscribe-btn {
+  padding: 2px 8px;
+}
+
+.remove-subscribe-btn {
+  padding: 7px;
+}
+
+.no-subscribe {
+  padding: 100px;
+  font-size: 1.2rem;
+}
+
+.remove-subscribe-modal {
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 320px;
+  height: 140px;
+
+  .remove-text-wrap {
+    text-align: center;
+    height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .yes-remove-btn,
+  .no-remove-btn {
+    width: 100%;
+    padding: 16px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.remove-subscribe-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9;
+}
