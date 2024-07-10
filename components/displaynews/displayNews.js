@@ -1,7 +1,7 @@
 import { showsubscribe } from "../subscribe/subscribe.js";
 import { transformToProgress, resetProgress } from "../progressbar/progressbutton.js";
 import { newstype } from "../newstab/newstab.js";
-import { moveToNextCatidx, animationTimer } from "../progressbar/progressbutton.js";
+import { animationTimer } from "../progressbar/progressbutton.js";
 import { clickArt } from "../mainscript.js";
 import { originaltabs, mytabs } from "../newstab/newstab.js";
 
@@ -75,6 +75,8 @@ btnLeft.addEventListener('click', () => {
 });
 
 function rightButtonClick(pridx) {
+    clearInterval(animationTimer); // 애니메이션 타이머 초기화
+
     if (indexstate.pageIndex < testingpages[pridx] - 1) {
         indexstate.pageIndex++;
     } else {
@@ -90,6 +92,8 @@ function rightButtonClick(pridx) {
 }
 
 function leftButtonClick() {
+    clearInterval(animationTimer); // 애니메이션 타이머 초기화
+
     if (indexstate.pageIndex > 0) {
         indexstate.pageIndex--;
     } else {
@@ -146,7 +150,7 @@ export const initmain = () => {
     clearInterval(animationTimer);
     resetProgress();
 
-    testingpages = countpages(window.newsData); // Ensure testingpages is updated
+    testingpages = countpages(window.newsData); 
 
     const buttons = document.querySelectorAll('.text-button');
     buttons.forEach(button => {
@@ -154,8 +158,8 @@ export const initmain = () => {
         button.addEventListener('click', handleButtonClick);
     });
 
-    indexstate.pressIndex = 0; // Ensure starting index is reset
-    indexstate.pageIndex = 0;  // Ensure starting page index is reset
+    indexstate.pressIndex = 0; 
+    indexstate.pageIndex = 0; 
 
     updateNewsDisplay("economy", indexstate.pageIndex);
     const ts = document.querySelector(".text-button");
