@@ -1,5 +1,5 @@
 import { renderMediaFilter } from "./media-filter.js";
-import { renderMediaDisplay } from "./media-display.js";
+import { renderGridLayout, renderMediaDisplay } from "./media-display.js";
 
 function initMediaContents() {
     /**
@@ -11,6 +11,11 @@ function initMediaContents() {
      * 그리드/리스트 형식 렌더링
      */
     renderMediaDisplay();
+
+    /**
+     * 그리드 레이아웃 렌더링
+     */
+    renderGridLayout();
 }
 
 initMediaContents();

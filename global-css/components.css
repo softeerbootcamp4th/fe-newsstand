@@ -70,6 +70,18 @@
 .button__container:hover .button__text {
     color: var(--gray500);
 }
+.button__container .subscribe-button--default {
+    display: block;
+}
+.button__container .subscribe-button--active {
+    display: none;
+}
+.button__container:hover .subscribe-button--default {
+    display: none;
+}
+.button__container:hover .subscribe-button--active {
+    display: block;
+}
 
 .snackbar__wrapper {
     position: absolute;

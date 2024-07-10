@@ -1,5 +1,5 @@
-import { renderSubscribedMedia } from "./subscribed-media.js";
-import { renderTotalMedia } from "./total-media.js";
+import { renderSubscribedMedia, resetSubscribedMedia } from "./subscribed-media.js";
+import { renderTotalMedia, resetTotalMedia } from "./total-media.js";
 
 /**
  * @description 언론사 필터를 렌더하는 함수
@@ -34,8 +34,10 @@ function clickMediaDisplay(e) {
     }
 
     if (selectedFilter === "total-media") {
+        resetSubscribedMedia();
         renderTotalMedia();
     } else if (selectedFilter === "subscribed-media") {
+        resetTotalMedia();
         renderSubscribedMedia();
     }
 }
@@ -59,4 +61,24 @@ function setUnelectedDisplay(targetId) {
     const inactiveImgSrc = imgSrc.replace("-active", "-inactive");
 
     unselectedDisplayDOM.src = inactiveImgSrc;
+}
+
+/**
+ * @description 그리드 레이아웃을 그려주는 함수
+ */
+export function renderGridLayout() {
+    const gridLayoutDOM = document.querySelector(".media-contents__grid-layout");
+    let gridLayoutDOMString = '';
+
+    const horizontalGap = 96.5;
+    const verticalGap = 154.5;
+
+    new Array(3).fill().forEach((_, idx) => {
+        gridLayoutDOMString += `<section class="media-contents__grid-horizontal-line" style="top: ${horizontalGap * (idx + 1)}px;"></section>`;
+    });
+    new Array(5).fill().forEach((_, idx) => {
+        gridLayoutDOMString += `<section class="media-contents__grid-vertical-line" style="left: ${verticalGap * (idx + 1)}px;"></section>`;
+    });
+
+    gridLayoutDOM.innerHTML = gridLayoutDOMString;
 }

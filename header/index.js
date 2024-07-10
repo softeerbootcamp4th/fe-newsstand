@@ -1,4 +1,4 @@
-import { getCurrentDate } from "./getCurrentDate.js";
+import { getCurrentDate } from "./get-current-date.js";
 
 function initHeader() {
     const currentDate = getCurrentDate();
