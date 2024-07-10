@@ -237,8 +237,13 @@ export function addMyData(object) {
   myData.add(object);
 }
 
-export function removeMyData(object) {
-  myData.delete(object);
+export function removeMyDataById(media) {
+  for (const item of myData) {
+    if (item.media === media) {
+      myData.delete(item);
+      break;
+    }
+  }
 }
 
 export function getMyDataAsArray() {

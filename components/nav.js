@@ -8,7 +8,9 @@ import {
   getMyListLength,
   categoryData,
   addMyData,
-  removeMyData,
+  removeMyDataById,
+  mediaData,
+  myData,
 } from "../resources/data.js";
 import state from "../list/state.js";
 import store from "../utils/stoageManager.js";
@@ -28,7 +30,7 @@ export function generateNav(container, currentHeaderCategoryIndex) {
     selectedList = categoryList;
     state.headerCategory = 0;
   } else if (currentHeaderCategoryIndex === 1) {
-    selectedList = myList;
+    selectedList = myList.map((element) => mediaData[element].media);
     state.headerCategory = 1;
   }
 
@@ -120,11 +122,13 @@ function addMediaToMyList() {
     "myList",
     categoryData[categoryList[state.currentCategoryIndex]][
       state.currentMediaIndex
-    ].media
+    ]
   );
   addMyData(
-    categoryData[categoryList[state.currentCategoryIndex]][
-      state.currentMediaIndex
+    mediaData[
+      categoryData[categoryList[state.currentCategoryIndex]][
+        state.currentMediaIndex
+      ]
     ]
   );
 }
@@ -156,25 +160,20 @@ function generateUnsubscribe() {
 
   sub.innerHTML = "구독 해지";
   sub.addEventListener("click", () =>
-    saveRemoveList(
-      categoryData[categoryList[state.currentCategoryIndex]][
-        state.currentMediaIndex
-      ]
-    )
+    saveRemoveList(myList[state.currentCategoryIndex])
   );
 }
 
 /**
  * 구독해지 버튼 로직
- * task : 바로 제거해서는 안됨!!
  */
-function removeMediaFromMyList(object) {
-  store.removeItemFromSet("myList", object.media);
-  removeMyData(object);
+function removeMediaFromMyList(id) {
+  store.removeItemFromSet("myList", id);
+  removeMyDataById(mediaData[id].media);
 }
 
-function saveRemoveList(object) {
-  needRemove.push(object);
+function saveRemoveList(id) {
+  needRemove.push(id);
 }
 
 /**

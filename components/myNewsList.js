@@ -34,9 +34,7 @@ function createFooterElement(container, media) {
 
 /**
  * 바뀐 카테고리에 맞게 newsList 업데이트
- * @param {String} category
  * @param {int} currentCategoryIndex
- * @param {int} currentMediaIndex
  */
 export function updateMyNewsList(currentCategoryIndex) {
   const newsListContainer = deleteNodeById("newsList_container");
