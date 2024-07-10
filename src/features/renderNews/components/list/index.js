@@ -14,14 +14,12 @@ export function renderListView(container, state) {
       : state.data[state.currentCompanyIndex];
 
   if (currentCompany) {
-    // 언론사 카테고리
-    container.appendChild(createTab(state));
-    // 언론사
-    container.appendChild(createCompany(currentCompany, state.currentDataType));
+    const tab = createTab(state);
+    const company = createCompany(currentCompany, state.currentDataType);
+
+    container.append(tab, company);
   } else {
-    container.insertAdjacentHTML(
-      "beforeend",
-      `<p class='empty-text'>해당하는 언론사가 존재하지 않습니다.</p>`
-    );
+    const empty = `<p class='empty-text'>해당하는 언론사가 존재하지 않습니다.</p>`;
+    container.appendChild(empty);
   }
 }
