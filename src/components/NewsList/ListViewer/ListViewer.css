@@ -167,7 +167,7 @@
   top: 50%;
   left: -47px;
 
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, -50%);
 }
 
 .newsButton.next {
@@ -175,7 +175,7 @@
   top: 50%;
   right: -47px;
 
-  transform: translate(50%, 50%);
+  transform: translate(50%, -50%);
 }
 
 .newsButton > img {
