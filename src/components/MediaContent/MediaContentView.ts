@@ -1,6 +1,6 @@
-import { Anchor, Div, Img, Span, ce } from "@/libs/elements";
+import { Anchor, Div, Img, Span, ce } from "@/libs";
 import styles from "./MediaContentView.module.css";
-import { cc } from "@/libs/components";
+import { cc } from "@/libs";
 import { News } from "@/models/News";
 
 import typoSyles from "@/styles/typo.module.css";

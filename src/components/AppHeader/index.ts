@@ -1,5 +1,5 @@
 import { NewspaperIcon } from "@/assets/NewspaperIcon";
-import { Div, H1, Raw, Span, ce } from "@/libs/elements";
+import { Div, H1, Raw, Span, ce } from "@/libs";
 import typoStyles from "@/styles/typo.module.css";
 import styles from "./index.module.css";
 import { formatHeaderDate } from "@/utils/formatDate";

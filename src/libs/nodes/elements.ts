@@ -1,4 +1,4 @@
-import { EventNameMaps } from "./event";
+import { EventNameMaps } from "../event";
 import { AppElement, AppElementProps, CreatedAppElement } from "./renderer";
 export const Raw = (data: string) => {
   const parser = new DOMParser();

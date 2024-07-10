@@ -1,7 +1,7 @@
-import { Button, Div, Img, Raw, Span, ce } from "@/libs/elements";
+import { Button, Div, Img, Raw, Span, ce } from "@/libs";
 import styles from "./MediaContentMainHeader.module.css";
 import typoStyles from "@/styles/typo.module.css";
-import { cc } from "@/libs/components";
+import { cc } from "@/libs";
 import { formatDetailDate } from "@/utils/formatDate";
 import { PlucIcon } from "@/assets/PlucIocn";
 import { Media } from "@/models/Media";

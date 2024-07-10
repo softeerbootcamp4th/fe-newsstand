@@ -1,8 +1,8 @@
-import { Button, Div, Raw, ce } from "@/libs/elements";
+import { Button, Div, Raw, ce } from "@/libs";
 import styles from "./MediaContentMain.module.css";
 import { Category } from "@/models/Newsstand";
 import { useMedia } from "@/hooks/useMedia";
-import { cc } from "@/libs/components";
+import { cc } from "@/libs";
 import { MediaContentMainHeader } from "./MediaContentMainHeader";
 import { useMediaRecentNews } from "@/hooks/useMediaRecentNews";
 import { MediaContentView } from "./MediaContentView";

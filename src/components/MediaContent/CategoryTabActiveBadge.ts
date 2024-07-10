@@ -1,4 +1,4 @@
-import { ce, Span } from "@/libs/elements";
+import { ce, Span } from "@/libs";
 import styles from "./CategoryTabActiveBadge.module.css";
 interface CategoryTabActiveBadgeProps {
   curIdx: number;

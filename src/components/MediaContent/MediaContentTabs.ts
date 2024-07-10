@@ -1,7 +1,7 @@
-import { Div, Span, ce } from "@/libs/elements";
+import { Div, Span, ce } from "@/libs";
 import styles from "./MediaContentTabs.module.css";
 import typoStyles from "@/styles/typo.module.css";
-import { AppChild } from "@/libs/renderer";
+import { AppChild } from "@/libs";
 interface MediaContentTabProps {
   main: string;
   sub: AppChild;

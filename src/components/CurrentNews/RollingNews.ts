@@ -1,5 +1,5 @@
 import { useEffect, useState } from "@/libs";
-import { Anchor, Div, H2, Span, ce } from "@/libs/elements";
+import { Anchor, Div, H2, Span, ce } from "@/libs";
 import styles from "./RollingNews.module.css";
 import { getRecentNews } from "@/remotes/getRecentNews";
 import { RecentNews } from "@/models/News";

@@ -1,4 +1,4 @@
-import { Div, Span, ce } from "@/libs/elements";
+import { Div, Span, ce } from "@/libs";
 import { MediaContentFilterType } from ".";
 import typoStyles from "@/styles/typo.module.css";
 import styles from "./MediaContentFilter.module.css";
