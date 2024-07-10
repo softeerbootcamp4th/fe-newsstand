@@ -170,3 +170,7 @@ export const checkSubscription = () => {
         replaceToCancleSubscriptionBtn();
     }
 }
+
+export const cancleMediaSubscription = () => {
+    localStorage.removeItem(nowMediaName);
+}

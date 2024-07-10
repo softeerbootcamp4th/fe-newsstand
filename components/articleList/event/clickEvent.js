@@ -5,6 +5,7 @@ import { setSubscriptionData } from "../articleList.js";
 import { extractMedias } from "../../../utils/api.js";
 import { setWholeData } from "../articleList.js";
 import { createAlert } from "../../alert/alert.js";
+import { cancleMediaSubscription } from "./pageEvent.js";
 
 // 전체 언론사, 구독한 언론사
 export const addModeSelectionEventListener = () => {
@@ -163,5 +164,22 @@ export const addCancleSubscriptionEventListener = () => {
         el.classList.add('alert-area');
         el.innerHTML = createAlert();
         document.querySelector('.article-body-wrapper').appendChild(el);
+        addAlertAcceptBtnEventListener();
+        addAlertCancleBtnEventListener();
+    })
+}
+
+export const addAlertAcceptBtnEventListener = () => {
+    document.querySelector('.alert-accept-btn').addEventListener('click', () => {
+        cancleMediaSubscription();
+
+        // alert 사라지는 이벤트
+        document.querySelector('.alert-area').remove();
+    })
+}
+
+export const addAlertCancleBtnEventListener = () => {
+    document.querySelector('.alert-cancle-btn').addEventListener('click', () => {
+        document.querySelector('.alert-area').remove();
     })
 }
