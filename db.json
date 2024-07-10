@@ -399,9 +399,24 @@
       "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/003.png"
     },
     {
+      "id": 5,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/005.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/005.png"
+    },
+    {
       "id": 6,
       "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/006.png",
       "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/006.png"
+    },
+    {
+      "id": 8,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/008.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/008.png"
+    },
+    {
+      "id": 9,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/009.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/009.png"
     },
     {
       "id": 11,
@@ -409,9 +424,49 @@
       "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/011.png"
     },
     {
+      "id": 14,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/014.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/014.png"
+    },
+    {
+      "id": 15,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/015.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/015.png"
+    },
+    {
+      "id": 16,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/016.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/016.png"
+    },
+    {
+      "id": 18,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/018.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/018.png"
+    },
+    {
       "id": 20,
       "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/020.png",
       "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/020.png"
+    },
+    {
+      "id": 21,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/021.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/021.png"
+    },
+    {
+      "id": 22,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/022.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/022.png"
+    },
+    {
+      "id": 24,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/024.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/024.png"
+    },
+    {
+      "id": 29,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/029.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/029.png"
     },
     {
       "id": 30,
@@ -487,6 +542,16 @@
       "id": 308,
       "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/308.png",
       "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/308.png"
+    },
+    {
+      "id": 312,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/312.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/312.png"
+    },
+    {
+      "id": 314,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/314.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/314.png"
     },
     {
       "id": 326,
