@@ -1,3 +1,4 @@
-import "./selectCategory.js"
-import "./selectMedia.js"
-import "./animation/subHeaderAnimation.js"
+import { renderNewsList } from "./newsListRenderer.js";
+
+const newsInfo = { "indexInfo": 1, "gridListInfo": "list", "categoryInfo": "방송/통신", "subAllInfo": 'all' }
+renderNewsList(newsInfo);

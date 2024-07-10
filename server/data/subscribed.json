@@ -1,4 +1,3 @@
-export default 
 {
   "여성경제신문": [
     {
@@ -1479,7 +1478,7 @@ export default
       "title": "기술 발전, 미래 사회 변화 전망",
       "media": "시사인",
       "date": "2024-07-28"
-    },
+    }
   ],
   "중앙일보": [
     {
@@ -2008,7 +2007,7 @@ export default
       "title": "한국 요리, 해외 미식가들 사이에서 인기",
       "media": "KBSWorld",
       "date": "2024-08-13"
-    },
+    }
   ],
   "아시아경제": [
     {
@@ -2225,7 +2224,7 @@ export default
       "title": "아시아 관광 산업, 회복세 보여",
       "media": "아시아경제",
       "date": "2024-08-24"
-    },
+    }
   ],
   "씨네21": [
     {
@@ -2712,7 +2711,7 @@ export default
       "title": "영화 트렌드, 장르별 분석",
       "media": "씨네21",
       "date": "2024-09-03"
-    },
+    }
   ],
   "MBC": [
     {
@@ -3159,7 +3158,7 @@ export default
       "title": "MBC 교양 프로그램, 시청자 호평",
       "media": "MBC",
       "date": "2024-09-12"
-    },
+    }
   ],
   "한겨례": [
     {
@@ -3411,7 +3410,7 @@ export default
       "title": "사회적 기업, 지속 가능한 모델 소개",
       "media": "한겨례",
       "date": "2024-09-20"
-    },
+    }
   ],
   "SBS Biz": [
     {
@@ -3743,7 +3742,7 @@ export default
       "title": "비즈니스 리더 인터뷰",
       "media": "SBS Biz",
       "date": "2024-09-25"
-    },
+    }
   ],
   "JTBC": [
     {
@@ -4290,7 +4289,7 @@ export default
       "title": "JTBC, 시청자 의견 반영한 프로그램 제작",
       "media": "JTBC",
       "date": "2024-10-09"
-    },
+    }
   ],
   "조선일보": [
     {
@@ -4753,5 +4752,5 @@ export default
       "media": "조선일보",
       "date": "2024-10-17"
     }
-  ],
+  ]
 }
