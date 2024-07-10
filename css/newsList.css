@@ -1,0 +1,116 @@
+.NewsList {
+  position: absolute;
+  top: 256px;
+  left: 175px;
+  width: auto;
+  height: auto;
+}
+
+.PressNews {
+  width: 930px;
+  height: auto;
+  border: 1px solid #D2DAE0;
+  padding: 0 24px 24px 24px;
+  box-sizing: border-box;
+}
+
+.PressInfo {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.Brandmark {
+  width: 51px;
+  height: 20px;
+}
+
+.EditDate {
+  width: 121px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #5F6E76;
+}
+
+.SubscribeButton {
+  color: gray;
+  width: auto;
+  height: 24px;
+  border-radius: 50px;
+  border: 1px #D2DAE0;
+  padding: 0 6px 0 6px;
+  gap: 2px;
+  background-color: #F5F7F9;
+  cursor: pointer;
+}
+
+.News {
+	width: 100px;
+  height: auto;
+  display: flex;
+}
+
+.Main {
+  width: 320px;
+  height: 260px;
+  cursor: pointer;
+  margin: 0 32px 0 0;
+}
+
+.Thumbnail {
+  width: 320px;
+  height: 200px;
+  border: 1px solid #D2DAE0;
+  overflow: hidden;
+}
+
+.Thumbnail:hover img {
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1.1);
+}
+
+.MainTitle {
+  width: 320px;
+  height: 44px;
+  font-size: 16px;
+  line-height: 22px;
+  margin: 16px 0;
+  color: #14212B;
+  font-weight: bold;
+}
+
+.Sub {
+  width: auto;
+  height: auto;
+}
+
+.Sub ul {
+	margin: 0;
+  padding: 0;
+}
+
+.Sub li {
+	width: 530px;
+	height: 22px;
+	font-size: 16px;
+	line-height: 22px;
+	color: #4B5966;
+	list-style-type: none;
+	margin: 0 0 16px 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+  cursor: pointer;
+}
+
+.Caption {
+  width: 530px;
+  height: 17px;
+  font-size: 14px;
+  line-height: 16.41px;
+  color: #879298;
+}

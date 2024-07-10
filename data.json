@@ -5,13 +5,13 @@
 		"company": [
 			{
 				"companyId": 1,
-				"companyLogo": "../../images/dailyahnLogo.svg",
-				"companyName": "서울파이낸스",
-				"updatedDate": "07월 03일 10:10 직접 편집",
+				"companyLogo": "./asset/seouleconomy.svg",
+				"companyName": "서울경제",
+				"updatedDate": "07월 03일 10:10 편집",
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 1,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "LG전자, 앳홈 지분 80% 인수···스마트홈 생태계 구축 속도 낸다"
 				},
 				"news": [
@@ -31,7 +31,7 @@
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 1,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "LG전자, 앳홈 지분 80% 인수···스마트홈 생태계 구축 속도 낸다"
 				},
 				"news": [
@@ -57,7 +57,7 @@
 				"isSubscribe": true,
 				"mainNews": {
 					"id": 1,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "20초 만에 고꾸라져...'중국판 스페이스-X'의 굴욕?"
 				},
 				"news": [
@@ -77,7 +77,7 @@
 				"isSubscribe": true,
 				"mainNews": {
 					"id": 1,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "20초 만에 고꾸라져...'중국판 스페이스-X'의 굴욕?"
 				},
 				"news": [
@@ -103,7 +103,7 @@
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 1,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "What happens next in Ukraine’s debt negotiations could change the course of the war"
 				},
 				"news": [
@@ -123,7 +123,7 @@
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 1,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "What happens next in Ukraine’s debt negotiations could change the course of the war"
 				},
 				"news": [
@@ -149,7 +149,7 @@
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 1,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "What happens next in Ukraine’s debt negotiations could change the course of the war"
 				},
 				"news": [
@@ -169,7 +169,7 @@
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 1,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "What happens next in Ukraine’s debt negotiations could change the course of the war"
 				},
 				"news": [
@@ -195,7 +195,7 @@
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 782,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "임영웅 단편영화 ‘인 악토버’, 6일 쿠팡플레이·티빙 공개"
 				},
 				"news": [
@@ -224,7 +224,7 @@
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 341,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "[단독][6월모평 실채점 배치표] 대성학원 자연 서울대 의예 435점, 인문"
 				},
 				"news": [
@@ -268,7 +268,7 @@
 				"isSubscribe": false,
 				"mainNews": {
 					"id": 123,
-					"src": "../../images/thumbnail/Thumbnail.png",
+					"src": "./asset/Thumbnail.svg",
 					"title": "경찰, 사직동 변사 사건 범인 친형 검거...부실수사로 2년 걸려"
 				},
 				"news": [

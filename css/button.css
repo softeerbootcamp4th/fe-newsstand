@@ -1,0 +1,22 @@
+.Button {
+  width: 24px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+.LeftButton {
+  position: absolute;
+  top: 430px;
+  left: 104px;
+  background: url("../asset/LeftButton.svg") no-repeat center center;
+  background-size: cover;
+}
+
+.RightButton {
+  position: absolute;
+  top: 430px;
+  left: 1153px;
+  background: url("../asset/RightButton.svg") no-repeat center center;
+  background-size: cover;
+}

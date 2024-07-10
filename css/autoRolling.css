@@ -1,0 +1,43 @@
+.AutoRollingNewsBar {
+  position: absolute;
+  top: 127px;
+  left: 175px;
+  width: 930px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.AutoRollingNews {
+  width: auto;
+  height: auto;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  border: 1px solid #D2DAE0;
+  background-color: #F5F7F9;
+}
+
+.AutoRollingNews-Press {
+  width: 49px;
+  height: 17px;
+  font-size: 14px;
+  line-height: 16.41px;
+  text-overflow: ellipsis;
+  color: #14212B;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.AutoRollingNews-NewsTitle {
+  width: 364px;
+  height: 17px;
+  font-size: 14px;
+  line-height: 16.41px;
+  text-overflow: ellipsis;
+  color: #5F6E76;
+  cursor: pointer;
+}

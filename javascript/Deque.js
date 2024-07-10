@@ -6,6 +6,7 @@ export class Deque {
 		this.items = {};
 		this.front = 0;
 		this.rear = 0;
+		this.current = 1;
 	}
 
 	/*

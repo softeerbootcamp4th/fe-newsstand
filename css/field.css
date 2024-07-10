@@ -1,0 +1,178 @@
+.FieldTab {
+  width: 930px;
+  height: 40px;
+  border : 1px solid #D2DAE0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.Field-chosen {
+  background-color: #7890E7;
+}
+
+.Tab {
+  float: left;
+  width: auto;
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.text {
+  width: auto;
+  height: 17px;
+  font-size: 14px;
+  line-height: 16.41px;
+  color: #879298;
+}
+
+.Field-chosen .text {
+  width: 97.77px;
+  height: 17px;
+  font-size: 14px;
+  line-height: 16.41px;
+  color: #FFFFFF;
+}
+
+.percentage {
+  display: none;
+}
+
+.Field-chosen .percentage {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.current-all {
+  width: 8px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+}
+
+.division {
+  width: 4px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}
+
+.all-num {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}
+
+.current-broad {
+  width: 8px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+}
+
+.broad-num {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}
+
+.current-it {
+  width: 8px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+}
+
+.it-num {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}
+
+.current-english {
+  width: 8px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+}
+
+.english-num {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}
+
+.current-sports {
+  width: 8px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+}
+
+.sports-num {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}
+
+.current-magazine {
+  width: 8px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+}
+
+.magazine-num {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}
+
+.current-region {
+  width: 8px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+}
+
+.region-num {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14.06px;
+  color: #FFFFFF;
+  opacity: 0.7;
+}

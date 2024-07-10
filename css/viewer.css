@@ -1,0 +1,83 @@
+.Tab-and-Viewer {
+  position: absolute;
+  top: 208px;
+  left: 175px;
+  width: 930px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.TapButton {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.AllPress {
+  width: 82px;
+  Height: 19px;
+  font-size: 16px;
+  line-height: 18.75px;
+  color: #14212B;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.SubscribedPress {
+	width: 119px;
+	height: 22px;
+	font-size: 16px;
+	line-height: 22px;
+	color: #879298;
+  cursor: pointer;
+}
+
+.ViewerButton {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.list-view {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border: none;
+}
+
+.list-symbol {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: url("../asset/list-symbol.svg") no-repeat center center;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+}
+
+.grid-view {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.grid-symbol {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: url("../asset/grid-symbol.svg") no-repeat center center;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+}
