@@ -11,15 +11,17 @@ class NewsStates extends States {
      * @param {number} newsInfo.categoryIndex - 어떤 카테고리가 선택되어 있는지에 대한 정보 
      * @param {string} newsInfo.allSubInfo - 구독 언론사인지, 전체 언론사인지에 대한 정보 
      * @param {number} newsInfo.newsListIndex - 몇 번째 뉴스 목록인지 대한 정보 
-     * @param {json} newsInfo.newsList - 뉴스 목록에 대한 json 파일
+     * @param {json} newsInfo.allNewsData - 전체 언론사 목록에 대한 json 파일
+     * @param {json} newsInfo.subscribedNewsData - 구독한 언론사 목록에 대한 json 파일
      * @param {Renderer} renderers - 렌더링을 해주는 클래스
      */
-    constructor({ categoryIndex = 0, allSubInfo = 'all', newsListIndex = 0, newsList }) {
+    constructor({ categoryIndex = 0, allSubInfo = 'all', newsListIndex = 0, allNewsData, subscribedNewsData }) {
         super();
         this.categoryIndex = categoryIndex;
         this.allSubInfo = allSubInfo;
         this.newsListIndex = newsListIndex;
-        this.newsList = newsList;
+        this.allNewsData = allNewsData;
+        this.subscribedNewsData = subscribedNewsData;
     }
 
     /**
@@ -30,8 +32,9 @@ class NewsStates extends States {
         this.categoryIndex = value;
         this.notify({
             eventName: "clickCategory",
-            value: this.categoryIndex
+            value: this.categoryIndex,
         })
+        console.log(this.subscribedNewsData)
     }
 }
 
