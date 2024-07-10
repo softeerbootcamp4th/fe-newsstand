@@ -1,3 +1,5 @@
+import { NEWS } from "../data/data.js"
+
 const reducer = {
     state: {
         viewMode: "list", // "grid"
@@ -8,13 +10,28 @@ const reducer = {
         const element = event.target
         if (element.classList.contains("mainContentSelectorElement")) {
             if (element.classList.contains("all")) {
+                this.state = "all"
                 this.actions["changeFilter"]("all")
+                this.actions["showAll"](NEWS)
             }
-            else {
+            else if (element.classList.contains("myCompanies")) {
                 this.actions["changeFilter"]("myCompanies")
+                this.actions["showMyCompanies"](NEWS)
+                this.state = "myCompanies"
             }
         }
-        else if (findClosestParentByClass(element, "mainContentNavElement")) {
+        else if (element.closest(".subscribeButton")) {
+            if (findClosestParentByClass(element, "isSubscribed")) {
+                setTimeout(() => { this.actions["changeFilter"]("all") }, 5000)
+            }
+            else {
+                setTimeout(() => { this.actions["changeFilter"]("myCompanies") }, 5000)
+            }
+        }
+        else if (findClosestParentByClass(element, "articlesPreviousButton")) {
+            this.actions["previousArticle"]()
+        }
+        else if (findClosestParentByClass(element, "articlesNextButton")) {
             this.actions["nextArticle"]()
         }
     }
