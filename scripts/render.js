@@ -6,6 +6,8 @@ import { generateToastPopupDom } from "./popup.js";
 import { resetstate } from "./reset.js";
 import { updateSubscribeButton } from "./subscribe.js";
 import { getTabLength, handleTabClick, updateTabAnimationStyle } from "./tab.js";
+import { assignCSS } from "./util.js";
+import { setUpToggleWithDefaultOption, updateAllToggleArrow, updateSubscribedToggleArrow } from "./toggle.js";
 
 export function renderDefaultSceen(state) {
     resetstate(state);
@@ -237,53 +239,12 @@ function renderTabItems(state, tabNames) {
     });
 }
 
-
-
 export function renderArrow(state) {
     switch (state.toggleName) {
         case TOGGLE.ALL:
-            return renderAllToggleArrow(state);
+            return updateAllToggleArrow(state);
         case TOGGLE.SUBSCRIBED:
-            return renderSubscribedToggleArrow(state);
-    }
-}
-
-function renderAllToggleArrow(state) {
-    const max = state.articleDataList[state.selectedArticleIndex].companies.length - 1;
-    const min = 0;
-    const tabLastIndex = getTabLength(state) - 1;
-    let leftArrowDom = document.querySelector(".left_arrow");
-    let rightArrowDom = document.querySelector(".right_arrow");
-    rightArrowDom.src = "public/right_arrow.svg";
-    leftArrowDom.src = "public/left_arrow.svg";
-    rightArrowDom.classList.add("arrow_hover");
-    leftArrowDom.classList.add("arrow_hover");
-    if (state.selectedCompanyIndex == max && state.selectedTabIndex == tabLastIndex) {
-        rightArrowDom.src = "public/right_arrow_disabled.svg";
-        rightArrowDom.classList.remove("arrow_hover");
-    }
-    if (state.selectedCompanyIndex == min && state.selectedTabIndex == min) {
-        leftArrowDom.src = "public/left_arrow_disabled.svg";
-        leftArrowDom.classList.remove("arrow_hover");
-    }
-}
-
-function renderSubscribedToggleArrow(state) {
-    const max = getTabLength(state) - 1;
-    const min = 0;
-    let leftArrowDom = document.querySelector(".left_arrow");
-    let rightArrowDom = document.querySelector(".right_arrow");
-    rightArrowDom.src = "public/right_arrow.svg";
-    leftArrowDom.src = "public/left_arrow.svg";
-    rightArrowDom.classList.add("arrow_hover");
-    leftArrowDom.classList.add("arrow_hover");
-    if (state.selectedTabIndex === max) {
-        rightArrowDom.src = "public/right_arrow_disabled.svg";
-        rightArrowDom.classList.remove("arrow_hover");
-    }
-    if (state.selectedTabIndex === min) {
-        leftArrowDom.src = "public/left_arrow_disabled.svg";
-        leftArrowDom.classList.remove("arrow_hover");
+            return updateSubscribedToggleArrow(state);
     }
 }
 
@@ -292,25 +253,36 @@ export function renderTabAnimationList(state) {
     tabAnimationDom.innerHTML = "";
     let tabDom = document.querySelector("#tab_wrapper");
     tabDom.childNodes.forEach((item, index) => {
-        const tabAnimationItemDom = document.createElement('div');
-        const tabAnimationHiderItemDom = document.createElement('div');
-        const width = window.getComputedStyle(item).width;
-        tabAnimationItemDom.id = `animation_${index}_tab`;
-        tabAnimationHiderItemDom.style.overflowX = "hidden";
-        tabAnimationHiderItemDom.style.backgroundColor = "#F5F7F9";
-        if (state.selectedTabIndex === index) {
 
-            tabAnimationHiderItemDom.style.backgroundColor = "#7890E7";
-            tabAnimationItemDom.style.transition = "transform 1.2s ease";
-            tabAnimationItemDom.style.transform = "translate(-100%)"
-            tabAnimationItemDom.style.backgroundColor = "#4362D0";
+        const tabAnimationItemDom = document.createElement('div');
+        tabAnimationItemDom.id = `animation_${index}_tab`;
+
+        const tabAnimationHiderItemDom = document.createElement('div');
+        const tabItemWidth = window.getComputedStyle(item).width;
+
+        assignCSS(tabAnimationHiderItemDom, {
+            overflowX: "hidden",
+            backgroundColor: "#F5F7F9",
+            height: "40px",
+        });
+
+        if (state.selectedTabIndex === index) {
+            assignCSS(tabAnimationHiderItemDom, { backgroundColor: "#7890E7" });
+            assignCSS(tabAnimationItemDom, {
+                transition: "transform 1.2s ease",
+                transform: "translate(-100%)",
+                backgroundColor: "#4362D0"
+            });
         } else {
-            tabAnimationItemDom.style.backgroundColor = "transparent";
+            assignCSS(tabAnimationItemDom, { backgroundColor: "transparent" });
         }
-        tabAnimationHiderItemDom.style.minWidth = width;
-        tabAnimationItemDom.style.width = width;
-        tabAnimationHiderItemDom.style.height = "40px";
-        tabAnimationItemDom.style.height = "40px";
+        assignCSS(tabAnimationHiderItemDom, {
+            minWidth: tabItemWidth,
+        });
+        assignCSS(tabAnimationItemDom, {
+            width: tabItemWidth,
+            height: "40px",
+        });
         tabAnimationHiderItemDom.appendChild(tabAnimationItemDom);
         tabAnimationDom.appendChild(tabAnimationHiderItemDom);
     });

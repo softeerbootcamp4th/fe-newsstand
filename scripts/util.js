@@ -18,3 +18,11 @@ export function createDomFromString(htmlString) {
     const dom = parser.parseFromString(htmlString, 'text/html');
     return dom;
 }
+
+export function responseToJson(res) {
+    return res.json();
+}
+
+export function assignCSS(DOM,styleJson) {
+    Object.assign(DOM.style, styleJson);    
+}
