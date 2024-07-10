@@ -82,7 +82,7 @@
     color: var(--gray200);
 }
 .text__white--default {
-    color: var(--white);
+    color: #ffffff;
 }
 .text__white--weak {
     color: var(--white-alt);
