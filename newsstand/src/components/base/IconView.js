@@ -17,6 +17,7 @@ const IconView = (props) => {
 
     const bindEvents = () => {
         const button = document.getElementById(`icon-view${props.id}`)
+        button.removeEventListener('click', handleMouseClick)
         button.addEventListener('click', handleMouseClick)
     }
 

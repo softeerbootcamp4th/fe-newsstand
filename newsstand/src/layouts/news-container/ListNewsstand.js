@@ -12,7 +12,7 @@ import { fetchNewsData, fetchNewsDataFromSubscribedCompany } from '../../api/new
 
 const ListNewsstand = (props) => {
     const [currentNewsId, setCurrentNewsId] = useState({ stateId: 1, initialValue: 1 })
-    const [subscribedCompanyIdList, setSubscribedCompanyIdList] = useState({ stateId: 2, initialValue: getSubscribedCompaniesId() })
+    const [subscribedCompanyIdList, setSubscribedCompanyIdList] = useState({ stateId: 2, initialValue: [] })
     const [newsData, setNewsData] = useState({ stateId: 3, initialValue: { news: [] } })
     const [subNewsListElements, setSubNewsListElements] = useState({ stateId: 4, initialValue: [] })
 
@@ -38,30 +38,35 @@ const ListNewsstand = (props) => {
 
     const initSubscribedCopaniesNewsData = () => {
         let category = props.selectedCategory.value
-        if (isIn(category, mediaCategoryData)) {
-            category = getCompanyName(subscribedCompanyIdList.value[0])
-        }
 
-        fetchNewsDataFromSubscribedCompany(subscribedCompanyIdList.value, category).then((res) => {
-            setNewsData(res)
-        })
+        getSubscribedCompaniesId()
+            .then((idList) => {
+                setSubscribedCompanyIdList(idList)
+                return idList
+            })
+            .then((idList) => {
+                if (isIn(category, mediaCategoryData)) {
+                    category = getCompanyName(idList[0])
+                    props.setSelectedCategory(category)
+                }
+
+                if (!category) return
+
+                fetchNewsDataFromSubscribedCompany(idList, category).then((res) => {
+                    setNewsData(res)
+                })
+            })
     }
 
     const fetchSubNewsList = async () => {
-        if (newsData && newsData.value.news.length > 0) {
+        if (newsData.value.news && newsData.value.news.length > 0) {
             let newsListElements = newsData.value.news.map((newsItem) => `<a class="news-content">${newsItem.title}</a>`).join('')
             return newsListElements
         }
         return null
     }
 
-    useEffect(
-        () => {
-            initNewsData()
-        },
-        [props.selectedCategory, props.selectedSource, props.viewType, currentNewsId, subscribedCompanyIdList],
-        0,
-    )
+    useEffect(() => initNewsData(), [props.selectedCategory, props.selectedSource, props.viewType, currentNewsId, subscribedCompanyIdList], 0)
 
     useEffect(
         () => {
@@ -91,6 +96,7 @@ const ListNewsstand = (props) => {
         } else {
             const nextIndex = getNextIndexInList(getCompanyIdByName(props.selectedCategory.value), subscribedCompanyIdList.value)
             const nextCategory = subscribedCompanyIdList.value[nextIndex]
+
             props.setSelectedCategory(getCompanyName(nextCategory))
         }
     }
@@ -119,6 +125,9 @@ const ListNewsstand = (props) => {
         const leftBtn = document.querySelector('.left-btn')
         const rightBtn = document.querySelector('.right-btn')
 
+        leftBtn.removeEventListener('click', handleLeftButtonClick)
+        rightBtn.removeEventListener('click', handleRightButtonClick)
+
         leftBtn.addEventListener('click', handleLeftButtonClick)
         rightBtn.addEventListener('click', handleRightButtonClick)
     }
@@ -131,6 +140,7 @@ const ListNewsstand = (props) => {
         setSelectedCategory: props.setSelectedCategory,
         currentNewsId: currentNewsId,
         setCurrentNewsId: setCurrentNewsId,
+        subscribedCompanyIdList: subscribedCompanyIdList,
         onFillComplete: handleRightButtonClick,
     })
 
@@ -138,7 +148,11 @@ const ListNewsstand = (props) => {
         id: 1,
         newsData: newsData,
         selectedSource: props.selectedSource,
+        selectedCategory: props.selectedCategory,
         setIsShowAlert: props.setIsShowAlert,
+        setSelectedCategory: props.setSelectedCategory,
+        setSelectedSource: props.setSelectedSource,
+        setViewType: props.setViewType,
         style: 'width:40%; padding:2%;',
     })
 
@@ -163,7 +177,7 @@ const ListNewsstand = (props) => {
                 <div class="list-news-body">
                     ${mainNewsComponent.element}
                     <div class="list-news-right-container">
-                        ${subNewsListElements.value}
+                        ${props.selectedCategory.value ? subNewsListElements.value : ''} 
                     </div>
                 </div>
             </div>

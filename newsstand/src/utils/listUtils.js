@@ -11,7 +11,7 @@ export const getNextIndexInList = (target, array) => {
     const targetIndex = array.indexOf(target)
 
     if (targetIndex === -1) {
-        return -1
+        return 1
     }
 
     const nextIndex = (targetIndex + 1) % array.length
@@ -22,7 +22,7 @@ export const getPrevIndexInList = (target, array) => {
     const targetIndex = array.indexOf(target)
 
     if (targetIndex === -1) {
-        return -1
+        return 1
     }
 
     const prevIndex = (targetIndex - 1 + array.length) % array.length
