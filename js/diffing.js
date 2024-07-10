@@ -93,14 +93,14 @@ function applyDiffChildren(targetDom, childList)
 	// 자식의 상대적 위치를 저장하는 별도의 맵을 만듭니다.
 	// 모든 dom에 대해, 재조정 과정을 거칩니다.
 	const tempNodeKeyMap = makeUniqueKeyMap(targetDom.childNodes);
-	const oldNodeNextMap = makeRelativeNodePositionMap(targetDom.childNodes);
 	
 	// 기존 dom의 자식의 상대적인 위치를 변경합니다.
 	const newNodeNextMapArray = [...newNodeNextMap].reverse();
 	newNodeNextMapArray.forEach( ([uniqueKey, nextKey])=>{
-		if(tempNodeKeyMap.get(uniqueKey) !== nextKey) {
-			const nextNode = tempNodeKeyMap.get(nextKey) ?? null;
-			const currentNode = tempNodeKeyMap.get(uniqueKey);
+		const currentNode = tempNodeKeyMap.get(uniqueKey);
+		const nextNode = tempNodeKeyMap.get(nextKey) ?? null;
+
+		if(currentNode.nextSibling !== nextNode) {
 			targetDom.insertBefore(currentNode, nextNode);
 		}
 	} );

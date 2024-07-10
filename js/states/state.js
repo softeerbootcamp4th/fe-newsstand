@@ -10,9 +10,11 @@ function State(initialValue, sideEffect=null)
 	if( typeof sideEffect === "function" ) this.__sideEffects.set(sideEffect, "default");
 
 	this.value = initialValue;
-	this.__applyChange = (newValue)=>{
-		if(this.value === newValue) return;
+	this.__applyChange = (valueChanger)=>{
 		const oldValue = this.value;
+		const newValue = typeof valueChanger === "function" ? valueChanger( oldValue ) : valueChanger;
+
+		if(this.value === newValue) return;
 		this.value = newValue;
 		stateBatchUpdater.__appendSideEffects(this.__sideEffects, newValue, oldValue);
 	}

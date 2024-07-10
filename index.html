@@ -6,6 +6,10 @@
 	<link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+	<script>
+		const systemDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+		document.documentElement.classList.toggle("dark", systemDarkMode);
+	</script>
 	<div class="overallWrapper">
 		<header class="titleWrapper">
 			<h2 class="title bold24">
@@ -17,11 +21,17 @@
 		<div class="rollerWrapper">
 			<div class="roller">
 				<p class="rollerCompany">연합뉴스</p>
-				<p class="rollerDesc">[1보] 김기현, 안철수, 여 전대 본경선 진출</p>
+				<div class="rollerSection">
+					<p class="rollerDesc">[1보] 이재명, 이낙연, 야 전대 본경선 진출</p>
+					<p class="rollerDesc">[2보] 홍준표, 이준석, 여 전대 본경선 진출</p>
+				</div>
 			</div>
 			<div class="roller">
-				<p class="rollerCompany">연합뉴스</p>
-				<p class="rollerDesc">[2보] 김기현, 안철수, 여 전대 본경선 진출</p>
+				<p class="rollerCompany">YTN</p>
+				<div class="rollerSection">
+					<p class="rollerDesc">[1보] 소프티어 부트캠프 크롱, 코드스쿼드 출신인 것으로 밝혀져</p>
+					<p class="rollerDesc">[2보] 황준일, 네이버 부스트캠프 프론트엔드 마스터로 전직해 화제</p>
+				</div>
 			</div>
 		</div>
 		<main class="mainWrapper">
@@ -71,6 +81,7 @@
 			</div>
 		</main>
 	</div>
+	<div id="darkModeToggle" class="bottomRightButton">다크모드 토글하기</div>
 	<script src="./js/index.js" type="module"></script>
 </body>
 </html>

@@ -42,40 +42,38 @@
 }
 
 
-@media (prefers-color-scheme: light) {
-	:root{
-		--text-strong: var(--grayscale-black, #14212b);
-		--text-bold: var(--grayscale-500, #4b5966);
-		--text-default: var(--grayscale-400, #5f6e76);
-		--text-weak: var(--grayscale-200, #879298);
-		--text-white-default: var(--grayscale-white, #ffffff);
-		--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
-		--text-point: var(--blue-500, #4362d0);
-		--surface-default: var(--grayscale-white, #ffffff);
-		--surface-alt: var(--grayscale-50, #f5f7f9);
-		--surface-brand-default: var(--blue-500, #4362d0);
-		--surface-brand-alt: var(--blue-100, #7890e7);
-		--border-bold: var(--grayscale-300, #6e8091);
-		--border-default: var(--grayscale-100, #d2dae0);
-	}
+:root {
+	color-scheme: light;
+	--text-strong: var(--grayscale-black, #14212b);
+	--text-bold: var(--grayscale-500, #4b5966);
+	--text-default: var(--grayscale-400, #5f6e76);
+	--text-weak: var(--grayscale-200, #879298);
+	--text-white-default: var(--grayscale-white, #ffffff);
+	--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
+	--text-point: var(--blue-500, #4362d0);
+	--surface-default: var(--grayscale-white, #ffffff);
+	--surface-alt: var(--grayscale-50, #f5f7f9);
+	--surface-brand-default: var(--blue-500, #4362d0);
+	--surface-brand-alt: var(--blue-100, #7890e7);
+	--border-bold: var(--grayscale-300, #6e8091);
+	--border-default: var(--grayscale-100, #d2dae0);
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--text-strong: var(--grayscale-white, #ffffff);
-		--text-bold: var(--grayscale-50, #f5f7f9);
-		--text-default: var(--grayscale-100, #d2dae0);
-		--text-weak: var(--grayscale-white-alt, #ffffffb3);
-		--text-white-default: var(--grayscale-white, #ffffff);
-		--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
-		--text-point: var(--blue-500, #4362d0);
-		--surface-default: var(--grayscale-black, #14212b);
-		--surface-alt: var(--grayscale-500, #4b5966);
-		--surface-brand-default: var(--blue-500, #4362d0);
-		--surface-brand-alt: var(--blue-100, #7890e7);
-		--border-bold: var(--grayscale-white-alt, #ffffffb3);
-		--border-default: var(--grayscale-400, #5f6e76);
-	}
+:root.dark {
+	color-scheme: dark;
+	--text-strong: var(--grayscale-white, #ffffff);
+	--text-bold: var(--grayscale-50, #f5f7f9);
+	--text-default: var(--grayscale-100, #d2dae0);
+	--text-weak: var(--grayscale-white-alt, #ffffffb3);
+	--text-white-default: var(--grayscale-white, #ffffff);
+	--text-white-weak: var(--grayscale-white-alt, #ffffffb3);
+	--text-point: var(--blue-500, #4362d0);
+	--surface-default: var(--grayscale-black, #14212b);
+	--surface-alt: var(--grayscale-500, #4b5966);
+	--surface-brand-default: var(--blue-500, #4362d0);
+	--surface-brand-alt: var(--blue-100, #7890e7);
+	--border-bold: var(--grayscale-white-alt, #ffffffb3);
+	--border-default: var(--grayscale-400, #5f6e76);
 }
 
 html, body, p {
@@ -132,13 +130,17 @@ ul {
 
 .roller {
 	width: 50%;
+	height: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+	position: relative;
 	flex-basis: 50%;
 	flex-shrink: 1;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	gap: 16px;
-	padding: 16px;
+	padding: 0px 16px;
 	background-color: var(--surface-alt);
 	border: 1px solid var(--border-default);
 }
@@ -147,11 +149,43 @@ ul {
 	color: var(--text-strong);
 	font-size: 0.875rem;
 	font-weight: 700;
+	flex-shrink: 0;
+}
+
+.rollerSection {
+	position: relative;
+	height: 200%;
+	top: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+.rollerSection.rolling {
+	animation: 0.5s ease-in-out 1 rollerAnim;
+}
+
+.rollerSection:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .rollerDesc {
+	width: 100%;
+	height: 50%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 	color: var(--text-default);
 	font-size: 0.875rem;
+}
+
+@keyframes rollerAnim{
+	from {
+		transform: translateY(0%);
+	}
+	to {
+		transform: translateY(-50%);
+	}
 }
 
 .mainWrapper {
@@ -337,6 +371,9 @@ ul {
 .logoImage {
 	width: 53px;
 	height: 20px;
+}
+
+.logoImage > img {
 	overflow: hidden;
 	object-fit: none;
 	object-position: center;
@@ -462,6 +499,9 @@ ul {
 .gridLogo {
 	width: 100%;
 	height: 100%;
+}
+
+.gridLogo > img {
 	overflow: hidden;
 	object-fit: cover;
 	object-position: center;
@@ -568,4 +608,20 @@ ul {
 
 .toast.active {
 	opacity: 1;
+}
+
+.bottomRightButton {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+}
+
+.logo > .light, :root.dark .logo > .dark {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.logo > .dark, :root.dark .logo > .light {
+	display: none;
 }
