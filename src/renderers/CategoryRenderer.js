@@ -19,20 +19,31 @@ class CategoryRenderer extends Renderer {
      * @returns 
      */
     _checkEventName(event) {
-        return event.eventName === 'clickCategory';
+        return event.eventName === 'clickCategory'; // 나중에 상수 배열로 빼기
     }
 
     /**
-     * 렌더 함수
+     * 생성된 element를 렌더링하는 함수
+     * @param {object} categoryInfo - 카테고리 정보
+     * @param {number} categoryIndex - 선택된 카테고리 인덱스
+     * @param {Array} categoryList - 표시 될 카테고리 목록
      */
-    _render({ eventName, value, ...rest }) {
-        const categoryListElement = this.#generateCategoryListElement(value);
+    _render({ categoryIndex, categoryList }) {
+        const categoryListElement = this.#generateCategoryListElement(categoryIndex, categoryList);
         this.categoryContainer.innerHTML = '';
         this.categoryContainer.innerHTML += categoryListElement;
     }
 
-    #generateCategoryListElement(value) {
-        return `<div>dd</div>`
+    /**
+     * 표시될 element를 생성하는 함수
+     * @param {number} categoryIndex - 선택된 카테고리 인덱스
+     * @param {Array} categoryList - 표시 될 카테고리 목록
+     * @returns {Element}
+     */
+    #generateCategoryListElement(categoryIndex = 0, categoryList) {
+        return categoryList.map((category, index) =>
+            `<li class="news-list__navbar__category" data-selected=${index === categoryIndex ? "yes" : "no"}>${category}</li>`
+        ).join("")
     }
 }
 

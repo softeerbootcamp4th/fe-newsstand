@@ -32,9 +32,9 @@ class NewsStates extends States {
         this.categoryIndex = value;
         this.notify({
             eventName: "clickCategory",
-            value: this.categoryIndex,
+            categoryIndex: this.categoryIndex,
+            categoryList: this.allSubInfo === "all" ? Object.keys(this.allNewsData) : Object.keys(this.subscribedNewsData)
         })
-        console.log(this.subscribedNewsData)
     }
 }
 
