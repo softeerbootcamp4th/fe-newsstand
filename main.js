@@ -1,5 +1,5 @@
 import { initializeData, initializeEvent, initializeScreen } from "./scripts/initialize.js";
-import { TOGGLE } from "./scripts/magicNumber.js";
+import { TIME, TOGGLE } from "./scripts/magicNumber.js";
 //store
 let state = {
     toggleName: TOGGLE.ALL,
@@ -18,8 +18,3 @@ initializeData(state)
     initializeEvent(state);
     initializeScreen(state);
 })
-
-
-
-                
-

@@ -1,11 +1,13 @@
 import { addDragEvent } from "./drag.js";
-import { getCurrentArticle, getCurrentArticleList } from "./article.js";
-import { getCurrentCompany, getSubscribeCompanies, getTotalCompanyLength } from "./company.js";
+import { getCurrentArticle, getCurrentArticleList, updateArticleBox } from "./article.js";
+import { getCurrentCompany, getSubscribeCompanies, getAllToggleCurrentCompanies } from "./company.js";
 import { TOGGLE } from "./magicNumber.js";
 import { generateToastPopupDom } from "./popup.js";
 import { resetstate } from "./reset.js";
 import { updateSubscribeButton } from "./subscribe.js";
-import { getTabLength, handleTabClick, updateTabAnimationStyle } from "./tab.js";
+import { getTabDomWithCleanUp, getTabLength, handleTabClick, updateTabAnimationStyle } from "./tab.js";
+import { assignCSS, cleanUpHTML } from "./util.js";
+import { updateAllToggleArrow, updateSubscribedToggleArrow } from "./toggle.js";
 
 export function renderDefaultSceen(state) {
     resetstate(state);
@@ -18,131 +20,47 @@ export function renderDefaultSceen(state) {
 export function renderArticles(state) {
     updateSubscribeButton(state);
     renderArrow(state);
+
     switch (state.toggleName) {
         case TOGGLE.ALL:
             return renderAllToggleArticles(state);
         case TOGGLE.SUBSCRIBED:
             return renderSubscribedToggleArticles(state);
     }
-
 }
 
 function renderAllToggleArticles(state) {
-    let articleBoxDom = document.querySelector(".news_letter_subject_box");
-    articleBoxDom.innerHTML = "";
+    const companies = getAllToggleCurrentCompanies(state);
+    const articleBoxDom = document.querySelector(".news_letter_subject_box");
+    const validCompanyLength = companies.length;
+    cleanUpHTML(articleBoxDom);
+    updateArticleBox(state, validCompanyLength);
 
-    let selectedSubject = state.articleDataList[state.selectedTabIndex];
-    let companies = selectedSubject.companies.filter((company) => {
-        if (state.toggleName == TOGGLE.SUBSCRIBED) return state.subscribedCompanyNameSet.has(company.name);
-        else return true;
-    });
-
-    let cardImage = "";
-    let cardTitle = "";
-
-    if (companies.length !== 0) {
-        const currentCompany = getCurrentCompany(state);
-        const currentArticle = getCurrentArticle(state);
-        document.querySelector("#register_date").textContent = currentArticle.registerDate;
-        document.querySelector("#company_img").src = currentCompany.image;
-        cardImage = companies[state.selectedCompanyIndex]
-            .articles[state.selectedArticleIndex]
-            .image;
-        cardTitle = companies[state.selectedCompanyIndex]
-            .articles[state.selectedArticleIndex]
-            .title;
-    }
-
-    let cardImageDom = document.querySelector("#selected_article_img");
-    let cardTitleDom = document.querySelector("#selected_article_description");
-    let companyHaederDom = document.querySelector("#company_header");
-    let validCompanyNumber = getTabLength(state);
-
-    if (validCompanyNumber === 0) {
-        cardImageDom.classList.add("hidden");
-        cardTitleDom.classList.add("hidden");
-        companyHaederDom.style.display = "none";
-    } else {
-        cardImageDom.classList.remove("hidden");
-        cardTitleDom.classList.remove("hidden");
-        companyHaederDom.style.display = "flex";
-    }
-
-    cardImageDom.src = "";
-    cardTitleDom.innerHTML = "";
-    if (companies.length === 0) return;
-    cardImageDom.src = cardImage;
-    cardTitleDom.innerHTML = cardTitle;
-
-    companies[state.selectedCompanyIndex]
-        .articles
-        .forEach((article, articleIndex) => {
-            const articleDom = document.createElement('div');
-            articleDom.classList.add('available-medium16'); // 클래스 추가
-            articleDom.classList.add('pointer');
-            articleDom.classList.add('hover_underline');
-            articleDom.textContent = article.title;
-            articleDom.addEventListener("click", function () {
-                state.selectedArticleIndex = articleIndex;
-                renderArticles(state);
-            });
-            articleBoxDom.appendChild(articleDom);
-        });
-    const articleCopyRightDom = document.createElement('div');
-    articleCopyRightDom.classList.add('display-medium14');
-    articleCopyRightDom.classList.add('color_879298');
-    articleCopyRightDom.textContent = `${state.articleDataList[state.selectedTabIndex]
-        .companies[state.selectedCompanyIndex].name} 언론사에서 직접 편집한 뉴스입니다.`;
-    articleBoxDom.appendChild(articleCopyRightDom);
+    if (validCompanyLength === 0) return;
+    renderArticleText(state, companies[state.selectedCompanyIndex].articles);
 }
 
+
 function renderSubscribedToggleArticles(state) {
-    let articleBoxDom = document.querySelector(".news_letter_subject_box");
-    articleBoxDom.innerHTML = "";
+    const companies = getSubscribeCompanies(state);
+    const articleBoxDom = document.querySelector(".news_letter_subject_box");
+    const validCompanyLength = companies.length;
 
-    let companies = getSubscribeCompanies(state);
+    cleanUpHTML(articleBoxDom);
+    updateArticleBox(state, validCompanyLength);
 
-    let cardImage = "";
-    let cardTitle = "";
+    if (validCompanyLength === 0) return;
+    renderArticleText(state, companies[state.selectedTabIndex].articles);
 
-    if (companies.length !== 0) {
-        const currentCompany = getCurrentCompany(state);
-        const currentArticle = getCurrentArticle(state);
-        document.querySelector("#register_date").textContent = currentArticle.registerDate;
-        document.querySelector("#company_img").src = currentCompany.image;
-        cardImage = currentArticle.image;
-        cardTitle = currentArticle.title;
-    }
+}
 
-    let cardImageDom = document.querySelector("#selected_article_img");
-    let cardTitleDom = document.querySelector("#selected_article_description");
-    let companyHaederDom = document.querySelector("#company_header");
-    let validCompanyNumber = getTabLength(state);
-
-    if (validCompanyNumber === 0) {
-        cardImageDom.classList.add("hidden");
-        cardTitleDom.classList.add("hidden");
-        companyHaederDom.style.display = "none";
-    } else {
-        cardImageDom.classList.remove("hidden");
-        cardTitleDom.classList.remove("hidden");
-        companyHaederDom.style.display = "flex";
-    }
-
-    cardImageDom.src = "";
-    cardTitleDom.innerHTML = "";
-    if (companies.length === 0) return;
-    cardImageDom.src = cardImage;
-    cardTitleDom.innerHTML = cardTitle;
-
-    companies[state.selectedTabIndex]
-        .articles
+function renderArticleText(state, articles) {
+    const articleBoxDom = document.querySelector(".news_letter_subject_box");
+    articles
         .filter((_, index) => index < 6)
         .forEach((article, articleIndex) => {
             const articleDom = document.createElement('div');
-            articleDom.classList.add('available-medium16'); // 클래스 추가
-            articleDom.classList.add('pointer');
-            articleDom.classList.add('hover_underline');
+            articleDom.classList.add('available-medium16', 'pointer', 'hover_underline'); // 클래스 추가
             articleDom.textContent = article.title;
             articleDom.addEventListener("click", function () {
                 state.selectedArticleIndex = articleIndex;
@@ -151,9 +69,8 @@ function renderSubscribedToggleArticles(state) {
             articleBoxDom.appendChild(articleDom);
         });
     const articleCopyRightDom = document.createElement('div');
-    articleCopyRightDom.classList.add('display-medium14');
-    articleCopyRightDom.classList.add('color_879298');
-    articleCopyRightDom.textContent = `${companies[state.selectedTabIndex].name} 언론사에서 직접 편집한 뉴스입니다.`;
+    articleCopyRightDom.classList.add('display-medium14', 'color_879298');
+    articleCopyRightDom.textContent = getCurrentCompany(state).name + " 언론사에서 직접 편집한 뉴스입니다.";
     articleBoxDom.appendChild(articleCopyRightDom);
 }
 
@@ -169,38 +86,34 @@ export function renderTabList(state) {
 }
 
 function renderLeftToggleTab(state) {
-    let subjectNames = state.articleDataList.map(data => data.subject);
+    const subjectNames = state.articleDataList.map(data => data.subject);
     renderTabItems(state, subjectNames);
 }
 
 function renderRightToggleTab(state) {
-    let subscribedCompanyNames = Object.keys(state.companiesWithArticles).filter(companyName => state.subscribedCompanyNameSet.has(companyName));
+    const subscribedCompanyNames = Object.keys(state.companiesWithArticles).filter(companyName => state.subscribedCompanyNameSet.has(companyName));
     renderTabItems(state, subscribedCompanyNames);
 }
 
-function getTabDomWithCleanUp() {
-    let tabDom = document.querySelector("#tab_wrapper");
-    tabDom.innerHTML = "";
-    return tabDom;
-}
+
 
 function renderTabItems(state, tabNames) {
     let mouseDownDate = new Date();
+    const tabDom = getTabDomWithCleanUp();
     let isMouseMoved = true;
-    let tabDom = getTabDomWithCleanUp();
     tabNames.forEach((name, nameIndex) => {
         const tabItemDom = document.createElement('div');
         if (state.selectedTabIndex == nameIndex) {
-            let additionalCountString = ""
+            let additionalTailString = ""
             if (state.toggleName === TOGGLE.ALL) {
                 const max = state.articleDataList[state.selectedArticleIndex].companies.length;
-                additionalCountString = `
+                additionalTailString = `
                     <div class="counter_box" >
                         ${max == 0 ? 0 : state.selectedCompanyIndex + 1}/${max}
                     </div>
                 `;
             } else {
-                additionalCountString = `
+                additionalTailString = `
                     <img src="public/tab_arrow.svg" />
                 `;
             }
@@ -209,7 +122,7 @@ function renderTabItems(state, tabNames) {
                 <div>
                     ${name}
                 </div>
-                ${additionalCountString}
+                ${additionalTailString}
             `;
 
         } else {
@@ -218,11 +131,11 @@ function renderTabItems(state, tabNames) {
         }
 
         //부모 스크롤 이벤트와 중첩이라 click이벤트 -> mouse이벤트로 변경
-        tabItemDom.addEventListener("mousedown", function (e) {
+        tabItemDom.addEventListener("mousedown", function () {
             mouseDownDate = new Date();
             isMouseMoved = false;
         });
-        tabItemDom.addEventListener("mouseup", function (e) {
+        tabItemDom.addEventListener("mouseup", function () {
             const timeGap = new Date().getTime() - mouseDownDate.getTime();
             //대부분의 스크롤이 150밀리 이상은 걸리기에 150밀리로 지정 (사람 반응속도보다 빠름)
             if (isMouseMoved === false || timeGap < 150) {
@@ -237,80 +150,52 @@ function renderTabItems(state, tabNames) {
     });
 }
 
-
-
 export function renderArrow(state) {
     switch (state.toggleName) {
         case TOGGLE.ALL:
-            return renderAllToggleArrow(state);
+            return updateAllToggleArrow(state);
         case TOGGLE.SUBSCRIBED:
-            return renderSubscribedToggleArrow(state);
-    }
-}
-
-function renderAllToggleArrow(state) {
-    const max = state.articleDataList[state.selectedArticleIndex].companies.length - 1;
-    const min = 0;
-    const tabLastIndex = getTabLength(state) - 1;
-    let leftArrowDom = document.querySelector(".left_arrow");
-    let rightArrowDom = document.querySelector(".right_arrow");
-    rightArrowDom.src = "public/right_arrow.svg";
-    leftArrowDom.src = "public/left_arrow.svg";
-    rightArrowDom.classList.add("arrow_hover");
-    leftArrowDom.classList.add("arrow_hover");
-    if (state.selectedCompanyIndex == max && state.selectedTabIndex == tabLastIndex) {
-        rightArrowDom.src = "public/right_arrow_disabled.svg";
-        rightArrowDom.classList.remove("arrow_hover");
-    }
-    if (state.selectedCompanyIndex == min && state.selectedTabIndex == min) {
-        leftArrowDom.src = "public/left_arrow_disabled.svg";
-        leftArrowDom.classList.remove("arrow_hover");
-    }
-}
-
-function renderSubscribedToggleArrow(state) {
-    const max = getTabLength(state) - 1;
-    const min = 0;
-    let leftArrowDom = document.querySelector(".left_arrow");
-    let rightArrowDom = document.querySelector(".right_arrow");
-    rightArrowDom.src = "public/right_arrow.svg";
-    leftArrowDom.src = "public/left_arrow.svg";
-    rightArrowDom.classList.add("arrow_hover");
-    leftArrowDom.classList.add("arrow_hover");
-    if (state.selectedTabIndex === max) {
-        rightArrowDom.src = "public/right_arrow_disabled.svg";
-        rightArrowDom.classList.remove("arrow_hover");
-    }
-    if (state.selectedTabIndex === min) {
-        leftArrowDom.src = "public/left_arrow_disabled.svg";
-        leftArrowDom.classList.remove("arrow_hover");
+            return updateSubscribedToggleArrow(state);
     }
 }
 
 export function renderTabAnimationList(state) {
-    let tabAnimationDom = document.querySelector("#tab_animation_wrapper");
-    tabAnimationDom.innerHTML = "";
-    let tabDom = document.querySelector("#tab_wrapper");
+    const tabAnimationDom = document.querySelector("#tab_animation_wrapper");
+    cleanUpHTML(tabAnimationDom);
+    const tabDom = document.querySelector("#tab_wrapper");
+
     tabDom.childNodes.forEach((item, index) => {
         const tabAnimationItemDom = document.createElement('div');
         const tabAnimationHiderItemDom = document.createElement('div');
-        const width = window.getComputedStyle(item).width;
-        tabAnimationItemDom.id = `animation_${index}_tab`;
-        tabAnimationHiderItemDom.style.overflowX = "hidden";
-        tabAnimationHiderItemDom.style.backgroundColor = "#F5F7F9";
-        if (state.selectedTabIndex === index) {
+        const tabItemWidth = window.getComputedStyle(item).width;
 
-            tabAnimationHiderItemDom.style.backgroundColor = "#7890E7";
-            tabAnimationItemDom.style.transition = "transform 1.2s ease";
-            tabAnimationItemDom.style.transform = "translate(-100%)"
-            tabAnimationItemDom.style.backgroundColor = "#4362D0";
+        tabAnimationItemDom.id = `animation_${index}_tab`;
+
+        assignCSS(tabAnimationHiderItemDom, {
+            overflowX: "hidden",
+            backgroundColor: "#F5F7F9",
+            height: "40px",
+        });
+
+        if (state.selectedTabIndex === index) {
+            assignCSS(tabAnimationHiderItemDom, { backgroundColor: "#7890E7" });
+            assignCSS(tabAnimationItemDom, {
+                transition: "transform 1.2s ease",
+                transform: "translate(-100%)",
+                backgroundColor: "#4362D0"
+            });
         } else {
-            tabAnimationItemDom.style.backgroundColor = "transparent";
+            assignCSS(tabAnimationItemDom, { backgroundColor: "transparent" });
         }
-        tabAnimationHiderItemDom.style.minWidth = width;
-        tabAnimationItemDom.style.width = width;
-        tabAnimationHiderItemDom.style.height = "40px";
-        tabAnimationItemDom.style.height = "40px";
+
+        assignCSS(tabAnimationHiderItemDom, {
+            minWidth: tabItemWidth,
+        });
+        assignCSS(tabAnimationItemDom, {
+            width: tabItemWidth,
+            height: "40px",
+        });
+        
         tabAnimationHiderItemDom.appendChild(tabAnimationItemDom);
         tabAnimationDom.appendChild(tabAnimationHiderItemDom);
     });

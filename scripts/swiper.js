@@ -1,22 +1,22 @@
-import { getSubscribeCompanies, getTotalCompanyLength } from "./company.js";
+import { getSubscribeCompanies, getAllCompanyLength } from "./company.js";
 import { DIRECTION, TIME, TOGGLE } from "./magicNumber.js";
 import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
 import { getTabLength, updateTabAnimationStyle } from "./tab.js";
 
 export function addEventToRotatingArrow(state) {
-    setInterval(function() {
-        handleCompanySwipe(state,DIRECTION.RIGHT);
-    },TIME.SECOND*1);
-    document.querySelector(".right_arrow").addEventListener("click",function() {
-        handleCompanySwipe(state,DIRECTION.RIGHT);
+    setInterval(function () {
+        handleCompanySwipe(state, DIRECTION.RIGHT);
+    }, TIME.SECOND * 1);
+    document.querySelector(".right_arrow").addEventListener("click", function () {
+        handleCompanySwipe(state, DIRECTION.RIGHT);
     });
-    document.querySelector(".left_arrow").addEventListener("click",function() {
-        handleCompanySwipe(state,DIRECTION.LEFT);
+    document.querySelector(".left_arrow").addEventListener("click", function () {
+        handleCompanySwipe(state, DIRECTION.LEFT);
     });
 }
 
 export function handleCompanySwipe(state, direction) {
-    let isNeedToResetAnimationStyle = rotate(state, direction);
+    const isNeedToResetAnimationStyle = rotate(state, direction);
     renderTabList(state);
     updateTabAnimationStyle(state);
     renderArticles(state);
@@ -59,13 +59,15 @@ function rotateAllToglePage(state, direction, animationResetPointer) {
     //코드 분리 가능하면 추후에 진행
     const { maxIndex, minIndex, tabLastIndex } = getRotateIndexes(state);
     const validToGo = maxIndex !== -1;
+
     switch (direction) {
         case DIRECTION.LEFT:
             const firstTabCondition = state.selectedTabIndex === minIndex;
             const firstCompanyCondition = state.selectedCompanyIndex === minIndex;
             if (!validToGo && !firstTabCondition) {
+                animationResetPointer.isNeed = true;
                 pageGoBack(state);
-                rotate(state);
+                rotate(state, animationResetPointer);
             } else {
                 if (!(firstCompanyCondition && firstTabCondition)) {
                     if (firstCompanyCondition) {
@@ -77,10 +79,11 @@ function rotateAllToglePage(state, direction, animationResetPointer) {
                 }
             }
             break;
+
         case DIRECTION.RIGHT:
             const lastTabCondition = state.selectedTabIndex === tabLastIndex;
             const lastCompanyCondition = state.selectedCompanyIndex === maxIndex;
-            if (!validToGo && state.selectedTabIndex !== tabLastIndex) {
+            if (!validToGo && !lastTabCondition) {
                 animationResetPointer.isNeed = true;
                 pageGoForward(state);
                 rotate(state, animationResetPointer);
@@ -96,13 +99,14 @@ function rotateAllToglePage(state, direction, animationResetPointer) {
             }
             break;
     }
+
     return animationResetPointer.isNeed;
 }
 
 function pageGoBack(state, isNeedToGoFirstCompanyIndex = false) {
     state.selectedTabIndex -= 1;
     if (!isNeedToGoFirstCompanyIndex) {
-        let nextCompanyIndex = getTabLength(state) - 1;
+        const nextCompanyIndex = getTabLength(state) - 1;
         state.selectedCompanyIndex = nextCompanyIndex === -1 ? 0 : nextCompanyIndex;
     }
     state.selectedArticleIndex = 0;
@@ -125,7 +129,7 @@ function getRotateIndexes(state) {
 function getSwipeMaxPageNumber(state) {
     switch (state.toggleName) {
         case TOGGLE.ALL:
-            return getTotalCompanyLength(state);
+            return getAllCompanyLength(state);
         case TOGGLE.SUBSCRIBED:
             return 1;
     }
