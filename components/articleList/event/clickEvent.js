@@ -17,6 +17,10 @@ export const addModeSelectionEventListener = () => {
     });
 }
 
+let isDown = false;
+let startX;
+let scrollLeft;
+
 // 리스트 보기, 그리드 보기
 export const addViewSelectionEventListener = () => {
     document.querySelector('.icon-wrapper').addEventListener('click', (event) => {
@@ -113,6 +117,7 @@ export const addSubscriptionListEventListener = () => {
         newsState.setMenuIdx(0);
         setSubscriptionData();
         addCategorySelectionEventListener();
+        addScrollEventListener();
     }
 
     document.querySelectorAll('.subscription-media-btn, .list-btn').forEach(button => {
@@ -181,4 +186,33 @@ export const addAlertCancleBtnEventListener = () => {
     document.querySelector('.alert-cancle-btn').addEventListener('click', () => {
         document.querySelector('.alert-area').remove();
     })
+}
+
+export const addScrollEventListener = () => {
+    const scrollable = document.querySelector('.article-menu-wrapper');
+
+    scrollable.addEventListener('mousedown', (e) => {
+        isDown = true;
+        scrollable.classList.add('active');
+        startX = e.pageX - scrollable.offsetLeft;
+        scrollLeft = scrollable.scrollLeft;
+    });
+    
+    scrollable.addEventListener('mouseleave', () => {
+        isDown = false;
+        scrollable.classList.remove('active');
+    });
+    
+    scrollable.addEventListener('mouseup', () => {
+        isDown = false;
+        scrollable.classList.remove('active');
+    });
+    
+    scrollable.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - scrollable.offsetLeft;
+        const walk = (x - startX) * 3; //scroll-fast
+        scrollable.scrollLeft = scrollLeft - walk;
+    });
 }

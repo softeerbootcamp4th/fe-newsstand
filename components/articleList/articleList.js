@@ -18,6 +18,7 @@ import { addModeSelectionEventListener,
     addSubscriptionListEventListener,
     addBtnEventsListener,
     addCancleSubscriptionEventListener,
+    addScrollEventListener,
 } from "./event/clickEvent.js";
 import { checkSubscription } from "./event/pageEvent.js";
 
@@ -56,7 +57,11 @@ export const addSubscriptionEventListener = () => {
 // 탭 데이터 설정 함수
 export const setWholeData = () => {
     newsState.setMenuCurrentPage(1);
-    newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
+    if (isMediaWhole) {
+        newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
+    } else {
+        newsState.setMenuLastPage(localStorage.length)
+    }
     
     if (isMediaWhole) {
         insertWholeContent();

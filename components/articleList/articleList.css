@@ -84,6 +84,13 @@ button {
         align-items: center;
         border: 1px solid #D2DAE0;
         border-bottom: 0px;
+        overflow: hidden;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .article-menu-wrapper::-webkit-scrollbar {
+        display: none;
     }
 
         .menu-btn-wrapper {
@@ -107,6 +114,7 @@ button {
                 align-items: center;
                 position: relative;
                 z-index: 10000;
+                white-space: nowrap;
             }
 
                 .menu-btn-wrapper-clicked > .article-menu-btn {
