@@ -1,52 +1,43 @@
-import { getSubscribeCompanies } from "./company.js";
+import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
 import { addDeletePopup, addToastPopup } from "./popup.js";
 import { getSubscribedTabValidation } from "./tab.js";
-import { TOGGLE } from "./magicNumber.js";
 
 export function updateSubscribeButton(state) {
     if (!getSubscribedTabValidation(state)) return;
-    let companyName = "";
-    switch (state.toggleName) {
-        case TOGGLE.ALL:
-            companyName = state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].name;
-            break;
-        case TOGGLE.SUBSCRIBED:
-            companyName = getSubscribeCompanies(state)[state.selectedTabIndex].name;
-            break;
-    }
-
+    const companyName = getCurrentCompany(state).name;
     const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
-
-    document.querySelector("#subscribe_button_wrapper").innerHTML =
-        isSubscribed ?
-            `
-            <div id="subscribe_button" class="pointer flex_row_center" >
-                <img width="20" height="20" src="public/unsubscribe_icon.svg" />
-            </div>
-            `
-            :
-            `
-            <div class="news_subscribe_button available-medium12" id="subscribe_button">
-                <img src="public/subscribe_icon.svg" />
-                구독하기
-            </div>
-            `
-        ;
-
+    document.querySelector("#subscribe_button_wrapper").innerHTML = getSerializedSubscribeButtonHTML(isSubscribed);
     const subscribeButtonDom = document.querySelector("#subscribe_button");
     subscribeButtonDom.addEventListener("click", function () {
-        eventFunction(state, companyName, isSubscribed);
+        subscribeEventFunction(state, companyName, isSubscribed);
     });
+}
 
-    function eventFunction(state, companyName, isSubscribed) {
-        if (isSubscribed) {
-            addDeletePopup(state, companyName);
-        } else {
-            addToastPopup(state);
-            subscribeCompany(state, companyName);
-            updateSubscribeButton(state);
-        }
+function subscribeEventFunction(state, companyName, isSubscribed) {
+    if (isSubscribed) {
+        addDeletePopup(state, companyName);
+    } else {
+        addToastPopup(state);
+        subscribeCompany(state, companyName);
+        updateSubscribeButton(state);
     }
+}
+
+function getSerializedSubscribeButtonHTML(isSubscribed) {
+    return isSubscribed ?
+        `
+    <div id="subscribe_button" class="pointer flex_row_center" >
+        <img width="20" height="20" src="public/unsubscribe_icon.svg" />
+    </div>
+    `
+        :
+        `
+    <div class="news_subscribe_button available-medium12" id="subscribe_button">
+        <img src="public/subscribe_icon.svg" />
+        구독하기
+    </div>
+    `
+        ;
 }
 
 export function loadSubscribeCompanies(state) {

@@ -207,9 +207,9 @@
 }
 
 .news_detail_tab_item:hover {
-    color: #FFFFFF;
-    background-color: gray;
-    /* transition: color 1.5s ease; */
+    text-decoration: underline;
+    text-underline-offset: 1.5px;
+    text-decoration-color: #879298;
 }
 
 .news_subscribe_button {
@@ -222,9 +222,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2px;
     cursor: pointer;
+    gap: 2px;
 }
+
+.news_subscribe_button:hover {
+    background-color: #F5F7F9;
+}
+
 
 .news_image_card {
     display: flex;
@@ -274,6 +279,10 @@
 
 .card_description {
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break:break-all;
+    width: 320px;
 }
 
 #popup_wrapper {
@@ -340,6 +349,17 @@
 }
 
 .delete_popup_answer_box {
+    color: #5F6E76;
+    width: 160px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F7F9;
+}
+
+.delete_popup_cancel_box {
     color: #14212B;
     width: 160px;
     height: 48px;
@@ -347,11 +367,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #F5F7F9;
 }
 
 .delete_popup_answer_box:hover {
-    color: #5F6E76;
+    text-decoration: underline;
+    text-underline-offset: 1.5px;
+    text-decoration-color: #5F6E76;
 }
+
+.delete_popup_cancel_box:hover {
+    text-decoration: underline;
+    text-underline-offset: 1.5px;
+    text-decoration-color: #14212B;
+    
+}
+
+/* 14212B */
 
 #register_date {
     display: flex;

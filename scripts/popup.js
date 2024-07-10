@@ -41,7 +41,7 @@ export function generateDeletePopupDom(state,companyName) {
             <div class="delete_popup_answer_box available-medium16" style="border-right: 1px solid #D2DAE0;" data-id="${POPUP.ACCEPT}" data-company_name="${companyName}" >
             예,해지합니다
             </div>
-            <div class="delete_popup_answer_box" data-id="${POPUP.REJECT}" >
+            <div class="delete_popup_cancel_box" data-id="${POPUP.REJECT}" >
             아니오
             </div>
         </div>

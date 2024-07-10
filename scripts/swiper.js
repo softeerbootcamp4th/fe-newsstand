@@ -37,7 +37,7 @@ function rotate(state, direction, animationResetPointer = { isNeed: false }) {
 }
 
 function rotateSubscribedTogglePage(state, direction, animationResetPointer) {
-    let { maxIndex, minIndex, tabLastIndex } = getRotateIndexes(state);
+    const { tabLastIndex } = getRotateIndexes(state);
     switch (direction) {
         case DIRECTION.LEFT:
             if (state.selectedTabIndex > 0) {
@@ -57,34 +57,39 @@ function rotateSubscribedTogglePage(state, direction, animationResetPointer) {
 
 function rotateAllToglePage(state, direction, animationResetPointer) {
     //코드 분리 가능하면 추후에 진행
-    let { maxIndex, minIndex, tabLastIndex } = getRotateIndexes(state);
+    const { maxIndex, minIndex, tabLastIndex } = getRotateIndexes(state);
+    const validToGo = maxIndex !== -1;
     switch (direction) {
         case DIRECTION.LEFT:
-            if (maxIndex === -1 && state.selectedTabIndex !== 0) {
+            const firstTabCondition = state.selectedTabIndex === minIndex;
+            const firstCompanyCondition = state.selectedCompanyIndex === minIndex;
+            if (!validToGo && !firstTabCondition) {
                 pageGoBack(state);
                 rotate(state);
             } else {
-                if (!(state.selectedCompanyIndex === minIndex && state.selectedTabIndex === minIndex)) {
-                    if (state.selectedCompanyIndex === minIndex) {
+                if (!(firstCompanyCondition && firstTabCondition)) {
+                    if (firstCompanyCondition) {
                         animationResetPointer.isNeed = true;
                         pageGoBack(state);
-                    } else if (maxIndex !== -1) {
+                    } else if (validToGo) {
                         state.selectedCompanyIndex -= 1;
                     }
                 }
             }
             break;
         case DIRECTION.RIGHT:
-            if (maxIndex === -1 && state.selectedTabIndex !== tabLastIndex) {
+            const lastTabCondition = state.selectedTabIndex === tabLastIndex;
+            const lastCompanyCondition = state.selectedCompanyIndex === maxIndex;
+            if (!validToGo && state.selectedTabIndex !== tabLastIndex) {
                 animationResetPointer.isNeed = true;
                 pageGoForward(state);
                 rotate(state, animationResetPointer);
             } else {
-                if (!(state.selectedCompanyIndex === maxIndex && state.selectedTabIndex === tabLastIndex)) {
-                    if (state.selectedCompanyIndex == maxIndex) {
+                if (!(lastCompanyCondition && lastTabCondition)) {
+                    if (lastCompanyCondition) {
                         animationResetPointer.isNeed = true;
                         pageGoForward(state);
-                    } else if (maxIndex !== -1) {
+                    } else if (validToGo) {
                         state.selectedCompanyIndex += 1;
                     }
                 }
