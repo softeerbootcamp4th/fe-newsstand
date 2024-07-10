@@ -109,7 +109,6 @@
 .media-contents__navigation-button {
     position: absolute;
     top: 50%;
-    cursor: pointer;
 }
 .media-contents__left-button {
     left: -70px;
