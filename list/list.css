@@ -132,6 +132,12 @@ main {
 .imageNews {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+
+.imageNews img:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease;
 }
 
 .imageNews_title {
