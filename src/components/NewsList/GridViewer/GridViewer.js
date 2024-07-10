@@ -3,6 +3,7 @@ import "./GridViewer.css";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
 import { COMPANIES_PER_PAGE } from "@/data/constants";
+import Button from "@/components/common/Button/Button";
 
 function GridViewer({ $target, position = "beforeend" }) {
   this.$element = document.createElement("article");
@@ -17,6 +18,10 @@ function GridViewer({ $target, position = "beforeend" }) {
 
   this.render();
   this.load(this.state.start);
+
+  this.components = {
+    SubscribeButtons: [],
+  };
 
   this.$element.addEventListener("click", this.handleClick.bind(this));
 }
@@ -67,6 +72,7 @@ GridViewer.prototype.load = async function (start) {
   const isLast = nextPage.length < 1;
 
   this.setState({ companies, start, isLast });
+  this.renderSubscribeButtons();
 };
 
 GridViewer.prototype.render = function () {
@@ -76,8 +82,10 @@ GridViewer.prototype.render = function () {
   this.$element.innerHTML = /* html */ `
     ${companies
       .map(
-        ({ lightLogo, darkLogo }) => /* html */ `
-      <div class="cell"><img src="${idDarkMode ? darkLogo : lightLogo}"/></div>
+        ({ id, lightLogo, darkLogo }) => /* html */ `
+        <li data-company-id="${id}" class="cell"><img src="${
+          idDarkMode ? darkLogo : lightLogo
+        }"/></li>
       `
       )
       .join("")}
@@ -89,6 +97,18 @@ GridViewer.prototype.render = function () {
       isLast ? " hide" : ""
     }"><img src="${rightButton}"/></button>
   `;
+};
+
+GridViewer.prototype.renderSubscribeButtons = function () {
+  const { companies } = this.state;
+
+  companies.forEach(({ id }) => {
+    const $listItem = this.$element.querySelector(`li[data-company-id="${id}"]`);
+
+    this.components.SubscribeButtons.push(
+      new Button({ $target: $listItem, text: "구독하기", icon: "plus", color: "white" })
+    );
+  });
 };
 
 export default GridViewer;

@@ -20,8 +20,20 @@
   justify-content: center;
 
   border: 0.5px solid var(--border-default);
+
+  &:hover {
+    background-color: var(--surface-alt);
+  }
 }
 
 .cell > img {
   height: 20px;
+}
+
+.cell:hover > img {
+  display: none;
+}
+
+.cell:not(:hover) > button {
+  display: none;
 }
