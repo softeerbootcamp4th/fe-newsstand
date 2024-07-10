@@ -9,3 +9,5 @@ export const getNews = ({ category, company }) => {
 
   return http.get(`/news?${params.toString()}`);
 };
+
+export const getAllCompany = (page) => http.get(`/companies?_page=${page}&_limit=24`);

@@ -7,11 +7,20 @@
   position: relative;
 }
 
+.filterSection {
+  display: flex;
+  justify-content: space-between;
+
+  height: 24px;
+
+  margin-top: 32px;
+}
+
 .newsFilter {
   display: flex;
   gap: 24px;
 
-  margin-top: 32px;
+  height: 100%;
 }
 
 .newsFilter > .filterTab {
@@ -26,11 +35,16 @@
   font-weight: bold;
 }
 
-.emptyView {
+.viewTypeFilter {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
+}
 
-  height: 388px;
+.viewTypeFilter > .filterTab {
+  cursor: pointer;
+}
+
+.viewTypeFilter > .filterTab.selected {
+  color: var(--text-point);
 }
