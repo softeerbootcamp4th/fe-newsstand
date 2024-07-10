@@ -18,14 +18,14 @@ class CategoryRenderer extends Renderer {
      * @param {string} event.eventName - 이벤트의 이름 
      * @returns 
      */
-    checkEventName(event) {
+    _checkEventName(event) {
         return event.eventName === 'clickCategory';
     }
 
     /**
      * 렌더 함수
      */
-    render({ eventName, value, ...rest }) {
+    _render({ eventName, value, ...rest }) {
         const categoryListElement = this.#generateCategoryListElement(value);
         this.categoryContainer.innerHTML = '';
         this.categoryContainer.innerHTML += categoryListElement;
