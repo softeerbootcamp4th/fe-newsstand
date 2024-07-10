@@ -1,0 +1,16 @@
+.dark-mode__button {
+    display: flex;
+
+    position: fixed;
+    bottom: 52px;
+    right: 40px;
+
+    padding: 12px;
+    border-radius: 30px;
+    border: 1.5px solid var(--gray500);
+}
+
+.dark-mode__icon {
+    width: 28px;
+    height: 28px;
+}
