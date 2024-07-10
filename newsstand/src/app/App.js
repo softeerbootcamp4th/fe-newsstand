@@ -1,4 +1,4 @@
-import HeaderContainer from "../views/header/header.js";
+import HeaderContainer from "../views/header/headerContainer.js";
 import Headline from "../views/headline/headline.js";
 import Main from "../views/main/main.js";
 
