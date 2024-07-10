@@ -1,3 +1,5 @@
+import { nowMediaName } from "../pages/state/newsState.js";
+
 export const fetchData = async (src) => {
     const res = await fetch(src);
     if (!res.ok) {
@@ -23,4 +25,14 @@ export const extractDataWithMedia = (data) => {
         });
         return acc;
     }, {});
+}
+
+export const setSubscription = () => {
+    localStorage.setItem(nowMediaName, Date.now())
+}
+
+export const getSubscriptionList = () => {
+    return Array.from({ length: localStorage.length }, (_, i) => [localStorage.getItem(localStorage.key(i)), localStorage.key(i)])
+        .sort((a, b) => Number(b[0]) - Number(a[0]))
+        .map(item => item[1])
 }

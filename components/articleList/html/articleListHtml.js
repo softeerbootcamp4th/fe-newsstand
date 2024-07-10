@@ -1,5 +1,5 @@
 import { menuInfo, menuIdx, menuCurrentPage, menuLastPage, isMediaWhole, newsState } from "../../../pages/state/newsState.js";
-import { extractDataWithMedia } from "../../../utils/api.js";
+import { extractDataWithMedia, getSubscriptionList } from "../../../utils/api.js";
 import { addSubscriptionEventListener } from "../articleList.js";
 import { addCancleSubscriptionEventListener } from "../event/clickEvent.js";
 import { isSubscribed } from "../event/pageEvent.js";
@@ -18,7 +18,7 @@ export const createMenuList = () => {
 }
 
 export const createSubscriptionMenuList = () => {
-    const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+    const subList = getSubscriptionList();
     return subList?.map((sub, idx) => `
         <div class="menu-btn-wrapper">
             <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
@@ -35,7 +35,7 @@ export const createArticleLiPart = () => {
         const articleData = menuInfo[menuIdx].mediaData[menuCurrentPage - 1].articleList;
         return articleData.map((articleItem) => `<li>${articleItem}</li>`).join('');
     } else {
-        const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+        const subList = getSubscriptionList();
         const mediaName = subList[menuIdx];
         const articleData = extractDataWithMedia(menuInfo)[mediaName].articleList;
         return articleData.map((articleItem) => `<li>${articleItem}</li>`).join('');
@@ -43,7 +43,7 @@ export const createArticleLiPart = () => {
 }
 
 export const insertSubscriptionContent = () => {
-    const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+    const subList = getSubscriptionList();
     const mediaName = subList[menuIdx];
     const nowInfo = extractDataWithMedia(menuInfo)[mediaName]
 

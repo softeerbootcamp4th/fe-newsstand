@@ -1,7 +1,7 @@
 import { MEDIA_LIST } from "../../pages/NewsPage.js";
 import { newsState } from "../../pages/state/newsState.js";
 import { menuInfo, menuCurrentPage, menuLastPage, menuIdx, categoryTimeoutId, isGrid, isMediaWhole, CATEGORY_TIMEOUT } from "../../pages/state/newsState.js";
-import { extractDataWithMedia, extractMedias } from "../../utils/api.js";
+import { extractDataWithMedia, extractMedias, getSubscriptionList, setSubscription } from "../../utils/api.js";
 import { createMenuList,
     insertSubscriptionContent,
     createSubscriptionMenuList,
@@ -48,7 +48,7 @@ const addEventListeners = () => {
 
 export const addSubscriptionEventListener = () => {
     document.querySelector('.subscribe-btn').addEventListener('click', () => {
-        localStorage.setItem(menuInfo[menuIdx].mediaData[menuCurrentPage-1].mediaName, true)
+        setSubscription();
         alert('구독')
     })
 }
@@ -79,7 +79,7 @@ export const setWholeData = () => {
 }
 
 export const setSubscriptionData = () => {
-    const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
+    const subList = getSubscriptionList();
     
     newsState.setMenuCurrentPage(1);
     newsState.setMenuLastPage(1);

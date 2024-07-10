@@ -2,7 +2,7 @@ import { menuInfo, isGrid, isMediaWhole, newsState } from "../../../pages/state/
 import { initArticleList } from "../articleList.js";
 import { createArticleList } from "../html/articleListHtml.js";
 import { setSubscriptionData } from "../articleList.js";
-import { extractMedias } from "../../../utils/api.js";
+import { extractMedias, getSubscriptionList } from "../../../utils/api.js";
 import { setWholeData } from "../articleList.js";
 import { createAlert } from "../../alert/alert.js";
 import { cancleMediaSubscription } from "./pageEvent.js";
@@ -75,8 +75,7 @@ export const addWholeListEventListener = () => {
 
 export const addSubscriptionGridEventListener = () => {
     const callback = () => {
-        const subList = Array.from({ length: localStorage.length }, (_, i) => localStorage.key(i));
-            
+        const subList = getSubscriptionList();
         // Generate grid items from the subList
         const gridItems = subList.map(mediaName => `
             <div class="grid-item">
