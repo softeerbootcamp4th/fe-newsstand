@@ -76,7 +76,7 @@
             <section class="newsList">
                 <nav>
                     <ul>
-                        <li class="navItem" id="nav-item-1">
+                        <li class="navItem">
                             <div></div>
                             <a>종합/경제</a>
                         </li>
@@ -108,14 +108,14 @@
                 </nav>
                 <article>
                     <div class="articleTop">
-                        <img src="asset/images/서울경제.svg" alt="pressImage">
-                        <span>2023.02.10 18:27 편집</span>
+                        <img id="pressImage" src="asset/images/서울경제.svg" alt="pressImage">
+                        <span id="editDate">2024.02.10 18:27 편집</span>
                         <button class="subscribeBtn">+구독하기</button>
                     </div>
                     <div class="articleBottom">
                         <div class="articleImage">
-                            <img src="asset/images/기사사진.svg" alt="articleImage">
-                            <strong>또 국민연금의 몽니…현대百 지주사 불발</strong>
+                            <img id="mainNewsImage" src="asset/images/기사사진1.svg" alt="mainNewsImage">
+                            <strong id="mainNewsTitle">또 국민연금의 몽니…현대百 지주사 불발</strong>
                         </div>
                         <div class="articleOther">
                             <ul class="vertical-list">
@@ -161,8 +161,9 @@
         <div class="rightButton">
             <img src="asset/images/rightButton.svg" alt="rightButton">
         </div>
-        <script src="js/getDate.js"></script>
+        <script src="js/todayDate.js"></script>
         <script src="js/navTheme.js"></script>
         <script src="js/rolling.js"></script>
+        <script src="js/loadNewsData.js"></script>
     </body>
 </html>

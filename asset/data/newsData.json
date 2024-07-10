@@ -6,12 +6,13 @@
             "press": [
                 {
                     "pressId": 0,
-                    "pressLogo": "/asset/images/서울경제.svg",
+                    "pressLogo": "./asset/images/서울경제.svg",
                     "pressName": "서울경제",
-                    "editDate": "2023.02.10 18:27 편집",
+                    "editDate": "2024.02.10 18:27 편집",
                     "mainNews": {
                         "mainNewsId": 0,
-                        "mainNewsTitle": "또 국민연금의 몽니…현대百 지주사 불발"
+                        "mainNewsTitle": "또 국민연금의 몽니…현대百 지주사 불발",
+                        "mainNewsImage": "./asset/images/기사사진1.svg"
                     },
                     "subNews": [
                         {"subNewsId": 0, "subNewsTitle": "\"위스키 사려고 이틀 전부터 줄 섰어요\""},
@@ -30,12 +31,13 @@
             "press": [
                 {
                     "pressId": 0,
-                    "pressLogo": "/asset/images/sbs.svg",
+                    "pressLogo": "./asset/images/sbs.svg",
                     "pressName": "SBS",
-                    "editDate": "2023.03.12 13:17 편집",
+                    "editDate": "2024.03.12 13:17 편집",
                     "mainNews": {
                         "mainNewsId": 0,
-                        "mainNewsTitle": "`연두색 번호판` 효과ㅏ 봤나...상반기 법인 외제차 확 줄었다"
+                        "mainNewsTitle": "`연두색 번호판` 효과 봤나...상반기 법인 외제차 확 줄었다",
+                        "mainNewsImage": "./asset/images/연두색 번호판.jpg"
                     },
                     "subNews": [
                         {"subNewsId":0, "subNewsTitle": "정부 \"모든 전공의 복귀 여부 상관없이 행정처분 안 해\""},
@@ -54,12 +56,13 @@
             "press": [
                 {
                     "pressId": 0,
-                    "pressLogo": "/asset/images/제드넷코리아.svg",
+                    "pressLogo": "./asset/images/제드넷코리아.svg",
                     "pressName": "ZDNET KOREA",
-                    "editDate": "2023.08.03 08:27 편집",
+                    "editDate": "2024.01.03 08:27 편집",
                     "mainNews": {
                         "mainNewsId": 0,
-                        "mainNewsTitle": "LG엔솔, 2분기 IRA 세액공제 빼면 2525억원 적자"
+                        "mainNewsTitle": "LG엔솔, 2분기 IRA 세액공제 빼면 2525억원 적자",
+                        "mainNewsImage": "./asset/images/LG엔솔.jpg"
                     },
                     "subNews": [
                         {"subNewsId":0, "subNewsTitle": "2명 중 1명은 `정신질환에 걸리면 몇몇 친구는 나에게 등을 돌릴 것` 생각"},
@@ -78,12 +81,13 @@
             "press": [
                 {
                     "pressId": 0,
-                    "pressLogo": "/asset/images/더코리아해럴드.svg",
+                    "pressLogo": "./asset/images/더코리아해럴드.svg",
                     "pressName": "The Korea Herald",
                     "editDate": "2024.03.15 16:31 편집",
                     "mainNews": {
                         "mainNewsId": 0,
-                        "mainNewsTitle": "Yoon set to travel to US for NATO summit"
+                        "mainNewsTitle": "Yoon set to travel to US for NATO summit",
+                        "mainNewsImage": "./asset/images/yoon.jpg"
                     },
                     "subNews": [
                         {"subNewsId":0, "subNewsTitle": "Samsung workers' union kicks off first-ever strike"},
@@ -102,12 +106,13 @@
             "press": [
                 {
                     "pressId": 0,
-                    "pressLogo": "/asset/images/스포츠서울.svg",
+                    "pressLogo": "./asset/images/스포츠서울.svg",
                     "pressName": "스포츠서울",
                     "editDate": "2024.04.27 21:53 편집",
                     "mainNews": {
                         "mainNewsId": 0,
-                        "mainNewsTitle": "인터밀란, 김민재 영입 위해 세부 계획까지 마련…뮌헨 떠나 세리에A 복귀 임박하나"
+                        "mainNewsTitle": "인터밀란, 김민재 영입 위해 세부 계획까지 마련…뮌헨 떠나 세리에A 복귀 임박하나",
+                        "mainNewsImage": "./asset/images/김민재.jpg"
                     },
                     "subNews": [
                         {"subNewsId":0, "subNewsTitle": "김대호, 순수함과 초심 잃었나...\"연출된 방송 모습 반성\""},
@@ -126,12 +131,13 @@
             "press": [
                 {
                     "pressId": 0,
-                    "pressLogo": "/asset/images/정신의학신문.svg",
+                    "pressLogo": "./asset/images/정신의학신문.svg",
                     "pressName": "정신의학신문",
-                    "editDate": "2024.01.06 19:08 편집",
+                    "editDate": "2024.07.02 19:08 편집",
                     "mainNews": {
                         "mainNewsId": 0,
-                        "mainNewsTitle": "AI, 인간을 대체할 수 있을까?"
+                        "mainNewsTitle": "AI, 인간을 대체할 수 있을까?",
+                        "mainNewsImage": "./asset/images/ai.png"
                     },
                     "subNews": [
                         {"subNewsId":0, "subNewsTitle": "[치매] 치매와 관련된 오해들"},
@@ -150,12 +156,13 @@
             "press": [
                 {
                     "pressId": 0,
-                    "pressLogo": "/asset/images/대전방송.svg",
+                    "pressLogo": "./asset/images/대전방송.svg",
                     "pressName": "대전방송",
-                    "editDate": "2024.05.30 10:28 편집",
+                    "editDate": "2024.06.29 10:28 편집",
                     "mainNews": {
                         "mainNewsId": 0,
-                        "mainNewsTitle": "쏟아지는 폭우에 충청권 비 피해 속출"
+                        "mainNewsTitle": "쏟아지는 폭우에 충청권 비 피해 속출",
+                        "mainNewsImage": "./asset/images/충청권 폭우.jpg"
                     },
                     "subNews": [
                         {"subNewsId":0, "subNewsTitle": "세종 읍면동 28개 전 노선 운행 중지"},
@@ -170,4 +177,3 @@
         }
     ]
 }
-    
