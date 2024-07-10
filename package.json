@@ -1,0 +1,21 @@
+{
+  "name": "fe-newsstand-my",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "FE Week01-02 Project - newsstand",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve-json": "json-server --watch data.json --port 3000",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.1",
+    "vite": "^5.3.3"
+  }
+}
