@@ -1,4 +1,4 @@
-import { processCategory, subscribeNews, handleCategoryClick } from "./fieldTab.js";
+import { subscribeNews, handleCategoryClick, init } from "./fieldTab.js";
 import { newsListLi } from './newsListLi.js';
 
 
@@ -44,16 +44,13 @@ allPress.addEventListener('click', async () => {
         });
     });
 
-    let newsIndex = 0;
-    while (true) {
-        await processCategory(newsIndex, liList, true);
-        newsIndex = (newsIndex + 1) % allNewsData.length;
-    }
+    init();
 });
 
 subscribedPress.addEventListener('click', () => {
     subscribedPress.classList.replace('available-medium16', 'selected-bold16');
     allPress.classList.replace('selected-bold16', 'available-medium16');
+    leftButton.className = 'show';
     subscribeNews("");
 });
 
