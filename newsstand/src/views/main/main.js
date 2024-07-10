@@ -31,7 +31,10 @@ export const Main = () => {
   };
 
   function createTabs() {
-    let tabs = isAllPress ? getAllPressTabs() : getSubscribedPressTabs();
+    let tabs = getAllPressTabs();
+    let subscribedPress = getSubscribedPressTabs(tabs);
+
+    tabs = isAllPress ? tabs : subscribedPress;
     return tabs;
   }
 
@@ -39,7 +42,7 @@ export const Main = () => {
     element.innerHTML = "";
 
     const tabs = createTabs();
-    const newsList = NewsList({tabs});
+    const newsList = NewsList({isAllPress, tabs});
 
     element.appendChild(newsList.element);
   }
@@ -54,32 +57,57 @@ export const Main = () => {
       return tab.newsTabs.map((newsTab) => {
         return {
           tabName: newsTab.tabName,
-          tabDataIndex: 0,
-          tabDataCount: newsTab.tabData.length
+          tabData: newsTab.tabData
         };
       });
     });
   
     return tabDataWithCounts;
-  }  
-
-  function getSubscribedPressTabs() {
-    const subscribedPressTabsString = localStorage.getItem("pressId");
+  }
+  
+  function getSubscribedPressTabs(tabs) {
+    const subscribedPressTabsString = localStorage.getItem("subscribed");
 
     if (!subscribedPressTabsString) {
-      console.log("no subscribed press");
-      return [];
+        console.log("no subscribed press");
+        return [];
     }
 
     try {
-      const subscribedPressTabsArray = JSON.parse(subscribedPressTabsString);
-      return subscribedPressTabsArray;
-    } catch (error) {
-      console.error("Error parsing subscribed press tabs:", error);
-      return [];
-    }
-  }
+        const subscribedPressTabs = subscribedPressTabsString.split(',');
+        const newTabs = [];
 
+        tabs.forEach(tab => {
+          const filteredTabData = tab.tabData.filter(data => {
+              return subscribedPressTabs.includes(data.mediaName.trim());
+          });
+
+          if (filteredTabData.length > 0) {
+              filteredTabData.forEach(data => {
+                  const newTab = {
+                      tabName: data.mediaName,
+                      tabData: [{
+                          mediaName: data.mediaName,
+                          sourceLogo: data.sourceLogo,
+                          newsDate: data.newsDate,
+                          subscribe: 'Y',
+                          mainNews: data.mainNews,
+                          subNews: data.subNews
+                      }]
+                  };
+                  newTabs.push(newTab);
+              });
+          }
+      });
+        console.log(newTabs);
+        return newTabs;
+    } catch (error) {
+        console.error("Error parsing subscribed press tabs:", error);
+        return [];
+    }
+}
+
+  
   function onToggleAllPress(newValue) {
     isAllPress = newValue;
     render();
@@ -87,7 +115,6 @@ export const Main = () => {
 
   function onToggleListView(newValue) {
     isList = newValue;
-    console.log(isList);
     render();
   }
 };

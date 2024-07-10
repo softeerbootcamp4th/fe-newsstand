@@ -1,75 +1,57 @@
+// pressCategory.js
 import { separateId } from "../../../utils/utils.js";
 
-const ProgressCategoryContainer = ({ 
-    tabs, 
-    timerIntervalRef,  // Use a ref to manage the timer interval
-    selectedId: initialSelectedId, 
-    selectedPressIndex: initialSelectedPressIndex, 
-    onChangeCategory, 
-    onChangePress 
-    }) => {
-
+const PressCategoryContainer = ({ 
+    isAllPress, 
+    tabFields,
+    selectedIndex,
+    onChangeCategory,
+    countInfo,
+}) => {
     const element = document.createElement('div');
     element.className = 'press-category-container';
 
     let buttons = [];
     let progressBars = [];
-    let selectedPressIndex = initialSelectedPressIndex;
-    let selectedId = initialSelectedId;
-
-    function autoChangeCategory() {
-        console.log('auto');
-        const currentIndex = separateId(selectedId);
-        const currentCategory = tabs[currentIndex];
-
-        if (selectedPressIndex < currentCategory.tabDataCount - 1) {
-            selectedPressIndex += 1;
-            onChangePress(selectedPressIndex);
-        } else {
-            const nextId = (currentIndex + 1) % tabs.length;
-            const newSelectedId = `press-category-${nextId}`;
-            onChangeCategory(newSelectedId);
-            onChangePress(0);
-        }
-
-        updateSelectedButtonStyle(currentIndex);
-    }
 
     function onClickEvent(event) {
-        setTimer();
-
         const intId = separateId(event.target.id);
-        const id = `press-category-${intId}`;
-
-        if (id !== selectedId) {
-            onChangeCategory(id);
-            onChangePress(0);
-        } else {
-            updateSelectedButtonStyle(intId);
-        }
+   
+        onChangeCategory(intId);
     }
 
-    function updateSelectedButtonStyle(id) {
+    function updateSelectedButtonStyle() {
         const rootStyles = getComputedStyle(document.documentElement);
 
         buttons.forEach((button, index) => {
-            const isSelected = index === id;
+            const isSelected = index === selectedIndex;
 
             button.style.backgroundColor = isSelected ? rootStyles.getPropertyValue('--color-surface-brand-alt') : 'transparent';
             button.style.color = isSelected ? rootStyles.getPropertyValue('--color-text-white-default') : rootStyles.getPropertyValue('--color-text-weak');
 
-            const categoryCountSpan = button.querySelector('.press-count-span');
-            if (categoryCountSpan) {
-                button.style.width = isSelected ? "166px" : "max-content";
-                categoryCountSpan.textContent = isSelected ? `${selectedPressIndex + 1}/${tabs[index].tabDataCount}` : "";
-            }
-
-            if (isSelected) {
-                progressBars[index].classList.add('selected');
-            } else {
-                progressBars[index].classList.remove('selected');
-            }
+            updateInfoSpanStyle(button, isSelected);
+            updateProgressBarStyle(index, isSelected);
         });
+    }
+
+    function updateInfoSpanStyle(button, isSelected) {
+        const infoSpan = button.querySelector('.press-count-span');
+        if (infoSpan) {
+            button.style.width = isSelected ? "166px" : "max-content";
+            if (isAllPress) {
+                infoSpan.textContent = isSelected ? `${countInfo}` : "";
+            } else {
+                infoSpan.textContent = ">"
+            }
+        }
+    }
+
+    function updateProgressBarStyle(index, isSelected) {
+        if (isSelected) {
+            progressBars[index].classList.add('selected');
+        } else {
+            progressBars[index].classList.remove('selected');
+        }
     }
 
     function createButton(category, index) {
@@ -78,7 +60,7 @@ const ProgressCategoryContainer = ({
         button.id = `press-category-${index}`;
 
         const progressBar = document.createElement('div');
-        progressBar.className = 'press-category-button-progress';
+        progressBar.className = 'press-category-button-progress';   
         progressBar.id = `press-category-${index}`;
 
         const container = document.createElement('div');
@@ -102,20 +84,11 @@ const ProgressCategoryContainer = ({
         return button;
     }
 
-    function setTimer() {
-        if (timerIntervalRef.current) {
-            console.log("clearTimer", timerIntervalRef.current);
-            clearInterval(timerIntervalRef.current);
-        }
-        timerIntervalRef.current = setInterval(autoChangeCategory, 20000);
-        console.log("settimer:", timerIntervalRef.current);
-    }
-
     function renderButtons() {
         element.innerHTML = '';
         buttons = [];
         progressBars = [];
-        tabs.forEach((category, index) => {
+        tabFields.forEach((category, index) => {
             const button = createButton(category, index);
             element.appendChild(button);
             buttons.push(button);
@@ -132,16 +105,14 @@ const ProgressCategoryContainer = ({
     function render() {
         renderButtons();
         addEventListeners();
-        updateSelectedButtonStyle(separateId(selectedId));
+        updateSelectedButtonStyle();
     }
 
     render();
-    setTimer();
 
     return {
-        element,
-        setTimer
+        element
     };
 };
 
-export default ProgressCategoryContainer;
+export default PressCategoryContainer;

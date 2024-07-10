@@ -1,18 +1,20 @@
 import ChipButton from "../../../components/chipButton/chipButton.js";
 import SnackBar from "../../../components/snackBar/snackBar.js";
+import Alert from "../../../components/alert/alert.js";
 
-export const PressInfoContainer = (props) => {
+export const PressInfoContainer = ({press}) => {
     let element = document.createElement('div');
     element.className = 'press-info-container';
 
-    let isSubscribed = props.isSubscribed;  
+    console.log(press);
+    let isSubscribed = press.subscribe == 'Y';  
 
     function render() {
         const chipButton = makeChipButton();
         
         const html = `
-            <img src="${props.imageSrc}" alt="press image"/>
-            <span class="press-info-edit-date">${props.editTime}</span>
+            <img src="${press.sourceLogo}" alt="press image"/>
+            <span class="press-info-edit-date">${press.newsDate}</span>
         `;
     
         element.innerHTML = html;
@@ -24,7 +26,7 @@ export const PressInfoContainer = (props) => {
         const title = isSubscribed ? '' : '구독하기';
         const chipButton = ChipButton({ icon: icon, title: title });
 
-        chipButton.element.addEventListener('click', subscribePress);
+        chipButton.element.addEventListener('click', isSubscribed ? unSubscribePress : subscribePress);
         return chipButton;
     }
 
@@ -34,19 +36,45 @@ export const PressInfoContainer = (props) => {
         render();
     }
 
+    function unSubscribePress() {
+        showAlert();
+    }
+
     function showSnackBar() {
         isSubscribed = !isSubscribed;
         const snackBar = SnackBar({ title: '내가 구독한 언론사에 추가되었습니다.' });
         snackBar.show();
     }
 
-    function savePressToStorage() {
-        let pressId = "경제신문";
-        let subscribedPress = localStorage.getItem('pressId');
-
-        subscribedPress += pressId;
-        localStorage.setItem('pressId', pressId);
+    function showAlert() {
+        const alert = Alert({ pressName: press.mediaName, handleOkButtonClick: handleUnsubscribe});
+        alert.show();
     }
+
+    function handleUnsubscribe() {
+        deletePressFromStorage()
+        isSubscribed = false;
+        render();
+    }
+
+    function savePressToStorage() {
+        const name = press.mediaName;
+        let subscribedPress = localStorage.getItem('subscribed');
+        subscribedPress += subscribedPress ? ","+name : name;
+        localStorage.setItem('subscribed', subscribedPress);
+    }
+
+    function deletePressFromStorage() {
+        const name = press.mediaName;
+        let subscribedPress = localStorage.getItem('subscribed');
+    
+        const subscribedPressArray = subscribedPress.split(',');
+        const updatedSubscribedPressArray = subscribedPressArray.filter(item => item.trim() !== name);
+        const updatedSubscribedPress = updatedSubscribedPressArray.join(',');
+    
+        localStorage.setItem('subscribed', updatedSubscribedPress);
+    }
+    
 
     render();
 
