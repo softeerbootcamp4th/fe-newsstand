@@ -1,7 +1,3 @@
-:root {
-    --main-color: #ff0000;
-}
-  
 h1 {
     color: var(--main-color);
 }
@@ -19,15 +15,6 @@ h1 {
     margin-left: 175px;
     width: 930px;
 }
-/*
-.news-icon {
-    position: flex;
-    top: 50px; 
-    left: 50px; 
-    fill: blue; 
-    background-image: url('../icons/newspaper.svg'); 
-} 
-*/
 
 .news-icon {
     display: inline-flex;
@@ -296,6 +283,7 @@ h2 {
     margin-top: 17px;
     color:  #4B5966;
     padding-left: 22px;
+    cursor: pointer;
 }
 .news-sub-titles:hover {
     text-decoration: underline;
@@ -377,7 +365,7 @@ button:hover {
 
 .progress-button.animate {
     background-position: left bottom;
-    animation: fillAnimation 2s ease-in;
+    animation: fillAnimation 4s linear;
 }
 
 .progress-button:hover{
@@ -476,81 +464,33 @@ button:hover {
     opacity: 1;
 }
 
-/*
-.cancelmodalcontainer{
-    width: 320px;
-    height: 48px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-    opacity: 0;
-    background: white;
-}
-
-.cancelmodalcontainer.active{
-    opacity: 1;
-}
-
-.cancelmodal-txt span {
-    color: #14212B;
-    font-weight: 500;
-}
-
-#cancelmodal-yesorno {
-    width: 100%;
-    height: 48px;
-    display: flex;
-    flex-direction: column;
-    color: var(--grayscale-black);
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border: 1px solid var(--grayscale-300);
-}
-
-#cancelmodal {
-    width: 100%;
-    height: 140px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: white;
-    color: var(--grayscale-300);
-    font-weight: 500;
-    font-size: 16px;
-    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
-                0 2px 18px hsla(var(--grayscale-black), 0.8);
-    border: 1px solid var(--gray-400);
-    opacity: 0;
-    gap: 0px;
-    z-index: 10;
-    left: 50%;
-    top: 50%;
-}
-
-.cancelmodal-txt {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    flex-direction: column;
-    padding : 24px;
-    color : #5F6E76;
-    border : 1px solid #D2DAE0;
-    background-color: #FFFFFF;
-    font-size: 16px;
-    box-sizing: border-box;
-    box-shadow: 0px 2px 18px 0px rgba(20, 33, 43, 0.08);
-
-}
-
-#cancelmodal.active {
-    opacity: 1;
-}
-*/
 .text-button span{
     margin-left: auto;
 }
 
+.subprogress-button{
+    cursor: pointer;
+    width: 166px;
+    height: 17px;
+    display: flex;
+    background: linear-gradient(to right,var(--blue-500) 50%,#7890E7 50%);
+    font-size: 15px;
+    padding: 12px 12px;
+    color: white;
+    position: relative;
+    background-size: 200% 100%;
+
+}
+
+.subprogress-button img{
+    margin-left: auto;
+}
+
+.subprogress-button.animate {
+    background-position: left bottom;
+    animation: fillAnimation 2s linear;
+}
+
+.subprogress-button:hover{
+    text-decoration: underline;
+}
