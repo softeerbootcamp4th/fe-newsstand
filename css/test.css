@@ -362,19 +362,6 @@ button:hover {
     left: 1100px;
 }
 
-/* progress button - tab
-/*
-.progress-button{
-    cursor: pointer;
-    /*background: var(--surface-surface-brand-alt, #7890E7); 
-    width: 166px;
-    height: 17px;
-    background: #7890E7;
-    font-size: 15px;
-    color: white;
-    overflow: hidden;
-}
-*/
 .progress-button{
     cursor: pointer;
     width: 166px;
@@ -442,7 +429,7 @@ button:hover {
 }
 
 #tost_message.active {
-    opacity: 100%;
+    opacity: 1;
     bottom: 50px;
 }
 
@@ -489,6 +476,7 @@ button:hover {
     opacity: 1;
 }
 
+/*
 .cancelmodalcontainer{
     width: 320px;
     height: 48px;
@@ -542,6 +530,7 @@ button:hover {
     left: 50%;
     top: 50%;
 }
+
 .cancelmodal-txt {
     display: flex;
     width: 100%;
@@ -560,7 +549,8 @@ button:hover {
 #cancelmodal.active {
     opacity: 1;
 }
-
+*/
 .text-button span{
     margin-left: auto;
 }
+
