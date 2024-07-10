@@ -23,7 +23,7 @@ const effectCleanupsMap = new Map<string, Array<() => void>>();
 const effectDepsMap = new Map<string, Array<Array<unknown> | null>>();
 const effectIdxMap = new Map<string, number>();
 const cachedProps = new Map<string, object>();
-export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
+export const diffingCommit = (cur: ChildNode, nxt: ChildNode) => {
   if (!cur || !nxt) {
     return;
   }
@@ -68,7 +68,7 @@ export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
     const curChild = curChildren[i];
     const nxtChild = nxtChildren[i];
     if (curChild && nxtChild) {
-      diffingRender(curChild, nxtChild);
+      diffingCommit(curChild, nxtChild);
     } else if (!curChild && nxtChild) {
       cur.appendChild(nxtChild);
     } else if (curChild && !nxtChild) {
@@ -284,7 +284,7 @@ export const render = () =>
       });
     }
     isRendering = true;
-    diffingRender(_root!, shadowRoot);
+    diffingCommit(_root!, shadowRoot);
     afterRender();
   });
 
