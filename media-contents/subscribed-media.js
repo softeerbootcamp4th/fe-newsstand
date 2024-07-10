@@ -289,8 +289,6 @@ function clickGridList(e) {
     if (displayMode === "list-display") {
         return;
     }
-    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
-    const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
 
-    return clickGridItem(e, mediaListData.data, () => renderGridMedia(currentPage));
+    return clickGridItem(e, mediaListData.data);
 }
