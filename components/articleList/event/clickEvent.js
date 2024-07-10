@@ -1,6 +1,6 @@
 import { menuInfo, isGrid, isMediaWhole, newsState } from "../../../pages/state/newsState.js";
 import { initArticleList } from "../articleList.js";
-import { createArticleList } from "../html/articleListHtml.js";
+import { createArticleList, renderGridSubscription, renderSubscriptionList, renderWholeGrid } from "../html/articleListHtml.js";
 import { setSubscriptionData } from "../articleList.js";
 import { extractMedias, getSubscriptionList } from "../../../utils/api.js";
 import { setWholeData } from "../articleList.js";
@@ -80,38 +80,10 @@ export const addWholeListEventListener = () => {
 }
 
 export const addSubscriptionGridEventListener = () => {
-    const callback = () => {
-        const subList = getSubscriptionList();
-        // Generate grid items from the subList
-        const gridItems = subList.map(mediaName => `
-            <div class="grid-item grid-filled-item" id="grid-${mediaName}">
-                <img class="display-block" src="/images/logos/${mediaName}.png" height="20px" />
-                <div class="grid-btn-wrapper display-none">
-                    <button class="grid-btn grid-unsubscribe-btn">
-                        <img src="/icons/plus.png" width="12px" height="12px" />    
-                        <p>해지하기</p>
-                    </button>
-                </div>
-            </div>
-        `).join('');
-        
-        // Add remaining empty grid items to complete the 24 items (if necessary)
-        const totalGridItems = 24;
-        const emptyGridItemsCount = totalGridItems - subList.length;
-        const emptyGridItems = new Array(emptyGridItemsCount).fill('<div class="grid-item"></div>').join('');
-
-        document.querySelector('.article-body-wrapper').innerHTML = `
-            <div class="grid-container">
-                ${gridItems}
-                ${emptyGridItems}
-            </div>
-        `;
-    }
-    
     document.querySelectorAll('.subscription-media-btn, .grid-selection-btn').forEach(button => {
         button.addEventListener('click', () => {
             if (isGrid && !isMediaWhole) {
-                callback();
+                renderGridSubscription();
                 addGridHoverEventListener();
                 addGridUnsubscribeBtnEventListener();
             }
@@ -120,66 +92,20 @@ export const addSubscriptionGridEventListener = () => {
 }
 
 export const addSubscriptionListEventListener = () => {
-    const callback = () => {
-        document.querySelector('.article-body-wrapper').innerHTML = createArticleList({ isSubscription: true });
-        document.querySelectorAll('.article-header-wrapper')[1].remove();
-        addModeSelectionEventListener();
-        newsState.setMenuIdx(0);
-        setSubscriptionData();
-        addCategorySelectionEventListener();
-        addScrollEventListener();
-    }
-
     document.querySelectorAll('.subscription-media-btn, .list-selection-btn').forEach(button => {
         button.addEventListener('click', () => {
             if (!isGrid && !isMediaWhole) {
-                callback();
+                renderSubscriptionList();
             }
         })
     })
 }
 
 export const addWholeGridEventListener = () => {
-    const callback = () => {
-        const subList = extractMedias(menuInfo);
-            
-        // Generate grid items from the subList
-        const gridItems = subList.map(mediaName => `
-            <div class="grid-item grid-filled-item" id="grid-${mediaName}">
-                <img class="display-block" src="/images/logos/${mediaName}.png" height="20px" />
-                <div class="grid-btn-wrapper display-none">
-                    ${localStorage.getItem(mediaName) ? 
-                    `<button class="grid-btn grid-unsubscribe-btn">
-                        <img src="/icons/plus.png" width="12px" height="12px" />    
-                        <p>해지하기</p>
-                    </button>` : `
-                    <button class="grid-btn grid-subscribe-btn">
-                        <img src="/icons/plus.png" width="12px" height="12px" />    
-                        <p>구독하기</p>
-                    </button>
-                    `
-                    }
-                </div>
-            </div>
-        `).join('');
-        
-        // Add remaining empty grid items to complete the 24 items (if necessary)
-        const totalGridItems = 24;
-        const emptyGridItemsCount = totalGridItems - subList.length;
-        const emptyGridItems = new Array(emptyGridItemsCount).fill('<div class="grid-item"></div>').join('');
-
-        document.querySelector('.article-body-wrapper').innerHTML = `
-            <div class="grid-container">
-                ${gridItems}
-                ${emptyGridItems}
-            </div>
-        `;
-    }
-
     document.querySelectorAll('.whole-media-btn, .grid-selection-btn').forEach(button => {
         button.addEventListener('click', () => {
             if (isGrid && isMediaWhole) {
-                callback();
+                renderWholeGrid();
                 addGridHoverEventListener();
                 addGridSubscribeBtnEventListener();
                 addGridUnsubscribeBtnEventListener();
@@ -188,6 +114,7 @@ export const addWholeGridEventListener = () => {
     })
 }
 
+// 구독 취소
 export const addCancleSubscriptionEventListener = () => {
     document.querySelector('.cancle-btn')?.addEventListener('click', () => {
         const el = document.createElement('div');
@@ -202,9 +129,10 @@ export const addCancleSubscriptionEventListener = () => {
 export const addAlertAcceptBtnEventListener = () => {
     document.querySelector('.alert-accept-btn').addEventListener('click', () => {
         cancleMediaSubscription();
-
-        // alert 사라지는 이벤트
-        document.querySelector('.alert-area').remove();
+        if (isGrid) {
+            renderGridSubscription();
+            // Or mediaName 받아서 해당 id el remove
+        }
     })
 }
 

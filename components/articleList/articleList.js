@@ -7,6 +7,7 @@ import { createMenuList,
     createSubscriptionMenuList,
     createArticleLiPart,
     insertWholeContent,
+    renderSubscriptionList,
 } from "./html/articleListHtml.js";
 import { handleNextPageEvent } from "./event/pageEvent.js";
 import { addModeSelectionEventListener,
@@ -55,6 +56,13 @@ export const addSubscriptionEventListener = () => {
         el.innerHTML = createSnackBar('내가 구독한 언론사에 추가되었습니다.');
         document.querySelector('.article-body-wrapper').appendChild(el);
         setSubscription();
+
+        setTimeout(() => {
+            if (!isGrid) {
+                // 버튼 선택도 해야함
+                renderSubscriptionList();
+            }
+        }, 5000)
     })
 }
 
