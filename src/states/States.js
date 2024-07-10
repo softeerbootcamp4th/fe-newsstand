@@ -24,8 +24,8 @@ class States {
      * @param {string} event.eventName - 발생한 이벤트 정보 이름
      * @param {*} event.value - 렌더 함수에 전달할 값 
      */
-    notify(event) {
-        this.observers.forEach((observer) => observer.update(event))
+    notify(eventInfo) {
+        this.observers.forEach((observer) => observer.update(eventInfo))
     }
 }
 
