@@ -96,10 +96,10 @@ export const createArticleList = ({ isSubscription }) => {
                     <button class="btn subscription-media-btn mode-selection-btn">내가 구독한 언론사</button>
                 </div>
                 <div class="icon-wrapper inline-tag flex-row-between">
-                    <button class="btn list-btn view-btn view-btn-clicked">
+                    <button class="btn list-selection-btn view-btn view-btn-clicked">
                         <img src="/icons/list-view.png" alt="" width="24px" height="24px">
                     </button>
-                    <button class="btn grid-btn view-btn">
+                    <button class="btn grid-selection-btn view-btn">
                         <img src="/icons/grid-view.png" alt="" width="24px" height="24px">
                     </button>
                 </div>

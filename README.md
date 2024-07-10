@@ -13,3 +13,4 @@ FE 1,2 주 프로젝트
 - feat/#9 : 구독 취소 버튼 구현
 - feat/#10 : snack bar 구현
 - feat/#11 : grid 해지하기 버튼 구현
+- feat/#12 : grid 구독하기 버튼 구현

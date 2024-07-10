@@ -6,6 +6,8 @@ import { extractMedias, getSubscriptionList } from "../../../utils/api.js";
 import { setWholeData } from "../articleList.js";
 import { createAlert } from "../../alert/alert.js";
 import { cancleMediaSubscription } from "./pageEvent.js";
+import { setSubscription } from "../../../utils/api.js";
+import { createSnackBar } from "../../snackBar/snackBar.js";
 
 // 전체 언론사, 구독한 언론사
 export const addModeSelectionEventListener = () => {
@@ -51,10 +53,10 @@ export const addBtnEventsListener = () => {
     document.querySelector('.subscription-media-btn').addEventListener('click', () => {
         newsState.setIsMediaWhole(false);
     })
-    document.querySelector('.list-btn').addEventListener('click', () => {
+    document.querySelector('.list-selection-btn').addEventListener('click', () => {
         newsState.setIsGrid(false);
     })
-    document.querySelector('.grid-btn').addEventListener('click', () => {
+    document.querySelector('.grid-selection-btn').addEventListener('click', () => {
         newsState.setIsGrid(true);
     })
 }
@@ -67,7 +69,7 @@ export const addWholeListEventListener = () => {
         initArticleList();
     }
 
-    document.querySelectorAll('.whole-media-btn, .list-btn').forEach(button => {
+    document.querySelectorAll('.whole-media-btn, .list-selection-btn').forEach(button => {
         button.addEventListener('click', () => {
             if (!isGrid && isMediaWhole) {
                 console.log('클릭')
@@ -84,8 +86,8 @@ export const addSubscriptionGridEventListener = () => {
         const gridItems = subList.map(mediaName => `
             <div class="grid-item grid-filled-item" id="grid-${mediaName}">
                 <img class="display-block" src="/images/logos/${mediaName}.png" height="20px" />
-                <div class="gird-unsubscribe-btn-wrapper display-none">
-                    <button class="grid-unsubscribe-btn">
+                <div class="grid-btn-wrapper display-none">
+                    <button class="grid-btn grid-unsubscribe-btn">
                         <img src="/icons/plus.png" width="12px" height="12px" />    
                         <p>해지하기</p>
                     </button>
@@ -106,12 +108,12 @@ export const addSubscriptionGridEventListener = () => {
         `;
     }
     
-    document.querySelectorAll('.subscription-media-btn, .grid-btn').forEach(button => {
+    document.querySelectorAll('.subscription-media-btn, .grid-selection-btn').forEach(button => {
         button.addEventListener('click', () => {
             if (isGrid && !isMediaWhole) {
                 callback();
                 addGridHoverEventListener();
-                addUnscribeClickEventListener();
+                addGridUnsubscribeBtnEventListener();
             }
         })
     });
@@ -128,7 +130,7 @@ export const addSubscriptionListEventListener = () => {
         addScrollEventListener();
     }
 
-    document.querySelectorAll('.subscription-media-btn, .list-btn').forEach(button => {
+    document.querySelectorAll('.subscription-media-btn, .list-selection-btn').forEach(button => {
         button.addEventListener('click', () => {
             if (!isGrid && !isMediaWhole) {
                 callback();
@@ -143,8 +145,21 @@ export const addWholeGridEventListener = () => {
             
         // Generate grid items from the subList
         const gridItems = subList.map(mediaName => `
-            <div class="grid-item">
-                <img src="/images/logos/${mediaName}.png" height="20px" />
+            <div class="grid-item grid-filled-item" id="grid-${mediaName}">
+                <img class="display-block" src="/images/logos/${mediaName}.png" height="20px" />
+                <div class="grid-btn-wrapper display-none">
+                    ${localStorage.getItem(mediaName) ? 
+                    `<button class="grid-btn grid-unsubscribe-btn">
+                        <img src="/icons/plus.png" width="12px" height="12px" />    
+                        <p>해지하기</p>
+                    </button>` : `
+                    <button class="grid-btn grid-subscribe-btn">
+                        <img src="/icons/plus.png" width="12px" height="12px" />    
+                        <p>구독하기</p>
+                    </button>
+                    `
+                    }
+                </div>
             </div>
         `).join('');
         
@@ -161,10 +176,13 @@ export const addWholeGridEventListener = () => {
         `;
     }
 
-    document.querySelectorAll('.whole-media-btn, .grid-btn').forEach(button => {
+    document.querySelectorAll('.whole-media-btn, .grid-selection-btn').forEach(button => {
         button.addEventListener('click', () => {
             if (isGrid && isMediaWhole) {
                 callback();
+                addGridHoverEventListener();
+                addGridSubscribeBtnEventListener();
+                addGridUnsubscribeBtnEventListener();
             }
         })
     })
@@ -228,31 +246,49 @@ export const addScrollEventListener = () => {
 export const addGridHoverEventListener = () => {
     // 전체 그리드에 e.target에 mouseover 시 해당 target(grid-filled-item)에 grid-overed 클래스 추가
     document.querySelectorAll('.grid-filled-item').forEach((el) => {
-        el.addEventListener('mouseover', (e) => {
-            e.target.querySelector('img').classList.replace('display-block', 'display-none')
-            e.target.querySelector('div').classList.replace('display-none', 'display-block')
+        el.addEventListener('mouseover', function() {
+            this.querySelector('img').classList.replace('display-block', 'display-none')
+            this.querySelector('div').classList.replace('display-none', 'display-block')
         })
     })
 
     // 전체 그리드 e.target에 mouseover 시 grid-filled-item이라면 img에 display none, button에 display block
     document.querySelectorAll('.grid-filled-item').forEach((el) => {
-        el.addEventListener('mouseout', (e) => {
-            e.target.querySelector('div').classList.replace('display-block', 'display-none')
-            e.target.querySelector('img').classList.replace('display-none', 'display-block')
+        el.addEventListener('mouseout', function() {
+            this.querySelector('div').classList.replace('display-block', 'display-none')
+            this.querySelector('img').classList.replace('display-none', 'display-block')
         })
     })
 }
 
-export const addUnscribeClickEventListener = () => {
+export const addGridUnsubscribeBtnEventListener = () => {
     document.querySelectorAll('.grid-filled-item').forEach((item) => {
-        item.addEventListener('click', (e) => {
-            newsState.setNowMediaName(e.target.id.split('-')[1])
-            const el = document.createElement('div');
-            el.classList.add('alert-area');
-            el.innerHTML = createAlert();
-            document.querySelector('.article-body-wrapper').appendChild(el);
-            addAlertAcceptBtnEventListener();
-            addAlertCancleBtnEventListener();
+        item.addEventListener('click', function() {
+            if (this.querySelector('.grid-unsubscribe-btn')) {
+                newsState.setNowMediaName(this.id.split('-')[1])
+                const el = document.createElement('div');
+                el.classList.add('alert-area');
+                el.innerHTML = createAlert();
+                document.querySelector('.article-body-wrapper').appendChild(el);
+                addAlertAcceptBtnEventListener();
+                addAlertCancleBtnEventListener();
+            }
         })
     })
 }
+
+export const addGridSubscribeBtnEventListener = () => {
+    document.querySelectorAll('.grid-filled-item').forEach((item) => {
+        item.addEventListener('click', function() {
+            if (this.querySelector('.grid-subscribe-btn')) {
+                newsState.setNowMediaName(this.id.split('-')[1]);
+
+                const el = document.createElement('div');
+                el.classList.add('snack-bar-area');
+                el.innerHTML = createSnackBar('내가 구독한 언론사에 추가되었습니다.');
+                document.querySelector('.article-body-wrapper').appendChild(el);
+                setSubscription();
+            }
+        });
+    });
+};
