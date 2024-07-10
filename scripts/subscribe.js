@@ -4,7 +4,7 @@ import { getSubscribedTabValidation } from "./tab.js";
 
 export function updateSubscribeButton(state) {
     if (!getSubscribedTabValidation(state)) return;
-    const companyName = getCurrentCompany(state).name;
+    const companyName = getCurrentCompany(state)?.name;
     const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
     document.querySelector("#subscribe_button_wrapper").innerHTML = getSerializedSubscribeButtonHTML(isSubscribed);
     const subscribeButtonDom = document.querySelector("#subscribe_button");
@@ -41,7 +41,7 @@ function getSerializedSubscribeButtonHTML(isSubscribed) {
 }
 
 export function loadSubscribeCompanies(state) {
-    let tmp = parseSetData(loadSubscribeCompaniesFromLocalStorage());
+    const tmp = parseSetData(loadSubscribeCompaniesFromLocalStorage());
     state.subscribedCompanyNameSet = tmp;
 }
 

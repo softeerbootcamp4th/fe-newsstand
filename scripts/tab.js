@@ -1,6 +1,7 @@
 import { TOGGLE } from "./magicNumber.js";
 import { renderArticles, renderTabAnimationList, renderTabList } from "./render.js";
 import { resetstate } from "./reset.js";
+import { cleanUpHTML } from "./util.js";
 
 export function handleTabClick(selectedTabIndex,state,isDragging) {
     if(!isDragging){
@@ -69,4 +70,10 @@ function updateTabAnimation(state,max) {
 
 export function getSubscribedTabValidation(state) {
     return !(state.toggleName === TOGGLE.SUBSCRIBED && state.subscribedCompanyNameSet.size === 0);
+}
+
+export function getTabDomWithCleanUp() {
+    const tabDom = document.querySelector("#tab_wrapper");
+    cleanUpHTML(tabDom);
+    return tabDom;
 }

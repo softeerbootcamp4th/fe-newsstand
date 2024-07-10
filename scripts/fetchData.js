@@ -1,7 +1,6 @@
 import { API } from "./magicNumber.js";
 import { responseToJson } from "./util.js";
 
-//회사명 기준 아티클 정렬
 function getCompaniesWithArticles(articleDataList) {
     const companiesWithArticles = {};
     articleDataList.forEach(subjectObject => {
