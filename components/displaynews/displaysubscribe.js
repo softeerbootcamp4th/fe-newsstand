@@ -14,6 +14,7 @@ export const showmysub = (subitem) => {
     });
 }
 
+/*
 export const shownewstab = (fnews) => {
     console.log(fnews);
     const tabinfos = document.querySelector('.news-list-header');
@@ -35,6 +36,60 @@ export const shownewstab = (fnews) => {
     });
     updateSubDisplay(hey);
 } 
+
+*/
+
+export let subProgressTimer;
+
+export const shownewstab = (fnews) => {
+    console.log(fnews);
+    const tabinfos = document.querySelector('.news-list-header');
+    tabinfos.innerHTML = '';
+
+    fnews.forEach(it => {  
+        tabinfos.innerHTML += "<article class=\"text-button\">" + it + "</article>";
+    });
+
+    const tbuttons = document.querySelectorAll('.text-button');
+    let currentIndex = 0;
+
+    const updateTab = (index) => {
+        tbuttons.forEach((btn, idx) => {
+            if (idx === index) {
+                btn.classList.add('subprogress-button','animate');
+                const img = document.createElement('img');
+                img.src = '../../icons/chevron-right.svg'; // 이미지 경로 설정
+                img.alt = 'Icon'; // 이미지 대체 텍스트 설정
+                btn.appendChild(img);
+            } else {
+                btn.classList.remove('subprogress-button','animate');
+                // 버튼에서 이미지 제거
+                const img = btn.querySelector('img');
+                if (img) {
+                    btn.removeChild(img);
+                }
+            }
+        });
+
+        const buttonText = tbuttons[index].textContent;
+        updateSubDisplay(buttonText);
+    };
+
+    tbuttons.forEach((bbtt, index) => {
+        bbtt.addEventListener('click', () => {
+            currentIndex = index;
+            updateTab(currentIndex);
+        });
+    });
+
+    updateTab(currentIndex);
+
+    clearInterval(subProgressTimer);
+    subProgressTimer = setInterval(() => {
+        currentIndex = (currentIndex + 1) % tbuttons.length;
+        updateTab(currentIndex);
+    }, 2000);
+};
 
 //관심 언론 선택하였을 때, 페이지 넘김에 따른 컨텐츠 변화 함수 
 export const updateSubDisplay = (pname) => {
