@@ -8,7 +8,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_1.svg',
                 companyName: '서울경제',
                 updatedDate: '07월 14일 09:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 1,
                     src: 'https://picsum.photos/500/300?img=1',
@@ -29,7 +28,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_2.svg',
                 companyName: '데일리안',
                 updatedDate: '07월 15일 10:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 2,
                     src: 'https://picsum.photos/500/300?img=2',
@@ -50,7 +48,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_3.svg',
                 companyName: '헤럴드경제',
                 updatedDate: '07월 16일 11:45 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 3,
                     src: 'https://picsum.photos/500/300?img=3',
@@ -71,7 +68,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_4.svg',
                 companyName: 'SBS Biz',
                 updatedDate: '07월 17일 14:20 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 4,
                     src: 'https://picsum.photos/500/300?img=4',
@@ -92,7 +88,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_5.svg',
                 companyName: '세계일보',
                 updatedDate: '07월 18일 15:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 5,
                     src: 'https://picsum.photos/500/300?img=15',
@@ -113,7 +108,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_6.svg',
                 companyName: '아시아경제',
                 updatedDate: '07월 19일 16:45 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 6,
                     src: 'https://picsum.photos/500/300?img=6',
@@ -134,7 +128,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_7.svg',
                 companyName: '이데일리',
                 updatedDate: '07월 20일 17:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 7,
                     src: 'https://picsum.photos/500/300?img=7',
@@ -155,7 +148,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_8.svg',
                 companyName: '한국일보',
                 updatedDate: '07월 21일 18:15 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 18,
                     src: 'https://picsum.photos/500/300?img=8',
@@ -176,7 +168,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_9.svg',
                 companyName: '아이뉴스24',
                 updatedDate: '07월 22일 19:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 9,
                     src: 'https://picsum.photos/500/300?img=9',
@@ -197,7 +188,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_10.svg',
                 companyName: '파이낸셜뉴스',
                 updatedDate: '07월 23일 20:45 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 10,
                     src: 'https://picsum.photos/500/300?img=10',
@@ -218,7 +208,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_11.svg',
                 companyName: '스포츠서울',
                 updatedDate: '07월 14일 09:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 11,
                     src: 'https://picsum.photos/500/300?img=11',
@@ -239,7 +228,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_12.svg',
                 companyName: '스포츠동아',
                 updatedDate: '07월 15일 10:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 12,
                     src: 'https://picsum.photos/500/300?img=12',
@@ -260,7 +248,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_13.svg',
                 companyName: '석간문화일보',
                 updatedDate: '07월 16일 11:45 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 13,
                     src: 'https://picsum.photos/500/300?img=13',
@@ -281,7 +268,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_14.svg',
                 companyName: 'KBS WORLD',
                 updatedDate: '07월 17일 14:20 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 14,
                     src: 'https://picsum.photos/500/300?img=14',
@@ -302,7 +288,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_15.svg',
                 companyName: 'Korea JoongAng Daily',
                 updatedDate: '07월 18일 15:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 15,
                     src: 'https://picsum.photos/500/300?img=15',
@@ -323,7 +308,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_16.svg',
                 companyName: 'Insight',
                 updatedDate: '07월 19일 16:45 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 16,
                     src: 'https://picsum.photos/500/300?img=16',
@@ -344,7 +328,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_17.svg',
                 companyName: '법률방송뉴스',
                 updatedDate: '07월 20일 17:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 17,
                     src: 'https://picsum.photos/500/300?img=17',
@@ -365,7 +348,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_18.svg',
                 companyName: '시사저널',
                 updatedDate: '07월 21일 18:15 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 18,
                     src: 'https://picsum.photos/500/300?img=18',
@@ -386,7 +368,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_19.svg',
                 companyName: 'RBS한국농어촌방송',
                 updatedDate: '07월 22일 19:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 19,
                     src: 'https://picsum.photos/500/300?img=19',
@@ -407,7 +388,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_20.svg',
                 companyName: '조이뉴스24',
                 updatedDate: '07월 23일 20:45 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 20,
                     src: 'https://picsum.photos/500/300?img=20',
@@ -428,7 +408,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_21.svg',
                 companyName: '에너지경제',
                 updatedDate: '07월 24일 21:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 21,
                     src: 'https://picsum.photos/500/300?img=21',
@@ -449,7 +428,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_22.svg',
                 companyName: 'BUSINESS POST',
                 updatedDate: '07월 25일 22:15 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 22,
                     src: 'https://picsum.photos/500/300?img=22',
@@ -470,7 +448,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_23.svg',
                 companyName: 'CEO스코어데일리',
                 updatedDate: '07월 26일 23:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 23,
                     src: 'https://picsum.photos/500/300?img=23',
@@ -491,7 +468,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_24.svg',
                 companyName: 'KNN',
                 updatedDate: '07월 27일 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 24,
                     src: 'https://picsum.photos/500/300?img=24',
@@ -512,7 +488,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_25.svg',
                 companyName: 'The Korea Herald',
                 updatedDate: '07월 28일 10:45 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 25,
                     src: 'https://picsum.photos/500/300?img=25',
@@ -533,7 +508,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_26.svg',
                 companyName: 'MBC',
                 updatedDate: '07월 29일 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 26,
                     src: 'https://picsum.photos/500/300?img=26',
@@ -554,7 +528,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_27.svg',
                 companyName: '뉴스타파',
                 updatedDate: '07월 30일 12:15 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 27,
                     src: 'https://picsum.photos/500/300?img=27',
@@ -575,7 +548,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_28.svg',
                 companyName: 'NewDaily',
                 updatedDate: '07월 31일 13:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 28,
                     src: 'https://picsum.photos/500/300?img=28',
@@ -596,7 +568,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_29.svg',
                 companyName: '국민일보',
                 updatedDate: '08월 01일 14:45 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 29,
                     src: 'https://picsum.photos/500/300?img=29',
@@ -617,7 +588,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_30.svg',
                 companyName: '일간스포츠',
                 updatedDate: '08월 02일 15:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 30,
                     src: 'https://picsum.photos/500/300?img=30',
@@ -643,7 +613,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_31.svg',
                 companyName: '경향신문',
                 updatedDate: '08월 03일 16:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 31,
                     src: 'https://picsum.photos/500/300?img=31',
@@ -664,7 +633,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_32.svg',
                 companyName: 'ZDNet Korea',
                 updatedDate: '08월 04일 17:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 32,
                     src: 'https://picsum.photos/500/300?img=32',
@@ -685,7 +653,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_33.svg',
                 companyName: '마이데일리',
                 updatedDate: '08월 05일 18:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 33,
                     src: 'https://picsum.photos/500/300?img=33',
@@ -706,7 +673,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_34.svg',
                 companyName: '머니투데이',
                 updatedDate: '08월 06일 19:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 34,
                     src: 'https://picsum.photos/500/300?img=34',
@@ -727,7 +693,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_35.svg',
                 companyName: 'SBS',
                 updatedDate: '08월 07일 20:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 35,
                     src: 'https://picsum.photos/500/300?img=35',
@@ -748,7 +713,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_36.svg',
                 companyName: 'OhMyNews',
                 updatedDate: '08월 08일 21:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 36,
                     src: 'https://picsum.photos/500/300?img=36',
@@ -769,7 +733,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_37.svg',
                 companyName: '매일경제',
                 updatedDate: '08월 09일 22:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 37,
                     src: 'https://picsum.photos/500/300?img=37',
@@ -790,7 +753,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_38.svg',
                 companyName: 'MBN',
                 updatedDate: '08월 10일 23:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 38,
                     src: 'https://picsum.photos/500/300?img=38',
@@ -811,7 +773,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_39.svg',
                 companyName: 'YTN',
                 updatedDate: '08월 11일 00:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 39,
                     src: 'https://picsum.photos/500/300?img=39',
@@ -832,7 +793,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_40.svg',
                 companyName: '시사위크',
                 updatedDate: '08월 12일 01:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 40,
                     src: 'https://picsum.photos/500/300?img=40',
@@ -853,7 +813,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_41.svg',
                 companyName: 'Digital Today',
                 updatedDate: '08월 13일 02:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 41,
                     src: 'https://picsum.photos/500/300?img=41',
@@ -874,7 +833,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_42.svg',
                 companyName: 'data news',
                 updatedDate: '08월 14일 03:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 42,
                     src: 'https://picsum.photos/500/300?img=42',
@@ -895,7 +853,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_43.svg',
                 companyName: '한국대학신문',
                 updatedDate: '08월 15일 04:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 43,
                     src: 'https://picsum.photos/500/300?img=43',
@@ -916,7 +873,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_44.svg',
                 companyName: '서울파이낸스',
                 updatedDate: '08월 16일 05:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 44,
                     src: 'https://picsum.photos/500/300?img=44',
@@ -958,7 +914,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_46.svg',
                 companyName: '맥스무비',
                 updatedDate: '08월 18일 07:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 46,
                     src: 'https://picsum.photos/500/300?img=46',
@@ -979,7 +934,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_47.svg',
                 companyName: 'OBS',
                 updatedDate: '08월 19일 08:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 47,
                     src: 'https://picsum.photos/500/300?img=47',
@@ -1000,7 +954,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_48.svg',
                 companyName: '소년한국일보',
                 updatedDate: '08월 20일 09:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 48,
                     src: 'https://picsum.photos/500/300?img=48',
@@ -1021,7 +974,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_49.svg',
                 companyName: 'OSEN',
                 updatedDate: '08월 21일 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
 
                     id: 49,
@@ -1043,7 +995,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_50.svg',
                 companyName: '디지털타임스',
                 updatedDate: '08월 22일 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 50,
                     src: 'https://picsum.photos/500/300?img=50',
@@ -1069,7 +1020,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_51.svg',
                 companyName: '미디어오늘',
                 updatedDate: 'August 1, 10:00 AM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 51,
                     src: 'https://picsum.photos/500/300?img=51',
@@ -1090,7 +1040,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_52.svg',
                 companyName: '연합뉴스TV',
                 updatedDate: 'August 2, 11:00 AM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 52,
                     src: 'https://picsum.photos/500/300?img=52',
@@ -1111,7 +1060,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_53.svg',
                 companyName: '한겨레',
                 updatedDate: 'August 3, 12:00 PM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 53,
                     src: 'https://picsum.photos/500/300?img=53',
@@ -1132,7 +1080,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_54.svg',
                 companyName: 'Chosun Biz',
                 updatedDate: 'August 4, 1:00 PM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 54,
                     src: 'https://picsum.photos/500/300?img=54',
@@ -1153,7 +1100,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_55.svg',
                 companyName: 'JTBC',
                 updatedDate: 'August 5, 2:00 PM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 55,
                     src: 'https://picsum.photos/500/300?img=55',
@@ -1174,7 +1120,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_56.svg',
                 companyName: 'metro',
                 updatedDate: 'August 6, 3:00 PM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 56,
                     src: 'https://picsum.photos/500/300?img=56',
@@ -1195,7 +1140,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_57.svg',
                 companyName: '비즈한국',
                 updatedDate: 'August 7, 4:00 PM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 57,
                     src: 'https://picsum.photos/500/300?img=57',
@@ -1216,7 +1160,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_58.svg',
                 companyName: '주간경향',
                 updatedDate: 'August 8, 5:00 PM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 58,
                     src: 'https://picsum.photos/500/300?img=58',
@@ -1237,7 +1180,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_59.svg',
                 companyName: 'Forbes',
                 updatedDate: 'August 9, 6:00 PM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 59,
                     src: 'https://picsum.photos/500/300?img=59',
@@ -1258,7 +1200,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_60.svg',
                 companyName: 'TvReport',
                 updatedDate: 'August 10, 7:00 PM (edited)',
-                isSubscribe: false,
                 mainNews: {
                     id: 60,
                     src: 'https://picsum.photos/500/300?img=60',
@@ -1284,7 +1225,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_61.svg',
                 companyName: '티브이데일리',
                 updatedDate: '7월 14일 오전 09:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 61,
                     src: 'https://picsum.photos/500/300?img=61',
@@ -1304,7 +1244,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_62.svg',
                 companyName: 'BBS News',
                 updatedDate: '7월 15일 오전 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 62,
                     src: 'https://picsum.photos/500/300?img=62',
@@ -1324,7 +1263,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_63.svg',
                 companyName: 'Monde diplomatique',
                 updatedDate: '7월 16일 오전 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 63,
                     src: 'https://picsum.photos/500/300?img=63',
@@ -1344,7 +1282,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_64.svg',
                 companyName: 'MK스포츠',
                 updatedDate: '7월 17일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 64,
                     src: 'https://picsum.photos/500/300?img=64',
@@ -1364,7 +1301,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_65.svg',
                 companyName: '텐아시아',
                 updatedDate: '7월 18일 오전 10:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 65,
                     src: 'https://picsum.photos/500/300?img=65',
@@ -1384,7 +1320,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_66.svg',
                 companyName: '대한민국 정책브리핑',
                 updatedDate: '7월 19일 오전 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 66,
                     src: 'https://picsum.photos/500/300?img=66',
@@ -1404,7 +1339,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_67.svg',
                 companyName: '씨네21',
                 updatedDate: '7월 20일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 67,
                     src: 'https://picsum.photos/500/300?img=67',
@@ -1424,7 +1358,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_68.svg',
                 companyName: '뉴스포스트',
                 updatedDate: '7월 21일 오전 10:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 68,
                     src: 'https://picsum.photos/500/300?img=68',
@@ -1444,7 +1377,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_69.svg',
                 companyName: '정신의학신문',
                 updatedDate: '7월 22일 오전 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 69,
                     src: 'https://picsum.photos/500/300?img=69',
@@ -1464,7 +1396,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_70.svg',
                 companyName: '철강금속신문',
                 updatedDate: '7월 23일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 70,
                     src: 'https://picsum.photos/500/300?img=70',
@@ -1489,7 +1420,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_71.svg',
                 companyName: 'Chosun71',
                 updatedDate: '7월 14일 오전 09:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 71,
                     src: 'https://picsum.photos/500/300?img=71',
@@ -1509,7 +1439,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_72.svg',
                 companyName: '여성경제신문',
                 updatedDate: '7월 15일 오전 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 72,
                     src: 'https://picsum.photos/500/300?img=72',
@@ -1549,7 +1478,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_74.svg',
                 companyName: 'sportalkorea',
                 updatedDate: '7월 17일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 74,
                     src: 'https://picsum.photos/500/300?img=74',
@@ -1569,7 +1497,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_75.svg',
                 companyName: '프레시안',
                 updatedDate: '7월 18일 오전 10:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 75,
                     src: 'https://picsum.photos/500/300?img=75',
@@ -1589,7 +1516,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_76.svg',
                 companyName: '노컷뉴스',
                 updatedDate: '7월 19일 오전 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 76,
                     src: 'https://picsum.photos/500/300?img=76',
@@ -1609,7 +1535,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_77.svg',
                 companyName: 'The JoongAng',
                 updatedDate: '7월 20일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 77,
                     src: 'https://picsum.photos/500/300?img=77',
@@ -1629,7 +1554,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_78.svg',
                 companyName: '서울신문',
                 updatedDate: '7월 21일 오전 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 78,
                     src: 'https://picsum.photos/500/300?img=78',
@@ -1649,7 +1573,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_79.svg',
                 companyName: '스포츠조선',
                 updatedDate: '7월 22일 오전 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 79,
                     src: 'https://picsum.photos/500/300?img=79',
@@ -1669,7 +1592,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_80.svg',
                 companyName: '전자신문',
                 updatedDate: '7월 23일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 80,
                     src: 'https://picsum.photos/500/300?img=80',
@@ -1694,7 +1616,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_81.svg',
                 companyName: '천지일보',
                 updatedDate: '07월 14일 09:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 81,
                     src: 'https://picsum.photos/500/300?img=81',
@@ -1715,7 +1636,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_82.svg',
                 companyName: 'Bloter',
                 updatedDate: '07월 15일 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 82,
                     src: 'https://picsum.photos/500/300?img=82',
@@ -1736,7 +1656,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_83.svg',
                 companyName: 'KBS',
                 updatedDate: '07월 16일 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 83,
                     src: 'https://picsum.photos/500/300?img=83',
@@ -1757,7 +1676,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_84.svg',
                 companyName: '동아일보',
                 updatedDate: '07월 17일 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 84,
                     src: 'https://picsum.photos/500/300?img=84',
@@ -1778,7 +1696,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_85.svg',
                 companyName: 'NEWSIS',
                 updatedDate: '07월 18일 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 85,
                     src: 'https://picsum.photos/500/300?img=85',
@@ -1799,7 +1716,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_86.svg',
                 companyName: '한국경제',
                 updatedDate: '07월 19일 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 86,
                     src: 'https://picsum.photos/500/300?img=86',
@@ -1825,7 +1741,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_87.svg',
                 companyName: '시사IN',
                 updatedDate: '7월 20일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 87,
                     src: 'https://picsum.photos/500/300?img=87',
@@ -1845,7 +1760,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_88.svg',
                 companyName: '산',
                 updatedDate: '7월 21일 오전 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 88,
                     src: 'https://picsum.photos/500/300?img=88',
@@ -1865,7 +1779,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_89.svg',
                 companyName: '독서신문',
                 updatedDate: '7월 22일 오전 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 89,
                     src: 'https://picsum.photos/500/300?img=89',
@@ -1885,7 +1798,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_90.svg',
                 companyName: 'EconoTimes',
                 updatedDate: '7월 23일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 90,
                     src: 'https://picsum.photos/500/300?img=90',
@@ -1905,7 +1817,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_91.svg',
                 companyName: 'TJB',
                 updatedDate: '7월 24일 오전 09:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 91,
                     src: 'https://picsum.photos/500/300?img=91',
@@ -1925,7 +1836,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_92.svg',
                 companyName: '시사오늘 시사IN',
                 updatedDate: '7월 25일 오전 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 92,
                     src: 'https://picsum.photos/500/300?img=92',
@@ -1945,7 +1855,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_93.svg',
                 companyName: '데일리한국',
                 updatedDate: '7월 26일 오전 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 93,
                     src: 'https://picsum.photos/500/300?img=93',
@@ -1965,7 +1874,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_94.svg',
                 companyName: '뉴스토마토',
                 updatedDate: '7월 27일 오전 09:30 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 94,
                     src: 'https://picsum.photos/500/300?img=94',
@@ -1985,7 +1893,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_95.svg',
                 companyName: '에이블뉴스',
                 updatedDate: '7월 28일 오전 10:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 95,
                     src: 'https://picsum.photos/500/300?img=95',
@@ -2005,7 +1912,6 @@ export const allNewsData = [
                 companyIcon: '../../images/assets/company/company_ico_96.svg',
                 companyName: 'YTN사이언스',
                 updatedDate: '7월 29일 오전 11:00 직접 편집',
-                isSubscribe: false,
                 mainNews: {
                     id: 96,
                     src: 'https://picsum.photos/500/300?img=96',
@@ -2022,82 +1928,3 @@ export const allNewsData = [
         ],
     },
 ]
-// 주어진 카테고리에 해당하는 뉴스 데이터를 반환하는 함수
-export const getCategoryNewsData = (category) => {
-    // allNewsData에서 주어진 카테고리에 해당하는 뉴스만 필터링
-    let newsDatas = allNewsData.filter((news) => news.category === category)
-    // 필터링된 뉴스 데이터를 반환
-    return newsDatas
-}
-
-// 주어진 카테고리에 속한 회사의 수를 반환하는 함수
-export const getCompanyCount = (category) => {
-    // allNewsData에서 주어진 카테고리에 해당하는 뉴스만 필터링
-    let newsDatas = allNewsData.filter((news) => news.category === category)
-    // 첫 번째 뉴스 데이터의 회사 배열의 길이를 반환
-    return newsDatas[0].company.length
-}
-
-// 주어진 카테고리와 ID에 해당하는 회사의 뉴스 데이터를 반환하는 함수
-export const getNewsData = (category, id) => {
-    // allNewsData에서 주어진 카테고리에 해당하는 뉴스만 필터링
-    let newsDatas = allNewsData.filter((news) => news.category === category)
-    // 만약 필터링된 뉴스 데이터가 없으면 null을 반환
-    if (newsDatas.length === 0) return null
-
-    // 필터링된 뉴스 데이터에서 주어진 ID에 해당하는 회사 데이터를 찾음
-    let companyData = newsDatas[0].company.find((company) => company.id === id)
-    // 회사 데이터가 존재하면 반환, 그렇지 않으면 null 반환
-    return companyData ? companyData : null
-}
-
-// 구독한 회사 ID 리스트에 해당하는 회사들의 뉴스 데이터를 반환하는 함수
-export const getSubscribedCompanyNewsData = (subscribedCompanyIdList) => {
-    // 구독한 회사들의 뉴스 데이터를 저장할 배열
-    let subscribedCompanyNews = []
-
-    // allNewsData의 각 카테고리를 순회
-    allNewsData.forEach((category) => {
-        // 각 카테고리의 회사들을 순회
-        category.company.forEach((company) => {
-            // 회사 ID가 구독한 회사 ID 리스트에 포함되어 있는지 확인
-            if (subscribedCompanyIdList.includes(company.companyId)) {
-                // 포함되어 있다면 해당 회사의 뉴스 데이터를 구독한 뉴스 배열에 추가
-                subscribedCompanyNews.push({
-                    category: company.companyName,
-                    company: {
-                        id: 1,
-                        companyId: company.companyId,
-                        companyIcon: company.companyIcon,
-                        companyName: company.companyName,
-                        updatedDate: company.updatedDate,
-                        mainNews: {
-                            id: company.mainNews.id,
-                            src: company.mainNews.src,
-                            title: company.mainNews.title,
-                        },
-                        news: company.news,
-                    },
-                })
-            }
-        })
-    })
-
-    // 구독한 회사들의 뉴스 데이터를 반환
-    return subscribedCompanyNews
-}
-
-// 구독한 회사 ID 리스트와 카테고리에 해당하는 뉴스 데이터를 반환하는 함수
-export const getNewsDataFromSubscribedCompany = (subscribedCompanyIdList, category) => {
-    // 구독한 회사들의 뉴스 데이터를 모두 가져옴
-    let allDatas = getSubscribedCompanyNewsData(subscribedCompanyIdList)
-    // 구독한 뉴스 데이터 중 주어진 카테고리에 해당하는 뉴스만 필터링
-    let newsDatas = allDatas.filter((news) => news.category === category)
-
-    // 만약 필터링된 뉴스 데이터가 없으면 null을 반환
-    if (newsDatas.length === 0) return null
-    // 필터링된 뉴스 데이터에서 첫 번째 회사 데이터를 반환
-    let companyData = newsDatas[0].company
-    // 회사 데이터가 존재하면 반환, 그렇지 않으면 null 반환
-    return companyData ? companyData : null
-}
