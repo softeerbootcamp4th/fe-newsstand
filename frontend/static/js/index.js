@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         mainContent.init()
     )
 
-    document.body.addEventListener('click', event => reducer.click(event))
+    document.body.addEventListener('click', event => reducer.click(event), true)
     document.getElementById("newsstand").insertAdjacentHTML("afterbegin", template);
     ticker.domDidLoad(NEWS)
     mainContent.domDidLoad(NEWS)
