@@ -1,0 +1,75 @@
+.news-list-header{
+    width: 930px;
+    height: 40px;
+    gap: 0px;
+    overflow-x: auto;
+    border-bottom: 1px solid #D2DAE0;
+    overflow-x: auto;
+    white-space: nowrap; /* 자식 줄 바꿈 x     overflow: hidden;
+    */
+    background: var(--surface-surface-alt, #F5F7F9);
+    display: flex;
+}
+
+.article {
+    width: 375px;
+    height: 17px;
+    gap: 0px;
+    margin-left: 16px;
+    opacity: 0px;
+    font-family: 'Pretendard Variable', sans-serif;
+    font-size: 14px;
+    color: #5f6e76;
+    animation: animateHeadline 2s infinite;
+}
+
+.article:hover {
+    text-decoration: underline; /* 마우스 커서가 올라갔을 때 밑줄 표시 */
+}
+
+.text-button {
+    padding: 12px 12px; 
+    color: #4B5966; 
+    cursor: pointer;
+    font-size: 15px; 
+    /*border-right: 0.5px solid #4B5966; */
+    display: inline-block;
+}
+
+.text-button:hover{
+    text-decoration: underline;
+}
+
+/*선택 된 후*/
+.text-button.selected::after {
+    content: url('../../icons/chevron-right.svg'); 
+    margin-left: auto; 
+    width: 16px; 
+    height: auto; 
+}
+
+.progress-button{
+    cursor: pointer;
+    width: 166px;
+    height: 17px;
+    display: flex;
+    background: linear-gradient(to right,var(--blue-500) 50%,#7890E7 50%);
+    font-size: 15px;
+    padding: 12px 12px;
+    color: white;
+    position: relative;
+    background-size: 200% 100%;
+}
+.progress-button.animate {
+    background-position: left bottom;
+    animation: fillAnimation 2s ease-in;
+}
+
+.progress-button:hover{
+    text-decoration: underline;
+}
+
+@keyframes fillAnimation {
+    0% { background-position: right bottom; }
+    100% { background-position: left bottom; }
+}

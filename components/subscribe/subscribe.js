@@ -1,6 +1,8 @@
-import { showcancelmodal, showsubmodal } from "./subalarm.js";
+import { showCancelmodal, showsubmodal } from "./subalarm.js";
 let existingPressData = localStorage.getItem('mysubscribe');
-let pressDataArray = existingPressData ? JSON.parse(existingPressData) : [];
+export let pressDataArray = existingPressData ? JSON.parse(existingPressData) : [];
+
+import { mytabs } from "../newstab/newstab.js";
 
 //구독버튼 누르면 -> 구독하기
 export const subscribePress = (btntxt) => {
@@ -17,7 +19,7 @@ export const subscribePress = (btntxt) => {
         const button = document.querySelector(`.news-press-subscribe`);
         button.innerHTML = '<img src="../../icons/cancel.svg" alt="Subscribed">'; // 버튼 이미지 변경
         showsubmodal();
-        console.log("dkseho");
+        mytabs();
     }
     else{
         cancelsubscribe(btntxt);
@@ -40,11 +42,6 @@ export const showsubscribe = (btntext) => {
 //구독취소
 export const cancelsubscribe = (btntext1) => {
   if (pressDataArray.includes(btntext1)) {
-    showcancelmodal(btntext1);
-    const btn = document.querySelector(`.news-press-subscribe`);
-    btn.innerHTML = '<img src="../../icons/Subscribe.svg" alt="Subscribe">';
-    pressDataArray = pressDataArray.filter(item => item !== btntext1);
-    const updatedsubs = JSON.stringify(pressDataArray);
-    localStorage.setItem('mysubscribe' , updatedsubs);
+    showCancelmodal(btntext1);
   }
 }

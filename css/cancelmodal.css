@@ -1,0 +1,68 @@
+.cancel-modal-container {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease;
+    z-index: 5;
+}
+.cancel-modal-container.show {
+    opacity: 1;
+}
+
+.cancel-modal-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    padding: 24px;
+    color: var(--grayscale-400);
+    border: 1px solid var(--grayscale-100);
+    background-color: white;
+    font-size: 16px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 18px 0px rgba(20, 33, 43, 0.08);
+}
+
+/*언론사명 - 진하게*/
+.cancel-modal-content span {
+    color: var(--grayscale-black);
+    font-weight: 500;
+}
+
+.cancel-modal-content p {
+    margin: 0;
+}
+
+.cancel-modal-btn {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    background-color: var(--grayscale-50);
+    border: 1px solid var(--grayscale-100);
+    cursor: pointer;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.cancel-yes, .cancel-no {
+    display: flex;
+    justify-content: center;
+    width: 50%; /*반반 */
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.cancel-yes {
+    border-right: 1px solid var(--grayscale-100);
+}
+
+.cancel-yes:hover, .cancel-no:hover {
+    text-decoration: underline;
+}

@@ -1,4 +1,6 @@
 import { showsubscribe } from "../subscribe/subscribe.js";
+
+//내가 구독한 뉴스기사에 따른  
 export const showmysub = (subitem) => {
     document.querySelector('.news-press-img img').src = subitem.pressImg;
     document.querySelector('.news-press-edit').textContent = subitem.edittime;

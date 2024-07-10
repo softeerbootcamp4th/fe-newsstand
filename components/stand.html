@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴스 스탠드-css</title>
     <link rel="stylesheet" href="../css/test.css" type="text/css" />
+    <link rel="stylesheet" href="../css/cancelmodal.css" type="text/css" />
     <link rel="stylesheet" href="../css/globalfonts.css" type="text/css" />
 
 </head>
@@ -64,14 +65,13 @@
     <div id="submodal"></div>
     <div class="news-list-container">
         <div class="news-list-header">
-            <article class="text-button" id="economy" data-index="0">종합/경제</article>
-            <article class="text-button" id="broadcast" data-index="1">방송/통신</article>
-            <article class="text-button" id="internet" data-index="2">IT</article>
-            <article class="text-button" id="englishnews" data-index="3">영자지</article>
-            <article class="text-button" id="sportsentertain" data-index="4">스포츠/연예</article>
-            <article class="text-button" id="magazine" data-index="5">매거진/전문지</article>
-            <article class="text-button" id="region" data-index="6">지역</article>
-            
+            <article class="text-button" id="economy" data-index="0">종합/경제 <span></span> </article>
+            <article class="text-button" id="broadcast" data-index="1">방송/통신 <span></span></article>
+            <article class="text-button" id="internet" data-index="2">IT <span></span></article>
+            <article class="text-button" id="englishnews" data-index="3">영자지 <span></span></article>
+            <article class="text-button" id="sportsentertain" data-index="4">스포츠/연예 <span></span></article>
+            <article class="text-button" id="magazine" data-index="5">매거진/전문지 <span></span></article>
+            <article class="text-button" id="region" data-index="6">지역 <span></span></article>
         </div>
         <div class="news-press-container">
             <div class="news-press-img">
@@ -103,11 +103,19 @@
             </div>
         </div>
     </div>
-    <div id="cancelmodal"></div>
+    <div class="cancel-modal-container">
+        <div class="cancel-modal-content">
+            <p><span id="cancel-modal-text"></span>을(를) 구독해지하시겠습니까?</p>
+        </div>
+        <div class="cancel-modal-btn">
+            <div class="cancel-yes">예, 해지합니다.</div>
+            <div class="cancel-no">아니오</div>
+        </div>
+    </div>
     <script type="module" src="./mainscript.js"></script>
     <script type="module" src="./animation/rollingnews.js"></script>
     <script type="module" src ="displaynews/displayNews.js"></script>
-    <script type="module" src ="testing/progressbutton.js"></script>
+    <script type="module" src ="progressbar/progressbutton.js"></script>
 
 </body>
 </html>
