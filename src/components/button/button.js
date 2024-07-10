@@ -1,4 +1,5 @@
-import { createIconTemplateStrings } from "../icon/icon.js";
+import { convertStringToFragment } from "../../utils/convertStringToFragment.js";
+import { createIcon } from "../icon/icon.js";
 
 /**
  * @typedef {Object} ButtonProps
@@ -22,16 +23,14 @@ export function createButton({ iconId, text = "", color = "white" }) {
   const button = document.createElement("button");
   button.className = `button button-${color} border-box`;
 
-  const icon = document.createElement("div");
-  icon.innerHTML = createIconTemplateStrings({ className: "button-icon", iconId });
-
+  const icon = createIcon({ className: "button-icon", iconId });
   button.appendChild(icon);
 
   if (text) {
-    button.insertAdjacentHTML(
-      "beforeend",
+    const label = convertStringToFragment(
       `<span class='available-medium12 button-text'>${text}</span>`
     );
+    button.append(label);
   }
 
   return button;

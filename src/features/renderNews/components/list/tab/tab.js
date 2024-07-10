@@ -1,37 +1,46 @@
-import { createIconTemplateStrings } from "../../../../../components/icon/icon.js";
-import { companyCategories } from "../../../../../data/companyCategories.js";
+import { createIcon } from "../../../../../components/icon/icon.js";
+import { getCategoryList } from "../../../../../apis/news.js";
 import { MainNewsState } from "../../../../../types/news.js";
-import { updateCompany, updateCompanyType } from "../../../utils/updateStates.js";
+import {
+  setTotalTabNumber,
+  updateCompany,
+  updateCompanyType,
+} from "../../../utils/updateStates.js";
 import { createTabItem } from "./tabItem.js";
 
 /**
  * @param {MainNewsState} state
  */
-export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDataType, data }) {
-  const categories = document.createElement("div");
-  categories.className = "list-tab";
+export async function createTab({ currentTabId, currentCompanyIndex, currentDataType, data }) {
+  const container = document.createElement("div");
+  container.className = "list-tab border-box";
 
   if (currentDataType === "all-news-tab") {
-    companyCategories.forEach((category, categoryIndex) => {
+    const categoryList = await getCategoryList();
+    setTotalTabNumber(categoryList.length);
+
+    categoryList.forEach(({ id, name }) => {
       const categoryElement = createTabItem({
-        innerText: category,
-        isSelected: categoryIndex === currentCategoryIndex,
-        children: `${currentCompanyIndex + 1}/${data[currentCategoryIndex].companies.length}`,
+        innerText: name,
+        isSelected: +id === +currentTabId,
+        children: `${currentCompanyIndex + 1}/${data.length}`,
+        onClick: async () => await updateCompanyType(id),
       });
-      categoryElement.addEventListener("click", () => updateCompanyType(categoryIndex));
-      categories.appendChild(categoryElement);
+
+      container.appendChild(categoryElement);
     });
   } else {
     data.forEach(({ name: companyName }, companyIndex) => {
       const companyElement = createTabItem({
         innerText: companyName,
         isSelected: companyIndex === currentCompanyIndex,
-        children: createIconTemplateStrings({ iconId: "arrow" }),
+        children: createIcon({ iconId: "arrow" }),
+        onClick: () => updateCompany(companyIndex),
       });
-      companyElement.addEventListener("click", () => updateCompany(companyIndex));
-      categories.appendChild(companyElement);
+
+      container.appendChild(companyElement);
     });
   }
 
-  return categories;
+  return container;
 }
