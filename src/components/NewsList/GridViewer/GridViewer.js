@@ -2,6 +2,7 @@ import { getAllCompany } from "@/apis/news";
 import "./GridViewer.css";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
+import { COMPANIES_PER_PAGE } from "@/data/constants";
 
 function GridViewer({ $target, position = "beforeend" }) {
   this.$element = document.createElement("article");
@@ -10,32 +11,67 @@ function GridViewer({ $target, position = "beforeend" }) {
 
   this.state = {
     companies: [],
-    page: 0,
+    start: 0,
+    isLast: false,
   };
 
   this.render();
-  this.load();
+  this.load(this.state.start);
+
+  this.$element.addEventListener("click", this.handleClick.bind(this));
 }
 
-GridViewer.prototype.setState = function ({ companies, page }) {
-  this.state;
+GridViewer.prototype.setState = function ({ companies, start, isLast }) {
   this.state = {
     companies: companies ?? this.state.companies,
-    page: page ?? this.state.page,
+    start: start ?? this.state.start,
+    isLast: isLast ?? this.state.isLast,
   };
 
   this.render();
 };
 
-GridViewer.prototype.load = async function () {
-  const companies = await getAllCompany(this.state.page);
+GridViewer.prototype.handleClick = function (event) {
+  const button = event.target.closest("button");
 
-  this.setState({ companies });
+  if (button) {
+    const { id } = button;
+
+    if (id === "nextButton") {
+      this.nextPage();
+
+      return;
+    }
+
+    if (id === "prevButton") {
+      this.prevPage();
+
+      return;
+    }
+  }
+};
+
+GridViewer.prototype.nextPage = function () {
+  this.load(this.state.start + COMPANIES_PER_PAGE);
+};
+
+GridViewer.prototype.prevPage = function () {
+  this.load(this.state.start - COMPANIES_PER_PAGE);
+};
+
+GridViewer.prototype.load = async function (start) {
+  const companies = await getAllCompany(start);
+
+  const nextPage = await getAllCompany(start + COMPANIES_PER_PAGE);
+
+  const isLast = nextPage.length < 1;
+
+  this.setState({ companies, start, isLast });
 };
 
 GridViewer.prototype.render = function () {
   const idDarkMode = document.body.classList.contains("dark");
-  const { companies, page } = this.state;
+  const { companies, start, isLast } = this.state;
 
   this.$element.innerHTML = /* html */ `
     ${companies
@@ -47,9 +83,11 @@ GridViewer.prototype.render = function () {
       .join("")}
 
     <button id="prevButton" class="newsButton prev${
-      page === 0 ? " hide" : ""
+      start === 0 ? " hide" : ""
     }"><img src="${leftButton}"/></button>
-    <button id="nextButton" class="newsButton next"><img src="${rightButton}"/></button>
+    <button id="nextButton" class="newsButton next${
+      isLast ? " hide" : ""
+    }"><img src="${rightButton}"/></button>
   `;
 };
 
