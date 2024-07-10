@@ -2,7 +2,6 @@ import { allNewsData } from './news.js';
 import { pressInfoButton } from './button.js';
 import { snackBar } from './snackBar.js';
 import { newsListLi } from './newsListLi.js';
-import { cancelAlert } from './cancelAlert.js';
 
 let currentIntervalId = null; // 현재 실행 중인 intervalId
 let currentTimeoutId = null; // 현재 실행 중인 timeoutId
@@ -17,6 +16,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
+    const cancelAlert = document.getElementById('cancelAlert');
+    const positiveButton = document.getElementById('positiveButton');
+    const negativeButton = document.getElementById('negativeButton');
+
+    positiveButton.addEventListener('mouseenter', () => {
+        positiveButton.classList.replace('available-medium16', 'hover-medium16');
+    });
+
+    negativeButton.addEventListener('mouseenter', () => {
+        negativeButton.classList.replace('available-medium16', 'hover-medium16');
+    })
+
+    positiveButton.addEventListener('mouseleave', () => {
+        positiveButton.classList.replace('hover-medium16', 'available-medium16');
+    });
+
+    negativeButton.addEventListener('mouseleave', () => {
+        negativeButton.classList.replace('hover-medium16', 'available-medium16');
+    });
+
+    positiveButton.addEventListener('click', () => {
+
+    });
+
+    negativeButton.addEventListener('click', () => {
+        cancelAlert.classList.remove('show');
+    });
+
     let newsIndex = 0;
 
     // 초기 실행을 위해 첫 번째 카테고리를 선택
@@ -27,18 +54,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // 카테고리 목록을 클릭하면 실행되는 함수
-const handleCategoryClick = async (index, liList, isFull) => {
+export const handleCategoryClick = async (index, liList, isFull) => {
     const currentSelectedIndex = getCurrentSelectedIndex(liList);
 
     // 현재 선택된 카테고리와 다른 카테고리를 클릭했을 경우
     if (index !== currentSelectedIndex) {
         deselectCategory(currentSelectedIndex, liList, isFull);
 
-        // 선택된 카테고리부터 순서대로 processCategory 실행
-        while (true) {
-            await processCategory(index, liList, isFull);
-            index = (index + 1) % allNewsData.length;
+        if (isFull) {
+            // 선택된 카테고리부터 순서대로 processCategory 실행
+            while (true) {
+                await processCategory(index, liList, isFull);
+                index = (index + 1) % allNewsData.length;
+            }
         }
+        else {
+            processCategory(index, liList, false);
+        }
+
     }
 };
 
@@ -58,51 +91,81 @@ const deselectCategory = (index, liList, isFull) => {
         currentSelectedLi.textContent = allNewsData[index].category;
     }
     else {
-        const subscribeNewData = allNewsData.flatMap(category =>
-            category.company.filter(company => company.isSubscribe))
-        currentSelectedLi.textContent = subscribeNewData[index].companyName;
+        const subscribeNewData = getSubscribedData();
+        currentSelectedLi.textContent = subscribeNewData[index];
     }
-
-    // 현재 실행 중인 intervalId와 timeoutId를 모두 초기화
-    clearInterval(currentIntervalId);
-    clearTimeout(currentTimeoutId);
 };
 
-const subscribeNews = (currentCompanyName) => {
+export const subscribeNews = (currentCompanyName) => {
+    const allPress = document.getElementById("allPress");
+    const subscribedPress = document.getElementById("subscribedPress");
     const NewsListUl = document.getElementById('NewsList').querySelector('ul');
     NewsListUl.innerHTML = '';
 
     const liList = newsListLi(false);
 
-    liList.forEach((li, companyIndex) => {
-        li.addEventListener('click', async () => {
-            await handleCategoryClick(companyIndex, liList, false);
-        });
-    });
+    subscribedPress.classList.replace('available-medium16', 'selected-bold16');
+    allPress.classList.replace('selected-bold16', 'available-medium16');
 
-    const subscribedCompanies = allNewsData.flatMap(category =>
-        category.company.filter(company => company.isSubscribe));
 
-    // currentCompanyName과 일치하는 회사의 index를 찾음
-    let newsIndex = subscribedCompanies.findIndex(company => company.companyName === currentCompanyName);
+    if (liList === undefined) {
+        const news = document.querySelector('.pressInfo');
+        const newsLeft = document.querySelector('.newsLeft');
+        const newsRight = document.querySelector('.newsRight');
 
-    // 만약 currentCompanyName과 일치하는 회사가 없다면 newsIndex를 0으로 설정
-    if (newsIndex === -1) {
-        newsIndex = 0;
+        news.innerHTML = '';
+        newsLeft.innerHTML = '';
+        newsRight.innerHTML = '';
     }
+    else {
+        liList.forEach((li, companyIndex) => {
+            li.addEventListener('click', async () => {
+                await handleCategoryClick(companyIndex, liList, false);
+            });
+        });
 
-    // 현재 실행 중인 intervalId와 timeoutId를 모두 초기화
-    clearInterval(currentIntervalId);
-    clearTimeout(currentTimeoutId);
+        const subscribed = getSubscribedData();
+        // currentCompanyName과 일치하는 회사의 index를 찾음
+        let newsIndex = subscribed.findIndex(company => company === currentCompanyName);
 
-    processCategory(newsIndex, liList, false, subscribedCompanies);
+
+        // 만약 currentCompanyName과 일치하는 회사가 없다면 newsIndex를 0으로 설정
+        if (newsIndex === -1) {
+            newsIndex = 0;
+        }
+
+        processCategory(newsIndex, liList, false);
+    }
 
 };
 
 
+export const getSubscribedData = () => {
+    const subscribedData = localStorage.getItem('subscribed');
+    if (subscribedData) {
+        return JSON.parse(subscribedData); // JSON 문자열을 배열로 변환
+    } else {
+        return []; // 로컬 스토리지에 데이터가 없으면 빈 배열 반환
+    }
+};
+
+
+const addSubscribedData = (newCompanyName) => {
+    // 현재 구독 정보 가져오기
+    let subscribedData = getSubscribedData();
+
+    // 새로운 구독 정보 추가
+    subscribedData.push(newCompanyName);
+
+    // 로컬스토리지에 배열 형식으로 저장
+    localStorage.setItem('subscribed', JSON.stringify(subscribedData));
+}
+
 
 // 카테고리의 정보를 표시하고 일정 시간 간격으로 업데이트하는 함수
-const processCategory = async (index, liList, isFull, subscribedCompanies) => {
+export const processCategory = async (index, liList, isFull) => {
+    clearInterval(currentIntervalId);
+    clearTimeout(currentTimeoutId);
 
     if (isFull) {
 
@@ -112,13 +175,15 @@ const processCategory = async (index, liList, isFull, subscribedCompanies) => {
         // 선택된 카테고리의 스타일을 변경
         NewsListCategory.classList.replace('notselectNews', 'selectNews');
         const totalCompanies = allNewsData[index].company.length;
+        const subscribedData = getSubscribedData();
 
 
         // 카테고리 정보를 업데이트하는 함수
         const updateNewsCategory = () => {
             const pressInfo = document.getElementById('mainNews').querySelector('.pressInfo');
-            const mainNewsLeft = document.getElementById('news').querySelector('.newsLeft');
-            const mainNewsRight = document.getElementById('news').querySelector('.newsRight');
+            const newsContainer = document.getElementById('news');
+            const mainNewsLeft = newsContainer.querySelector('.newsLeft');
+            const mainNewsRight = newsContainer.querySelector('.newsRight');
             const newsData = allNewsData[index].company[i - 1];
 
             const text = `
@@ -133,41 +198,30 @@ const processCategory = async (index, liList, isFull, subscribedCompanies) => {
             const pressInfoText = `
             <img src = ${newsData.companyIcon}>
             <span class = "display-medium12">${newsData.updatedDate}</span>
-            ${pressInfoButton(newsData.isSubscribe ? "" : "구독하기")}`
+            ${pressInfoButton(subscribedData.includes(newsData.companyName) ? "" : "구독하기")}`
             pressInfo.innerHTML = pressInfoText;
 
             const button = pressInfo.querySelector('.pressInfoButton');
             if (button) {
                 button.addEventListener('click', () => {
 
-                    if (!newsData.isSubscribe) {
+                    if (!subscribedData.includes(newsData.companyName)) {
                         const pressInfoText = `
             <img src = ${newsData.companyIcon}>
             <span class = "display-medium12">${newsData.updatedDate}</span>
-            ${pressInfoButton(newsData.isSubscribe ? "구독하기" : "")}`
+            ${pressInfoButton("구독하기")}`
                         pressInfo.innerHTML = pressInfoText;
                         snackBar("내가 구독한 언론사에 추가되었습니다.");
                         setTimeout(() => {
                             subscribeNews(newsData.companyName);
                         }, 5000);
-                        newsData.isSubscribe = !newsData.isSubscribe;
+                        addSubscribedData(newsData.companyName);
                     }
                     else {
-                        const modalText = newsData.companyName;
-                        const modalHtml = cancelAlert(modalText, () => {
-                            // 모달에서 '예' 버튼 클릭 시
-                            newsData.isSubscribe = false;
-
-                            const modal = document.getElementById('cancelAlert');
-                            modal.remove();
-                        }, () => {
-                            // 모달에서 '아니오' 버튼 클릭 시
-                            // 모달 제거
-
-                            const modal = document.getElementById('cancelAlert');
-                            modal.remove();
-                        });
-                        pressInfo.insertAdjacentHTML(modalHtml);
+                        const cancelAlert = document.getElementById('cancelAlert');
+                        const calcelText = document.getElementById('cancelAlertTop').querySelector('p');
+                        calcelText.innerHTML = `<strong>${newsData.companyName}</strong>을/를<br>구독해지하시겠습니까?`;
+                        cancelAlert.className = `show`;
                     }
 
                 })
@@ -217,8 +271,7 @@ const processCategory = async (index, liList, isFull, subscribedCompanies) => {
     }
     else {
         let currentIndex = index;
-        const subscribeNewData = allNewsData.flatMap(category =>
-            category.company.filter(company => company.isSubscribe));
+        const subscribed = getSubscribedData();
         // 카테고리 정보를 업데이트하는 함수
         const updateNewsCategory = (currentIndex) => {
             const NewsListCategory = liList[currentIndex];
@@ -226,9 +279,14 @@ const processCategory = async (index, liList, isFull, subscribedCompanies) => {
             // 선택된 카테고리의 스타일을 변경
             NewsListCategory.classList.replace('notselectNews', 'selectNews');
             const pressInfo = document.getElementById('mainNews').querySelector('.pressInfo');
-            const mainNewsLeft = document.getElementById('news').querySelector('.newsLeft');
-            const mainNewsRight = document.getElementById('news').querySelector('.newsRight');
-            const newsData = subscribeNewData[currentIndex];
+            const newsContainer = document.getElementById('news');
+            const mainNewsLeft = newsContainer.querySelector('.newsLeft');
+            const mainNewsRight = newsContainer.querySelector('.newsRight');
+            const newsData = allNewsData
+                .flatMap(category => category.company)
+                .find(company => company.companyName === subscribed[currentIndex]);
+
+
 
             const text = `
             <div class="selected-bold14">${newsData.companyName}</div>
@@ -241,43 +299,16 @@ const processCategory = async (index, liList, isFull, subscribedCompanies) => {
             const pressInfoText = `
             <img src = ${newsData.companyIcon}>
             <span class = "display-medium12">${newsData.updatedDate}</span>
-            ${pressInfoButton(newsData.isSubscribe ? "" : "구독하기")}`
+            ${pressInfoButton("")}`
             pressInfo.innerHTML = pressInfoText;
 
             const button = pressInfo.querySelector('.pressInfoButton');
             if (button) {
                 button.addEventListener('click', () => {
-
-                    if (!newsData.isSubscribe) {
-                        const pressInfoText = `
-            <img src = ${newsData.companyIcon}>
-            <span class = "display-medium12">${newsData.updatedDate}</span>
-            ${pressInfoButton(newsData.isSubscribe ? "구독하기" : "")}`
-                        pressInfo.innerHTML = pressInfoText;
-                        snackBar("내가 구독한 언론사에 추가되었습니다.");
-                        setTimeout(() => {
-                            subscribeNews(newsData.companyName);
-                        }, 5000);
-                        newsData.isSubscribe = !newsData.isSubscribe;
-                    }
-                    else {
-                        const modalText = newsData.companyName;
-                        const modalHtml = cancelAlert(modalText, () => {
-                            // 모달에서 '예' 버튼 클릭 시
-                            newsData.isSubscribe = false;
-
-                            const modal = document.getElementById('cancelAlert');
-                            modal.remove();
-                        }, () => {
-                            // 모달에서 '아니오' 버튼 클릭 시
-                            // 모달 제거
-
-                            const modal = document.getElementById('cancelAlert');
-                            modal.remove();
-                        });
-                        pressInfo.insertAdjacentHTML(modalHtml);
-                    }
-
+                    const cancelAlert = document.getElementById('cancelAlert');
+                    const calcelText = document.getElementById('cancelAlertTop').querySelector('p');
+                    calcelText.innerHTML = `<strong>${newsData.companyName}</strong>을/를<br>구독해지하시겠습니까?`;
+                    cancelAlert.className = `show`;
                 })
             }
 
@@ -297,7 +328,7 @@ const processCategory = async (index, liList, isFull, subscribedCompanies) => {
 
         currentIntervalId = setInterval(() => {
             liList[currentIndex].classList.replace('selectNews', 'notselectNews');
-            liList[currentIndex].innerText = subscribedCompanies[currentIndex].companyName;
+            liList[currentIndex].innerText = subscribed[currentIndex];
             currentIndex = (currentIndex + 1) % liList.length;
             updateNewsCategory(currentIndex);
         }, 20000);

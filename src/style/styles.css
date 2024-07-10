@@ -195,6 +195,7 @@ main {
 
 
 #NewsList {
+    position: relative;
     width: 930px;
     height: 388px;
     border: 1px;
@@ -450,37 +451,96 @@ main {
     border: 1px;
     border-style: solid;
     border-color: var(--border-default);
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+}
+
+
+#cancelAlert.show {
+    visibility: visible;
 }
 
 
 #cancelAlertTop {
+    height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--surface-default);
-    border: 1px;
+    background-color: white;
+    border-bottom: 1px;
     border-style: solid;
     border-color: var(--border-default);
+}
+
+
+#cancelAlertBottom {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-alt);
 }
 
 
 #positiveButton {
+    width: 50%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--surface-default);
-    border: 1px;
-    border-style: solid;
-    border-color: var(--border-default);
 }
 
 
 #negativeButton {
+    width: 50%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--surface-default);
-    border: 1px;
-    border-style: solid;
-    border-color: var(--border-default);
+    border-left: 1px;
+    border-left-style: solid;
+    border-left-color: var(--border-default);
+}
+
+
+
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/*******************************************************************/
+/* Left, Right Arrow Button */
+
+
+#leftButton {
+    position: absolute;
+    width: 24px;
+    height: 40px;
+    top: 55%;
+    left: -4%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease;
+}
+
+
+#leftButton:hover {
+    cursor: pointer;
+    transform: translate(-50%, -50%) scale(1.3);
+}
+
+
+#rightButton {
+    position: absolute;
+    width: 24px;
+    height: 40px;
+    top: 55%;
+    left: 104%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease;
+}
+
+
+#rightButton:hover {
+    cursor: pointer;
+    transform: translate(-50%, -50%) scale(1.3);
 }
