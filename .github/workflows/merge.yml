@@ -67,7 +67,7 @@ jobs:
                     owner: context.repo.owner,
                     repo: context.repo.repo,
                     issue_number: node.number,
-                    body: "main 브랜치로 병합 시도 || 적절한 라벨이 있는지 확인해 주세요."
+                    body: "main 브랜치로 병합 시도"
                 })
                 continue;
              }
