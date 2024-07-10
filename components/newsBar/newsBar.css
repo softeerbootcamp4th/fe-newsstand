@@ -62,7 +62,9 @@
     position: absolute;
     top: -36px;
     left: 0;
+    cursor: pointer;
 }
+
 /* 이전, 현재, 다음 롤링 배너 표시 */
 .rolling-banner li.prev{
     top: -36px;

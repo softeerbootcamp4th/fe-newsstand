@@ -12,7 +12,7 @@ export const createNewsBar = () => {
                         연합뉴스
                     </div>
                     <div class="wrap">
-                        <ul>
+                        <ul class="hover-underline">
                             <li class="current flex-row-between-center"><a href="#">노바백스 백신 2월중순부터 접종</a></li>
                             <li class="next"><a href="#">얼어붙은 투심에…현대엔지니어링 상장 철회</a></li>
                             <li><a href="#">"일본 정부, 사도광산 세계유산 추천 방침 굳혀, 일본과 갈등 첨예화 예상"</a></li>
@@ -28,7 +28,7 @@ export const createNewsBar = () => {
                         연합뉴스
                     </div>
                     <div class="wrap">
-                        <ul>
+                        <ul class="hover-underline">
                             <li class="current"><a href="#">노바백스 백신 2월중순부터 접종</a></li>
                             <li class="next"><a href="#">얼어붙은 투심에…현대엔지니어링 상장 철회</a></li>
                             <li><a href="#">"일본 정부, 사도광산 세계유산 추천 방침 굳혀, 일본과 갈등 첨예화 예상"</a></li>
