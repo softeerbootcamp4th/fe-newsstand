@@ -4,33 +4,80 @@ const $subscribeToggleDOM = document.querySelectorAll(".subscribe-toggle span");
 const $newsgroupDOM = document.querySelector(".newsgroup");
 const $headlineTitleDOM = document.querySelector(".paper .headline span");
 const $newsListDOM = document.querySelector(".paper .list");
-const $comImgDOM = document.querySelector(".paper .subscribe-bar img");
+const $companyImgDOM = document.querySelector(".paper .subscribe-bar img");
 const $headlineImgDOM = document.querySelector(".paper .headline img");
 const $subscribeButtonDOM = document.querySelector(".paper .subscribe-button");
+let $ctgDOM = [];
 const categories = ["종합/경제", "방송/통신", "IT", "영자지", "스포츠/연예", "매거진/전문지", "지역"];
-const ctgScrollNum = 6;
-let newsList;
-let newsCom;
+
+let newsListObject = {};
+let newsCompanyList = [];
+let companyList = [];
 
 let state = {
   subscribeToggle: "whole",
-  ctg: 0,
-  comId: 1,
+  bigCtg: 0,
+  smallCtg: 0,
 };
+const currentCompanyId = () => {
+  if (state.subscribeToggle === "whole") return companyList[state.bigCtg][state.smallCtg].id;
+  else if (state.subscribeToggle === "my") return getSubscribeList()[state.bigCtg];
+}
 
-categories.forEach((ctg) => {
+const currentCompanyName = () => {
+  if (state.subscribeToggle === "whole") return companyList[state.bigCtg][state.smallCtg].name;
+  else if (state.subscribeToggle === "my") return newsCompanyList.find((news) => news.id === currentCompanyId())?.name;
+}
+
+const insertDOM = (text) => {
   const newDOM = document.createElement("div");
   const newnewDOM = document.createElement("span");
-  newnewDOM.innerText = ctg;
+  newnewDOM.innerText = text;
   newDOM.appendChild(newnewDOM);
   newDOM.setAttribute("class", "unselected");
   $newsgroupDOM.appendChild(newDOM);
-});
+};
 
-const $ctgDOM = document.querySelectorAll(".newsgroup div");
+const refillGroup = () => {
+  if ($ctgDOM.length > 0) loseCtg();
+  while ($newsgroupDOM.firstChild) {
+    $newsgroupDOM.removeChild($newsgroupDOM.firstChild);
+  }
+  state.bigCtg = 0;
+  state.smallCtg = 0;
+  if (state.subscribeToggle === "whole") {
+    categories.forEach((ctg) => {
+      insertDOM(ctg);
+    });
+  }
+  else if (state.subscribeToggle === "my") {
+    const subscribeList = getSubscribeList();
+    let subscribeNameList = [];
+    subscribeList.forEach((comId) => {
+      subscribeNameList = [...subscribeNameList, newsCompanyList.find((com) => com.id === comId).name];
+    });
+    subscribeNameList.forEach((comName) => {
+      insertDOM(comName);
+    });
+  }
+  $ctgDOM = document.querySelectorAll(".newsgroup div");
+  for (let i = 0; i < $ctgDOM.length; i++) {
+    $ctgDOM[i].addEventListener("click", () => {
+      if (state.bigCtg !== i) {
+        loseCtg();
+        state.bigCtg = i;
+        state.smallCtg = 0;
+        fillCtg();
+        fillBottom();
+      }
+    })
+  }
+  if ($ctgDOM.length > 0) fillCtg();
+};
 
-const ctgFill = () => {
-  const DOM = $ctgDOM[state.ctg];
+const fillCtg = () => {
+  const DOM = $ctgDOM[state.bigCtg];
+  const scrollNum = companyList[state.bigCtg].length;
   const keyframes = [
     {
       backgroundPosition: "100%",
@@ -45,27 +92,37 @@ const ctgFill = () => {
 
   DOM.setAttribute("class", "selected");
   DOM.animate(keyframes, options).onfinish = () => {
-    ctgLose();
-    state.comId++;
-    if (state.comId > ctgScrollNum) {
-      state.comId = 1;
-      state.ctg++;
-      if (state.ctg === categories.length) state.ctg = 0;
+    loseCtg();
+    if (state.subscribeToggle === "whole") {
+      state.smallCtg++;
+      if (state.smallCtg >= scrollNum) {
+        state.smallCtg = 0;
+        state.bigCtg++;
+        if (state.bigCtg >= categories.length) state.bigCtg = 0;
+      }
     }
-    ctgFill();
-    bottomFill();
+    else if (state.subscribeToggle === "my") {
+      state.bigCtg++;
+      if (state.bigCtg >= getSubscribeList().length) {
+        state.bigCtg = 0;
+      }
+    }
+    fillCtg();
+    fillBottom();
   }
 
-  if (DOM.childElementCount === 2) {
-    DOM.removeChild(DOM.lastElementChild);
-  }
   const newDOM = document.createElement("span");
-  newDOM.innerText = `${state.comId}/${ctgScrollNum}`;
+  if (state.subscribeToggle === "whole") {
+    newDOM.innerText = `${state.smallCtg + 1}/${scrollNum}`;
+  }
+  else if (state.subscribeToggle === "my") {
+    newDOM.innerHTML = "<img src='../img/chevron-right.png'>"
+  }
   DOM.appendChild(newDOM);
 };
 
-const ctgLose = () => {
-  const DOM = $ctgDOM[state.ctg];
+const loseCtg = () => {
+  const DOM = $ctgDOM[state.bigCtg];
   DOM.setAttribute("class", "unselected");
   const animations = DOM.getAnimations();
   animations.forEach(ani => ani.cancel());
@@ -75,31 +132,36 @@ const ctgLose = () => {
   }
 };
 
-const bottomFill = () => {
-  $comImgDOM.setAttribute("src", `../img/${state.comId}.png`);
-  $headlineImgDOM.setAttribute("src", `../img/sample${state.comId}.jpg`);
-  const currentComName = newsCom.find((com) => com.id === state.comId).name;
-  const frontNewsList = newsList[categories[state.ctg]].filter((news) => news.com === currentComName);
-  let isFirstNews = true;
+const fillBottom = () => {
+  const frontNewsList = state.subscribeToggle === "whole" ? newsListObject[categories[state.bigCtg]].filter((news) => news.com === currentCompanyName()) : Object.values(newsListObject).flat().filter(news => news.com === currentCompanyName());
+  const newsPerPage = 8;
 
-  $headlineTitleDOM.innerText = frontNewsList[0] ? frontNewsList[0].title : "카테고리와 언론사에 해당되는 기사가 없습니다.";
+  if (frontNewsList.length === 0) {
+    updateDOMstyle(document.querySelector(".paper"), { visibility: "hidden" });
+  }
+  else {
+    updateDOMstyle(document.querySelector(".paper"), { visibility: "visible" });
+  }
+
+  $companyImgDOM.setAttribute("src", `../img/${currentCompanyId()}.png`);
+  $headlineImgDOM.setAttribute("src", `../img/sample${1 + Math.floor(Math.random() * 6)}.jpg`);
+
+  $headlineTitleDOM.innerText = frontNewsList[0] ? frontNewsList[0].title : "";
   while ($newsListDOM.firstChild) {
     $newsListDOM.removeChild($newsListDOM.firstChild);
   }
-  frontNewsList.forEach((news) => {
-    if (isFirstNews) isFirstNews = false;
-    else {
-      const newDOM = document.createElement("span");
-      newDOM.innerText = news.title;
-      $newsListDOM.appendChild(newDOM);
-    }
-  });
+  for (let i = 1; i < Math.min(newsPerPage, frontNewsList.length); i++) {
+    const newDOM = document.createElement("span");
+    newDOM.innerText = frontNewsList[i].title;
+    $newsListDOM.appendChild(newDOM);
+  }
+
   const newDOM = document.createElement("caption");
-  newDOM.innerText = `${currentComName} 언론사에서 직접 편집한 뉴스입니다.`;
+  newDOM.innerText = `${currentCompanyName()} 언론사에서 직접 편집한 뉴스입니다.`;
   $newsListDOM.appendChild(newDOM);
 
   const subscribeList = getSubscribeList();
-  if (!subscribeList.includes(state.comId)) {
+  if (!subscribeList.includes(currentCompanyId())) {
     $subscribeButtonDOM.innerText = "+ 구독하기";
   }
   else {
@@ -114,24 +176,37 @@ const getSubscribeList = () => {
 
 const pushCurrentSubscribe = () => {
   let subscribeList = getSubscribeList();
-  if (!subscribeList.includes(state.comId)) {
-    subscribeList = [...subscribeList, state.comId];
+  if (!subscribeList.includes(currentCompanyId())) {
+    subscribeList = [...subscribeList, currentCompanyId()];
     localStorage.setItem("subscribe-list", JSON.stringify(subscribeList));
   }
 };
 
 const removeCurrentSubscribe = () => {
   let subscribeList = getSubscribeList();
-  subscribeList = subscribeList.filter(com => com !== state.comId);
+  subscribeList = subscribeList.filter(com => com !== currentCompanyId());
   localStorage.setItem("subscribe-list", JSON.stringify(subscribeList));
-}
+};
 
 export default function CategoriesAndNewsSection(_news, _newsCom) {
-  newsList = _news;
-  newsCom = _newsCom;
+  newsListObject = _news;
+  newsCompanyList = _newsCom;
+  categories.forEach((ctg) => {
+    const comNameList = [...new Set(newsListObject[ctg].map(news => news.com))];
+    companyList = [...companyList, comNameList.map(name => newsCompanyList.find((com) => com.name === name))];
+  })
+
+  refillGroup();
+  fillBottom();
 
   document.querySelector(".subscribe-toggle").addEventListener("click", (e) => {
-    state.subscribeToggle = e.target.className;
+    const targetClassName = e.target.className;
+    if (targetClassName !== "whole" && targetClassName !== "my") return;
+    if (state.subscribeToggle !== targetClassName) {
+      state.subscribeToggle = targetClassName;
+      refillGroup();
+      fillBottom();
+    }
     updateDOMstyle($subscribeToggleDOM[0], {
       fontWeight: `${state.subscribeToggle === "whole" ? "bold" : "normal"}`,
       color: `${state.subscribeToggle === "whole" ? "black" : "#879298"}`
@@ -139,63 +214,64 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
     updateDOMstyle($subscribeToggleDOM[1], {
       fontWeight: `${state.subscribeToggle === "my" ? "bold" : "normal"}`,
       color: `${state.subscribeToggle === "my" ? "black" : "#879298"}`
-    })
+    });
   });
 
   document.querySelector(".paper").addEventListener("click", (e) => {
     const targetClassName = e.target.className;
 
     if (targetClassName === "leftscroll") {
-      ctgLose();
-      state.comId--;
-      if (state.comId === 0) {
-        state.comId = ctgScrollNum;
-        state.ctg--;
-        if (state.ctg < 0) state.ctg = categories.length - 1;
+      loseCtg();
+      if (state.subscribeToggle === "whole") {
+        state.smallCtg--;
+        if (state.smallCtg < 0) {
+          state.bigCtg--;
+          if (state.bigCtg < 0) state.bigCtg = companyList.length - 1;
+          state.smallCtg = companyList[state.bigCtg].length - 1;
+        }
       }
-      ctgFill();
-      bottomFill();
+      else if (state.subscribeToggle === "my") {
+        state.bigCtg--;
+        if (state.bigCtg < 0) state.bigCtg = getSubscribeList().length - 1;
+      }
+      fillCtg();
+      fillBottom();
     }
     else if (targetClassName === "rightscroll") {
-      ctgLose();
-      state.comId++;
-      if (state.comId > ctgScrollNum) {
-        state.comId = 1;
-        state.ctg++;
-        if (state.ctg === categories.length) state.ctg = 0;
+      loseCtg();
+      if (state.subscribeToggle === "whole") {
+        state.smallCtg++;
+        if (state.smallCtg >= companyList[state.bigCtg].length) {
+          state.bigCtg++;
+          if (state.bigCtg >= companyList.length) state.bigCtg = 0;
+          state.smallCtg = 0;
+        }
       }
-      ctgFill();
-      bottomFill();
+      else if (state.subscribeToggle === "my") {
+        state.bigCtg++;
+        if (state.bigCtg === getSubscribeList().length) state.bigCtg = 0;
+      }
+      fillCtg();
+      fillBottom();
     }
     else if (targetClassName === "subscribe-button") {
       const subscribeList = getSubscribeList();
-      if (!subscribeList.includes(state.comId)) {
+      if (!subscribeList.includes(currentCompanyId())) {
         if (confirm("구독하시겠습니까?")) {
           pushCurrentSubscribe();
           $subscribeButtonDOM.innerText = "×";
+          refillGroup();
+          fillBottom();
         }
       }
       else {
         if (confirm("구독을 해지하시겠습니까?")) {
           removeCurrentSubscribe();
           $subscribeButtonDOM.innerText = "+ 구독하기";
+          refillGroup();
+          fillBottom();
         }
       }
     }
   });
-
-  ctgFill();
-  bottomFill();
-
-  for (let i = 0; i < $ctgDOM.length; i++) {
-    $ctgDOM[i].addEventListener("click", () => {
-      if (state.ctg !== i) {
-        ctgLose();
-        state.ctg = i;
-        state.comId = 1;
-        ctgFill();
-        bottomFill();
-      }
-    })
-  }
 }

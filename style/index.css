@@ -110,6 +110,7 @@
   display: flex;
   align-items: center;
   color: #879298;
+  height: 40px;
 }
 
 .newsgroup div {
