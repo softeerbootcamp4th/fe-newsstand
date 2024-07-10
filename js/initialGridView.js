@@ -1,4 +1,4 @@
-import { initializeGridViewContainerTypeAll } from "./displaygridViewnews.js";
+import { initializeGridViewContainer } from "./displaygridViewnews.js";
 import { handleClickTab } from "./toggleView.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,6 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     `);
     handleClickTab('grid-view');
-    initializeGridViewContainerTypeAll();
+    initializeGridViewContainer('all');
 });
 

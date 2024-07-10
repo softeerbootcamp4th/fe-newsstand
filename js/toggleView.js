@@ -1,5 +1,5 @@
 import { category } from "./data.js";
-import { initializeGridViewContainerTypeAll } from "./displaygridViewnews.js";
+import { initializeGridViewContainer } from "./displaygridViewnews.js";
 import { createCategory, initlizeListViewFunction, loadCurrentCategoryNews } from "./displaylistViewNews.js";
 import { getSubscriptionList, initalizeSubscribeFunction } from "./subscribe.js";
 
@@ -99,7 +99,7 @@ const switchView = (viewType) => {
             `
         );
 
-        initializeGridViewContainerTypeAll();
+        initializeGridViewContainer('prevTabType');
         handleClickTab('grid-view', prevTabType);
     }
 
@@ -121,7 +121,7 @@ const handleTabClick = (tabType, viewType) => {
             createCategory(category, 'all');
             loadCurrentCategoryNews('all');
         } else if (viewType === 'grid-view') {
-            initializeGridViewContainerTypeAll();
+            initializeGridViewContainer('all');
         }
     } else if (tabType === 'subscribe') {
         subscribeTab.classList.add('selected-tab');
@@ -130,8 +130,7 @@ const handleTabClick = (tabType, viewType) => {
             createCategory(subscriptions, 'subscribe');
             loadCurrentCategoryNews('subscribe');
         } else if (viewType === 'grid-view') {
-            //initializeGridViewContainerTypeSubscribe();
-            console.log('bi');
+            initializeGridViewContainer('subscribe');
         }
     }
 };

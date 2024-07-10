@@ -39,7 +39,7 @@ function handleModalBtnClick() {
     });
 }
 
-function setSubscriptionList(subscriptionList) {
+export const setSubscriptionList = (subscriptionList) =>  {
     localStorage.setItem('subscriptions', JSON.stringify(subscriptionList));
 }
 

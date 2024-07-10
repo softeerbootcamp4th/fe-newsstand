@@ -439,3 +439,31 @@ main {
     opacity: 1;
 
 }
+
+.grid-sub-btn, .grid-unsub-btn {
+    padding: 0px 6px 0px 6px;
+    border: 1px solid var(--border-bold);
+    border-radius: 50px;
+    color: var(--text-bold);
+    font-size: 12px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    background-color: var(--surface-alt);
+    box-sizing: border-box;
+    display: none;
+    cursor: pointer;
+}
+
+.grid-item:hover {
+    background-color: var(--surface-alt);
+}
+
+
+.grid-item:hover .grid-logo-img {
+    display: none;
+}
+
+.grid-item:hover .grid-sub-btn, .grid-item:hover .grid-unsub-btn {
+    display: flex;
+}
