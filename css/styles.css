@@ -254,6 +254,10 @@ nav ul li.active a {
     color: white;
 }
 
+.navItem:not(.active):hover a {
+    text-decoration: underline;
+}
+
 .navItem.active {
     position: relative;
     background-color: #7890E7; /* 선택된 nav item의 기존 배경색 */
