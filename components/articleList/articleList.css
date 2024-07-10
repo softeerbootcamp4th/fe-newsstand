@@ -204,6 +204,14 @@ button {
                 width: 882px;
             }
 
+                .thumbnail-part {
+                    margin-top: 16px;
+                }
+
+                    .thumbnail-detail {
+                        margin-top: 16px;
+                    }
+
                 .article-li-part {
                     font-size: 16px;
                     color: #4B5966;
