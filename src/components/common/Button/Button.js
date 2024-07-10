@@ -1,7 +1,5 @@
 import "./Button.css";
-import plus from "@/assets/icons/plus.svg";
-import closed from "@/assets/icons/closed.svg";
-import { changeFillColor } from "@/utils/svg";
+import { getSVGTemplate } from "@/components/SVG/SVG";
 
 function Button({ $target, position = "beforeend", icon, color, text, onClick }) {
   this.$element = document.createElement("button");
@@ -14,40 +12,11 @@ function Button({ $target, position = "beforeend", icon, color, text, onClick })
   this.$element.addEventListener("click", onClick);
 }
 
-Button.prototype.handleButtonHover = function () {
-  const svgObject = this.$element.querySelector("object.buttonIcon");
-  const svgDoc = svgObject.contentDocument;
-  const svgElement = svgDoc.querySelector("svg");
-
-  this.$element.addEventListener("mouseenter", () => {
-    svgElement.querySelectorAll("path").forEach((el) => {
-      el.style.fill = "#4b5966";
-    });
-  });
-
-  this.$element.addEventListener("mouseleave", () => {
-    svgElement.querySelectorAll("path").forEach((el) => {
-      el.style.fill = "#879298";
-    });
-  });
-};
-
-Button.prototype.render = function (icon, text) {
+Button.prototype.render = function (iconId, text) {
   this.$element.innerHTML = /* html */ `
-    <object class="buttonIcon" type="image/svg+xml" data="${
-      icon === "plus" ? plus : closed
-    }"></object>
+    ${getSVGTemplate({ className: "svg", iconId })}
     ${text ?? ""}
     `;
-
-  const svgObject = this.$element.querySelector("object.buttonIcon");
-
-  svgObject.setAttribute("width", "12px");
-  svgObject.setAttribute("height", "12px");
-
-  changeFillColor(svgObject, "#879298");
-
-  svgObject.addEventListener("load", this.handleButtonHover.bind(this));
 };
 
 export default Button;

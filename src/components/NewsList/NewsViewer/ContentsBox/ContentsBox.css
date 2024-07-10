@@ -39,7 +39,7 @@
 
   width: 320px;
 
-  color: var(--black);
+  color: var(--text-strong);
 
   &:hover {
     img {
@@ -84,7 +84,7 @@
 .subNews {
   overflow: hidden;
 
-  color: var(--gray-500);
+  color: var(--text-bold);
 }
 
 .subNews > ul {
@@ -103,5 +103,5 @@
 
 .subNews > ul > p {
   font-size: 14px;
-  color: var(--gray-200);
+  color: var(--text-weak);
 }
