@@ -107,6 +107,9 @@ export class Deque {
 			{
 				const	front = this.removeFront();
 				this.addRear(front);
+				this.current = this.current - 1;
+				if (this.current <= 0)
+					this.current = this.size();
 				n--;
 			}
 		}
@@ -117,6 +120,9 @@ export class Deque {
 			{
 				const	rear = this.removeRear();
 				this.addFront(rear);
+				this.current = this.current + 1;
+				if (this.current > this.size())
+					this.current = 1;
 				n--;
 			}
 		}

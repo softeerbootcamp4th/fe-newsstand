@@ -9,7 +9,7 @@
   position: absolute;
   top: 430px;
   left: 104px;
-  background: url("../asset/LeftButton.svg") no-repeat center center;
+  background: url("../asset/button/LeftButton.svg") no-repeat center center;
   background-size: cover;
 }
 
@@ -17,6 +17,6 @@
   position: absolute;
   top: 430px;
   left: 1153px;
-  background: url("../asset/RightButton.svg") no-repeat center center;
+  background: url("../asset/button/RightButton.svg") no-repeat center center;
   background-size: cover;
 }

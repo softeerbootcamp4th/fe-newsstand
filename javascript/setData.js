@@ -16,56 +16,75 @@ export function	setFieldTab(fieldName, Deque) {
 }
 
 /*
-* 언론사 정보 및 구독 버튼
+* field별 언론사 정보 및 구독 버튼
 */
-export function	setPressInfo(Deque) {
-	const	editDateElement = document.querySelector(".EditDate");
-	const	brandMarkElement = document.querySelector(".Brandmark");
-	const	subscribeButtonElement = document.querySelector(".SubscribeButton");
-	const	src = Deque.items[0].companyLogo;
-	const	is_subscribed = Deque.items[0].isSubscribe;
-
-	if (brandMarkElement)
-		brandMarkElement.innerHTML = `<img src=${src}>`;
-	if (editDateElement)
-		editDateElement.textContent = Deque.items[0].updatedDate;
-	if (subscribeButtonElement)
+function	setPressInfo(Deque) {
+	const	pressNews = document.querySelector(".PressNews");
+	if (pressNews)
 	{
-		if (is_subscribed)
-			subscribeButtonElement.innerHTML = `<img src="./asset/subscribed.svg">`;
-		else
-			subscribeButtonElement.textContent = "+ 구독하기";
+		const	editDateElement = pressNews.querySelector(".EditDate");
+		const	brandMarkElement = pressNews.querySelector(".Brandmark");
+		const	subscribeButtonElement = pressNews.querySelector(".SubscribeButton");
+		const	src = Deque.peekFront().companyLogo;
+		const	is_subscribed = Deque.peekFront().isSubscribe;
+
+		if (brandMarkElement)
+			brandMarkElement.innerHTML = `<img src=${src}>`;
+		if (editDateElement)
+			editDateElement.textContent = Deque.peekFront().updatedDate;
+		if (subscribeButtonElement)
+		{
+			if (is_subscribed)
+				subscribeButtonElement.innerHTML = `<img src="./asset/button/subscribed.svg">`;
+			else
+				subscribeButtonElement.textContent = "+ 구독하기";
+		}
 	}
 }
 
 /*
-* main class 데이터 정리
+* field별 main class 데이터 정리
 */
-export function	setMain(Deque) {
-	const	ThumbnailElement = document.querySelector(".Thumbnail");
-	const	mainTitleElement = document.querySelector(".MainTitle");
-	const	src = Deque.items[0].mainNews.src;
+function	setMain(Deque) {
+	const	pressNews = document.querySelector(".PressNews");
+	if (pressNews)
+	{
+		const	ThumbnailElement = pressNews.querySelector(".Thumbnail");
+		const	mainTitleElement = pressNews.querySelector(".MainTitle");
+		const	src = Deque.peekFront().mainNews.src;
 
-	if (ThumbnailElement)
-		ThumbnailElement.innerHTML = `<img src=${src}>`;
-	if (mainTitleElement)
-		mainTitleElement.textContent = Deque.items[0].mainNews.title;
+		if (ThumbnailElement)
+			ThumbnailElement.innerHTML = `<img src=${src}>`;
+		if (mainTitleElement)
+			mainTitleElement.textContent = Deque.peekFront().mainNews.title;
+	}
 }
 
 /*
-* sub 뉴스 데이터 입력
+* field별 sub 뉴스 데이터 입력
 */
-export function	setSub(Deque) {
-	const	subElement = document.querySelector(".Sub");
-	const	captionElement = document.querySelector(".Caption");
-	const	subNewsArray = Deque.items[0].news;
-	const	newsName = Deque.items[0].companyName;
-	let		subNews = "<ul>";
+function	setSub(Deque) {
+	const	pressNews = document.querySelector(".PressNews");
+	if (pressNews)
+	{
+		const	subElement = pressNews.querySelector(".Sub");
+		const	captionElement = pressNews.querySelector(".Caption");
+		const	subNewsArray = Deque.peekFront().news;
+		const	newsName = Deque.peekFront().companyName;
+		let		subNews = "<ul>";
 
-	for (let news of subNewsArray)
-		subNews = subNews + `<li>${news.title}</li>`
-	subNews = subNews + "</ul>";
-	subNews = subNews + `<div class="Caption">${newsName} 언론사에서 직접 편집한 뉴스입니다.</div>`;
-	if (subElement)
-		subElement.innerHTML = subNews;
+		for (let news of subNewsArray)
+			subNews = subNews + `<li>${news.title}</li>`
+		subNews = subNews + "</ul>";
+		subNews = subNews + `<div class="Caption">${newsName} 언론사에서 직접 편집한 뉴스입니다.</div>`;
+		if (subElement)
+			subElement.innerHTML = subNews;
+	}
+}
+
+export function	setNewsList(fieldName, Deque) {
+	setFieldTab(fieldName, Deque);
+	setPressInfo(Deque);
+	setMain(Deque);
+	setSub(Deque);
 }

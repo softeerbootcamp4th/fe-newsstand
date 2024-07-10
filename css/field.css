@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.Field-chosen {
+.fieldChosen {
   background-color: #7890E7;
 }
 
@@ -29,7 +29,7 @@
   color: #879298;
 }
 
-.Field-chosen .text {
+.fieldChosen .text {
   width: 97.77px;
   height: 17px;
   font-size: 14px;
@@ -41,7 +41,7 @@
   display: none;
 }
 
-.Field-chosen .percentage {
+.fieldChosen .percentage {
   width: auto;
   height: auto;
   display: flex;
