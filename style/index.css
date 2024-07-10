@@ -189,8 +189,7 @@
   flex-direction: column;
   width: 320px;
   gap: 16px;
-  font-size: 16px;
-  font-weight: bold;
+
 }
 
 .paper .bottom .headline img {
@@ -198,14 +197,30 @@
   object-fit: contain;
 }
 
+.paper .bottom .headline span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.paper .bottom .headline span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .paper .bottom .list {
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  overflow: hidden;;
+  overflow: hidden;
+  ;
   white-space: nowrap;
   font-size: 16px;
   gap: 16px;
+}
+
+.paper .bottom .list span:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .paper .bottom .list caption {
@@ -216,7 +231,8 @@
 .paper .leftscroll {
   position: absolute;
   left: -6%;
-  top: 40%;
+  top: 50%;
+  transform: translate(0%, -50%);
 }
 
 .paper .leftscroll:hover {
@@ -226,9 +242,80 @@
 .paper .rightscroll {
   position: absolute;
   right: -6%;
-  top: 40%;
+  top: 50%;
+  transform: translate(0%, -50%);
 }
 
 .paper .rightscroll:hover {
   cursor: pointer;
+}
+
+.paper .snackbar {
+  color: white;
+  font-size: 16px;
+  background-color: #4362D0;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.paper .unsubscribe-alert {
+  width: 320px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #D2DAE0;
+  display: none;
+}
+
+.paper .unsubscribe-alert .up {
+  height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #5F6E76;
+  font-size: 16px;
+}
+
+.paper .unsubscribe-alert .up .company-name {
+  color: black;
+  font-weight: bold;
+}
+
+.paper .unsubscribe-alert .down {
+  background-color: #F5F7F9;
+  border-top: 1px solid #D2DAE0;
+  display: flex;
+}
+
+.paper .unsubscribe-alert .down div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  font-size: 16px;
+  color: #14212B;
+}
+
+.paper .unsubscribe-alert .down div:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.paper .unsubscribe-alert .down .unsubscribe-yes {
+  border-right: 1px solid #D2DAE0;
+}
+
+.paper .no-news {
+  display: none;
 }
