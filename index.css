@@ -1,5 +1,6 @@
 p {
     margin: 0;
+    padding: 0;
 }
 
 /* 공통 css class */
@@ -7,8 +8,12 @@ p {
     display: inline;
 }
 
-.block-tag {
+.display-block {
     display: block;
+}
+
+.display-none {
+    display: none;
 }
 
 .flex-row {

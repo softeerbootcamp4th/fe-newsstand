@@ -224,3 +224,18 @@ button {
                         font-size: 14px;
                         color: .879298;
                     }
+    
+    .grid-unsubscribe-btn {
+        border: 1px solid #6E8091;
+        border-radius: 50px;
+        font-size: 12px;
+        width: 72px;
+        height: 24px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        /* display: table-cell;
+        vertical-align: middle; */
+    }

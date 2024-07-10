@@ -82,8 +82,14 @@ export const addSubscriptionGridEventListener = () => {
         const subList = getSubscriptionList();
         // Generate grid items from the subList
         const gridItems = subList.map(mediaName => `
-            <div class="grid-item">
-                <img src="/images/logos/${mediaName}.png" height="20px" />
+            <div class="grid-item grid-filled-item" id="grid-${mediaName}">
+                <img class="display-block" src="/images/logos/${mediaName}.png" height="20px" />
+                <div class="gird-unsubscribe-btn-wrapper display-none">
+                    <button class="grid-unsubscribe-btn">
+                        <img src="/icons/plus.png" width="12px" height="12px" />    
+                        <p>해지하기</p>
+                    </button>
+                </div>
             </div>
         `).join('');
         
@@ -104,6 +110,8 @@ export const addSubscriptionGridEventListener = () => {
         button.addEventListener('click', () => {
             if (isGrid && !isMediaWhole) {
                 callback();
+                addGridHoverEventListener();
+                addUnscribeClickEventListener();
             }
         })
     });
@@ -215,4 +223,36 @@ export const addScrollEventListener = () => {
         const walk = (x - startX) * 3; //scroll-fast
         scrollable.scrollLeft = scrollLeft - walk;
     });
+}
+
+export const addGridHoverEventListener = () => {
+    // 전체 그리드에 e.target에 mouseover 시 해당 target(grid-filled-item)에 grid-overed 클래스 추가
+    document.querySelectorAll('.grid-filled-item').forEach((el) => {
+        el.addEventListener('mouseover', (e) => {
+            e.target.querySelector('img').classList.replace('display-block', 'display-none')
+            e.target.querySelector('div').classList.replace('display-none', 'display-block')
+        })
+    })
+
+    // 전체 그리드 e.target에 mouseover 시 grid-filled-item이라면 img에 display none, button에 display block
+    document.querySelectorAll('.grid-filled-item').forEach((el) => {
+        el.addEventListener('mouseout', (e) => {
+            e.target.querySelector('div').classList.replace('display-block', 'display-none')
+            e.target.querySelector('img').classList.replace('display-none', 'display-block')
+        })
+    })
+}
+
+export const addUnscribeClickEventListener = () => {
+    document.querySelectorAll('.grid-filled-item').forEach((item) => {
+        item.addEventListener('click', (e) => {
+            newsState.setNowMediaName(e.target.id.split('-')[1])
+            const el = document.createElement('div');
+            el.classList.add('alert-area');
+            el.innerHTML = createAlert();
+            document.querySelector('.article-body-wrapper').appendChild(el);
+            addAlertAcceptBtnEventListener();
+            addAlertCancleBtnEventListener();
+        })
+    })
 }
