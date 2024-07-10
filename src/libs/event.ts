@@ -13,6 +13,7 @@ export type EventHandlers = {
   onKeydown: EventListener<KeyboardEvent>;
   onKeyup: EventListener<KeyboardEvent>;
   onAnimationIteration: EventListener<AnimationEvent>;
+  onAnimationEnd: EventListener<AnimationEvent>;
 };
 
 export const EventNameMap = {
@@ -27,6 +28,7 @@ export const EventNameMap = {
   onKeydown: "keydown",
   onKeyup: "keyup",
   onAnimationIteration: "animationiteration",
+  onAnimationEnd: "animationend",
 };
 
 export const EventNameMaps = new Map<string, string>([
@@ -41,6 +43,7 @@ export const EventNameMaps = new Map<string, string>([
   ["onKeydown", "keydown"],
   ["onKeyup", "keyup"],
   ["onAnimationIteration", "animationiteration"],
+  ["onAnimationEnd", "animationend"],
 ]);
 
 export const eventMap = new Map<string, Map<string, EventListener>>();

@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  border: 1px solid var(--border-border-default, #D2DAE0);
+}
+
+.btn {
+  background: transparent;
+  border: none;
+  position: absolute;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.left {
+  left: -48px;
+}
+
+.right {
+  right: -48px;
+}

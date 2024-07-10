@@ -32,21 +32,37 @@ export type CreatedAppElement<T extends HTMLElement = HTMLElement> = {
 
 export type RenderingAppElement<T extends HTMLElement = HTMLElement> =
   CreatedAppElement<T> & {
-    key: string;
+    parentKey: string;
+    componentKey: string;
     parent: HTMLElement;
+    forced: boolean;
   };
 
 export interface CreatedAppComponent<P = object> {
-  render: (props: P) => CreatedAppComponent<P> | CreatedAppElement;
+  render: (
+    props: P,
+  ) =>
+    | CreatedAppComponent<P>
+    | CreatedAppElement
+    | string
+    | number
+    | false
+    | null;
   props: P;
   renderName: string;
 }
 export type AppComponent<P = object> = AppRender<
   P,
-  CreatedAppComponent<P> | CreatedAppElement
+  CreatedAppComponent<P> | CreatedAppElement | string | number | false | null
 >;
 export type RenderingAppComponent<P = object> = CreatedAppComponent<P> & {
   key: string;
+  parent: HTMLElement;
+  forced: boolean;
+};
+
+export type RenderingAppNode = {
+  node: Node;
   parent: HTMLElement;
 };
 
@@ -60,4 +76,16 @@ export const isAppElement = (
   app: AppComponent | AppElement,
 ): app is AppElement => {
   return (app as AppElement).type === "element";
+};
+
+export const isRenderingAppComponent = (
+  created: RenderingAppComponent | RenderingAppElement | RenderingAppNode,
+): created is RenderingAppComponent => {
+  return (created as RenderingAppComponent).render != null;
+};
+
+export const isRenderingAppNode = (
+  created: RenderingAppComponent | RenderingAppElement | RenderingAppNode,
+): created is RenderingAppNode => {
+  return (created as RenderingAppNode).node != null;
 };

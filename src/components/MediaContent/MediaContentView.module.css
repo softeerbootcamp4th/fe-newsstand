@@ -1,0 +1,46 @@
+.container {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  gap: 32px;
+}
+
+.main-news-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+}
+
+.main-news-box a {
+  color: var(--text-text-strong, #14212B);
+}
+
+
+.sub-news-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+}
+
+.sub-news-title {
+  color: var(--text-text-bold, #4B5966);
+}
+
+.news-title {
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.news-title:hover {
+  text-decoration: underline;
+}
+
+.news-info {
+  color: var(--text-text-weak, #879298);
+}
+
+.img {
+  aspect-ratio: 16 / 10;
+}

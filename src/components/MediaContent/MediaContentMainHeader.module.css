@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  gap: 16px;
+  align-items: center
+}
+
+.logo {
+  height: 20px;
+  object-fit: contain;
+
+  width: auto;
+}
+
+.date {
+  color: var(--text-text-default, #5F6E76);
+
+}
+
+.subscribe-button {
+  color: var(--text-text-weak, #879298);
+  background: var(--surface-surface-alt, #F5F7F9);
+  border: 1px solid var(--border-border-default, #D2DAE0);
+  padding: 6px;
+  display: flex;
+  gap: 2px;
+  border-radius: 50px;
+  cursor: pointer;
+}

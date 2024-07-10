@@ -5,19 +5,24 @@ import {
   CreatedAppElement,
   RenderingAppComponent,
   RenderingAppElement,
+  RenderingAppNode,
   isCreatedAppComponent,
+  isRenderingAppComponent,
+  isRenderingAppNode,
 } from "./renderer";
 import { isPropsEqual } from "./utils";
 
 let currentKey: string = "";
 let initComponent: AppComponent | null = null;
 let _root: HTMLElement | null = null;
+let isRendering = false;
+const updateQueue = new Deque<() => void>();
 const statesMap = new Map<string, Array<unknown>>();
 const stateIdxMap = new Map<string, number>();
 const effectCleanupsMap = new Map<string, Array<() => void>>();
-const effectDepsMap = new Map<string, Array<unknown>>();
+const effectDepsMap = new Map<string, Array<Array<unknown> | null>>();
 const effectIdxMap = new Map<string, number>();
-
+const cachedProps = new Map<string, object>();
 export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
   if (!cur || !nxt) {
     return;
@@ -29,7 +34,7 @@ export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
     }
     return;
   }
-  const forceUpdate = nxt.getAttribute("forced") === "true";
+  const forceUpdate = false; //nxt.getAttribute("forced") === "true";
   if (cur.tagName !== nxt.tagName || forceUpdate) {
     cur.replaceWith(nxt);
     return;
@@ -49,6 +54,9 @@ export const diffingRender = (cur: ChildNode, nxt: ChildNode) => {
     if (!nxtAttrs.getNamedItem(name)) {
       cur.removeAttribute(name);
     }
+  }
+  if (cur.innerHTML !== nxt.innerHTML) {
+    cur.innerHTML = nxt.innerHTML;
   }
 
   // Update children
@@ -73,19 +81,29 @@ export const useEffect = (
   effect: () => void | (() => void),
   deps?: Array<unknown>,
 ) => {
-  const currentDeps = deps ?? [];
-  const prevDeps = effectDepsMap.get(currentKey);
+  const currentDeps = deps ?? null;
+
   if (!effectIdxMap.has(currentKey)) {
     effectIdxMap.set(currentKey, 0);
   }
   if (!effectCleanupsMap.has(currentKey)) {
     effectCleanupsMap.set(currentKey, []);
   }
+  if (!effectDepsMap.has(currentKey)) {
+    effectDepsMap.set(currentKey, []);
+  }
+  const effectDeps = effectDepsMap.get(currentKey)!;
   const effectsCleanups = effectCleanupsMap.get(currentKey)!;
   const effectIdx = effectIdxMap.get(currentKey)!;
-  if (isPropsEqual(prevDeps, currentDeps)) {
+  if (effectDeps.length <= effectIdx) {
+    effectDeps.push(null);
+  }
+  const prevDeps = effectDeps[effectIdx];
+  if (currentDeps != null && isPropsEqual(prevDeps, currentDeps)) {
+    effectIdxMap.set(currentKey, effectIdx + 1);
     return;
   }
+  effectDeps[effectIdx] = currentDeps;
   const cleanup = effect();
 
   if (effectIdx >= effectsCleanups.length) {
@@ -98,7 +116,6 @@ export const useEffect = (
       effectsCleanups[effectIdx] = cleanup;
     }
   }
-  effectDepsMap.set(currentKey, currentDeps);
 
   effectIdxMap.set(currentKey, effectIdx + 1);
 };
@@ -117,6 +134,11 @@ export const useState = <T>(initialState: T) => {
   }
   const state = states[stateIdx];
   const setState = (newState: T) => {
+    if (isRendering) {
+      updateQueue.pushBack(() => {
+        states[stateIdx] = newState;
+      });
+    }
     states[stateIdx] = newState;
     render();
   };
@@ -132,85 +154,138 @@ const createShadowRoot = () => {
 
 const preRender = () => {
   stateIdxMap.clear();
+  effectIdxMap.clear();
+};
+
+const afterRender = () => {
+  isRendering = false;
+  if (updateQueue.length == 0) {
+    return;
+  }
+  while (updateQueue.length) {
+    updateQueue.popFront()!();
+  }
+  render();
 };
 export const render = () =>
   requestAnimationFrame(() => {
     const shadowRoot = createShadowRoot();
     preRender();
-    const renderQueue = new Deque<RenderingAppComponent>();
+    const renderQueue = new Deque<
+      RenderingAppComponent | RenderingAppElement | RenderingAppNode
+    >();
     renderQueue.pushBack({
       render: initComponent!,
       props: {},
       parent: shadowRoot,
       renderName: "App",
       key: "App",
+      forced: false,
     });
     while (renderQueue.length) {
-      const { render: component, props, parent, key } = renderQueue.popFront()!;
-      currentKey = key;
-      const renderElementQueue = new Deque<RenderingAppElement>();
-      const createdComponent = component(props);
-
-      if (isCreatedAppComponent(createdComponent)) {
+      const cur = renderQueue.popFront()!;
+      if (isRenderingAppComponent(cur)) {
+        const { render: component, props, parent, key, forced } = cur;
+        const prevProps = cachedProps.get(key);
+        let curForced = forced;
+        if (!curForced && !isPropsEqual(prevProps, props)) {
+          curForced = true;
+        }
+        currentKey = key;
+        const createdComponent = component(props);
+        if (createdComponent == null || createdComponent === false) {
+          continue;
+        }
+        if (
+          typeof createdComponent === "string" ||
+          typeof createdComponent === "number"
+        ) {
+          renderQueue.pushFront({
+            node: document.createTextNode(`${createdComponent}`),
+            parent,
+          });
+          continue;
+        }
+        if (isCreatedAppComponent(createdComponent)) {
+          renderQueue.pushBack({
+            render: createdComponent.render,
+            props: createdComponent.props,
+            parent,
+            renderName: createdComponent.renderName,
+            key: key,
+            forced: curForced,
+          });
+          continue;
+        }
         renderQueue.pushFront({
-          render: createdComponent.render,
-          props: createdComponent.props,
+          ...createdComponent,
+          parentKey: key,
+          componentKey: key,
           parent,
-          renderName: createdComponent.renderName,
-          key,
+          forced: curForced,
         });
         continue;
       }
-      renderElementQueue.pushBack({
-        ...createdComponent,
-        key,
+
+      if (isRenderingAppNode(cur)) {
+        const { node, parent } = cur;
+        parent.appendChild(node);
+        continue;
+      }
+      const {
+        element,
         parent,
-      });
+        eventListeners,
+        children,
+        parentKey,
+        componentKey,
+        forced,
+      } = cur;
 
-      while (renderElementQueue.length) {
-        const {
-          element,
-          parent,
-          eventListeners,
-          children,
-          key: parentKey,
-        } = renderElementQueue.popFront()!;
-        if (element == null) {
-          continue;
-        }
-        const idx = parent.children.length;
-        const currentKey = parentKey + `_${element.tagName}[${idx}]`;
-        element.setAttribute("key", currentKey);
-        parent.appendChild(element);
-        eventMap.set(currentKey, eventListeners);
-        (children ?? []).forEach((child, index) => {
-          if (typeof child === "string" || typeof child === "number") {
-            element.appendChild(document.createTextNode(child.toString()));
-            return;
-          }
-          if (child === false || child == null) {
-            return;
-          }
-
-          if (isCreatedAppComponent(child)) {
-            renderQueue.pushBack({
-              render: child.render,
-              props: child.props,
-              renderName: child.renderName,
-              parent: element,
-              key: `${key}-${child.renderName}[${index}]`,
-            });
-            return;
-          }
-          renderElementQueue.pushBack({
-            ...(child as CreatedAppElement),
-            key: currentKey,
+      if (element == null) {
+        continue;
+      }
+      const idx = parent.children.length;
+      const curKey = parentKey + `_${element.tagName}[${idx}]`;
+      element.setAttribute("key", curKey);
+      element.setAttribute("forced", `${forced}`);
+      parent.appendChild(element);
+      eventMap.set(curKey, eventListeners);
+      (children ?? []).forEach((child, index) => {
+        if (typeof child === "string" || typeof child === "number") {
+          renderQueue.pushBack({
+            node: document.createTextNode(String(child)),
             parent: element,
           });
+          return;
+        }
+        if (child === false || child == null) {
+          return;
+        }
+
+        if (isCreatedAppComponent(child)) {
+          renderQueue.pushBack({
+            render: child.render,
+            props: child.props,
+            renderName: child.renderName,
+            parent: element,
+            key: `${componentKey}-${child.renderName}[${index}]`,
+            forced: forced,
+          });
+          return;
+        }
+        renderQueue.pushBack({
+          ...(child as CreatedAppElement),
+          parentKey: curKey,
+          componentKey: componentKey,
+          parent: element,
+          forced: forced,
         });
-      }
+      });
     }
+    isRendering = true;
     diffingRender(_root!, shadowRoot);
+    afterRender();
   });
 
 export const init = (app: AppComponent, root: HTMLElement) => {

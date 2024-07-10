@@ -1,9 +1,11 @@
 import { News } from "@/models/News";
+import { sleep } from "@/utils/sleep";
 
-export const getMediaRecentNewsByCategory = (
+export const getMediaRecentNewsByCategory = async (
   mediaId: number,
   categoryId: number,
-): News[] => {
+): Promise<News[]> => {
+  await sleep();
   return [
     {
       title: `${mediaId} ${categoryId} 뉴스 test1`,
