@@ -1,3 +1,4 @@
+import { subscribedMediaList } from "../store/subscribed-media.js";
 import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
 import { DATA_COUNT_PER_GRID, DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
@@ -130,6 +131,7 @@ function renderGridMedia(page) {
 
     gridListDOM.innerHTML = mediaListDOMString;
 
+    subscribedMediaList.addCallback(() => renderGridMedia(page));
     setArrowDisplayInGrid(page);
 }
 
@@ -173,7 +175,8 @@ function renderListMedia(categoryIdx, mediaIdx) {
     const contentsString = getSelectedCategoryContentsDOMString(category[categoryIdx].media[mediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(category[categoryIdx].media[mediaIdx], () => renderListMedia(categoryIdx, mediaIdx));
+    subscribedMediaList.addCallback(() => renderListMedia(categoryIdx, mediaIdx));
+    setSubscribeButtonEvent(category[categoryIdx].media[mediaIdx]);
 }
 
 /**
@@ -292,8 +295,6 @@ function clickGridList(e) {
     if (displayMode === "list-display") {
         return;
     }
-    const gridBoxDOM = document.querySelector(".media-contents__grid-box");
-    const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
 
-    return clickGridItem(e, mediaListData.data, () => renderGridMedia(currentPage));
+    return clickGridItem(e, mediaListData.data);
 }

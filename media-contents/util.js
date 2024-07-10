@@ -1,4 +1,4 @@
-import { getItem, setItem } from "../utils/local-storage.js";
+import { subscribedMediaList } from "../store/subscribed-media.js";
 import { renderAlert } from "../utils/render-alert.js";
 import { renderSnackbar } from "../utils/render-snackbar.js";
 
@@ -45,8 +45,7 @@ export function getUnselectedCategoryItemDOMString(categoryName, categoryIdx) {
 export function getSelectedCategoryContentsDOMString(media) {
     const { id, iconUrl, editDate, imageContent, contents } = media;
 
-    const subscribeList = getItem("newsstand-subscribe") ?? [];
-    const isSubscribed = subscribeList.includes(id);
+    const isSubscribed = subscribedMediaList.isSubscribed(id);
 
     return `
     <section class="flexbox__flex-start--center gap16">
@@ -88,33 +87,29 @@ export function getSelectedCategoryContentsDOMString(media) {
 /**
  * @description 구독/구독취소 이벤트 등록하는 함수
  */
-export function setSubscribeButtonEvent(media, triggerRender) {  
+export function setSubscribeButtonEvent(media) {
     const subscribeButtonDOM = document.querySelector(`.subscribe-button__${media.id}--subscribe`);
     if (subscribeButtonDOM) {
-        const subscribeMediaId = parseInt(subscribeButtonDOM.dataset.mediaId);
-        subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(subscribeMediaId, triggerRender));
+        subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(media));
     }
 
     const unsubscribeButtonDOM = document.querySelector(`.subscribe-button__${media.id}--unsubscribe`);
     if (unsubscribeButtonDOM) {
-        unsubscribeButtonDOM.addEventListener("click", () => clickUnsubscribeButton(media, triggerRender));
+        unsubscribeButtonDOM.addEventListener("click", () => clickUnsubscribeButton(media));
     }
 }
 
 /**
  * @description 언론사 구독 이벤트 등록하는 함수
  */
-function clickSubscribeButton(subscribeMediaId, triggerRender) {
-    const subscribeList = getItem("newsstand-subscribe") ?? [];
-    setItem("newsstand-subscribe", [...subscribeList, subscribeMediaId]);
-
+function clickSubscribeButton(media) {
+    subscribedMediaList.addMedia(media)
     renderSnackbar("내가 구독한 언론사에 추가되었습니다.", 'subscribe');
-    triggerRender();
 }
 /**
  * @description 언론사 구독 취소 이벤트 등록하는 함수
  */
-function clickUnsubscribeButton(media, triggerRender) {
+function clickUnsubscribeButton(media) {
     const mediaName = media.name;
     const id = media.id;
 
@@ -124,12 +119,8 @@ function clickUnsubscribeButton(media, triggerRender) {
         bodyDOM.removeChild(alertDOM);
     }
     function clickUnsubscribe() {
-        const subscribeList = getItem("newsstand-subscribe") ?? [];
-        const newSubscribeList = subscribeList.filter((subscribedId) => subscribedId !== id);
-        setItem("newsstand-subscribe", newSubscribeList);
-
+        subscribedMediaList.deleteMedia(media);
         clickCancel();
-        triggerRender();
     }
 
     renderAlert(`{${mediaName}}을(를)\n구독해지하시겠습니까?`, id, "예, 해지합니다", "아니오", clickUnsubscribe, clickCancel, clickCancel)
@@ -147,8 +138,7 @@ export function getDisplayMode() {
  * @description 그리드 언론사 아이템 DOM string을 반환해주는 함수
  */
 export function getGridMediaItem(media) {
-    const subscribeList = getItem("newsstand-subscribe") ?? [];
-    const isSubscribed = subscribeList.includes(media.id);
+    const isSubscribed = subscribedMediaList.isSubscribed(media.id);
 
     return `<li class="media-contents__grid-item">
                 <img class="media-contents__grid-item-icon" alt="${media.name} 언론사 아이콘" src="${media.icon}"/>
@@ -169,21 +159,20 @@ export function getGridMediaItem(media) {
 /**
  * @description 그리드 보기에서 구독/구독취소 이벤트 등록하는 함수
  */
-export function clickGridItem(e, media, renderTrigger) {
+export function clickGridItem(e, media) {
     const mediaId = getMediaId(e.target);
 
     if (mediaId === -1) {
         return;
     }
 
-    const subscribeList = getItem("newsstand-subscribe") ?? [];
-    const isSubscribed = subscribeList.includes(mediaId);
+    const isSubscribed = subscribedMediaList.isSubscribed(mediaId);
+    const subscribedMedia = media.find((_media) => _media.id === mediaId);
 
     if (isSubscribed) {
-        const subscribedMedia = media.find((_media) => _media.id === mediaId);
-        clickUnsubscribeButton(subscribedMedia, renderTrigger);
+        clickUnsubscribeButton(subscribedMedia);
     } else {
-        clickSubscribeButton(mediaId, renderTrigger);
+        clickSubscribeButton(subscribedMedia);
     }
 }
 
