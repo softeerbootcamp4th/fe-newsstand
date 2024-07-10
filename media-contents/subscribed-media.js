@@ -1,6 +1,6 @@
+import { subscribedMediaList } from "../store/subscribed-media.js";
 import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
-import { getItem } from "../utils/local-storage.js";
 import { DATA_COUNT_PER_GRID, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
 import { 
     getSelectedCategoryItemDOMString,
@@ -12,14 +12,14 @@ import {
     clickGridItem,
 } from "./util.js";
 
-let mediaData = {};
+let mediaDetailData = {};
 let mediaListData = {};
 
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
 export async function renderSubscribedMedia() {
-    mediaData = await getData('../static/data/media-detail.json');
+    mediaDetailData = await getData('../static/data/media-detail.json');
     mediaListData = await getData('../static/data/media.json');
 
     const displayMode = getDisplayMode();
@@ -103,8 +103,7 @@ function setArrowDisplayInGrid(page) {
     const prevMediaButton = document.querySelector(".media-contents__left-button");
     const nextMediaButton = document.querySelector(".media-contents__right-button");
 
-    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
-    const maxPage = Math.floor((subscribeIdList.length - 1) / DATA_COUNT_PER_GRID);
+    const maxPage = Math.floor((subscribedMediaList.getSubscribedMediaLength() - 1) / DATA_COUNT_PER_GRID);
 
     if (page === 0) {
         prevMediaButton.classList.add("non-display");
@@ -124,16 +123,14 @@ function setArrowDisplayInGrid(page) {
 function renderGridMedia(page) {
     const gridListDOM = document.querySelector(".media-contents__grid-list");
 
-    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
-    const media = subscribeIdList.map((subscribedId) => mediaListData.data.find((_media) => _media.id === subscribedId));
-
     let mediaListDOMString = '';
-    media.slice(page * DATA_COUNT_PER_GRID, (page + 1) * DATA_COUNT_PER_GRID).forEach((_media) => {
+    subscribedMediaList.data.slice(page * DATA_COUNT_PER_GRID, (page + 1) * DATA_COUNT_PER_GRID).forEach((_media) => {
         mediaListDOMString += getGridMediaItem(_media);
     });
 
     gridListDOM.innerHTML = mediaListDOMString;
 
+    subscribedMediaList.setCallback(() => renderGridMedia(page));
     setArrowDisplayInGrid(page);
 }
 
@@ -141,14 +138,11 @@ function renderGridMedia(page) {
  * @description 내가 구독한 언론사를 리스트 형식으로 렌더링하는 함수
  */
 function renderListMedia(mediaId) {
-    const media = mediaData.data;
-    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
-    const subscribedMediaList = subscribeIdList.map((subscribed) => media.find((_media) => _media.id === subscribed));
-
     const mediaListDOM = document.querySelector(".media-contents__category-list");
     const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
+    const subscribedMediaDetailList = subscribedMediaList.data.map((subscribed) => mediaDetailData.data.find((_media) => _media.id === subscribed.id))
 
-    if (subscribedMediaList.length === 0) {
+    if (subscribedMediaList.getSubscribedMediaLength() === 0) {
         mediaListDOM.innerHTML = "";
         contentsBoxDOM.innerHTML = "";
         return;
@@ -157,12 +151,12 @@ function renderListMedia(mediaId) {
     /**
      * 언론사 카테고리 렌더링
      */
-    const selectedMediaId = mediaId ?? subscribeIdList[0];
-    const _selectedMediaIdx = subscribedMediaList.findIndex((media) => media.id === selectedMediaId);
+    const selectedMediaId = mediaId ?? subscribedMediaList.data[0].id;
+    const _selectedMediaIdx = subscribedMediaList.data.findIndex((media) => media.id === selectedMediaId);
     const selectedMediaIdx = _selectedMediaIdx === -1 ? 0 : _selectedMediaIdx;
 
     let mediaListDOMString = ''
-    subscribedMediaList.forEach((_media, _mediaIdx) => {
+    subscribedMediaDetailList.forEach((_media, _mediaIdx) => {
         if (_mediaIdx === selectedMediaIdx) {
             /**
              * 선택된 카테고리인 경우
@@ -187,10 +181,11 @@ function renderListMedia(mediaId) {
     /**
      * 선택된 카테고리의 콘텐츠 렌더링
      */
-    const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaList[selectedMediaIdx]);
+    const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaDetailList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    setSubscribeButtonEvent(subscribedMediaList[selectedMediaIdx], () => renderListMedia(selectedMediaId));
+    subscribedMediaList.setCallback(() => renderListMedia(selectedMediaId));
+    setSubscribeButtonEvent(subscribedMediaList.data[selectedMediaIdx]);
 }
 
 /**
@@ -208,10 +203,7 @@ function clickMediaList(e) {
         return;
     }
 
-    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
-    const mediaId = subscribeIdList.find((_, idx) => idx === mediaIdx);
-
-    renderListMedia(mediaId);
+    renderListMedia(subscribedMediaList.data[mediaIdx].id);
 }
 
 /**
@@ -242,10 +234,10 @@ function navigatePrevMedia() {
 /**
  * @description 리스트 보기에서 prev, next 버튼 클릭 동작을 수행하는 함수
  */
-function clickListNavigationButton(step) {
-    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
+function clickListNavigationButton(step) { 
+    const mediaLength = subscribedMediaList.getSubscribedMediaLength();
 
-    if (subscribeIdList.length === 0) {
+    if (mediaLength === 0) {
         return;
     }
 
@@ -260,8 +252,8 @@ function clickListNavigationButton(step) {
         /**
          * 첫 카테고리에 다다른 경우 마지막 카테고리로 이동
          */
-        nextCategoryIdx = subscribeIdList.length - 1;
-    } else if (nextCategoryIdx === subscribeIdList.length) {
+        nextCategoryIdx = mediaLength - 1;
+    } else if (nextCategoryIdx === mediaLength) {
         /**
          * 마지막 카테고리에 다다른 경우 첫 카테고리로 이동
          */
@@ -269,8 +261,8 @@ function clickListNavigationButton(step) {
     }
 
     selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
-    const nextCategoryId = subscribeIdList[nextCategoryIdx];
-    renderListMedia(nextCategoryId);
+    const nextCategory = subscribedMediaList.data[nextCategoryIdx];
+    renderListMedia(nextCategory.id);
 }
 
 /**
@@ -280,8 +272,7 @@ function clickGridNavigationButton(step) {
     const gridBoxDOM = document.querySelector(".media-contents__grid-box");
     const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
 
-    const subscribeIdList = getItem("newsstand-subscribe") ?? [];
-    const media = subscribeIdList.map((subscribedId) => mediaListData.data.find((_media) => _media.id === subscribedId));
+    const media = subscribedMediaList.data.map((subscribed) => mediaListData.data.find((_media) => _media.id === subscribed.id));
     const mediaLength = media.length;
     const nextPage = getBoundNumber(currentPage + step, 0, Math.floor((mediaLength - 1) / DATA_COUNT_PER_GRID));
 
