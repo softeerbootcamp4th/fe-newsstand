@@ -26,8 +26,6 @@ export const AutoRollingNews = ({ news, handleHoverAction }) => {
   function updateProps(updateNews) {
     news = updateNews;
     render();
-
-    console.log(news, handleHoverAction);
 }
 
 return {
