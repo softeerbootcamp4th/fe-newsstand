@@ -6,7 +6,6 @@ import { createTabItem } from "./tabItem.js";
 
 /**
  * @param {MainNewsState} state
- * @param {string} companyName
  */
 export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDataType, data }) {
   const categories = document.createElement("div");
@@ -17,15 +16,13 @@ export function createTab({ currentCategoryIndex, currentCompanyIndex, currentDa
       const categoryElement = createTabItem({
         innerText: category,
         isSelected: categoryIndex === currentCategoryIndex,
-        children: `<p>${currentCompanyIndex + 1}/${
-          data[currentCategoryIndex].companies.length
-        }</p>`,
+        children: `${currentCompanyIndex + 1}/${data[currentCategoryIndex].companies.length}`,
       });
       categoryElement.addEventListener("click", () => updateCompanyType(categoryIndex));
       categories.appendChild(categoryElement);
     });
   } else {
-    data.forEach(({ companyName }, companyIndex) => {
+    data.forEach(({ name: companyName }, companyIndex) => {
       const companyElement = createTabItem({
         innerText: companyName,
         isSelected: companyIndex === currentCompanyIndex,

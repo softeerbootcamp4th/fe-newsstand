@@ -1,15 +1,17 @@
-import { createButton } from "../../../../../components/button/button.js";
 import { Company, NewsItem } from "../../../../../types/news.js";
+import { createSubscriptionButton } from "../../../../subscriptionButton/components/subscriptionButton.js";
+import { getObjectSubscribedCompanies } from "../../../../subscriptionButton/utils/localStorage.js";
 
 /**
  * @param {Company} company
+ * @param {"all-news-tab" | "subscribed-news-tab"} dataType
  * @returns {HTMLDivElement}
  */
-export function createCompany(company) {
+export function createCompany(company, dataType) {
   const container = document.createElement("div");
   container.className = "list-company-container border-box";
 
-  container.appendChild(createHeader(company));
+  container.appendChild(createHeader(company, dataType));
   container.insertAdjacentHTML("beforeend", createNewsContents(company));
 
   return container;
@@ -17,19 +19,23 @@ export function createCompany(company) {
 
 /**
  * @param {Company} company
+ * @param {"all-news-tab" | "subscribed-news-tab"} dataType
  * @returns {HTMLDivElement}
  */
-function createHeader(company) {
-  const { companyLogoUrl, companyName, updatedDate } = company;
+function createHeader(company, dataType) {
+  const { logoUrl, name, updatedDate } = company;
 
   const header = document.createElement("div");
   header.className = "company-container-header display-medium12";
 
   header.innerHTML = `
-    <img src=${companyLogoUrl} alt='${companyName} 로고'/>
+    <img src=${logoUrl} alt='${name} 로고'/>
     <time>${formatDateString(updatedDate)}</time>
   `;
-  header.appendChild(createButton({ iconId: "plus", text: "구독하기" }));
+
+  const subscriptions = getObjectSubscribedCompanies();
+  const isSubscribed = subscriptions.hasOwnProperty(company.id);
+  header.appendChild(createSubscriptionButton({ company, isSubscribed, dataType }));
 
   return header;
 }
@@ -39,11 +45,11 @@ function createHeader(company) {
  * @returns {string}
  */
 function createNewsContents(company) {
-  const { newsItems, companyName, mainNews } = company;
+  const { newsItems, name, mainNews } = company;
 
   return `<div class='company-container-contents'>
             ${createMainNews(mainNews)}
-            ${createNewsList(newsItems, companyName)}
+            ${createNewsList(newsItems, name)}
           </div>`;
 }
 
@@ -62,16 +68,16 @@ function createMainNews(mainNews) {
 
 /**
  * @param {NewsItem[]} newsList
- * @param {string} companyName
+ * @param {string} name
  * @returns {string}
  */
-function createNewsList(newsList, companyName) {
+function createNewsList(newsList, name) {
   const newsItems = newsList.map(createNewsTitle).join("");
 
   return `
    <ul class="news-list">
      ${newsItems}
-     <p class="display-medium14">${companyName}에서 직접 편집한 뉴스입니다.</p>
+     <p class="display-medium14">${name}에서 직접 편집한 뉴스입니다.</p>
    </ul>
  `;
 }
