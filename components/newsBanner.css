@@ -23,7 +23,7 @@
 }
 
 .bannerList li.prev {
-  top: 50px;
+  top: -50px;
   transition: top 0.5s ease;
 }
 .bannerList li.current {
@@ -31,7 +31,7 @@
   transition: top 0.5s ease;
 }
 .bannerList li.next {
-  top: -50px;
+  top: 50px;
 }
 
 .banner_media {

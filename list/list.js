@@ -1,6 +1,6 @@
-import { deleteNav, generateNav, setProgress } from "../components/nav.js";
+import { deleteNav, generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
-import { getTodayString, deleteNodeById } from "../utils/utils.js";
+import { getTodayString } from "../utils/utils.js";
 
 const headlineData = [
   {
@@ -93,6 +93,14 @@ function initialize() {
     });
   });
 }
+const leftButton = document.querySelector(".leftButton");
+const rightButton = document.querySelector(".rightButton");
+
+leftButton.addEventListener("click", movePrevMedia);
+rightButton.addEventListener("click", moveNextMedia);
+
+function movePrevMedia() {}
+function moveNextMedia() {}
 
 // 초기화
 initialize();

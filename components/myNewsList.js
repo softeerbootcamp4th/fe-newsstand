@@ -1,14 +1,13 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
-import { setProgress } from "./nav.js";
-import { categoryData, getMaxMediaLength } from "../resources/data.js";
-import "./carousel.js";
+import { setRightArrow } from "./nav.js";
+import { myData } from "../resources/data.js";
 
 /**
  * 언론사 별 뉴스 목록을 container하위에 생성
  * @param {Node} container
  * @param {Object} content {media: String, news: Array}
  */
-function generateNewsList(container, content) {
+function generateMyNewsList(container, content) {
   const list = generateNode("ul", "newsList");
 
   content.news.slice(0, 6).forEach((category) => {
@@ -39,24 +38,23 @@ function createFooterElement(container, media) {
  * @param {int} currentCategoryIndex
  * @param {int} currentMediaIndex
  */
-export function updateNewsList(
-  category,
-  currentCategoryIndex,
-  currentMediaIndex
-) {
+export function updateMyNewsList(currentCategoryIndex) {
   const newsListContainer = deleteNodeById("newsList_container");
-  const mediaList = categoryData[category].map((element) => element.media);
-  const contentList = categoryData[category];
+  const mediaList = myData.map((element) => element.media);
 
-  setProgress(
-    currentCategoryIndex,
-    currentMediaIndex,
-    getMaxMediaLength(category)
-  );
+  setMedia(mediaList, currentCategoryIndex);
 
-  setMedia(mediaList, currentMediaIndex);
+  setRightArrow(currentCategoryIndex);
 
-  generateNewsList(newsListContainer, contentList[currentMediaIndex]);
+  generateMyNewsList(newsListContainer, myData[currentCategoryIndex]);
+}
+
+/**
+ * myData의 길이 가져오기
+ * @returns myData의 길이
+ */
+export function getMyDataLength() {
+  return myData.length;
 }
 
 /**
