@@ -3,7 +3,7 @@
 @import "./newsList/newsList.css";
 @import "./pressMenu/pressMenu.css";
 
-.content-container {
+.app-container {
     width: calc(100% - 208px);
     height: 100%;
     margin: 0 auto;
