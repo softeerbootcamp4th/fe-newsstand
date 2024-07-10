@@ -218,6 +218,10 @@ export function addMyData(object) {
   myData.add(object);
 }
 
+export function removeMyData(object) {
+  myData.delete(object);
+}
+
 export function getMyDataAsArray() {
   const set = myData;
   return [...set];

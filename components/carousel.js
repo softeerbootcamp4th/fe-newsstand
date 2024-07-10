@@ -110,8 +110,8 @@ function handleMoveNext(state, getCategoryLength, getMediaLengthByIndex) {
  * 페이지가 넘어갈 때 progress animation을 재시작
  */
 function resetCover() {
-  console.log(state);
   const cover = document.querySelector(".contentList li.selected .cover");
+  if (!cover) return;
   cover.classList.remove("cover");
   void cover.offsetWidth;
   cover.classList.add("cover");

@@ -8,6 +8,7 @@ import {
   getMyListLength,
   categoryData,
   addMyData,
+  removeMyData,
 } from "../resources/data.js";
 import state from "../list/state.js";
 import store from "../utils/stoageManager.js";
@@ -84,9 +85,7 @@ function generateNavForNewsList() {
     state.currentMediaIndex
   );
 
-  const sub = document.querySelector(".subscribe");
-
-  sub.addEventListener("click", addMediaToMyList);
+  generateSubscribe();
 
   const navElementNodes = document.querySelectorAll(".contentList li");
 
@@ -95,6 +94,23 @@ function generateNavForNewsList() {
   startNewsInterval();
 }
 
+/**
+ * 구독 버튼에 이벤트 추가
+ */
+function generateSubscribe() {
+  const contentTitle = document.querySelector(".content_title");
+  contentTitle.lastChild.remove();
+  const sub = document.createElement("button");
+  sub.classList.add("subscribe");
+  contentTitle.appendChild(sub);
+
+  sub.innerHTML = "+ 구독하기";
+  sub.addEventListener("click", addMediaToMyList);
+}
+
+/**
+ * 구독 버튼 로직
+ */
 function addMediaToMyList() {
   store.addItemToSet(
     "myList",
@@ -115,11 +131,44 @@ function addMediaToMyList() {
 function generateNavForMyList() {
   updateMyNewsList(state.currentCategoryIndex);
 
+  generateUnsubscribe();
+
   const navElementNodes = document.querySelectorAll(".contentList li");
 
   setupNavElements(navElementNodes, startMyNewsInterval, updateMyMedia);
 
   startMyNewsInterval();
+}
+
+/**
+ * 구독해지 버튼에 이벤트 추가
+ */
+function generateUnsubscribe() {
+  const contentTitle = document.querySelector(".content_title");
+  contentTitle.lastChild.remove();
+  const sub = document.createElement("button");
+  sub.classList.add("subscribe");
+  contentTitle.appendChild(sub);
+
+  sub.innerHTML = "구독 해지";
+  sub.addEventListener("click", removeMediaFromMyList);
+}
+
+/**
+ * 구독해지 버튼 로직
+ */
+function removeMediaFromMyList() {
+  store.removeItemFromSet(
+    "myList",
+    categoryData[categoryList[state.currentCategoryIndex]][
+      state.currentMediaIndex
+    ].media
+  );
+  removeMyData(
+    categoryData[categoryList[state.currentCategoryIndex]][
+      state.currentMediaIndex
+    ]
+  );
 }
 
 /**
