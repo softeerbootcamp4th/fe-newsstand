@@ -1,7 +1,12 @@
 import { shownewstab } from "../displaynews/displaysubscribe.js";
+import { clickArt } from "../mainscript.js";
+import { animationTimer } from "../progressbar/progressbutton.js";
+import { subProgressTimer } from "../displaynews/displaysubscribe.js";
 
 export const mytabs = () => {
     const datas1 = localStorage.getItem("mysubscribe");
+    clickArt('my-article');
+    clearInterval(animationTimer);
     if (!datas1) {
         console.log('No data found in localStorage');
         const button = document.querySelector(`.news-list-header`);
@@ -26,6 +31,7 @@ export const mytabs = () => {
 export const newstype = ["economy", "broadcast", "internet", "englishnews", "sportsentertain", "magazine", "region"];
 
 export const originaltabs = () => {
+    clearInterval(subProgressTimer);
     const defaultn = document.querySelector(".news-list-header");
     defaultn.innerHTML = 
     "<article class=\"text-button\" id=\"economy\" data-index=\"0\">종합/경제 <span></span></article>"+
