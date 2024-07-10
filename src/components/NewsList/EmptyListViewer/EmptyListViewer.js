@@ -1,14 +1,14 @@
-import "./EmptyNewsViewer.css";
+import "./EmptyListViewer.css";
 
-function EmptyNewsViewer({ $target, position = "beforeend" }) {
+function EmptyListViewer({ $target, position = "beforeend" }) {
   this.$element = document.createElement("article");
-  this.$element.className = "newsViewer";
+  this.$element.className = "listViewer";
   $target.insertAdjacentElement(position, this.$element);
 
   this.render();
 }
 
-EmptyNewsViewer.prototype.render = function () {
+EmptyListViewer.prototype.render = function () {
   this.$element.innerHTML = /* html */ `
     <div class="emptyView">
       <p class="bold">구독한 언론사가 없습니다.</p>
@@ -17,4 +17,4 @@ EmptyNewsViewer.prototype.render = function () {
   `;
 };
 
-export default EmptyNewsViewer;
+export default EmptyListViewer;

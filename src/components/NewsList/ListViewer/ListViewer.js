@@ -1,14 +1,14 @@
-import "./NewsViewer.css";
+import "./ListViewer.css";
 import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
-import ContentsBox from "@/components/NewsList/NewsViewer/ContentsBox/ContentsBox";
+import ContentsBox from "@/components/NewsList/ListViewer/ContentsBox/ContentsBox";
 import { addCompany, getSubscribedCompanies, removeCompany } from "@/data/storageHandler";
 import { CATEGORIES } from "@/data/constants";
 import { getNews } from "@/apis/news";
 import { getSVGTemplate } from "@/components/SVG/SVG";
 import { shuffleArray } from "@/utils/array";
 
-function NewsViewer({
+function ListViewer({
   $target,
   position = "beforeend",
   filter = "category",
@@ -16,7 +16,7 @@ function NewsViewer({
   initialTab = 0,
 }) {
   this.$element = document.createElement("article");
-  this.$element.className = "newsViewer";
+  this.$element.className = "listViewer";
   $target.insertAdjacentElement(position, this.$element);
 
   this.props = {
@@ -40,7 +40,7 @@ function NewsViewer({
   this.$element.addEventListener("click", this.handleClick.bind(this));
 }
 
-NewsViewer.prototype.setState = function ({ page, tab, news, tabs }) {
+ListViewer.prototype.setState = function ({ page, tab, news, tabs }) {
   this.state = {
     page: page ?? this.state.page,
     tab: tab ?? this.state.tab,
@@ -51,7 +51,7 @@ NewsViewer.prototype.setState = function ({ page, tab, news, tabs }) {
   this.render();
 };
 
-NewsViewer.prototype.loadNews = async function (tab, page) {
+ListViewer.prototype.loadNews = async function (tab, page) {
   if (this.props.filter === "category") {
     const news = await getNews({ category: tab });
 
@@ -70,7 +70,7 @@ NewsViewer.prototype.loadNews = async function (tab, page) {
   this.initializeProgress();
 };
 
-NewsViewer.prototype.handleClick = function (event) {
+ListViewer.prototype.handleClick = function (event) {
   const button = event.target.closest("button");
 
   if (button) {
@@ -98,18 +98,18 @@ NewsViewer.prototype.handleClick = function (event) {
   }
 };
 
-NewsViewer.prototype.handleTabClick = function (tab) {
+ListViewer.prototype.handleTabClick = function (tab) {
   this.loadNews(tab, 0);
 };
 
-NewsViewer.prototype.initializeProgress = function () {
+ListViewer.prototype.initializeProgress = function () {
   if (this.state.tabs.length <= 1) return;
   if (this.timer) clearInterval(this.timer);
 
   this.timer = setInterval(this.progressInterval.bind(this), 1000);
 };
 
-NewsViewer.prototype.progressInterval = function () {
+ListViewer.prototype.progressInterval = function () {
   const $progress = this.$element.querySelector(
     `.tab[data-tab-number="${this.state.tab}"] .progress`
   );
@@ -126,7 +126,7 @@ NewsViewer.prototype.progressInterval = function () {
   $progress.value += 5;
 };
 
-NewsViewer.prototype.nextPage = function () {
+ListViewer.prototype.nextPage = function () {
   const nextPage = this.state.page + 1;
 
   if (nextPage >= this.state.news.length) {
@@ -138,7 +138,7 @@ NewsViewer.prototype.nextPage = function () {
   this.loadNews(this.state.tab, nextPage);
 };
 
-NewsViewer.prototype.prevPage = function () {
+ListViewer.prototype.prevPage = function () {
   const prevPage = this.state.page - 1;
 
   if (prevPage < 0) {
@@ -150,7 +150,7 @@ NewsViewer.prototype.prevPage = function () {
   this.loadNews(this.state.tab, prevPage);
 };
 
-NewsViewer.prototype.nextTab = function () {
+ListViewer.prototype.nextTab = function () {
   const nextTab = this.state.tab + 1;
 
   if (nextTab >= this.state.tabs.length) {
@@ -162,7 +162,7 @@ NewsViewer.prototype.nextTab = function () {
   this.loadNews(nextTab, 0);
 };
 
-NewsViewer.prototype.prevTab = function () {
+ListViewer.prototype.prevTab = function () {
   const prevTab = this.state.tab - 1;
 
   if (prevTab < 0) {
@@ -174,7 +174,7 @@ NewsViewer.prototype.prevTab = function () {
   this.loadNews(prevTab, this.state.news.length - 1);
 };
 
-NewsViewer.prototype.unsubscribeCompany = function (company) {
+ListViewer.prototype.unsubscribeCompany = function (company) {
   removeCompany(company);
 
   if (this.props.filter === "company") {
@@ -194,7 +194,7 @@ NewsViewer.prototype.unsubscribeCompany = function (company) {
   }
 };
 
-NewsViewer.prototype.subscribeCompany = function (company) {
+ListViewer.prototype.subscribeCompany = function (company) {
   addCompany(company);
 
   const tabLength = getSubscribedCompanies().length;
@@ -204,7 +204,7 @@ NewsViewer.prototype.subscribeCompany = function (company) {
   }, 2000);
 };
 
-NewsViewer.prototype.MoveToSelectedTab = function () {
+ListViewer.prototype.MoveToSelectedTab = function () {
   const selectedTab = this.$element.querySelector(".tab.selected");
 
   if (selectedTab) {
@@ -212,7 +212,7 @@ NewsViewer.prototype.MoveToSelectedTab = function () {
   }
 };
 
-NewsViewer.prototype.formatDate = function formatDate(date) {
+ListViewer.prototype.formatDate = function formatDate(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
@@ -222,7 +222,7 @@ NewsViewer.prototype.formatDate = function formatDate(date) {
   return `${year}. ${month}. ${day}. ${hours}:${minutes}`;
 };
 
-NewsViewer.prototype.render = function () {
+ListViewer.prototype.render = function () {
   const { news, tabs, tab, page } = this.state;
 
   this.$element.innerHTML = /* html */ `
@@ -269,4 +269,4 @@ NewsViewer.prototype.render = function () {
   }
 };
 
-export default NewsViewer;
+export default ListViewer;
