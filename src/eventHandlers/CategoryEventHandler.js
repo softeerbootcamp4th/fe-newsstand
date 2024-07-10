@@ -10,11 +10,11 @@ class CategoryEventHandler extends EventsHandler {
      * @param {string} type 
      * @param {Array} [states = 0] - 주입받는 states
      */
-    constructor(type, states = {}) {
+    constructor(states = {}, eventInfo) {
         super();
         this.states = states;
         this.element = document.querySelector(".news-list__navbar");
-        this.addEvents(this.#listener.bind(this), type);
+        this.#addEvents(eventInfo);
     }
 
     /**
@@ -22,12 +22,10 @@ class CategoryEventHandler extends EventsHandler {
      * @param {Function} listener 
      * @param {string} type 
      */
-    addEvents(listener, type) {
-        this.element.addEventListener(type, listener);
-    }
-
-    #listener(event) {
-        this.states.setCategory(Array.from(this.element.children).indexOf(event.target));
+    #addEvents(eventInfos) {
+        eventInfos.forEach(({ type, listener }) => {
+            this.element.addEventListener(type, (event) => listener(event, this.states, this.element));
+        })
     }
 }
 
