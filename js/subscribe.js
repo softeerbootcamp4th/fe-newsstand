@@ -1,16 +1,25 @@
-import { loadCurrentCategoryNews } from "./category.js";
-import { moveToSubscribeTab } from "./mainTab.js";
+import { createCategory, showInformation, loadCurrentCategoryNews } from "./listView.js";
+import { moveToSubscribeTab } from './mainTab.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+
+export function initalizeSubscribeFunction() {
     updateButton();
     handleSubscribeBtnClick();
     handleModalBtnClick();
-});
+}
+
+export const getSubscriptionList = () => {
+    const subscriptionList = localStorage.getItem('subscriptions');
+    return subscriptionList ? JSON.parse(subscriptionList) : [];
+}
+
+
 
 function handleModalBtnClick() {
     const modal = document.querySelector('.modal-container');
     
 
+    /* 구독한 언론사에서 삭제 */
     document.querySelector('.modal-confirm-btn').addEventListener('click', () => {
         const company = document.getElementById('logo').getAttribute('alt');
         modal.classList.remove('show');
@@ -21,17 +30,15 @@ function handleModalBtnClick() {
 
         setSubscriptionList(subscriptor);
         updateButton();
-        moveToSubscribeTab();
+        createCategory(subscriptor.reverse(), 'subscribe');
+        subscriptor.length === 0 ? showInformation() : loadCurrentCategoryNews('subscribe');
+        
     });
 
     document.querySelector('.modal-cancle-btn').addEventListener('click', () => {
         modal.classList.remove('show');
+        document.querySelector('.company-name').remove();
     });
-}
-
-export const getSubscriptionList = () => {
-    const subscriptionList = localStorage.getItem('subscriptions');
-    return subscriptionList ? JSON.parse(subscriptionList) : [];
 }
 
 function setSubscriptionList(subscriptionList) {
@@ -80,3 +87,9 @@ function handleSubscribeBtnClick() {
         }
     });
 }
+document.addEventListener('DOMContentLoaded', () => {
+    if(!document.querySelector('.list-view-container')) return;
+    updateButton();
+    handleSubscribeBtnClick();
+    handleModalBtnClick();
+});
