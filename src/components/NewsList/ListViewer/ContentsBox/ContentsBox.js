@@ -97,7 +97,7 @@ ContentsBox.prototype.render = function () {
 
   this.$element.innerHTML = /* html */ `
     <section class="companyInfo">
-      <img src="${news.companyLogo}"/>
+      <img src="${document.body.classList.contains("dark") ? news.darkLogo : news.lightLogo}"/>
       <p>${this.formatDate(new Date())} 편집</p>
     </section>
 

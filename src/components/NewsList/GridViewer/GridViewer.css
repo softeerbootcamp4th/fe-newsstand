@@ -1,0 +1,39 @@
+.gridViewer {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+
+  height: 388px;
+
+  position: relative;
+
+  border: 0.5px solid var(--border-default);
+
+  box-sizing: border-box;
+
+  background-color: var(--surface-default);
+}
+
+.gridViewer .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0.5px solid var(--border-default);
+
+  &:hover {
+    background-color: var(--surface-alt);
+  }
+}
+
+.cell > img {
+  height: 20px;
+}
+
+.cell:hover > img {
+  display: none;
+}
+
+.cell:not(:hover) > button {
+  display: none;
+}

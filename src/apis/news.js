@@ -9,3 +9,9 @@ export const getNews = ({ category, company }) => {
 
   return http.get(`/news?${params.toString()}`);
 };
+
+export const getAllCompany = (page) => {
+  const params = new URLSearchParams({ _start: page, _limit: 24 });
+
+  return http.get(`/companies?${params.toString()}`);
+};

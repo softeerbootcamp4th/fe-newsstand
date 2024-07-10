@@ -35,10 +35,11 @@
   ],
   "news": [
     {
-      "id": 0,
+      "id": 921,
       "category": 0,
       "company": "아주경제",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/up/2023/0731/nsd133759965.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/921.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/921.png",
       "title": "물가안정·생계비 지원에 5.6조 투입…中企 근로자 소득세 감면 확대",
       "thumbnail": "https://image.dnews.co.kr/photo/photo/2024/07/03/202407031106477860748-2-512953.jpg",
       "headlines": [
@@ -51,10 +52,11 @@
       ]
     },
     {
-      "id": 1,
+      "id": 944,
       "category": 0,
       "company": "나우뉴스",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/up/2022/0804/nsd13457540.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/944.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/944.png",
       "title": "최악의 자책골…“러軍, 자국 영토에 ‘실수로’ 활공폭탄 투하” [핫이슈]",
       "thumbnail": "https://imgnn.seoul.co.kr/img/upload/2024/07/02/SSC_20240702110720.jpg",
       "headlines": [
@@ -67,10 +69,11 @@
       ]
     },
     {
-      "id": 2,
+      "id": 814,
       "category": 0,
       "company": "미주한국일보",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/814.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/814.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/814.png",
       "title": "민주 의원, 첫 공개 사퇴 요구 vs 바이든측 “언론 과잉보도탓”",
       "thumbnail": "http://image.koreatimes.com/article/2024/07/02/20240702145345661.jpg",
       "headlines": [
@@ -83,10 +86,11 @@
       ]
     },
     {
-      "id": 3,
+      "id": 215,
       "category": 1,
       "company": "한국경제TV",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/215.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/215.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/215.png",
       "title": "코스피, 연중최고치 경신…외국인, 선물 1.8조원 '매집'",
       "thumbnail": "https://img.wowtv.co.kr/wowtv_news/dnrs/20240704/B20240704152653633.jpg",
       "headlines": [
@@ -99,10 +103,11 @@
       ]
     },
     {
-      "id": 4,
+      "id": 989,
       "category": 1,
       "company": "TBC뉴스",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/989.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/989.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/989.png",
       "title": "[굿모닝 날씨]낮기온 33도 안팎...저녁부터 장맛비",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9215%2F085559_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -115,10 +120,11 @@
       ]
     },
     {
-      "id": 5,
+      "id": 214,
       "category": 1,
       "company": "MBC뉴스",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/214.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/214.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/214.png",
       "title": "주진우, 채 상병 순직 '장비손괴' 비유‥야당 \"사람이 장비인가\"",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9011%2F164555_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -131,10 +137,11 @@
       ]
     },
     {
-      "id": 6,
+      "id": 818,
       "category": 2,
       "company": "IT동아",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/818.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/818.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/818.png",
       "title": "[리뷰] M4 칩 기반으로 더 얇고 강력해진 아이패드 프로 7세대",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9230%2F112222_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -147,10 +154,11 @@
       ]
     },
     {
-      "id": 7,
+      "id": 952,
       "category": 2,
       "company": "보안뉴스",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/952.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/952.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/952.png",
       "title": "3년 전에 패치된 취약점, 공격자들이 재발굴해 스파이웨어 퍼트리는 중",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9176%2F155601_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -163,10 +171,11 @@
       ]
     },
     {
-      "id": 8,
+      "id": 30,
       "category": 2,
       "company": "전자신문",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/030.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/030.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/030.png",
       "title": "지자체 데이터센터 프로젝트 28개…강원도 압도적",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9026%2F165552_001.png%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -179,10 +188,11 @@
       ]
     },
     {
-      "id": 9,
+      "id": 946,
       "category": 3,
       "company": "연합뉴스",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/946.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/946.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/946.png",
       "title": "DP seeks to pass controversial special probe bill on Marine's death at plenary session",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9169%2F170222_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -195,10 +205,11 @@
       ]
     },
     {
-      "id": 10,
+      "id": 40,
       "category": 3,
       "company": "TheKoreaTimes",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/040.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/040.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/040.png",
       "title": "Korean-British couple left in blind spot for adoption",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9043%2F170222_001.png%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -211,26 +222,28 @@
       ]
     },
     {
-      "id": 11,
+      "id": 326,
       "category": 3,
-      "company": "ECONOTIMES",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/up/2022/0615/nsd7244919.png",
-      "title": "Why Russia still has friends on the world stage",
-      "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9358%2F114241_001.jpg%22&type=nf312_208&service=navermain",
+      "company": "KBS World",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/326.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/326.png",
+      "title": "4 Dead, 1 Missing in Chungcheong, Daegu after",
+      "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0710%2Farticle_img%2Fnew_main%2F9057%2F152600_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
-        "UK Millennials, Gen Z Eye Crypto's Future as Elections Loom",
-        "Crypto Industry Faces $1.5B Loss in 200 Attacks, Ethereum and Bitcoin Hit Hard",
-        "Bitcoin Dips Below $60K Amid $9B Mt. Gox Repayments, Whale Activity Intensifies",
-        "Election 2024: what happens on the big day – and at what time",
-        "Ukraine war: Russia toughens up draft law to round-up more people for the frontlines",
-        "Despite the U.S. Supreme Court’s gift to Donald Trump, he may be barred from Canada as a convicted felon"
+        "Heavy Rain Disrupts Train Services",
+        "Yoon Stresses Strong Power, Solidarity among Value-Sharing Countries",
+        "尹锡悦总统访问美国印度太平洋司令部",
+        "韩统一部：北韩没有提前通知黄江大坝开闸泄洪 正在密切监控",
+        "尹大統領 インド太平洋軍司令部を訪問 韓米防衛体制の重要性強調",
+        "サムスン電子の労組 無期限ストに突入"
       ]
     },
     {
-      "id": 12,
+      "id": 396,
       "category": 4,
       "company": "스포츠월드",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/396.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/396.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/396.png",
       "title": "허웅 前여친 “3억 요구? 다툼 중 나온 말…이후 여행도”",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9120%2F163556_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -243,10 +256,11 @@
       ]
     },
     {
-      "id": 13,
+      "id": 241,
       "category": 4,
       "company": "일간스포츠",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/241.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/241.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/241.png",
       "title": "'얼짱 농구스타'에서 '내조의 여왕'으로 신혜인 \"우리 집은 용인 아방궁\"",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9034%2F163237_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -259,42 +273,45 @@
       ]
     },
     {
-      "id": 14,
+      "id": 440,
       "category": 4,
-      "company": "스포츠춘추",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/up/2022/0116/nsd194523259.png",
-      "title": "두산, 외국인 투수 교체 승부수…MLB 특급 유망주 출신 발라조빅 영입 [춘추 이슈]",
-      "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9175%2F170556_001.jpg%22&type=nf312_208&service=navermain",
+      "company": "티브이데일리",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/440.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/440.png",
+      "title": "“배임=코미디”라 눙친들…민희진vs하이브 장기전 [이슈&톡]",
+      "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0710%2Farticle_img%2Fnew_main%2F9119%2F142605_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
-        "에어쇼, 워터페스티벌, 팬 노래방…2024 KBO 올스타전, 볼거리 풍성 [춘추 이슈]",
-        "르브론 부자, LA 레이커스에서 의기투합…NBA의 새 역사 쓴다 [춘추 NBA]",
-        "팬들이 싫다는데 왜…MLB 올스타전, 4년 연속 ‘나이키표 유니폼’ 논란 [춘추 MLB]",
-        "누가 ‘체인지업’ 원툴이래? 원태인, 컷패스트볼 앞세워 땅꾼 변신 [춘추 집중분석]",
-        "“상하·좌우 평균 4.5mm 이내 정확성 확인” 9개 구장 ABS 테스트 진행 [춘추 이슈]",
-        "“치과 치료받으라”고 6만 달러 내준 오타니의 호의, 그마저도 빼돌린 통역사의 파렴치 [춘추 MLB]"
+        "김경남 잡은 송승헌…‘플레이어2’ 시즌3 예고한 빌런 엔딩 (종영) [종합]",
+        "‘이제 혼자다’ 조윤희 “이동건, 내겐 아이 아빠” [TV온에어]",
+        "'인사이드 아웃2' 개봉 28일째 700만 관객 돌파, 역대 픽사 애니 흥행 2위",
+        "서민재, 남태현 입장 반박 \"데이트 폭력 증거 있어\"",
+        "[TD포토] 스테이씨 아이사 '전엔 몰랐던 볼륨 몸매'",
+        "[TD영상] '빅토리' 이혜리-박세완 \"나이ㆍ키ㆍ몸무게ㆍ발사이즈 모두 똑같은 소울메이트\""
       ]
     },
     {
-      "id": 15,
+      "id": 808,
       "category": 5,
-      "company": "베리타스알파",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/up/2023/0826/nsd0136682.png",
-      "title": "[단독][2024라이덴랭킹] UNIST 세종대 포스텍 KAIST 영남대 톱5.. 논문 수, 서울대 연대 고대 성대 KAIST 톱5",
-      "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9181%2F170556_001.jpg%22&type=nf312_208&service=navermain",
+      "company": "산업일보",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/808.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/808.png",
+      "title": "‘정보보호의 날’ 기념식 개최…“사이버 보안은 우리 모두의 과제”",
+      "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0710%2Farticle_img%2Fnew_main%2F9223%2F152600_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
-        "'최상위 N수 참여' 6월모평 1등급 자연계 '장악'..수학 98.6% 영 72.2% 국 71.4%",
-        "[단독][6월모평 실채점 배치표] 대성학원 자연 서울대 의예 435점, 인문 이대 의예(인문) 416점 ‘최고’",
-        "[2025 6월모평] '역대급 난도 불구 전영역 만점자 6명’.. 표점 최고점 국어148 수학152, 영어 1등급 1.47% ‘역대 최저’",
-        "[단독] 2024 US뉴스 세계대학순위.. 서울대 ‘10년 연속 국내 톱’ 연대 세종대 성대 KAIST 톱5",
-        "[2025수시] '논술 경쟁률 겁먹지 마라'..‘주목! 실질경쟁률’ 중대 의학 203→45대1, 인하대 의예 661→71대1 ‘급감’",
-        "2025대입 '3개월앞두고 역대급' 전형변화 ‘수요자 패닉’.. ‘아예 사라진 사전예고 취지’      "
+        "[포토뉴스]“반도체는 패권이자 국력…K-반도체 전례 없는 지원할 것”",
+        "AI와 OTT의 평행이론?…AI 향한 우려 종식하고 기대 증대하는 방향 찾아야",
+        "‘바이오플러스-인터펙스 코리아’ 개막…“바이오산업 공급망 총망라”",
+        "[한국국제기계박람회]에스디앤티, 대형 AGV 앞세워 물류자동화 시장 적극 공략",
+        "2분기 전력기기 빅3, 현대일렉트릭 ‘맑음’·LS일렉트릭 ‘흐림’·효성중공업 ‘비’",
+        "[포토뉴스] 배터리·금속산업, 순환경제로 글로벌 경쟁력 확보 나서"
       ]
     },
     {
-      "id": 16,
+      "id": 384,
       "category": 5,
       "company": "한국대한신문",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/384.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/384.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/384.png",
       "title": "[2024 전문대 UCN PS/제3차 컨퍼런스] “전문대학 지역사회 영향력 지표 만들어야”…총장단 7박 9일 ‘호주·뉴질랜드 직업교육 탐방’ 대장정 마무리",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9094%2F170556_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -307,10 +324,11 @@
       ]
     },
     {
-      "id": 17,
+      "id": 296,
       "category": 5,
       "company": "코메디닷컴",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/296.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/296.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/296.png",
       "title": "[이거 맞아?] 일본 갈 때 꼭 사오는 '이 파스', 도대체 뭐가 다를까?",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9046%2F112222_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -323,10 +341,11 @@
       ]
     },
     {
-      "id": 18,
+      "id": 332,
       "category": 6,
       "company": "국제신문",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/332.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/332.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/332.png",
       "title": "‘명지 중금속 오염토’ 1100억 들여 덜어낸다",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9071%2F140558_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -339,10 +358,11 @@
       ]
     },
     {
-      "id": 19,
+      "id": 89,
       "category": 6,
       "company": "대전일보",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/089.png",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/089.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/089.png",
       "title": "대통령실 세종 이전 규정 추진...\"2027년 입주\"",
       "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9062%2F171233_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
@@ -355,20 +375,303 @@
       ]
     },
     {
-      "id": 20,
+      "id": 339,
       "category": 6,
-      "company": "경기신문",
-      "companyLogo": "https://s.pstatic.net/static/newsstand/up/2022/1017/nsd20268714.png",
-      "title": "“녹화·녹음 중입니다”…교권 보호 위한 ‘민원면담실’ 조성에 ‘박차’",
-      "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0704%2Farticle_img%2Fnew_main%2F9362%2F170556_001.jpg%22&type=nf312_208&service=navermain",
+      "company": "경기일보",
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/339.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/339.png",
+      "title": "경기도, K-컬처밸리 협약해제 재고 요청에 “CJ, 사업추진 의지 부족”",
+      "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0710%2Farticle_img%2Fnew_main%2F9069%2F135232_001.jpg%22&type=nf312_208&service=navermain",
       "headlines": [
-        "“공영주차장 있으나 마나”...코앞 주차장 대신 불법 주차",
-        "“지원해줘도 안 해요”…지지부진한 민간건축물 내진보강",
-        "\"갑질vs계약위반\"…바디프렌드, 美서 딜러사와 갈등 ",
-        "경기도의회 민주, 원구성 합의에 내부 반발…지도부는 “철회 없다”",
-        "취임 100일 맞은 강호동 농협 회장, 현장경영 행보 강화",
-        "경기 북부 체육인의 오랜 염원…경기체육 북부지원센터 출범"
+        "경찰, '화성 아리셀 공장 화재' 2차 압수수색… 관계자 2명 입건",
+        "경기도의회 민주당, ‘후반기 원 구성 합의 후폭풍’ 해소 국면",
+        "'아리셀 유족' 진입 막던 공무원 4명 부상…화성시 \"원칙적 대응\"",
+        "국힘, ‘안철수 징계 추진'…추가이탈 방지 고육지계",
+        "길가에 방치된 ‘폭탄’…여름철 전동 킥보드 안전 ‘빨간불’",
+        "인천 학익유수지 악취, 연말까지 해결책 찾는다"
       ]
+    }
+  ],
+  "companies": [
+    {
+      "id": 3,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/003.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/003.png"
+    },
+    {
+      "id": 5,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/005.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/005.png"
+    },
+    {
+      "id": 6,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/006.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/006.png"
+    },
+    {
+      "id": 8,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/008.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/008.png"
+    },
+    {
+      "id": 9,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/009.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/009.png"
+    },
+    {
+      "id": 11,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/011.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/011.png"
+    },
+    {
+      "id": 14,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/014.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/014.png"
+    },
+    {
+      "id": 15,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/015.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/015.png"
+    },
+    {
+      "id": 16,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/016.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/016.png"
+    },
+    {
+      "id": 18,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/018.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/018.png"
+    },
+    {
+      "id": 20,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/020.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/020.png"
+    },
+    {
+      "id": 21,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/021.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/021.png"
+    },
+    {
+      "id": 22,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/022.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/022.png"
+    },
+    {
+      "id": 24,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/024.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/024.png"
+    },
+    {
+      "id": 29,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/029.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/029.png"
+    },
+    {
+      "id": 30,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/030.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/030.png"
+    },
+    {
+      "id": 40,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/040.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/040.png"
+    },
+    {
+      "id": 44,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/044.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/044.png"
+    },
+    {
+      "id": 55,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/055.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/055.png"
+    },
+    {
+      "id": 56,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/056.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/056.png"
+    },
+    {
+      "id": 57,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/057.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/057.png"
+    },
+    {
+      "id": 76,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/076.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/076.png"
+    },
+    {
+      "id": 89,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/089.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/089.png"
+    },
+    {
+      "id": 214,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/214.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/214.png"
+    },
+    {
+      "id": 215,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/215.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/215.png"
+    },
+    {
+      "id": 241,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/241.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/241.png"
+    },
+    {
+      "id": 277,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/277.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/277.png"
+    },
+    {
+      "id": 293,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/293.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/293.png"
+    },
+    {
+      "id": 296,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/296.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/296.png"
+    },
+    {
+      "id": 308,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/308.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/308.png"
+    },
+    {
+      "id": 312,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/312.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/312.png"
+    },
+    {
+      "id": 314,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/314.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/314.png"
+    },
+    {
+      "id": 326,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/326.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/326.png"
+    },
+    {
+      "id": 330,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/330.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/330.png"
+    },
+    {
+      "id": 332,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/332.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/332.png"
+    },
+    {
+      "id": 339,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/339.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/339.png"
+    },
+    {
+      "id": 345,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/345.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/345.png"
+    },
+    {
+      "id": 368,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/368.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/368.png"
+    },
+    {
+      "id": 376,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/376.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/376.png"
+    },
+    {
+      "id": 384,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/384.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/384.png"
+    },
+    {
+      "id": 396,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/396.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/396.png"
+    },
+    {
+      "id": 417,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/417.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/417.png"
+    },
+    {
+      "id": 422,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/422.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/422.png"
+    },
+    {
+      "id": 440,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/440.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/440.png"
+    },
+    {
+      "id": 536,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/536.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/536.png"
+    },
+    {
+      "id": 808,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/808.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/808.png"
+    },
+    {
+      "id": 814,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/814.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/814.png"
+    },
+    {
+      "id": 818,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/818.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/818.png"
+    },
+    {
+      "id": 913,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/913.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/913.png"
+    },
+    {
+      "id": 921,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/921.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/921.png"
+    },
+    {
+      "id": 944,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/944.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/944.png"
+    },
+    {
+      "id": 946,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/946.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/946.png"
+    },
+    {
+      "id": 952,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/952.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/952.png"
+    },
+    {
+      "id": 962,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/962.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/962.png"
+    },
+    {
+      "id": 966,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/966.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/966.png"
+    },
+    {
+      "id": 988,
+      "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/988.png",
+      "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/988.png"
     }
   ]
 }
