@@ -1,5 +1,5 @@
-import { createCategory, showInformation, loadCurrentCategoryNews } from "./listView.js";
-import { moveToSubscribeTab } from './mainTab.js';
+import { createCategory, showInformation, loadCurrentCategoryNews } from "./displaylistViewNews.js";
+import { moveToSubscribeTab } from './toggleView.js';
 
 
 export function initalizeSubscribeFunction() {
@@ -12,8 +12,6 @@ export const getSubscriptionList = () => {
     const subscriptionList = localStorage.getItem('subscriptions');
     return subscriptionList ? JSON.parse(subscriptionList) : [];
 }
-
-
 
 function handleModalBtnClick() {
     const modal = document.querySelector('.modal-container');

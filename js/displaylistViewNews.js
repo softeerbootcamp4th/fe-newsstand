@@ -282,8 +282,8 @@ function updateBtnVisibility() {
 }
 
 export const initializeArrowBtn = () => {
-    const leftBtn = document.querySelector('.left-btn');
-    const rightBtn = document.querySelector('.right-btn');
+    const leftBtn = document.querySelector('.left-btn.list');
+    const rightBtn = document.querySelector('.right-btn.list');
 
     leftBtn.addEventListener('click',() => {
         if(curNewsIdx > 0) {
