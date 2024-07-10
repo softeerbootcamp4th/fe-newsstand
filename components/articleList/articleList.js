@@ -21,6 +21,7 @@ import { addModeSelectionEventListener,
     addScrollEventListener,
 } from "./event/clickEvent.js";
 import { checkSubscription } from "./event/pageEvent.js";
+import { createSnackBar } from "../snackBar/snackBar.js";
 
 // 초기화 함수
 export const initArticleList = async () => {
@@ -49,8 +50,11 @@ const addEventListeners = () => {
 
 export const addSubscriptionEventListener = () => {
     document.querySelector('.subscribe-btn').addEventListener('click', () => {
+        const el = document.createElement('div');
+        el.classList.add('snack-bar-area');
+        el.innerHTML = createSnackBar('내가 구독한 언론사에 추가되었습니다.');
+        document.querySelector('.article-body-wrapper').appendChild(el);
         setSubscription();
-        alert('구독')
     })
 }
 

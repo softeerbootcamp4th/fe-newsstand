@@ -167,7 +167,7 @@ export const addCancleSubscriptionEventListener = () => {
         const el = document.createElement('div');
         el.classList.add('alert-area');
         el.innerHTML = createAlert();
-        document.querySelector('.article-body-wrapper').appendChild(el);
+        document.querySelector('.article-content-wrapper').appendChild(el);
         addAlertAcceptBtnEventListener();
         addAlertCancleBtnEventListener();
     })
