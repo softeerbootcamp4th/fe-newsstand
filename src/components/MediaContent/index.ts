@@ -1,7 +1,7 @@
-import { Div, Main, ce } from "@/libs/elements";
+import { Div, Main, ce } from "@/libs";
 import { MediaContentFilter } from "./MediaContentFilter";
 import { useEffect, useState } from "@/libs";
-import { cc } from "@/libs/components";
+import { cc } from "@/libs";
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { MediaIdByCategories } from "@/models/Newsstand";
 import { MediaContentTabs } from "./MediaContentTabs";

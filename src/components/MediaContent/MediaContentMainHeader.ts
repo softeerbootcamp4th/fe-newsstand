@@ -1,12 +1,13 @@
-import { Button, Div, Img, Raw, Span, ce } from "@/libs/elements";
+import { Button, Div, Img, Raw, Span, ce } from "@/libs";
 import styles from "./MediaContentMainHeader.module.css";
 import typoStyles from "@/styles/typo.module.css";
-import { cc } from "@/libs/components";
+import { cc } from "@/libs";
 import { formatDetailDate } from "@/utils/formatDate";
 import { PlucIcon } from "@/assets/PlucIocn";
 import { Media } from "@/models/Media";
 import { CloseIcon } from "@/assets/CloseIcon";
 import { updateMediaSubscribe } from "@/remotes/updateMediaSubscibe";
+import { useModalContext } from "@/hooks/useModalContext";
 
 const Logo = ({ src }: { src?: string }) => {
   return ce(Span, {
@@ -31,11 +32,35 @@ interface SubscribeButtonProps {
   onClick: () => void;
 }
 const SubscribeButton = ({ isSubscribed, onClick }: SubscribeButtonProps) => {
+  const { addModal, closeModal } = useModalContext();
+
+  const openModal = () => {
+    addModal(
+      ce(Div, {
+        className: styles.modal,
+        children: [
+          ce(Div, {
+            className: styles["modal-content"],
+            children: [
+              ce(Span, {
+                className: typoStyles["available-medium16"],
+                children: ["구독이 해지되었습니다."],
+              }),
+              ce(Button, {
+                children: ["확인"],
+                onClick: closeModal,
+              }),
+            ],
+          }),
+        ],
+      }),
+    );
+  };
   if (isSubscribed) {
     return ce(Button, {
       className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
       children: [Raw(PlucIcon), "구독하기"],
-      onClick: onClick,
+      onClick: openModal,
     });
   }
   return ce(Button, {

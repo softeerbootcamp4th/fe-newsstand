@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EventHandlers } from "./event";
+import { EventHandlers } from "../event";
 
 export type AppChild =
   | CreatedAppComponent<any>

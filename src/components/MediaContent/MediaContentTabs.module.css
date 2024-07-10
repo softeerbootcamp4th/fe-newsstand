@@ -42,7 +42,7 @@
 .tab-animate {
   background: linear-gradient(to right, var(--surface-surface-brand-default, #4362D0) 50%, var(--surface-surface-brand-alt, #7890E7) 50%);
   background-size: 200% 100%;
-  animation: bg-fill 5s infinite;
+  animation: bg-fill 20s infinite;
 }
 
 .tab-inactive {

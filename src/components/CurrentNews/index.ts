@@ -1,7 +1,7 @@
-import { Div, ce } from "@/libs/elements";
+import { Div, ce } from "@/libs";
 import styles from "./index.module.css";
 import { RollingNews } from "./RollingNews";
-import { cc } from "@/libs/components";
+import { cc } from "@/libs";
 
 export const CurrentNews = () => {
   return ce(Div, {
