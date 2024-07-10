@@ -22,6 +22,25 @@
                         {"subNewsId": 4, "subNewsTitle": "태평양에는 우영우의 고래만 있는게 아니었다 [로비의 그림]"},
                         {"subNewsId": 5, "subNewsTitle": "LG엔솔, 폴란드 자동차산업협회 가입…\"유럽서 목소리 키운다\""}
                     ]
+                },
+                {
+                    "pressId": 1,
+                    "pressLogo": "./asset/images/서울신문.svg",
+                    "pressName": "서울신문",
+                    "editDate": "2024.03.23 11:19 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "1년치 비 10%가 1시간만에…\"200년에 한번 나타날 수준\"",
+                        "mainNewsImage": "./asset/images/서울신문 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId": 0, "subNewsTitle": "진중권 \"김건희 여사와 57분 통화…친윤 주장과 달라\""},
+                        {"subNewsId": 1, "subNewsTitle": "정부, 의대생 복귀 독려 \"2학기 등록 기간 학년말까지 연장\""},
+                        {"subNewsId": 2, "subNewsTitle": "추경호 \"尹 탄핵청문회 원천 무효…민주당은 적당히 하라\""},
+                        {"subNewsId": 3, "subNewsTitle": "이임생 \"홍 감독 면접 없이 선임…韓 축구에 최선이라 판단\""},
+                        {"subNewsId": 4, "subNewsTitle": "하와이 이승만 동상 찾은 김여사 \"위업 재조명되길\""},
+                        {"subNewsId": 5, "subNewsTitle": "이재명, 당대표 연임 출마 선언"}
+                    ]
                 }
             ]
         },
@@ -46,6 +65,25 @@
                         {"subNewsId":3, "subNewsTitle": "`best`가 아닌 `goodest`?…바이든, 인터뷰 `실언` 논란"},
                         {"subNewsId":4, "subNewsTitle": "경찰, 임성근 전 사단장 `혐의 없음` 불송치 결정"},
                         {"subNewsId":5, "subNewsTitle": "`1천 명 집단 식중독` 남원 초중고, 내일부터 급식 재개"}
+                    ]
+                },
+                {
+                    "pressId": 1,
+                    "pressLogo": "./asset/images/mbc.svg",
+                    "pressName": "MBC",
+                    "editDate": "2024.06.26 18:45 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "밤사이 극한호우‥충청권 3명 사망·1명 실종",
+                        "mainNewsImage": "./asset/images/mbc 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "\"다시는 축협 믿자는 말 않아\"‥\"사라져야\" 이영표도 직격탄"},
+                        {"subNewsId":1, "subNewsTitle": "경북선·장항선 일반열차 전 구간 운행 중지"},
+                        {"subNewsId":2, "subNewsTitle": "이화영 측근 3명 기소‥'쌍방울 대북송금' 관련 위증 혐의"},
+                        {"subNewsId":3, "subNewsTitle": "배민, 음식값 수수료 9.8%로 인상‥ \"소상공인 상생할 마음 없어\""},
+                        {"subNewsId":4, "subNewsTitle": "\"명예회복 기회주겠다\"‥트럼프, 바이든에 토론·골프 대결 제안"},
+                        {"subNewsId":5, "subNewsTitle": "'파타야 살인' 피의자 국내 송환‥검거 50여 일 만"}
                     ]
                 }
             ]
@@ -72,6 +110,25 @@
                         {"subNewsId":4, "subNewsTitle": "\"갤럭시버즈3·버즈3 프로, 가격 유출\"…얼마나 오르나"},
                         {"subNewsId":5, "subNewsTitle": "엔비디아 투자 등급 내렸다…이유는?"}
                     ]
+                },
+                {
+                    "pressId": 1,
+                    "pressLogo": "./asset/images/bloter.svg",
+                    "pressName": "BLOTER",
+                    "editDate": "2024.07.10 09:02 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "[정의선 EV플랜]④배터리 내재화 '9.5조 투자' 전고체·LFP 개발",
+                        "mainNewsImage": "./asset/images/bloter 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "로봇 사업에 진심인 LG전자…엔젤로보틱스 엑시트 가능성은?"},
+                        {"subNewsId":1, "subNewsTitle": "LS전선, 미국 해저케이블 공장 투자 확정...보조금 2000억원 확보"},
+                        {"subNewsId":2, "subNewsTitle": "나이키 악재에 웃는 아디다스…2분기 호실적 기대감"},
+                        {"subNewsId":3, "subNewsTitle": "세운5구역, GS건설 합류 정상화 '3800억 브리지론' 차환"},
+                        {"subNewsId":4, "subNewsTitle": "[단독]금융위, 비트모빅 DEX 거래소 ‘모빅매니아’ 수사 의뢰"},
+                        {"subNewsId":5, "subNewsTitle": "카카오 김범수, 'SM 시세조종' 혐의로 검찰 소환 조사"}
+                    ]
                 }
             ]
         },
@@ -96,6 +153,25 @@
                         {"subNewsId":3, "subNewsTitle": "Patterns build up identity, originality: Hanbok illustrator"},
                         {"subNewsId":4, "subNewsTitle": "K-pop groups produced by K-pop artists: Better chances of success?"},
                         {"subNewsId":5, "subNewsTitle": "JobKorea launches Klik app for foreign job seekers"}
+                    ]
+                },
+                {
+                    "pressId": 1,
+                    "pressLogo": "./asset/images/korea joongang daily.svg",
+                    "pressName": "Korea JoongAng Daily",
+                    "editDate": "2024.07.06 14:56 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "ADOR CEO leaves police station after questioning",
+                        "mainNewsImage": "./asset/images/korea joongang daily 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "Elon Musk calls Koreans 'Smart people'"},
+                        {"subNewsId":1, "subNewsTitle": "Samsung Electronics union extends ongoing strike 'indefinitely'"},
+                        {"subNewsId":2, "subNewsTitle": "Prosecutors to investigate 29 suspects for alleged involvement in Oh Jae-won drug case"},
+                        {"subNewsId":3, "subNewsTitle": "Suspect in murder of Korean tourist found in plastic barrel extradited to Korea"},
+                        {"subNewsId":4, "subNewsTitle": "Samsung wins 2nm chip-manufacturing deal with Japanese AI firm"},
+                        {"subNewsId":5, "subNewsTitle": "Grammy Museum to exhibit BTS, Seventeen, Le Sserafim artifacts"}
                     ]
                 }
             ]
@@ -122,6 +198,25 @@
                         {"subNewsId":4, "subNewsTitle": "퓨처스 올스타전 도중 코칭스태프 개편 발표, 삼성은 뭐가 급했나"},
                         {"subNewsId":5, "subNewsTitle": "울산에 고개 숙인 이임생 \"입이 열개라도 할 말이 없다\""}
                     ]
+                },
+                {
+                    "pressId": 1,
+                    "pressLogo": "./asset/images/일간스포츠.svg",
+                    "pressName": "일간스포츠",
+                    "editDate": "2024.07.07 09:12 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "[단독] 김호중 母 \"호중이 잘못한 거 맞다\" 눈물",
+                        "mainNewsImage": "./asset/images/일간스포츠 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "잠실 한지붕 두가족, '주머니 걱정' 덜었지만.."},
+                        {"subNewsId":1, "subNewsTitle": "시라카와, KBO 재취업 성공.. 연봉 수직 상승"},
+                        {"subNewsId":2, "subNewsTitle": "'올스타전 결장' 노시환, '후하방 관절와순 부분 손상'...최소 3주 소요[IS 이슈]"},
+                        {"subNewsId":3, "subNewsTitle": "'아티스트 부부 탄생' 현아♥용준형, 만남에서 결혼까지.. 공개 연애 9개월만 웨딩마치[종합]"},
+                        {"subNewsId":4, "subNewsTitle": "'마약 투약 혐의' 오재원 연루된 사람만 수십명"},
+                        {"subNewsId":5, "subNewsTitle": "‘천생 클라이머’ 서채현의 두 번째 올림픽 \"축제 즐기고 올게요\" [IS 인터뷰]"}
+                    ]
                 }
             ]
         },
@@ -147,6 +242,25 @@
                         {"subNewsId":4, "subNewsTitle": "식이장애 치료 방법"},
                         {"subNewsId":5, "subNewsTitle": "누군가를 신뢰한다는 것"}
                     ]
+                },
+                {
+                    "pressId": 1,
+                    "pressLogo": "./asset/images/소년한국일보.svg",
+                    "pressName": "소년한국일보",
+                    "editDate": "2024.07.09 11:58 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "‘저출산·고령화 사회’ 위기의 대한민국 \"이러다 학교도 없어지면 어쩌죠?\"",
+                        "mainNewsImage": "./asset/images/소년한국일보 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "제64회 소년한국일보 미술대회 \"마감 임박\" 7월 5일까지! 서두르세요"},
+                        {"subNewsId":1, "subNewsTitle": "\"내가 우주를 만들었어요!\" 어린이 봄방학 진로 체험과 감각 놀이 동시에"},
+                        {"subNewsId":2, "subNewsTitle": "방탄소년단 데뷔10주년 ‘2023 BTS 페스타’ 열린다"},
+                        {"subNewsId":3, "subNewsTitle": "개학 후 일주일간 코로나 확진 학생 ‘5326명"},
+                        {"subNewsId":4, "subNewsTitle": "‘부산국제어린이청소년영화제’ 오늘 개막"},
+                        {"subNewsId":5, "subNewsTitle": "야산·길가에 핀 봄 야생화 반갑게 너의 이름을 불러본다"}
+                    ]
                 }
             ]
         },
@@ -171,6 +285,25 @@
                         {"subNewsId":3, "subNewsTitle": "尹대통령, 나토정상회의 참석차 출국"},
                         {"subNewsId":4, "subNewsTitle": "초등래퍼 부자가 전한 `울림`"},
                         {"subNewsId":5, "subNewsTitle": "`성추행 의혹` 대전시의원, 징계 앞두고 국민의힘 탈당"}
+                    ]
+                },
+                {
+                    "pressId": 1,
+                    "pressLogo": "./asset/images/obs.svg",
+                    "pressName": "OBS",
+                    "editDate": "2024.06.30 12:00 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "경기도, 상반기 지방세 고액체납자 출국금지 요청",
+                        "mainNewsImage": "./asset/images/obs 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "인천공항, 누적 수하물 8억 개 달성…23년 만"},
+                        {"subNewsId":1, "subNewsTitle": "원적·만월산 터널 출퇴근 시간 '통행료 무료'"},
+                        {"subNewsId":2, "subNewsTitle": "경기도, 위기정보 빅데이터 활용 노인가구 지원"},
+                        {"subNewsId":3, "subNewsTitle": "고양 로컬푸드 직거래 매장 연 매출 1천억 육박"},
+                        {"subNewsId":4, "subNewsTitle": "K-9 자주포, 루마니아 수출…1조 3천800억 원 계약"},
+                        {"subNewsId":5, "subNewsTitle": "6월 취업자 9만 6천 명 증가…청년층 20개월째 감소"}
                     ]
                 }
             ]
