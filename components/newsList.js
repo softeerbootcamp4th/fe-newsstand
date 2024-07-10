@@ -1,6 +1,6 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
 import { setProgress } from "./nav.js";
-import { categoryData, getMaxMediaLength } from "../resources/data.js";
+import { categoryData, getMediaLength } from "../resources/data.js";
 import "./carousel.js";
 
 /**
@@ -51,7 +51,7 @@ export function updateNewsList(
   setProgress(
     currentCategoryIndex,
     currentMediaIndex,
-    getMaxMediaLength(category)
+    getMediaLength(category)
   );
 
   setMedia(mediaList, currentMediaIndex);

@@ -1,6 +1,6 @@
 import {
   getCateogryLength,
-  getMaxMediaLengthByIndex,
+  getMediaLengthByIndex,
   getMyDataLength,
 } from "../resources/data.js";
 import {
@@ -13,26 +13,67 @@ import state from "../list/state.js";
 const leftButton = document.querySelector(".leftButton");
 const rightButton = document.querySelector(".rightButton");
 
-leftButton.addEventListener("click", movePrevNewsMedia);
-rightButton.addEventListener("click", moveNextNewsMedia);
+leftButton.addEventListener("click", () => movePrevMedia(state));
+rightButton.addEventListener("click", () => moveNextMedia(state));
 
 /**
- * 왼쪽 화살표 이동 함수
+ * 상태를 받아 왼쪽으로 이동한 값으로 변경하고 nav와 content부분을 업데이트 함
+ * @param {object} state 현재 상태
  */
-function movePrevNewsMedia() {
+function movePrevMedia(state) {
   resetCover();
-  debugger;
 
-  if (state.headerCategory === 0) handleNewsMovePrev();
-  else if (state.headerCategory === 1) handleMyMovePrev();
+  const newState =
+    state.headerCategory === 0
+      ? handleMovePrev(
+          state,
+          getCateogryLength,
+          getMediaLengthByIndex,
+          updateCategoryByIndex
+        )
+      : handleMovePrev(state, getMyDataLength, () => 0, updateMyMedia);
+
+  updateNavElements(document.querySelectorAll(".contentList li"));
+  state.currentCategoryIndex = newState.currentCategoryIndex;
+  state.currentMediaIndex = newState.currentMediaIndex;
 }
 
 /**
- * newsList 일 때 왼쪽 이동
+ * 상태를 받아 오른쪽으로 이동한 값으로 변경하고 nav와 content부분을 업데이트 함
+ * @param {object} state 현재 상태
  */
-function handleNewsMovePrev() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
+function moveNextMedia(state) {
+  resetCover();
 
+  const newState =
+    state.headerCategory === 0
+      ? handleMoveNext(
+          state,
+          getCateogryLength,
+          getMediaLengthByIndex,
+          updateCategoryByIndex
+        )
+      : handleMoveNext(state, getMyDataLength, () => 0, updateMyMedia);
+
+  updateNavElements(document.querySelectorAll(".contentList li"));
+  state.currentCategoryIndex = newState.currentCategoryIndex;
+  state.currentMediaIndex = newState.currentMediaIndex;
+}
+
+/**
+ * 왼쪽 이동 함수
+ * @param {object} state 현재 상태
+ * @param {function} getCategoryLength data 접근 함수
+ * @param {function} getMediaLengthByIndex data 접근 함수
+ * @param {function} updateContent newsList부분 업데이트 함수
+ * @returns
+ */
+function handleMovePrev(
+  state,
+  getCategoryLength,
+  getMediaLengthByIndex,
+  updateContent
+) {
   let currentMediaIndex = state.currentMediaIndex;
   let currentCategoryIndex = state.currentCategoryIndex;
 
@@ -40,86 +81,45 @@ function handleNewsMovePrev() {
 
   if (currentMediaIndex < 0) {
     currentCategoryIndex--;
-
     if (currentCategoryIndex < 0) {
-      currentCategoryIndex = getCateogryLength() - 1;
+      currentCategoryIndex = getCategoryLength() - 1;
     }
-
-    currentMediaIndex = getMaxMediaLengthByIndex(currentCategoryIndex) - 1;
+    currentMediaIndex = getMediaLengthByIndex(currentCategoryIndex) - 1;
   }
 
-  state.currentMediaIndex = currentMediaIndex;
-  state.currentCategoryIndex = currentCategoryIndex;
-
-  updateNavElements(navElementNodes);
-  updateCategoryByIndex(currentCategoryIndex);
+  updateContent(currentCategoryIndex);
+  return { currentCategoryIndex, currentMediaIndex };
 }
 
 /**
- * myList 일 때 왼쪽 이동
+ * 오른쪽 이동 함수
+ * @param {object} state 현재 상태
+ * @param {function} getCategoryLength data 접근 함수
+ * @param {function} getMediaLengthByIndex data 접근 함수
+ * @param {function} updateContent newsList부분 업데이트 함수
+ * @returns
  */
-function handleMyMovePrev() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-
+function handleMoveNext(
+  state,
+  getCategoryLength,
+  getMediaLengthByIndex,
+  updateContent
+) {
+  let currentMediaIndex = state.currentMediaIndex;
   let currentCategoryIndex = state.currentCategoryIndex;
 
-  currentCategoryIndex--;
-  if (currentCategoryIndex < 0) {
-    currentCategoryIndex = getMyDataLength() - 1;
-  }
+  currentMediaIndex++;
 
-  state.currentCategoryIndex = currentCategoryIndex;
-
-  updateNavElements(navElementNodes);
-  updateMyMedia(currentCategoryIndex);
-}
-
-/**
- * 오른쪽 화살표 이동 함수
- */
-function moveNextNewsMedia() {
-  resetCover();
-
-  if (state.headerCategory === 0) handleNewsMoveNext();
-  else if (state.headerCategory === 1) handleMyMoveNext();
-}
-
-/**
- * newsList 일 때 오른쪽 이동
- */
-function handleNewsMoveNext() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-
-  state.currentMediaIndex++;
-
-  if (
-    state.currentMediaIndex >=
-    getMaxMediaLengthByIndex(state.currentCategoryIndex)
-  ) {
-    state.currentCategoryIndex++;
-
-    if (state.currentCategoryIndex >= getCateogryLength()) {
-      state.currentCategoryIndex = 0;
+  if (currentMediaIndex >= getMediaLengthByIndex(currentCategoryIndex)) {
+    currentCategoryIndex++;
+    if (currentCategoryIndex >= getCategoryLength()) {
+      currentCategoryIndex = 0;
     }
-
-    state.currentMediaIndex = 0;
+    currentMediaIndex = 0;
   }
 
-  updateNavElements(navElementNodes);
-  updateCategoryByIndex(state.currentCategoryIndex);
-}
-
-/**
- * myList 일 때 오른쪽 이동
- */
-function handleMyMoveNext() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-
-  state.currentCategoryIndex =
-    (state.currentCategoryIndex + 1) % getMyDataLength();
-
-  updateNavElements(navElementNodes);
-  updateMyMedia(state.currentCategoryIndex);
+  updateContent(currentCategoryIndex);
+  return { currentCategoryIndex, currentMediaIndex };
 }
 
 /**

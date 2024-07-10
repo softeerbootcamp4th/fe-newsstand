@@ -252,11 +252,11 @@ export function getMyDataLength() {
  * @param {String} category
  * @returns 최대 media 수 반환
  */
-export function getMaxMediaLength(category) {
+export function getMediaLength(category) {
   return categoryData[category].length;
 }
 
-export function getMaxMediaLengthByIndex(index) {
+export function getMediaLengthByIndex(index) {
   return categoryData[categoryList[index]].length;
 }
 

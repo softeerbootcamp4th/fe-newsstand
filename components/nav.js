@@ -4,7 +4,7 @@ import { updateNewsList } from "./newsList.js";
 import {
   categoryList,
   myList,
-  getMaxMediaLength,
+  getMediaLength,
   getMyDataLength,
 } from "../resources/data.js";
 import state from "../list/state.js";
@@ -197,7 +197,7 @@ function handleNewsInterval(navElementNodes) {
   state.currentMediaIndex++;
   if (
     state.currentMediaIndex >=
-    getMaxMediaLength(categoryList[state.currentCategoryIndex])
+    getMediaLength(categoryList[state.currentCategoryIndex])
   ) {
     state.currentCategoryIndex =
       (state.currentCategoryIndex + 1) % categoryList.length;
