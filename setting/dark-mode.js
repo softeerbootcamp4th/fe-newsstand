@@ -41,6 +41,9 @@ function setDarkmode() {
     darkmodeButtonDOM.addEventListener("click", clickDarkMode);
 }
 
+/**
+ * @description 다크모드 버튼 클릭 이벤트 리스너
+ */
 function clickDarkMode() {
     const isDarkmode = getItem("dark-mode") ?? false;
     setItem("dark-mode", !isDarkmode);
