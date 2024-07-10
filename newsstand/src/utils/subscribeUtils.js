@@ -23,19 +23,21 @@ export const handleSubscription = (targetCompanyId) => {
 }
 
 export const subscribe = (targetCompanyId) => {
+    if (!targetCompanyId) return
     let subscribedCompaniesId = getSubscribedCompaniesId()
     subscribedCompaniesId.push(targetCompanyId)
     setSubscribedCompaniesId(subscribedCompaniesId)
 }
 
 export const unSubscribe = (targetCompanyId) => {
+    if (!targetCompanyId) return
     let subscribedCompaniesId = getSubscribedCompaniesId()
     subscribedCompaniesId = subscribedCompaniesId.filter((company) => company !== targetCompanyId)
     setSubscribedCompaniesId(subscribedCompaniesId)
 }
 
-export const getSubscribedCompanies = (wholeCompanyData) => {
-    const subscribedIds = getSubscribedCompaniesId()
+export const getSubscribedCompanies = async (wholeCompanyData) => {
+    const subscribedIds = await Promise.resolve(getSubscribedCompaniesId())
     const subscribedCompanies = wholeCompanyData.filter((company) => subscribedIds.includes(company.id))
 
     return subscribedCompanies

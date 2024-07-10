@@ -1,5 +1,4 @@
 import createComponent from '../../core/component/component.js'
-import { generateRandomId } from '../../utils/idGenerator.js'
 import { mediaCategoryData } from '../../datas/mockData.js'
 import CategoryBox from '../../components/category/CategoryBox.js'
 import { getSubscribedCompaniesId } from '../../utils/subscribeUtils.js'
@@ -7,7 +6,7 @@ import { getCompanyName } from '../../datas/companyData.js'
 
 const MediaCategories = (props) => {
     let categoryDatas = mediaCategoryData
-    if (props.selectedSource === '내가 구독한 언론사') {
+    if (props.selectedSource.value === '내가 구독한 언론사') {
         let categoryIds = getSubscribedCompaniesId()
 
         categoryDatas = categoryIds.map((id) => {
@@ -16,9 +15,9 @@ const MediaCategories = (props) => {
         })
     }
 
-    const categoryComponents = categoryDatas.map((category) =>
+    const categoryComponents = categoryDatas.map((category, index) =>
         createComponent(CategoryBox, {
-            id: generateRandomId(10),
+            id: category + index,
             text: category,
             selectedSource: props.selectedSource,
             state: props.selectedCategory,

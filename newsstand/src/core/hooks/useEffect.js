@@ -24,12 +24,16 @@ const isDependenciesShouldChange = (obj1, obj2) => {
         const element1 = obj1[index]
         const element2 = obj2[index]
 
+        if (!element1 || !element2) {
+            return false
+        }
+
         if (element1.stateId != element2.stateId) {
             isSameDependencies = false
             break
         }
 
-        if (element1.state != element2.state) {
+        if (element1.value != element2.value) {
             isShouldChange = true
         }
     }
