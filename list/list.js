@@ -1,29 +1,8 @@
 import { deleteNav, generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
 import { getTodayString } from "../utils/utils.js";
-
-const headlineData = [
-  {
-    media: "언론사1",
-    news: [
-      "[1보] 경제 성장률, 기대 이상의 상승",
-      "[1보] 코로나19 백신 접종률, 예상을 웃도는 증가",
-      "[속보] 기후 변화 대응, 세계 각국 공조 모색",
-      "[속보] 디지털 트랜스포메이션 가속화, 기업들 반응",
-      "[1보] 주식 시장 급락, 투자자들 불안 증가",
-    ],
-  },
-  {
-    media: "언론사2",
-    news: [
-      "[1보] 금리 인상 기대에 부동산 시장 영향",
-      "[속보] 글로벌 무역 갈등 재점화 가능성",
-      "[속보] 기술 기업들의 인공지능 연구 경쟁",
-      "[1보] 5G 네트워크 확장 속도, 소비자 접근성 향상",
-      "[1보] 통신사들의 요금 인하 경쟁 가열",
-    ],
-  },
-];
+import store from "../utils/stoageManager.js";
+import { updateMyList, headlineData } from "../resources/data.js";
 
 let currentHeaderCategoryIndex = 0;
 
@@ -77,9 +56,11 @@ setInterval(() => rollingCallback(1000), 5000);
 
 // 초기화 함수
 function initialize() {
+  store.setSet("myList", new Set());
   //header_selected 초기화
   headerCategory[0].classList.add("selected");
   headerShow[0].classList.add("selected");
+
   headerCategory.forEach((element, index) => {
     element.addEventListener("click", () => {
       headerCategory[currentHeaderCategoryIndex].classList.remove("selected");
@@ -88,19 +69,12 @@ function initialize() {
       currentHeaderCategoryIndex = index;
 
       //nav 삭제후 재생성
+      updateMyList();
       deleteNav();
       generateNav(navContainer, currentHeaderCategoryIndex);
     });
   });
 }
-const leftButton = document.querySelector(".leftButton");
-const rightButton = document.querySelector(".rightButton");
-
-leftButton.addEventListener("click", movePrevMedia);
-rightButton.addEventListener("click", moveNextMedia);
-
-function movePrevMedia() {}
-function moveNextMedia() {}
 
 // 초기화
 initialize();

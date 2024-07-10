@@ -1,6 +1,6 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
 import { setProgress } from "./nav.js";
-import { categoryData, getMaxMediaLength } from "../resources/data.js";
+import { categoryData, getMediaLength, mediaData } from "../resources/data.js";
 import "./carousel.js";
 
 /**
@@ -11,13 +11,13 @@ import "./carousel.js";
 function generateNewsList(container, content) {
   const list = generateNode("ul", "newsList");
 
-  content.news.slice(0, 6).forEach((category) => {
+  mediaData[content].news.slice(0, 6).forEach((category) => {
     const li = generateNode("li");
     li.textContent = category;
     list.appendChild(li);
   });
 
-  createFooterElement(list, content.media);
+  createFooterElement(list, mediaData[content].media);
 
   container.appendChild(list);
 }
@@ -45,13 +45,15 @@ export function updateNewsList(
   currentMediaIndex
 ) {
   const newsListContainer = deleteNodeById("newsList_container");
-  const mediaList = categoryData[category].map((element) => element.media);
+  const mediaList = categoryData[category].map(
+    (element) => mediaData[element].media
+  );
   const contentList = categoryData[category];
 
   setProgress(
     currentCategoryIndex,
     currentMediaIndex,
-    getMaxMediaLength(category)
+    getMediaLength(category)
   );
 
   setMedia(mediaList, currentMediaIndex);

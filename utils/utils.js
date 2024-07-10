@@ -26,6 +26,10 @@ export function deleteNodeById(id) {
   return node;
 }
 
+/**
+ * 오늘 날짜를 리턴함
+ * @returns "yyyy.mm.dd.요일"
+ */
 export function getTodayString() {
   const today = new Date();
   const year = today.getFullYear();

@@ -4,30 +4,15 @@ import { updateNewsList } from "./newsList.js";
 import {
   categoryList,
   myList,
-  getMaxMediaLength,
-  getMyDataLength,
+  getMediaLength,
+  getMyListLength,
+  mediaData,
 } from "../resources/data.js";
+import state from "../list/state.js";
+import { generateSubscribe, generateUnsubscribe } from "./subscribe.js";
 
 var newsInterval; //왜 전역변수로 설정해야 작동하는가??
 var myInterval;
-let currentCategoryIndex = 0;
-let currentMediaIndex = 0;
-let headerCategory = 0;
-
-export const getCurrentCategoryIndex = () => currentCategoryIndex;
-export const setCurrentCategoryIndex = (index) => {
-  currentCategoryIndex = index;
-};
-
-export const getCurrentMediaIndex = () => currentMediaIndex;
-export const setCurrentMediaIndex = (index) => {
-  currentMediaIndex = index;
-};
-
-export const getHeaderCategory = () => headerCategory;
-export const setHeaderCategory = (category) => {
-  headerCategory = category;
-};
 
 /**
  * Nav목록으로 네비게이션 바를 container의 child로 생성 후 초기화
@@ -38,10 +23,10 @@ export function generateNav(container, currentHeaderCategoryIndex) {
   let selectedList;
   if (currentHeaderCategoryIndex === 0) {
     selectedList = categoryList;
-    headerCategory = 0;
+    state.headerCategory = 0;
   } else if (currentHeaderCategoryIndex === 1) {
-    selectedList = myList;
-    headerCategory = 1;
+    selectedList = myList.map((element) => mediaData[element].media);
+    state.headerCategory = 1;
   }
 
   navInit(selectedList);
@@ -50,8 +35,8 @@ export function generateNav(container, currentHeaderCategoryIndex) {
   else if (currentHeaderCategoryIndex === 1) generateNavForMyList();
 
   function navInit(selectedList) {
-    currentCategoryIndex = 0;
-    currentMediaIndex = 0;
+    state.currentCategoryIndex = 0;
+    state.currentMediaIndex = 0;
     resetInterval();
 
     const nav = generateNode("nav", "content_navigator");
@@ -63,7 +48,7 @@ export function generateNav(container, currentHeaderCategoryIndex) {
 
       createNavElement(li, category);
 
-      if (index === currentCategoryIndex) li.classList.add("selected");
+      if (index === state.currentCategoryIndex) li.classList.add("selected");
     });
 
     nav.appendChild(ul);
@@ -93,10 +78,12 @@ function createNavElement(container, category) {
  */
 function generateNavForNewsList() {
   updateNewsList(
-    categoryList[currentCategoryIndex],
-    currentCategoryIndex,
-    currentMediaIndex
+    categoryList[state.currentCategoryIndex],
+    state.currentCategoryIndex,
+    state.currentMediaIndex
   );
+
+  generateSubscribe();
 
   const navElementNodes = document.querySelectorAll(".contentList li");
 
@@ -108,8 +95,10 @@ function generateNavForNewsList() {
 /**
  * 구독 newsList를 생성하는 함수
  */
-function generateNavForMyList() {
-  updateMyNewsList(currentCategoryIndex);
+export function generateNavForMyList() {
+  updateMyNewsList(state.currentCategoryIndex);
+
+  generateUnsubscribe();
 
   const navElementNodes = document.querySelectorAll(".contentList li");
 
@@ -128,14 +117,14 @@ function setupNavElements(
 ) {
   navElementNodes.forEach((element, index) => {
     element.addEventListener("click", function () {
-      navElementNodes[currentCategoryIndex].classList.remove("selected");
+      navElementNodes[state.currentCategoryIndex].classList.remove("selected");
       element.classList.add("selected");
-      currentCategoryIndex = index;
+      state.currentCategoryIndex = index;
 
       resetInterval();
       intervalStartFunction();
 
-      updateFunction(currentCategoryIndex);
+      updateFunction(state.currentCategoryIndex);
     });
   });
 }
@@ -160,18 +149,19 @@ export function setProgress(categoryIndex, currentMediaIndex, maxMediaIndex) {
   }/${maxMediaIndex}`;
 }
 
-export function setRightArrow(currentCategoryIndex) {
+export function setRightArrow(categoryIndex) {
   const progresses = document.querySelectorAll(".progress");
-  progresses[currentCategoryIndex].innerHTML = ">";
+  if (progresses.length === 0) return;
+  progresses[categoryIndex].innerHTML = ">";
 }
 
 /**
  * 새로 선택될 카테고리를 설정하고 언론사를 처음부터 시작
  * @param {String} newCategory
- * @param {int} currentCategoryIndex
+ * @param {int} index
  */
 function updateCategory(newCategory, index) {
-  updateNewsList(newCategory, index, currentMediaIndex);
+  updateNewsList(newCategory, index, state.currentMediaIndex);
 }
 
 /**
@@ -188,8 +178,8 @@ export function updateCategoryByIndex(index) {
  * @param {int} newCategoryIndex
  */
 export function updateMyMedia(newCategoryIndex) {
-  currentCategoryIndex = newCategoryIndex;
-  updateMyNewsList(currentCategoryIndex);
+  state.currentCategoryIndex = newCategoryIndex;
+  updateMyNewsList(state.currentCategoryIndex);
 }
 
 /**
@@ -198,7 +188,7 @@ export function updateMyMedia(newCategoryIndex) {
  */
 export function updateNavElements(navElementNodes) {
   navElementNodes.forEach((element, index) => {
-    if (index === currentCategoryIndex) {
+    if (index === state.currentCategoryIndex) {
       element.classList.add("selected");
     } else {
       element.classList.remove("selected");
@@ -211,19 +201,21 @@ export function updateNavElements(navElementNodes) {
  * @param {node Array} navElementNodes
  */
 function handleNewsInterval(navElementNodes) {
-  currentMediaIndex++;
+  state.currentMediaIndex++;
   if (
-    currentMediaIndex >= getMaxMediaLength(categoryList[currentCategoryIndex])
+    state.currentMediaIndex >=
+    getMediaLength(categoryList[state.currentCategoryIndex])
   ) {
-    currentCategoryIndex = (currentCategoryIndex + 1) % categoryList.length;
-    currentMediaIndex = 0;
+    state.currentCategoryIndex =
+      (state.currentCategoryIndex + 1) % categoryList.length;
+    state.currentMediaIndex = 0;
   }
 
   updateNavElements(navElementNodes);
   updateNewsList(
-    categoryList[currentCategoryIndex],
-    currentCategoryIndex,
-    currentMediaIndex
+    categoryList[state.currentCategoryIndex],
+    state.currentCategoryIndex,
+    state.currentMediaIndex
   );
 }
 
@@ -232,13 +224,10 @@ function handleNewsInterval(navElementNodes) {
  * @param {node Array} navElementNodes
  */
 function handleMyInterval(navElementNodes) {
-  currentCategoryIndex++;
-  if (currentCategoryIndex >= getMyDataLength()) {
-    currentCategoryIndex = 0;
-  }
+  (state.currentCategoryIndex + 1) % getMyListLength();
 
   updateNavElements(navElementNodes);
-  updateMyNewsList(currentCategoryIndex);
+  updateMyNewsList(state.currentCategoryIndex);
 }
 
 /**

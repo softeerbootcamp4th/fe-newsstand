@@ -1,131 +1,109 @@
 import {
   getCateogryLength,
-  getMaxMediaLengthByIndex,
-  getMyDataLength,
+  getMediaLengthByIndex,
+  getMyListLength,
 } from "../resources/data.js";
 import {
-  getCurrentCategoryIndex,
-  setCurrentCategoryIndex,
-  getCurrentMediaIndex,
-  setCurrentMediaIndex,
-  getHeaderCategory,
   updateNavElements,
   updateCategoryByIndex,
   updateMyMedia,
 } from "./nav.js";
+import state from "../list/state.js";
 
 const leftButton = document.querySelector(".leftButton");
 const rightButton = document.querySelector(".rightButton");
 
-leftButton.addEventListener("click", movePrevNewsMedia);
-rightButton.addEventListener("click", moveNextNewsMedia);
+leftButton.addEventListener("click", () => movePrevMedia(state));
+rightButton.addEventListener("click", () => moveNextMedia(state));
 
 /**
- * 왼쪽 화살표 이동 함수
+ * 상태를 받아 왼쪽으로 이동한 값으로 변경하고 nav와 content부분을 업데이트 함
+ * @param {object} state 현재 상태
  */
-function movePrevNewsMedia() {
+function movePrevMedia(state) {
   resetCover();
 
-  if (getHeaderCategory() === 0) handleNewsMovePrev();
-  else if (getHeaderCategory() === 1) handleMyMovePrev();
+  const newState =
+    state.headerCategory === 0
+      ? handleMovePrev(state, getCateogryLength, getMediaLengthByIndex)
+      : handleMovePrev(state, getMyListLength, () => 0);
+
+  state.currentCategoryIndex = newState.currentCategoryIndex;
+  state.currentMediaIndex = newState.currentMediaIndex;
+
+  updateNavElements(document.querySelectorAll(".contentList li"));
+  state.headerCategory === 0
+    ? updateCategoryByIndex(state.currentCategoryIndex)
+    : updateMyMedia(state.currentCategoryIndex);
 }
 
 /**
- * newsList 일 때 왼쪽 이동
+ * 상태를 받아 오른쪽으로 이동한 값으로 변경하고 nav와 content부분을 업데이트 함
+ * @param {object} state 현재 상태
  */
-function handleNewsMovePrev() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
+function moveNextMedia(state) {
+  resetCover();
 
-  let currentMediaIndex = getCurrentMediaIndex();
-  let currentCategoryIndex = getCurrentCategoryIndex();
+  const newState =
+    state.headerCategory === 0
+      ? handleMoveNext(state, getCateogryLength, getMediaLengthByIndex)
+      : handleMoveNext(state, getMyListLength, () => 0);
+
+  state.currentCategoryIndex = newState.currentCategoryIndex;
+  state.currentMediaIndex = newState.currentMediaIndex;
+
+  updateNavElements(document.querySelectorAll(".contentList li"));
+  state.headerCategory === 0
+    ? updateCategoryByIndex(state.currentCategoryIndex)
+    : updateMyMedia(state.currentCategoryIndex);
+}
+
+/**
+ * 왼쪽 이동 함수
+ * @param {object} state 현재 상태
+ * @param {function} getCategoryLength data 접근 함수
+ * @param {function} getMediaLengthByIndex data 접근 함수
+ * @returns
+ */
+function handleMovePrev(state, getCategoryLength, getMediaLengthByIndex) {
+  let currentMediaIndex = state.currentMediaIndex;
+  let currentCategoryIndex = state.currentCategoryIndex;
 
   currentMediaIndex--;
 
   if (currentMediaIndex < 0) {
     currentCategoryIndex--;
-
-    if (currentCategoryIndex < 0)
-      currentCategoryIndex = getCateogryLength() - 1;
-
-    currentMediaIndex = getMaxMediaLengthByIndex(currentCategoryIndex) - 1;
+    if (currentCategoryIndex < 0) {
+      currentCategoryIndex = getCategoryLength() - 1;
+    }
+    currentMediaIndex = getMediaLengthByIndex(currentCategoryIndex) - 1;
   }
 
-  setCurrentMediaIndex(currentMediaIndex);
-  setCurrentCategoryIndex(currentCategoryIndex);
-
-  updateNavElements(navElementNodes);
-  updateCategoryByIndex(getCurrentCategoryIndex());
+  return { currentCategoryIndex, currentMediaIndex };
 }
 
 /**
- * myList 일 때 왼쪽 이동
+ * 오른쪽 이동 함수
+ * @param {object} state 현재 상태
+ * @param {function} getCategoryLength data 접근 함수
+ * @param {function} getMediaLengthByIndex data 접근 함수
+ * @returns
  */
-function handleMyMovePrev() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-
-  let currentCategoryIndex = getCurrentCategoryIndex();
-
-  currentCategoryIndex--;
-  if (currentCategoryIndex < 0) currentCategoryIndex = getMyDataLength() - 1;
-
-  setCurrentCategoryIndex(currentCategoryIndex);
-
-  updateNavElements(navElementNodes);
-  updateMyMedia(getCurrentCategoryIndex());
-}
-
-/**
- * 오른쪽 화살표 이동 함수
- */
-function moveNextNewsMedia() {
-  resetCover();
-
-  if (getHeaderCategory() === 0) handleNewsMoveNext();
-  else if (getHeaderCategory() === 1) handleMyMoveNext();
-}
-
-/**
- * newsList 일 때 오른쪽 이동
- */
-function handleNewsMoveNext() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-
-  let currentMediaIndex = getCurrentMediaIndex();
-  let currentCategoryIndex = getCurrentCategoryIndex();
+function handleMoveNext(state, getCategoryLength, getMediaLengthByIndex) {
+  let currentMediaIndex = state.currentMediaIndex;
+  let currentCategoryIndex = state.currentCategoryIndex;
 
   currentMediaIndex++;
 
-  if (currentMediaIndex > getMaxMediaLengthByIndex(currentCategoryIndex) - 1) {
+  if (currentMediaIndex >= getMediaLengthByIndex(currentCategoryIndex)) {
     currentCategoryIndex++;
-
-    if (currentCategoryIndex > getCateogryLength() - 1)
+    if (currentCategoryIndex >= getCategoryLength()) {
       currentCategoryIndex = 0;
-
+    }
     currentMediaIndex = 0;
   }
 
-  setCurrentMediaIndex(currentMediaIndex);
-  setCurrentCategoryIndex(currentCategoryIndex);
-
-  updateNavElements(navElementNodes);
-  updateCategoryByIndex(getCurrentCategoryIndex());
-}
-
-/**
- * myList 일 때 오른쪽 이동
- */
-function handleMyMoveNext() {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-
-  let currentCategoryIndex = getCurrentCategoryIndex();
-
-  currentCategoryIndex++;
-  if (currentCategoryIndex > getMyDataLength() - 1) currentCategoryIndex = 0;
-
-  setCurrentCategoryIndex(currentCategoryIndex);
-
-  updateNavElements(navElementNodes);
-  updateMyMedia(getCurrentCategoryIndex());
+  return { currentCategoryIndex, currentMediaIndex };
 }
 
 /**
@@ -133,6 +111,7 @@ function handleMyMoveNext() {
  */
 function resetCover() {
   const cover = document.querySelector(".contentList li.selected .cover");
+  if (!cover) return;
   cover.classList.remove("cover");
   void cover.offsetWidth;
   cover.classList.add("cover");
