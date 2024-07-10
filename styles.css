@@ -382,10 +382,17 @@ main {
     text-decoration: underline;
 }
 
-.main-news img {
+.thumbnail-img {
     width: 320px;
     height: 200px;
+    transition: transform 0.3s ease ;
 }
+
+.thumbnail-img:hover {
+    transform: scale(1.05);
+
+}
+
 .sub-news {
    gap: 16px; 
    color: var(--text-bold);

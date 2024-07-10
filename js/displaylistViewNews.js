@@ -8,6 +8,7 @@ let prevCategoryType;
 const intervalTime = 20000;
 let progressBarTimeout;
 let subscriptions;
+let mainEventHandler;
 
 /* 다른 탭을 선택했을 때 초기화 함수 */
 function checkCurDataType(dataType) {
@@ -133,13 +134,22 @@ function displayNews(dataType) {
     document.getElementById('logo').alt = news.company;
     document.querySelector('.edit-date').textContent = `${news.date} 편집`;
 
-    const thumnbailImg = document.createElement('img');
-    thumnbailImg.src = news.thumbnailUrl;
+    const thummnailImg = document.createElement('img');
+    thummnailImg.src = news.thumbnailUrl;
+    thummnailImg.classList.add('thumbnail-img');
     const thumbnailNews = document.createElement('div');
     thumbnailNews.textContent = news.newsItems[0].title;
 
-    mainNewsDiv.appendChild(thumnbailImg);
+    mainNewsDiv.appendChild(thummnailImg);
     mainNewsDiv.appendChild(thumbnailNews);
+
+    if(mainEventHandler) mainNewsDiv.removeEventListener('click', mainEventHandler);
+
+    mainEventHandler = () => {
+        window.open(news.newsItems[0].url, '_blank');
+    };
+
+    mainNewsDiv.addEventListener('click', mainEventHandler);
 
     news.newsItems.slice(1).forEach(n => {
         const newsItemDiv = document.createElement('div');

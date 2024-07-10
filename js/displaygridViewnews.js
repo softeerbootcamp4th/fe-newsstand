@@ -92,7 +92,7 @@ function createGridSubscribeItem() {
         gridItem.classList.add('grid-item');
 
         if(i < subscribedCompanies.length && i < (endIdx - startIdx)) {
-            const company = subscribedCompanies[startIdx + i].company;
+            const company = subscribedCompanies[startIdx + i]?.company;
             const imgElement = document.createElement('img');
             imgElement.classList.add('grid-logo-img');
             imgElement.src = subscribedCompanies[startIdx + i].logoUrl;
