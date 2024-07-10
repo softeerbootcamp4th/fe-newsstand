@@ -1,6 +1,3 @@
-import { getSubscriptionList } from "./subscribe.js";
-
-let subscriptions = getSubscriptionList();
 let newsData = [];
 let companies = [];
 let currentPage = 0; // 현재 페이지를 추적하기 위한 변수

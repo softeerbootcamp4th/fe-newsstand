@@ -1,8 +1,8 @@
 import './loadComponent.js';
-import './iconTab.js';
-import './mainTab.js';
 import './rollingnews.js';
 import './subscribe.js';
 import './todayDate.js';
-import './listView.js';
-import './gridView.js';
+import './displaygridViewnews.js';
+import './displaylistViewNews.js';
+import './initialGridView.js';
+import './toggleView.js';
