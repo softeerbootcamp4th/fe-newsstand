@@ -15,6 +15,7 @@ import store from "../utils/stoageManager.js";
 
 var newsInterval; //왜 전역변수로 설정해야 작동하는가??
 var myInterval;
+let needRemove = [];
 
 /**
  * Nav목록으로 네비게이션 바를 container의 child로 생성 후 초기화
@@ -104,6 +105,9 @@ function generateSubscribe() {
   sub.classList.add("subscribe");
   contentTitle.appendChild(sub);
 
+  needRemove.forEach((element) => removeMediaFromMyList(element));
+  needRemove = [];
+
   sub.innerHTML = "+ 구독하기";
   sub.addEventListener("click", addMediaToMyList);
 }
@@ -151,24 +155,26 @@ function generateUnsubscribe() {
   contentTitle.appendChild(sub);
 
   sub.innerHTML = "구독 해지";
-  sub.addEventListener("click", removeMediaFromMyList);
+  sub.addEventListener("click", () =>
+    saveRemoveList(
+      categoryData[categoryList[state.currentCategoryIndex]][
+        state.currentMediaIndex
+      ]
+    )
+  );
 }
 
 /**
  * 구독해지 버튼 로직
+ * task : 바로 제거해서는 안됨!!
  */
-function removeMediaFromMyList() {
-  store.removeItemFromSet(
-    "myList",
-    categoryData[categoryList[state.currentCategoryIndex]][
-      state.currentMediaIndex
-    ].media
-  );
-  removeMyData(
-    categoryData[categoryList[state.currentCategoryIndex]][
-      state.currentMediaIndex
-    ]
-  );
+function removeMediaFromMyList(object) {
+  store.removeItemFromSet("myList", object.media);
+  removeMyData(object);
+}
+
+function saveRemoveList(object) {
+  needRemove.push(object);
 }
 
 /**
