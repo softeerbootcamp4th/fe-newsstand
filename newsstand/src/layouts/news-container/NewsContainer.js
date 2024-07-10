@@ -32,6 +32,7 @@ const NewsContainer = () => {
     const listNewsstandLayout = createComponent(ListNewsstand, {
         id: 1,
         selectedSource: selectedSource,
+        setSelectedSource: setSelectedSource,
         selectedCategory: selectedCategory,
         setSelectedCategory: setSelectedCategory,
         viewType: viewType,
@@ -47,6 +48,9 @@ const NewsContainer = () => {
         viewType: viewType,
         setCurrentCompanyInfo: setCurrentCompanyInfo,
         setIsShowAlert: setIsShowAlert,
+        setSelectedCategory: setSelectedCategory,
+        setSelectedSource: setSelectedSource,
+        setViewType: setViewType,
         style: 'width:100%; height:70%;',
     })
 
