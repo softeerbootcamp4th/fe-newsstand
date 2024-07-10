@@ -1,24 +1,24 @@
-import { createNewsTicker } from "./src/components/newsTicker/newsTicker.js";
-import { createSwitcher } from "./src/components/switcher/switcher.js";
+import { createNewsTicker } from "./components/newsTicker/newsTicker.js";
+import { createSwitcher } from "./components/switcher/switcher.js";
 
-import { leftNewsItems, rightNewsItems } from "./src/data/headlineNews.js";
-import { dataTabItems, viewTabItems } from "./src/data/tabItems.js";
-import { createMainArrowButton } from "./src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
+import { dataTabItems, viewTabItems } from "./features/renderNews/constants/tabItems.js";
+import { createMainArrowButton } from "./features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
 
 import {
   switchCompanyTab,
   switchCompanyView,
   updateNext,
   updatePrev,
-} from "./src/features/renderNews/utils/updateStates.js";
+} from "./features/renderNews/utils/updateStates.js";
+import { getHeadlineList } from "./apis/news.js";
 
 initialize();
 
-function initialize() {
+async function initialize() {
   renderHeader();
-  renderHeadlineNewsTicker();
+  await renderHeadlineNewsTicker();
   renderSwitcher();
-  renderNewsView();
+  await renderNewsView();
 }
 
 function renderHeader() {
@@ -40,11 +40,13 @@ function renderHeader() {
 }
 
 /* render headline news ticker */
-function renderHeadlineNewsTicker() {
+async function renderHeadlineNewsTicker() {
+  const headlines = await getHeadlineList();
+
   const container = document.getElementById("news-ticker-container");
 
-  const left = createNewsTicker({ newsItems: leftNewsItems, tag: "연합뉴스" });
-  const right = createNewsTicker({ newsItems: rightNewsItems, tag: "연합뉴스" }, 1);
+  const left = createNewsTicker({ newsItems: headlines.slice(0, 5), tag: "연합뉴스" });
+  const right = createNewsTicker({ newsItems: headlines.slice(5), tag: "연합뉴스" }, 1);
 
   container.append(left, right);
 }
@@ -56,7 +58,7 @@ function renderSwitcher() {
   const tabSwitcher = createSwitcher({
     className: "tab-switcher",
     items: dataTabItems,
-    onClick: (event) => switchCompanyTab(event.target.id),
+    onClick: async (event) => await switchCompanyTab(event.target.id),
   });
 
   const viewSwitcher = createSwitcher({
@@ -69,8 +71,8 @@ function renderSwitcher() {
 }
 
 /** render news view */
-function renderNewsView() {
-  switchCompanyTab("all-news-tab");
+async function renderNewsView() {
+  await switchCompanyTab("all-news-tab");
 
   const container = document.getElementById("main-news-contents");
 
