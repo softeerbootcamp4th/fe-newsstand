@@ -23,6 +23,7 @@ export const createSubscriptionMenuList = () => {
         <div class="menu-btn-wrapper">
             <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
                 <h5>${sub}</h5>
+                <img class="chevron" style="filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(43deg) brightness(102%) contrast(101%)" src="/icons/chevron-right.png" />
             </button>
             <div class="fill-background"></div>
         </div>

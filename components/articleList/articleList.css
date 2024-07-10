@@ -135,6 +135,14 @@ button {
             animation: fill 20s linear;
         }
 
+            .menu-btn-wrapper > .article-menu-btn > .chevron {
+                display: none;
+            }
+
+            .menu-btn-wrapper-clicked > .article-menu-btn > .chevron {
+                display: block;
+            }
+
 
     .article-wrapper {
         width: 930px;
