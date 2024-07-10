@@ -4,15 +4,11 @@ import {
   getMyDataLength,
 } from "../resources/data.js";
 import {
-  getCurrentCategoryIndex,
-  setCurrentCategoryIndex,
-  getCurrentMediaIndex,
-  setCurrentMediaIndex,
-  getHeaderCategory,
   updateNavElements,
   updateCategoryByIndex,
   updateMyMedia,
 } from "./nav.js";
+import state from "../list/state.js";
 
 const leftButton = document.querySelector(".leftButton");
 const rightButton = document.querySelector(".rightButton");
@@ -25,9 +21,10 @@ rightButton.addEventListener("click", moveNextNewsMedia);
  */
 function movePrevNewsMedia() {
   resetCover();
+  debugger;
 
-  if (getHeaderCategory() === 0) handleNewsMovePrev();
-  else if (getHeaderCategory() === 1) handleMyMovePrev();
+  if (state.headerCategory === 0) handleNewsMovePrev();
+  else if (state.headerCategory === 1) handleMyMovePrev();
 }
 
 /**
@@ -36,25 +33,26 @@ function movePrevNewsMedia() {
 function handleNewsMovePrev() {
   const navElementNodes = document.querySelectorAll(".contentList li");
 
-  let currentMediaIndex = getCurrentMediaIndex();
-  let currentCategoryIndex = getCurrentCategoryIndex();
+  let currentMediaIndex = state.currentMediaIndex;
+  let currentCategoryIndex = state.currentCategoryIndex;
 
   currentMediaIndex--;
 
   if (currentMediaIndex < 0) {
     currentCategoryIndex--;
 
-    if (currentCategoryIndex < 0)
+    if (currentCategoryIndex < 0) {
       currentCategoryIndex = getCateogryLength() - 1;
+    }
 
     currentMediaIndex = getMaxMediaLengthByIndex(currentCategoryIndex) - 1;
   }
 
-  setCurrentMediaIndex(currentMediaIndex);
-  setCurrentCategoryIndex(currentCategoryIndex);
+  state.currentMediaIndex = currentMediaIndex;
+  state.currentCategoryIndex = currentCategoryIndex;
 
   updateNavElements(navElementNodes);
-  updateCategoryByIndex(getCurrentCategoryIndex());
+  updateCategoryByIndex(currentCategoryIndex);
 }
 
 /**
@@ -63,15 +61,17 @@ function handleNewsMovePrev() {
 function handleMyMovePrev() {
   const navElementNodes = document.querySelectorAll(".contentList li");
 
-  let currentCategoryIndex = getCurrentCategoryIndex();
+  let currentCategoryIndex = state.currentCategoryIndex;
 
   currentCategoryIndex--;
-  if (currentCategoryIndex < 0) currentCategoryIndex = getMyDataLength() - 1;
+  if (currentCategoryIndex < 0) {
+    currentCategoryIndex = getMyDataLength() - 1;
+  }
 
-  setCurrentCategoryIndex(currentCategoryIndex);
+  state.currentCategoryIndex = currentCategoryIndex;
 
   updateNavElements(navElementNodes);
-  updateMyMedia(getCurrentCategoryIndex());
+  updateMyMedia(currentCategoryIndex);
 }
 
 /**
@@ -80,8 +80,8 @@ function handleMyMovePrev() {
 function moveNextNewsMedia() {
   resetCover();
 
-  if (getHeaderCategory() === 0) handleNewsMoveNext();
-  else if (getHeaderCategory() === 1) handleMyMoveNext();
+  if (state.headerCategory === 0) handleNewsMoveNext();
+  else if (state.headerCategory === 1) handleMyMoveNext();
 }
 
 /**
@@ -90,25 +90,23 @@ function moveNextNewsMedia() {
 function handleNewsMoveNext() {
   const navElementNodes = document.querySelectorAll(".contentList li");
 
-  let currentMediaIndex = getCurrentMediaIndex();
-  let currentCategoryIndex = getCurrentCategoryIndex();
+  state.currentMediaIndex++;
 
-  currentMediaIndex++;
+  if (
+    state.currentMediaIndex >=
+    getMaxMediaLengthByIndex(state.currentCategoryIndex)
+  ) {
+    state.currentCategoryIndex++;
 
-  if (currentMediaIndex > getMaxMediaLengthByIndex(currentCategoryIndex) - 1) {
-    currentCategoryIndex++;
+    if (state.currentCategoryIndex >= getCateogryLength()) {
+      state.currentCategoryIndex = 0;
+    }
 
-    if (currentCategoryIndex > getCateogryLength() - 1)
-      currentCategoryIndex = 0;
-
-    currentMediaIndex = 0;
+    state.currentMediaIndex = 0;
   }
 
-  setCurrentMediaIndex(currentMediaIndex);
-  setCurrentCategoryIndex(currentCategoryIndex);
-
   updateNavElements(navElementNodes);
-  updateCategoryByIndex(getCurrentCategoryIndex());
+  updateCategoryByIndex(state.currentCategoryIndex);
 }
 
 /**
@@ -117,15 +115,11 @@ function handleNewsMoveNext() {
 function handleMyMoveNext() {
   const navElementNodes = document.querySelectorAll(".contentList li");
 
-  let currentCategoryIndex = getCurrentCategoryIndex();
-
-  currentCategoryIndex++;
-  if (currentCategoryIndex > getMyDataLength() - 1) currentCategoryIndex = 0;
-
-  setCurrentCategoryIndex(currentCategoryIndex);
+  state.currentCategoryIndex =
+    (state.currentCategoryIndex + 1) % getMyDataLength();
 
   updateNavElements(navElementNodes);
-  updateMyMedia(getCurrentCategoryIndex());
+  updateMyMedia(state.currentCategoryIndex);
 }
 
 /**

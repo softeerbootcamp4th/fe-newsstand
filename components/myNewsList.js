@@ -50,14 +50,6 @@ export function updateMyNewsList(currentCategoryIndex) {
 }
 
 /**
- * myData의 길이 가져오기
- * @returns myData의 길이
- */
-export function getMyDataLength() {
-  return myData.length;
-}
-
-/**
  * 언론사 목록과 현재 언론사 index를 받아 언론사 이름 출력
  * @param {Array} mediaList
  * @param {int} mediaIndex

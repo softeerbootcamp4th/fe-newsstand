@@ -93,14 +93,6 @@ function initialize() {
     });
   });
 }
-const leftButton = document.querySelector(".leftButton");
-const rightButton = document.querySelector(".rightButton");
-
-leftButton.addEventListener("click", movePrevMedia);
-rightButton.addEventListener("click", moveNextMedia);
-
-function movePrevMedia() {}
-function moveNextMedia() {}
 
 // 초기화
 initialize();
