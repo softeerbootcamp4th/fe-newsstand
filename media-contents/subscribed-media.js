@@ -151,8 +151,8 @@ function renderListMedia(mediaId) {
     /**
      * 언론사 카테고리 렌더링
      */
-    const selectedMedia = mediaId ?? subscribedMediaList.data[0];
-    const _selectedMediaIdx = subscribedMediaList.data.findIndex((media) => media.id === selectedMedia.id);
+    const selectedMediaId = mediaId ?? subscribedMediaList.data[0].id;
+    const _selectedMediaIdx = subscribedMediaList.data.findIndex((media) => media.id === selectedMediaId);
     const selectedMediaIdx = _selectedMediaIdx === -1 ? 0 : _selectedMediaIdx;
 
     let mediaListDOMString = ''
@@ -184,7 +184,7 @@ function renderListMedia(mediaId) {
     const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaDetailList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    subscribedMediaList.addCallback(() => renderListMedia(selectedMedia.id));
+    subscribedMediaList.addCallback(() => renderListMedia(selectedMediaId));
     setSubscribeButtonEvent(subscribedMediaList.data[selectedMediaIdx]);
 }
 
@@ -203,7 +203,7 @@ function clickMediaList(e) {
         return;
     }
 
-    renderListMedia(subscribedMediaList.data[mediaIdx]);
+    renderListMedia(subscribedMediaList.data[mediaIdx].id);
 }
 
 /**
