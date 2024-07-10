@@ -14,9 +14,6 @@
     list-style-type: none;
 }
 
-#header {
-    margin-top: 50px;
-}
 
 #newsstand {
     width: 900px;
@@ -182,9 +179,6 @@
     width: 100%;
 }
 
-.datetext {
-    color: var(--date-text-color);
-}
 
 .fontSize14 {
     font-size: 14px;
@@ -269,19 +263,6 @@
     text-overflow: ellipsis;
 }
 
-#mainContentSelector {
-    margin-top: 32px;
-}
-
-.mainContentSelectorElement {
-    color: var(--disable-color);
-}
-
-.mainContentSelectorElement.isSelected {
-    color: var(--selected-color);
-}
-
-
 .detailTitleCategory {
     display: flex;
     align-items: center;
@@ -361,8 +342,6 @@
     margin-top: 16px;
 }
 
-
-
 .newsstandCollectionMainContent>.title {
     margin-top: 16px;
     font-size: 16px;
@@ -380,77 +359,6 @@
     color: #879298;
 }
 
-/*  여기서 부터 rolling css 나중에 분리하자 */
-
-.hoverInRecentNews>.recentArticleTitle {
-    text-decoration: underline;
-}
-
-.currentDom_left {
-    top: 0px;
-    max-width: 360px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    position: absolute;
-}
-
-.currentDom_right {
-    top: 0px;
-    max-width: 360px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    position: absolute;
-}
-
-.futureDom_left {
-    top: 17px;
-    max-width: 360px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    position: absolute;
-}
-
-.futureDom_right {
-    top: 17px;
-    max-width: 360px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    position: absolute;
-}
-
-.futureDomStart {
-    animation-name: futureDomStart;
-    animation-duration: 1s;
-}
-
-.currentDom_Start {
-    animation-name: currentDomStart;
-    animation-duration: 1s;
-}
-
-@keyframes futureDomStart {
-    from {
-        top: 17px;
-    }
-
-    to {
-        top: 0px;
-    }
-}
-
-@keyframes currentDomStart {
-    from {
-        top: 0px;
-    }
-
-    to {
-        top: -17px;
-    }
-}
 
 .alert_Container {
     flex-direction: column;

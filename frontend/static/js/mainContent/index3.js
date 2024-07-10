@@ -44,7 +44,6 @@ function initMainContent() {
             currentArticleIndex = index;
             currentArticleDetailIndex = 0;
             // 현재 선택된 nav element 활성화
-            console.log(NEWS_Sorted[currentArticleIndex]);
             navSelected(currentArticleDetailIndex, NEWS_Sorted[currentArticleIndex].length, element);
             // 현재 IT를 선택했고, 연애를 누른다면 오른쪽으로 기사가 넘어가고
             // 현재 IT를 선택했고, 종합/경제를 누른다면 왼쪽으로 기사가 넘어가기 위한 분기처리
@@ -94,13 +93,9 @@ function goToNext() {
     moveToNextPage(NEWS_Sorted[currentArticleIndex], currentDom, nextDom, currentArticleDetailIndex);
 }
 
-function getSelectedNav() {
-    return document.querySelector(".mainContentNavElement.isSelected");
-}
+const getSelectedNav = () => document.querySelector(".mainContentNavElement.isSelected")
 
-function getAllNavElements() {
-    return document.querySelectorAll(".mainContentNavElement");
-}
+const getAllNavElements = () => document.querySelectorAll(".mainContentNavElement");
 
 function addIndex() {
     var currentLenth = NEWS_Sorted[currentArticleIndex].length;
