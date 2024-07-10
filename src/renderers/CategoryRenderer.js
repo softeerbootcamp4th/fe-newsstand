@@ -16,7 +16,7 @@ class CategoryRenderer extends Renderer {
     /**
      * 이 클래스에서 실행 될 이벤트인지 확인한다.
      * @param {string} event.eventName - 이벤트의 이름 
-     * @returns 
+     * @returns {boolean}
      */
     _checkEventName(event) {
         return event.eventName === 'clickCategory'; // 나중에 상수 배열로 빼기
@@ -24,7 +24,6 @@ class CategoryRenderer extends Renderer {
 
     /**
      * 생성된 element를 렌더링하는 함수
-     * @param {object} categoryInfo - 카테고리 정보
      * @param {number} categoryIndex - 선택된 카테고리 인덱스
      * @param {Array} categoryList - 표시 될 카테고리 목록
      */

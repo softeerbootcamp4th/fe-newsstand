@@ -18,6 +18,6 @@ export const categoryOnloadEventInfo = deepFreeze({
 })
 
 /**
- * Renderer에서 렌더를 허용할 이벤트 타입의 목록
+ * Renderer에서 렌더를 허용할 이벤트 이름의 목록
  */
-export const categoryEventTypeList = deepFreeze(["click"]);
+export const categoryEventNameList = deepFreeze(["clickCategory"]);
