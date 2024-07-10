@@ -14,31 +14,6 @@ export const showmysub = (subitem) => {
     });
 }
 
-/*
-export const shownewstab = (fnews) => {
-    console.log(fnews);
-    const tabinfos = document.querySelector('.news-list-header');
-    tabinfos.innerHTML='';
-    
-    fnews.forEach(it => {  
-        tabinfos.innerHTML += "<article class=\"text-button\">"+it+"</article>";
-    });
-
-    // text-button 클래스의 모든 요소 선택
-    const tbuttons = document.querySelectorAll('.text-button');
-    const hey = fnews[0];
-    // 각 버튼에 클릭 이벤트 리스너 추가
-    tbuttons.forEach(bbtt => {
-        bbtt.addEventListener('click', () => {
-            const buttonText = bbtt.textContent; // 버튼의 텍스트 내용 가져오기
-            updateSubDisplay(buttonText); // updateSubDisplay 함수 호출
-        });
-    });
-    updateSubDisplay(hey);
-} 
-
-*/
-
 export let subProgressTimer;
 
 export const shownewstab = (fnews) => {
