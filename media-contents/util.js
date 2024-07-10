@@ -53,15 +53,15 @@ export function getSelectedCategoryContentsDOMString(media) {
         <img alt="언론사 아이콘" src="${iconUrl}"/>
         <p class="text__medium12">${editDate}</p>
         ${isSubscribed ? `
-            <section class="button__container subscribe-button__${id}--unsubscribe" data-media-id="${id}">
+            <button class="button__container subscribe-button__${id}--unsubscribe" data-media-id="${id}">
                 <img class="subscribe-button__icon--unsubscribe subscribe-button--default" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
                 <img class="subscribe-button__icon--unsubscribe subscribe-button--active" alt="구독 취소 아이콘" src="./static/icons/close-hover.svg" />
-            </section>` : `
-            <section class="button__container subscribe-button__${id}--subscribe" data-media-id="${id}">
+            </button>` : `
+            <button class="button__container subscribe-button__${id}--subscribe" data-media-id="${id}">
                 <img class="subscribe-button__icon subscribe-button--default" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
                 <img class="subscribe-button__icon subscribe-button--active" alt="구독 클릭 아이콘" src="./static/icons/plus-hover.svg" />
                 <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
-            </section>`}
+            </button>`}
     </section>
 
     <section class="flexbox__flex-start--start gap32">
@@ -153,16 +153,16 @@ export function getGridMediaItem(media) {
     return `<li class="media-contents__grid-item">
                 <img class="media-contents__grid-item-icon" alt="${media.name} 언론사 아이콘" src="${media.icon}"/>
                 ${isSubscribed ? `
-                <section class="button__container subscribe-button__${media.id}--unsubscribe" data-media-id="${media.id}">
+                <button class="button__container subscribe-button__${media.id}--unsubscribe" data-media-id="${media.id}">
                     <img class="subscribe-button__icon--unsubscribe subscribe-button--default" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
                     <img class="subscribe-button__icon--unsubscribe subscribe-button--active" alt="구독 취소 아이콘" src="./static/icons/close-hover.svg" />
                     <p class="button__text subscribe-button__text text__medium12 text--weak">해지하기</p>
-                </section>` : `
-                <section class="button__container subscribe-button__${media.id}--subscribe" data-media-id="${media.id}">
+                </button>` : `
+                <button class="button__container subscribe-button__${media.id}--subscribe" data-media-id="${media.id}">
                     <img class="subscribe-button__icon subscribe-button--default" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
                     <img class="subscribe-button__icon subscribe-button--active" alt="구독 클릭 아이콘" src="./static/icons/plus-hover.svg" />
                     <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
-                </section>`}
+                </button>`}
             </li>`
 }
 
