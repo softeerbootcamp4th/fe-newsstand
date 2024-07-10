@@ -1,19 +1,33 @@
 import { showsubscribe } from "../subscribe/subscribe.js";
 import { transformToProgress, resetProgress } from "../progressbar/progressbutton.js";
-//카테고리별 제목이 들어있는 배열
 import { newstype } from "../newstab/newstab.js";
-import { moveToNextCatidx } from "../progressbar/progressbutton.js";
+import { moveToNextCatidx, animationTimer } from "../progressbar/progressbutton.js";
+import { clickArt } from "../mainscript.js";
+import { originaltabs, mytabs } from "../newstab/newstab.js";
+
+document.addEventListener('DOMContentLoaded', () => {
+    const allArticleButton = document.getElementById('all-article');
+    const myArticleButton = document.getElementById('my-article');
+
+    allArticleButton.addEventListener('click', () => {
+        clickArt('all-article');
+        originaltabs();
+        initmain();
+    });
+
+    myArticleButton.addEventListener('click', () => {
+        clickArt('my-article');
+        mytabs();
+    });
+});
 
 window.newsData = [];
-//각 카테고리별 페이지수 배열
 export let testingpages = [];
-//전역변수 - 포인터
 export var indexstate = {
-    //현재 뉴스 종류
     pressIndex: 0,
-    //현재 페이지 인덱스
     pageIndex: 0
 };
+
 let buttonId = "";
 
 window.onload = async () => {
@@ -22,31 +36,17 @@ window.onload = async () => {
         const data = await response.json();
         window.newsData = data;
         testingpages = countpages(newsData);
-        const buttons = document.querySelectorAll('.text-button');
-        buttons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                resetProgress();
-                indexstate.pressIndex = Number(button.dataset.index);
-                indexstate.pageIndex = 0;
-                buttonId = button.id;
-                updateNewsDisplay(buttonId, indexstate.pageIndex);
-                transformToProgress(event.currentTarget);
-            });            
-        });
-        //초기에는 경제기사를 디폴트 값으로 한다.
-        updateNewsDisplay("economy", indexstate.pageIndex);
-        const ts = document.querySelector(".text-button");
-        transformToProgress(ts);
+
+        initmain();
     } catch (error) {
         console.error('Error loading JSON:', error);
     }
-}; 
+};
 
 var btnRight = document.getElementById('btnRight');
 var btnLeft = document.getElementById('btnLeft');
 
 function updateList(pridx) {
-    // 왼쪽 버튼 상태 업데이트
     if (indexstate.pageIndex === 0) {
         btnLeft.classList.add('disabled');
     } else {
@@ -63,7 +63,7 @@ function updateList(pridx) {
         updateNewsDisplay(buttonId, indexstate.pageIndex);
     } else {
         btnRight.classList.remove('disabled');
-    } 
+    }
 }
 
 btnRight.addEventListener('click', () => {
@@ -108,8 +108,7 @@ function leftButtonClick() {
     updateNewsDisplay(buttonId, indexstate.pageIndex);
 }
 
-//뉴스 종류를 선택하였을 때, 페이지 넘김에 따른 컨텐츠 변화 함수 
-export const updateNewsDisplay = (pressType, pageidx)  =>{
+export const updateNewsDisplay = (pressType, pageidx) => {
     const filteredNews = window.newsData.filter(item => item.pressType === pressType);
     const newsItem = filteredNews.find(item => item.pid === pageidx);
 
@@ -141,4 +140,33 @@ const countpages = (allvalues) => {
 
 const getNextPressIndex = (pridx) => {
     return (pridx + 1) % newstype.length;
+}
+
+export const initmain = () => {
+    clearInterval(animationTimer);
+    resetProgress();
+
+    testingpages = countpages(window.newsData); // Ensure testingpages is updated
+
+    const buttons = document.querySelectorAll('.text-button');
+    buttons.forEach(button => {
+        button.removeEventListener('click', handleButtonClick);
+        button.addEventListener('click', handleButtonClick);
+    });
+
+    indexstate.pressIndex = 0; // Ensure starting index is reset
+    indexstate.pageIndex = 0;  // Ensure starting page index is reset
+
+    updateNewsDisplay("economy", indexstate.pageIndex);
+    const ts = document.querySelector(".text-button");
+    transformToProgress(ts);
+}
+
+const handleButtonClick = (event) => {
+    resetProgress();
+    indexstate.pressIndex = Number(event.currentTarget.dataset.index);
+    indexstate.pageIndex = 0;
+    buttonId = event.currentTarget.id;
+    updateNewsDisplay(buttonId, indexstate.pageIndex);
+    transformToProgress(event.currentTarget);
 }
