@@ -4,6 +4,7 @@ import { createArticleList } from "../html/articleListHtml.js";
 import { setSubscriptionData } from "../articleList.js";
 import { extractMedias } from "../../../utils/api.js";
 import { setWholeData } from "../articleList.js";
+import { createAlert } from "../../alert/alert.js";
 
 // 전체 언론사, 구독한 언론사
 export const addModeSelectionEventListener = () => {
@@ -153,5 +154,14 @@ export const addWholeGridEventListener = () => {
                 callback();
             }
         })
+    })
+}
+
+export const addCancleSubscriptionEventListener = () => {
+    document.querySelector('.cancle-btn')?.addEventListener('click', () => {
+        const el = document.createElement('div');
+        el.classList.add('alert-area');
+        el.innerHTML = createAlert();
+        document.querySelector('.article-body-wrapper').appendChild(el);
     })
 }

@@ -169,6 +169,21 @@ button {
                     cursor: pointer;
                 }
 
+                .cancle-btn {
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50px;
+                    border: 1px solid #D2DAE0;
+                    background-color: #F5F7F9;
+                    color: #879298;
+                    text-align: center;
+                    font-size: 12px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
             .content-body-wrapper {
                 width: 882px;
             }

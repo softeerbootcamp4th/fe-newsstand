@@ -5,9 +5,17 @@ import { newsState,
     menuIdx,
     categoryTimeoutId,
     menuLastPage,
-    CATEGORY_TIMEOUT,    
+    CATEGORY_TIMEOUT,
+    nowMediaName,
 } from "../../../pages/state/newsState.js";
-import { insertSubscriptionContent, insertWholeContent } from "../html/articleListHtml.js";
+import { insertCancleSubscriptionBtn, insertSubscriptionBtn, insertSubscriptionContent, insertWholeContent } from "../html/articleListHtml.js";
+
+export const isSubscribed = () => {
+    if (localStorage.getItem(nowMediaName)) {
+        return true;
+    }
+    return false;
+}
 
 const nextPageCallback = () => {
     // moveEvent
@@ -32,6 +40,16 @@ export const handleNextPageEvent = ({ isNow = false } = {}) => {
         newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
     } else {
         newsState.setMenuLastPage(1);
+    }
+
+    if (isMediaWhole) {
+        newsState.setNowMediaName(menuInfo[menuIdx].mediaData[menuCurrentPage-1]['mediaName'])
+    }
+
+    if (isSubscribed()) {
+        insertCancleSubscriptionBtn();
+    } else {
+        insertSubscriptionBtn();
     }
 
     if (isNow) {
@@ -99,7 +117,7 @@ const prePageCallback = () => {
 
 export const handlePrePageEvent = ({ isNow = false } = {}) => {
     newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
-
+    newsState.setNowMediaName(menuInfo[menuIdx].mediaName)
     if (isNow) {
         clearTimeout(categoryTimeoutId);
         prePageCallback();
@@ -145,4 +163,10 @@ export const movePrePage = () => {
     thisBtn.appendChild(fillBackground);
     
     handleNextPageEvent();
+}
+
+export const checkSubscription = () => {
+    if (localStorage.getItem(nowMediaName)) {
+        replaceToCancleSubscriptionBtn();
+    }
 }

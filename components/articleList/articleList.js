@@ -17,7 +17,9 @@ import { addModeSelectionEventListener,
     addSubscriptionGridEventListener,
     addSubscriptionListEventListener,
     addBtnEventsListener,
+    addCancleSubscriptionEventListener,
 } from "./event/clickEvent.js";
+import { checkSubscription } from "./event/pageEvent.js";
 
 // 초기화 함수
 export const initArticleList = async () => {
@@ -25,7 +27,6 @@ export const initArticleList = async () => {
         addEventListeners();
         newsState.setMenuIdx(0);
         setWholeData(document.querySelectorAll('.menu-btn-wrapper')[0]);
-        // setWholeData(document.querySelectorAll('.menu-btn-wrapper')[0], 0);
     } catch (error) {
         console.log(error)
     }
@@ -33,7 +34,6 @@ export const initArticleList = async () => {
 
 // 이벤트 리스너 추가 함수
 const addEventListeners = () => {
-
     addBtnEventsListener();
     addModeSelectionEventListener();
     addViewSelectionEventListener();
@@ -43,9 +43,10 @@ const addEventListeners = () => {
     addWholeGridEventListener();
     addWholeListEventListener();
     addSubscriptionListEventListener();
+    addCancleSubscriptionEventListener();
 }
 
-const addSubscriptionEventListener = () => {
+export const addSubscriptionEventListener = () => {
     document.querySelector('.subscribe-btn').addEventListener('click', () => {
         localStorage.setItem(menuInfo[menuIdx].mediaData[menuCurrentPage-1].mediaName, true)
         alert('구독')

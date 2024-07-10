@@ -11,6 +11,7 @@ export let rightRollingId;
 export let isMediaWhole = true;
 export let isGrid = false;
 export let CATEGORY_TIMEOUT = 1000 * 20;
+export let nowMediaName = '';
 
 export const newsState = {
     setMenuInfo: (info) => { menuInfo = info },
@@ -22,4 +23,5 @@ export const newsState = {
     setRightRollingId: (id) => { rightRollingId = id },
     setIsMediaWhole: (bool) => { isMediaWhole = bool },
     setIsGrid: (bool) => { isGrid = bool },
+    setNowMediaName: (name) => { nowMediaName = name },
 };

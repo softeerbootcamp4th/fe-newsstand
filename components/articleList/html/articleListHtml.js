@@ -1,5 +1,8 @@
-import { menuInfo, menuIdx, menuCurrentPage, menuLastPage, isMediaWhole } from "../../../pages/state/newsState.js";
+import { menuInfo, menuIdx, menuCurrentPage, menuLastPage, isMediaWhole, newsState } from "../../../pages/state/newsState.js";
 import { extractDataWithMedia } from "../../../utils/api.js";
+import { addSubscriptionEventListener } from "../articleList.js";
+import { addCancleSubscriptionEventListener } from "../event/clickEvent.js";
+import { isSubscribed } from "../event/pageEvent.js";
 
 // 메뉴 리스트 생성 함수
 export const createMenuList = () => {
@@ -44,6 +47,8 @@ export const insertSubscriptionContent = () => {
     const mediaName = subList[menuIdx];
     const nowInfo = extractDataWithMedia(menuInfo)[mediaName]
 
+    newsState.setNowMediaName(mediaName);
+
     document.querySelector('.media-img').src = `/images/logos/${mediaName}.png`;
     document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
     document.querySelector('.thumbnail-img').src = `https://picsum.photos/500/300?img=95`;
@@ -61,6 +66,9 @@ export const insertWholeContent = () => {
     if (document.querySelector('.article-menu-pages') !== null) {
         document.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
     }
+
+    newsState.setNowMediaName(nowInfo.mediaName);
+
     document.querySelector('.media-img').src = `/images/logos/${nowInfo.mediaName}.png`;
     document.querySelector('.updated-date-tag').innerText = `${nowInfo.updatedDate} 편집`;
     document.querySelector('.thumbnail-img').src = `https://picsum.photos/500/300?img=95`;
@@ -69,6 +77,13 @@ export const insertWholeContent = () => {
         ${createArticleLiPart()}
         <p class="li-part-info">${nowInfo.mediaName}에서 직접 편집한 뉴스입니다.</p>
     `;
+
+    if (isSubscribed()) {
+        insertCancleSubscriptionBtn();
+    } else {
+        insertSubscriptionBtn();
+
+    }
 }
 
 export const createArticleList = ({ isSubscription }) => {
@@ -114,4 +129,28 @@ export const createArticleList = ({ isSubscription }) => {
             </div>
         </div>
     `;
+}
+
+export const insertCancleSubscriptionBtn = () => {
+    document.querySelectorAll('.subscribe-btn, .cancle-btn')?.forEach((btn) => btn.remove())
+    const el = document.createElement('button')
+    el.classList.add('cancle-btn')
+    const imgEl = document.createElement('img');
+    imgEl.src = '/icons/closed.png';
+    imgEl.height = 12;
+    imgEl.width = 12;
+    el.classList.add('btn')
+    el.appendChild(imgEl)
+    document.querySelector('.content-header-wrapper').appendChild(el);
+    addCancleSubscriptionEventListener();
+}
+
+export const insertSubscriptionBtn = () => {
+    document.querySelectorAll('.cancle-btn, .subscribe-btn')?.forEach((btn) => btn.remove())
+    const el = document.createElement('button')
+    el.classList.add('subscribe-btn')
+    el.classList.add('btn')
+    el.innerText = '+ 구독하기'
+    document.querySelector('.content-header-wrapper').appendChild(el);
+    addSubscriptionEventListener();
 }

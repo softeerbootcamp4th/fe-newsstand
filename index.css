@@ -1,3 +1,7 @@
+p {
+    margin: 0;
+}
+
 /* 공통 css class */
 .inline-tag {
     display: inline;

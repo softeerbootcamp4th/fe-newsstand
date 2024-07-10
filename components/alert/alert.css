@@ -1,0 +1,41 @@
+.alert-wrapper {
+    width: 320px;
+    height: 138px;
+    font-size: 16px;
+    border: 1px solid #D2DAE0;
+    position: relative;
+    top: -264px;
+    left: 305px;
+}
+
+    .alert-msg-wrapper {
+        width: 100%;
+        height: 90px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: white;
+    }
+
+    .alert-btn-wrapper {
+        width: 100%;
+        height: 48px;
+        border-top: 1px solid #D2DAE0;
+        background-color: #F5F7F9;
+    }
+
+        .alert-accept-btn {
+            width: 50%;
+            height: 100%;
+            text-align: center;
+            border-right: 1px solid #D2DAE0;
+            cursor: pointer;
+        }
+        
+        .alert-cancle-btn {
+            width: 50%;
+            height: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
