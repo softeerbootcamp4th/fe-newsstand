@@ -25,17 +25,16 @@ function movePrevMedia(state) {
 
   const newState =
     state.headerCategory === 0
-      ? handleMovePrev(
-          state,
-          getCateogryLength,
-          getMediaLengthByIndex,
-          updateCategoryByIndex
-        )
-      : handleMovePrev(state, getMyDataLength, () => 0, updateMyMedia);
+      ? handleMovePrev(state, getCateogryLength, getMediaLengthByIndex)
+      : handleMovePrev(state, getMyDataLength, () => 0);
 
-  updateNavElements(document.querySelectorAll(".contentList li"));
   state.currentCategoryIndex = newState.currentCategoryIndex;
   state.currentMediaIndex = newState.currentMediaIndex;
+
+  updateNavElements(document.querySelectorAll(".contentList li"));
+  state.headerCategory === 0
+    ? updateCategoryByIndex(state.currentCategoryIndex)
+    : updateMyMedia(state.currentCategoryIndex);
 }
 
 /**
@@ -47,17 +46,16 @@ function moveNextMedia(state) {
 
   const newState =
     state.headerCategory === 0
-      ? handleMoveNext(
-          state,
-          getCateogryLength,
-          getMediaLengthByIndex,
-          updateCategoryByIndex
-        )
-      : handleMoveNext(state, getMyDataLength, () => 0, updateMyMedia);
+      ? handleMoveNext(state, getCateogryLength, getMediaLengthByIndex)
+      : handleMoveNext(state, getMyDataLength, () => 0);
 
-  updateNavElements(document.querySelectorAll(".contentList li"));
   state.currentCategoryIndex = newState.currentCategoryIndex;
   state.currentMediaIndex = newState.currentMediaIndex;
+
+  updateNavElements(document.querySelectorAll(".contentList li"));
+  state.headerCategory === 0
+    ? updateCategoryByIndex(state.currentCategoryIndex)
+    : updateMyMedia(state.currentCategoryIndex);
 }
 
 /**
@@ -65,15 +63,9 @@ function moveNextMedia(state) {
  * @param {object} state 현재 상태
  * @param {function} getCategoryLength data 접근 함수
  * @param {function} getMediaLengthByIndex data 접근 함수
- * @param {function} updateContent newsList부분 업데이트 함수
  * @returns
  */
-function handleMovePrev(
-  state,
-  getCategoryLength,
-  getMediaLengthByIndex,
-  updateContent
-) {
+function handleMovePrev(state, getCategoryLength, getMediaLengthByIndex) {
   let currentMediaIndex = state.currentMediaIndex;
   let currentCategoryIndex = state.currentCategoryIndex;
 
@@ -87,7 +79,6 @@ function handleMovePrev(
     currentMediaIndex = getMediaLengthByIndex(currentCategoryIndex) - 1;
   }
 
-  updateContent(currentCategoryIndex);
   return { currentCategoryIndex, currentMediaIndex };
 }
 
@@ -96,15 +87,9 @@ function handleMovePrev(
  * @param {object} state 현재 상태
  * @param {function} getCategoryLength data 접근 함수
  * @param {function} getMediaLengthByIndex data 접근 함수
- * @param {function} updateContent newsList부분 업데이트 함수
  * @returns
  */
-function handleMoveNext(
-  state,
-  getCategoryLength,
-  getMediaLengthByIndex,
-  updateContent
-) {
+function handleMoveNext(state, getCategoryLength, getMediaLengthByIndex) {
   let currentMediaIndex = state.currentMediaIndex;
   let currentCategoryIndex = state.currentCategoryIndex;
 
@@ -118,7 +103,6 @@ function handleMoveNext(
     currentMediaIndex = 0;
   }
 
-  updateContent(currentCategoryIndex);
   return { currentCategoryIndex, currentMediaIndex };
 }
 
@@ -126,6 +110,7 @@ function handleMoveNext(
  * 페이지가 넘어갈 때 progress animation을 재시작
  */
 function resetCover() {
+  console.log(state);
   const cover = document.querySelector(".contentList li.selected .cover");
   cover.classList.remove("cover");
   void cover.offsetWidth;

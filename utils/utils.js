@@ -26,6 +26,10 @@ export function deleteNodeById(id) {
   return node;
 }
 
+/**
+ * 오늘 날짜를 리턴함
+ * @returns "yyyy.mm.dd.요일"
+ */
 export function getTodayString() {
   const today = new Date();
   const year = today.getFullYear();
@@ -43,30 +47,4 @@ export function getTodayString() {
   const dayName = days[today.getDay()];
 
   return `${year}.${month}.${date}.${dayName}`;
-}
-
-export class StorageManager {
-  constructor() {
-    if (StorageManager.instance) {
-      return StorageManager.instance;
-    }
-    StorageManager.instance = this;
-  }
-
-  setItem(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  getItem(key) {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : null;
-  }
-
-  removeItem(key) {
-    localStorage.removeItem(key);
-  }
-
-  clear() {
-    localStorage.clear();
-  }
 }

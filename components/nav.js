@@ -8,6 +8,7 @@ import {
   getMyDataLength,
 } from "../resources/data.js";
 import state from "../list/state.js";
+import store from "../utils/stoageManager.js";
 
 var newsInterval; //왜 전역변수로 설정해야 작동하는가??
 var myInterval;
@@ -79,6 +80,11 @@ function generateNavForNewsList() {
     categoryList[state.currentCategoryIndex],
     state.currentCategoryIndex,
     state.currentMediaIndex
+  );
+
+  const sub = document.querySelector(".subscribe");
+  sub.addEventListener("click", () =>
+    store.addItemToSet("myList", state.currentMediaIndex)
   );
 
   const navElementNodes = document.querySelectorAll(".contentList li");

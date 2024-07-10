@@ -1,6 +1,7 @@
 import { deleteNav, generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
 import { getTodayString } from "../utils/utils.js";
+import store from "../utils/stoageManager.js";
 
 const headlineData = [
   {
@@ -77,9 +78,11 @@ setInterval(() => rollingCallback(1000), 5000);
 
 // 초기화 함수
 function initialize() {
+  store.setSet("myList", new Set());
   //header_selected 초기화
   headerCategory[0].classList.add("selected");
   headerShow[0].classList.add("selected");
+
   headerCategory.forEach((element, index) => {
     element.addEventListener("click", () => {
       headerCategory[currentHeaderCategoryIndex].classList.remove("selected");

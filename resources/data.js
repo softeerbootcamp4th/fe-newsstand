@@ -1,3 +1,5 @@
+import store from "../utils/stoageManager.js";
+
 export const categoryList = [
   "종합/경제",
   "방송/통신",
@@ -179,7 +181,7 @@ export const categoryData = {
   ],
 };
 
-export const myList = ["언론사1", "언론사2", "언론사9", "언론사11", "언론사12"];
+export const myList = store.getSetAsArray("myList");
 
 export const myData = [
   {

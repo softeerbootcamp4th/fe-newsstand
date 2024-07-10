@@ -1,5 +1,6 @@
 class State {
   constructor() {
+    //싱글톤 보장 조건문
     if (State.instance) {
       return State.instance;
     }
@@ -34,6 +35,4 @@ class State {
   }
 }
 
-const state = new State();
-
-export default state;
+export default new State();
