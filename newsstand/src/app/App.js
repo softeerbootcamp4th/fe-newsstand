@@ -1,12 +1,10 @@
-import AutoRollingNews from "../components/autoRollingNews/autoRollingNews.js";
-import Header from "../views/header/header.js";
+import HeaderContainer from "../views/header/headerContainer.js";
 import Headline from "../views/headline/headline.js";
 import Main from "../views/main/main.js";
 
-// App 컴포넌트
 export const App = () => {
     const appContainer = document.createElement('div');
-    appContainer.className = 'content-container';
+    appContainer.className = 'app-container';
 
     const html = `
         <div class="main-container">
@@ -25,8 +23,8 @@ export const App = () => {
             return;
         }
 
-        const header = Header();
-        headerContainer.appendChild(header.element);
+        const headerContainerElement = HeaderContainer(render);
+        headerContainer.appendChild(headerContainerElement.element);
     }
 
     function makeHeadline(appContainer) {
@@ -56,7 +54,7 @@ export const App = () => {
         mainContainer.appendChild(main.element);
     }
 
-    function initializeApp() {
+    function render() {
         appContainer.innerHTML = html;
 
         makeHeader(appContainer);
@@ -65,11 +63,12 @@ export const App = () => {
 
         const appDiv = document.getElementById('app');
         if (appDiv) {
+            appDiv.innerHTML = '';
             appDiv.appendChild(appContainer);
         }
     }
 
-    initializeApp();
+    render();
 }
 
 App();

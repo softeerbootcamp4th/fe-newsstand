@@ -1,4 +1,5 @@
 import intervalManager from '../../manager/intervalManager.js';
+import { IntervalKey, IntervalConst } from '../../namespace/intervalKey.js';
 import PressCategoryContainer from './pressCategory/pressCategory.js';
 import PressInfoContainer from './pressInfo/pressInfo.js';
 import PressNewsContainer from './pressNews/pressNews.js';
@@ -11,9 +12,7 @@ export const NewsList = ({ isAllPress, tabs }) => {
     let selectedPressIndex = 0;
 
     function startTimer() {
-        intervalManager.startTimer(() => {
-            changeToNextPress();
-        }, 20000);
+        intervalManager.startTimer(IntervalKey.Progress,changeToNextPress, IntervalConst.ProgressTime)
     }
 
     function render() {

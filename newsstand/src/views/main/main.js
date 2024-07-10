@@ -99,7 +99,7 @@ export const Main = () => {
               });
           }
       });
-        console.log(newTabs);
+
         return newTabs;
     } catch (error) {
         console.error("Error parsing subscribed press tabs:", error);

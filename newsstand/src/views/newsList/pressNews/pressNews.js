@@ -2,7 +2,6 @@ export const PressNewsContainer = ({pressName, mainNews, subNews}) => {
     let element = document.createElement('div');
     element.className = 'press-news-container';
 
-    console.log(mainNews, subNews);
     function render() {
         const mainNewsHtml = `
             <div class="press-main-news-container">

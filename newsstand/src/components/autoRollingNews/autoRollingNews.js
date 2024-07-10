@@ -1,88 +1,37 @@
-export const AutoRollingNews = (props) => {
-    const newsStrings = [
-        {
-            press: "연합뉴스",
-            link: "",
-            title: "[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
-        },
-        {
-            press: "연합뉴스",
-            link: "",
-            title: "[2보] 새로운 뉴스 타이틀",
-        },
-        {
-            press: "연합뉴스",
-            link: "",
-            title: "[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
-        },
-        {
-            press: "연합뉴스",
-            link: "",
-            title: "[2보] 새로운 뉴스 타이틀",
-        },
-        {
-            press: "연합뉴스",
-            link: "",
-            title: "[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출",
-        },
-        {
-            press: "연합뉴스",
-            link: "",
-            title: "[2보] 새로운 뉴스 타이틀",
-        }
-    ];
+export const AutoRollingNews = ({ news, handleHoverAction }) => {
+  let element = document.createElement("div");
+  element.className = "autoRollingNews-container";
 
-    let currentIndex = 0;
-    let element = document.createElement('div');
-    element.className = 'autoRollingNews-container';
-
-    let interval;
-
-    // 초기 렌더링 함수 호출
-    render();
-
-    // 자동 롤링 기능 구현
-    interval = setInterval(rollingCallback, 3000);
-
-    // 마우스 오버/아웃 이벤트 처리
-    element.addEventListener('mouseover', function() {
-        clearInterval(interval);
-    });
-
-    element.addEventListener('mouseout', function() {
-        interval = setInterval(rollingCallback, 3000);
-    });
-
-    function rollingCallback() {
-        currentIndex = (currentIndex + 1) % newsStrings.length;
-        render();
-    }
-
-    function render() {
-        const { press, title, link } = newsStrings[currentIndex];
-
-        const html = `
-            <p class="autoRollingNews-company">${press}</p>
-            <a class="autoRollingNews-item animate-out" href="${link}">${title}</a>
+  let titleElement;
+  const render = () => {
+    const html = `
+            <p class="autoRollingNews-company">${news.press}</p>
+            <a id="autoRollingNews-title" class="autoRollingNews-item animate-out" href="${news.link}">${news.title}</a>
         `;
-        element.innerHTML = html;
+    element.innerHTML = html;
 
-        setTimeout(() => {
-            const item = element.querySelector('.autoRollingNews-item');
-            item.classList.remove('animate-out');
-            item.classList.add('animate-in');
-        }, 100);
-    }
+    titleElement = element.querySelector("#autoRollingNews-title");
 
-    function updateProps(newProps) {
-        props = newProps;
-        render();
-    }
+    titleElement.addEventListener("mouseover", () => { handleHoverAction(true); });
+    titleElement.addEventListener("mouseout", () => { handleHoverAction(false); });
 
-    return {
-        element,
-        updateProps
-    };
+    setTimeout(() => {
+        titleElement.classList.remove('animate-out');
+        titleElement.classList.add('animate-in');
+    }, 100);
+  }
+
+  render();
+
+  function updateProps(updateNews) {
+    news = updateNews;
+    render();
+}
+
+return {
+    element,
+    updateProps
+};
 };
 
 export default AutoRollingNews;

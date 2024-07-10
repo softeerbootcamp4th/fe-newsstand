@@ -1,23 +1,77 @@
 import AutoRollingNews from "../../components/autoRollingNews/autoRollingNews.js";
+import { HeadlineNews } from "./headlineNews.js";
+import { IntervalKey, IntervalConst } from "../../namespace/intervalKey.js";
+import intervalManager from "../../manager/intervalManager.js";
 
 export const Headline = () => {
+    let leftNewsIndex = 0;
+    let rightNewsIndex = 1;
+
+    let isLeftAutoRollingNewsHovered = false;
+    let isRightAutoRllingNewsHovered = false;
+
+    let leftAutoRollingNews;
+    let rightAutoRollingNews;
+
     let element = document.createElement('div');
     element.className = 'headline-container';
 
-    function render() {
-        const autoRollingNews1 = AutoRollingNews({
-            company: '연합뉴스',
-            title: '[1보] 김기현·안철수·천하람·황교안, 與전대 본경선 진출'
-        });
-        const autoRollingNews2 = AutoRollingNews({
-            company: '중앙일보',
-            title: '[2보] 새로운 뉴스 타이틀'
-        });
+    function rollLeftNews() {
+        if (!isLeftAutoRollingNewsHovered) {
 
-        element.appendChild(autoRollingNews1.element);
-        element.appendChild(autoRollingNews2.element);
+            leftNewsIndex += 2;
+            leftNewsIndex = (leftNewsIndex) % HeadlineNews.length;
+
+            leftAutoRollingNews.updateProps(HeadlineNews[leftNewsIndex]);
+        }
     }
 
+    function rollRightNews() {
+        if (!isRightAutoRllingNewsHovered) {
+            rightNewsIndex += 2;
+            rightNewsIndex = (rightNewsIndex) % HeadlineNews.length;
+
+            rightAutoRollingNews.updateProps(HeadlineNews[rightNewsIndex]);
+        }
+    }
+
+    const render = () => {
+        leftAutoRollingNews = AutoRollingNews({
+            news: HeadlineNews[leftNewsIndex],
+            handleHoverAction: changeLeftRollingStatus
+        });
+
+        rightAutoRollingNews = AutoRollingNews({
+            news: HeadlineNews[rightNewsIndex],
+            handleHoverAction: changeRightRollingStatus
+        });
+
+        element.innerHTML = '';
+        element.appendChild(leftAutoRollingNews.element);
+        element.appendChild(rightAutoRollingNews.element);
+
+        startLeftRolling();
+        startRightRolling();
+    };
+
+    function startLeftRolling() {
+        intervalManager.startTimer(IntervalKey.RollingLeft, rollLeftNews, IntervalConst.RollingTime);
+    }
+
+    function startRightRolling() {
+        setTimeout(() => {
+            intervalManager.startTimer(IntervalKey.RollingRight, rollRightNews, IntervalConst.RollingTime);
+        }, 1000); 
+    }
+
+    function changeLeftRollingStatus(status) {
+        isLeftAutoRollingNewsHovered = status;
+    }
+
+    function changeRightRollingStatus(status) {
+        isRightAutoRllingNewsHovered = status;
+    }
+    
     render();
 
     return {

@@ -6,7 +6,31 @@
 
 .press-category-button {
     height: 100%;
+    width: max-content;
+    
     color: var(--color-text-weak);
+    background-color: transparent;
+
+    padding: 0px 16px 0px 16px;
+    margin: 0px;
+
+    position: relative;
+    cursor: pointer;
+    
+    z-index: 0;
+}
+
+.press-category-button:hover {
+    text-decoration: underline;
+}
+
+.press-category-button-selected {
+    height: 100%;
+    width: 166px;
+
+    color: var(--color-text-white-default);
+    background-color: var(--color-surface-brand-alt);
+
     padding: 0px 16px 0px 16px;
     margin: 0px;
 

@@ -8,6 +8,14 @@
     height:100%;
 }
 
+.press-main-news-container:hover {
+    text-decoration: var(--text-decoration-underline);
+}
+
+.press-main-news-container:hover .press-main-news-img {
+    transform: scale(1.03);
+}
+
 .press-main-news-img-container {
     width:100%;
     height:200px;
@@ -19,12 +27,11 @@
 }
 
 .press-main-news-img {
+    width: 100%;
+    height: 100%;
+    
     transition: transform 0.3s ease-in-out;
     transform-origin: center;
-}
-
-.press-main-news-img:hover{
-    transform: scale(1.03);
 }
 
 .press-main-news-title {
