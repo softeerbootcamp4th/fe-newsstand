@@ -20,6 +20,10 @@ function mountRollerSection(element, data, delay)
 	});
 
 	const intervalController = new IntervalController(ROLLER_INTERVAL);
+	document.addEventListener("visibilitychange", ()=>{
+		if(document.visibilityState === "hidden") intervalController.pause();
+		else intervalController.resume();
+	});
 
 	setTimeout(
 		()=>{
