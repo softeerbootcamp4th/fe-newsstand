@@ -7,8 +7,8 @@ import { EventsHandler } from "./EventsHandler.js";
 class CategoryEventHandler extends EventsHandler {
     /**
      * @constructor
-     * @param {string} type 
-     * @param {Array} [states = 0] - 주입받는 states
+     * @param {States} states - 주입받은 states 
+     * @param {object} eventInfoList - 발생한 이벤트 리스트
      */
     constructor(states = {}, eventInfo) {
         super();
@@ -19,8 +19,9 @@ class CategoryEventHandler extends EventsHandler {
 
     /**
      * 이벤트를 등록하는 함수
-     * @param {Function} listener 
-     * @param {string} type 
+     * @param {object} eventInfoList - 발생한 이벤트 리스트
+     * @param {string} eventInfoList[].type - 등록할 이벤트 타입
+     * @param {Function} eventInfoList[].listener - 등록할 이벤트 리스너 
      */
     #addEvents(eventInfos) {
         eventInfos.forEach(({ type, listener }) => {
