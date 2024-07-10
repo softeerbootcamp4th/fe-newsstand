@@ -100,7 +100,7 @@ export const showInformation = () => {
 ;
 
 const showNews = () => {
-    document.querySelector('.news-container').classList.remove('hidden');
+    document.querySelector('.news-container')?.classList.remove('hidden');
     document.querySelector('.info').classList.add('hidden');
 
 }

@@ -106,7 +106,7 @@ const switchView = (viewType) => {
     checkCurViewType(viewType);
 };
 
-const handleTabClick = (tabType, viewType) => {
+export const handleTabClick = (tabType, viewType) => {
     const allTab = document.querySelector('.all');
     const subscribeTab = document.querySelector('.subscribe');
 
