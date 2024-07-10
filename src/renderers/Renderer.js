@@ -15,20 +15,20 @@ class Renderer {
      * @param {*} event.value - 렌더 함수에 전달할 값 
      */
     update(event) {
-        if (this.checkEventName(event)) this.render(event);
+        if (this._checkEventName(event)) this._render(event);
     }
 
     /**
      * @throws {Error} - 미구현 시 오류 발생
      */
-    checkEventName() {
+    _checkEventName() {
         throw new Error(ERROR_MESSAGE.NOT_IMPLEMENTED);
     }
 
     /**
      * @throws {Error} - 미구현 시 오류 발생
      */
-    render() {
+    _render() {
         throw new Error(ERROR_MESSAGE.NOT_IMPLEMENTED);
     }
 }

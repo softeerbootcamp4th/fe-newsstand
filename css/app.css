@@ -100,17 +100,20 @@
 .news-list__menu__selectors {
     display: flex;
     gap: 30px;
+    color: gray;
+}
+
+.news-list__menu__selectors [data-selected="yes"] {
+    color: black;
 }
 
 .news-list__menu__selectors__all {
     font-size: 16px;
-    color: black;
     display: inline-block;
 }
 
 .news-list__menu__selectors__my {
     font-size: 16px;
-    color: gray;
     display: inline-block;
 }
 
