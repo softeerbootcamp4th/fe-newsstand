@@ -13,6 +13,7 @@ const CategoryBox = (props) => {
 
     const bindEvents = () => {
         const button = document.getElementById(`category-text-${props.id}`)
+        button.removeEventListener('click', handleMouseClick)
         button.addEventListener('click', handleMouseClick)
     }
 
@@ -46,7 +47,6 @@ const CategoryBox = (props) => {
     } else {
         clearIntervalForce()
     }
-
     return {
         element: `
             <div class="category-box-wrap"

@@ -14,6 +14,9 @@ const Alert = (props) => {
         const yesButton = document.querySelector(`#yes-btn${props.id}`)
         const noButton = document.querySelector(`#no-btn${props.id}`)
 
+        yesButton.removeEventListener('click', handleYesButtonClick)
+        noButton.removeEventListener('click', handleNoButtonClick)
+
         yesButton.addEventListener('click', handleYesButtonClick)
         noButton.addEventListener('click', handleNoButtonClick)
     }
