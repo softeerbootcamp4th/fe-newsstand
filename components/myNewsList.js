@@ -1,6 +1,6 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
 import { setRightArrow } from "./nav.js";
-import { myData } from "../resources/data.js";
+import { getMyDataAsArray, myData } from "../resources/data.js";
 
 /**
  * 언론사 별 뉴스 목록을 container하위에 생성
@@ -40,13 +40,18 @@ function createFooterElement(container, media) {
  */
 export function updateMyNewsList(currentCategoryIndex) {
   const newsListContainer = deleteNodeById("newsList_container");
-  const mediaList = myData.map((element) => element.media);
+  const mediaList = getMyDataAsArray().map((element) => element.media);
 
   setMedia(mediaList, currentCategoryIndex);
 
   setRightArrow(currentCategoryIndex);
 
-  generateMyNewsList(newsListContainer, myData[currentCategoryIndex]);
+  if (myData.size === 0) return;
+
+  generateMyNewsList(
+    newsListContainer,
+    getMyDataAsArray()[currentCategoryIndex]
+  );
 }
 
 /**

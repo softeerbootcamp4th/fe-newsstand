@@ -2,6 +2,7 @@ import { deleteNav, generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
 import { getTodayString } from "../utils/utils.js";
 import store from "../utils/stoageManager.js";
+import { updateMyList } from "../resources/data.js";
 
 const headlineData = [
   {
@@ -91,6 +92,7 @@ function initialize() {
       currentHeaderCategoryIndex = index;
 
       //nav 삭제후 재생성
+      updateMyList();
       deleteNav();
       generateNav(navContainer, currentHeaderCategoryIndex);
     });

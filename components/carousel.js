@@ -1,7 +1,7 @@
 import {
   getCateogryLength,
   getMediaLengthByIndex,
-  getMyDataLength,
+  getMyListLength,
 } from "../resources/data.js";
 import {
   updateNavElements,
@@ -26,7 +26,7 @@ function movePrevMedia(state) {
   const newState =
     state.headerCategory === 0
       ? handleMovePrev(state, getCateogryLength, getMediaLengthByIndex)
-      : handleMovePrev(state, getMyDataLength, () => 0);
+      : handleMovePrev(state, getMyListLength, () => 0);
 
   state.currentCategoryIndex = newState.currentCategoryIndex;
   state.currentMediaIndex = newState.currentMediaIndex;
@@ -47,7 +47,7 @@ function moveNextMedia(state) {
   const newState =
     state.headerCategory === 0
       ? handleMoveNext(state, getCateogryLength, getMediaLengthByIndex)
-      : handleMoveNext(state, getMyDataLength, () => 0);
+      : handleMoveNext(state, getMyListLength, () => 0);
 
   state.currentCategoryIndex = newState.currentCategoryIndex;
   state.currentMediaIndex = newState.currentMediaIndex;

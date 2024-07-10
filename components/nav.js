@@ -5,7 +5,9 @@ import {
   categoryList,
   myList,
   getMediaLength,
-  getMyDataLength,
+  getMyListLength,
+  categoryData,
+  addMyData,
 } from "../resources/data.js";
 import state from "../list/state.js";
 import store from "../utils/stoageManager.js";
@@ -83,15 +85,28 @@ function generateNavForNewsList() {
   );
 
   const sub = document.querySelector(".subscribe");
-  sub.addEventListener("click", () =>
-    store.addItemToSet("myList", state.currentMediaIndex)
-  );
+
+  sub.addEventListener("click", addMediaToMyList);
 
   const navElementNodes = document.querySelectorAll(".contentList li");
 
   setupNavElements(navElementNodes, startNewsInterval, updateCategoryByIndex);
 
   startNewsInterval();
+}
+
+function addMediaToMyList() {
+  store.addItemToSet(
+    "myList",
+    categoryData[categoryList[state.currentCategoryIndex]][
+      state.currentMediaIndex
+    ].media
+  );
+  addMyData(
+    categoryData[categoryList[state.currentCategoryIndex]][
+      state.currentMediaIndex
+    ]
+  );
 }
 
 /**
@@ -151,6 +166,7 @@ export function setProgress(categoryIndex, currentMediaIndex, maxMediaIndex) {
 
 export function setRightArrow(categoryIndex) {
   const progresses = document.querySelectorAll(".progress");
+  if (progresses.length === 0) return;
   progresses[categoryIndex].innerHTML = ">";
 }
 
@@ -223,7 +239,7 @@ function handleNewsInterval(navElementNodes) {
  * @param {node Array} navElementNodes
  */
 function handleMyInterval(navElementNodes) {
-  (state.currentCategoryIndex + 1) % getMyDataLength();
+  (state.currentCategoryIndex + 1) % getMyListLength();
 
   updateNavElements(navElementNodes);
   updateMyNewsList(state.currentCategoryIndex);
