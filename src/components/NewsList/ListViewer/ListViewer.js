@@ -196,8 +196,8 @@ ListViewer.prototype.unsubscribeCompany = function ({ id, company }) {
   }
 };
 
-ListViewer.prototype.subscribeCompany = function ({ id, company }) {
-  addCompany({ id, company });
+ListViewer.prototype.subscribeCompany = function ({ id, company, lightLogo, darkLogo }) {
+  addCompany({ id, company, lightLogo, darkLogo });
 
   const tabLength = getSubscribedCompanies().length;
 

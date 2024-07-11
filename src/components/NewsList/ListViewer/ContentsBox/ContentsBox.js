@@ -55,9 +55,9 @@ function ContentsBox({
 }
 
 ContentsBox.prototype.handleSubscribeButtonClick = function () {
-  const { id, company } = this.props.news;
+  const { id, company, lightLogo, darkLogo } = this.props.news;
 
-  this.props.onSubscribeCompany({ id, company });
+  this.props.onSubscribeCompany({ id, company, lightLogo, darkLogo });
 
   this.components.SnackBar.show();
   this.showUnsubscribeButton();
