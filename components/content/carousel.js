@@ -41,13 +41,13 @@ function movePrevMedia(state) {
   } else if (state.headerShow === 1) {
     if (state.headerCategory === 0) {
       let index = state.currentCategoryIndex - 1;
-      if (index < 0) index = Math.floor(getMyListLength() / 24) + 1;
+      if (index < 0) index = Math.floor(getMediaDataLength() / 24);
 
       updateGridContent(state.headerCategory, index);
       state.currentCategoryIndex = index;
     } else if (state.headerCategory === 1) {
       let index = state.currentCategoryIndex - 1;
-      if (index < 0) index = Math.floor(getMyListLength() / 24) + 1;
+      if (index < 0) index = Math.floor(getMyListLength() / 24);
 
       updateGridContent(state.headerCategory, index);
       state.currentCategoryIndex = index;

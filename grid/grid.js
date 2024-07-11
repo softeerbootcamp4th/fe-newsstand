@@ -31,7 +31,8 @@ export function updateGridContent(headerCategoryIndex, categoryIndex) {
   else if (headerCategoryIndex === 1)
     mediaPageList = getGridList(getMyDataAsArray());
 
-  renderGridItems(gridWrapper, mediaPageList[categoryIndex]);
+  if (mediaPageList.length !== 0)
+    renderGridItems(gridWrapper, mediaPageList[categoryIndex]);
 }
 
 function getGridList(mediaObjectList) {
