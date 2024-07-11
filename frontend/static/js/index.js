@@ -3,9 +3,13 @@ import * as mainContentSelector from "./component/mainContentSelector/index.js";
 import * as title from "./component/newsstandTitle/index.js";
 import * as ticker from "./component/ticker/index.js";
 import { reducer, reducerInit } from "./reducer.js";
-import * as ticker from "./ticker/index.js";
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    const didLoadActions = {}
+    didLoadActions[ticker.id] = ticker.domDidLoad
+    didLoadActions[mainContent.id] = mainContent.domDidLoad
+
     const template = reducerInit(
         [
             title.actions,
@@ -13,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             mainContentSelector.actions,
             mainContent.actions
         ],
+        didLoadActions,
         title.init(),
         ticker.init(),
         mainContentSelector.init(),
@@ -21,8 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.body.addEventListener('click', event => reducer.click(event), true)
     document.getElementById("newsstand").insertAdjacentHTML("afterbegin", template);
-    ticker.domDidLoad(NEWS)
-    mainContent.domDidLoad(NEWS)
+    reducer.loadComplete()
 });
 
 const stylesheets = [
