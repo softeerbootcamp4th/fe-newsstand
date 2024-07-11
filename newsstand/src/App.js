@@ -63,9 +63,8 @@ const App = () => {
                 ${newsContainerLayout.element}
 
                 ${toastComponent.element}
-                <div class="foundation-btn-wrapper">
-                    ${foundationButton.element}
-                </div>
+
+                ${foundationButton.element}
             </div>
         </div>
         `,
