@@ -4,5 +4,5 @@ export const toastOn = async () => {
     tostMessage.classList.add('active')
     setTimeout(() => {
         tostMessage.classList.remove('active')
-    }, 4000)
+    }, 1000)
 }
