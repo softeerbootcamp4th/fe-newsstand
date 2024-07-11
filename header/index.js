@@ -5,6 +5,9 @@ function initHeader() {
     const currentDateDOM = document.querySelector('#header__current-date');
     
     currentDateDOM.textContent = currentDate;
+
+    const newsstandIconDOM = document.querySelector("#newsstand-icon");
+    newsstandIconDOM.addEventListener("click", () => location.reload());
 }
 
 initHeader();
