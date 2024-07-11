@@ -124,25 +124,29 @@ function contentInit(news) {
     document.querySelector("#mainContentArea").insertAdjacentHTML('beforeend', template)
     const subButton = document.querySelector(".subscribeButton")
     subButton.addEventListener("click", () => {
-        if (!subButton.classList.contains("isSubscribed")) {
-            currentData.isSubscribe = true
-            subButton.classList.add("isSubscribed")
-            removeAllChild(subButton)
-            subButton.insertAdjacentHTML('afterbegin', `<img src="./static/assets/images/Button.svg" alt="Description of SVG">`)
-            alert.showSubscribeAlert(() => {
-                showMyCompany(state.data)
-            })
-        }
-        else {
-            currentData.isSubscribe = false
-            subButton.classList.remove("isSubscribed")
-            removeAllChild(subButton)
-            subButton.insertAdjacentHTML('afterbegin', `<img src="./static/assets/images/subscribeButton.svg" alt="Description of SVG">`)
-            alert.showUnSubsribeAlert(currentData.name, () => {
-                showAllCompany(state.data)
-            })
-        }
+        toggleSubscribeButton(subButton, currentData)
     })
+}
+
+function toggleSubscribeButton(buttonElement, article) {
+    if (!buttonElement.classList.contains("isSubscribed")) {
+        article.isSubscribe = true
+        buttonElement.classList.add("isSubscribed")
+        removeAllChild(buttonElement)
+        buttonElement.insertAdjacentHTML('afterbegin', `<img src="./static/assets/images/Button.svg" alt="Description of SVG">`)
+        alert.showSubscribeAlert(() => {
+            showMyCompany(state.data)
+        })
+    }
+    else {
+        article.isSubscribe = false
+        buttonElement.classList.remove("isSubscribed")
+        removeAllChild(buttonElement)
+        buttonElement.insertAdjacentHTML('afterbegin', `<img src="./static/assets/images/subscribeButton.svg" alt="Description of SVG">`)
+        alert.showUnSubsribeAlert(article.name, () => {
+            showAllCompany(state.data)
+        })
+    }
 }
 
 function navInit(categories) {
