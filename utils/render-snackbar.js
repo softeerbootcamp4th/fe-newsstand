@@ -2,7 +2,7 @@
 /**
  * @description snackbar를 렌더하는 함수
  */
-export function renderSnackbar(text, id) {
+export function renderSnackbar(text, id, closeCallback) {
     const bodyDOM = document.querySelector("body");
     const snackbarDOMString = `
     <section id="snackbar-${id}" class="snackbar__wrapper">
@@ -21,6 +21,7 @@ export function renderSnackbar(text, id) {
     snackbarId = setTimeout(() => {
         bodyDOM.removeChild(snackbarWrapperDOM);
         snackbarId = null;
+        closeCallback();
     }, 5000);
 
     /**
@@ -39,5 +40,6 @@ export function renderSnackbar(text, id) {
 
         const bodyDOM = document.querySelector("body");
         bodyDOM.removeChild(snackbarWrapperDOM);
+        closeCallback();
     }
 }

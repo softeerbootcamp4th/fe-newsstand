@@ -1,6 +1,9 @@
+import { mediaList } from "../store/media-list.js";
 import { subscribedMediaList } from "../store/subscribed-media.js";
 import { renderAlert } from "../utils/render-alert.js";
 import { renderSnackbar } from "../utils/render-snackbar.js";
+import { setListDisplay } from "./media-display.js";
+import { setSubscribedMedia } from "./media-filter.js";
 
 /**
  * @description 선택된 카테고리 아이템 DOM string을 반환해주는 함수
@@ -65,7 +68,9 @@ export function getSelectedCategoryContentsDOMString(media) {
 
     <section class="flexbox__flex-start--start gap32">
         <a class="media-contents__image-content flexbox__column-direction gap16" href="${imageContent.url}" target="_blank">
-            <img alt="뉴스 이미지" src="${imageContent.imageUrl}" />
+            <section class="media-contents__image-wrapper">
+                <img alt="뉴스 이미지" src="${imageContent.imageUrl}" />
+            </section>
             <p class="media-contents__image-headline text__medium16 text--strong">${imageContent.headline}</p>
         </a>
         <section class="flexbox__column-direction gap16">
@@ -87,10 +92,10 @@ export function getSelectedCategoryContentsDOMString(media) {
 /**
  * @description 구독/구독취소 이벤트 등록하는 함수
  */
-export function setSubscribeButtonEvent(media) {
+export function setSubscribeButtonEvent(media, navigateToSubscribedMedia) {
     const subscribeButtonDOM = document.querySelector(`.subscribe-button__${media.id}--subscribe`);
     if (subscribeButtonDOM) {
-        subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(media));
+        subscribeButtonDOM.addEventListener("click", () => clickSubscribeButton(media, () => clickSubscribeButtonCallback(media, navigateToSubscribedMedia)));
     }
 
     const unsubscribeButtonDOM = document.querySelector(`.subscribe-button__${media.id}--unsubscribe`);
@@ -102,9 +107,9 @@ export function setSubscribeButtonEvent(media) {
 /**
  * @description 언론사 구독 이벤트 등록하는 함수
  */
-function clickSubscribeButton(media) {
+function clickSubscribeButton(media, closeCallback) {
     subscribedMediaList.addMedia(media)
-    renderSnackbar("내가 구독한 언론사에 추가되었습니다.", 'subscribe');
+    renderSnackbar("내가 구독한 언론사에 추가되었습니다.", 'subscribe', closeCallback);
 }
 /**
  * @description 언론사 구독 취소 이벤트 등록하는 함수
@@ -159,7 +164,8 @@ export function getGridMediaItem(media) {
 /**
  * @description 그리드 보기에서 구독/구독취소 이벤트 등록하는 함수
  */
-export function clickGridItem(e, media) {
+export function clickGridItem(e, navigateToSubscribedMedia) {
+    const media = mediaList.data;
     const mediaId = getMediaId(e.target);
 
     if (mediaId === -1) {
@@ -172,7 +178,17 @@ export function clickGridItem(e, media) {
     if (isSubscribed) {
         clickUnsubscribeButton(subscribedMedia);
     } else {
-        clickSubscribeButton(subscribedMedia);
+        clickSubscribeButton(subscribedMedia, () => clickSubscribeButtonCallback(subscribedMedia, navigateToSubscribedMedia));
+    }
+}
+/**
+ * @description 내가 구독한 언론사로 이동하는 함수
+ */
+function clickSubscribeButtonCallback(media, navigateToSubscribedMedia) {
+    if (navigateToSubscribedMedia) {
+        setListDisplay();
+        setSubscribedMedia();
+        navigateToSubscribedMedia(media.id);
     }
 }
 
