@@ -5,9 +5,11 @@ import { getCompanyName } from '../../datas/companyData.js'
 
 const Alert = (props) => {
     const handleYesButtonClick = () => {
-        const nextIndex = getNextIndexInList(props.currentCompanyInfo.value.id, props.subscribedCompanyIdList.value)
-        const nextCategory = props.subscribedCompanyIdList.value[nextIndex]
-        props.setSelectedCategory(getCompanyName(nextCategory))
+        if (props.selectedSource.value === '내가 구독한 언론사') {
+            const nextIndex = getNextIndexInList(props.currentCompanyInfo.value.id, props.subscribedCompanyIdList.value)
+            const nextCategory = props.subscribedCompanyIdList.value[nextIndex]
+            props.setSelectedCategory(getCompanyName(nextCategory))
+        }
 
         unSubscribe(props.currentCompanyInfo.value.id)
         props.setIsShowAlert(false)

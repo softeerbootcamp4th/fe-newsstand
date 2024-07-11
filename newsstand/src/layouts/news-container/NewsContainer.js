@@ -20,6 +20,7 @@ const NewsContainer = () => {
         currentCompanyInfo: currentCompanyInfo,
         subscribedCompanyIdList: subscribedCompanyIdList,
         setSelectedCategory: setSelectedCategory,
+        selectedSource: selectedSource,
     })
 
     const newsSourceSelectorLayout = createComponent(NewsSourceSelector, {
