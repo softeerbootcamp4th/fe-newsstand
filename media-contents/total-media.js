@@ -1,6 +1,7 @@
 import { subscribedMediaList } from "../store/subscribed-media.js";
 import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
+import { shuffleList } from "../utils/shuffle-list.js";
 import { DATA_COUNT_PER_GRID, DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
 import { 
     getSelectedCategoryItemDOMString, 
@@ -21,6 +22,7 @@ let mediaListData = {};
 export async function renderTotalMedia() {
     categoryData = await getData('../static/data/media-by-category.json');
     mediaListData = await getData('../static/data/media.json');
+    mediaListData.data = shuffleList(mediaListData.data.slice());
 
     const displayMode = getDisplayMode();
 
