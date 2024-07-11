@@ -12,7 +12,7 @@ import useEffect from './core/hooks/useEffect.js'
 const App = () => {
     const headerLayout = createComponent(Header, { id: 1, style: 'width:100%; height:8%;' })
     const subHeaderLayout = createComponent(SubHeader, { id: 1, style: 'width:100%; height:8%;' })
-    const newsContainerLayout = createComponent(NewsContainer, { id: 1, style: 'width:100%; height:80%;' })
+    const newsContainerLayout = createComponent(NewsContainer, { id: 1, style: 'width:100%; height:74%;' })
     const toastComponent = createComponent(Toast, { text: '내가 구독한 언론사에 추가되었습니다.' })
 
     const savedFoundation = localStorage.getItem('foundation') || 'white'
