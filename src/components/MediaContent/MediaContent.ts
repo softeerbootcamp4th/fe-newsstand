@@ -8,6 +8,7 @@ import { useMediaRecentNews } from "@/hooks/useMediaRecentNews";
 import { MediaContentView } from "./MediaContentView";
 import { RightIcon } from "@/assets/RightIcon";
 import { LeftIcon } from "@/assets/LeftIcon";
+import { Media } from "@/models/Media";
 
 interface MediaContentProps {
   mediaId: number;
@@ -15,7 +16,7 @@ interface MediaContentProps {
   handleNext: () => void;
   handlePrev: () => void;
   handleUnsubscribe?: () => void;
-  handleSubscribe?: () => void;
+  handleSubscribe?: (media: Media) => void;
 }
 export const MediaContent = ({
   mediaId,

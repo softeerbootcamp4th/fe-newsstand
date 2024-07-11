@@ -92,7 +92,7 @@ interface MediaContentHeaderProps {
   media: Media | null;
   setMedia: (media: Media) => void;
   handleUnsubscribe?: () => void;
-  handleSubscribe?: () => void;
+  handleSubscribe?: (media: Media) => void;
 }
 export const MediaContentHeader = ({
   media,
@@ -125,7 +125,7 @@ export const MediaContentHeader = ({
           await updateMediaSubscribe(media.id, nextIsSubscribed);
           if (nextIsSubscribed) {
             addToast("내가 구독한 언론사에 추가되었습니다.");
-            handleSubscribe?.();
+            handleSubscribe?.(media);
           } else {
             handleUnsubscribe?.();
           }

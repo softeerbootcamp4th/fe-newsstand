@@ -8,16 +8,25 @@ import { MediaContentFilterType } from "@/models/MediaContentFilter";
 
 interface SubscribedContentListProps {
   setCurrentFilter: (filter: MediaContentFilterType) => void;
+  mediaName: string | null;
 }
 export const SubscribedContentList = ({
   setCurrentFilter,
+  mediaName,
 }: SubscribedContentListProps) => {
   const [currentData, setCurrentData] = useState<MediaIdByCategories | null>(
     null,
   );
+  const [currentDataIdx, setCurrentDataIdx] = useState<[number, number]>([
+    0, 0,
+  ]);
   const loadData = async () => {
     const data = await getSubscribedMedias();
     setCurrentData(data);
+    if (mediaName != null) {
+      const idx = data.findIndex((d) => d.category.name === mediaName);
+      setCurrentDataIdx([idx, 0]);
+    }
   };
   useEffect(() => {
     loadData();
@@ -26,9 +35,6 @@ export const SubscribedContentList = ({
   if (currentData === null || currentData.length === 0) {
     return null;
   }
-  const [currentDataIdx, setCurrentDataIdx] = useState<[number, number]>([
-    0, 0,
-  ]);
 
   const hasNext =
     currentDataIdx[0] < currentData.length - 1 ||

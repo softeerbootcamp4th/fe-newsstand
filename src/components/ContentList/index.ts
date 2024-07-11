@@ -1,4 +1,4 @@
-import { Div, ce } from "@/libs";
+import { Div, ce, useEffect } from "@/libs";
 import { ContentFilter } from "../ContentFilter/ContentFilter";
 import { useState } from "@/libs";
 import { cc } from "@/libs";
@@ -10,7 +10,12 @@ import { SubscribedContentList } from "./SubscribedContentList";
 export const ContentList = () => {
   const [currentFilter, setCurrentFilter] =
     useState<MediaContentFilterType>("전체 언론사");
-
+  const [mediaName, setMediaName] = useState<string | null>(null);
+  useEffect(() => {
+    if (currentFilter === "전체 언론사") {
+      setMediaName(null);
+    }
+  }, [currentFilter]);
   return ce(Div, {
     className: styles.container,
     children: [
@@ -21,9 +26,11 @@ export const ContentList = () => {
       currentFilter === "전체 언론사"
         ? cc(AllcontentList, {
             setCurrentFilter,
+            setMediaName,
           })
         : cc(SubscribedContentList, {
             setCurrentFilter,
+            mediaName,
           }),
     ],
   });
