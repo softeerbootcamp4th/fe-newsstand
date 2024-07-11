@@ -141,7 +141,7 @@ function rollingCallback(time) {
  * 배너 롤링 interval 시작
  */
 function startBannerInterval() {
-  bannerInterval = setInterval(() => rollingCallback(1000), 3000);
+  bannerInterval = setInterval(() => rollingCallback(1000), 5000);
 }
 
 /**

@@ -1,6 +1,6 @@
 import { deleteNav, generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
-import { getTodayString } from "../utils/utils.js";
+import { getTodayString, refreshPage } from "../utils/utils.js";
 import store from "../global/stoageManager.js";
 import { updateMyList, headlineData } from "../resources/data.js";
 import { startBannerInterval } from "../global/interval.js";
@@ -9,6 +9,8 @@ let currentHeaderCategoryIndex = 0;
 
 //요소 생성
 //header
+const logo = document.querySelector(".logo");
+logo.addEventListener("click", refreshPage);
 const today = document.querySelector(".today");
 today.innerHTML = getTodayString();
 //banner

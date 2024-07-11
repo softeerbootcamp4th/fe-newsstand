@@ -48,3 +48,10 @@ export function getTodayString() {
 
   return `${year}.${month}.${date}.${dayName}`;
 }
+
+/**
+ * 현재 페이지 새로고침
+ */
+export function refreshPage() {
+  location.reload();
+}
