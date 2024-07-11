@@ -23,6 +23,9 @@ class Fetcher {
         const jsonData = JSON.stringify(data);
         const response = await fetch(`${this.baseURL}/${endpoint}`, {
             method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: jsonData
         })
         if (!response.ok) {
