@@ -2,6 +2,7 @@ import { allNewsData } from './news.js';
 import { pressInfoButton } from './button.js';
 import { snackBar } from './snackBar.js';
 import { newsListLi } from './newsListLi.js';
+import { newsGrid } from './newsGrid.js';
 
 let currentIntervalId = null; // 현재 실행 중인 intervalId
 let currentTimeoutId = null; // 현재 실행 중인 timeoutId
@@ -9,6 +10,8 @@ let currentMidiaIndex = 0; // 현재 실행중인 카테고리중 언론사의 i
 
 
 export const init = async () => {
+    const leftButton = document.getElementById('leftButton');
+    leftButton.classList.remove('show');
     const NewsListUl = document.getElementById('NewsList').querySelector('ul');
     NewsListUl.innerHTML = '';
     currentMidiaIndex = 0;
@@ -29,6 +32,12 @@ export const init = async () => {
         await processCategory(newsIndex, liList, true, false);
         newsIndex = (newsIndex + 1) % allNewsData.length;
     }
+}
+
+
+export const clearIntervalVar = () => {
+    clearInterval(currentIntervalId);
+    clearTimeout(currentTimeoutId);
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -56,13 +65,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     positiveButton.addEventListener('click', () => {
-        const button = document.getElementById('allPress').className;
-        if (button === 'selected-bold16') {
-            removeSubscribedData(true);
-        }
-        else {
-            removeSubscribedData(false);
-        }
+        const $id = (id, element = document) => element.getElementById(id);
+        const buttonClass = $id('allPress').className;
+        removeSubscribedData(buttonClass === 'selected-bold16');
     });
 
     negativeButton.addEventListener('click', () => {
@@ -76,14 +81,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             clearTimeout(currentTimeoutId);
             leftButton.className = 'show';
             const liList = document.querySelectorAll('#NewsList ul li');
-            const categoryIndex = getCurrentSelectedIndex(liList);
+            let categoryIndex = getCurrentSelectedIndex(liList);
             const totalCompanies = allNewsData[categoryIndex].company.length;
             const currentSelectedLi = liList[categoryIndex];
             currentSelectedLi.classList.add('restartAnimation');
             setTimeout(() => {
                 currentSelectedLi.classList.remove('restartAnimation');
                 //restartAnimation(currentSelectedLi);
-            }, 50);
+            }, 1);
             if (currentMidiaIndex + 1 === totalCompanies) {
                 rightButton.className = `hidden`;
             }
@@ -121,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             setTimeout(() => {
                 currentSelectedLi.classList.remove('restartAnimation');
                 //restartAnimation(currentSelectedLi);
-            }, 50);
+            }, 1);
             if (currentMidiaIndex === 0) {
                 leftButton.classList.remove('show');
             }
@@ -158,11 +163,11 @@ export const handleCategoryClick = async (index, liList, isFull) => {
 
     // 현재 선택된 카테고리와 다른 카테고리를 클릭했을 경우
     if (index !== currentSelectedIndex) {
-        rightButton.classList.remove('hidden');
-        leftButton.classList.remove('show');
         deselectCategory(currentSelectedIndex, liList, isFull);
 
         if (isFull) {
+            rightButton.classList.remove('hidden');
+            leftButton.classList.remove('show');
             currentMidiaIndex = 0;
             // 선택된 카테고리부터 순서대로 processCategory 실행
             while (true) {
@@ -260,7 +265,7 @@ export const getSubscribedData = () => {
 };
 
 
-const addSubscribedData = (newCompanyName) => {
+export const addSubscribedData = (newCompanyName) => {
     // 현재 구독 정보 가져오기
     let subscribedData = getSubscribedData();
 
@@ -280,34 +285,79 @@ const removeSubscribedData = (isFull) => {
     subscribed.splice(currentIndex, 1);
     localStorage.setItem('subscribed', JSON.stringify(subscribed));
     cancelAlert.classList.remove('show');
-    if (!isFull) {
-        const NewsListUl = document.getElementById('NewsList').querySelector('ul');
-        NewsListUl.innerHTML = '';
-        const liList = newsListLi(false);
-
-        liList.forEach((li, companyIndex) => {
-            li.addEventListener('click', async () => {
-                await handleCategoryClick(companyIndex, liList, false);
-            });
-        });
-        if (subscribed.length == 0) {
-            nonLilist();
-        }
-        else {
-            if (currentIndex === subscribed.length) {
-                processCategory(0, liList, false, false);
-            }
-            else {
-                processCategory(currentIndex, liList, false, false);
-            }
+    const isNewsGrid = document.getElementById('NewsList').className;
+    if (isNewsGrid === "hidden") {
+        newsGrid(0, true);
+        gridLeftButton.classList.remove('show');
+        if (subscribed.length <= 24) {
+            gridRightButton.classList.remove('show');
         }
     }
     else {
-        const button = document.querySelector('.pressInfoButton');
-        button.innerHTML = `<img src='../../images/plus.svg' alt='plus icon'/>
-            <span>구독하기</span>`;
-    }
+        if (!isFull) {
+            const NewsListUl = document.getElementById('NewsList').querySelector('ul');
+            NewsListUl.innerHTML = '';
+            const liList = newsListLi(false);
 
+            liList.forEach((li, companyIndex) => {
+                li.addEventListener('click', async () => {
+                    await handleCategoryClick(companyIndex, liList, false);
+                });
+            });
+            if (subscribed.length == 0) {
+                nonLilist();
+            }
+            else {
+                if (currentIndex === subscribed.length) {
+                    processCategory(0, liList, false, false);
+                }
+                else {
+                    processCategory(currentIndex, liList, false, false);
+                }
+            }
+        }
+        else {
+            const button = document.querySelector('.pressInfoButton');
+            button.innerHTML = `<img src='../../images/plus.svg' alt='plus icon'/>
+                <span>구독하기</span>`;
+        }
+    }
+}
+
+
+export const handlePressInfoButtonClick = (button, newsData, subscribedData, isList) => {
+    button.addEventListener('click', () => {
+        const pressInfo = document.querySelector('.pressInfo');
+        const leftButton = document.getElementById('leftButton');
+
+        if (!subscribedData.includes(newsData.companyName)) {
+            const pressInfoText = `
+                <img src="${newsData.companyIcon}">
+                <span class="display-medium12">${newsData.updatedDate}</span>
+                ${pressInfoButton("구독하기")}
+            `;
+            pressInfo.innerHTML = pressInfoText;
+            snackBar("내가 구독한 언론사에 추가되었습니다.", isList);
+            if (isList) {
+                setTimeout(() => {
+                    subscribeNews(newsData.companyName);
+                    leftButton.className = 'show';
+                }, 5000);
+            }
+            else {
+                button.innerHTML = button.innerText === "rnehr" ? `<img src='../../images/plus.svg' alt='plus icon'/>
+            <span>구독하기</span>`: `<img src='../../images/closed.svg' alt='plus icon'/>
+            <span>해지하기</span>`;
+            }
+            addSubscribedData(newsData.companyName);
+        } else {
+            const cancelAlert = document.getElementById('cancelAlert');
+            const cancelText = document.getElementById('cancelAlertTop').querySelector('p');
+            cancelText.innerHTML = `<strong>${newsData.companyName}</strong>을/를<br>구독해지하시겠습니까?`;
+            cancelAlert.className = 'show';
+        }
+
+    });
 }
 
 
@@ -315,6 +365,9 @@ const removeSubscribedData = (isFull) => {
 export const processCategory = async (index, liList, isFull, isClickTopAndViewer) => {
     clearInterval(currentIntervalId);
     clearTimeout(currentTimeoutId);
+    const nowIndex = currentMidiaIndex;
+    const leftButton = document.getElementById('leftButton');
+    const rightButton = document.getElementById('rightButton');
 
     if (isFull) {
 
@@ -355,28 +408,7 @@ export const processCategory = async (index, liList, isFull, isClickTopAndViewer
 
             const button = pressInfo.querySelector('.pressInfoButton');
             if (button) {
-                button.addEventListener('click', () => {
-
-                    if (!subscribedData.includes(newsData.companyName)) {
-                        const pressInfoText = `
-            <img src = ${newsData.companyIcon}>
-            <span class = "display-medium12">${newsData.updatedDate}</span>
-            ${pressInfoButton("구독하기")}`
-                        pressInfo.innerHTML = pressInfoText;
-                        snackBar("내가 구독한 언론사에 추가되었습니다.");
-                        setTimeout(() => {
-                            subscribeNews(newsData.companyName);
-                            leftButton.className = 'show';
-                        }, 5000);
-                        addSubscribedData(newsData.companyName);
-                    }
-                    else {
-                        const cancelAlert = document.getElementById('cancelAlert');
-                        const calcelText = document.getElementById('cancelAlertTop').querySelector('p');
-                        calcelText.innerHTML = `<strong>${newsData.companyName}</strong>을/를<br>구독해지하시겠습니까?`;
-                        cancelAlert.className = `show`;
-                    }
-                })
+                handlePressInfoButtonClick(button, newsData, subscribedData, true);
             }
 
 
@@ -394,20 +426,20 @@ export const processCategory = async (index, liList, isFull, isClickTopAndViewer
             currentMidiaIndex++;
 
 
-
             // 모든 정보를 업데이트한 후에 intervalId를 종료하고, 일정 시간이 지난 후에 스타일을 초기화
-            if (currentMidiaIndex > totalCompanies) {
+            if (currentMidiaIndex >= totalCompanies) {
                 clearInterval(currentIntervalId);
                 setTimeout(() => {
                     NewsListCategory.classList.replace('selectNews', 'notselectNews');
                     NewsListCategory.textContent = allNewsData[index].category;
+                    rightButton.classList.remove('hidden');
+                    leftButton.classList.remove('show');
                 }, 20000);
             }
         };
 
         // 일정 시간 간격으로 updateNewsCategory 함수를 실행
         currentIntervalId = setInterval(() => {
-            const leftButton = document.getElementById('leftButton');
             leftButton.className = 'show';
             updateNewsCategory();
         }, 20000);
@@ -420,8 +452,10 @@ export const processCategory = async (index, liList, isFull, isClickTopAndViewer
             currentTimeoutId = setTimeout(() => {
                 clearInterval(currentIntervalId);
                 resolve();
+                NewsListCategory.classList.replace('selectNews', 'notselectNews');
+                NewsListCategory.textContent = allNewsData[index].category;
                 currentMidiaIndex = 0;
-            }, (totalCompanies - currentMidiaIndex + 1) * 20000);
+            }, (totalCompanies - nowIndex) * 20000);
         });
     }
     else {
@@ -460,10 +494,7 @@ export const processCategory = async (index, liList, isFull, isClickTopAndViewer
             const button = pressInfo.querySelector('.pressInfoButton');
             if (button) {
                 button.addEventListener('click', () => {
-                    const cancelAlert = document.getElementById('cancelAlert');
-                    const calcelText = document.getElementById('cancelAlertTop').querySelector('p');
-                    calcelText.innerHTML = `<strong>${newsData.companyName}</strong>을/를<br>구독해지하시겠습니까?`;
-                    cancelAlert.className = `show`;
+                    handlePressInfoButtonClick(button, newsData, subscribed, true);
                 })
             }
 
