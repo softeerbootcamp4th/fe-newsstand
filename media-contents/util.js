@@ -67,7 +67,9 @@ export function getSelectedCategoryContentsDOMString(media) {
 
     <section class="flexbox__flex-start--start gap32">
         <a class="media-contents__image-content flexbox__column-direction gap16" href="${imageContent.url}" target="_blank">
-            <img alt="뉴스 이미지" src="${imageContent.imageUrl}" />
+            <section class="media-contents__image-wrapper">
+                <img alt="뉴스 이미지" src="${imageContent.imageUrl}" />
+            </section>
             <p class="media-contents__image-headline text__medium16 text--strong">${imageContent.headline}</p>
         </a>
         <section class="flexbox__column-direction gap16">
