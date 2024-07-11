@@ -51,6 +51,7 @@
 }
 
 .auto-rolling-news-title {
+    color: black;
     font-weight: bold;
     float: left;
     padding-right: 10px;
@@ -201,4 +202,23 @@
 
 .right-btn {
     right: -100px;
+}
+
+.foundation-btn {
+    display: flex;
+
+    position: fixed;
+    bottom: 52px;
+    right: 40px;
+
+    padding: 12px;
+    border-radius: 30px;
+    border: 1.5px solid gainsboro;
+
+    cursor: pointer;
+}
+
+.foundation-btn-icon {
+    width: 28px;
+    height: 28px;
 }

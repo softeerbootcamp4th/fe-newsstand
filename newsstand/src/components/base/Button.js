@@ -5,7 +5,7 @@ export const ButtonVariantProps = {
     GRAY: 'gray',
 }
 
-const buttonVariant = (type) => {
+export const buttonVariant = (type) => {
     const variant = {
         white: {
             light: {

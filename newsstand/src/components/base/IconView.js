@@ -6,6 +6,8 @@ export const Icon = {
     GRID_CATEGORY: './assets/grid_category_ico.svg',
     LEFT_BUTTON: './assets/left_button_ico.svg',
     RIGHT_BUTTON: './assets/right_button_ico.svg',
+    SUN: './assets/sun.png',
+    MOON: './assets/moon.png',
 }
 
 const IconView = (props) => {

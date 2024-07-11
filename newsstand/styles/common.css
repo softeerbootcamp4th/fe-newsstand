@@ -27,6 +27,16 @@ body {
     user-select: none;
 }
 
+.light {
+    background-color: #ffffff;
+    color: #14212b;
+}
+
+.dark {
+    background-color: #14212b;
+    color: #ffffff;
+}
+
 h1,
 h2,
 h3,
