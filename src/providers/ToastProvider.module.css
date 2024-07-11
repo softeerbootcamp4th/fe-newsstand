@@ -1,0 +1,35 @@
+.container {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px;
+  gap: 16px;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast {
+  background: var(--surface-surface-brand-default, #4362D0);
+  box-shadow: 0px 2px 18px 0px #14212B14;
+  box-shadow: 0px 4px 2px 0px #14212B05;
+  color: var(--text-text-white-default, #FFFFFF);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slidein 0.5s forwards;
+}
