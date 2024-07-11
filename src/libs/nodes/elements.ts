@@ -1,6 +1,6 @@
 import { EventNameMaps } from "../event";
 import { AppElement, AppElementProps, CreatedAppElement } from "./renderer";
-export const Raw = (data: string) => {
+export const Raw = (data: string): CreatedAppElement => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(data, "text/xml");
   return {
