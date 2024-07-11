@@ -31,8 +31,8 @@ export function generateNav(container, currentHeaderCategoryIndex) {
 
   navInit(selectedList);
 
-  if (currentHeaderCategoryIndex === 0) generateNavForNewsList();
-  else if (currentHeaderCategoryIndex === 1) generateNavForMyList();
+  if (currentHeaderCategoryIndex === 0) generateNavForNewsList(selectedList);
+  else if (currentHeaderCategoryIndex === 1) generateNavForMyList(selectedList);
 
   function navInit(selectedList) {
     state.currentCategoryIndex = 0;
@@ -76,7 +76,7 @@ function createNavElement(container, category) {
 /**
  * newsList를 생성하는 함수
  */
-function generateNavForNewsList() {
+function generateNavForNewsList(selectedList) {
   updateNewsList(
     categoryList[state.currentCategoryIndex],
     state.currentCategoryIndex,
@@ -85,9 +85,16 @@ function generateNavForNewsList() {
 
   generateSubscribe();
 
-  const navElementNodes = document.querySelectorAll(".contentList li");
+  const navNode = document.querySelector(".contentList");
+  const navNodeElements = document.querySelectorAll(".contentList li");
 
-  setupNavElements(navElementNodes, startNewsInterval, updateCategoryByIndex);
+  setupNavElements(
+    navNode,
+    navNodeElements,
+    startNewsInterval,
+    updateCategoryByIndex,
+    selectedList
+  );
 
   startNewsInterval();
 }
@@ -95,37 +102,57 @@ function generateNavForNewsList() {
 /**
  * 구독 newsList를 생성하는 함수
  */
-export function generateNavForMyList() {
+export function generateNavForMyList(selectedList) {
   updateMyNewsList(state.currentCategoryIndex);
 
   generateUnsubscribe();
 
-  const navElementNodes = document.querySelectorAll(".contentList li");
+  const navNode = document.querySelector(".contentList");
+  const navNodeElements = document.querySelectorAll(".contentList li");
 
-  setupNavElements(navElementNodes, startMyNewsInterval, updateMyMedia);
+  setupNavElements(
+    navNode,
+    navNodeElements,
+    startMyNewsInterval,
+    updateMyMedia,
+    selectedList
+  );
 
   startMyNewsInterval();
 }
 
 /**
- * navElementNodes에 이벤트 리스너를 추가하고 Interval 을 시작하는 함수
+ * navNode 이벤트 리스너를 추가하고 Interval 을 시작하는 함수
  */
 function setupNavElements(
-  navElementNodes,
+  navNode,
+  navNodeElements,
   intervalStartFunction,
-  updateFunction
+  updateFunction,
+  selectedList
 ) {
-  navElementNodes.forEach((element, index) => {
-    element.addEventListener("click", function () {
-      navElementNodes[state.currentCategoryIndex].classList.remove("selected");
-      element.classList.add("selected");
-      state.currentCategoryIndex = index;
+  navNode.addEventListener("click", function ({ target }) {
+    //이벤트 위임
+    //원래 방식 : 모든 하위 노드에 부착해서 인덱스를 가져와 state의 인덱스를 갱신하는 방식
+    //위임하게 되면 발생하는 문제 : 인덱스를 간단히 가져올 수 없음, target이 li 또는 span 두가지 경우
+    //index를 가져오는 방법 : span내부와 nav생성 리스트내부 비교 후 인덱스 가져오기 => selectedList필요
+    navNodeElements[state.currentCategoryIndex].classList.remove("selected");
+    if (target.tagName === "LI") {
+      target = target.querySelector("span");
+    }
 
-      resetInterval();
-      intervalStartFunction();
+    for (const [index, element] of selectedList.entries()) {
+      if (element === target.innerHTML) {
+        navNodeElements[index].classList.add("selected");
+        state.currentCategoryIndex = index;
+        break;
+      }
+    }
 
-      updateFunction(state.currentCategoryIndex);
-    });
+    resetInterval();
+    intervalStartFunction();
+
+    updateFunction(state.currentCategoryIndex);
   });
 }
 
