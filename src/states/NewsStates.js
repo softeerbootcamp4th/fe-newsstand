@@ -15,14 +15,15 @@ class NewsStates extends States {
      * @param {json} newsInfo.subscribedNewsData - 구독한 언론사 목록에 대한 json 파일
      * @param {Renderer} renderers - 렌더링을 해주는 클래스
      */
-    constructor({ categoryIndex = 0, subAllInfo = 'all', newsListIndex = 0, currenNewsListIndex = 0, allNewsData, subscribedNewsData }) {
+    constructor({ categoryIndex = 0, subAllInfo = 'all', newsListIndex = 0, currentNewsListIndex = 0, allNewsData, subscribedNewsData }) {
         super();
         this.categoryIndex = categoryIndex;
         this.subAllInfo = subAllInfo;
         this.newsListIndex = newsListIndex;
-        this.currenNewsListIndex = currenNewsListIndex;
+        this.currentNewsListIndex = currentNewsListIndex;
         this.allNewsData = allNewsData;
         this.subscribedNewsData = subscribedNewsData;
+        this.currentNewsListCount = this.#getCurrentNewsListCount();
     }
 
     /**
@@ -31,7 +32,8 @@ class NewsStates extends States {
      */
     setCategory(value) {
         this.categoryIndex = value;
-        this.currenNewsListIndex = 0;
+        this.currentNewsListIndex = 0;
+        this.currentNewsListCount = this.#getCurrentNewsListCount();
         this.notify({
             eventName: "clickCategory",
             ...this.#getCategoryStates(),
@@ -46,11 +48,22 @@ class NewsStates extends States {
     setSubAll(value) {
         this.subAllInfo = value === 0 ? "all" : "sub";
         this.categoryIndex = 0;
+        this.currentNewsListCount = this.#getCurrentNewsListCount();
         this.notify({
             eventName: "clickSubAll",
             ...this.#getCategoryStates(),
             ...this.#getSubAllStates(),
             ...this.#getNewsListStates(),
+        })
+    }
+
+    setCurrentNewsListIndex(value) {
+        if (value === 'plus') this.currentNewsListIndex++;
+        else this.currentNewsListIndex--;
+        this.notify({
+            eventName: "clickArrow",
+            ...this.#getCategoryStates(),
+            ...this.#getNewsListStates()
         })
     }
 
@@ -61,7 +74,9 @@ class NewsStates extends States {
     #getCategoryStates() {
         return {
             categoryIndex: this.categoryIndex,
-            categoryList: this.subAllInfo === "all" ? Object.keys(this.allNewsData) : Object.keys(this.subscribedNewsData)
+            categoryList: this.subAllInfo === "all" ? Object.keys(this.allNewsData) : Object.keys(this.subscribedNewsData),
+            currentNewsListIndex: this.currentNewsListIndex + 1,
+            currentNewsListCount: this.currentNewsListCount + 1,
         }
     }
 
@@ -77,10 +92,15 @@ class NewsStates extends States {
 
     #getNewsListStates() {
         const newsListRawData = this.subAllInfo === "all" ? this.allNewsData : this.subscribedNewsData;
-        const newsListData = Object.values(newsListRawData)[this.categoryIndex].slice(this.currenNewsListIndex * 7, this.currenNewsListIndex * 7 + 7);
+        const newsListData = Object.values(newsListRawData)[this.categoryIndex].slice(this.currentNewsListIndex * 7, this.currentNewsListIndex * 7 + 7);
         return {
             newsList: newsListData,
         }
+    }
+
+    #getCurrentNewsListCount() {
+        const newsListRawData = this.subAllInfo === "all" ? this.allNewsData : this.subscribedNewsData;
+        return Math.floor(Object.values(newsListRawData)[this.categoryIndex].length / 7);
     }
 }
 

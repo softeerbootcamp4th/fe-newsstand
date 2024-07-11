@@ -13,4 +13,4 @@ export const categoryClickEventInfo = deepFreeze({
 /**
  * Renderer에서 렌더를 허용할 이벤트 이름의 목록
  */
-export const categoryEventNameList = deepFreeze(["clickCategory", "clickSubAll"]);
+export const categoryEventNameList = deepFreeze(["clickCategory", "clickSubAll", "clickArrow"]);
