@@ -7,7 +7,7 @@ class NewsstandFetcher extends Fetcher {
 
     getAllCompanies = async () => await super.get("")
     getMyCompanies = async () => (await super.get("")).filter(element => element.isSubscribe)
-    updateSubscribe = async (id, isSubscribe) => await super.patch(isSubscribe, id)
+    updateSubscribe = async (id, isSubscribe) => await super.patch({ isSubscribe: isSubscribe }, id)
 }
 
 const newsstandFetcher = new NewsstandFetcher()
