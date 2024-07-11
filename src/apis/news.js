@@ -2,10 +2,10 @@ import { http } from "./fetch";
 
 export const getBreakingNews = () => http.get("/breakingNews");
 
-export const getNews = ({ category, company }) => {
+export const getNews = ({ category, companyId }) => {
   const params = new URLSearchParams();
   if (category !== undefined) params.set("category", category);
-  if (company !== undefined) params.set("company", company);
+  if (companyId !== undefined) params.set("id", companyId);
 
   return http.get(`/news?${params.toString()}`);
 };

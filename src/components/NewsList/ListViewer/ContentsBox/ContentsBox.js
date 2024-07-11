@@ -55,14 +55,18 @@ function ContentsBox({
 }
 
 ContentsBox.prototype.handleSubscribeButtonClick = function () {
-  this.props.onSubscribeCompany(this.props.news.company);
+  const { id, company } = this.props.news;
+
+  this.props.onSubscribeCompany({ id, company });
 
   this.components.SnackBar.show();
   this.showUnsubscribeButton();
 };
 
 ContentsBox.prototype.handleUnsubscribe = function () {
-  this.props.onUnsubscribeCompany(this.props.news.company);
+  const { id, company } = this.props.news;
+
+  this.props.onUnsubscribeCompany({ id, company });
 
   this.components.UnsubscribeAlert.show();
   this.showSubscribeButton();
@@ -120,7 +124,7 @@ ContentsBox.prototype.render = function () {
 };
 
 ContentsBox.prototype.renderSubscribeButton = function () {
-  if (isSubscribeCompany(this.props.news.company)) {
+  if (isSubscribeCompany(this.props.news.id)) {
     this.showUnsubscribeButton();
 
     return;

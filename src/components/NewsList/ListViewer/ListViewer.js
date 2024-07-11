@@ -62,9 +62,10 @@ ListViewer.prototype.loadNews = async function (tab, page) {
 
   if (this.props.filter === "company") {
     const companies = getSubscribedCompanies();
-    const news = await getNews({ company: companies[tab] });
+    const tabs = companies.map(({ company }) => company);
+    const news = await getNews({ companyId: companies[tab].id });
 
-    this.setState({ tab, page, news, tabs: companies });
+    this.setState({ tab, page, news, tabs });
   }
 
   this.initializeProgress();
@@ -174,8 +175,8 @@ ListViewer.prototype.prevTab = function () {
   this.loadNews(prevTab, this.state.news.length - 1);
 };
 
-ListViewer.prototype.unsubscribeCompany = function (company) {
-  removeCompany(company);
+ListViewer.prototype.unsubscribeCompany = function ({ id, company }) {
+  removeCompany({ id, company });
 
   if (this.props.filter === "company") {
     if (getSubscribedCompanies().length < 1) {
@@ -194,8 +195,8 @@ ListViewer.prototype.unsubscribeCompany = function (company) {
   }
 };
 
-ListViewer.prototype.subscribeCompany = function (company) {
-  addCompany(company);
+ListViewer.prototype.subscribeCompany = function ({ id, company }) {
+  addCompany({ id, company });
 
   const tabLength = getSubscribedCompanies().length;
 
