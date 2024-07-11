@@ -43,7 +43,6 @@ function createGridItem() {
             const subscribeBtn = document.createElement('div');
             subscribeBtn.textContent = subscriptionList.includes(company) ? '+ 해지하기' : '+ 구독하기';
             subscribeBtn.classList.add('grid-sub-btn');
-            // subscriptionList.includes(companies[startIdx+i].company) ? subscribeBtn.classList.add('grid-unsub-btn') : subscribeBtn.classList.add('grid-sub-btn');
 
             subscribeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -54,7 +53,6 @@ function createGridItem() {
                 } else {
                     subscriptionList.push(company);
                     subscribeBtn.textContent = '+ 해지하기'
-                                    // 토스트 알림 표시
                     toastAlert.classList.add('show');
                     setTimeout(() => {
                         toastAlert.classList.remove('show');
@@ -77,7 +75,7 @@ function createGridItem() {
 function createGridSubscribeItem() {
     const gridContainer = document.querySelector('.grid-view-container');
     gridContainer.innerHTML = ""; // 이전 아이템을 모두 제거
-
+    currentPage = 0;
     const startIdx = currentPage * itemsPerPage;
     const endIdx = Math.min(startIdx + itemsPerPage, companies.length);
 
@@ -96,7 +94,7 @@ function createGridSubscribeItem() {
             const company = subscribedCompanies[startIdx + i]?.company;
             const imgElement = document.createElement('img');
             imgElement.classList.add('grid-logo-img');
-            imgElement.src = subscribedCompanies[startIdx + i].logoUrl;
+            imgElement.src = subscribedCompanies[startIdx + i]?.logoUrl;
             imgElement.alt = company;
     
             const subscribeBtn = document.createElement('div');
@@ -113,7 +111,6 @@ function createGridSubscribeItem() {
                     subscriptionList.push(company);
                     setSubscriptionList(subscriptionList);
                     subscribeBtn.textContent = '+ 해지하기';
-                    // 토스트 알림 표시
                     toastAlert.classList.add('show');
                     handleTabClick('subscribe', 'grid-view');    
 
@@ -130,8 +127,6 @@ function createGridSubscribeItem() {
         }
         gridContainer.appendChild(gridItem);
     }
-
-    updatePaginationButtons();
 }
 
 function handleModalBtnClick(company) {
@@ -204,7 +199,7 @@ function fetchNewsData(type) {
             newsData = data;
             displayData();
             type === 'all' ? createGridItem() : createGridSubscribeItem();
-            createPaginationButtons();
+            if(type === 'all') createPaginationButtons();
         })
         .catch(error => {
             console.error(error);
