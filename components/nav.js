@@ -124,29 +124,59 @@ function setupNavElements(
   selectedList
 ) {
   navNode.addEventListener("click", function ({ target }) {
-    if (target.tagName === "UL") {
-      return false;
-    }
-
-    navNodeElements[state.currentCategoryIndex].classList.remove("selected");
-
-    if (target.tagName === "LI") {
-      target = target.querySelector("span");
-    }
-
-    for (const [index, element] of selectedList.entries()) {
-      if (element === target.innerHTML) {
-        navNodeElements[index].classList.add("selected");
-        state.currentCategoryIndex = index;
-        break;
-      }
-    }
-
-    resetInterval();
-    intervalStartFunction();
-
-    updateFunction(state.currentCategoryIndex);
+    handleNavClick(
+      target,
+      navNodeElements,
+      selectedList,
+      intervalStartFunction,
+      updateFunction
+    );
   });
+}
+
+/**
+ * 선택된 탭을 찾아 selected 부여, state변경, interval 재시작, content 업데이트
+ * @param {node} target
+ * @param {node array} navNodeElements
+ * @param {array} selectedList
+ */
+function handleNavClick(
+  target,
+  navNodeElements,
+  selectedList,
+  intervalStartFunction,
+  updateFunction
+) {
+  if (target.tagName === "UL") {
+    return false;
+  }
+
+  navNodeElements[state.currentCategoryIndex].classList.remove("selected");
+
+  if (target.tagName === "LI") {
+    target = target.querySelector("span");
+  }
+
+  selectCategoryByContent(target.innerHTML, selectedList, navNodeElements);
+
+  resetInterval();
+  intervalStartFunction();
+
+  updateFunction(state.currentCategoryIndex);
+}
+
+/**
+ * content와 동일한 array index를 찾아 navNode에 selectedClass 부여하고 state 변경
+ * @param {String} content
+ */
+function selectCategoryByContent(content, array, navNodeElements) {
+  for (const [index, element] of array.entries()) {
+    if (element === content) {
+      navNodeElements[index].classList.add("selected");
+      state.currentCategoryIndex = index;
+      break;
+    }
+  }
 }
 
 /**
