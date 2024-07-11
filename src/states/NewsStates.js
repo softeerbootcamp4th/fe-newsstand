@@ -58,6 +58,10 @@ class NewsStates extends States {
         })
     }
 
+    /**
+     * 화살표 버튼을 눌렀을 때 실행되는 함수, 지금 Subject를 구독하고 있는 Observer에게 알림을 전달
+     * @param {string} value - 화살표가 오른쪽인지 왼쪽인지 정보
+     */
     setCurrentNewsListIndex(value) {
         if (value === 'plus') {
             if (this.currentNewsListIndex === this.currentNewsListCount) {
@@ -110,14 +114,17 @@ class NewsStates extends States {
     #getNewsListStates() {
         const newsListRawData = this.subAllInfo === "all" ? this.allNewsData : this.subscribedNewsData;
         const newsListData = Object.values(newsListRawData)[this.categoryIndex].slice(this.currentNewsListIndex * 7, this.currentNewsListIndex * 7 + 7);
+        const categoryList = this.subAllInfo === "all" ? Object.keys(this.allNewsData) : Object.keys(this.subscribedNewsData)
         return {
             newsList: newsListData,
+            isFirst: this.categoryIndex === 0 && this.currentNewsListIndex === 0,
+            isLast: this.categoryIndex === categoryList.length - 1 && this.currentNewsListIndex === this.currentNewsListCount,
         }
     }
 
     #getCurrentNewsListCount() {
         const newsListRawData = this.subAllInfo === "all" ? this.allNewsData : this.subscribedNewsData;
-        return Math.floor(Object.values(newsListRawData)[this.categoryIndex].length / 7);
+        return Math.floor(Object.values(newsListRawData)[this.categoryIndex].length / 7) - 1;
     }
 }
 

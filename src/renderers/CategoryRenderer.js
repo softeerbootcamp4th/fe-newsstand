@@ -43,7 +43,6 @@ class CategoryRenderer extends Renderer {
      * @returns {Element}
      */
     #generateCategoryListElement(categoryIndex = 0, categoryList, currentNewsListIndex, currentNewsListCount) {
-        debugger;
         return categoryList.map((category, index) =>
             `<li class="news-list__navbar__category" 
             data-selected=${index === categoryIndex ? "yes" : "no"} 

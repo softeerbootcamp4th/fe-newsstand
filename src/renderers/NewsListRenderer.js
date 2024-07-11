@@ -22,8 +22,8 @@ class NewsListRenderer extends Renderer {
     /**
      * 생성된 element를 렌더링하는 함수
      */
-    _render({ newsList }) {
-        const newsListElement = this.#generateNewsListElement(newsList);
+    _render({ newsList, isFirst, isLast }) {
+        const newsListElement = this.#generateNewsListElement(newsList, isFirst, isLast);
         this.newsListContainer.innerHTML = '';
         this.newsListContainer.innerHTML += newsListElement;
     }
@@ -33,15 +33,15 @@ class NewsListRenderer extends Renderer {
      * @param {Array} newsList - State에서 받아온 뉴스 목록
      * @returns {Element}
      */
-    #generateNewsListElement(newsList) {
+    #generateNewsListElement(newsList, isFirst, isLast) {
         const headerNewsElement = this.#generateHeaderNewsElement(newsList[0])
         const newsListElement = this.#generateSideNewsListElement(newsList.slice(1));
-        return `<button class="news-list__btn-left"></button>
+        return `${isFirst ? "" : '<button class="news-list__btn-left"></button>'}
                 <main class="news-list__main">
                     ${headerNewsElement}
                     ${newsListElement}
                 </main>
-                <button class="news-list__btn-right"></button>`
+                ${isLast ? "" : '<button class="news-list__btn-right"></button>'}`
     }
 
     /**
