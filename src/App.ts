@@ -3,7 +3,7 @@ import { CurrentNews } from "./components/CurrentNews";
 import { cc } from "./libs/nodes/components";
 import { ce, Div } from "./libs/nodes/elements";
 import styles from "./App.module.css";
-import { MediaContent } from "./components/MediaContent";
+import { ContentList } from "./components/ContentList";
 import { ModalProvider } from "./providers/ModalProvider";
 import { AppComponent } from "./libs";
 import { ToastProvider } from "./providers/ToastProvider";
@@ -17,7 +17,7 @@ export const App = () => {
             children: [
               cc(AppHeader, {}),
               cc(CurrentNews, {}),
-              cc(MediaContent, {}),
+              cc(ContentList, {}),
             ],
           }),
         ],

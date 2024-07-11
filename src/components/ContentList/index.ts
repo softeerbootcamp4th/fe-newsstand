@@ -4,14 +4,14 @@ import { useEffect, useState } from "@/libs";
 import { cc } from "@/libs";
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { MediaIdByCategories } from "@/models/Newsstand";
-import { MediaContentTabs } from "./MediaContentTabs";
+import { MediaContentTabs } from "./ContentListHeader";
 import styles from "./index.module.css";
-import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
-import { MediaContentMain } from "./MediaContentMain";
+import { CategoryTabActiveBadge } from "../MediaContent/CategoryTabActiveBadge";
+import { MediaContentMain } from "../MediaContent/MediaContentMain";
 import { getSubscribedMedias } from "@/remotes/getSubscribedMedias";
 import { MediaContentFilterType } from "@/models/MediaContentFilter";
 
-export const MediaContent = () => {
+export const ContentList = () => {
   const [currentFilter, setCurrentFilter] =
     useState<MediaContentFilterType>("전체 언론사");
 

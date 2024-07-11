@@ -1,8 +1,8 @@
 import { Div, Span, ce } from "@/libs";
-import styles from "./MediaContentTabs.module.css";
+import styles from "./ContentListHeader.module.css";
 import typoStyles from "@/styles/typo.module.css";
 import { AppChild } from "@/libs";
-interface MediaContentTabProps {
+interface ContentListHeaderProps {
   main: string;
   sub: AppChild;
   onClick: () => void;
@@ -11,14 +11,14 @@ interface MediaContentTabProps {
   onNext: () => void;
 }
 
-const MediaContentTab = ({
+const ContentListHeader = ({
   main,
   sub,
   onClick,
   isActive,
   onNext,
   hasNext,
-}: MediaContentTabProps) => {
+}: ContentListHeaderProps) => {
   const activeStyle = `${styles["tab-active"]} ${
     typoStyles["selected-bold14"]
   } ${hasNext ? styles["tab-animate"] : ""}`;
@@ -31,7 +31,7 @@ const MediaContentTab = ({
   });
 };
 interface MediaContentTabsProps {
-  tabs: Omit<MediaContentTabProps, "hasNext">[];
+  tabs: Omit<ContentListHeaderProps, "hasNext">[];
   hasNext: boolean;
 }
 
@@ -39,7 +39,7 @@ export const MediaContentTabs = ({ tabs, hasNext }: MediaContentTabsProps) => {
   return ce(Div, {
     className: styles.container,
     children: tabs.map((tab) =>
-      MediaContentTab({
+      ContentListHeader({
         ...tab,
         hasNext: hasNext,
       }),
