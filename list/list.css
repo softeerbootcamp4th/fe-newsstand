@@ -1,7 +1,5 @@
-@import "../global/global.css";
-@import "../components/nav.css";
-@import "../components/newsBanner.css";
-@import "../components/newsList.css";
+@import "../components/content/nav.css";
+@import "../components/content/newsList.css";
 
 body {
   width: 100%;
@@ -88,7 +86,7 @@ main {
   font-size: 50px;
 }
 
-.content_wrapper {
+#content_wrapper {
   display: flex;
   flex-direction: column;
   width: 930px;

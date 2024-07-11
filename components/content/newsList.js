@@ -1,22 +1,27 @@
-import { deleteNodeById, generateNode } from "../utils/utils.js";
-import { setRightArrow } from "./nav.js";
-import { getMyDataAsArray, myData } from "../resources/data.js";
+import { deleteNodeById, generateNode } from "../../utils/utils.js";
+import { setProgress } from "./nav.js";
+import {
+  categoryData,
+  getMediaLength,
+  mediaData,
+} from "../../resources/data.js";
+import "./carousel.js";
 
 /**
  * 언론사 별 뉴스 목록을 container하위에 생성
  * @param {Node} container
  * @param {Object} content {media: String, news: Array}
  */
-function generateMyNewsList(container, content) {
+function generateNewsList(container, content) {
   const list = generateNode("ul", "newsList");
 
-  content.news.slice(0, 6).forEach((category) => {
+  mediaData[content].news.slice(0, 6).forEach((category) => {
     const li = generateNode("li");
     li.textContent = category;
     list.appendChild(li);
   });
 
-  createFooterElement(list, content.media);
+  createFooterElement(list, mediaData[content].media);
 
   container.appendChild(list);
 }
@@ -34,22 +39,30 @@ function createFooterElement(container, media) {
 
 /**
  * 바뀐 카테고리에 맞게 newsList 업데이트
+ * @param {String} category
  * @param {int} currentCategoryIndex
+ * @param {int} currentMediaIndex
  */
-export function updateMyNewsList(currentCategoryIndex) {
+export function updateNewsList(
+  category,
+  currentCategoryIndex,
+  currentMediaIndex
+) {
   const newsListContainer = deleteNodeById("newsList_container");
-  const mediaList = getMyDataAsArray().map((element) => element.media);
-
-  setMedia(mediaList, currentCategoryIndex);
-
-  setRightArrow(currentCategoryIndex);
-
-  if (myData.size === 0) return;
-
-  generateMyNewsList(
-    newsListContainer,
-    getMyDataAsArray()[currentCategoryIndex]
+  const mediaList = categoryData[category].map(
+    (element) => mediaData[element].media
   );
+  const contentList = categoryData[category];
+
+  setProgress(
+    currentCategoryIndex,
+    currentMediaIndex,
+    getMediaLength(category)
+  );
+
+  setMedia(mediaList, currentMediaIndex);
+
+  generateNewsList(newsListContainer, contentList[currentMediaIndex]);
 }
 
 /**

@@ -9,15 +9,15 @@ let bannerInterval;
  * @param {node array} navElementNodes
  * @param {object} state
  * @param {array} categoryList
- * @param {function} updateNav
- * @param {function} updateContent
+ * @param {function} updateNavFunction
+ * @param {function} updateContentFunction
  */
 function handleNewsInterval(
   navElementNodes,
   state,
   categoryList,
-  updateNav,
-  updateContent
+  updateNavFunction,
+  updateContentFunction
 ) {
   state.currentMediaIndex++;
   if (
@@ -29,8 +29,8 @@ function handleNewsInterval(
     state.currentMediaIndex = 0;
   }
 
-  updateNav(navElementNodes);
-  updateContent(
+  updateNavFunction(navElementNodes);
+  updateContentFunction(
     categoryList[state.currentCategoryIndex],
     state.currentCategoryIndex,
     state.currentMediaIndex
@@ -41,15 +41,20 @@ function handleNewsInterval(
  * media 값이 하나 증가시키고 state, nav, mylist영역을 업데이트
  * @param {node array} navElementNodes
  * @param {object} state
- * @param {function} updateNav
- * @param {function} updateContent
+ * @param {function} updateNavFunction
+ * @param {function} updateContentFunction
  */
-function handleMyInterval(navElementNodes, state, updateNav, updateContent) {
+function handleMyInterval(
+  navElementNodes,
+  state,
+  updateNavFunction,
+  updateContentFunction
+) {
   state.currentCategoryIndex =
     (state.currentCategoryIndex + 1) % getMyListLength();
 
-  updateNav(navElementNodes);
-  updateContent(state.currentCategoryIndex);
+  updateNavFunction(navElementNodes);
+  updateContentFunction(state.currentCategoryIndex);
 }
 
 /**
@@ -58,16 +63,16 @@ function handleMyInterval(navElementNodes, state, updateNav, updateContent) {
  * @param {node array} navElementNodes
  * @param {object} state
  * @param {array} categoryList
- * @param {function} updateNav
- * @param {function} updateContent
+ * @param {function} updateNavFunction
+ * @param {function} updateContentFunction
  */
 function startInterval(
   intervalType,
   navElementNodes,
   state,
   categoryList,
-  updateNav,
-  updateContent
+  updateNavFunction,
+  updateContentFunction
 ) {
   if (intervalType === "news") {
     newsInterval = setInterval(
@@ -76,14 +81,20 @@ function startInterval(
           navElementNodes,
           state,
           categoryList,
-          updateNav,
-          updateContent
+          updateNavFunction,
+          updateContentFunction
         ),
       20000
     );
   } else if (intervalType === "my") {
     myInterval = setInterval(
-      () => handleMyInterval(navElementNodes, state, updateNav, updateContent),
+      () =>
+        handleMyInterval(
+          navElementNodes,
+          state,
+          updateNavFunction,
+          updateContentFunction
+        ),
       20000
     );
   }

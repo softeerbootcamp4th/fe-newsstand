@@ -1,5 +1,8 @@
-import { startBannerInterval, stopBannerInterval } from "../global/interval.js";
-import { generateNode } from "../utils/utils.js";
+import {
+  startBannerInterval,
+  stopBannerInterval,
+} from "../../global/interval.js";
+import { generateNode } from "../../utils/utils.js";
 /**
  * content를 롤링하는 배너를 container의 child로 생성
  * @param {Node} container

@@ -1,10 +1,10 @@
-import { deleteNodeById, generateNode } from "../utils/utils.js";
+import { deleteNodeById, generateNode } from "../../utils/utils.js";
 import { updateMyNewsList } from "./myNewsList.js";
 import { updateNewsList } from "./newsList.js";
-import { categoryList, myList, mediaData } from "../resources/data.js";
-import state from "../global/state.js";
+import { categoryList, myList, mediaData } from "../../resources/data.js";
+import state from "../../global/state.js";
 import { generateSubscribe, generateUnsubscribe } from "./subscribe.js";
-import { startInterval, stopInterval } from "../global/interval.js";
+import { startInterval, stopInterval } from "../../global/interval.js";
 
 /**
  * Nav목록으로 네비게이션 바를 container의 child로 생성 후 초기화

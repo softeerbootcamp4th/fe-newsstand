@@ -2,13 +2,13 @@ import {
   getCateogryLength,
   getMediaLengthByIndex,
   getMyListLength,
-} from "../resources/data.js";
+} from "../../resources/data.js";
 import {
   updateNavElements,
   updateCategoryByIndex,
   updateMyMedia,
 } from "./nav.js";
-import state from "../global/state.js";
+import state from "../../global/state.js";
 
 const leftButton = document.querySelector(".leftButton");
 const rightButton = document.querySelector(".rightButton");

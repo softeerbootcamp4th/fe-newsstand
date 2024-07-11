@@ -1,53 +1,35 @@
-import { deleteNav, generateNav } from "../components/nav.js";
-import { generateBanner } from "../components/newsBanner.js";
-import { getTodayString, refreshPage } from "../utils/utils.js";
-import store from "../global/stoageManager.js";
-import { updateMyList, headlineData } from "../resources/data.js";
-import { startBannerInterval } from "../global/interval.js";
+import { getTodayString, generateNode } from "../utils/utils.js";
 
-let currentHeaderCategoryIndex = 0;
+export function generateListContent(container, newsData) {
+  const divContentTitle = generateNode("div", "content_title");
+  const pMedia = generateNode("p", "media");
+  const pDate = generateNode("p", "date");
+  pDate.textContent = getTodayString();
 
-//요소 생성
-//header
-const logo = document.querySelector(".logo");
-logo.addEventListener("click", refreshPage);
-const today = document.querySelector(".today");
-today.innerHTML = getTodayString();
-//banner
-const bannerContainer = document.getElementById("banner_container");
-generateBanner(bannerContainer, headlineData[0]);
-generateBanner(bannerContainer, headlineData[1]);
-startBannerInterval();
+  divContentTitle.appendChild(pMedia);
+  divContentTitle.appendChild(pDate);
 
-//nav
-const navContainer = document.getElementById("nav_container");
-generateNav(navContainer, currentHeaderCategoryIndex);
+  const divNewsListWrapper = generateNode("div", "newsList_wrapper");
 
-//각 배너는 time delay를 가지고 롤링
-const headerCategory = document.querySelectorAll(".headerCategory");
-const headerShow = document.querySelectorAll(".headerShow");
+  const divImageNews = generateNode("div", "imageNews");
+  const imgThumbnail = document.createElement("img");
+  imgThumbnail.src = newsData.thumbnailUrl;
+  imgThumbnail.alt = newsData.title;
+  const divImageNewsTitle = generateNode("div", "imageNews_title");
+  divImageNewsTitle.textContent = newsData.title;
 
-// 초기화 함수
-function initialize() {
-  store.setSet("myList", new Set());
-  //header_selected 초기화
-  headerCategory[0].classList.add("selected");
-  headerShow[0].classList.add("selected");
+  divImageNews.appendChild(imgThumbnail);
+  divImageNews.appendChild(divImageNewsTitle);
 
-  headerCategory.forEach((element, index) => {
-    element.addEventListener("click", () => {
-      headerCategory[currentHeaderCategoryIndex].classList.remove("selected");
-      element.classList.add("selected");
+  const divNewsListContainer = document.createElement("div");
+  divNewsListContainer.id = "newsList_container";
 
-      currentHeaderCategoryIndex = index;
+  divNewsListWrapper.appendChild(divImageNews);
+  divNewsListWrapper.appendChild(divNewsListContainer);
 
-      //nav 삭제후 재생성
-      updateMyList();
-      deleteNav();
-      generateNav(navContainer, currentHeaderCategoryIndex);
-    });
-  });
+  const divNewsItem = generateNode("div", "newsItem");
+  divNewsItem.appendChild(divContentTitle);
+  divNewsItem.appendChild(divNewsListWrapper);
+
+  container.appendChild(divNewsItem);
 }
-
-// 초기화
-initialize();
