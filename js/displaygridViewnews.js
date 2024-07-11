@@ -76,7 +76,6 @@ function createGridSubscribeItem() {
     const gridContainer = document.querySelector('.grid-view-container');
     gridContainer.innerHTML = ""; // 이전 아이템을 모두 제거
     currentPage = 0;
-
     const startIdx = currentPage * itemsPerPage;
     const endIdx = Math.min(startIdx + itemsPerPage, companies.length);
 
@@ -86,9 +85,6 @@ function createGridSubscribeItem() {
 
     // 로컬 스토리지에 있는 아이템만 필터링
     const subscribedCompanies = companies.filter(company => subscriptionList.includes(company.company));
-
-    console.log(subscriptionList);
-    console.log(subscribedCompanies);
 
     for (let i = 0; i < itemsPerPage; i++) {
         const gridItem = document.createElement('div');
@@ -130,7 +126,6 @@ function createGridSubscribeItem() {
                 
         }
         gridContainer.appendChild(gridItem);
-        document.querySelector('.right-btn.grid').style.display = 'none';
     }
 }
 
@@ -203,9 +198,8 @@ function fetchNewsData(type) {
         .then(data => {
             newsData = data;
             displayData();
-            console.log(type);
             type === 'all' ? createGridItem() : createGridSubscribeItem();
-            createPaginationButtons();
+            if(type === 'all') createPaginationButtons();
         })
         .catch(error => {
             console.error(error);

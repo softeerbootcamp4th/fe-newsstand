@@ -109,11 +109,13 @@ const switchView = (viewType) => {
 export const handleTabClick = (tabType, viewType) => {
     const allTab = document.querySelector('.all');
     const subscribeTab = document.querySelector('.subscribe');
+    const leftBtn = document.querySelector('.left-btn.grid');
+    const rightBtn = document.querySelector('.right-btn.grid');
 
     allTab.classList.remove('selected-tab');
     subscribeTab.classList.remove('selected-tab');
 
-    prevTabType = tabType; 
+    prevTabType = tabType;
 
     if (tabType === 'all') {
         allTab.classList.add('selected-tab');
@@ -122,6 +124,8 @@ export const handleTabClick = (tabType, viewType) => {
             loadCurrentCategoryNews('all');
         } else if (viewType === 'grid-view') {
             initializeGridViewContainer('all');
+            if (leftBtn) leftBtn.style.display = 'block';
+            if (rightBtn) rightBtn.style.display = 'block';
         }
     } else if (tabType === 'subscribe') {
         subscribeTab.classList.add('selected-tab');
@@ -131,6 +135,8 @@ export const handleTabClick = (tabType, viewType) => {
             loadCurrentCategoryNews('subscribe');
         } else if (viewType === 'grid-view') {
             initializeGridViewContainer('subscribe');
+            if (leftBtn) leftBtn.style.display = 'none';
+            if (rightBtn) rightBtn.style.display = 'none';
         }
     }
 };
