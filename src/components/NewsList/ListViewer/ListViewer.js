@@ -55,7 +55,8 @@ ListViewer.prototype.loadNews = async function (tab, page) {
   if (this.props.filter === "category") {
     const news = await getNews({ category: tab });
 
-    const shuffledNews = shuffleArray(news);
+    // const shuffledNews = shuffleArray(news);
+    const shuffledNews = news;
 
     this.setState({ tab, page, news: shuffledNews, tabs: CATEGORIES });
   }
