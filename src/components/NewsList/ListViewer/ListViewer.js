@@ -136,7 +136,7 @@ ListViewer.prototype.nextPage = function () {
     return;
   }
 
-  this.loadNews(this.state.tab, nextPage);
+  this.setState({ page: nextPage });
 };
 
 ListViewer.prototype.prevPage = function () {
@@ -148,7 +148,7 @@ ListViewer.prototype.prevPage = function () {
     return;
   }
 
-  this.loadNews(this.state.tab, prevPage);
+  this.setState({ page: prevPage });
 };
 
 ListViewer.prototype.nextTab = function () {
