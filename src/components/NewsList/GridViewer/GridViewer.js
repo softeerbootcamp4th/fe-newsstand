@@ -6,13 +6,14 @@ import { COMPANIES_PER_PAGE } from "@/data/constants";
 import Button from "@/components/common/Button/Button";
 import { addCompany, isSubscribeCompany, removeCompany } from "@/data/storageHandler";
 
-function GridViewer({ $target, position = "beforeend", changeTab }) {
+function GridViewer({ $target, position = "beforeend", changeTab, filter = "category" }) {
   this.$element = document.createElement("article");
   this.$element.className = "gridViewer";
   $target.insertAdjacentElement(position, this.$element);
 
   this.props = {
     changeTab,
+    filter,
   };
 
   this.state = {
@@ -64,7 +65,16 @@ GridViewer.prototype.handleClick = function (event) {
     }
 
     if (classList.contains("subscribe")) {
-      this.subscribeCompany({ id: companyId, company: companyName });
+      const company = this.state.companies.find(
+        (company) => Number(company.id) === Number(companyId)
+      );
+
+      this.subscribeCompany({
+        id: companyId,
+        company: companyName,
+        lightLogo: company.lightLogo,
+        darkLogo: company.darkLogo,
+      });
 
       return;
     }
@@ -96,8 +106,8 @@ GridViewer.prototype.load = async function (start) {
   this.renderSubscribeButtons();
 };
 
-GridViewer.prototype.subscribeCompany = function ({ id, company }) {
-  addCompany({ id, company });
+GridViewer.prototype.subscribeCompany = function ({ id, company, lightLogo, darkLogo }) {
+  addCompany({ id, company, lightLogo, darkLogo });
 
   this.showUnsubscribeButton(id);
 };

@@ -1,6 +1,6 @@
 export const SUBSCRIBE_COMPANIES_LOCAL_STORAGE_KEYS = "subscribe_companies";
 
-export function addCompany({ id, company }) {
+export function addCompany({ id, company, lightLogo, darkLogo }) {
   const companies = getSubscribedCompanies();
   const idSet = new Set(companies.map(({ id }) => Number(id)));
 
@@ -10,7 +10,7 @@ export function addCompany({ id, company }) {
     return;
   }
 
-  companies.push({ id: Number(id), company });
+  companies.push({ id: Number(id), company, lightLogo, darkLogo });
 
   localStorage.setItem(SUBSCRIBE_COMPANIES_LOCAL_STORAGE_KEYS, JSON.stringify(companies));
 }
