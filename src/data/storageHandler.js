@@ -15,7 +15,7 @@ export function addCompany({ id, company }) {
   localStorage.setItem(SUBSCRIBE_COMPANIES_LOCAL_STORAGE_KEYS, JSON.stringify(companies));
 }
 
-export function removeCompany({ id, company }) {
+export function removeCompany({ id }) {
   const companies = getSubscribedCompanies();
 
   const updatedCompanies = companies.filter(
