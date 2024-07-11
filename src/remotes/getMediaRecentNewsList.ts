@@ -22,5 +22,20 @@ export const getMediaRecentNewsByCategory = async (
       href: "#",
       imgSrc: "https://picsum.photos/200",
     },
+    {
+      title: `${mediaId} ${categoryId} 뉴스 test4`,
+      href: "#",
+      imgSrc: "https://picsum.photos/200",
+    },
+    {
+      title: `${mediaId} ${categoryId} 뉴스 test5`,
+      href: "#",
+      imgSrc: "https://picsum.photos/200",
+    },
+    {
+      title: `${mediaId} ${categoryId} 뉴스 test6`,
+      href: "#",
+      imgSrc: "https://picsum.photos/200",
+    },
   ];
 };

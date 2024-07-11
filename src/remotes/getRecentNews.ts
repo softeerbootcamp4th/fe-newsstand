@@ -13,7 +13,7 @@ export const getRecentNews = async ({
   return {
     mediaId: 1,
     news: {
-      title: `test${from}${from}${from}${from}${from}`,
+      title: `test${from} 속보!!`,
       href: "#",
       imgSrc: "https://picsum.photos/200",
     },

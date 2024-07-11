@@ -35,7 +35,7 @@ const mediaData: Omit<Media, "isSubscribed">[] = [
   {
     id: 6,
     name: "시사위크",
-    imgSrc: "/images/sisaweek.png",
+    imgSrc: "/images/sisajounalE.png",
     lastEdited: "2024-07-04T01:10:00Z",
   },
   {
