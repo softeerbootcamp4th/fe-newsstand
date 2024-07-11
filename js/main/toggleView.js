@@ -1,7 +1,7 @@
-import { category } from "./data.js";
-import { createCategory, loadCurrentCategoryNews } from "./displaylistViewNews.js";
+import { category } from "../../data/categoryData.js";
+import { createCategory, loadCurrentCategoryNews } from "./listView/displaylistViewNews.js";
 import { initalizeSubscribeFunction, initializeGridViewContainer, initlizeListViewFunction } from "./init.js";
-import { getSubscriptionList  } from "./subscribe.js";
+import { getSubscriptionList  } from "./listView/subscribe.js";
 
 let prevViewType = null;
 let prevTabType = 'all';

@@ -1,7 +1,7 @@
-import { category } from "./data.js";
-import { initlizeListViewFunction } from "./init.js";
+import { category } from "../../../data/categoryData.js";
+import { initlizeListViewFunction } from "../init.js";
 import { getSubscriptionList } from "./subscribe.js";
-import { getTheme } from "./toggleTheme.js";
+import { getTheme } from "../../header/toggleTheme.js";
 
 let curCategoryIdx = 0;
 let newsData = [];

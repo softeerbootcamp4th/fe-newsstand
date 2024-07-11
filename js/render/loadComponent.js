@@ -1,8 +1,8 @@
-import { renderHeader } from '../components/header.js';
-import { renderNewsSection } from '../components/newsSection.js';
-import { renderMainContent } from '../components/main.js';
-import { renderToastAlert } from '../components/toastAlert.js';
-import { renderModal } from '../components/modal.js';
+import { renderHeader } from '../../components/header.js';
+import { renderNewsSection } from '../../components/newsSection.js';
+import { renderMainContent } from '../../components/main.js';
+import { renderToastAlert } from '../../components/toastAlert.js';
+import { renderModal } from '../../components/modal.js';
 
 
 function loadComponent(selector, renderFunction) {

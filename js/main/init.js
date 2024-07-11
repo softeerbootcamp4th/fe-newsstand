@@ -1,8 +1,8 @@
-import { category } from "./data.js";
-import { fetchNewsData } from "./displaygridViewnews.js";
-import { createCategory, initalizeHeaderScroll, initializeArrowBtn, loadCurrentCategoryNews } from "./displaylistViewNews.js";
-import { handleModalBtnClick, handleSubscribeBtnClick, updateButton } from "./subscribe.js";
-import { onThemeChange } from "./toggleTheme.js";
+import { category } from "../../data/categoryData.js";
+import { fetchNewsData } from "./gridView/displaygridViewnews.js";
+import { createCategory, initalizeHeaderScroll, initializeArrowBtn, loadCurrentCategoryNews } from "./listView/displaylistViewNews.js";
+import { handleModalBtnClick, handleSubscribeBtnClick, updateButton } from "./listView/subscribe.js";
+import { onThemeChange } from "../header/toggleTheme.js";
 
 let curViewType = 'all';
 

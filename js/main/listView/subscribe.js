@@ -1,6 +1,6 @@
 import { createCategory, showInformation, loadCurrentCategoryNews } from "./displaylistViewNews.js";
-import { initalizeSubscribeFunction } from "./init.js";
-import { moveToSubscribeTab } from './toggleView.js';
+import { initalizeSubscribeFunction } from "../init.js";
+import { moveToSubscribeTab } from '../toggleView.js';
 
 export const getSubscriptionList = () => {
     const subscriptionList = localStorage.getItem('subscriptions');
