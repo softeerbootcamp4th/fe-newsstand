@@ -6,15 +6,16 @@ import { addEventToToggle } from "./toggle.js";
 import { setUpCurrentTime } from "./util.js";
 import { addEventToRotatingArrow } from "./swiper.js";
 import { fetchData } from "./fetchData.js";
+import state from "./store.js";
 
-export function initializeScreen(state) {
+export function initializeScreen() {
     setUpCurrentTime();
-    renderDefaultSceen(state);
+    renderDefaultSceen();
 }
 
-export async function initializeData(state) {
+export async function initializeData() {
     return new Promise((resolve,reject) => {
-        loadSubscribeCompanies(state);
+        loadSubscribeCompanies();
         fetchData().then(([
             articleData,
             previewArticleData
@@ -28,9 +29,9 @@ export async function initializeData(state) {
     })
 }
 
-export function initializeEvent(state) {
-    addEventToRollingBox(state);
-    addEventToToggle(state);
-    addEventToRotatingArrow(state);
+export function initializeEvent() {
+    addEventToRollingBox();
+    addEventToToggle();
+    addEventToRotatingArrow();
 }
 

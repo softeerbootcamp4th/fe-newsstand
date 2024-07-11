@@ -1,8 +1,9 @@
 import { getCurrentCompany } from "./company.js";
 import { TOGGLE } from "./magicNumber.js";
 import { assignCSS } from "./util.js";
+import state from "./store.js";
 
- export function getCurrentArticle(state) {
+ export function getCurrentArticle() {
     switch(state.toggleName){
         case TOGGLE.ALL:
             return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles[state.selectedArticleIndex];
@@ -11,7 +12,7 @@ import { assignCSS } from "./util.js";
     }  
  }
 
- export function getCurrentArticleList(state) {
+ export function getCurrentArticleList() {
     switch(state.toggleName){
         case TOGGLE.ALL:
             return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles;
@@ -20,9 +21,9 @@ import { assignCSS } from "./util.js";
     }
  }
 
-export function updateArticleBox(state){
-    const currentCompany = getCurrentCompany(state);
-    const currentArticle = getCurrentArticle(state);
+export function updateArticleBox(){
+    const currentCompany = getCurrentCompany();
+    const currentArticle = getCurrentArticle();
 
     const registerDateDom = document.querySelector("#register_date");
     const companyImgDom = document.querySelector("#company_img");

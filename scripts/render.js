@@ -1,25 +1,25 @@
 import { addDragEvent } from "./drag.js";
-import { getCurrentArticle, getCurrentArticleList, updateArticleBox } from "./article.js";
+import { updateArticleBox } from "./article.js";
 import { getCurrentCompany, getSubscribeCompanies, getAllToggleCurrentCompanies } from "./company.js";
 import { TOGGLE } from "./magicNumber.js";
-import { generateToastPopupDom } from "./popup.js";
 import { resetstate } from "./reset.js";
 import { updateSubscribeButton } from "./subscribe.js";
 import { getTabDomWithCleanUp, getTabLength, handleTabClick, updateTabAnimationStyle } from "./tab.js";
 import { assignCSS, cleanUpHTML } from "./util.js";
 import { updateAllToggleArrow, updateSubscribedToggleArrow } from "./toggle.js";
+import state from "./store.js";
 
-export function renderDefaultSceen(state) {
-    resetstate(state);
-    renderTabList(state);
-    renderArticles(state);
-    renderTabAnimationList(state);
-    updateTabAnimationStyle(state);
+export function renderDefaultSceen() {
+    resetstate();
+    renderTabList();
+    renderArticles();
+    renderTabAnimationList();
+    updateTabAnimationStyle();
 }
 
-export function renderArticles(state) {
-    updateSubscribeButton(state);
-    renderArrow(state);
+export function renderArticles() {
+    updateSubscribeButton();
+    renderArrow();
 
     switch (state.toggleName) {
         case TOGGLE.ALL:
@@ -29,32 +29,31 @@ export function renderArticles(state) {
     }
 }
 
-function renderAllToggleArticles(state) {
-    const companies = getAllToggleCurrentCompanies(state);
+function renderAllToggleArticles() {
+    const companies = getAllToggleCurrentCompanies();
     const articleBoxDom = document.querySelector(".news_letter_subject_box");
     const validCompanyLength = companies.length;
     cleanUpHTML(articleBoxDom);
-    updateArticleBox(state, validCompanyLength);
+    updateArticleBox( validCompanyLength);
 
     if (validCompanyLength === 0) return;
-    renderArticleText(state, companies[state.selectedCompanyIndex].articles);
+    renderArticleText(companies[state.selectedCompanyIndex].articles);
 }
 
-
-function renderSubscribedToggleArticles(state) {
-    const companies = getSubscribeCompanies(state);
+function renderSubscribedToggleArticles() {
+    const companies = getSubscribeCompanies();
     const articleBoxDom = document.querySelector(".news_letter_subject_box");
     const validCompanyLength = companies.length;
 
     cleanUpHTML(articleBoxDom);
-    updateArticleBox(state, validCompanyLength);
+    updateArticleBox( validCompanyLength);
 
     if (validCompanyLength === 0) return;
-    renderArticleText(state, companies[state.selectedTabIndex].articles);
+    renderArticleText( companies[state.selectedTabIndex].articles);
 
 }
 
-function renderArticleText(state, articles) {
+function renderArticleText( articles) {
     const articleBoxDom = document.querySelector(".news_letter_subject_box");
     articles
         .filter((_, index) => index < 6)
@@ -64,40 +63,40 @@ function renderArticleText(state, articles) {
             articleDom.textContent = article.title;
             articleDom.addEventListener("click", function () {
                 state.selectedArticleIndex = articleIndex;
-                renderArticles(state);
+                renderArticles();
             });
             articleBoxDom.appendChild(articleDom);
         });
     const articleCopyRightDom = document.createElement('div');
     articleCopyRightDom.classList.add('display-medium14', 'color_879298');
-    articleCopyRightDom.textContent = getCurrentCompany(state).name + " 언론사에서 직접 편집한 뉴스입니다.";
+    articleCopyRightDom.textContent = getCurrentCompany().name + " 언론사에서 직접 편집한 뉴스입니다.";
     articleBoxDom.appendChild(articleCopyRightDom);
 }
 
-export function renderTabList(state) {
+export function renderTabList() {
     switch (state.toggleName) {
         case TOGGLE.ALL:
-            renderLeftToggleTab(state);
+            renderLeftToggleTab();
             break;
         case TOGGLE.SUBSCRIBED:
-            renderRightToggleTab(state);
+            renderRightToggleTab();
             break;
     }
 }
 
-function renderLeftToggleTab(state) {
+function renderLeftToggleTab() {
     const subjectNames = state.articleDataList.map(data => data.subject);
-    renderTabItems(state, subjectNames);
+    renderTabItems(subjectNames);
 }
 
-function renderRightToggleTab(state) {
+function renderRightToggleTab() {
     const subscribedCompanyNames = Object.keys(state.companiesWithArticles).filter(companyName => state.subscribedCompanyNameSet.has(companyName));
-    renderTabItems(state, subscribedCompanyNames);
+    renderTabItems(subscribedCompanyNames);
 }
 
 
 
-function renderTabItems(state, tabNames) {
+function renderTabItems(tabNames) {
     let mouseDownDate = new Date();
     const tabDom = getTabDomWithCleanUp();
     let isMouseMoved = true;
@@ -139,7 +138,7 @@ function renderTabItems(state, tabNames) {
             const timeGap = new Date().getTime() - mouseDownDate.getTime();
             //대부분의 스크롤이 150밀리 이상은 걸리기에 150밀리로 지정 (사람 반응속도보다 빠름)
             if (isMouseMoved === false || timeGap < 150) {
-                handleTabClick(nameIndex, state);
+                handleTabClick(nameIndex);
             }
         });
         tabItemDom.addEventListener("mousemove", function (e) {
@@ -150,16 +149,16 @@ function renderTabItems(state, tabNames) {
     });
 }
 
-export function renderArrow(state) {
+export function renderArrow() {
     switch (state.toggleName) {
         case TOGGLE.ALL:
-            return updateAllToggleArrow(state);
+            return updateAllToggleArrow();
         case TOGGLE.SUBSCRIBED:
-            return updateSubscribedToggleArrow(state);
+            return updateSubscribedToggleArrow();
     }
 }
 
-export function renderTabAnimationList(state) {
+export function renderTabAnimationList() {
     const tabAnimationDom = document.querySelector("#tab_animation_wrapper");
     cleanUpHTML(tabAnimationDom);
     const tabDom = document.querySelector("#tab_wrapper");
@@ -199,7 +198,7 @@ export function renderTabAnimationList(state) {
         tabAnimationHiderItemDom.appendChild(tabAnimationItemDom);
         tabAnimationDom.appendChild(tabAnimationHiderItemDom);
     });
-    addDragEvent(state);
+    addDragEvent();
 }
 
 export function renderPopup(toastPopupDom) {

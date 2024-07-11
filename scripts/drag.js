@@ -1,4 +1,6 @@
-export function addDragEvent(state) {
+import state from "./store.js";
+
+export function addDragEvent() {
     const draggableDom = document.querySelector('#draggable_wrapper');
 
     const positionPointer = {

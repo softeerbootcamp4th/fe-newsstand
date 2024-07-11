@@ -1,25 +1,26 @@
-import { getCurrentCompany, getSubscribeCompanies } from "./company.js";
+import { getCurrentCompany } from "./company.js";
 import { addDeletePopup, addToastPopup } from "./popup.js";
 import { getSubscribedTabValidation } from "./tab.js";
+import state from "./store.js";
 
-export function updateSubscribeButton(state) {
-    if (!getSubscribedTabValidation(state)) return;
-    const companyName = getCurrentCompany(state)?.name;
+export function updateSubscribeButton() {
+    if (!getSubscribedTabValidation()) return;
+    const companyName = getCurrentCompany()?.name;
     const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
     document.querySelector("#subscribe_button_wrapper").innerHTML = getSerializedSubscribeButtonHTML(isSubscribed);
     const subscribeButtonDom = document.querySelector("#subscribe_button");
     subscribeButtonDom.addEventListener("click", function () {
-        subscribeEventFunction(state, companyName, isSubscribed);
+        subscribeEventFunction(companyName, isSubscribed);
     });
 }
 
-function subscribeEventFunction(state, companyName, isSubscribed) {
+function subscribeEventFunction(companyName, isSubscribed) {
     if (isSubscribed) {
-        addDeletePopup(state, companyName);
+        addDeletePopup(companyName);
     } else {
-        addToastPopup(state);
-        subscribeCompany(state, companyName);
-        updateSubscribeButton(state);
+        addToastPopup();
+        subscribeCompany(companyName);
+        updateSubscribeButton();
     }
 }
 
@@ -40,17 +41,17 @@ function getSerializedSubscribeButtonHTML(isSubscribed) {
         ;
 }
 
-export function loadSubscribeCompanies(state) {
+export function loadSubscribeCompanies() {
     const tmp = parseSetData(loadSubscribeCompaniesFromLocalStorage());
     state.subscribedCompanyNameSet = tmp;
 }
 
-export function subscribeCompany(state, company) {
+export function subscribeCompany(company) {
     state.subscribedCompanyNameSet.add(company);
     saveSubscribeCompaniesToLocalStorage(state.subscribedCompanyNameSet);
 }
 
-export function unSubscribeCompany(state, company) {
+export function unSubscribeCompany(company) {
     state.subscribedCompanyNameSet.delete(company);
     saveSubscribeCompaniesToLocalStorage(state.subscribedCompanyNameSet);
 }

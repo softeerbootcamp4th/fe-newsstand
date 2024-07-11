@@ -1,6 +1,7 @@
 import { TOGGLE } from "./magicNumber.js";
+import state from "./store.js";
 
-export function getCurrentCompany(state) {
+export function getCurrentCompany() {
     switch (state.toggleName) {
         case TOGGLE.ALL:
             return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex];
@@ -9,15 +10,15 @@ export function getCurrentCompany(state) {
     }
 }
 
-export function getAllToggleCurrentCompanies(state) {
+export function getAllToggleCurrentCompanies() {
     return state.articleDataList[state.selectedTabIndex].companies;
 }
 
-export function getSubscribeCompanies(state) {
+export function getSubscribeCompanies() {
     return (Object.values(state.companiesWithArticles)).filter(company => state.subscribedCompanyNameSet.has(company.name));
 }
 
-export function getAllCompanyLength(state) {
+export function getAllCompanyLength() {
     return Object.keys(state.companiesWithArticles).length;
 }
 

@@ -1,4 +1,6 @@
-export function addEventToRollingBox(state) {
+import state from "./store.js";
+
+export function addEventToRollingBox() {
     let indexPointer = {
         leftAnimationIndex: 0,
         rightAnimationIndex: 0
