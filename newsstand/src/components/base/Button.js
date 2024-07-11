@@ -48,7 +48,7 @@ const Button = (props) => {
     }
 
     const handleMouseClick = () => {
-        console.log('clicked')
+        props.onClick()
     }
 
     const bindEvents = () => {
