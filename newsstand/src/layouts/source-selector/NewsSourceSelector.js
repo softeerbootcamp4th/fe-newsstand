@@ -25,15 +25,19 @@ const NewsSourceSelector = (props) => {
     })
 
     const listCategoryButton = createComponent(IconView, {
-        id: 1,
+        id: `${props.id}-1`,
         icon: Icon.LIST_CATEGORY,
-        onClick: () => props.setViewType('list'),
+        onClick: () => {
+            props.setViewType('list')
+        },
     })
 
     const gridCategoryButton = createComponent(IconView, {
-        id: 2,
+        id: `${props.id}-2`,
         icon: Icon.GRID_CATEGORY,
-        onClick: () => props.setViewType('grid'),
+        onClick: () => {
+            props.setViewType('grid')
+        },
     })
 
     return {
