@@ -12,11 +12,12 @@ const NewsBox = (props) => {
 
     useEffect(
         () => {
-            isSubscribed(props.news.id).then((res) => {
-                setSubscribed(res)
-            })
+            isHover &&
+                isSubscribed(props.news.id).then((res) => {
+                    setSubscribed(res)
+                })
         },
-        [],
+        [isHover],
         1,
     )
 

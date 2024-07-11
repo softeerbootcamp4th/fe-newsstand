@@ -1,13 +1,23 @@
 import { unSubscribe } from '../../utils/subscribeUtils.js'
+import { getSubscribedCompaniesId } from '../../utils/subscribeUtils.js'
+import { getNextIndexInList } from '../../utils/listUtils.js'
+import { getCompanyName } from '../../datas/companyData.js'
 
 const Alert = (props) => {
     const handleYesButtonClick = () => {
+        const nextIndex = getNextIndexInList(props.currentCompanyInfo.value.id, props.subscribedCompanyIdList.value)
+        const nextCategory = props.subscribedCompanyIdList.value[nextIndex]
+        props.setSelectedCategory(getCompanyName(nextCategory))
+
         unSubscribe(props.currentCompanyInfo.value.id)
         props.setIsShowAlert(false)
     }
 
     const handleNoButtonClick = () => {
         props.setIsShowAlert(false)
+        getSubscribedCompaniesId().then((idList) => {
+            props.setSubscribedCompanyIdList(idList)
+        })
     }
 
     const bindEvents = () => {
