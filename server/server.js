@@ -17,6 +17,10 @@ app.get('/newsList', (req, res) => {
     else res.sendFile(__dirname + "/data/all.json");
 })
 
+app.get('/rollingNewsList', (req, res) => {
+    res.sendFile(__dirname + '/data/headers.json')
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
     console.log(__dirname)
