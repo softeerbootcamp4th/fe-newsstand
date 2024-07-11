@@ -13,7 +13,7 @@
     position: relative;
     overflow: hidden;
     display: flex;
-    width: 100%;
+    width: max-content;
     height: 100%;
     align-items: center;
     justify-content: center;
@@ -37,20 +37,25 @@
     z-index: 999;
 }
 
+.category-text:hover {
+    text-decoration: underline;
+}
+
 /* auto-rolling-news */
 .auto-rolling-news-container {
     position: relative;
     width: 100%;
-    height: 32px;
+    height: 50px;
     font-size: 0.875rem;
     letter-spacing: -1px;
-    padding: 7px 15px;
+    padding: 16px 15px;
     box-sizing: border-box;
-    background-color: #f0f0f0;
-    border: 1px solid #d1d5db;
+    background-color: #f5f7f9;
+    border: 1px solid gainsboro;
 }
 
 .auto-rolling-news-title {
+    color: black;
     font-weight: bold;
     float: left;
     padding-right: 10px;
@@ -70,12 +75,12 @@
 
 .auto-rolling-news-container li {
     position: absolute;
-    top: -36px;
+    top: -54px;
     left: 0;
 }
 
 .auto-rolling-news-container li.prev {
-    top: -36px;
+    top: -54px;
     transition: top 0.5s ease;
 }
 
@@ -85,7 +90,7 @@
 }
 
 .auto-rolling-news-container li.next {
-    top: 36px;
+    top: 54px;
 }
 
 .auto-rolling-news-container a {
@@ -103,12 +108,20 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    overflow-x: scroll;
     height: 100%;
     width: auto;
-    background-color: #d2dae0;
+    background-color: #f5f7f9;
+    border-bottom: 1px solid gainsboro;
     list-style: none;
     margin: 0px;
     padding-left: 0px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+.list-news-header::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
 }
 
 .list-news-body {
@@ -129,15 +142,16 @@
     display: flex;
     column-gap: 10px;
     width: 100%;
-    height: 70px;
-    float: left;
-    align-items: baseline;
+    height: 50px;
+    align-items: center;
+    justify-content: left;
 }
 
 .list-news-left-body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     width: 100%;
     min-height: 210px;
 }
@@ -188,10 +202,33 @@
     background-color: transparent;
 }
 
+.carousel-btn:hover {
+    filter: invert(41%) sepia(18%) saturate(2120%) hue-rotate(191deg) brightness(91%) contrast(91%);
+}
+
 .left-btn {
     left: -100px;
 }
 
 .right-btn {
     right: -100px;
+}
+
+.foundation-btn {
+    display: flex;
+
+    position: fixed;
+    bottom: 52px;
+    right: 40px;
+
+    padding: 12px;
+    border-radius: 30px;
+    border: 1.5px solid gainsboro;
+
+    cursor: pointer;
+}
+
+.foundation-btn-icon {
+    width: 28px;
+    height: 28px;
 }

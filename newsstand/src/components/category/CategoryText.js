@@ -17,14 +17,16 @@ const CategoryText = (props) => {
 
     const bindEvents = () => {
         const button = document.getElementById(`category-text-${props.id}`)
-
-        button.removeEventListener('mouseover', handleMouseOver)
-        button.removeEventListener('mouseout', handleMouseOut)
-        button.removeEventListener('click', handleMouseClick)
-
         button.addEventListener('mouseover', handleMouseOver)
         button.addEventListener('mouseout', handleMouseOut)
         button.addEventListener('click', handleMouseClick)
+    }
+
+    const removeEvents = () => {
+        const button = document.getElementById(`category-text-${props.id}`)
+        button.removeEventListener('mouseover', handleMouseOver)
+        button.removeEventListener('mouseout', handleMouseOut)
+        button.removeEventListener('click', handleMouseClick)
     }
 
     return {
@@ -36,6 +38,7 @@ const CategoryText = (props) => {
         </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 

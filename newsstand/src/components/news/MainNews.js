@@ -16,7 +16,7 @@ const MainNews = (props) => {
                 setSubscribed(res)
             })
         },
-        [props.newsData, props.setSelectedSource],
+        [props.newsData, props.setSelectedSource, props.isShowAlert],
         1,
     )
 
@@ -27,6 +27,7 @@ const MainNews = (props) => {
             props.setIsShowAlert(true)
         } else {
             subscribe(value.companyId)
+            setSubscribed(true)
             toastOn()
             moveToSubscribedCategory({
                 companyName: value.companyName,

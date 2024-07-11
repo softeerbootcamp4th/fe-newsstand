@@ -38,7 +38,7 @@ const useState = ({ stateId, initialValue }) => {
         }
     }
 
-    const debouncedSetState = debounce(setState, 10)
+    const debouncedSetState = debounce(setState, 0)
 
     return [{ stateId: stateId, value: state }, debouncedSetState]
 }

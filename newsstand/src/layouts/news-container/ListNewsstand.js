@@ -12,9 +12,8 @@ import { fetchNewsData, fetchNewsDataFromSubscribedCompany } from '../../api/new
 
 const ListNewsstand = (props) => {
     const [currentNewsId, setCurrentNewsId] = useState({ stateId: 1, initialValue: 1 })
-    const [subscribedCompanyIdList, setSubscribedCompanyIdList] = useState({ stateId: 2, initialValue: [] })
-    const [newsData, setNewsData] = useState({ stateId: 3, initialValue: { news: [] } })
-    const [subNewsListElements, setSubNewsListElements] = useState({ stateId: 4, initialValue: [] })
+    const [newsData, setNewsData] = useState({ stateId: 2, initialValue: { news: [] } })
+    const [subNewsListElements, setSubNewsListElements] = useState({ stateId: 3, initialValue: [] })
 
     const lastIndex = 6
     const lastCompanyCount = 10
@@ -41,7 +40,7 @@ const ListNewsstand = (props) => {
 
         getSubscribedCompaniesId()
             .then((idList) => {
-                setSubscribedCompanyIdList(idList)
+                props.setSubscribedCompanyIdList(idList)
                 return idList
             })
             .then((idList) => {
@@ -63,10 +62,16 @@ const ListNewsstand = (props) => {
             let newsListElements = newsData.value.news.map((newsItem) => `<a class="news-content">${newsItem.title}</a>`).join('')
             return newsListElements
         }
-        return null
+        return ''
     }
 
-    useEffect(() => initNewsData(), [props.selectedCategory, props.selectedSource, props.viewType, currentNewsId, subscribedCompanyIdList], 0)
+    useEffect(
+        () => {
+            initNewsData()
+        },
+        [props.selectedCategory, props.selectedSource, props.viewType, currentNewsId, props.subscribedCompanyIdList, props.isShowAlert],
+        0,
+    )
 
     useEffect(
         () => {
@@ -94,8 +99,8 @@ const ListNewsstand = (props) => {
                 setCurrentNewsId(currentNewsId.value + 1)
             }
         } else {
-            const nextIndex = getNextIndexInList(getCompanyIdByName(props.selectedCategory.value), subscribedCompanyIdList.value)
-            const nextCategory = subscribedCompanyIdList.value[nextIndex]
+            const nextIndex = getNextIndexInList(getCompanyIdByName(props.selectedCategory.value), props.subscribedCompanyIdList.value)
+            const nextCategory = props.subscribedCompanyIdList.value[nextIndex]
 
             props.setSelectedCategory(getCompanyName(nextCategory))
         }
@@ -115,8 +120,8 @@ const ListNewsstand = (props) => {
                 setCurrentNewsId(currentNewsId.value - 1)
             }
         } else {
-            const prevIndex = getPrevIndexInList(getCompanyIdByName(props.selectedCategory.value), subscribedCompanyIdList.value)
-            const prevCategory = subscribedCompanyIdList.value[prevIndex]
+            const prevIndex = getPrevIndexInList(getCompanyIdByName(props.selectedCategory.value), props.subscribedCompanyIdList.value)
+            const prevCategory = props.subscribedCompanyIdList.value[prevIndex]
             props.setSelectedCategory(getCompanyName(prevCategory))
         }
     }
@@ -124,12 +129,15 @@ const ListNewsstand = (props) => {
     const bindEvents = () => {
         const leftBtn = document.querySelector('.left-btn')
         const rightBtn = document.querySelector('.right-btn')
-
-        leftBtn.removeEventListener('click', handleLeftButtonClick)
-        rightBtn.removeEventListener('click', handleRightButtonClick)
-
         leftBtn.addEventListener('click', handleLeftButtonClick)
         rightBtn.addEventListener('click', handleRightButtonClick)
+    }
+
+    const removeEvents = () => {
+        const leftBtn = document.querySelector('.left-btn')
+        const rightBtn = document.querySelector('.right-btn')
+        leftBtn.removeEventListener('click', handleLeftButtonClick)
+        rightBtn.removeEventListener('click', handleRightButtonClick)
     }
 
     const mediaCategories = createComponent(MediaCategories, {
@@ -140,7 +148,7 @@ const ListNewsstand = (props) => {
         setSelectedCategory: props.setSelectedCategory,
         currentNewsId: currentNewsId,
         setCurrentNewsId: setCurrentNewsId,
-        subscribedCompanyIdList: subscribedCompanyIdList,
+        subscribedCompanyIdList: props.subscribedCompanyIdList,
         onFillComplete: handleRightButtonClick,
     })
 
@@ -153,6 +161,7 @@ const ListNewsstand = (props) => {
         setSelectedCategory: props.setSelectedCategory,
         setSelectedSource: props.setSelectedSource,
         setViewType: props.setViewType,
+        isShowAlert: props.isShowAlert,
         style: 'width:40%; padding:2%;',
     })
 
@@ -187,6 +196,7 @@ const ListNewsstand = (props) => {
         </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 

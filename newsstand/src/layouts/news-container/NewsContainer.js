@@ -12,11 +12,15 @@ const NewsContainer = () => {
     const [viewType, setViewType] = useState({ stateId: 3, initialValue: 'list' })
     const [isShowAlert, setIsShowAlert] = useState({ stateId: 4, initialValue: false })
     const [currentCompanyInfo, setCurrentCompanyInfo] = useState({ stateId: 5, initialValue: undefined })
+    const [subscribedCompanyIdList, setSubscribedCompanyIdList] = useState({ stateId: 6, initialValue: [] })
 
     const alertComponent = createComponent(Alert, {
         id: 1,
         setIsShowAlert: setIsShowAlert,
         currentCompanyInfo: currentCompanyInfo,
+        subscribedCompanyIdList: subscribedCompanyIdList,
+        setSelectedCategory: setSelectedCategory,
+        selectedSource: selectedSource,
     })
 
     const newsSourceSelectorLayout = createComponent(NewsSourceSelector, {
@@ -39,7 +43,10 @@ const NewsContainer = () => {
         setViewType: setViewType,
         setCurrentCompanyInfo: setCurrentCompanyInfo,
         setIsShowAlert: setIsShowAlert,
-        style: 'width:100%;',
+        subscribedCompanyIdList: subscribedCompanyIdList,
+        setSubscribedCompanyIdList: setSubscribedCompanyIdList,
+        isShowAlert: isShowAlert,
+        style: 'width:100%; height: 80%',
     })
 
     const gridNewsstandLayout = createComponent(GridNewsstand, {
@@ -51,6 +58,9 @@ const NewsContainer = () => {
         setSelectedCategory: setSelectedCategory,
         setSelectedSource: setSelectedSource,
         setViewType: setViewType,
+        subscribedCompanyIdList: subscribedCompanyIdList,
+        setSubscribedCompanyIdList: setSubscribedCompanyIdList,
+        isShowAlert: isShowAlert,
         style: 'width:100%; height:70%;',
     })
 

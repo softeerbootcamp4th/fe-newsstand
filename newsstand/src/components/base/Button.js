@@ -5,7 +5,7 @@ export const ButtonVariantProps = {
     GRAY: 'gray',
 }
 
-const buttonVariant = (type) => {
+export const buttonVariant = (type) => {
     const variant = {
         white: {
             light: {
@@ -52,29 +52,30 @@ const Button = (props) => {
     }
 
     const bindEvents = () => {
-        const button = document.getElementById(`button${props.id}`)
-
-        // 기존의 리스너가 있다면 제거
-        button.removeEventListener('mouseenter', handleMouseEnter)
-        button.removeEventListener('mouseleave', handleMouseLeave)
-        button.removeEventListener('click', handleMouseClick)
-
-        // 새로운 리스너 등록
+        const button = document.getElementById(`button-${props.id}`)
         button.addEventListener('mouseenter', handleMouseEnter)
         button.addEventListener('mouseleave', handleMouseLeave)
         button.addEventListener('click', handleMouseClick)
+    }
+
+    const removeEvents = () => {
+        const button = document.getElementById(`button-${props.id}`)
+        button.removeEventListener('mouseenter', handleMouseEnter)
+        button.removeEventListener('mouseleave', handleMouseLeave)
+        button.removeEventListener('click', handleMouseClick)
     }
 
     const { backgroundColor, hoverdColor, color } = buttonVariant(props.variant)
 
     return {
         element: `
-        <div class="button" id="button${props.id}" style="background-color: ${isHover.value ? hoverdColor : backgroundColor}; color: ${color};">
+        <div class="button" id="button-${props.id}" style="background-color: ${isHover.value ? hoverdColor : backgroundColor}; color: ${color};">
             ${props.icon ? `<img class="button-left-icon" src=${props.icon} alt="icon"/>` : ''}
             ${props.text}
         </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 
