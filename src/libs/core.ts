@@ -23,6 +23,9 @@ export const stateIdxMap = new Map<string, number>();
 export const effectCleanupsMap = new Map<string, Array<() => void>>();
 export const effectDepsMap = new Map<string, Array<Array<unknown> | null>>();
 export const effectIdxMap = new Map<string, number>();
+export const callbackIdxMap = new Map<string, number>();
+export const callbacksMap = new Map<string, Array<() => void>>();
+export const callbackDepsMap = new Map<string, Array<Array<unknown> | null>>();
 const cachedProps = new Map<string, object>();
 
 const createShadowRoot = () => {
@@ -33,6 +36,7 @@ const createShadowRoot = () => {
 
 const preRender = () => {
   stateIdxMap.clear();
+  callbackIdxMap.clear();
   effectIdxMap.clear();
 };
 
