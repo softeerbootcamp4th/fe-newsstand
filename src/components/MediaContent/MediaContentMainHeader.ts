@@ -9,6 +9,7 @@ import { CloseIcon } from "@/assets/CloseIcon";
 import { updateMediaSubscribe } from "@/remotes/updateMediaSubscibe";
 import { useModalContext } from "@/hooks/useModalContext";
 import { Modal } from "../Modal/Modal";
+import { useToastContext } from "@/hooks/useToastContext";
 
 const Logo = ({ src }: { src?: string }) => {
   return ce(Span, {
@@ -73,7 +74,7 @@ const SubscribeButton = ({
       }),
     );
   };
-  if (isSubscribed) {
+  if (!isSubscribed) {
     return ce(Button, {
       className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
       children: [Raw(PlucIcon), "구독하기"],
@@ -95,6 +96,7 @@ export const MediaContentMainHeader = ({
   media,
   setMedia,
 }: MediaContentMainHeaderProps) => {
+  const { addToast } = useToastContext();
   if (media === null) {
     return null;
   }
@@ -115,8 +117,12 @@ export const MediaContentMainHeader = ({
           if (media === null) {
             return;
           }
-          updateMediaSubscribe(media.id, !isSubscribed);
-          setMedia({ ...media, isSubscribed: !isSubscribed });
+          const nextIsSubscribed = !isSubscribed;
+          updateMediaSubscribe(media.id, nextIsSubscribed);
+          if (nextIsSubscribed) {
+            addToast("내가 구독한 언론사에 추가되었습니다.");
+          }
+          setMedia({ ...media, isSubscribed: nextIsSubscribed });
         },
       }),
     ],
