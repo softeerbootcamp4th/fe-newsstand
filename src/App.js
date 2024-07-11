@@ -11,10 +11,16 @@ function App({ $target }) {
 
   this.checkSystemTheme();
 
-  new Header({ $target: this.$element });
-  new AutoRollingNews({ $target: this.$element });
-  new NewsList({ $target: this.$element });
-  new ThemeToggleButton({ $target: this.$element });
+  this.components = {
+    Header: new Header({ $target: this.$element }),
+    AutoRollingNews: new AutoRollingNews({ $target: this.$element }),
+    NewsList: new NewsList({ $target: this.$element }),
+  };
+
+  this.components.ThemeToggleButton = new ThemeToggleButton({
+    $target: this.$element,
+    onChangeTheme: this.components.NewsList.render.bind(this.components.NewsList),
+  });
 }
 
 App.prototype.checkSystemTheme = function () {

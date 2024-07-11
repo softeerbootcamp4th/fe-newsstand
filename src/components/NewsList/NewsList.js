@@ -51,7 +51,9 @@ NewsList.prototype.handleClick = function (event) {
   }
 };
 
-NewsList.prototype.render = function (tabIndex) {
+NewsList.prototype.render = function (tabIndex = 0) {
+  const { companyFilterIndex, viewTypeFilterIndex } = this.state;
+
   this.$element.innerHTML = /* html */ `
     <section class="filterSection">
       <ul class="newsFilter">
@@ -59,7 +61,7 @@ NewsList.prototype.render = function (tabIndex) {
           .map(
             (value, idx) => /* html */ `
             <li data-tab-number="${idx}" class="filterTab${
-              idx === this.state.companyFilterIndex ? " selected" : ""
+              idx === companyFilterIndex ? " selected" : ""
             }">${value}</li>
           `
           )
@@ -70,7 +72,7 @@ NewsList.prototype.render = function (tabIndex) {
             .map(
               (iconId, idx) => /* html */ `
               <li data-tab-number="${idx}" class="filterTab${
-                idx === this.state.viewTypeFilterIndex ? " selected" : ""
+                idx === viewTypeFilterIndex ? " selected" : ""
               }">
               ${getSVGTemplate({ iconId })}</li>
             `
@@ -80,10 +82,10 @@ NewsList.prototype.render = function (tabIndex) {
     </section>
   `;
 
-  const companyFilter = this.state.companyFilterIndex === 0 ? "category" : "company";
-  const viewTypeFilter = this.state.viewTypeFilterIndex === 0 ? "list" : "grid";
+  const companyFilter = companyFilterIndex === 0 ? "category" : "company";
+  const viewTypeFilter = viewTypeFilterIndex === 0 ? "list" : "grid";
 
-  if (this.state.companyFilterIndex === 1 && getSubscribedCompanies().length < 1) {
+  if (companyFilterIndex === 1 && getSubscribedCompanies().length < 1) {
     new EmptyListViewer({ $target: this.$element });
 
     return;
