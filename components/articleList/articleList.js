@@ -8,6 +8,7 @@ import { createMenuList,
     createArticleLiPart,
     insertWholeContent,
     renderSubscriptionList,
+    createArticleList,
 } from "./html/articleListHtml.js";
 import { addNextPageEvent } from "./event/pageEvent.js";
 import { addModeSelectionEventListener,
@@ -59,8 +60,7 @@ export const addSubscriptionEventListener = () => {
 
         setTimeout(() => {
             if (!isGrid) {
-                // 버튼 선택도 해야함
-                renderSubscriptionList();
+                document.querySelector('.subscription-media-btn').click()
             }
         }, 5000)
     })

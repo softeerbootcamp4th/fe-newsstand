@@ -7,7 +7,7 @@ import { setWholeData } from "../articleList.js";
 import { createAlert } from "../../alert/alert.js";
 import { cancleMediaSubscription } from "./pageEvent.js";
 import { setSubscription } from "../../../utils/api.js";
-import { createSnackBar } from "../../snackBar/snackBar.js";
+import { createSnackBar, deleteSnackBar } from "../../snackBar/snackBar.js";
 
 // 전체 언론사, 구독한 언론사
 export const addModeSelectionEventListener = () => {
@@ -72,7 +72,6 @@ export const addWholeListEventListener = () => {
     document.querySelectorAll('.whole-media-btn, .list-selection-btn').forEach(button => {
         button.addEventListener('click', () => {
             if (!isGrid && isMediaWhole) {
-                console.log('클릭')
                 callback();
             }
         });
@@ -132,6 +131,10 @@ export const addAlertAcceptBtnEventListener = () => {
         if (isGrid) {
             renderGridSubscription();
             // Or mediaName 받아서 해당 id el remove
+        } else if (isMediaWhole) {
+            document.querySelector('.whole-media-btn').click()
+        } else {
+            document.querySelector('.subscription-media-btn').click();
         }
     })
 }
@@ -216,6 +219,12 @@ export const addGridSubscribeBtnEventListener = () => {
                 el.innerHTML = createSnackBar('내가 구독한 언론사에 추가되었습니다.');
                 document.querySelector('.article-body-wrapper').appendChild(el);
                 setSubscription();
+
+                setTimeout(() => {
+                    deleteSnackBar();
+                    document.querySelector('.subscription-media-btn').click()
+                    document.querySelector('.list-selection-btn').click()
+                }, 5000);
             }
         });
     });
