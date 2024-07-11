@@ -11,20 +11,18 @@ import { startInterval, stopInterval } from "../../global/interval.js";
  * @param {Node} container Nav가 붙을 돔 객체
  * @param {Array} currentHeaderCategoryIndex Nav에 보여질 현재 선택된 리스트
  */
-export function generateNav(container, currentHeaderCategoryIndex) {
+export function generateNav(container) {
   let selectedList;
-  if (currentHeaderCategoryIndex === 0) {
+  if (state.headerCategory === 0) {
     selectedList = categoryList;
-    state.headerCategory = 0;
-  } else if (currentHeaderCategoryIndex === 1) {
+  } else if (state.headerCategory === 1) {
     selectedList = myList.map((element) => mediaData[element].media);
-    state.headerCategory = 1;
   }
 
   navInit(selectedList);
 
-  if (currentHeaderCategoryIndex === 0) generateNavForNewsList(selectedList);
-  else if (currentHeaderCategoryIndex === 1) generateNavForMyList(selectedList);
+  if (state.headerCategory === 0) generateNavForNewsList(selectedList);
+  else if (state.headerCategory === 1) generateNavForMyList(selectedList);
 
   function navInit(selectedList) {
     state.currentCategoryIndex = 0;

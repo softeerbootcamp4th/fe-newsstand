@@ -1,3 +1,4 @@
 @import "./global/global.css";
-@import "./list/list.css";
 @import "./components/banner/newsBanner.css";
+@import "./list/list.css";
+@import "./grid/grid.css";

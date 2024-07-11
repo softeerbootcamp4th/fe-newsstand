@@ -1,6 +1,9 @@
+import { deleteNav, generateNav } from "../components/content/nav.js";
+import { updateMyList } from "../resources/data.js";
 import { getTodayString, generateNode } from "../utils/utils.js";
 
-export function generateListContent(container, newsData) {
+export function generateListContent(container, categoryIndex) {
+  container.classList.remove("grid");
   const divContentTitle = generateNode("div", "content_title");
   const pMedia = generateNode("p", "media");
   const pDate = generateNode("p", "date");
@@ -13,10 +16,10 @@ export function generateListContent(container, newsData) {
 
   const divImageNews = generateNode("div", "imageNews");
   const imgThumbnail = document.createElement("img");
-  imgThumbnail.src = newsData.thumbnailUrl;
-  imgThumbnail.alt = newsData.title;
+  imgThumbnail.src = sampleNewsData.thumbnailUrl;
+  imgThumbnail.alt = sampleNewsData.title;
   const divImageNewsTitle = generateNode("div", "imageNews_title");
-  divImageNewsTitle.textContent = newsData.title;
+  divImageNewsTitle.textContent = sampleNewsData.title;
 
   divImageNews.appendChild(imgThumbnail);
   divImageNews.appendChild(divImageNewsTitle);
@@ -32,4 +35,15 @@ export function generateListContent(container, newsData) {
   divNewsItem.appendChild(divNewsListWrapper);
 
   container.appendChild(divNewsItem);
+
+  deleteNav();
+
+  const navContainer = document.getElementById("nav_container");
+  generateNav(navContainer, categoryIndex);
+  updateMyList();
 }
+
+const sampleNewsData = {
+  thumbnailUrl: "../resources/Thumbnail.png",
+  title: "이미지 뉴스 제목",
+};

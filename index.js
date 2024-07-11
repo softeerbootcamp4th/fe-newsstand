@@ -5,28 +5,23 @@ import { startBannerInterval } from "../global/interval.js";
 import store from "../global/stoageManager.js";
 import state from "../global/state.js";
 import { setupHeader } from "../components/content_header/header.js";
-import { getTodayString, generateNode } from "../utils/utils.js";
 import { generateListContent } from "./list/list.js";
+import { deleteNodeById } from "./utils/utils.js";
+import { generateGridContent } from "./grid/grid.js";
 
 //요소 생성
-const sampleNewsData = {
-  thumbnailUrl: "../resources/Thumbnail.png",
-  title: "이미지 뉴스 제목",
-};
 //header
 setupHeader();
+state.headerCategory = 0;
+state.headerShow = 0;
 //banner
 const bannerContainer = document.getElementById("banner_container");
 generateBanner(bannerContainer, headlineData[0]);
 generateBanner(bannerContainer, headlineData[1]);
 startBannerInterval();
 
-const contetContainer = document.getElementById("content_wrapper");
-generateListContent(contetContainer, sampleNewsData);
-
-//nav
-const navContainer = document.getElementById("nav_container");
-generateNav(navContainer, 0);
+const contentContainer = document.getElementById("content_wrapper");
+generateListContent(contentContainer, state.headerCategory);
 
 //각 배너는 time delay를 가지고 롤링
 const headerCategory = document.querySelectorAll(".headerCategory");
@@ -46,10 +41,29 @@ function initialize() {
 
       state.headerCategory = index;
 
-      //nav 삭제후 재생성
-      updateMyList();
-      deleteNav();
-      generateNav(navContainer, state.headerCategory);
+      deleteNodeById("content_wrapper");
+
+      if (state.headerShow === 0)
+        generateListContent(contentContainer, state.headerCategory);
+      else if (state.headerShow === 1)
+        generateGridContent(contentContainer, state.headerCategory);
+    });
+  });
+
+  headerShow.forEach((element, index) => {
+    element.addEventListener("click", () => {
+      headerShow[state.headerShow].classList.remove("selected");
+      element.classList.add("selected");
+
+      state.headerShow = index;
+
+      deleteNodeById("nav_container");
+      deleteNodeById("content_wrapper");
+
+      if (index === 0)
+        generateListContent(contentContainer, state.headerCategory);
+      else if (index === 1)
+        generateGridContent(contentContainer, state.headerCategory);
     });
   });
 }
