@@ -14,9 +14,18 @@ const App = () => {
     const subHeaderLayout = createComponent(SubHeader, { id: 1, style: 'width:100%; height:8%;' })
     const newsContainerLayout = createComponent(NewsContainer, { id: 1, style: 'width:100%; height:80%;' })
     const toastComponent = createComponent(Toast, { text: '내가 구독한 언론사에 추가되었습니다.' })
-    const [foundation, setFoundation] = useState({ stateId: 1, initialValue: 'white' })
 
-    useEffect(() => changeFoundation(), [foundation], 1)
+    const savedFoundation = localStorage.getItem('foundation') || 'white'
+    const [foundation, setFoundation] = useState({ stateId: 1, initialValue: savedFoundation })
+
+    useEffect(
+        () => {
+            changeFoundation()
+            localStorage.setItem('foundation', foundation.value)
+        },
+        [foundation],
+        1,
+    )
 
     function changeFoundation() {
         const body = document.querySelector('body')
