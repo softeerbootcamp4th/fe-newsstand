@@ -17,8 +17,12 @@ const IconView = (props) => {
 
     const bindEvents = () => {
         const button = document.getElementById(`icon-view${props.id}`)
-        button.removeEventListener('click', handleMouseClick)
         button.addEventListener('click', handleMouseClick)
+    }
+
+    const removeEvents = () => {
+        const button = document.getElementById(`icon-view${props.id}`)
+        button.removeEventListener('click', handleMouseClick)
     }
 
     return {
@@ -26,6 +30,7 @@ const IconView = (props) => {
             <img class="icon-view" id="icon-view${props.id}" src="${props.icon}" alt="icon"/>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 

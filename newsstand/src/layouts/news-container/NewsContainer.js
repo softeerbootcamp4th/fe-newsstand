@@ -39,7 +39,7 @@ const NewsContainer = () => {
         setViewType: setViewType,
         setCurrentCompanyInfo: setCurrentCompanyInfo,
         setIsShowAlert: setIsShowAlert,
-        style: 'width:100%;',
+        style: 'width:100%; height: 80%',
     })
 
     const gridNewsstandLayout = createComponent(GridNewsstand, {

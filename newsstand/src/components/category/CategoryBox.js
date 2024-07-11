@@ -13,8 +13,12 @@ const CategoryBox = (props) => {
 
     const bindEvents = () => {
         const button = document.getElementById(`category-text-${props.id}`)
-        button.removeEventListener('click', handleMouseClick)
         button.addEventListener('click', handleMouseClick)
+    }
+
+    const removeEvents = () => {
+        const button = document.getElementById(`category-text-${props.id}`)
+        button.removeEventListener('click', handleMouseClick)
     }
 
     const fillGauge = () => {
@@ -65,6 +69,7 @@ const CategoryBox = (props) => {
             </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 

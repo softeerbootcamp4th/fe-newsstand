@@ -124,12 +124,15 @@ const ListNewsstand = (props) => {
     const bindEvents = () => {
         const leftBtn = document.querySelector('.left-btn')
         const rightBtn = document.querySelector('.right-btn')
-
-        leftBtn.removeEventListener('click', handleLeftButtonClick)
-        rightBtn.removeEventListener('click', handleRightButtonClick)
-
         leftBtn.addEventListener('click', handleLeftButtonClick)
         rightBtn.addEventListener('click', handleRightButtonClick)
+    }
+
+    const removeEvents = () => {
+        const leftBtn = document.querySelector('.left-btn')
+        const rightBtn = document.querySelector('.right-btn')
+        leftBtn.removeEventListener('click', handleLeftButtonClick)
+        rightBtn.removeEventListener('click', handleRightButtonClick)
     }
 
     const mediaCategories = createComponent(MediaCategories, {
@@ -187,6 +190,7 @@ const ListNewsstand = (props) => {
         </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 

@@ -30,12 +30,13 @@ const NewsBox = (props) => {
 
     const bindEvents = () => {
         const newsBox = document.getElementById(`news-box${props.id}`)
-
-        newsBox.removeEventListener('mouseenter', handleMouseEnter)
-        newsBox.removeEventListener('mouseleave', handleMouseLeave)
-
         newsBox.addEventListener('mouseenter', handleMouseEnter)
         newsBox.addEventListener('mouseleave', handleMouseLeave)
+    }
+    const removeEvents = () => {
+        const newsBox = document.getElementById(`news-box${props.id}`)
+        newsBox.removeEventListener('mouseenter', handleMouseEnter)
+        newsBox.removeEventListener('mouseleave', handleMouseLeave)
     }
 
     const handleSubscriptionButtonClick = () => {
@@ -80,6 +81,7 @@ const NewsBox = (props) => {
         </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 
