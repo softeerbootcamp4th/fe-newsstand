@@ -158,3 +158,11 @@ export const Img: AppElement<HTMLImageElement> = (
 };
 
 Img.type = "element";
+
+export const Br: AppElement<HTMLBRElement> = (
+  props: AppElementProps<HTMLBRElement>,
+) => {
+  return createElement<HTMLBRElement>("br", props);
+};
+
+Br.type = "element";
