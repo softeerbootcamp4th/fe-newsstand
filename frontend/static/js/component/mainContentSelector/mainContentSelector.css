@@ -1,0 +1,11 @@
+#mainContentSelector {
+    margin-top: 32px;
+}
+
+.mainContentSelectorElement {
+    color: var(--disable-color);
+}
+
+.mainContentSelectorElement.isSelected {
+    color: var(--selected-color);
+}
