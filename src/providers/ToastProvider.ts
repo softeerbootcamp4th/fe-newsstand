@@ -1,4 +1,4 @@
-import { AppChild, Div, cc, ce, useEffect, useState } from "@/libs";
+import { AppChild, Div, cc, ce, useState } from "@/libs";
 import { createContext } from "@/libs/hooks/useContext";
 import styles from "./ToastProvider.module.css";
 import typoStyles from "@/styles/typo.module.css";
@@ -23,24 +23,12 @@ const ToastContainer = ({ toasts }: { toasts: string[] }) => {
 
 export const ToastProvider = ({ children }: { children: AppChild[] }) => {
   const [currentToasts, setCurrentToasts] = useState<string[]>([]);
-
   const addToast = (toast: string) => {
     setCurrentToasts([...currentToasts, toast]);
-  };
-
-  useEffect(() => {
-    console.log("add Interval");
-    const interval = setInterval(() => {
-      setCurrentToasts((prev) => {
-        if (prev.length === 0) return prev;
-        return prev.slice(1);
-      });
+    setTimeout(() => {
+      setCurrentToasts((prev) => prev.slice(1));
     }, 5000);
-    return () => {
-      clearInterval(interval);
-      console.log("remove Interval");
-    };
-  }, []);
+  };
 
   return ToastContext.Provider({
     value: {
