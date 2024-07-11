@@ -7,7 +7,7 @@ import { MediaIdByCategories } from "@/models/Newsstand";
 import { MediaContentTabs } from "./ContentListHeader";
 import styles from "./index.module.css";
 import { CategoryTabActiveBadge } from "../MediaContent/CategoryTabActiveBadge";
-import { MediaContentMain } from "../MediaContent/MediaContentMain";
+import { MediaContent } from "../MediaContent/MediaContent";
 import { getSubscribedMedias } from "@/remotes/getSubscribedMedias";
 import { MediaContentFilterType } from "@/models/MediaContentFilter";
 
@@ -105,7 +105,7 @@ export const ContentList = () => {
             tabs: tabData,
             hasNext: hasNext,
           }),
-          cc(MediaContentMain, {
+          cc(MediaContent, {
             mediaId: currentMediaId,
             category: currentCategory,
             handleNext: handleNext,

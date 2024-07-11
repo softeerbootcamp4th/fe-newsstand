@@ -1,26 +1,26 @@
 import { Button, Div, Raw, ce } from "@/libs";
-import styles from "./MediaContentMain.module.css";
+import styles from "./MediaContent.module.css";
 import { Category } from "@/models/Newsstand";
 import { useMedia } from "@/hooks/useMedia";
 import { cc } from "@/libs";
-import { MediaContentMainHeader } from "./MediaContentMainHeader";
+import { MediaContentHeader } from "./MediaContentHeader";
 import { useMediaRecentNews } from "@/hooks/useMediaRecentNews";
 import { MediaContentView } from "./MediaContentView";
 import { RightIcon } from "@/assets/RightIcon";
 import { LeftIcon } from "@/assets/LeftIcon";
 
-interface MediaContentMainProps {
+interface MediaContentProps {
   mediaId: number;
   category: Category;
   handleNext: () => void;
   handlePrev: () => void;
 }
-export const MediaContentMain = ({
+export const MediaContent = ({
   mediaId,
   category,
   handleNext,
   handlePrev,
-}: MediaContentMainProps) => {
+}: MediaContentProps) => {
   const [media, setMedia] = useMedia(mediaId);
   const newsList = useMediaRecentNews(mediaId, category.id);
   return ce(Div, {
@@ -31,7 +31,7 @@ export const MediaContentMain = ({
         children: [Raw(LeftIcon)],
         onClick: handlePrev,
       }),
-      cc(MediaContentMainHeader, {
+      cc(MediaContentHeader, {
         media,
         setMedia,
       }),

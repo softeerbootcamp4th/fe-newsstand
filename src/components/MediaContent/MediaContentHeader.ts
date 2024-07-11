@@ -1,5 +1,5 @@
 import { Button, Div, Img, Raw, Span, ce } from "@/libs";
-import styles from "./MediaContentMainHeader.module.css";
+import styles from "./MediaContentHeader.module.css";
 import typoStyles from "@/styles/typo.module.css";
 import { cc } from "@/libs";
 import { formatDetailDate } from "@/utils/formatDate";
@@ -88,14 +88,14 @@ const SubscribeButton = ({
   });
 };
 
-interface MediaContentMainHeaderProps {
+interface MediaContentHeaderProps {
   media: Media | null;
   setMedia: (media: Media) => void;
 }
-export const MediaContentMainHeader = ({
+export const MediaContentHeader = ({
   media,
   setMedia,
-}: MediaContentMainHeaderProps) => {
+}: MediaContentHeaderProps) => {
   const { addToast } = useToastContext();
   if (media === null) {
     return null;
