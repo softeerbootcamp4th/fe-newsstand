@@ -1,9 +1,10 @@
-import { useState, useEffect, cc, ce, Main } from "@/libs";
+import { useState, useEffect, cc, ce, Main, Raw } from "@/libs";
 import { MediaIdByCategories } from "@/models/Newsstand";
 import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
 import { MediaContent } from "../MediaContent/MediaContent";
 import { MediaContentTabs } from "./ContentListHeader";
 import { getSubscribedMedias } from "@/remotes/getSubscribedMedias";
+import { RightSmallIcon } from "@/assets/RightSmallIcon";
 
 export const SubscribedContentList = () => {
   const [currentData, setCurrentData] = useState<MediaIdByCategories | null>(
@@ -64,12 +65,7 @@ export const SubscribedContentList = () => {
     const isActive = idx === currentDataIdx[0];
     return {
       main: data.category.name,
-      sub: isActive
-        ? cc(CategoryTabActiveBadge, {
-            curIdx: currentDataIdx[1],
-            total: data.mediaIds.length,
-          })
-        : null,
+      sub: isActive ? Raw(RightSmallIcon) : null,
       isActive: isActive,
       onClick: () => {
         handleClick([idx, 0]);
