@@ -5,6 +5,7 @@ import store from "../utils/stoageManager.js";
 import { updateMyList, headlineData } from "../resources/data.js";
 
 let currentHeaderCategoryIndex = 0;
+var bannerInterval;
 
 //요소 생성
 //header
@@ -14,6 +15,7 @@ today.innerHTML = getTodayString();
 const bannerContainer = document.getElementById("banner_container");
 generateBanner(bannerContainer, headlineData[0]);
 generateBanner(bannerContainer, headlineData[1]);
+startBannerInterval();
 //nav
 const navContainer = document.getElementById("nav_container");
 generateNav(navContainer, currentHeaderCategoryIndex);
@@ -52,7 +54,13 @@ function rollingCallback(time) {
 const headerCategory = document.querySelectorAll(".headerCategory");
 const headerShow = document.querySelectorAll(".headerShow");
 
-setInterval(() => rollingCallback(1000), 5000);
+export function startBannerInterval() {
+  bannerInterval = setInterval(() => rollingCallback(1000), 5000);
+}
+
+export function removeBannerInterval() {
+  clearInterval(bannerInterval);
+}
 
 // 초기화 함수
 function initialize() {

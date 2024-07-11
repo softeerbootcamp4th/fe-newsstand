@@ -132,10 +132,6 @@ function setupNavElements(
   selectedList
 ) {
   navNode.addEventListener("click", function ({ target }) {
-    //이벤트 위임
-    //원래 방식 : 모든 하위 노드에 부착해서 인덱스를 가져와 state의 인덱스를 갱신하는 방식
-    //위임하게 되면 발생하는 문제 : 인덱스를 간단히 가져올 수 없음, target이 li 또는 span 두가지 경우
-    //index를 가져오는 방법 : span내부와 nav생성 리스트내부 비교 후 인덱스 가져오기 => selectedList필요
     navNodeElements[state.currentCategoryIndex].classList.remove("selected");
     if (target.tagName === "LI") {
       target = target.querySelector("span");

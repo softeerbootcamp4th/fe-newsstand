@@ -29,6 +29,10 @@
 .bannerList li.current {
   top: 0;
   transition: top 0.5s ease;
+  cursor: pointer;
+}
+.bannerList li.current :hover {
+  text-decoration: underline;
 }
 .bannerList li.next {
   top: 50px;
