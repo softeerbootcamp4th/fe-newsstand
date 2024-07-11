@@ -1,7 +1,7 @@
-import { handleThemeChange, initializeGridViewContainer } from "./displaygridViewnews.js";
+import { handleThemeChange } from "./displaygridViewnews.js";
 
 const handleToggle = () => {
-    const themeToggleBtn = document.querySelector('#theme-toggle-btn');
+    const themeToggleBtn = document.querySelector('#theme-toggle');
     const curTheme = getTheme();
 
     if(curTheme) {

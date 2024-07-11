@@ -495,25 +495,41 @@ main {
     display: flex;
 }
 
-/* .toggleSwitch {
-    width: 100px;
-    height: 50px;
+.toggle-btn {
+    margin-right: 10px;
+}
+.theme-toggle-switch {
+    width: 60px;
+    height: 30px;
     display: block;
     position: relative;
     border-radius: 30px;
-    background-color: #fff;
+    background-color: var(--surface-brand-default);
     box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
     cursor: pointer;
-  } */
-  
-   /* 토글 버튼 */
-  /* .toggleSwitch .toggleButton {
-    width: 40px;
-    height: 40px;
+
+}
+.theme-toggle-switch .theme-toggle-btn {
+    width: 20px;
+    height: 20px;
     position: absolute;
     top: 50%;
     left: 4px;
     transform: translateY(-50%);
     border-radius: 50%;
-    background: #f03d3d;
-  } */ 
+    background: var(--surface-alt)
+}
+
+  /* 체크박스가 체크되면 변경 이벤트 */
+#theme-toggle:checked ~ .theme-toggle-switch {
+    background: var(--surface-brand-alt);
+}
+  
+#theme-toggle:checked ~ .theme-toggle-switch .theme-toggle-btn {
+    left: calc(100% - 25px);
+    background: var(--surface-brand-default);;
+}
+  
+.theme-toggle-switch, .theme-toggle-btn {
+    transition: all 0.2s ease-in;
+}
