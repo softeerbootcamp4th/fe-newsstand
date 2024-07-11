@@ -48,6 +48,7 @@ class NewsStates extends States {
     setSubAll(value) {
         this.subAllInfo = value === 0 ? "all" : "sub";
         this.categoryIndex = 0;
+        this.currentNewsListIndex = 0;
         this.currentNewsListCount = this.#getCurrentNewsListCount();
         this.notify({
             eventName: "clickSubAll",
@@ -58,8 +59,24 @@ class NewsStates extends States {
     }
 
     setCurrentNewsListIndex(value) {
-        if (value === 'plus') this.currentNewsListIndex++;
-        else this.currentNewsListIndex--;
+        if (value === 'plus') {
+            if (this.currentNewsListIndex === this.currentNewsListCount) {
+                this.categoryIndex++;
+                this.currentNewsListIndex = 0;
+                this.currentNewsListCount = this.#getCurrentNewsListCount();
+            } else {
+                this.currentNewsListIndex++;
+            }
+        }
+        else {
+            if (this.currentNewsListIndex === 0) {
+                this.categoryIndex--;
+                this.currentNewsListCount = this.#getCurrentNewsListCount();
+                this.currentNewsListIndex = this.currentNewsListCount;
+            } else {
+                this.currentNewsListIndex--;
+            }
+        }
         this.notify({
             eventName: "clickArrow",
             ...this.#getCategoryStates(),
