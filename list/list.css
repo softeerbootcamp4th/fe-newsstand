@@ -90,9 +90,12 @@ main {
   display: flex;
   flex-direction: column;
   width: 930px;
-  min-height: 348px;
-  padding: 24px;
   border: 1px solid gray;
+}
+
+.list {
+  height: 348px;
+  padding: 24px;
 }
 
 .content_title {

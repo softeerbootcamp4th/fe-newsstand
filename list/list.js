@@ -4,6 +4,8 @@ import { getTodayString, generateNode } from "../utils/utils.js";
 
 export function generateListContent(container, categoryIndex) {
   container.classList.remove("grid");
+  container.classList.add("list");
+
   const divContentTitle = generateNode("div", "content_title");
   const pMedia = generateNode("p", "media");
   const pDate = generateNode("p", "date");
