@@ -6,11 +6,9 @@
   max-width: 930px;
   margin-left: auto;
   margin-right: auto;
-  /* border: solid red; */
 }
 
 .header {
-  /* border: solid black; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -111,6 +109,9 @@
   align-items: center;
   color: #879298;
   height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  user-select: none;
 }
 
 .newsgroup div {
@@ -328,4 +329,8 @@
 .paper .no-news img {
   height: 150px;
   width: 150px;
+}
+
+.grid-view {
+  display: none;
 }

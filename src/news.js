@@ -1,4 +1,4 @@
-import { updateDOMstyle } from "./util.js";
+import { updateDOMstyle, getSubscribeList, pushSubscribe, removeSubscribe } from "./util.js";
 
 const $subscribeToggleDOM = document.querySelectorAll(".subscribe-toggle span");
 const $newsgroupDOM = document.querySelector(".newsgroup");
@@ -21,6 +21,7 @@ let state = {
   bigCtg: 0,
   smallCtg: 0,
 };
+
 const currentCompanyId = () => {
   if (state.subscribeToggle === "whole") return companyList[state.bigCtg][state.smallCtg].id;
   else if (state.subscribeToggle === "my") return getSubscribeList()[state.bigCtg];
@@ -80,7 +81,6 @@ const refillGroup = () => {
     color: `${state.subscribeToggle === "my" ? "black" : "#879298"}`
   });
 
-  if ($ctgDOM.length > 0) loseCtg();
   $newsgroupDOM.innerHTML = "";
 
   if (state.subscribeToggle === "whole") {
@@ -115,12 +115,12 @@ const refillGroup = () => {
 
 const fillCtg = () => {
   const DOM = $ctgDOM[state.bigCtg];
-  const scrollNum = `${state.subscribeToggle === "whole" ? companyList[state.bigCtg].length : 0 }`;
+  const scrollNum = `${state.subscribeToggle === "whole" ? companyList[state.bigCtg].length : 0}`;
   const keyframes = [
     { backgroundPosition: "100%" },
     { backgroundPosition: "0%" }
   ];
-  const options = { duration: 20000 };
+  const options = { duration: 5000 };
 
   DOM.setAttribute("class", "selected");
   DOM.animate(keyframes, options).onfinish = () => {
@@ -156,13 +156,13 @@ const fillBottom = () => {
   const newsVisibleDOM = document.querySelector(".paper .news-visible");
   const noNewsDOM = document.querySelector(".paper .no-news");
 
-  if(frontNewsList.length === 0){
+  if (frontNewsList.length === 0) {
     updateDOMstyle(newsVisibleDOM, { display: "none" });
-    updateDOMstyle(noNewsDOM, { display:  "flex" });
+    updateDOMstyle(noNewsDOM, { display: "flex" });
     return;
   }
   updateDOMstyle(newsVisibleDOM, { display: "block" });
-  updateDOMstyle(noNewsDOM, { display:  "none" });
+  updateDOMstyle(noNewsDOM, { display: "none" });
 
   $companyImgDOM.setAttribute("src", `../img/${currentCompanyId()}.png`);
   $headlineImgDOM.setAttribute("src", `../img/sample${1 + Math.floor(Math.random() * 6)}.jpg`);
@@ -188,24 +188,6 @@ const fillBottom = () => {
   }
 };
 
-const getSubscribeList = () => {
-  let JSONData = localStorage.getItem("subscribe-list");
-  return JSONData ? JSON.parse(JSONData) : [];
-};
-
-const pushCurrentSubscribe = () => {
-  let subscribeList = getSubscribeList();
-  if (!subscribeList.includes(currentCompanyId())) {
-    subscribeList = [...subscribeList, currentCompanyId()];
-    localStorage.setItem("subscribe-list", JSON.stringify(subscribeList));
-  }
-};
-
-const removeCurrentSubscribe = () => {
-  let subscribeList = getSubscribeList();
-  subscribeList = subscribeList.filter(com => com !== currentCompanyId());
-  localStorage.setItem("subscribe-list", JSON.stringify(subscribeList));
-};
 
 export default function CategoriesAndNewsSection(_news, _newsCom) {
   newsListObject = _news;
@@ -223,11 +205,36 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
     if (targetClassName !== "whole" && targetClassName !== "my") return;
     if (state.subscribeToggle !== targetClassName) {
       state.subscribeToggle = targetClassName;
+      loseCtg();
       state.bigCtg = 0;
       state.smallCtg = 0;
       refillGroup();
       fillBottom();
     }
+  });
+
+  let startX;
+  let firstScrollLeft;
+  let isDown = false;
+  $newsgroupDOM.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.pageX - $newsgroupDOM.offsetLeft;
+    firstScrollLeft = $newsgroupDOM.scrollLeft;
+  });
+
+  $newsgroupDOM.addEventListener("mouseup", () => {
+    isDown = false;
+  });
+
+  $newsgroupDOM.addEventListener("mouseleave", () => {
+    isDown = false;
+  });
+
+  $newsgroupDOM.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const walk = (e.pageX - $newsgroupDOM.offsetLeft - startX) * 2; // 스크롤 속도 조정
+    $newsgroupDOM.scrollLeft = firstScrollLeft - walk;
   });
 
   document.querySelector(".paper").addEventListener("click", (e) => {
@@ -238,12 +245,18 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
       switchPrevCtg();
       fillCtg();
       fillBottom();
+      if (state.subscribeToggle === "my" && state.bigCtg === getSubscribeList().length - 1) {
+        $newsgroupDOM.scrollLeft = $newsgroupDOM.scrollWidth;
+      }
     }
     else if (targetClassName === "rightscroll") {
       loseCtg();
       switchNextCtg();
       fillCtg();
       fillBottom();
+      if (state.subscribeToggle === "my" && state.bigCtg === 0) {
+        $newsgroupDOM.scrollLeft = 0;
+      }
     }
     else if (targetClassName === "subscribe-button") {
       const subscribeList = getSubscribeList();
@@ -257,13 +270,15 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
         ];
         const options = { duration: 5000, };
         $snackbarDOM.animate(keyframes, options).onfinish = () => {
-          state.subscribeToggle = "my";
-          state.bigCtg = 0;
-          state.smallCtg = 0;
-          refillGroup();
-          fillBottom();
+          if (state.subscribeToggle !== "my") {
+            state.subscribeToggle = "my";
+            state.bigCtg = 0;
+            state.smallCtg = 0;
+            refillGroup();
+            fillBottom();
+          }
         };
-        pushCurrentSubscribe();
+        pushSubscribe(currentCompanyId());
         fillBottom();
       }
       else {
@@ -274,7 +289,7 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
     }
     else if (targetClassName === "unsubscribe-yes") {
       updateDOMstyle($unsubscribeAlertDOM, { display: "none" });
-      removeCurrentSubscribe();
+      removeSubscribe(currentCompanyId());
       if (state.subscribeToggle === "whole") switchNextCtg();
       else if (state.subscribeToggle === "my") state.bigCtg = 0;
       refillGroup();

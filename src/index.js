@@ -1,5 +1,6 @@
 import rollingNewsSection from "./rolling.js";
 import CategoriesAndNewsSection from "./news.js";
+import GridCompanySection  from "./grid.js";
 
 const $viewDateDOM = document.querySelector(".date");
 
@@ -10,6 +11,7 @@ const loadNews = async () => {
   newsCom = await (await (await fetch("/data/company.json")).json()).company;
   rollingNewsSection(news);
   CategoriesAndNewsSection(news, newsCom);
+  GridCompanySection(newsCom);
 }
 
 const getDate = () => {
