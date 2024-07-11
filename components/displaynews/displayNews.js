@@ -1,9 +1,10 @@
-import { showsubscribe } from "../subscribe/subscribe.js";
-import { transformToProgress, resetProgress } from "../progressbar/progressbutton.js";
+import { showsubscribe, subscribePress } from "../subscribe/subscribe.js";
+import { transformToProgress, resetProgress, animationTimer } from "../progressbar/progressbutton.js";
 import { newstype } from "../newstab/newstab.js";
-import { animationTimer } from "../progressbar/progressbutton.js";
 import { clickArt } from "../mainscript.js";
 import { originaltabs, mytabs } from "../newstab/newstab.js";
+import { subProgressTimer } from "./displaysubscribe.js";
+import stateManager from "../statemanager/stateManager.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const allArticleButton = document.getElementById('all-article');
@@ -22,11 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.newsData = [];
+
 export let testingpages = [];
-export var indexstate = {
-    pressIndex: 0,
-    pageIndex: 0
-};
 
 let buttonId = "";
 
@@ -43,31 +41,38 @@ window.onload = async () => {
     }
 };
 
+/*
+export var indexstate = {
+    pressIndex: 0,
+    pageIndex: 0
+};
+*/
 var btnRight = document.getElementById('btnRight');
 var btnLeft = document.getElementById('btnLeft');
 
+
 function updateList(pridx) {
-    if (indexstate.pageIndex === 0) {
+    if (stateManager.getPageIndex() === 0) {
         btnLeft.classList.add('disabled');
     } else {
         btnLeft.classList.remove('disabled');
     }
 
-    if (indexstate.pageIndex >= testingpages[pridx] - 1) {
-        indexstate.pressIndex = getNextPressIndex(pridx);
-        indexstate.pageIndex = 0;
-        buttonId = newstype[indexstate.pressIndex];
+    if (stateManager.getPageIndex() >= testingpages[pridx] - 1) {
+        stateManager.setPressIndex(getNextPressIndex(pridx));
+        stateManager.setPageIndex(0);
+        buttonId = newstype[stateManager.getPressIndex()];
         resetProgress();
-        const nextButton = document.querySelector(`.text-button[data-index="${indexstate.pressIndex}"]`);
+        const nextButton = document.querySelector(`.text-button[data-index="${stateManager.getPressIndex()}"]`);
         transformToProgress(nextButton);
-        updateNewsDisplay(buttonId, indexstate.pageIndex);
+        updateNewsDisplay(buttonId, stateManager.getPageIndex());
     } else {
         btnRight.classList.remove('disabled');
     }
 }
 
 btnRight.addEventListener('click', () => {
-    rightButtonClick(indexstate.pressIndex);
+    rightButtonClick(stateManager.getPressIndex());
 });
 
 btnLeft.addEventListener('click', () => {
@@ -77,39 +82,39 @@ btnLeft.addEventListener('click', () => {
 function rightButtonClick(pridx) {
     clearInterval(animationTimer); // 애니메이션 타이머 초기화
 
-    if (indexstate.pageIndex < testingpages[pridx] - 1) {
-        indexstate.pageIndex++;
+    if (stateManager.getPageIndex() < testingpages[pridx] - 1) {
+        stateManager.setPageIndex(stateManager.getPageIndex() + 1);
     } else {
-        indexstate.pressIndex = getNextPressIndex(pridx);
-        indexstate.pageIndex = 0;
-        buttonId = newstype[indexstate.pressIndex];
+        stateManager.setPressIndex(getNextPressIndex(pridx));
+        stateManager.setPageIndex(0);
+        buttonId = newstype[stateManager.getPressIndex()];
         resetProgress();
-        const nextButton = document.querySelector(`.text-button[data-index="${indexstate.pressIndex}"]`);
+        const nextButton = document.querySelector(`.text-button[data-index="${stateManager.getPressIndex()}"]`);
         transformToProgress(nextButton);
     }
-    updateList(indexstate.pressIndex);
-    updateNewsDisplay(buttonId, indexstate.pageIndex);
+    updateList(stateManager.getPressIndex());
+    updateNewsDisplay(buttonId, stateManager.getPageIndex());
 }
 
 function leftButtonClick() {
     clearInterval(animationTimer); // 애니메이션 타이머 초기화
 
-    if (indexstate.pageIndex > 0) {
-        indexstate.pageIndex--;
+    if (stateManager.getPageIndex() > 0) {
+        stateManager.setPageIndex(stateManager.getPageIndex() - 1);
     } else {
-        if (indexstate.pressIndex > 0) {
-            indexstate.pressIndex--;
+        if (stateManager.getPressIndex() > 0) {
+            stateManager.setPressIndex(stateManager.getPressIndex() - 1);
         } else {
-            indexstate.pressIndex = newstype.length - 1;
+            stateManager.setPressIndex(newstype.length - 1);
         }
-        indexstate.pageIndex = testingpages[indexstate.pressIndex] - 1;
-        buttonId = newstype[indexstate.pressIndex];
+        stateManager.setPageIndex(testingpages[stateManager.getPressIndex()] - 1);
+        buttonId = newstype[stateManager.getPressIndex()];
         resetProgress();
-        const nextButton = document.querySelector(`.text-button[data-index="${indexstate.pressIndex}"]`);
+        const nextButton = document.querySelector(`.text-button[data-index="${stateManager.getPressIndex()}"]`);
         transformToProgress(nextButton);
     }
-    updateList(indexstate.pressIndex);
-    updateNewsDisplay(buttonId, indexstate.pageIndex);
+    updateList(stateManager.getPressIndex());
+    updateNewsDisplay(buttonId, stateManager.getPageIndex());
 }
 
 export const updateNewsDisplay = (pressType, pageidx) => {
@@ -147,30 +152,32 @@ const getNextPressIndex = (pridx) => {
 }
 
 export const initmain = () => {
-    clearInterval(animationTimer);
+    clearInterval(subProgressTimer);
+    //원래
     resetProgress();
-
+    //
     testingpages = countpages(window.newsData); 
 
     const buttons = document.querySelectorAll('.text-button');
     buttons.forEach(button => {
+        
         button.removeEventListener('click', handleButtonClick);
         button.addEventListener('click', handleButtonClick);
     });
 
-    indexstate.pressIndex = 0; 
-    indexstate.pageIndex = 0; 
-
-    updateNewsDisplay("economy", indexstate.pageIndex);
+    stateManager.setPressIndex(0); 
+    stateManager.setPageIndex(0); 
+    //기존 코드 아래
+    updateNewsDisplay("economy", stateManager.getPageIndex());
     const ts = document.querySelector(".text-button");
     transformToProgress(ts);
 }
 
 const handleButtonClick = (event) => {
     resetProgress();
-    indexstate.pressIndex = Number(event.currentTarget.dataset.index);
-    indexstate.pageIndex = 0;
+    stateManager.setPressIndex(Number(event.currentTarget.dataset.index));
+    stateManager.setPageIndex(0);
     buttonId = event.currentTarget.id;
-    updateNewsDisplay(buttonId, indexstate.pageIndex);
+    updateNewsDisplay(buttonId, stateManager.getPageIndex());
     transformToProgress(event.currentTarget);
 }
