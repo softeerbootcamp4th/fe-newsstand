@@ -4,7 +4,7 @@ import { deepEqual } from '../../utils/deepEqual.js'
 
 export const componentsState = new Map()
 
-const debounce = (func, wait) => {
+export const debounce = (func, wait) => {
     let timeout
     return (...args) => {
         const later = () => {
