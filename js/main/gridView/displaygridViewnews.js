@@ -1,20 +1,20 @@
-import { getSubscriptionList, setSubscriptionList } from "./subscribe.js";
-import { handleTabClick } from "./toggleView.js";
+import { handleThemeChange, initializeGridViewContainer } from "../init.js";
+import { getSubscriptionList, setSubscriptionList } from "../listView/subscribe.js";
+import { getTheme, onThemeChange } from "../../header/toggleTheme.js";
+import { handleTabClick } from "../toggleView.js";
 
 let newsData = [];
 let companies = [];
 let currentPage = 0; // 현재 페이지를 추적하기 위한 변수
 const itemsPerPage = 24; // 한 페이지당 보여줄 아이템 수
 let subscriptionList;
+let curViewType = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!document.querySelector('.grid-view-container')) return;
     initializeGridViewContainer('all');
+    handleThemeChange();
 });
-
-export const initializeGridViewContainer = (type) => {
-    fetchNewsData(type);
-}
 
 function createGridItem() {
     const gridContainer = document.querySelector('.grid-view-container');
@@ -28,6 +28,9 @@ function createGridItem() {
     const toastAlert = document.querySelector('.toast-alert');
     const modal = document.querySelector('.modal-container');
 
+    const theme = getTheme();
+    console.log(theme);
+
 
     for (let i = 0; i < itemsPerPage; i++) {
         const gridItem = document.createElement('div');
@@ -37,7 +40,7 @@ function createGridItem() {
             const company = companies[startIdx + i].company;
             const imgElement = document.createElement('img');
             imgElement.classList.add('grid-logo-img');
-            imgElement.src = companies[startIdx + i].logoUrl;
+            imgElement.src = theme === 'light' ? companies[startIdx + i].logoUrl : companies[startIdx + i].logoUrl.replace(/\.[^/.]+$/, "") + '_dark.png';
             imgElement.alt = company;
 
             const subscribeBtn = document.createElement('div');
@@ -83,6 +86,9 @@ function createGridSubscribeItem() {
     const toastAlert = document.querySelector('.toast-alert');
     const modal = document.querySelector('.modal-container');
 
+    const theme = getTheme();
+
+
     // 로컬 스토리지에 있는 아이템만 필터링
     const subscribedCompanies = companies.filter(company => subscriptionList.includes(company.company));
 
@@ -94,7 +100,7 @@ function createGridSubscribeItem() {
             const company = subscribedCompanies[startIdx + i]?.company;
             const imgElement = document.createElement('img');
             imgElement.classList.add('grid-logo-img');
-            imgElement.src = subscribedCompanies[startIdx + i]?.logoUrl;
+            imgElement.src = theme === 'light' ? companies[startIdx + i].logoUrl : companies[startIdx + i].logoUrl.replace(/\.[^/.]+$/, "") + '_dark.png';
             imgElement.alt = company;
     
             const subscribeBtn = document.createElement('div');
@@ -187,7 +193,7 @@ function createPaginationButtons() {
     updatePaginationButtons();
 }
 
-function fetchNewsData(type) {
+export function fetchNewsData(type) {
     fetch("./data/allNews.json")
         .then(response => {
             if (!response.ok) {

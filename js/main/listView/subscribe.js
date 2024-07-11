@@ -1,19 +1,13 @@
 import { createCategory, showInformation, loadCurrentCategoryNews } from "./displaylistViewNews.js";
-import { moveToSubscribeTab } from './toggleView.js';
-
-
-export function initalizeSubscribeFunction() {
-    updateButton();
-    handleSubscribeBtnClick();
-    handleModalBtnClick();
-}
+import { initalizeSubscribeFunction } from "../init.js";
+import { moveToSubscribeTab } from '../toggleView.js';
 
 export const getSubscriptionList = () => {
     const subscriptionList = localStorage.getItem('subscriptions');
     return subscriptionList ? JSON.parse(subscriptionList) : [];
 }
 
-function handleModalBtnClick() {
+export function handleModalBtnClick() {
     const modal = document.querySelector('.modal-container');
     
 
@@ -43,7 +37,7 @@ export const setSubscriptionList = (subscriptionList) =>  {
     localStorage.setItem('subscriptions', JSON.stringify(subscriptionList));
 }
 
-function updateButton() {
+export function updateButton() {
     const subscribeBtn = document.querySelector('.subscribe-btn');
     const company = document.getElementById('logo').getAttribute('alt');
     const subscriptions = getSubscriptionList();
@@ -59,7 +53,7 @@ function updateButton() {
     }
 }
 
-function handleSubscribeBtnClick() {
+export function handleSubscribeBtnClick() {
     document.querySelector('.subscribe-btn').addEventListener('click', () => {
         const company = document.getElementById('logo').getAttribute('alt');
         let subscriptions = getSubscriptionList();
@@ -87,7 +81,5 @@ function handleSubscribeBtnClick() {
 }
 document.addEventListener('DOMContentLoaded', () => {
     if(!document.querySelector('.list-view-container')) return;
-    updateButton();
-    handleSubscribeBtnClick();
-    handleModalBtnClick();
+    initalizeSubscribeFunction();
 });
