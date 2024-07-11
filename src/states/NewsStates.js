@@ -15,7 +15,7 @@ class NewsStates extends States {
      * @param {json} newsInfo.subscribedNewsData - 구독한 언론사 목록에 대한 json 파일
      * @param {Renderer} renderers - 렌더링을 해주는 클래스
      */
-    constructor({ categoryIndex = 0, subAllInfo = 'all', newsListIndex = 0, currentNewsListIndex = 0, allNewsData, subscribedNewsData }) {
+    constructor({ categoryIndex = 0, subAllInfo = 'all', newsListIndex = 0, currentNewsListIndex = 0, allNewsData = {}, subscribedNewsData = {} }) {
         super();
         this.categoryIndex = categoryIndex;
         this.subAllInfo = subAllInfo;
@@ -24,6 +24,18 @@ class NewsStates extends States {
         this.allNewsData = allNewsData;
         this.subscribedNewsData = subscribedNewsData;
         this.currentNewsListCount = this.#getCurrentNewsListCount();
+    }
+
+    /**
+     * DOM이 Load가 완료 되었을 때 실행되는 함수
+     */
+    setInitialState() {
+        this.notify({
+            eventName: "init",
+            ...this.#getSubAllStates(),
+            ...this.#getCategoryStates(),
+            ...this.#getNewsListStates(),
+        })
     }
 
     /**
