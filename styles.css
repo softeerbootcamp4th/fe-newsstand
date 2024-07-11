@@ -517,7 +517,7 @@ main {
     left: 4px;
     transform: translateY(-50%);
     border-radius: 50%;
-    background: var(--surface-alt)
+    background: var(--text-white-default)
 }
 
   /* 체크박스가 체크되면 변경 이벤트 */
@@ -527,7 +527,7 @@ main {
   
 #theme-toggle:checked ~ .theme-toggle-switch .theme-toggle-btn {
     left: calc(100% - 25px);
-    background: var(--surface-brand-default);;
+    background: var(--text-white-default)
 }
   
 .theme-toggle-switch, .theme-toggle-btn {

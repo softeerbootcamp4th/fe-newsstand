@@ -1,3 +1,4 @@
+import { handleThemeChange, initializeGridViewContainer } from "./init.js";
 import { getSubscriptionList, setSubscriptionList } from "./subscribe.js";
 import { getTheme, onThemeChange } from "./toggleTheme.js";
 import { handleTabClick } from "./toggleView.js";
@@ -14,15 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeGridViewContainer('all');
     handleThemeChange();
 });
-
-export const handleThemeChange = () => {
-    onThemeChange(initializeGridViewContainer(curViewType));
-}
-
-export const initializeGridViewContainer = (type) => {
-    fetchNewsData(type);
-    curViewType = type;
-}
 
 function createGridItem() {
     const gridContainer = document.querySelector('.grid-view-container');
@@ -201,7 +193,7 @@ function createPaginationButtons() {
     updatePaginationButtons();
 }
 
-function fetchNewsData(type) {
+export function fetchNewsData(type) {
     fetch("./data/allNews.json")
         .then(response => {
             if (!response.ok) {

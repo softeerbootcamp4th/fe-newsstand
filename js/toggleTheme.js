@@ -1,4 +1,4 @@
-import { handleThemeChange } from "./displaygridViewnews.js";
+import { handleThemeChange } from "./init.js";
 
 const handleToggle = () => {
     const themeToggleBtn = document.querySelector('#theme-toggle');
@@ -13,7 +13,6 @@ const handleToggle = () => {
         theme = theme === "light" ? "dark" : "light";
         setTheme(theme);
         handleThemeChange();
-
     })
 }
 

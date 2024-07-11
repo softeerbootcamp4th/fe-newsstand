@@ -1,5 +1,7 @@
 import { category } from "./data.js";
+import { initlizeListViewFunction } from "./init.js";
 import { getSubscriptionList } from "./subscribe.js";
+import { getTheme } from "./toggleTheme.js";
 
 let curCategoryIdx = 0;
 let newsData = [];
@@ -107,6 +109,8 @@ const showNews = () => {
 /* 현재 카테고리의 뉴스 정보로 div 생성하는 함수 */
 function displayNews(dataType) {
 
+    const theme = getTheme();
+
     subscriptions = getSubscriptionList().reverse();
 
     showNews();
@@ -129,8 +133,7 @@ function displayNews(dataType) {
         subscribeBtn.textContent = '+ 구독하기';
     }
 
-
-    document.getElementById('logo').src = news.logoUrl;
+    document.getElementById('logo').src = theme === 'light' ? news.logoUrl : news.logoUrl.replace(/\.[^/.]+$/, "") + '_dark.png';
     document.getElementById('logo').alt = news.company;
     document.querySelector('.edit-date').textContent = `${news.date} 편집`;
 
@@ -315,7 +318,7 @@ export const initializeArrowBtn = () => {
 
 }
 
-function initalizeHeaderScroll() {
+export function initalizeHeaderScroll() {
     const header = document.querySelector('.list-view-header');
 
     header.addEventListener('wheel', (event) => {
@@ -323,14 +326,6 @@ function initalizeHeaderScroll() {
         event.preventDefault();
         header.scrollLeft += event.deltaY;
 });
-}
-
-export const initlizeListViewFunction = () => {
-    createCategory(category, 'all');
-    loadCurrentCategoryNews('all');
-    initalizeHeaderScroll();
-    initializeArrowBtn();
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {

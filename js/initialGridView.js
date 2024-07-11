@@ -1,4 +1,4 @@
-import { initializeGridViewContainer } from "./displaygridViewnews.js";
+import { initializeGridViewContainer } from "./init.js";
 import { handleClickTab } from "./toggleView.js";
 
 document.addEventListener("DOMContentLoaded", () => {
