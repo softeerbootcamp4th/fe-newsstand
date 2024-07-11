@@ -1,4 +1,5 @@
 import './loadComponent.js';
+import './toggleTheme.js';
 import './rollingnews.js';
 import './subscribe.js';
 import './todayDate.js';

@@ -14,6 +14,26 @@
     --border-default: #D2DAE0;
 }
 
+[data-theme="dark"]{
+    --text-strong: #FFFFFF;
+    --text-bold: #F5F7F9;
+    --text-default: #D2DAE0;
+    --text-weak: #FFFFFFB2;
+    --text-white-default: #FFFFFF;
+    --text-white-weak: #FFFFFFB2;
+    --text-point: #4362D0;
+    --surface-default: #14212B;
+    --surface-alt: #4B5966;
+    --surface-brand-default: #4362D0;
+    --surface-brand-alt: #7890E7;
+    --border-bold: #FFFFFFB2;
+    --border-default: #5F6E76;
+}
+
+body {
+    background-color: var(--surface-default);
+}
+
 /* 공통 CSS 클래스 */
 .center {
     display: flex;
@@ -105,7 +125,7 @@ section {
 
 .news-item .news-company {
     font-weight: bold;
-    color: #333;
+    color: var(--text-strong);
     flex-shrink: 0;
 }
 
@@ -474,3 +494,26 @@ main {
 .grid-item:hover .grid-sub-btn, .grid-item:hover .grid-unsub-btn {
     display: flex;
 }
+
+/* .toggleSwitch {
+    width: 100px;
+    height: 50px;
+    display: block;
+    position: relative;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
+    cursor: pointer;
+  } */
+  
+   /* 토글 버튼 */
+  /* .toggleSwitch .toggleButton {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #f03d3d;
+  } */ 
