@@ -171,6 +171,11 @@ function renderListMedia(mediaId) {
     progressAnimationDOM.addEventListener("animationiteration", navigateNextMedia);
 
     /**
+     * 선택된 언론사로 스크롤
+     */
+    scrollToSelectedMedia();
+
+    /**
      * 카테고리 이벤트 리스너 등록
      */
     mediaListDOM.addEventListener('click', clickMediaList);
@@ -288,4 +293,20 @@ function clickGridList(e) {
     }
 
     return clickGridItem(e);
+}
+
+/**
+ * @description 선택된 언론사로 스크롤하는 함수
+ */
+function scrollToSelectedMedia() {
+    const mediaListDOM = document.querySelector(".media-contents__category-list");
+    const categoryListDOM = document.querySelector(".media-contents__category-list");
+    const selectedMediaDOM = mediaListDOM.querySelector(".media-contents__category-item--selected");
+    
+    const { width: selectedMediaWidth, left: selectedMediaLeft } = selectedMediaDOM.getBoundingClientRect();
+    const { width: categoryListWidth, left: categoryListLeft } = categoryListDOM.getBoundingClientRect();
+
+    const scroll = selectedMediaLeft - categoryListLeft - categoryListWidth + selectedMediaWidth;
+
+    categoryListDOM.scrollBy({ left: scroll });
 }
