@@ -26,6 +26,7 @@ export const effectIdxMap = new Map<string, number>();
 export const callbackIdxMap = new Map<string, number>();
 export const callbacksMap = new Map<string, Array<() => void>>();
 export const callbackDepsMap = new Map<string, Array<Array<unknown> | null>>();
+export const renderedComponentKeyMap = new Map<string, true>();
 const cachedProps = new Map<string, object>();
 
 const createShadowRoot = () => {
@@ -38,9 +39,40 @@ const preRender = () => {
   stateIdxMap.clear();
   callbackIdxMap.clear();
   effectIdxMap.clear();
+  renderedComponentKeyMap.clear();
 };
 
 const afterRender = () => {
+  statesMap.forEach((_, key) => {
+    if (!renderedComponentKeyMap.has(key)) {
+      statesMap.delete(key);
+    }
+  });
+  effectCleanupsMap.forEach((_, key) => {
+    if (!renderedComponentKeyMap.has(key)) {
+      effectCleanupsMap.forEach((cleanups) =>
+        cleanups.forEach((cleanup) => cleanup()),
+      );
+      effectCleanupsMap.delete(key);
+    }
+  });
+
+  effectDepsMap.forEach((_, key) => {
+    if (!renderedComponentKeyMap.has(key)) {
+      effectDepsMap.delete(key);
+    }
+  });
+  callbackIdxMap.forEach((_, key) => {
+    if (!renderedComponentKeyMap.has(key)) {
+      callbacksMap.delete(key);
+    }
+  });
+  callbackDepsMap.forEach((_, key) => {
+    if (!renderedComponentKeyMap.has(key)) {
+      callbackDepsMap.delete(key);
+    }
+  });
+
   isRendering = false;
   if (updateQueue.length == 0) {
     return;
@@ -70,6 +102,7 @@ export const render = () =>
 
       if (isRenderingAppComponent(cur)) {
         const { render: component, props, parent, key, forced } = cur;
+        renderedComponentKeyMap.set(key, true);
         const prevProps = cachedProps.get(key);
         let curForced = forced;
         if (!curForced && !isPropsEqual(prevProps, props)) {
