@@ -4,9 +4,16 @@ import leftButton from "@/assets/icons/leftButton.png";
 import rightButton from "@/assets/icons/rightButton.png";
 import { COMPANIES_PER_PAGE } from "@/data/constants";
 import Button from "@/components/common/Button/Button";
-import { addCompany, isSubscribeCompany, removeCompany } from "@/data/storageHandler";
+import {
+  addCompany,
+  getSubscribedCompanies,
+  isSubscribeCompany,
+  removeCompany,
+} from "@/data/storageHandler";
+import SnackBar from "@/components/common/SnackBar/SnackBar";
+import UnsubscribeAlert from "@/components/UnsubscribeAlert/UnsubscribeAlert";
 
-function GridViewer({ $target, position = "beforeend", changeTab, filter = "category" }) {
+function GridViewer({ $target, position = "beforeend", changeTab, filter }) {
   this.$element = document.createElement("article");
   this.$element.className = "gridViewer";
   $target.insertAdjacentElement(position, this.$element);
@@ -22,13 +29,23 @@ function GridViewer({ $target, position = "beforeend", changeTab, filter = "cate
     isLast: false,
   };
 
-  this.render();
-  this.load(this.state.start);
-
   this.components = {
     SubscribeButtons: [],
     UnsubscribeButtons: [],
+    SnackBar: new SnackBar({
+      $target: this.$element,
+      text: "내가 구독한 언론사에 추가되었습니다.",
+    }),
+
+    UnsubscribeAlert: new UnsubscribeAlert({
+      $target: this.$element,
+      company: "",
+      onConfirm: () => {},
+    }),
   };
+
+  this.render();
+  this.load(this.state.start);
 
   this.$element.addEventListener("click", this.handleClick.bind(this));
 }
@@ -47,43 +64,60 @@ GridViewer.prototype.handleClick = function (event) {
   const $button = event.target.closest("button");
 
   if ($button) {
-    const { id, classList } = $button;
-    const {
-      dataset: { companyId, companyName },
-    } = $button.closest("li");
+    const { classList } = $button;
 
-    if (id === "nextButton") {
-      this.nextPage();
+    if (classList.contains("newsButton")) {
+      this.handleMovePageButtonClick($button);
 
       return;
     }
 
-    if (id === "prevButton") {
-      this.prevPage();
+    if (classList.contains("subscribe") || classList.contains("unsubscribe")) {
+      this.handleCompanyButtonClick($button);
 
       return;
     }
+  }
+};
 
-    if (classList.contains("subscribe")) {
-      const company = this.state.companies.find(
-        (company) => Number(company.id) === Number(companyId)
-      );
+GridViewer.prototype.handleMovePageButtonClick = function ($button) {
+  const { id } = $button;
 
-      this.subscribeCompany({
-        id: companyId,
-        company: companyName,
-        lightLogo: company.lightLogo,
-        darkLogo: company.darkLogo,
-      });
+  if (id === "nextButton") {
+    this.nextPage();
 
-      return;
-    }
+    return;
+  }
 
-    if (classList.contains("unsubscribe")) {
-      this.unsubscribeCompany({ id: companyId });
+  if (id === "prevButton") {
+    this.prevPage();
 
-      return;
-    }
+    return;
+  }
+};
+
+GridViewer.prototype.handleCompanyButtonClick = function ($button) {
+  const { classList } = $button;
+  const {
+    dataset: { companyId },
+  } = $button.closest("li");
+
+  if (classList.contains("subscribe")) {
+    const company = this.state.companies.find(
+      (company) => Number(company.id) === Number(companyId)
+    );
+
+    if (!company) return;
+
+    this.subscribeCompany({ ...company });
+
+    return;
+  }
+
+  if (classList.contains("unsubscribe")) {
+    this.unsubscribeCompany({ id: companyId });
+
+    return;
   }
 };
 
@@ -96,8 +130,17 @@ GridViewer.prototype.prevPage = function () {
 };
 
 GridViewer.prototype.load = async function (start) {
-  const companies = await getAllCompany(start);
+  if (this.props.filter === "company") {
+    const subscribedCompanies = getSubscribedCompanies().slice(start, start + 24);
+    const isLast = subscribedCompanies.length < start + 24;
 
+    this.setState({ companies: subscribedCompanies, start, isLast });
+    this.renderSubscribeButtons();
+
+    return;
+  }
+
+  const companies = await getAllCompany(start);
   const nextPage = await getAllCompany(start + COMPANIES_PER_PAGE);
 
   const isLast = nextPage.length < 1;
@@ -107,9 +150,11 @@ GridViewer.prototype.load = async function (start) {
 };
 
 GridViewer.prototype.subscribeCompany = function ({ id, company, lightLogo, darkLogo }) {
+  this.showUnsubscribeButton(id);
+
   addCompany({ id, company, lightLogo, darkLogo });
 
-  this.showUnsubscribeButton(id);
+  this.components.SnackBar.show();
 };
 
 GridViewer.prototype.unsubscribeCompany = function ({ id }) {
@@ -145,8 +190,8 @@ GridViewer.prototype.render = function () {
   this.$element.innerHTML = /* html */ `
     ${companies
       .map(
-        ({ id, company, lightLogo, darkLogo }) => /* html */ `
-        <li data-company-id="${id}" data-company-name="${company}" class="cell"><img src="${
+        ({ id, lightLogo, darkLogo }) => /* html */ `
+        <li data-company-id="${id}" class="cell"><img src="${
           idDarkMode ? darkLogo : lightLogo
         }"/></li>
       `

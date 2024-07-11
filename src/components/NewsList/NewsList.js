@@ -103,7 +103,11 @@ NewsList.prototype.render = function (tabIndex = 0) {
   }
 
   if (viewTypeFilter === "grid") {
-    new GridViewer({ $target: this.$element, changeTab: this.changeTab.bind(this) });
+    new GridViewer({
+      $target: this.$element,
+      filter: companyFilter,
+      changeTab: this.changeTab.bind(this),
+    });
   }
 };
 
