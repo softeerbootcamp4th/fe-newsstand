@@ -1,6 +1,6 @@
+import { mediaDetail } from "../store/media-detail.js";
 import { mediaList } from "../store/media-list.js";
 import { subscribedMediaList } from "../store/subscribed-media.js";
-import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
 import { DATA_COUNT_PER_GRID, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
 import { 
@@ -13,14 +13,10 @@ import {
     clickGridItem,
 } from "./util.js";
 
-let mediaDetailData = {};
-
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
 export async function renderSubscribedMedia(mediaId) {
-    mediaDetailData = await getData('../static/data/media-detail.json');
-
     const displayMode = getDisplayMode();
 
     const gridBoxDOM = document.querySelector(".media-contents__grid-box");
@@ -141,7 +137,7 @@ function renderGridMedia(page) {
 function renderListMedia(mediaId) {
     const mediaListDOM = document.querySelector(".media-contents__category-list");
     const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
-    const subscribedMediaDetailList = subscribedMediaList.data.map((subscribed) => mediaDetailData.data.find((_media) => _media.id === subscribed.id))
+    const subscribedMediaDetailList = subscribedMediaList.data.map((subscribed) => mediaDetail.findMediaById(subscribed.id));
 
     if (subscribedMediaList.getSubscribedMediaLength() === 0) {
         mediaListDOM.innerHTML = "";
