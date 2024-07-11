@@ -1,5 +1,5 @@
 import { Div, Main, ce } from "@/libs";
-import { MediaContentFilter } from "./MediaContentFilter";
+import { ContentFilter } from "../ContentFilter/ContentFilter";
 import { useEffect, useState } from "@/libs";
 import { cc } from "@/libs";
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
@@ -8,7 +8,8 @@ import { MediaContentTabs } from "./MediaContentTabs";
 import styles from "./index.module.css";
 import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
 import { MediaContentMain } from "./MediaContentMain";
-export type MediaContentFilterType = "전체 언론사" | "내가 구독한 언론사";
+import { getSubscribedMedias } from "@/remotes/getSubscribedMedias";
+import { MediaContentFilterType } from "@/models/MediaContentFilter";
 
 export const MediaContent = () => {
   const [currentFilter, setCurrentFilter] =
@@ -18,12 +19,17 @@ export const MediaContent = () => {
     null,
   );
   const loadData = async () => {
+    if (currentFilter == "내가 구독한 언론사") {
+      const data = await getSubscribedMedias();
+      setCurrentData(data);
+      return;
+    }
     const data = await getMediaIdByCategories();
     setCurrentData(data);
   };
   useEffect(() => {
     loadData();
-  }, []);
+  }, [currentFilter]);
 
   if (currentData === null) {
     return null;
@@ -89,7 +95,7 @@ export const MediaContent = () => {
   return ce(Div, {
     className: styles.container,
     children: [
-      cc(MediaContentFilter, {
+      cc(ContentFilter, {
         currentFilter: currentFilter,
         setCurrentFilter: setCurrentFilter,
       }),

@@ -1,7 +1,7 @@
 import { sleep } from "@/utils/sleep";
 import { Media } from "../models/Media";
 
-const mediaData: Omit<Media, "isSubscribed">[] = [
+export const mediaData: Omit<Media, "isSubscribed">[] = [
   {
     id: 1,
     name: "연합뉴스",
