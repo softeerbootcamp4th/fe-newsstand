@@ -1,4 +1,4 @@
-import store from "../utils/stoageManager.js";
+import store from "../global/stoageManager.js";
 
 export const headlineData = [
   {

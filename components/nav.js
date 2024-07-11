@@ -1,18 +1,10 @@
 import { deleteNodeById, generateNode } from "../utils/utils.js";
 import { updateMyNewsList } from "./myNewsList.js";
 import { updateNewsList } from "./newsList.js";
-import {
-  categoryList,
-  myList,
-  getMediaLength,
-  getMyListLength,
-  mediaData,
-} from "../resources/data.js";
-import state from "../list/state.js";
+import { categoryList, myList, mediaData } from "../resources/data.js";
+import state from "../global/state.js";
 import { generateSubscribe, generateUnsubscribe } from "./subscribe.js";
-
-var newsInterval; //왜 전역변수로 설정해야 작동하는가??
-var myInterval;
+import { startInterval, stopInterval } from "../global/interval.js";
 
 /**
  * Nav목록으로 네비게이션 바를 container의 child로 생성 후 초기화
@@ -220,76 +212,35 @@ export function updateNavElements(navElementNodes) {
 }
 
 /**
- * news List 자동 전환
- * @param {node Array} navElementNodes
+ * newsList interval 시작 함수
  */
-function handleNewsInterval(navElementNodes) {
-  state.currentMediaIndex++;
-  if (
-    state.currentMediaIndex >=
-    getMediaLength(categoryList[state.currentCategoryIndex])
-  ) {
-    state.currentCategoryIndex =
-      (state.currentCategoryIndex + 1) % categoryList.length;
-    state.currentMediaIndex = 0;
-  }
-
-  updateNavElements(navElementNodes);
-  updateNewsList(
-    categoryList[state.currentCategoryIndex],
-    state.currentCategoryIndex,
-    state.currentMediaIndex
+function startNewsInterval() {
+  const navElementNodes = document.querySelectorAll(".contentList li");
+  startInterval(
+    "news",
+    navElementNodes,
+    state,
+    categoryList,
+    updateNavElements,
+    updateNewsList
   );
 }
 
 /**
- * my news List 자동 전환
- * @param {node Array} navElementNodes
- */
-function handleMyInterval(navElementNodes) {
-  (state.currentCategoryIndex + 1) % getMyListLength();
-
-  updateNavElements(navElementNodes);
-  updateMyNewsList(state.currentCategoryIndex);
-}
-
-/**
- * news면 newsList, my면 myList 자동 전환
- * @param {String} intervalType
- */
-function startInterval(intervalType) {
-  const navElementNodes = document.querySelectorAll(".contentList li");
-  const isNewsInterval = intervalType === "news";
-  const isMyInterval = intervalType === "my";
-
-  if (isNewsInterval) {
-    newsInterval = setInterval(
-      () => handleNewsInterval(navElementNodes),
-      20000
-    );
-  } else if (isMyInterval) {
-    myInterval = setInterval(() => handleMyInterval(navElementNodes), 20000);
-  }
-}
-
-/**
- * news list Interval 시작
- */
-function startNewsInterval() {
-  startInterval("news");
-}
-
-/**
- * my list Interval 시작
+ * myList interval 시작 함수
  */
 function startMyNewsInterval() {
-  startInterval("my");
+  const navElementNodes = document.querySelectorAll(".contentList li");
+  startInterval(
+    "my",
+    navElementNodes,
+    state,
+    updateNavElements,
+    updateMyNewsList
+  );
 }
 
-/**
- * news list, my list Interval 삭제
- */
 function resetInterval() {
-  clearInterval(newsInterval);
-  clearInterval(myInterval);
+  stopInterval("news");
+  stopInterval("my");
 }

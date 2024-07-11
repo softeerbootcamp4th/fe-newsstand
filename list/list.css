@@ -1,8 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import "../global/global.css";
+@import "../components/nav.css";
+@import "../components/newsBanner.css";
+@import "../components/newsList.css";
 
 body {
   width: 100%;

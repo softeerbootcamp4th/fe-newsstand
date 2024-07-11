@@ -1,5 +1,5 @@
-import store from "../utils/stoageManager.js";
-import state from "../list/state.js";
+import store from "../global/stoageManager.js";
+import state from "../global/state.js";
 import {
   addMyData,
   categoryData,

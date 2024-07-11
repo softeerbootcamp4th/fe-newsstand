@@ -8,7 +8,7 @@ import {
   updateCategoryByIndex,
   updateMyMedia,
 } from "./nav.js";
-import state from "../list/state.js";
+import state from "../global/state.js";
 
 const leftButton = document.querySelector(".leftButton");
 const rightButton = document.querySelector(".rightButton");

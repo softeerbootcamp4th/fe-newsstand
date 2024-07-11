@@ -1,11 +1,11 @@
 import { deleteNav, generateNav } from "../components/nav.js";
 import { generateBanner } from "../components/newsBanner.js";
 import { getTodayString } from "../utils/utils.js";
-import store from "../utils/stoageManager.js";
+import store from "../global/stoageManager.js";
 import { updateMyList, headlineData } from "../resources/data.js";
+import { startBannerInterval } from "../global/interval.js";
 
 let currentHeaderCategoryIndex = 0;
-var bannerInterval;
 
 //요소 생성
 //header
@@ -15,52 +15,15 @@ today.innerHTML = getTodayString();
 const bannerContainer = document.getElementById("banner_container");
 generateBanner(bannerContainer, headlineData[0]);
 generateBanner(bannerContainer, headlineData[1]);
-startBannerInterval();
+startBannerInterval(bannerContainer);
+
 //nav
 const navContainer = document.getElementById("nav_container");
 generateNav(navContainer, currentHeaderCategoryIndex);
 
 //각 배너는 time delay를 가지고 롤링
-function rollingCallback(time) {
-  const prevElements = bannerContainer.querySelectorAll(".prev");
-  prevElements.forEach((prev, index) => {
-    setTimeout(() => {
-      prev.classList.remove("prev");
-    }, index * time);
-  });
-
-  const currentElements = bannerContainer.querySelectorAll(".current");
-  currentElements.forEach((current, index) => {
-    setTimeout(() => {
-      current.classList.remove("current");
-      current.classList.add("prev");
-    }, index * time);
-  });
-
-  const nextElements = bannerContainer.querySelectorAll(".next");
-  nextElements.forEach((next, index) => {
-    setTimeout(() => {
-      next.classList.remove("next");
-      next.classList.add("current");
-
-      let nextNext = next.nextElementSibling;
-      if (!nextNext) {
-        nextNext = next.parentElement.firstElementChild;
-      }
-      nextNext.classList.add("next");
-    }, index * time);
-  });
-}
 const headerCategory = document.querySelectorAll(".headerCategory");
 const headerShow = document.querySelectorAll(".headerShow");
-
-export function startBannerInterval() {
-  bannerInterval = setInterval(() => rollingCallback(1000), 5000);
-}
-
-export function removeBannerInterval() {
-  clearInterval(bannerInterval);
-}
 
 // 초기화 함수
 function initialize() {
