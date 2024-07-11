@@ -115,7 +115,7 @@ const refillGroup = () => {
 
 const fillCtg = () => {
   const DOM = $ctgDOM[state.bigCtg];
-  const scrollNum = companyList[state.bigCtg].length;
+  const scrollNum = `${state.subscribeToggle === "whole" ? companyList[state.bigCtg].length : 0 }`;
   const keyframes = [
     { backgroundPosition: "100%" },
     { backgroundPosition: "0%" }
