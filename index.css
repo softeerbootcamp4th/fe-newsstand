@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 p {
     margin: 0;
     padding: 0;
@@ -85,6 +90,10 @@ p {
 
 .hover-underline > :hover::after {
     transform: scaleX(1);
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /* 컴포넌트 간 간격 */

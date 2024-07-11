@@ -229,3 +229,11 @@ export const addGridSubscribeBtnEventListener = () => {
         });
     });
 };
+
+export const addHoverUnderlineEventListener = () => {
+    document.querySelectorAll('a').forEach((a) => {
+        console.log(a)
+        a.addEventListener('mouseover', () => {console.log('hover');a.classList?.add('a-underline')});
+        a.addEventListener('mouseout', () => a.classList?.remove('a-underline'));
+    })
+}

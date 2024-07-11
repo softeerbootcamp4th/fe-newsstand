@@ -21,6 +21,7 @@ import { addModeSelectionEventListener,
     addBtnEventsListener,
     addCancleSubscriptionEventListener,
     addScrollEventListener,
+    addHoverUnderlineEventListener,
 } from "./event/clickEvent.js";
 import { checkSubscription } from "./event/pageEvent.js";
 import { createSnackBar } from "../snackBar/snackBar.js";
@@ -48,6 +49,7 @@ const addEventListeners = () => {
     addWholeListEventListener();
     addSubscriptionListEventListener();
     addCancleSubscriptionEventListener();
+    addHoverUnderlineEventListener();
 }
 
 export const addSubscriptionEventListener = () => {

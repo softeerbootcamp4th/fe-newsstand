@@ -11,7 +11,7 @@ export const createMenuList = () => {
     return menuInfo?.map((info, idx) => `
         <div class="menu-btn-wrapper">
             <button class="flex-row-between article-menu-btn ${idx === 0 ? "article-menu-btn-clicked" : ""}">
-                <h5>${info?.category}</h5>
+                <h5><a>${info?.category}</a></h5>
                 <h5 class="article-menu-pages display-none">1 / ${info?.totalPages}</h5>
             </button>
             <div class="fill-background"></div>
@@ -36,12 +36,12 @@ export const createSubscriptionMenuList = () => {
 export const createArticleLiPart = () => {
     if (isMediaWhole) {
         const articleData = menuInfo[menuIdx].mediaData[menuCurrentPage - 1].articleList;
-        return articleData.map((articleItem) => `<li>${articleItem}</li>`).join('');
+        return articleData.map((articleItem) => `<li><a href="#">${articleItem}</a></li>`).join('');
     } else {
         const subList = getSubscriptionList();
         const mediaName = subList[menuIdx];
         const articleData = extractDataWithMedia(menuInfo)[mediaName].articleList;
-        return articleData.map((articleItem) => `<li>${articleItem}</li>`).join('');
+        return articleData.map((articleItem) => `<li><a href="#">${articleItem}</a></li>`).join('');
     }
 }
 
@@ -85,7 +85,6 @@ export const insertWholeContent = () => {
         insertCancleSubscriptionBtn();
     } else {
         insertSubscriptionBtn();
-
     }
 }
 
