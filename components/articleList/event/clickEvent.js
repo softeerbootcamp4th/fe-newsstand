@@ -129,8 +129,7 @@ export const addAlertAcceptBtnEventListener = () => {
     document.querySelector('.alert-accept-btn').addEventListener('click', () => {
         cancleMediaSubscription();
         if (isGrid) {
-            renderGridSubscription();
-            // Or mediaName 받아서 해당 id el remove
+            document.querySelector('.grid-selection-btn').click()
         } else if (isMediaWhole) {
             document.querySelector('.whole-media-btn').click()
         } else {
