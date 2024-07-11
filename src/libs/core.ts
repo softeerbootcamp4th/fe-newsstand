@@ -42,33 +42,33 @@ const preRender = () => {
   renderedComponentKeyMap.clear();
 };
 
+const isRendered = (key: string) => renderedComponentKeyMap.has(key);
+
 const afterRender = () => {
   statesMap.forEach((_, key) => {
-    if (!renderedComponentKeyMap.has(key)) {
+    if (!isRendered(key)) {
       statesMap.delete(key);
     }
   });
   effectCleanupsMap.forEach((_, key) => {
-    if (!renderedComponentKeyMap.has(key)) {
-      effectCleanupsMap.forEach((cleanups) =>
-        cleanups.forEach((cleanup) => cleanup()),
-      );
-      effectCleanupsMap.delete(key);
+    if (!isRendered(key)) {
+      effectCleanupsMap.get(key)?.forEach((cleanup) => cleanup()),
+        effectCleanupsMap.delete(key);
     }
   });
 
   effectDepsMap.forEach((_, key) => {
-    if (!renderedComponentKeyMap.has(key)) {
+    if (!isRendered(key)) {
       effectDepsMap.delete(key);
     }
   });
-  callbackIdxMap.forEach((_, key) => {
-    if (!renderedComponentKeyMap.has(key)) {
+  callbacksMap.forEach((_, key) => {
+    if (!isRendered(key)) {
       callbacksMap.delete(key);
     }
   });
   callbackDepsMap.forEach((_, key) => {
-    if (!renderedComponentKeyMap.has(key)) {
+    if (!isRendered(key)) {
       callbackDepsMap.delete(key);
     }
   });
@@ -129,7 +129,7 @@ export const render = () =>
             props: createdComponent.props,
             parent,
             renderName: createdComponent.renderName,
-            key: key,
+            key: `${key}-${createdComponent.renderName}`,
             forced: curForced,
           });
           continue;
