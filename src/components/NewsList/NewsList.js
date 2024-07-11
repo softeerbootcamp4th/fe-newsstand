@@ -2,7 +2,7 @@ import "./NewsList.css";
 import EmptyListViewer from "@/components/NewsList/EmptyListViewer/EmptyListViewer";
 import ListViewer from "@/components/NewsList/ListViewer/ListViewer";
 import { getSubscribedCompanies } from "@/data/storageHandler";
-import { getSVGTemplate } from "../SVG/SVG";
+import { getSVGTemplate } from "@/components/common/SVG/SVG";
 import GridViewer from "@/components/NewsList/GridViewer/GridViewer";
 
 function NewsList({ $target, position = "beforeend" }) {

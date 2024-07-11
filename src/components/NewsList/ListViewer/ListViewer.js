@@ -5,7 +5,7 @@ import ContentsBox from "@/components/NewsList/ListViewer/ContentsBox/ContentsBo
 import { addCompany, getSubscribedCompanies, removeCompany } from "@/data/storageHandler";
 import { CATEGORIES } from "@/data/constants";
 import { getNews } from "@/apis/news";
-import { getSVGTemplate } from "@/components/SVG/SVG";
+import { getSVGTemplate } from "@/components/common/SVG/SVG";
 import { shuffleArray } from "@/utils/array";
 
 function ListViewer({

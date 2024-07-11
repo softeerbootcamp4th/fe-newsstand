@@ -1,5 +1,5 @@
 import "./Button.css";
-import { getSVGTemplate } from "@/components/SVG/SVG";
+import { getSVGTemplate } from "@/components/common/SVG/SVG";
 
 function Button({ $target, position = "beforeend", icon, color, text, onClick }) {
   this.$element = document.createElement("button");

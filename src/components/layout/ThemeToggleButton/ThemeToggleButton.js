@@ -1,4 +1,4 @@
-import { getSVGTemplate } from "@/components/SVG/SVG";
+import { getSVGTemplate } from "@/components/common/SVG/SVG";
 import "./ThemeToggleButton.css";
 
 function ThemeToggleButton({ $target, position = "beforeend" }) {
