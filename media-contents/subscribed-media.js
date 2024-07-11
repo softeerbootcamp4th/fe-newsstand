@@ -1,3 +1,4 @@
+import { mediaList } from "../store/media-list.js";
 import { subscribedMediaList } from "../store/subscribed-media.js";
 import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
@@ -13,14 +14,12 @@ import {
 } from "./util.js";
 
 let mediaDetailData = {};
-let mediaListData = {};
 
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
 export async function renderSubscribedMedia(mediaId) {
     mediaDetailData = await getData('../static/data/media-detail.json');
-    mediaListData = await getData('../static/data/media.json');
 
     const displayMode = getDisplayMode();
 
@@ -274,7 +273,7 @@ function clickGridNavigationButton(step) {
     const gridBoxDOM = document.querySelector(".media-contents__grid-box");
     const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
 
-    const media = subscribedMediaList.data.map((subscribed) => mediaListData.data.find((_media) => _media.id === subscribed.id));
+    const media = subscribedMediaList.data.map((subscribed) => mediaList.findMediaById(subscribed.id));
     const mediaLength = media.length;
     const nextPage = getBoundNumber(currentPage + step, 0, Math.floor((mediaLength - 1) / DATA_COUNT_PER_GRID));
 
@@ -292,5 +291,5 @@ function clickGridList(e) {
         return;
     }
 
-    return clickGridItem(e, mediaListData.data);
+    return clickGridItem(e);
 }

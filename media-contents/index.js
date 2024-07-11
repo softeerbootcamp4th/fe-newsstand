@@ -1,7 +1,13 @@
 import { renderMediaFilter } from "./media-filter.js";
 import { renderGridLayout, renderMediaDisplay } from "./media-display.js";
+import { getMediaData } from "./get-data.js";
 
 function initMediaContents() {
+    /**
+     * 데이터 패치
+     */
+    getMediaData();
+
     /**
      * 언론사 필터 렌더링
      */

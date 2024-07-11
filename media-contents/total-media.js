@@ -1,7 +1,7 @@
 import { subscribedMediaList } from "../store/subscribed-media.js";
 import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
-import { shuffleList } from "../utils/shuffle-list.js";
+import { mediaList } from "../store/media-list.js";
 import { DATA_COUNT_PER_GRID, DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
 import { renderSubscribedMedia } from "./subscribed-media.js";
 import { 
@@ -15,15 +15,12 @@ import {
 } from "./util.js";
 
 let categoryData = {};
-let mediaListData = {};
 
 /**
  * @description 전체 언론사를 렌더링하는 함수
  */
 export async function renderTotalMedia() {
     categoryData = await getData('../static/data/media-by-category.json');
-    mediaListData = await getData('../static/data/media.json');
-    mediaListData.data = shuffleList(mediaListData.data.slice());
 
     const displayMode = getDisplayMode();
 
@@ -106,7 +103,7 @@ function setArrowDisplayInGrid(page) {
     const prevMediaButton = document.querySelector(".media-contents__left-button");
     const nextMediaButton = document.querySelector(".media-contents__right-button");
 
-    const lastPage = Math.floor((mediaListData.data.length - 1) / DATA_COUNT_PER_GRID);
+    const lastPage = Math.floor((mediaList.getLength() - 1) / DATA_COUNT_PER_GRID);
     const maxPage = lastPage >= 4 ? 3 : lastPage;
 
     if (page === 0) {
@@ -125,7 +122,7 @@ function setArrowDisplayInGrid(page) {
  * @description 미디어 카테고리, 콘텐츠를 리스트 형식으로 렌더링하는 함수
  */
 function renderGridMedia(page) {
-    const media = mediaListData.data;
+    const media = mediaList.data;
     const gridListDOM = document.querySelector(".media-contents__grid-list");
 
     let mediaListDOMString = '';
@@ -179,7 +176,7 @@ function renderListMedia(categoryIdx, mediaIdx) {
     const contentsString = getSelectedCategoryContentsDOMString(category[categoryIdx].media[mediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
-    const media = mediaListData.data.find((_data) => _data.id === category[categoryIdx].media[mediaIdx].id);
+    const media = mediaList.findMediaById(category[categoryIdx].media[mediaIdx].id);
     subscribedMediaList.setCallback(() => renderListMedia(categoryIdx, mediaIdx));
     setSubscribeButtonEvent(media, (mediaId) => renderSubscribedMedia(mediaId));
 }
@@ -284,7 +281,7 @@ function clickGridNavigationButton(step) {
     const gridBoxDOM = document.querySelector(".media-contents__grid-box");
     const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
 
-    const mediaLength = mediaListData.length;
+    const mediaLength = mediaList.getLength();
     const nextPage = getBoundNumber(currentPage + step, 0, Math.floor((mediaLength - 1) / DATA_COUNT_PER_GRID));
 
     gridBoxDOM.dataset.gridPage = nextPage;
@@ -301,5 +298,5 @@ function clickGridList(e) {
         return;
     }
 
-    return clickGridItem(e, mediaListData.data, (mediaId) => renderSubscribedMedia(mediaId));
+    return clickGridItem(e, (mediaId) => renderSubscribedMedia(mediaId));
 }

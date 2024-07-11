@@ -1,3 +1,4 @@
+import { mediaList } from "../store/media-list.js";
 import { subscribedMediaList } from "../store/subscribed-media.js";
 import { renderAlert } from "../utils/render-alert.js";
 import { renderSnackbar } from "../utils/render-snackbar.js";
@@ -163,7 +164,8 @@ export function getGridMediaItem(media) {
 /**
  * @description 그리드 보기에서 구독/구독취소 이벤트 등록하는 함수
  */
-export function clickGridItem(e, media, navigateToSubscribedMedia) {
+export function clickGridItem(e, navigateToSubscribedMedia) {
+    const media = mediaList.data;
     const mediaId = getMediaId(e.target);
 
     if (mediaId === -1) {
