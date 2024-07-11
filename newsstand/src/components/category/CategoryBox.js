@@ -1,3 +1,4 @@
+import useEffect from '../../core/hooks/useEffect.js'
 import { mediaCategoryData, getCompanyCount } from '../../datas/mockData.js'
 import { isIn } from '../../utils/listUtils.js'
 let intervalId = null
@@ -5,6 +6,27 @@ let intervalId = null
 const CategoryBox = (props) => {
     const companyCount = isIn(props.text, mediaCategoryData) ? getCompanyCount(props.text) : 1
     const countText = props.selectedSource.value === '전체 언론사' ? `${props.currentNewsId.value}/${companyCount}` : `>`
+
+    const moveAutoScroll = () => {
+        const element = document.getElementById(`category-text-${props.id}`)
+        if (!element) return
+
+        const rect = element.getBoundingClientRect()
+
+        const parentElement = document.querySelector('.list-news-header')
+        if (parentElement) {
+            const parentRect = parentElement.getBoundingClientRect()
+            const scrollLeft = parentElement.scrollLeft + rect.left - parentRect.left - parentElement.clientWidth + rect.width
+            parentElement.scrollBy(scrollLeft, 0, 'smooth')
+        }
+    }
+    useEffect(
+        () => {
+            if (props.state.value === props.text) setTimeout(() => moveAutoScroll(), 10)
+        },
+        [props.state],
+        1,
+    )
 
     const handleMouseClick = () => {
         props.setState(props.text)
@@ -53,7 +75,7 @@ const CategoryBox = (props) => {
     }
     return {
         element: `
-            <div class="category-box-wrap"
+            <div class="category-box-wrap id="category-box-wrap-${props.id}"
                 style="background-color: ${props.state.value === props.text ? '#7890E7' : 'transparent'};"
             >
                 <div class="category-box-fill" id="category-fill-${props.id}"></div>
