@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/newsList', (req, res) => {
-    if (req.query.subAllInfo === "sub") res.sendFile(__dirname + "/data/all.json");
+    if (req.query.subAllInfo === "sub") res.sendFile(__dirname + "/data/subscribed.json");
     else res.sendFile(__dirname + "/data/all.json");
 })
 
