@@ -1,12 +1,17 @@
 import { useState, useEffect, cc, ce, Main, Raw } from "@/libs";
 import { MediaIdByCategories } from "@/models/Newsstand";
-import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
 import { MediaContent } from "../MediaContent/MediaContent";
 import { MediaContentTabs } from "./ContentListHeader";
 import { getSubscribedMedias } from "@/remotes/getSubscribedMedias";
 import { RightSmallIcon } from "@/assets/RightSmallIcon";
+import { MediaContentFilterType } from "@/models/MediaContentFilter";
 
-export const SubscribedContentList = () => {
+interface SubscribedContentListProps {
+  setCurrentFilter: (filter: MediaContentFilterType) => void;
+}
+export const SubscribedContentList = ({
+  setCurrentFilter,
+}: SubscribedContentListProps) => {
   const [currentData, setCurrentData] = useState<MediaIdByCategories | null>(
     null,
   );
@@ -18,7 +23,7 @@ export const SubscribedContentList = () => {
     loadData();
   }, []);
 
-  if (currentData === null) {
+  if (currentData === null || currentData.length === 0) {
     return null;
   }
   const [currentDataIdx, setCurrentDataIdx] = useState<[number, number]>([
@@ -74,6 +79,11 @@ export const SubscribedContentList = () => {
     };
   });
 
+  const handleUnsubscribe = () => {
+    setCurrentFilter("전체 언론사");
+    loadData();
+  };
+
   return ce(Main, {
     children: [
       cc(MediaContentTabs, {
@@ -85,6 +95,7 @@ export const SubscribedContentList = () => {
         category: currentCategory,
         handleNext: handleNext,
         handlePrev,
+        handleUnsubscribe,
       }),
     ],
   });

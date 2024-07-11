@@ -14,12 +14,16 @@ interface MediaContentProps {
   category: Category;
   handleNext: () => void;
   handlePrev: () => void;
+  handleUnsubscribe?: () => void;
+  handleSubscribe?: () => void;
 }
 export const MediaContent = ({
   mediaId,
   category,
   handleNext,
   handlePrev,
+  handleUnsubscribe,
+  handleSubscribe,
 }: MediaContentProps) => {
   const [media, setMedia] = useMedia(mediaId);
   const newsList = useMediaRecentNews(mediaId, category.id);
@@ -34,6 +38,8 @@ export const MediaContent = ({
       cc(MediaContentHeader, {
         media,
         setMedia,
+        handleUnsubscribe,
+        handleSubscribe,
       }),
       cc(MediaContentView, {
         newsList: newsList,

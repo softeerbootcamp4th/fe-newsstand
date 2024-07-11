@@ -4,8 +4,12 @@ import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
 import { MediaContent } from "../MediaContent/MediaContent";
 import { MediaContentTabs } from "./ContentListHeader";
+import { MediaContentFilterType } from "@/models/MediaContentFilter";
 
-export const AllcontentList = () => {
+interface AllcontentListProps {
+  setCurrentFilter: (filter: MediaContentFilterType) => void;
+}
+export const AllcontentList = ({ setCurrentFilter }: AllcontentListProps) => {
   const [currentData, setCurrentData] = useState<MediaIdByCategories | null>(
     null,
   );
@@ -77,6 +81,9 @@ export const AllcontentList = () => {
       onNext: handleNext,
     };
   });
+  const handleSubscribe = () => {
+    setCurrentFilter("내가 구독한 언론사");
+  };
 
   return ce(Main, {
     children: [
@@ -89,6 +96,7 @@ export const AllcontentList = () => {
         category: currentCategory,
         handleNext: handleNext,
         handlePrev,
+        handleSubscribe,
       }),
     ],
   });

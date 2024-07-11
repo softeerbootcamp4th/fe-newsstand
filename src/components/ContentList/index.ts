@@ -19,8 +19,12 @@ export const ContentList = () => {
         setCurrentFilter: setCurrentFilter,
       }),
       currentFilter === "전체 언론사"
-        ? cc(AllcontentList, {})
-        : cc(SubscribedContentList, {}),
+        ? cc(AllcontentList, {
+            setCurrentFilter,
+          })
+        : cc(SubscribedContentList, {
+            setCurrentFilter,
+          }),
     ],
   });
 };

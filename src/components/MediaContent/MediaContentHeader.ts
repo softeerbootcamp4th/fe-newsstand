@@ -91,10 +91,14 @@ const SubscribeButton = ({
 interface MediaContentHeaderProps {
   media: Media | null;
   setMedia: (media: Media) => void;
+  handleUnsubscribe?: () => void;
+  handleSubscribe?: () => void;
 }
 export const MediaContentHeader = ({
   media,
   setMedia,
+  handleUnsubscribe,
+  handleSubscribe,
 }: MediaContentHeaderProps) => {
   const { addToast } = useToastContext();
   if (media === null) {
@@ -113,14 +117,17 @@ export const MediaContentHeader = ({
       cc(SubscribeButton, {
         isSubscribed: isSubscribed,
         media: media,
-        onClick: () => {
+        onClick: async () => {
           if (media === null) {
             return;
           }
           const nextIsSubscribed = !isSubscribed;
-          updateMediaSubscribe(media.id, nextIsSubscribed);
+          await updateMediaSubscribe(media.id, nextIsSubscribed);
           if (nextIsSubscribed) {
             addToast("내가 구독한 언론사에 추가되었습니다.");
+            handleSubscribe?.();
+          } else {
+            handleUnsubscribe?.();
           }
           setMedia({ ...media, isSubscribed: nextIsSubscribed });
         },
