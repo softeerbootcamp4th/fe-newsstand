@@ -120,7 +120,7 @@ const fillCtg = () => {
     { backgroundPosition: "100%" },
     { backgroundPosition: "0%" }
   ];
-  const options = { duration: 5000 };
+  const options = { duration: 20000 };
 
   DOM.setAttribute("class", "selected");
   DOM.animate(keyframes, options).onfinish = () => {
@@ -142,6 +142,7 @@ const fillCtg = () => {
 
 const loseCtg = () => {
   const DOM = $ctgDOM[state.bigCtg];
+  if(!DOM) return; 
   DOM.setAttribute("class", "unselected");
   DOM.getAnimations().forEach(ani => ani.cancel());
 
@@ -201,7 +202,7 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
   fillBottom();
 
   document.querySelector(".subscribe-toggle").addEventListener("click", (e) => {
-    const targetClassName = e.target.className;
+    const { className: targetClassName } = e.target;
     if (targetClassName !== "whole" && targetClassName !== "my") return;
     if (state.subscribeToggle !== targetClassName) {
       state.subscribeToggle = targetClassName;
@@ -222,13 +223,9 @@ export default function CategoriesAndNewsSection(_news, _newsCom) {
     firstScrollLeft = $newsgroupDOM.scrollLeft;
   });
 
-  $newsgroupDOM.addEventListener("mouseup", () => {
-    isDown = false;
-  });
+  $newsgroupDOM.addEventListener("mouseup", () => { isDown = false; });
 
-  $newsgroupDOM.addEventListener("mouseleave", () => {
-    isDown = false;
-  });
+  $newsgroupDOM.addEventListener("mouseleave", () => { isDown = false; });
 
   $newsgroupDOM.addEventListener('mousemove', (e) => {
     if (!isDown) return;

@@ -98,7 +98,7 @@
   color: black;
 }
 
-.toggle .list-view {
+.toggle .list-button {
   filter: invert(44%) sepia(40%) saturate(1022%) hue-rotate(190deg) brightness(83%) contrast(98%);
 }
 
@@ -332,5 +332,17 @@
 }
 
 .grid-view {
+  border: solid #D2DAE0 1px;
+  height: 388px;
+  position: relative;
   display: none;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.grid-view .cell {
+  border: solid #D2DAE0 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
