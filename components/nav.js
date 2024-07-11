@@ -124,7 +124,12 @@ function setupNavElements(
   selectedList
 ) {
   navNode.addEventListener("click", function ({ target }) {
+    if (target.tagName === "UL") {
+      return false;
+    }
+
     navNodeElements[state.currentCategoryIndex].classList.remove("selected");
+
     if (target.tagName === "LI") {
       target = target.querySelector("span");
     }
@@ -240,6 +245,9 @@ function startMyNewsInterval() {
   );
 }
 
+/**
+ * list interval 중단 함수
+ */
 function resetInterval() {
   stopInterval("news");
   stopInterval("my");
