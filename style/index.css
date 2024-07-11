@@ -318,4 +318,14 @@
 
 .paper .no-news {
   display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  color: #879298;
+}
+
+.paper .no-news img {
+  height: 150px;
+  width: 150px;
 }

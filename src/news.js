@@ -153,15 +153,16 @@ const loseCtg = () => {
 const fillBottom = () => {
   const frontNewsList = state.subscribeToggle === "whole" ? newsListObject[categories[state.bigCtg]].filter((news) => news.com === currentCompanyName()) : Object.values(newsListObject).flat().filter(news => news.com === currentCompanyName());
   const newsPerPage = 8;
+  const newsVisibleDOM = document.querySelector(".paper .news-visible");
+  const noNewsDOM = document.querySelector(".paper .no-news");
 
-  if (frontNewsList.length === 0) {
-    updateDOMstyle(document.querySelector(".paper .news-visible"), { display: "none" });
-    updateDOMstyle(document.querySelector(".paper .no-news"), { display: "block" });
+  if(frontNewsList.length === 0){
+    updateDOMstyle(newsVisibleDOM, { display: "none" });
+    updateDOMstyle(noNewsDOM, { display:  "flex" });
+    return;
   }
-  else {
-    updateDOMstyle(document.querySelector(".paper .news-visible"), { display: "block" });
-    updateDOMstyle(document.querySelector(".paper .no-news"), { display: "none" });
-  }
+  updateDOMstyle(newsVisibleDOM, { display: "block" });
+  updateDOMstyle(noNewsDOM, { display:  "none" });
 
   $companyImgDOM.setAttribute("src", `../img/${currentCompanyId()}.png`);
   $headlineImgDOM.setAttribute("src", `../img/sample${1 + Math.floor(Math.random() * 6)}.jpg`);
