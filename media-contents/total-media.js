@@ -103,7 +103,8 @@ function setArrowDisplayInGrid(page) {
     const prevMediaButton = document.querySelector(".media-contents__left-button");
     const nextMediaButton = document.querySelector(".media-contents__right-button");
 
-    const maxPage = Math.floor((mediaListData.data.length - 1) / DATA_COUNT_PER_GRID);
+    const lastPage = Math.floor((mediaListData.data.length - 1) / DATA_COUNT_PER_GRID);
+    const maxPage = lastPage >= 4 ? 3 : lastPage;
 
     if (page === 0) {
         prevMediaButton.classList.add("non-display");
