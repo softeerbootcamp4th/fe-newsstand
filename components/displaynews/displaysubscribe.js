@@ -19,61 +19,7 @@ export let subProgressTimer;
 //currentIndex 전역변수와 구별 (구독만을 위한 변수)
 let subsindex = 0;
 
-//전체 구독 데이터를 가지고 보여주는 함수 - 애니메이션 o
-/*
-export const shownewstab = (fnews) => {
-    console.log(fnews);
-    const tabinfos = document.querySelector('.news-list-header');
-    tabinfos.innerHTML = '';
-
-    fnews.forEach(it => {  
-        tabinfos.innerHTML += "<article class=\"text-button\">" + it + "</article>";
-    });
-
-    const tbuttons = document.querySelectorAll('.text-button');
-
-    const updateTab = (index) => {
-        tbuttons.forEach((btn, idx) => {
-            if (idx === index) {
-                btn.classList.add('subprogress-button','animate');
-                const img = document.createElement('img');
-                img.src = '../../icons/chevron-right.svg'; 
-                img.alt = 'Icon'; 
-                btn.appendChild(img);
-            } else {
-                btn.classList.remove('subprogress-button','animate');
-                // 버튼에서 이미지 제거
-                const img = btn.querySelector('img');
-                if (img) {
-                    btn.removeChild(img);
-                }
-            }
-        });
-
-        const buttonText = tbuttons[index].textContent;
-        console.log(buttonText);
-        window.btntext = buttonText;
-        updateSubDisplay(buttonText);
-    };
-    
-
-    tbuttons.forEach((bbtt, index) => {
-        bbtt.addEventListener('click', () => {
-            subsindex = index;
-            updateTab(subsindex);
-        });
-    });
-
-    updateTab(subsindex);
-
-    clearInterval(subProgressTimer);
-    subProgressTimer = setInterval(() => {
-        subsindex = (subsindex + 1) % tbuttons.length;
-        updateTab(subsindex);
-    }, 2000);
-};
-*/
-
+//로컬 스토리지에 있는 아이템들에 대한 렌더링
 export const shownewstab = (fnews) => {
     //clearInterval(subProgressTimer);
     console.log(fnews);
@@ -89,6 +35,7 @@ export const shownewstab = (fnews) => {
     const updateTab = (index) => {
         tbuttons.forEach((btn, idx) => {
             if (idx === index) {
+                
                 // 애니메이션 초기화 후 다시 추가
                 btn.classList.remove('animate');
                 void btn.offsetWidth;  // Reflow를 발생시켜 애니메이션 재시작
@@ -101,6 +48,7 @@ export const shownewstab = (fnews) => {
                     img.alt = 'Icon';
                     btn.appendChild(img);
                 }
+                
             } else {
                 btn.classList.remove('subprogress-button', 'animate');
                 const img = btn.querySelector('img');
@@ -122,7 +70,7 @@ export const shownewstab = (fnews) => {
             updateTab(subsindex);
         });
     });
-
+    
     updateTab(subsindex);
 
     clearInterval(subProgressTimer);
@@ -131,6 +79,7 @@ export const shownewstab = (fnews) => {
         updateTab(subsindex);
     }, 2000);
 };
+
 //관심 언론사 선택하였을 때, 페이지 넘김에 따른 화면 보여줌
 export const updateSubDisplay = (pname) => {
     const filtered = window.newsData.filter(item => item.pressName === pname);
