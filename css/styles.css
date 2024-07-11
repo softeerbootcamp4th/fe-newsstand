@@ -263,6 +263,15 @@ nav ul li.active a {
     background-color: #7890E7; /* 선택된 nav item의 기존 배경색 */
 }
 
+@keyframes progressBar {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
 .navItem.active > div::after {
     content: '';
     position: absolute;
@@ -271,13 +280,11 @@ nav ul li.active a {
     width: 100%;
     height: 100%;
     background-color: #4362D0; /* 선택된 nav item에 덮어씌울 색상 */
-    transform: scaleX(0); /* 초기 너비를 0으로 설정 */
     transform-origin: left; /* 왼쪽에서 시작 */
-    transition: transform 20s linear; /* 20초 동안 서서히 변화 */
 }
 
 .navItem.progress > div::after {
-    transform: scaleX(1); /* 최종 너비를 100%로 설정 */
+    animation: progressBar 20s linear forwards; /* 20초 동안 progressBar keyframes 실행 */
 }
 
 .articleImage {
