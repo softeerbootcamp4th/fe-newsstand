@@ -92,6 +92,10 @@ p {
     transform: scaleX(1);
 }
 
+.p-underline {
+    text-decoration: underline;
+}
+
 a:hover {
     text-decoration: underline;
 }
