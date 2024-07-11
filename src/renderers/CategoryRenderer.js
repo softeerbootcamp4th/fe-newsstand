@@ -1,3 +1,4 @@
+import { categoryEventNameList } from "../events/categoryEvent.js";
 import { Renderer } from "./Renderer.js";
 
 /**
@@ -19,7 +20,8 @@ class CategoryRenderer extends Renderer {
      * @returns {boolean}
      */
     _checkEventName(event) {
-        return event.eventName === 'clickCategory'; // 나중에 상수 배열로 빼기
+        debugger;
+        return categoryEventNameList.includes(event.eventName);
     }
 
     /**
