@@ -7,10 +7,10 @@ export const mytabs = () => {
     const datas1 = localStorage.getItem("mysubscribe");
     clickArt('my-article');
     clearInterval(animationTimer);
-    if (!datas1) {
+    clearInterval(subProgressTimer);
+    if (datas1.length === 0) {
         console.log('No data found in localStorage');
         const button = document.querySelector(`.news-list-header`);
-        
         button.innerHTML = '';
         const lists = document.querySelector(".news-main-container");
         lists.innerHTML = '';
@@ -18,9 +18,8 @@ export const mytabs = () => {
         lists1.innerHTML = '';
         const lists2 = document.querySelector(".news-press-container");
         lists2.innerHTML = ''; 
-        return;
+        //return;
     }
-
     //필수
     else{
         const parsedData = JSON.parse(datas1);
@@ -32,6 +31,7 @@ export const newstype = ["economy", "broadcast", "internet", "englishnews", "spo
 
 export const originaltabs = () => {
     clearInterval(subProgressTimer);
+    clearInterval(animationTimer);
     const defaultn = document.querySelector(".news-list-header");
     defaultn.innerHTML = 
     "<article class=\"text-button\" id=\"economy\" data-index=\"0\">종합/경제 <span></span></article>"+
