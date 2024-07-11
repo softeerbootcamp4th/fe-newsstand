@@ -1,6 +1,7 @@
 import HeaderContainer from "../views/header/headerContainer.js";
 import Headline from "../views/headline/headline.js";
-import Main from "../views/main/main.js";
+// import Main from "../views/main/main.js";
+import MainController from "../views/main/mainController.js";
 
 export const App = () => {
     const appContainer = document.createElement('div');
@@ -50,8 +51,11 @@ export const App = () => {
             return;
         }
 
-        const main = Main();
-        mainContainer.appendChild(main.element);
+        // const main = Main();
+        // mainContainer.appendChild(main.element);
+
+        const mainViewController = new MainController();
+        mainContainer.appendChild(mainViewController.getElement()); 
     }
 
     function render() {
