@@ -186,6 +186,12 @@ function actions() {
     tempMap.set("showMyCompanies", function (data) {
         showMyCompany(data)
     })
+    tempMap.set("subscribe_getback", async function (articleReturn) {
+        articleReturn(state.sortedNews[state.currentArticleIndex][state.currentArticleDetailIndex])
+    })
+    tempMap.set("unsubscribe_getback", async function (articleReturn) {
+        articleReturn(state.sortedNews[state.currentArticleIndex][state.currentArticleDetailIndex])
+    })
 
     return tempMap
 }
