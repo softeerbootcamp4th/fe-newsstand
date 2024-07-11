@@ -1,6 +1,5 @@
-import { deleteNav, generateNav } from "../components/content/nav.js";
 import { generateBanner } from "../components/banner/newsBanner.js";
-import { updateMyList, headlineData } from "../resources/data.js";
+import { headlineData } from "../resources/data.js";
 import { startBannerInterval } from "../global/interval.js";
 import store from "../global/stoageManager.js";
 import state from "../global/state.js";

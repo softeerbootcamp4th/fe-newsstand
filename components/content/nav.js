@@ -27,7 +27,7 @@ export function generateNav(container) {
   function navInit(selectedList) {
     state.currentCategoryIndex = 0;
     state.currentMediaIndex = 0;
-    resetInterval();
+    stopInterval();
 
     const nav = generateNode("nav", "content_navigator");
     const ul = generateNode("ul", "contentList");
@@ -157,7 +157,7 @@ function handleNavClick(
 
   selectCategoryByContent(target.innerHTML, selectedList, navNodeElements);
 
-  resetInterval();
+  stopInterval();
   intervalStartFunction();
 
   updateFunction(state.currentCategoryIndex);
@@ -271,12 +271,4 @@ function startMyNewsInterval() {
     updateNavElements,
     updateMyNewsList
   );
-}
-
-/**
- * list interval 중단 함수
- */
-function resetInterval() {
-  stopInterval("news");
-  stopInterval("my");
 }

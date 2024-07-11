@@ -1,5 +1,6 @@
 import {
   getCateogryLength,
+  getMediaDataLength,
   getMediaLengthByIndex,
   getMyListLength,
 } from "../../resources/data.js";
@@ -9,6 +10,7 @@ import {
   updateMyMedia,
 } from "./nav.js";
 import state from "../../global/state.js";
+import { updateGridContent } from "../../grid/grid.js";
 
 const leftButton = document.querySelector(".leftButton");
 const rightButton = document.querySelector(".rightButton");
@@ -21,20 +23,36 @@ rightButton.addEventListener("click", () => moveNextMedia(state));
  * @param {object} state 현재 상태
  */
 function movePrevMedia(state) {
-  resetCover();
+  if (state.headerShow === 0) {
+    resetCover();
 
-  const newState =
+    const newState =
+      state.headerCategory === 0
+        ? handleMovePrev(state, getCateogryLength, getMediaLengthByIndex)
+        : handleMovePrev(state, getMyListLength, () => 0);
+
+    state.currentCategoryIndex = newState.currentCategoryIndex;
+    state.currentMediaIndex = newState.currentMediaIndex;
+
+    updateNavElements(document.querySelectorAll(".contentList li"));
     state.headerCategory === 0
-      ? handleMovePrev(state, getCateogryLength, getMediaLengthByIndex)
-      : handleMovePrev(state, getMyListLength, () => 0);
+      ? updateCategoryByIndex(state.currentCategoryIndex)
+      : updateMyMedia(state.currentCategoryIndex);
+  } else if (state.headerShow === 1) {
+    if (state.headerCategory === 0) {
+      let index = state.currentCategoryIndex - 1;
+      if (index < 0) index = Math.floor(getMyListLength() / 24) + 1;
 
-  state.currentCategoryIndex = newState.currentCategoryIndex;
-  state.currentMediaIndex = newState.currentMediaIndex;
+      updateGridContent(state.headerCategory, index);
+      state.currentCategoryIndex = index;
+    } else if (state.headerCategory === 1) {
+      let index = state.currentCategoryIndex - 1;
+      if (index < 0) index = Math.floor(getMyListLength() / 24) + 1;
 
-  updateNavElements(document.querySelectorAll(".contentList li"));
-  state.headerCategory === 0
-    ? updateCategoryByIndex(state.currentCategoryIndex)
-    : updateMyMedia(state.currentCategoryIndex);
+      updateGridContent(state.headerCategory, index);
+      state.currentCategoryIndex = index;
+    }
+  }
 }
 
 /**
@@ -42,20 +60,38 @@ function movePrevMedia(state) {
  * @param {object} state 현재 상태
  */
 function moveNextMedia(state) {
-  resetCover();
+  if (state.headerShow === 0) {
+    resetCover();
 
-  const newState =
+    const newState =
+      state.headerCategory === 0
+        ? handleMoveNext(state, getCateogryLength, getMediaLengthByIndex)
+        : handleMoveNext(state, getMyListLength, () => 0);
+
+    state.currentCategoryIndex = newState.currentCategoryIndex;
+    state.currentMediaIndex = newState.currentMediaIndex;
+
+    updateNavElements(document.querySelectorAll(".contentList li"));
     state.headerCategory === 0
-      ? handleMoveNext(state, getCateogryLength, getMediaLengthByIndex)
-      : handleMoveNext(state, getMyListLength, () => 0);
+      ? updateCategoryByIndex(state.currentCategoryIndex)
+      : updateMyMedia(state.currentCategoryIndex);
+  } else if (state.headerShow === 1) {
+    if (state.headerCategory === 0) {
+      let index =
+        (state.currentCategoryIndex + 1) %
+        (Math.floor(getMediaDataLength() / 24) + 1);
 
-  state.currentCategoryIndex = newState.currentCategoryIndex;
-  state.currentMediaIndex = newState.currentMediaIndex;
+      updateGridContent(state.headerCategory, index);
+      state.currentCategoryIndex = index;
+    } else if (state.headerCategory === 1) {
+      let index =
+        (state.currentCategoryIndex + 1) %
+        (Math.floor(getMyListLength() / 24) + 1);
 
-  updateNavElements(document.querySelectorAll(".contentList li"));
-  state.headerCategory === 0
-    ? updateCategoryByIndex(state.currentCategoryIndex)
-    : updateMyMedia(state.currentCategoryIndex);
+      updateGridContent(state.headerCategory, index);
+      state.currentCategoryIndex = index;
+    }
+  }
 }
 
 /**

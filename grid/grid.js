@@ -1,8 +1,12 @@
+import { stopInterval } from "../global/interval.js";
 import { getMyDataAsArray, mediaData } from "../resources/data.js";
 import { generateNode } from "../utils/utils.js";
+import state from "../global/state.js";
 
 export function generateGridContent(container, categoryIndex) {
-  let currentGridIndex = 0;
+  stopInterval();
+  state.currentCategoryIndex = 0;
+  let currentGridIndex = state.currentCategoryIndex;
 
   container.classList.remove("list");
   container.classList.add("grid");
@@ -12,13 +16,28 @@ export function generateGridContent(container, categoryIndex) {
   if (categoryIndex === 0) mediaPageList = getGridList(mediaData);
   else if (categoryIndex === 1) mediaPageList = getGridList(getMyDataAsArray());
 
-  renderGridItems(divNewsGridWrapper, mediaPageList[currentGridIndex]);
+  if (mediaPageList.length != 0)
+    renderGridItems(divNewsGridWrapper, mediaPageList[currentGridIndex]);
 
   container.appendChild(divNewsGridWrapper);
 }
 
+export function updateGridContent(headerCategoryIndex, categoryIndex) {
+  const gridWrapper = document.querySelector(".newsGrid_wrapper");
+  gridWrapper.innerHTML = "";
+
+  let mediaPageList = [];
+  if (headerCategoryIndex === 0) mediaPageList = getGridList(mediaData);
+  else if (headerCategoryIndex === 1)
+    mediaPageList = getGridList(getMyDataAsArray());
+
+  renderGridItems(gridWrapper, mediaPageList[categoryIndex]);
+}
+
 function getGridList(mediaObjectList) {
   let girdList = [];
+
+  if (mediaObjectList.length === 0) return girdList;
 
   Object.entries(mediaObjectList).forEach((element, index) => {
     const object = { mediaId: element[0], media: element[1].media };

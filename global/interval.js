@@ -109,6 +109,9 @@ function stopInterval(intervalType) {
     clearInterval(newsInterval);
   } else if (intervalType === "my") {
     clearInterval(myInterval);
+  } else {
+    clearInterval(newsInterval);
+    clearInterval(myInterval);
   }
 }
 

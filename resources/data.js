@@ -404,3 +404,7 @@ export function getMyDataAsArray() {
   const set = myData;
   return [...set];
 }
+
+export function getMediaDataLength() {
+  return [...Object.entries(mediaData)].length;
+}
