@@ -2,7 +2,7 @@ import { deleteNav, generateNav } from "../components/content/nav.js";
 import { updateMyList } from "../resources/data.js";
 import { getTodayString, generateNode } from "../utils/utils.js";
 
-export function generateListContent(container, categoryIndex) {
+export function generateListContent(container, headerCategoryIndex) {
   container.classList.remove("grid");
   container.classList.add("list");
 
@@ -41,7 +41,7 @@ export function generateListContent(container, categoryIndex) {
   deleteNav();
 
   const navContainer = document.getElementById("nav_container");
-  generateNav(navContainer, categoryIndex);
+  generateNav(navContainer, headerCategoryIndex);
   updateMyList();
 }
 

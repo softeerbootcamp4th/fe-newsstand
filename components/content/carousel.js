@@ -43,13 +43,13 @@ function movePrevMedia(state) {
       let index = state.currentCategoryIndex - 1;
       if (index < 0) index = Math.floor(getMediaDataLength() / 24);
 
-      updateGridContent(state.headerCategory, index);
+      updateGridContent(index);
       state.currentCategoryIndex = index;
     } else if (state.headerCategory === 1) {
       let index = state.currentCategoryIndex - 1;
       if (index < 0) index = Math.floor(getMyListLength() / 24);
 
-      updateGridContent(state.headerCategory, index);
+      updateGridContent(index);
       state.currentCategoryIndex = index;
     }
   }
@@ -81,14 +81,14 @@ function moveNextMedia(state) {
         (state.currentCategoryIndex + 1) %
         (Math.floor(getMediaDataLength() / 24) + 1);
 
-      updateGridContent(state.headerCategory, index);
+      updateGridContent(index);
       state.currentCategoryIndex = index;
     } else if (state.headerCategory === 1) {
       let index =
         (state.currentCategoryIndex + 1) %
         (Math.floor(getMyListLength() / 24) + 1);
 
-      updateGridContent(state.headerCategory, index);
+      updateGridContent(index);
       state.currentCategoryIndex = index;
     }
   }
