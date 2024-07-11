@@ -22,6 +22,8 @@ class NewsStates extends States {
         this.newsListIndex = newsListIndex;
         this.allNewsData = allNewsData;
         this.subscribedNewsData = subscribedNewsData;
+        console.log(allNewsData)
+        console.log(subscribedNewsData)
     }
 
     /**
@@ -45,7 +47,9 @@ class NewsStates extends States {
         this.subAllInfo = value === 0 ? "all" : "sub";
         this.notify({
             eventName: "clickSubAll",
-            subAllInfo: this.subAllInfo
+            subAllInfo: this.subAllInfo,
+            categoryIndex: this.categoryIndex,
+            categoryList: this.subAllInfo === "all" ? Object.keys(this.allNewsData) : Object.keys(this.subscribedNewsData)
         })
     }
 }
