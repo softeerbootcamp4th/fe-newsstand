@@ -20,7 +20,6 @@ class CategoryRenderer extends Renderer {
      * @returns {boolean}
      */
     _checkEventName(event) {
-        debugger;
         return categoryEventNameList.includes(event.eventName);
     }
 
