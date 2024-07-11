@@ -29,7 +29,7 @@ NewsList.prototype.setState = function ({ companyFilterIndex, viewTypeFilterInde
 };
 
 NewsList.prototype.changeTab = function (companyFilterIndex, tabIndex) {
-  this.state = { companyFilterIndex };
+  this.state.companyFilterIndex = companyFilterIndex;
 
   this.render(tabIndex);
 };
