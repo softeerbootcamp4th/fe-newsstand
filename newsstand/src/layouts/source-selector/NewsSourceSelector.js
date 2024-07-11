@@ -20,7 +20,10 @@ const NewsSourceSelector = (props) => {
         state: props.selectedSource,
         onClick: () => {
             props.setSelectedSource('내가 구독한 언론사')
-            props.setSelectedCategory(getCompanyName(getSubscribedCompaniesId()[0]))
+
+            getSubscribedCompaniesId().then((idList) => {
+                props.setSelectedCategory(getCompanyName(idList[0]))
+            })
         },
     })
 
