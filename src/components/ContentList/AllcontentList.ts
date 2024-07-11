@@ -1,7 +1,7 @@
 import { useState, useEffect, cc, ce, Main } from "@/libs";
 import { MediaIdByCategories } from "@/models/Newsstand";
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
-import { CategoryTabActiveBadge } from "../MediaContent/CategoryTabActiveBadge";
+import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
 import { MediaContent } from "../MediaContent/MediaContent";
 import { MediaContentTabs } from "./ContentListHeader";
 
