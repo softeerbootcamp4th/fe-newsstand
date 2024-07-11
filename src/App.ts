@@ -5,12 +5,11 @@ import { ce, Div } from "./libs/nodes/elements";
 import styles from "./App.module.css";
 import { ContentList } from "./components/ContentList";
 import { ModalProvider } from "./providers/ModalProvider";
-import { AppComponent } from "./libs";
 import { ToastProvider } from "./providers/ToastProvider";
 export const App = () => {
-  return cc(ToastProvider as AppComponent, {
+  return cc(ToastProvider, {
     children: [
-      cc(ModalProvider as AppComponent, {
+      cc(ModalProvider, {
         children: [
           ce(Div, {
             className: styles.container,

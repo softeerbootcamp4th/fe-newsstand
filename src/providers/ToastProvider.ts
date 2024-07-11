@@ -29,15 +29,20 @@ export const ToastProvider = ({ children }: { children: AppChild[] }) => {
   };
 
   useEffect(() => {
+    console.log("add Interval");
     const interval = setInterval(() => {
       setCurrentToasts((prev) => {
         if (prev.length === 0) return prev;
         return prev.slice(1);
       });
     }, 5000);
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      console.log("remove Interval");
+    };
   }, []);
-  return cc(ToastContext.Provider, {
+
+  return ToastContext.Provider({
     value: {
       addToast,
     },
