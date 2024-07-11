@@ -6,7 +6,9 @@ import {
   updateQueue,
   render,
 } from "../core";
+import { useCallback } from "./useCallback";
 
+type Updater<T> = ((prev: T) => T) | T;
 export const useState = <T>(initialState: T) => {
   if (!stateIdxMap.has(currentKey)) {
     stateIdxMap.set(currentKey, 0);
@@ -19,8 +21,11 @@ export const useState = <T>(initialState: T) => {
   if (stateIdx >= states.length) {
     states.push(initialState);
   }
-  const state = states[stateIdx];
-  const setState = (newState: T) => {
+  const setState = useCallback((updater: Updater<T>) => {
+    const newState =
+      typeof updater === "function"
+        ? (updater as (prev: T) => T)(states[stateIdx] as T)
+        : updater;
     if (isRendering) {
       updateQueue.pushBack(() => {
         states[stateIdx] = newState;
@@ -28,7 +33,7 @@ export const useState = <T>(initialState: T) => {
     }
     states[stateIdx] = newState;
     render();
-  };
+  }, []);
   stateIdxMap.set(currentKey, stateIdx + 1);
-  return [state, setState] as [T, (newState: T) => void];
+  return [states[stateIdx], setState] as [T, (updater: Updater<T>) => void];
 };
