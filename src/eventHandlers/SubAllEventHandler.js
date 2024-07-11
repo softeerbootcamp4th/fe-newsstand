@@ -10,7 +10,7 @@ class SubAllEventHandler extends EventsHandler {
      * @param {States} states - 주입받은 states 
      * @param {object} eventInfoList - 발생한 이벤트 리스트
      */
-    constructor(states = {}, eventInfoList) {
+    constructor(states = {}, eventInfoList = []) {
         super();
         this.states = states;
         this.element = document.querySelector(".news-list__menu__selectors");

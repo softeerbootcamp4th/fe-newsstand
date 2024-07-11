@@ -6,6 +6,8 @@ import { fetchAllNewsData, fetchSubscribedNewsData } from "./data/newsDataFetche
 import { SubAllEventHandler } from "./eventHandlers/SubAllEventHandler.js";
 import { subAllClickEventInfo } from "./events/subAllEvent.js";
 import { SubAllRenderer } from "./renderers/SubAllRenderer.js";
+import { NewsListEventHandler } from "./eventHandlers/NewsListEventHandler.js";
+import { NewsListRenderer } from "./renderers/NewsListRenderer.js";
 
 
 const allNewsData = await fetchAllNewsData();
@@ -13,8 +15,10 @@ const subscribedNewsData = await fetchSubscribedNewsData();
 
 const newsStates = new NewsStates({ allNewsData, subscribedNewsData });
 
-new CategoryEventHandler(newsStates, [categoryClickEventInfo]);
 new SubAllEventHandler(newsStates, [subAllClickEventInfo]);
+new CategoryEventHandler(newsStates, [categoryClickEventInfo]);
+new NewsListEventHandler(newsStates, []);
 
-newsStates.subscribe(new CategoryRenderer);
 newsStates.subscribe(new SubAllRenderer);
+newsStates.subscribe(new CategoryRenderer);
+newsStates.subscribe(new NewsListRenderer);

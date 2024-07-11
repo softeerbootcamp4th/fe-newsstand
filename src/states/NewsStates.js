@@ -15,11 +15,12 @@ class NewsStates extends States {
      * @param {json} newsInfo.subscribedNewsData - 구독한 언론사 목록에 대한 json 파일
      * @param {Renderer} renderers - 렌더링을 해주는 클래스
      */
-    constructor({ categoryIndex = 0, subAllInfo = 'all', newsListIndex = 0, allNewsData, subscribedNewsData }) {
+    constructor({ categoryIndex = 0, subAllInfo = 'all', newsListIndex = 0, currenNewsListIndex = 0, allNewsData, subscribedNewsData }) {
         super();
         this.categoryIndex = categoryIndex;
         this.subAllInfo = subAllInfo;
         this.newsListIndex = newsListIndex;
+        this.currenNewsListIndex = currenNewsListIndex;
         this.allNewsData = allNewsData;
         this.subscribedNewsData = subscribedNewsData;
     }
@@ -30,9 +31,11 @@ class NewsStates extends States {
      */
     setCategory(value) {
         this.categoryIndex = value;
+        this.currenNewsListIndex = 0;
         this.notify({
             eventName: "clickCategory",
             ...this.#getCategoryStates(),
+            ...this.#getNewsListStates(),
         })
     }
 
@@ -46,10 +49,15 @@ class NewsStates extends States {
         this.notify({
             eventName: "clickSubAll",
             ...this.#getCategoryStates(),
-            ...this.#getSubAllStates()
+            ...this.#getSubAllStates(),
+            ...this.#getNewsListStates(),
         })
     }
 
+    /**
+     * 카테고리를 렌더링 하는데 필요한 state 객체를 반환하는 함수
+     * @returns {object} 
+     */
     #getCategoryStates() {
         return {
             categoryIndex: this.categoryIndex,
@@ -57,9 +65,21 @@ class NewsStates extends States {
         }
     }
 
+    /**
+     * '전체언론사', '내가 구독한 언론사'를 렌더링 하는데 필요한 state 객체를 반환하는 함수
+     * @returns {object}
+     */
     #getSubAllStates() {
         return {
             subAllInfo: this.subAllInfo,
+        }
+    }
+
+    #getNewsListStates() {
+        const newsListRawData = this.subAllInfo === "all" ? this.allNewsData : this.subscribedNewsData;
+        const newsListData = Object.values(newsListRawData)[this.categoryIndex].slice(this.currenNewsListIndex * 7, this.currenNewsListIndex * 7 + 7);
+        return {
+            newsList: newsListData,
         }
     }
 }
