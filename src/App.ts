@@ -6,15 +6,20 @@ import styles from "./App.module.css";
 import { MediaContent } from "./components/MediaContent";
 import { ModalProvider } from "./providers/ModalProvider";
 import { AppComponent } from "./libs";
+import { ToastProvider } from "./providers/ToastProvider";
 export const App = () => {
-  return cc(ModalProvider as AppComponent, {
+  return cc(ToastProvider as AppComponent, {
     children: [
-      ce(Div, {
-        className: styles.container,
+      cc(ModalProvider as AppComponent, {
         children: [
-          cc(AppHeader, {}),
-          cc(CurrentNews, {}),
-          cc(MediaContent, {}),
+          ce(Div, {
+            className: styles.container,
+            children: [
+              cc(AppHeader, {}),
+              cc(CurrentNews, {}),
+              cc(MediaContent, {}),
+            ],
+          }),
         ],
       }),
     ],
