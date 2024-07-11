@@ -1,5 +1,5 @@
 import { menuInfo } from "../../pages/state/newsState.js"
-import { handleNextPageEvent, handlePrePageEvent } from "../articleList/event/pageEvent.js"
+import { addNextPageEvent, addPrePageEvent } from "../articleList/event/pageEvent.js"
 
 export const createArrow = () => {
     return `
@@ -31,7 +31,7 @@ const addEventListenerLeftArrow = () => {
     const leftArrow = document.querySelector('.left-arrow-btn');
     const thisBtn = document.querySelector('.menu-btn-wrapper-clicked') !== null ? document.querySelector('.menu-btn-wrapper-clicked') : document.querySelectorAll('.menu-btn-wrapper')[0]
     leftArrow.addEventListener('click', () => {
-        handlePrePageEvent({ isNow: true })
+        addPrePageEvent({ isNow: true })
     })
 }
 
@@ -40,6 +40,6 @@ const addEventListenerRightArrow = () => {
     const thisBtn = document.querySelector('.menu-btn-wrapper-clicked');
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
     rightArrow.addEventListener('click', () => {
-        handleNextPageEvent({ isNow: true })
+        addNextPageEvent({ isNow: true })
     })
 }

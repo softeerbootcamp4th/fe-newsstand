@@ -33,7 +33,7 @@ const nextPageCallback = () => {
     }
 }
 
-export const handleNextPageEvent = ({ isNow = false } = {}) => {
+export const addNextPageEvent = ({ isNow = false } = {}) => {
     const totalMenuLength = isMediaWhole ? menuInfo.length : localStorage.length;
     
     if (isMediaWhole) {
@@ -78,7 +78,7 @@ export const moveNextCategory = () => {
 
     thisBtn.classList.remove('menu-btn-wrapper-clicked');
     nextBtn.classList.add('menu-btn-wrapper-clicked');
-    handleNextPageEvent();
+    addNextPageEvent();
 }
 
 export const moveNextPage = () => {
@@ -96,7 +96,7 @@ export const moveNextPage = () => {
     fillBackground.classList.add('fill-background');
     thisBtn.appendChild(fillBackground);
     
-    handleNextPageEvent();
+    addNextPageEvent();
 }
 
 const prePageCallback = () => {
@@ -115,7 +115,7 @@ const prePageCallback = () => {
     }
 }
 
-export const handlePrePageEvent = ({ isNow = false } = {}) => {
+export const addPrePageEvent = ({ isNow = false } = {}) => {
     newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
     newsState.setNowMediaName(menuInfo[menuIdx].mediaName)
     if (isNow) {
@@ -147,7 +147,7 @@ export const movePreCategory = () => {
     thisBtn.classList.remove('menu-btn-wrapper-clicked');
     preBtn.classList.add('menu-btn-wrapper-clicked');
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
-    handleNextPageEvent();
+    addNextPageEvent();
 }
 
 export const movePrePage = () => {
@@ -162,7 +162,7 @@ export const movePrePage = () => {
     fillBackground.classList.add('fill-background');
     thisBtn.appendChild(fillBackground);
     
-    handleNextPageEvent();
+    addNextPageEvent();
 }
 
 export const checkSubscription = () => {

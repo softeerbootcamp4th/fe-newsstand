@@ -9,7 +9,7 @@ import { createMenuList,
     insertWholeContent,
     renderSubscriptionList,
 } from "./html/articleListHtml.js";
-import { handleNextPageEvent } from "./event/pageEvent.js";
+import { addNextPageEvent } from "./event/pageEvent.js";
 import { addModeSelectionEventListener,
     addViewSelectionEventListener,
     addCategorySelectionEventListener,
@@ -92,7 +92,7 @@ export const setWholeData = () => {
     document.querySelectorAll('.menu-btn-wrapper').forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
     document.querySelectorAll('.menu-btn-wrapper')[menuIdx].classList.add('menu-btn-wrapper-clicked')
 
-    handleNextPageEvent();
+    addNextPageEvent();
 }
 
 export const setSubscriptionData = () => {
@@ -108,5 +108,5 @@ export const setSubscriptionData = () => {
     document.querySelectorAll('.menu-btn-wrapper').forEach(b => b.classList.remove('menu-btn-wrapper-clicked'));
     document.querySelectorAll('.menu-btn-wrapper')[menuIdx].classList.add('menu-btn-wrapper-clicked');
     
-    handleNextPageEvent();
+    addNextPageEvent();
 }
