@@ -63,6 +63,7 @@ export const render = () =>
     });
     while (renderQueue.length) {
       const cur = renderQueue.popFront()!;
+
       if (isRenderingAppComponent(cur)) {
         const { render: component, props, parent, key, forced } = cur;
         const prevProps = cachedProps.get(key);
@@ -98,6 +99,7 @@ export const render = () =>
         }
         renderQueue.pushFront({
           ...createdComponent,
+          element: createdComponent.element.cloneNode(true) as HTMLElement,
           parentKey: key,
           componentKey: key,
           parent,
@@ -155,6 +157,9 @@ export const render = () =>
         }
         renderQueue.pushBack({
           ...(child as CreatedAppElement),
+          element: (child as CreatedAppElement).element.cloneNode(
+            true,
+          ) as HTMLElement,
           parentKey: curKey,
           componentKey: componentKey,
           parent: element,
