@@ -11,8 +11,12 @@ export function generateBanner(container, content) {
 
   const bannerList = generateNode("ul", "bannerList");
   listContainer.appendChild(bannerList);
-  bannerList.addEventListener("mouseover", stopBannerInterval);
-  bannerList.addEventListener("mouseleave", startBannerInterval);
+  bannerList.addEventListener("mouseover", ({ target }) =>
+    stopBannerInterval(target)
+  );
+  bannerList.addEventListener("mouseleave", ({ target }) =>
+    startBannerInterval(target)
+  );
 
   content.news.forEach((element) => {
     const elementContainer = generateNode("li");

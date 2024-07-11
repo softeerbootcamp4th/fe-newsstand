@@ -15,7 +15,7 @@ today.innerHTML = getTodayString();
 const bannerContainer = document.getElementById("banner_container");
 generateBanner(bannerContainer, headlineData[0]);
 generateBanner(bannerContainer, headlineData[1]);
-startBannerInterval(bannerContainer);
+startBannerInterval();
 
 //nav
 const navContainer = document.getElementById("nav_container");

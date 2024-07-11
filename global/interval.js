@@ -102,20 +102,19 @@ function stopInterval(intervalType) {
 }
 
 /**
- * bannerContainer하위의 에니매이션 실행하는 함수
+ * banner 에니매이션 실행하는 함수
  * banner끼리 time의 간격을 두고 롤링
- * @param {Node} bannerContainer
  * @param {int} time
  */
-function rollingCallback(bannerContainer, time) {
-  const prevElements = bannerContainer.querySelectorAll(".prev");
+function rollingCallback(time) {
+  const prevElements = document.querySelectorAll(".prev");
   prevElements.forEach((prev, index) => {
     setTimeout(() => {
       prev.classList.remove("prev");
     }, index * time);
   });
 
-  const currentElements = bannerContainer.querySelectorAll(".current");
+  const currentElements = document.querySelectorAll(".current");
   currentElements.forEach((current, index) => {
     setTimeout(() => {
       current.classList.remove("current");
@@ -123,7 +122,7 @@ function rollingCallback(bannerContainer, time) {
     }, index * time);
   });
 
-  const nextElements = bannerContainer.querySelectorAll(".next");
+  const nextElements = document.querySelectorAll(".next");
   nextElements.forEach((next, index) => {
     setTimeout(() => {
       next.classList.remove("next");
@@ -140,13 +139,9 @@ function rollingCallback(bannerContainer, time) {
 
 /**
  * 배너 롤링 interval 시작
- * @param {Node} bannerContainer
  */
-function startBannerInterval(bannerContainer) {
-  bannerInterval = setInterval(
-    () => rollingCallback(bannerContainer, 1000),
-    5000
-  );
+function startBannerInterval() {
+  bannerInterval = setInterval(() => rollingCallback(1000), 3000);
 }
 
 /**
