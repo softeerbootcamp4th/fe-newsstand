@@ -12,9 +12,13 @@
 
 .emptyView {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 12px;
+
+  width: 100%;
+  height: 100%;
 
   white-space: pre-wrap;
   text-align: center;
