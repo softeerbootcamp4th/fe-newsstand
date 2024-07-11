@@ -47,7 +47,7 @@ export const moveToSubscribedCategory = (props) => {
         props.setSelectedCategory(props.companyName)
         props.setSelectedSource('내가 구독한 언론사')
         props.setViewType('list')
-    }, 5000)
+    }, 1000)
 }
 
 export const getSubscribedCompanies = async (wholeCompanyData) => {

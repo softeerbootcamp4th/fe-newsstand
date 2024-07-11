@@ -22,7 +22,7 @@ const CategoryBox = (props) => {
     }
     useEffect(
         () => {
-            if (props.state.value === props.text) setTimeout(() => moveAutoScroll(), 10)
+            if (props.state.value === props.text) setTimeout(() => moveAutoScroll(), 60)
         },
         [props.state],
         1,
@@ -79,12 +79,14 @@ const CategoryBox = (props) => {
                 style="background-color: ${props.state.value === props.text ? '#7890E7' : 'transparent'};"
             >
                 <div class="category-box-fill" id="category-fill-${props.id}"></div>
-                <li class="category-text" id="category-text-${props.id}"
+                <li class="category-text-wrap" id="category-text-${props.id}"
                     style="font-weight: ${props.state.value === props.text ? 'bold' : 400};
                     color: ${props.state.value === props.text ? 'white' : 'black'};"
                 >
-                    ${props.text} 
-                    <span style="font-size: 14px; padding-left: 12px">
+                    <span class="category-text">
+                        ${props.text} 
+                    </span>
+                    <span class="category-count-text">
                         ${companyCount > 0 && props.state.value === props.text ? countText : ''}
                     </span>
                 </li>

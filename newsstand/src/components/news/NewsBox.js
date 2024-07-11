@@ -5,10 +5,13 @@ import createComponent from '../../core/component/component.js'
 import IconView, { Icon } from '../base/IconView.js'
 import { isSubscribed, subscribe, moveToSubscribedCategory } from '../../utils/subscribeUtils.js'
 import { toastOn } from '../../utils/toastUtils.js'
+import { debounce } from '../../core/hooks/useState.js'
 
 const NewsBox = (props) => {
     const [isHover, setIsHover] = useState({ stateId: 1, initialValue: false })
     const [subscribed, setSubscribed] = useState({ stateId: 2, initialValue: false })
+
+    const debouncedSetIsHover = debounce(setIsHover, 60)
 
     useEffect(
         () => {
@@ -22,11 +25,11 @@ const NewsBox = (props) => {
     )
 
     const handleMouseEnter = () => {
-        setIsHover(true)
+        debouncedSetIsHover(true)
     }
 
     const handleMouseLeave = () => {
-        setIsHover(false)
+        debouncedSetIsHover(false)
     }
 
     const bindEvents = () => {
