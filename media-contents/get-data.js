@@ -1,3 +1,4 @@
+import { mediaCategory } from '../store/media-category.js';
 import { mediaDetail } from '../store/media-detail.js';
 import { mediaList } from '../store/media-list.js';
 import { getData } from '../utils/fetch.js';
@@ -19,4 +20,17 @@ export async function getMediaData() {
      */
     const mediaDetailData = await getData('../static/data/media-detail.json');
     mediaDetail.setData(mediaDetailData.data);
+
+    /**
+     * 카테고리별 언론사 목록
+     */
+    const categoryData = await getData('../static/data/media-by-category.json');
+    const shuffledCategory = categoryData.data.map((_data) => {
+        const shuffledMediaList = shuffleList(_data.media.slice());
+        return {
+            ..._data,
+            media: shuffledMediaList
+        }
+    });
+    mediaCategory.setData(shuffledCategory);
 }

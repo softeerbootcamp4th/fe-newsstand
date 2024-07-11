@@ -1,5 +1,4 @@
 import { subscribedMediaList } from "../store/subscribed-media.js";
-import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
 import { mediaList } from "../store/media-list.js";
 import { DATA_COUNT_PER_GRID, DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
@@ -13,15 +12,12 @@ import {
     getGridMediaItem,
     clickGridItem,
 } from "./util.js";
-
-let categoryData = {};
+import { mediaCategory } from "../store/media-category.js";
 
 /**
  * @description 전체 언론사를 렌더링하는 함수
  */
 export async function renderTotalMedia() {
-    categoryData = await getData('../static/data/media-by-category.json');
-
     const displayMode = getDisplayMode();
 
     const gridBoxDOM = document.querySelector(".media-contents__grid-box");
@@ -140,7 +136,7 @@ function renderGridMedia(page) {
  * @description 미디어 카테고리, 콘텐츠를 리스트 형식으로 렌더링하는 함수
  */
 function renderListMedia(categoryIdx, mediaIdx) {
-    const category = categoryData.data;
+    const category = mediaCategory.data;
     const categoryListDOM = document.querySelector(".media-contents__category-list");
 
     /**
@@ -228,7 +224,7 @@ function navigatePrevMedia() {
  * @description 리스트 보기에서 prev, next 버튼 클릭 동작을 수행하는 함수
  */
 function clickListNavigationButton(step) {
-    const category = categoryData.data;
+    const category = mediaCategory.data;
     const selectedCategory = document.querySelector(".media-contents__category-item--selected");
 
     const selectedCategoryIdx = parseInt(selectedCategory.dataset.selectedCategoryIdx);
@@ -248,7 +244,7 @@ function clickListNavigationButton(step) {
             /**
              * 첫 카테고리에 다다른 경우 마지막 카테고리로 이동
              */
-            const categoryIdx = categoryData.length - 1;
+            const categoryIdx = mediaCategory.getLength() - 1;
             selectedCategory.dataset.selectedCategoryIdx = categoryIdx;
             selectedCategory.dataset.selectedMediaIdx = category[categoryIdx].length - 1;
         } else {
@@ -257,7 +253,7 @@ function clickListNavigationButton(step) {
         }
     } else if (nextMediaIdx === currentCategory.length) {
         const nextCategoryIdx = selectedCategoryIdx + 1;
-        if (nextCategoryIdx === categoryData.length) {
+        if (nextCategoryIdx === mediaCategory.getLength()) {
             /**
              * 마지막 카테고리에 다다른 경우 첫 카테고리로 이동
              */
