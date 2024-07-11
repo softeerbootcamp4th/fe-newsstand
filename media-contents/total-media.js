@@ -3,6 +3,7 @@ import { getData } from "../utils/fetch.js";
 import { getBoundNumber } from "../utils/get-number.js";
 import { shuffleList } from "../utils/shuffle-list.js";
 import { DATA_COUNT_PER_GRID, DEFAULT_CATEGORY_INDEX, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
+import { renderSubscribedMedia } from "./subscribed-media.js";
 import { 
     getSelectedCategoryItemDOMString, 
     getUnselectedCategoryItemDOMString,
@@ -178,8 +179,9 @@ function renderListMedia(categoryIdx, mediaIdx) {
     const contentsString = getSelectedCategoryContentsDOMString(category[categoryIdx].media[mediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
+    const media = mediaListData.data.find((_data) => _data.id === category[categoryIdx].media[mediaIdx].id);
     subscribedMediaList.setCallback(() => renderListMedia(categoryIdx, mediaIdx));
-    setSubscribeButtonEvent(category[categoryIdx].media[mediaIdx]);
+    setSubscribeButtonEvent(media, (mediaId) => renderSubscribedMedia(mediaId));
 }
 
 /**
@@ -299,5 +301,5 @@ function clickGridList(e) {
         return;
     }
 
-    return clickGridItem(e, mediaListData.data);
+    return clickGridItem(e, mediaListData.data, (mediaId) => renderSubscribedMedia(mediaId));
 }

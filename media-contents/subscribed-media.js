@@ -18,7 +18,7 @@ let mediaListData = {};
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
-export async function renderSubscribedMedia() {
+export async function renderSubscribedMedia(mediaId) {
     mediaDetailData = await getData('../static/data/media-detail.json');
     mediaListData = await getData('../static/data/media.json');
 
@@ -31,7 +31,7 @@ export async function renderSubscribedMedia() {
         gridBoxDOM.classList.add("non-display");
         listBoxDOM.classList.remove("non-display");
 
-        renderListMedia();
+        renderListMedia(mediaId);
     } else if (displayMode === "grid-display") {
         gridBoxDOM.classList.remove("non-display");
         listBoxDOM.classList.add("non-display");
