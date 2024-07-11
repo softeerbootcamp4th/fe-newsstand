@@ -32,6 +32,7 @@ const reducer = {
         else if (element.closest(".subscribeButton")) {
             if (findClosestParentByClass(element, "isSubscribed")) {
                 alert.showUnSubsribeAlert("서창교언론사", async () => {
+
                     const news = await newsstandFetcher.getAllCompanies()
                     this.state = "all"
                     this.actions["changeFilter"]("all")
@@ -39,6 +40,7 @@ const reducer = {
                 })
             }
             else {
+                this.actions["subscribe_getback"](async (data) => await newsstandFetcher.updateSubscribe(data.id, true))
                 alert.showSubscribeAlert(async () => {
                     const news = await newsstandFetcher.getMyCompanies()
                     this.actions["changeFilter"]("myCompanies")
