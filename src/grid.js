@@ -1,4 +1,4 @@
-import { updateDOMstyle } from "./util.js";
+import { updateDOMstyle, getSubscribeList } from "./util.js";
 
 const $listButtonDOM = document.querySelector(".toggle .list-button");
 const $gridButtonDOM = document.querySelector(".toggle .grid-button");
@@ -8,32 +8,62 @@ const blueStyle = "invert(44%) sepia(40%) saturate(1022%) hue-rotate(190deg) bri
 const companyPerPage = 24;
 
 let newsCompanyList = [];
+let state = {
+  subscribeToggle: "whole",
+};
 
-const FillCompany = () => {
+const insertDOM = () => {
+
+}
+
+const refillCompany = () => {
   $gridDOM.innerHTML = "";
-  for (let i = 1; i <= companyPerPage; i++) {
-    const newCellDOM = document.createElement("div");
-    newCellDOM.setAttribute("class", "cell");
-    if (i <= newsCompanyList.length) {
-      const newImgDOM = document.createElement("img");
-      newImgDOM.setAttribute("src", `../img/${i}.png`);
-      newCellDOM.appendChild(newImgDOM);
+  if (state.subscribeToggle === "whole") {
+    for (let i = 1; i <= companyPerPage; i++) {
+      const newCellDOM = document.createElement("div");
+      newCellDOM.setAttribute("class", "cell");
+      if (i <= newsCompanyList.length) {
+        const newImgDOM = document.createElement("img");
+        newImgDOM.setAttribute("src", `../img/${i}.png`);
+        newCellDOM.appendChild(newImgDOM);
+      }
+      $gridDOM.appendChild(newCellDOM);
     }
-    $gridDOM.appendChild(newCellDOM);
+  }
+  else if (state.subscribeToggle === "my") {
+    for (let i = 0; i < companyPerPage; i++) {
+      const newCellDOM = document.createElement("div");
+      newCellDOM.setAttribute("class", "cell");
+      if (i < getSubscribeList().length) {
+        const newImgDOM = document.createElement("img");
+        newImgDOM.setAttribute("src", `../img/${getSubscribeList()[i]}.png`);
+        newCellDOM.appendChild(newImgDOM);
+      }
+      $gridDOM.appendChild(newCellDOM);
+    }
   }
 };
 
 export default function GridCompanySection(_newsCom) {
-  document.querySelector(".toggle .view-toggle").addEventListener("click", (e) => {
-    const isTargetListButton = e.target === $listButtonDOM;
-    updateDOMstyle($listButtonDOM, { filter: isTargetListButton ? blueStyle : "none" });
-    updateDOMstyle($gridButtonDOM, { filter: isTargetListButton ? "none" : blueStyle });
-    updateDOMstyle(document.querySelector(".paper"), { display: isTargetListButton ? "block" : "none" });
-    updateDOMstyle(document.querySelector(".newsgroup"), { display: isTargetListButton ? "flex" : "none" });
-    updateDOMstyle(document.querySelector(".grid-view"), { display: isTargetListButton ? "none" : "grid" });
+  document.querySelector(".toggle").addEventListener("click", (e) => {
+    const { className: targetClassName } = e.target;
+    if (targetClassName === "list-button" || targetClassName === "grid-button") {
+      const isListButton = targetClassName === "list-button";
+      updateDOMstyle($listButtonDOM, { filter: isListButton ? blueStyle : "none" });
+      updateDOMstyle($gridButtonDOM, { filter: isListButton ? "none" : blueStyle });
+      updateDOMstyle(document.querySelector(".paper"), { display: isListButton ? "block" : "none" });
+      updateDOMstyle(document.querySelector(".newsgroup"), { display: isListButton ? "flex" : "none" });
+      updateDOMstyle(document.querySelector(".grid-view"), { display: isListButton ? "none" : "grid" });
+    }
+    else if (targetClassName === "whole" || targetClassName === "my") {
+      if (targetClassName !== state.subscribeToggle) {
+        state.subscribeToggle = targetClassName;
+        refillCompany();
+      }
+    }
   });
 
   newsCompanyList = _newsCom;
 
-  FillCompany();
+  refillCompany();
 }

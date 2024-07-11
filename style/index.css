@@ -332,7 +332,8 @@
 }
 
 .grid-view {
-  border: solid #D2DAE0 1px;
+  border-top: solid #D2DAE0 1px;
+  border-left: solid #D2DAE0 1px;
   height: 388px;
   position: relative;
   display: none;
@@ -341,7 +342,8 @@
 }
 
 .grid-view .cell {
-  border: solid #D2DAE0 1px;
+  border-right: solid #D2DAE0 1px;
+  border-bottom: solid #D2DAE0 1px;
   display: flex;
   justify-content: center;
   align-items: center;

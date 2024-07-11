@@ -72,13 +72,14 @@ const insertDOM = (text) => {
 };
 
 const refillGroup = () => {
+  const isWholeCompany = state.subscribeToggle === "whole";
   updateDOMstyle($subscribeToggleDOM[0], {
-    fontWeight: `${state.subscribeToggle === "whole" ? "bold" : "normal"}`,
-    color: `${state.subscribeToggle === "whole" ? "black" : "#879298"}`
+    fontWeight: isWholeCompany ? "bold" : "normal",
+    color: isWholeCompany ? "black" : "#879298"
   });
   updateDOMstyle($subscribeToggleDOM[1], {
-    fontWeight: `${state.subscribeToggle === "my" ? "bold" : "normal"}`,
-    color: `${state.subscribeToggle === "my" ? "black" : "#879298"}`
+    fontWeight: isWholeCompany ? "normal" : "bold",
+    color: isWholeCompany ? "#879298" : "black"
   });
 
   $newsgroupDOM.innerHTML = "";
