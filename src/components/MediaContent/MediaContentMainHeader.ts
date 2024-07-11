@@ -8,6 +8,7 @@ import { Media } from "@/models/Media";
 import { CloseIcon } from "@/assets/CloseIcon";
 import { updateMediaSubscribe } from "@/remotes/updateMediaSubscibe";
 import { useModalContext } from "@/hooks/useModalContext";
+import { Modal } from "../Modal/Modal";
 
 const Logo = ({ src }: { src?: string }) => {
   return ce(Span, {
@@ -30,29 +31,45 @@ const LastEditedDate = ({ date }: { date?: string }) => {
 interface SubscribeButtonProps {
   isSubscribed: boolean;
   onClick: () => void;
+  media: Media;
 }
-const SubscribeButton = ({ isSubscribed, onClick }: SubscribeButtonProps) => {
+const SubscribeButton = ({
+  isSubscribed,
+  onClick,
+  media,
+}: SubscribeButtonProps) => {
   const { addModal, closeModal } = useModalContext();
 
+  const onConfirm = () => {
+    closeModal();
+    onClick();
+  };
+
+  const onDismiss = () => {
+    closeModal();
+  };
   const openModal = () => {
     addModal(
-      ce(Div, {
-        className: styles.modal,
-        children: [
-          ce(Div, {
-            className: styles["modal-content"],
-            children: [
-              ce(Span, {
-                className: typoStyles["available-medium16"],
-                children: ["구독이 해지되었습니다."],
-              }),
-              ce(Button, {
-                children: ["확인"],
-                onClick: closeModal,
-              }),
-            ],
-          }),
-        ],
+      cc(Modal, {
+        onConfirm: onConfirm,
+        onDismiss: onDismiss,
+        confirmText: "예, 해지합니다",
+        dismissText: "아니오",
+        content: ce(Div, {
+          className: `${styles["subscibe-content"]} ${typoStyles["display-medium16"]}`,
+          children: [
+            ce(Span, {
+              children: [
+                ce(Span, {
+                  className: typoStyles["display-bold16"],
+                  children: [media.name],
+                }),
+                "을(를)",
+              ],
+            }),
+            "구독해지하시겠습니까?",
+          ],
+        }),
       }),
     );
   };
@@ -60,13 +77,13 @@ const SubscribeButton = ({ isSubscribed, onClick }: SubscribeButtonProps) => {
     return ce(Button, {
       className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
       children: [Raw(PlucIcon), "구독하기"],
-      onClick: openModal,
+      onClick: onClick,
     });
   }
   return ce(Button, {
     className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
     children: [Raw(CloseIcon)],
-    onClick: onClick,
+    onClick: openModal,
   });
 };
 
@@ -93,6 +110,7 @@ export const MediaContentMainHeader = ({
       }),
       cc(SubscribeButton, {
         isSubscribed: isSubscribed,
+        media: media,
         onClick: () => {
           if (media === null) {
             return;
