@@ -2,7 +2,7 @@ import { createNewsTicker } from "./components/newsTicker/newsTicker.js";
 import { createSwitcher } from "./components/switcher/switcher.js";
 
 import { dataTabItems, viewTabItems } from "./features/renderNews/constants/tabItems.js";
-import { createMainArrowButton } from "./features/renderNews/components/@common/mainArrowButton/mainArrowButton.js";
+import { createAdjacentButton } from "./features/renderNews/components/@common/adjacentButton/adjacentButton.js";
 
 import {
   switchCompanyData,
@@ -23,8 +23,8 @@ async function initialize() {
 }
 
 function renderHeader() {
-  const logo = document.getElementById("logo");
-  logo.addEventListener("click", () => history.go(0));
+  const logoElement = document.getElementById("logo");
+  logoElement.addEventListener("click", () => history.go(0));
 
   /* render current time */
   const timeElement = document.getElementById("current-date");
@@ -42,43 +42,49 @@ function renderHeader() {
 
 /* render headline news ticker */
 async function renderHeadlineNewsTicker() {
-  const headlines = await getHeadlineList();
+  const headlinesData = await getHeadlineList();
 
-  const container = document.getElementById("news-ticker-container");
+  const containerElement = document.getElementById("news-ticker-container");
 
-  const left = createNewsTicker({ newsItems: headlines.slice(0, 5), tag: "연합뉴스" });
-  const right = createNewsTicker({ newsItems: headlines.slice(5), tag: "연합뉴스" }, 1);
+  const leftNewsTickerComponent = createNewsTicker({
+    newsItems: headlinesData.slice(0, 5),
+    tag: "연합뉴스",
+  });
+  const rightNewsTickerComponent = createNewsTicker({
+    newsItems: headlinesData.slice(5),
+    tag: "연합뉴스",
+  });
 
-  container.append(left, right);
+  containerElement.append(leftNewsTickerComponent, rightNewsTickerComponent);
 }
 
 /* render switcher */
 function renderSwitcher() {
-  const navContainer = document.getElementById("switcher-container");
+  const containerElement = document.getElementById("switcher-container");
 
-  const tabSwitcher = createSwitcher({
-    className: "tab-switcher",
+  const dataSwitcherComponent = createSwitcher({
+    className: "data-switcher",
     items: dataTabItems,
     onClick: async (event) => await switchCompanyData({ dataTabId: event.target.id }),
   });
 
-  const viewSwitcher = createSwitcher({
+  const viewSwitcherComponent = createSwitcher({
     className: "view-switcher",
     items: viewTabItems,
     onClick: async (event) => await switchCompanyView(event.target.id),
   });
 
-  navContainer.append(tabSwitcher, viewSwitcher);
+  containerElement.append(dataSwitcherComponent, viewSwitcherComponent);
 }
 
 /** render news view */
 async function renderNewsView() {
   await renderInit();
 
-  const container = document.getElementById("main-news-contents");
+  const containerElement = document.getElementById("main-news-contents");
 
-  const prevButton = createMainArrowButton({ direction: "prev", onClick: updatePrev });
-  const nextButton = createMainArrowButton({ direction: "next", onClick: updateNext });
+  const prevButtonComponent = createAdjacentButton({ direction: "prev", onClick: updatePrev });
+  const nextButtonComponent = createAdjacentButton({ direction: "next", onClick: updateNext });
 
-  container.append(prevButton, nextButton);
+  containerElement.append(prevButtonComponent, nextButtonComponent);
 }

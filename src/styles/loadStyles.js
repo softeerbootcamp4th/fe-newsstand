@@ -1,8 +1,8 @@
 const stylesheets = [
-  "src/style/global.css",
-  "src/style/typography.css",
-  "src/style/color.css",
-  "src/style/layout.css",
+  "src/styles/global.css",
+  "src/styles/typography.css",
+  "src/styles/color.css",
+  "src/styles/layout.css",
 
   "src/components/button/button.css",
   "src/components/newsTicker/newsTicker.css",
@@ -15,7 +15,7 @@ const stylesheets = [
 
   "src/features/subscriptionButton/components/unsubscribeDialog/unsubscribeDialog.css",
 
-  "src/features/renderNews/components/@common/mainArrowButton/mainArrowButton.css",
+  "src/features/renderNews/components/@common/adjacentButton/adjacentButton.css",
 
   "src/features/renderNews/styles/layout.css",
   "src/features/renderNews/components/list/company/company.css",

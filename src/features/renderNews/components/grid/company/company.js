@@ -12,12 +12,12 @@ import { createCompanyLogoTemplate } from "../../@common/companyLogo.js";
 export function renderCompany({ container, company, dataTabId }) {
   container.classList.add("grid-item-company");
 
-  const companyLogo = document.createElement("div");
-  companyLogo.innerHTML = createCompanyLogoTemplate(company);
+  const logoContainer = document.createElement("div");
+  logoContainer.innerHTML = createCompanyLogoTemplate(company);
 
   const subscriptions = getObjectSubscribedCompanies();
   const isSubscribed = Object.hasOwn(subscriptions, company.id);
-  const subscriptionButton = createSubscriptionButton({
+  const subscriptionButtonContainer = createSubscriptionButton({
     company,
     isSubscribed,
     dataTabId,
@@ -25,17 +25,17 @@ export function renderCompany({ container, company, dataTabId }) {
     container,
   });
 
-  subscriptionButton.classList.add("hover-hidden");
+  subscriptionButtonContainer.classList.add("hover-hidden");
 
   container.addEventListener("mouseenter", () => {
-    companyLogo.classList.add("hover-hidden");
-    subscriptionButton.classList.remove("hover-hidden");
+    logoContainer.classList.add("hover-hidden");
+    subscriptionButtonContainer.classList.remove("hover-hidden");
   });
 
   container.addEventListener("mouseleave", () => {
-    companyLogo.classList.remove("hover-hidden");
-    subscriptionButton.classList.add("hover-hidden");
+    logoContainer.classList.remove("hover-hidden");
+    subscriptionButtonContainer.classList.add("hover-hidden");
   });
 
-  container.append(companyLogo, subscriptionButton);
+  container.append(logoContainer, subscriptionButtonContainer);
 }

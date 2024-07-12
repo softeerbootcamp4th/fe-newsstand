@@ -77,7 +77,7 @@ async function switchCompanyData({ dataTabId, view }) {
     dataTabId === ALL_NEWS_TAB
       ? await getCompanyList({ categoryId })
       : getArraySubscribedCompanies();
-  console.log(state);
+
   render(state);
 }
 
@@ -173,9 +173,9 @@ function rerenderInGridView() {
 /** utils */
 
 function selectTab(elementId, stateKey) {
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.checked = true;
+  const tabElement = document.getElementById(elementId);
+  if (tabElement) {
+    tabElement.checked = true;
     state[stateKey] = elementId;
   }
 }
