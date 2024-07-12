@@ -1,0 +1,16 @@
+{
+  "id": 999,
+  "category": 0,
+  "company": "연합뉴스",
+  "lightLogo": "https://s.pstatic.net/static/newsstand/2020/logo/light/0604/343.png",
+  "darkLogo": "https://s.pstatic.net/static/newsstand/2020/logo/dark/0604/343.png",
+  "title": "연합뉴스, 새해 특집 보도 계획 발표",
+  "thumbnail": "https://s.pstatic.net/dthumb.phinf/?src=%22https%3A%2F%2Fs.pstatic.net%2Fstatic%2Fnewsstand%2F2024%2F0712%2Farticle_img%2Fnew_main%2F9360%2F104231_001.jpg%22&type=nf312_208&service=navermain",
+  "headlines": [
+    "연합뉴스, 국제 뉴스 확대 방안 마련",
+    "연합뉴스, 신뢰도 1위 언론사로 선정",
+    "연합뉴스, 사회적 책임 경영 강화 선언",
+    "연합뉴스, 디지털 뉴스 서비스 확대",
+    "연합뉴스, 지역 뉴스 활성화 위해 50억 투자"
+  ]
+}

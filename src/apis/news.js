@@ -1,13 +1,20 @@
+import { getMockNews } from "@/data/mocks/news";
 import { http } from "./fetch";
 
 export const getBreakingNews = () => http.get("/breakingNews");
 
-export const getNews = ({ category, companyId }) => {
+export const getNews = async ({ category, companyId }) => {
   const params = new URLSearchParams();
   if (category !== undefined) params.set("category", category);
   if (companyId !== undefined) params.set("id", companyId);
 
-  return http.get(`/news?${params.toString()}`);
+  const news = await http.get(`/news?${params.toString()}`);
+
+  if (!news || news.length < 1) {
+    return getMockNews(companyId);
+  }
+
+  return news;
 };
 
 export const getAllCompany = (page) => {
