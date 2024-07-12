@@ -1,15 +1,16 @@
 import { newstype } from "../newstab/newstab.js";
 import { updateNewsDisplay } from "../displaynews/displayNews.js";
 import stateManager from "../statemanager/stateManager.js";
+
 export let animationTimer;
 
 export const transformToProgress = (element) => {
-    console.log(stateManager.getPressIndex());
-    console.log(stateManager.getPageIndex());
     element.setAttribute('data-original-text', element.textContent);
     element.classList.add('progress-button');
+
     const pageindex = stateManager.getPages();
     const maxrepeat = pageindex[Number(element.dataset.index)];
+
     let counts = 0;
 
     const startAnimation = () => {
@@ -22,8 +23,10 @@ export const transformToProgress = (element) => {
 
     const updateProgress = () => {
         stateManager.setPageIndex(stateManager.getPageIndex() + 1);
+
         console.log(stateManager.getPressIndex());
         console.log(stateManager.getPageIndex());
+
         counts++;
         updateButtonText(element);
         updateNewsDisplay(newstype[stateManager.getPressIndex()], stateManager.getPageIndex());
