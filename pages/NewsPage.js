@@ -3,9 +3,8 @@ import { createArticleList } from "../components/articleList/html/articleListHtm
 import { initArticleList } from "../components/articleList/articleList.js";
 import { createHeader } from "../components/header/header.js"
 import { createNewsBar, initNewsBar } from "../components/newsBar/newsBar.js"
-import { extractDataWithMedia, fetchData } from "../utils/api.js";
+import { fetchData } from "../utils/api.js";
 import { newsState } from "./state/newsState.js";
-import { menuInfo } from "./state/newsState.js";
 
 export const MENU_INFO_DATA_SRC = '/datas/menuInfo.json';
 export const MEDIA_LIST = ['데일리안', '서울경제', '세계일보', '스포츠동아', '스포츠서울', '아시아경제', '이데일리', '조선일보', '파이낸셜뉴스', '헤럴드경제'];  // 썸네일에 임의의 이미지 경로를 넣기 위해

@@ -1,9 +1,16 @@
-import { menuInfo, menuIdx, menuCurrentPage, menuLastPage, isMediaWhole, newsState } from "../../../pages/state/newsState.js";
-import { extractMedias, extractDataWithMedia, getSubscriptionList } from "../../../utils/api.js";
+import { menuInfo,
+    menuIdx,
+    menuCurrentPage,
+    menuLastPage,
+    isMediaWhole,
+    newsState } from "../../../pages/state/newsState.js";
+import { extractMedias,
+    extractDataWithMedia,
+    getSubscriptionList } from "../../../utils/api.js";
 import { addSubscriptionEventListener } from "../articleList.js";
 import { addCancleSubscriptionEventListener } from "../event/clickEvent.js";
 import { handleGridSubscription } from "../event/eventHandlers.js";
-import { isSubscribed } from "../event/pageEvent.js";
+import { isSubscribed } from "../../../utils/api.js";
 import { setSubscriptionData } from "../articleList.js";
 
 // 메뉴 리스트 생성 함수
@@ -136,13 +143,16 @@ export const createArticleList = ({ isSubscription }) => {
 export const insertCancleSubscriptionBtn = () => {
     document.querySelectorAll('.subscribe-btn, .cancle-btn')?.forEach((btn) => btn.remove())
     const el = document.createElement('button')
-    el.classList.add('cancle-btn')
     const imgEl = document.createElement('img');
+    
     imgEl.src = '/icons/closed.png';
     imgEl.height = 12;
     imgEl.width = 12;
+
+    el.classList.add('cancle-btn')
     el.classList.add('btn')
     el.appendChild(imgEl)
+    
     document.querySelector('.content-header-wrapper').appendChild(el);
     addCancleSubscriptionEventListener();
 }
@@ -150,9 +160,11 @@ export const insertCancleSubscriptionBtn = () => {
 export const insertSubscriptionBtn = () => {
     document.querySelectorAll('.cancle-btn, .subscribe-btn')?.forEach((btn) => btn.remove())
     const el = document.createElement('button')
+    
     el.classList.add('subscribe-btn')
     el.classList.add('btn')
     el.innerText = '+ 구독하기'
+    
     document.querySelector('.content-header-wrapper').appendChild(el);
     addSubscriptionEventListener();
 }

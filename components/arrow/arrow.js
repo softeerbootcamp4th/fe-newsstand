@@ -1,4 +1,3 @@
-import { menuInfo } from "../../pages/state/newsState.js"
 import { addNextPageEvent, addPrePageEvent } from "../articleList/event/pageEvent.js"
 
 export const createArrow = () => {

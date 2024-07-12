@@ -1,16 +1,21 @@
-import { menuInfo, isGrid, isMediaWhole, newsState, isDown, startX, scrollLeft } from "../../../pages/state/newsState.js";
+import { isGrid,
+    isMediaWhole,
+    newsState,
+    isDown,
+    startX,
+    scrollLeft } from "../../../pages/state/newsState.js";
+import { createArticleList,
+    renderGridSubscription,
+    renderSubscriptionList,
+    renderWholeGrid } from "../html/articleListHtml.js";
 import { initArticleList } from "../articleList.js";
-import { createArticleList, renderGridSubscription, renderSubscriptionList, renderWholeGrid } from "../html/articleListHtml.js";
-import { setSubscriptionData } from "../articleList.js";
-import { extractMedias, getSubscriptionList } from "../../../utils/api.js";
 import { setWholeData } from "../articleList.js";
 import { createAlert } from "../../alert/alert.js";
 import { cancleMediaSubscription } from "./pageEvent.js";
-import { setSubscription } from "../../../utils/api.js";
+import { delay, setSubscription } from "../../../utils/api.js";
 import { createSnackBar, deleteSnackBar } from "../../snackBar/snackBar.js";
 
 // 전체 언론사, 구독한 언론사
-
 export const addModeSelectionEventListener = () => {
     document.querySelector('.media-wrapper').addEventListener('click', (event) => {
         if (event.target.classList.contains('mode-selection-btn')) {
@@ -61,52 +66,51 @@ export const addBtnEventsListener = () => {
 // 전체미디어 / 리스트
 export const addWholeListEventListener = () => {
     const callback = () => {
+        if (isGrid || !isMediaWhole) { return }
         document.querySelector('.article-body-wrapper').innerHTML = createArticleList({ isSubscription: false });
         document.querySelectorAll('.article-header-wrapper')[1].remove();
         initArticleList();
     }
 
     document.querySelectorAll('.whole-media-btn, .list-selection-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            if (!isGrid && isMediaWhole) {
-                callback();
-            }
-        });
+        button.addEventListener('click', callback);
     });
 }
 
 export const addSubscriptionGridEventListener = () => {
+    const callback = () => {
+        if (!isGrid || isMediaWhole) { return }
+        renderGridSubscription();
+        addGridHoverEventListener();
+        addGridUnsubscribeBtnEventListener();
+    }
+
     document.querySelectorAll('.subscription-media-btn, .grid-selection-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            if (isGrid && !isMediaWhole) {
-                renderGridSubscription();
-                addGridHoverEventListener();
-                addGridUnsubscribeBtnEventListener();
-            }
-        })
+        button.addEventListener('click', callback)
     });
 }
 
 export const addSubscriptionListEventListener = () => {
+    const callback = () => {
+        if (isGrid || isMediaWhole) { return }
+        renderSubscriptionList();
+    }
     document.querySelectorAll('.subscription-media-btn, .list-selection-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            if (!isGrid && !isMediaWhole) {
-                renderSubscriptionList();
-            }
-        })
+        button.addEventListener('click', callback)
     })
 }
 
 export const addWholeGridEventListener = () => {
+    const callback = () => {
+        if (!isGrid || !isMediaWhole) { return }
+        renderWholeGrid();
+        addGridHoverEventListener();
+        addGridSubscribeBtnEventListener();
+        addGridUnsubscribeBtnEventListener();
+    }
+    
     document.querySelectorAll('.whole-media-btn, .grid-selection-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            if (isGrid && isMediaWhole) {
-                renderWholeGrid();
-                addGridHoverEventListener();
-                addGridSubscribeBtnEventListener();
-                addGridUnsubscribeBtnEventListener();
-            }
-        })
+        button.addEventListener('click', callback)
     })
 }
 
@@ -125,6 +129,7 @@ export const addCancleSubscriptionEventListener = () => {
 export const addAlertAcceptBtnEventListener = () => {
     document.querySelector('.alert-accept-btn').addEventListener('click', () => {
         cancleMediaSubscription();
+
         if (isGrid) {
             document.querySelector('.grid-selection-btn').click()
         } else if (isMediaWhole) {
@@ -193,10 +198,12 @@ export const addGridUnsubscribeBtnEventListener = () => {
         item.addEventListener('click', function() {
             if (this.querySelector('.grid-unsubscribe-btn')) {
                 newsState.setNowMediaName(this.id.split('-')[1])
+                
                 const el = document.createElement('div');
                 el.classList.add('alert-area');
                 el.innerHTML = createAlert();
                 document.querySelector('.article-body-wrapper').appendChild(el);
+
                 addAlertAcceptBtnEventListener();
                 addAlertCancleBtnEventListener();
             }
@@ -216,11 +223,11 @@ export const addGridSubscribeBtnEventListener = () => {
                 document.querySelector('.article-body-wrapper').appendChild(el);
                 setSubscription();
 
-                setTimeout(() => {
+                delay(5).then(() => {
                     deleteSnackBar();
                     document.querySelector('.subscription-media-btn').click()
                     document.querySelector('.list-selection-btn').click()
-                }, 5000);
+                })
             }
         });
     });
@@ -231,9 +238,11 @@ export const addHoverUnderlineEventListener = () => {
         a.addEventListener('mouseover', () => {a.classList?.add('a-underline')});
         a.addEventListener('mouseout', () => a.classList?.remove('a-underline'));
     })
+
     document.querySelector('.thumbnail-part').addEventListener('mouseover', function() {
         this.querySelector('p').classList?.add('p-underline');
     })
+    
     document.querySelector('.thumbnail-part').addEventListener('mouseout', function() {
         this.querySelector('p').classList?.remove('p-underline');
     })

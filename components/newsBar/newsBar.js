@@ -1,7 +1,6 @@
 import { leftRollingId, rightRollingId } from "../../pages/state/newsState.js"
 import { newsState } from "../../pages/state/newsState.js"
-
-const mediaImgPath = '/images/logos/조선일보.png'
+import { delay } from "../../utils/api.js"
 
 export const createNewsBar = () => {
     return `
@@ -44,9 +43,7 @@ export const createNewsBar = () => {
 
 export const initNewsBar = () => {
     newsState.setleftRollingId(window.setInterval(leftRollingCallback, 5000));
-    setTimeout(() => {
-        newsState.setRightRollingId(window.setInterval(rightRollingCallback, 5000)); 
-    }, 1000)
+    delay(1).then(() => newsState.setRightRollingId(window.setInterval(rightRollingCallback, 5000)))
     addEventListeners();
 }
 
@@ -84,12 +81,12 @@ function leftRollingCallback(){
     document.querySelector('.left-rolling-banner .prev').classList.remove('prev');
 
     //.current -> .prev
-    let current = document.querySelector('.left-rolling-banner .current');
+    const current = document.querySelector('.left-rolling-banner .current');
     current.classList.remove('current');
     current.classList.add('prev');
 
     //.next -> .current
-    let next = document.querySelector('.left-rolling-banner .next');
+    const next = document.querySelector('.left-rolling-banner .next');
     //다음 목록 요소가 널인지 체크
     if (next.nextElementSibling == null) {
         document.querySelector('.left-rolling-banner ul li:first-child').classList.add('next');
@@ -106,12 +103,12 @@ function rightRollingCallback(){
     document.querySelector('.right-rolling-banner .prev').classList.remove('prev');
 
     //.current -> .prev
-    let current = document.querySelector('.right-rolling-banner .current');
+    const current = document.querySelector('.right-rolling-banner .current');
     current.classList.remove('current');
     current.classList.add('prev');
 
     //.next -> .current
-    let next = document.querySelector('.right-rolling-banner .next');
+    const next = document.querySelector('.right-rolling-banner .next');
     //다음 목록 요소가 널인지 체크
     if (next.nextElementSibling == null) {
         document.querySelector('.right-rolling-banner ul li:first-child').classList.add('next');

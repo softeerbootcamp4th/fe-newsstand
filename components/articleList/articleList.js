@@ -1,16 +1,3 @@
-import { MEDIA_LIST } from "../../pages/NewsPage.js";
-import { newsState } from "../../pages/state/newsState.js";
-import { menuInfo, menuCurrentPage, menuLastPage, menuIdx, categoryTimeoutId, isGrid, isMediaWhole, CATEGORY_TIMEOUT } from "../../pages/state/newsState.js";
-import { extractDataWithMedia, extractMedias, getSubscriptionList, setSubscription } from "../../utils/api.js";
-import { createMenuList,
-    insertSubscriptionContent,
-    createSubscriptionMenuList,
-    createArticleLiPart,
-    insertWholeContent,
-    renderSubscriptionList,
-    createArticleList,
-} from "./html/articleListHtml.js";
-import { addNextPageEvent } from "./event/pageEvent.js";
 import { addModeSelectionEventListener,
     addViewSelectionEventListener,
     addCategorySelectionEventListener,
@@ -20,10 +7,17 @@ import { addModeSelectionEventListener,
     addSubscriptionListEventListener,
     addBtnEventsListener,
     addCancleSubscriptionEventListener,
-    addScrollEventListener,
-    addHoverUnderlineEventListener,
-} from "./event/clickEvent.js";
-import { checkSubscription } from "./event/pageEvent.js";
+    addHoverUnderlineEventListener } from "./event/clickEvent.js";
+import { menuInfo,
+    menuCurrentPage,
+    menuIdx,
+    categoryTimeoutId,
+    isGrid,
+    isMediaWhole } from "../../pages/state/newsState.js";
+import { delay, getSubscriptionList, setSubscription } from "../../utils/api.js";
+import { insertSubscriptionContent, insertWholeContent } from "./html/articleListHtml.js";
+import { newsState } from "../../pages/state/newsState.js";
+import { addNextPageEvent } from "./event/pageEvent.js";
 import { createSnackBar } from "../snackBar/snackBar.js";
 
 // 초기화 함수
@@ -60,11 +54,7 @@ export const addSubscriptionEventListener = () => {
         document.querySelector('.article-body-wrapper').appendChild(el);
         setSubscription();
 
-        setTimeout(() => {
-            if (!isGrid) {
-                document.querySelector('.subscription-media-btn').click()
-            }
-        }, 5000)
+        delay(5).then(() => { !isGrid && document.querySelector('.subscription-media-btn').click() })
     })
 }
 

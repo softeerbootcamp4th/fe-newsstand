@@ -9,13 +9,9 @@ export const fetchData = async (src) => {
 }
 
 export const extractMedias = (data) => {
-    const mediaList = [];
-    data.forEach(categoryEl => {
-        categoryEl.mediaData.forEach((d) => {
-            mediaList.push(d.mediaName);
-        })
-    });
-    return mediaList;
+    return data.flatMap(categoryEl => 
+        categoryEl.mediaData.map(d => d.mediaName)
+    );
 }
 
 export const extractDataWithMedia = (data) => {
@@ -35,4 +31,15 @@ export const getSubscriptionList = () => {
     return Array.from({ length: localStorage.length }, (_, i) => [localStorage.getItem(localStorage.key(i)), localStorage.key(i)])
         .sort((a, b) => Number(b[0]) - Number(a[0]))
         .map(item => item[1])
+}
+
+export const delay = (sec) => {
+    return new Promise((res) => { return setTimeout(res, sec*1000) })
+}
+
+export const isSubscribed = () => {
+    if (localStorage.getItem(nowMediaName)) {
+        return true;
+    }
+    return false;
 }
