@@ -117,8 +117,7 @@ function clickSubscribeButton(media, closeCallback) {
  * @description 언론사 구독 취소 이벤트 등록하는 함수
  */
 function clickUnsubscribeButton(media) {
-    const mediaName = media.name;
-    const id = media.id;
+    const { id, name } = media;
 
     function clickCancel() {
         const bodyDOM = document.querySelector("body");
@@ -130,7 +129,7 @@ function clickUnsubscribeButton(media) {
         clickCancel();
     }
 
-    renderAlert(`{${mediaName}}을(를)\n구독해지하시겠습니까?`, id, "예, 해지합니다", "아니오", clickUnsubscribe, clickCancel, clickCancel)
+    renderAlert(`{${name}}을(를)\n구독해지하시겠습니까?`, id, "예, 해지합니다", "아니오", clickUnsubscribe, clickCancel, clickCancel)
 }
 
 /**
@@ -145,18 +144,20 @@ export function getDisplayMode() {
  * @description 그리드 언론사 아이템 DOM string을 반환해주는 함수
  */
 export function getGridMediaItem(media) {
-    const isSubscribed = subscribedMediaList.isSubscribed(media.id);
+    const { id, name, icon } = media;
+
+    const isSubscribed = subscribedMediaList.isSubscribed(id);
     const isDarkmode = darkMode.isDarkMode;
 
     return `<li class="media-contents__grid-item">
-                <img class="media-contents__grid-item-icon" alt="${media.name} 언론사 아이콘" src="./static/media-icon/${isDarkmode ? 'dark' : 'light'}/${media.icon}"/>
+                <img class="media-contents__grid-item-icon" alt="${name} 언론사 아이콘" src="./static/media-icon/${isDarkmode ? 'dark' : 'light'}/${icon}"/>
                 ${isSubscribed ? `
-                <button class="button__container subscribe-button__${media.id}--unsubscribe" data-media-id="${media.id}">
+                <button class="button__container subscribe-button__${id}--unsubscribe" data-media-id="${id}">
                     <img class="subscribe-button__icon--unsubscribe subscribe-button--default" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
                     <img class="subscribe-button__icon--unsubscribe subscribe-button--active" alt="구독 취소 아이콘" src="./static/icons/close-hover.svg" />
                     <p class="button__text subscribe-button__text text__medium12 text--weak">해지하기</p>
                 </button>` : `
-                <button class="button__container subscribe-button__${media.id}--subscribe" data-media-id="${media.id}">
+                <button class="button__container subscribe-button__${id}--subscribe" data-media-id="${id}">
                     <img class="subscribe-button__icon subscribe-button--default" alt="구독 클릭 아이콘" src="./static/icons/plus-default.svg" />
                     <img class="subscribe-button__icon subscribe-button--active" alt="구독 클릭 아이콘" src="./static/icons/plus-hover.svg" />
                     <p class="button__text subscribe-button__text text__medium12 text--weak">구독하기</p>
