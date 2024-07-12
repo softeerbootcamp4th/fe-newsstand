@@ -41,7 +41,6 @@ function ContentsBox({
 
     SnackBar: new SnackBar({
       $target: this.$element,
-      text: "내가 구독한 언론사에 추가되었습니다.",
     }),
 
     UnsubscribeAlert: new UnsubscribeAlert({

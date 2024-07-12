@@ -33,8 +33,7 @@ function GridViewer({ $target, position = "beforeend", changeTab, filter }) {
     SubscribeButtons: [],
     UnsubscribeButtons: [],
     SnackBar: new SnackBar({
-      $target: this.$element,
-      text: "내가 구독한 언론사에 추가되었습니다.",
+      $target: $target,
     }),
 
     UnsubscribeAlert: new UnsubscribeAlert({
@@ -154,7 +153,11 @@ GridViewer.prototype.subscribeCompany = function ({ id, company, lightLogo, dark
 
   addCompany({ id, company, lightLogo, darkLogo });
 
-  this.components.SnackBar.show();
+  this.components.SnackBar.show({ text: "내가 구독한 언론사에 추가되었습니다." });
+
+  setTimeout(() => {
+    this.props.changeTab(1);
+  }, 2000);
 };
 
 GridViewer.prototype.unsubscribeCompany = function ({ id }) {
