@@ -16,7 +16,7 @@ import { isPropsEqual } from "./utils";
 
 export let currentKey: string = "";
 let initComponent: AppComponent<object, object> | null = null;
-let _root: HTMLElement | null = null;
+export let rootElement: HTMLElement | null = null;
 export let isRendering = false;
 export const updateQueue = new Deque<() => void>();
 export const statesMap = new Map<string, Array<unknown>>();
@@ -206,13 +206,13 @@ export const render = () =>
       });
     }
     isRendering = true;
-    diffingCommit(_root!, shadowRoot);
+    diffingCommit(rootElement!, shadowRoot);
     afterRender();
   });
 
 export const init = (app: AppComponent<object, any>, root: HTMLElement) => {
   initComponent = app;
-  _root = root;
+  rootElement = root;
   addRootEvent(root);
   render();
 };
