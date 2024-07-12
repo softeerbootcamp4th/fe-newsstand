@@ -160,6 +160,12 @@ GridViewer.prototype.subscribeCompany = function ({ id, company, lightLogo, dark
 GridViewer.prototype.unsubscribeCompany = function ({ id }) {
   removeCompany({ id });
 
+  if (this.props.filter === "company") {
+    this.removeCell(id);
+
+    return;
+  }
+
   this.showSubscribeButton(id);
 };
 
@@ -181,6 +187,12 @@ GridViewer.prototype.showUnsubscribeButton = function (companyId) {
 
   $subscribeButton.classList.add("hide");
   $unsubscribeButton.classList.remove("hide");
+};
+
+GridViewer.prototype.removeCell = function (companyId) {
+  const $listItem = this.$element.querySelector(`li[data-company-id="${companyId}"]`);
+
+  $listItem.remove();
 };
 
 GridViewer.prototype.render = function () {
