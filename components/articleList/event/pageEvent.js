@@ -9,13 +9,7 @@ import { newsState,
     nowMediaName,
 } from "../../../pages/state/newsState.js";
 import { insertCancleSubscriptionBtn, insertSubscriptionBtn, insertSubscriptionContent, insertWholeContent } from "../html/articleListHtml.js";
-
-export const isSubscribed = () => {
-    if (localStorage.getItem(nowMediaName)) {
-        return true;
-    }
-    return false;
-}
+import { isSubscribed } from "../../../utils/api.js";
 
 const nextPageCallback = () => {
     // moveEvent
@@ -116,8 +110,14 @@ const prePageCallback = () => {
 }
 
 export const addPrePageEvent = ({ isNow = false } = {}) => {
-    newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
-    newsState.setNowMediaName(menuInfo[menuIdx].mediaName)
+    if (isMediaWhole) {
+        newsState.setMenuLastPage(menuInfo[menuIdx].totalPages);
+    } else {
+        newsState.setMenuLastPage(1);
+    }
+    if (isMediaWhole) {
+        newsState.setNowMediaName(menuInfo[menuIdx].mediaData[menuCurrentPage-1]['mediaName'])
+    }
     if (isNow) {
         clearTimeout(categoryTimeoutId);
         prePageCallback();
@@ -136,16 +136,20 @@ export const movePreCategory = () => {
     if (menuIdx === -1) {
         newsState.setMenuIdx(totalMenuLength-1)
     }
+
     if (isMediaWhole) {
         newsState.setMenuCurrentPage(menuInfo[menuIdx].mediaData.length)
     } else {
         newsState.setMenuCurrentPage(1)
     }
+
     if (isMediaWhole) {
         preBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuInfo[menuIdx].totalPages}`;
     }
+
     thisBtn.classList.remove('menu-btn-wrapper-clicked');
     preBtn.classList.add('menu-btn-wrapper-clicked');
+    
     const nextBtn = thisBtn.nextElementSibling !== null ? thisBtn.nextElementSibling : thisBtn.parentElement.firstElementChild;
     addNextPageEvent();
 }
@@ -153,6 +157,7 @@ export const movePreCategory = () => {
 export const movePrePage = () => {
     const thisBtn = document.querySelector('.menu-btn-wrapper-clicked')
     newsState.setMenuCurrentPage(menuCurrentPage-1);
+    
     if (isMediaWhole) {
         thisBtn.querySelector('.article-menu-pages').innerText = `${menuCurrentPage} / ${menuLastPage}`;
     }
@@ -163,12 +168,6 @@ export const movePrePage = () => {
     thisBtn.appendChild(fillBackground);
     
     addNextPageEvent();
-}
-
-export const checkSubscription = () => {
-    if (localStorage.getItem(nowMediaName)) {
-        replaceToCancleSubscriptionBtn();
-    }
 }
 
 export const cancleMediaSubscription = () => {
