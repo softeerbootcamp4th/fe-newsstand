@@ -8,32 +8,18 @@ export const ButtonVariantProps = {
 export const buttonVariant = (type) => {
     const variant = {
         white: {
-            light: {
-                backgroundColor: '#fff',
-                hoverdColor: '#f0f0f0',
-                color: 'gray',
-            },
-            dark: {
-                backgroundColor: '#375a7f',
-                hoverdColor: '#2d4866',
-                color: '#fff',
-            },
+            backgroundColor: 'var(--white)',
+            hoverdColor: 'var(--gray50)',
+            color: 'var(--gray200)',
         },
         gray: {
-            light: {
-                backgroundColor: 'gainsboro',
-                hoverdColor: '#bcbcbc',
-                color: 'gray',
-            },
-            dark: {
-                backgroundColor: '#444950',
-                hoverdColor: '#3a3f46',
-                color: '#fff',
-            },
+            backgroundColor: 'var(--gray50)',
+            hoverdColor: 'var(--white)',
+            color: 'var(--gray200)',
         },
     }
 
-    return variant[type].light
+    return variant[type]
 }
 
 const Button = (props) => {
