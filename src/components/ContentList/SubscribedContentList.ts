@@ -1,4 +1,4 @@
-import { useState, useEffect, cc, cc, Main, Raw } from "@/libs";
+import { useState, useEffect, cc, Main, Raw } from "@/libs";
 import { MediaIdByCategories } from "@/models/Newsstand";
 import { MediaContent } from "../MediaContent/MediaContent";
 import { MediaContentTabs } from "./ContentListHeader";

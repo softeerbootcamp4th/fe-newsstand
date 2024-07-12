@@ -1,4 +1,4 @@
-import { AppChild, AppComponent, Div, cc, cc, useState } from "@/libs";
+import { AppChild, Div, cc, useState } from "@/libs";
 import { createContext } from "@/libs/hooks/useContext";
 import styles from "./ToastProvider.module.css";
 import typoStyles from "@/styles/typo.module.css";

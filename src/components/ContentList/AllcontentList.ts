@@ -1,4 +1,4 @@
-import { useState, useEffect, cc, cc, Main } from "@/libs";
+import { useState, useEffect, cc, Main } from "@/libs";
 import { MediaIdByCategories } from "@/models/Newsstand";
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
