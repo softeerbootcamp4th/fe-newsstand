@@ -22,7 +22,6 @@ window.onload = async () => {
 var btnRight = document.getElementById('btnRight');
 var btnLeft = document.getElementById('btnLeft');
 
-
 function updateList(pridx) {
     if (stateManager.getPageIndex() === 0) {
         btnLeft.classList.add('disabled');
@@ -30,6 +29,7 @@ function updateList(pridx) {
         btnLeft.classList.remove('disabled');
     }
     const pageindex = stateManager.getPages();
+    
     if (stateManager.getPageIndex() >= pageindex[pridx] - 1) {
         stateManager.setPressIndex(getNextPressIndex(pridx));
         stateManager.setPageIndex(0);
@@ -39,7 +39,10 @@ function updateList(pridx) {
         transformToProgress(nextButton);
         updateNewsDisplay(buttonId, stateManager.getPageIndex());
     } else {
-        btnRight.classList.remove('disabled');
+        stateManager.setPageIndex(stateManager.getPageIndex()+1);
+        resetProgress();
+        transformToProgress(buttonId);
+        updateNewsDisplay(buttonId, stateManager.getPageIndex());
     }
 }
 
@@ -55,14 +58,9 @@ function rightButtonClick(pridx) {
     //clearInterval(animationTimer); // 애니메이션 타이머 초기화
     const pageindex = stateManager.getPages();
     if (stateManager.getPageIndex() < pageindex[pridx] - 1) {
-        //+1
-        stateManager.setPageIndex(stateManager.getPageIndex());
         updateList(stateManager.getPressIndex());
-        //stateManager.setPageIndex(stateManager.getPageIndex() + 1);
-        updateNewsDisplay(buttonId, stateManager.getPageIndex());
+        //updateNewsDisplay(buttonId, stateManager.getPageIndex());
     } else {
-        //stateManager.setPressIndex(getNextPressIndex(pridx));
-        //stateManager.setPageIndex(0);
         buttonId = newstype[stateManager.getPressIndex()];
         resetProgress();
         const nextButton = document.querySelector(`.text-button[data-index="${stateManager.getPressIndex()}"]`);
@@ -132,7 +130,6 @@ export const initmain = () => {
     clearInterval(subProgressTimer);
     //원래
     resetProgress();
-    //testingpages = countpages(stateManager.getAllNews()); 
     stateManager.setPages(countpages(stateManager.getAllNews()));
     const buttons = document.querySelectorAll('.text-button');
 
