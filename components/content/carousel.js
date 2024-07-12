@@ -9,6 +9,7 @@ import {
   updateCategoryByIndex,
   updateMyMedia,
   startMyNewsInterval,
+  startNewsInterval,
 } from "./nav.js";
 import state from "../../global/state.js";
 import { updateGridContent } from "../../grid/grid.js";
