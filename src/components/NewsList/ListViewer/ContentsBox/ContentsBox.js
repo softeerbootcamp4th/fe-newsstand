@@ -45,7 +45,6 @@ function ContentsBox({
 
     UnsubscribeAlert: new UnsubscribeAlert({
       $target: this.$element,
-      company: news.company,
       onConfirm: this.handleUnsubscribe.bind(this),
     }),
   };
@@ -67,7 +66,7 @@ ContentsBox.prototype.handleUnsubscribe = function () {
 
   this.props.onUnsubscribeCompany({ id, company });
 
-  this.components.UnsubscribeAlert.show();
+  this.components.UnsubscribeAlert.show(company);
   this.showSubscribeButton();
 };
 
@@ -82,7 +81,7 @@ ContentsBox.prototype.showUnsubscribeButton = function () {
 };
 
 ContentsBox.prototype.showUnsubscribeAlert = function () {
-  this.components.UnsubscribeAlert.show();
+  this.components.UnsubscribeAlert.show(this.props.news.company);
 };
 
 ContentsBox.prototype.formatDate = function formatDate(date) {

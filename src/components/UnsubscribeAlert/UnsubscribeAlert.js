@@ -1,11 +1,13 @@
 import "./UnsubscribeAlert.css";
 
-function UnsubscribeAlert({ $target, position = "beforeend", company, onConfirm }) {
+function UnsubscribeAlert({ $target, position = "beforeend", onConfirm }) {
   this.$element = document.createElement("dialog");
   this.$element.classList.add("alert");
   this.$element.classList.add("hide");
 
   $target.insertAdjacentElement(position, this.$element);
+
+  this.props = { onConfirm };
 
   this.handleClick = function (event) {
     const button = event.target.closest("button");
@@ -14,7 +16,7 @@ function UnsubscribeAlert({ $target, position = "beforeend", company, onConfirm 
       const { id } = button;
 
       if (id === "confirmButton") {
-        onConfirm();
+        this.props.onConfirm();
         this.close();
 
         return;
@@ -28,17 +30,22 @@ function UnsubscribeAlert({ $target, position = "beforeend", company, onConfirm 
     }
   };
 
-  this.render(company);
+  // this.render(company);
 
   this.$element.addEventListener("click", this.handleClick.bind(this));
 }
 
-UnsubscribeAlert.prototype.show = function () {
+UnsubscribeAlert.prototype.show = function (company) {
+  this.render(company);
   this.$element.classList.remove("hide");
 };
 
 UnsubscribeAlert.prototype.close = function () {
   this.$element.classList.add("hide");
+};
+
+UnsubscribeAlert.prototype.setOnConfirm = function (onConfirm) {
+  this.props = { onConfirm };
 };
 
 UnsubscribeAlert.prototype.render = function (company) {
