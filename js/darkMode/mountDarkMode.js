@@ -10,7 +10,7 @@ function mountDarkModeButton(el)
 	});
 	darkmodeState.addSideEffect( (state)=>{
 		document.documentElement.classList.toggle("dark", state);
-		el.textContent = state ? "라이트모드로 토글하기" : "다크모드로 토글하기";
+		el.classList.toggle("active", state);
 	} );
 }
 

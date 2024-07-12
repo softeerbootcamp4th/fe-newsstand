@@ -634,3 +634,53 @@ ul {
 .logo > .dark, :root.dark .logo > .light {
 	display: none;
 }
+
+.darkModeButton {
+	width: 90px;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: var(--grayscale-white-alt);
+    border: 2px solid var(--grayscale-100);
+    padding: 3px 4px;
+    transition: background-color 0.4s, border-color 0.4s;
+    z-index: 0;
+}
+
+.darkModeButton::after {
+	content: "";
+	position: relative;
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-color: #ffc40d;
+    border-radius: 50%;
+    transition: transform 0.4s, background-color 0.4s;
+    z-index: 2;
+}
+
+.darkModeButton.active {
+	background-color: var(--grayscale-black);
+    border-color: var(--grayscale-500);
+}
+
+.darkModeButton.active::after {
+	background-color: var(--blue-500);
+    transform: translateX(46px);
+}
+
+.darkModeButton .icon {
+	width: 30px;
+	height: 30px;
+	z-index: 1;
+}
+
+.darkModeButton .right-icon {
+	position: absolute;
+	right: 4px;
+}
+
+.darkModeButton .left-icon {
+	position: absolute;
+	left: 4px;
+}
