@@ -1,5 +1,6 @@
 import { getSubscriptionList } from "../../common/getSubscriptionList.js";
 import { setSubscriptionList } from "../../common/setSubscriptionList.js";
+import { renderSelectedTab } from "../toggleView.js";
 
 export function handleModalBtnClick(company) {
     const modal = document.querySelector('.modal-container');

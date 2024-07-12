@@ -12,7 +12,7 @@ export function handleModalBtnClick() {
     document.querySelector('.modal-confirm-btn').addEventListener('click', () => {
         const company = document.getElementById('logo').getAttribute('alt');
         modal.classList.remove('show');
-        document.querySelector('.company-name').remove();
+        document.querySelector('.company-name')?.remove();
         let subscriptor = getSubscriptionList();
 
         subscriptor = subscriptor.filter(item => item !== company);
@@ -26,6 +26,6 @@ export function handleModalBtnClick() {
 
     document.querySelector('.modal-cancle-btn').addEventListener('click', () => {
         modal.classList.remove('show');
-        document.querySelector('.company-name').remove();
+        document.querySelector('.company-name')?.remove();
     });
 }

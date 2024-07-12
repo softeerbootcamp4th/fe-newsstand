@@ -2,7 +2,7 @@ import { handleThemeChange, initializeGridViewContainer } from "../../common/ini
 import { filterData } from "./filterData.js";
 import { createGridItem } from "./createGridItem.js";
 import { createPaginationButtons } from "./createPaginationButton.js";
-import { createGridSubscribeItem } from "./createSubscribeGridItem.js";
+import { cresteSubscribeGridItem } from './createSubscribeGridItem.js';
 
 let companies = [];
 let currentPage = 0; // 현재 페이지를 추적하기 위한 변수
@@ -24,7 +24,7 @@ export function fetchNewsData(type) {
         })
         .then(data => {
             companies = filterData(data);
-            type === 'all' ? createGridItem(companies, currentPage) : createGridSubscribeItem(companies);
+            type === 'all' ? createGridItem(companies, currentPage) : cresteSubscribeGridItem(companies);
             if(type === 'all') createPaginationButtons(currentPage, companies);
         })
         .catch(error => {

@@ -4,7 +4,7 @@ import { getTheme } from "../../header/toggleTheme.js";
 import { renderSelectedTab } from "../toggleView.js";
 import { handleModalBtnClick } from "./handleModalClick.js";
 
-export function createGridSubscribeItem(companies) {
+export function cresteSubscribeGridItem(companies) {
     const gridContainer = document.querySelector('.grid-view-container');
     gridContainer.innerHTML = ""; // 이전 아이템을 모두 제거
 
@@ -12,14 +12,14 @@ export function createGridSubscribeItem(companies) {
     const startIdx = 0 * itemsPerPage;
     const endIdx = Math.min(startIdx + itemsPerPage, companies.length);
     let subscriptionList = getSubscriptionList().reverse();
+    console.log(subscriptionList);
     const toastAlert = document.querySelector('.toast-alert');
     const modal = document.querySelector('.modal-container');
     const theme = getTheme();
 
-
     // 로컬 스토리지에 있는 아이템만 필터링
-    const subscribedCompanies = companies.filter(company => subscriptionList.includes(company.company));
-
+    let subscribedCompanies = companies.filter(company => subscriptionList.includes(company.company));
+    console.log(subscribedCompanies);
     for (let i = 0; i < itemsPerPage; i++) {
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
@@ -28,7 +28,7 @@ export function createGridSubscribeItem(companies) {
             const company = subscribedCompanies[startIdx + i]?.company;
             const imgElement = document.createElement('img');
             imgElement.classList.add('grid-logo-img');
-            imgElement.src = theme === 'light' ? companies[startIdx + i].logoUrl : companies[startIdx + i].logoUrl.replace(/\.[^/.]+$/, "") + '_dark.png';
+            imgElement.src = theme === 'light' ? subscribedCompanies[startIdx + i].logoUrl : subscribedCompanies[startIdx + i].logoUrl.replace(/\.[^/.]+$/, "") + '_dark.png';
             imgElement.alt = company;
     
             const subscribeBtn = document.createElement('div');
