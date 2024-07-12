@@ -1,4 +1,4 @@
-import { getSubscribeCompanies } from "./company.js";
+import { getAllCompanyLength, getSubscribeCompanies } from "./company.js";
 import { TOGGLE } from "./magicNumber.js";
 import { renderDefaultSceen } from "./render.js";
 import { getTabLength } from "./tab.js";
@@ -25,7 +25,7 @@ export function switchToggleWithToggleName(toggleName) {
             document.querySelector("#toggle_all").classList.remove('toggle_item_active');
             break;
     }
-    state.toggleName = toggleName;
+    state.setter.setToggleName(toggleName);
     renderDefaultSceen();
 }
 
@@ -51,20 +51,23 @@ function setUpToggleWithDisabledCondition(disabledCondition) {
 }
 
 export function updateAllToggleArrow() {
-    const max = getSubscribeCompanies().length - 1;
+    const max = getAllCompanyLength() - 1;
     const min = 0;
     const tabLastIndex = getTabLength() - 1;
+    const selectedCompanyIndex = state.getter.getSelectedCompanyIndex();
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
     setUpToggleWithDisabledCondition({
-        left: state.selectedCompanyIndex == min && state.selectedTabIndex == min,
-        right: state.selectedCompanyIndex == max && state.selectedTabIndex == tabLastIndex
+        left: selectedCompanyIndex == min && selectedTabIndex == min,
+        right: selectedCompanyIndex == max && selectedTabIndex == tabLastIndex
     });
 }
 
 export function updateSubscribedToggleArrow() {
     const max = getTabLength() - 1;
     const min = 0;
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
     setUpToggleWithDisabledCondition({
-        left: state.selectedTabIndex === min,
-        right: state.selectedTabIndex === max
+        left: selectedTabIndex === min,
+        right: selectedTabIndex === max
     });
 }

@@ -28,8 +28,8 @@ export function handleCompanySwipe(direction) {
 }
 
 function rotate(direction, animationResetPointer = { isNeed: false }) {
-    state.selectedArticleIndex = 0;
-    switch (state.toggleName) {
+    state.setter.setSelectedArticleIndex(0);
+    switch (state.getter.getToggleName()) {
         case TOGGLE.ALL:
             return rotateAllToglePage(direction, animationResetPointer);
         case TOGGLE.SUBSCRIBED:
@@ -41,13 +41,13 @@ function rotateSubscribedTogglePage(direction, animationResetPointer) {
     const { tabLastIndex } = getRotateIndexes();
     switch (direction) {
         case DIRECTION.LEFT:
-            if (state.selectedTabIndex > 0) {
+            if (state.getter.getSelectedTabIndex() > 0) {
                 pageGoBack(true);
                 animationResetPointer.isNeed = true;
             }
             break;
         case DIRECTION.RIGHT:
-            if (state.selectedTabIndex < tabLastIndex) {
+            if (state.getter.getSelectedTabIndex() < tabLastIndex) {
                 pageGoForward();
                 animationResetPointer.isNeed = true;
             }
@@ -63,8 +63,8 @@ function rotateAllToglePage(direction, animationResetPointer) {
 
     switch (direction) {
         case DIRECTION.LEFT:
-            const firstTabCondition = state.selectedTabIndex === minIndex;
-            const firstCompanyCondition = state.selectedCompanyIndex === minIndex;
+            const firstTabCondition = state.getter.getSelectedTabIndex() === minIndex;
+            const firstCompanyCondition = state.getter.getSelectedCompanyIndex() === minIndex;
             if (!validToGo && !firstTabCondition) {
                 animationResetPointer.isNeed = true;
                 pageGoBack();
@@ -75,15 +75,15 @@ function rotateAllToglePage(direction, animationResetPointer) {
                         animationResetPointer.isNeed = true;
                         pageGoBack();
                     } else if (validToGo) {
-                        state.selectedCompanyIndex -= 1;
+                        state.setter.setSelectedCompanyIndex(state.getter.getSelectedCompanyIndex() - 1);
                     }
                 }
             }
             break;
 
         case DIRECTION.RIGHT:
-            const lastTabCondition = state.selectedTabIndex === tabLastIndex;
-            const lastCompanyCondition = state.selectedCompanyIndex === maxIndex;
+            const lastTabCondition = state.getter.getSelectedTabIndex() === tabLastIndex;
+            const lastCompanyCondition = state.getter.getSelectedCompanyIndex() === maxIndex;
             if (!validToGo && !lastTabCondition) {
                 animationResetPointer.isNeed = true;
                 pageGoForward();
@@ -94,7 +94,7 @@ function rotateAllToglePage(direction, animationResetPointer) {
                         animationResetPointer.isNeed = true;
                         pageGoForward();
                     } else if (validToGo) {
-                        state.selectedCompanyIndex += 1;
+                        state.setter.setSelectedCompanyIndex(state.getter.getSelectedCompanyIndex() + 1);
                     }
                 }
             }
@@ -105,18 +105,18 @@ function rotateAllToglePage(direction, animationResetPointer) {
 }
 
 function pageGoBack(isNeedToGoFirstCompanyIndex = false) {
-    state.selectedTabIndex -= 1;
+    state.setter.setSelectedTabIndex(state.getter.getSelectedTabIndex() - 1);
     if (!isNeedToGoFirstCompanyIndex) {
         const nextCompanyIndex = getTabLength() - 1;
         state.selectedCompanyIndex = nextCompanyIndex === -1 ? 0 : nextCompanyIndex;
     }
-    state.selectedArticleIndex = 0;
+    state.setter.setSelectedArticleIndex(0);
 }
 
 function pageGoForward() {
-    state.selectedTabIndex += 1;
-    state.selectedArticleIndex = 0;
-    state.selectedCompanyIndex = 0;
+    state.setter.setSelectedTabIndex(state.getter.getSelectedTabIndex() + 1);
+    state.setter.setSelectedArticleIndex(0);
+    state.setter.setSelectedCompanyIndex(0)
 }
 
 
@@ -128,7 +128,7 @@ function getRotateIndexes() {
 }
 
 function getSwipeMaxPageNumber() {
-    switch (state.toggleName) {
+    switch (state.getter.getToggleName()) {
         case TOGGLE.ALL:
             return getAllCompanyLength();
         case TOGGLE.SUBSCRIBED:

@@ -5,10 +5,10 @@ export function addEventToRollingBox() {
         leftAnimationIndex: 0,
         rightAnimationIndex: 0
     };
-
-    initializeData(indexPointer, state.previewArticleData);
+    const previewArticleData = state.getter.getPreviewArticleData();
+    initializeData(indexPointer, previewArticleData);
     addPauseEvent();
-    addRollingEvent(indexPointer, state.previewArticleData);
+    addRollingEvent(indexPointer, previewArticleData);
 }
 
 function initializeData(indexPointer, previewArticleData) {

@@ -11,7 +11,7 @@ export function addToastPopup() {
     renderPopup(toastPopupDom);
     setTimeout(()=>{
         toastPopupDom.remove();
-        switchToggleWithToggleName(state,TOGGLE.SUBSCRIBED);
+        switchToggleWithToggleName(TOGGLE.SUBSCRIBED);
     },TIME.SECOND * 5);
 }
 
@@ -60,8 +60,9 @@ function handleDeletePopup(target) {
 
 function handleDeleteAction(companyName) {
     unSubscribeCompany(companyName);
-    if (state.selectedTabIndex > (getTabLength() - 1)) {
-        state.selectedTabIndex -= 1;
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
+    if (selectedTabIndex > (getTabLength() - 1)) {
+        state.setter.setSelectedTabIndex(selectedTabIndex-1)
     }
     renderTabList();
     renderTabAnimationList();

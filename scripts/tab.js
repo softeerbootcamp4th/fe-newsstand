@@ -16,21 +16,21 @@ export function handleTabClick(selectedTabIndex, isDragging) {
 }
 
 export function updateSelectedTabIndex(newIndex) {
-    state.selectedTabIndex = newIndex;
+    state.setter.setSelectedTabIndex(newIndex);
 }
 
 export function getTabLength() {
-    switch (state.toggleName) {
+    switch (state.getter.getToggleName()) {
         case TOGGLE.ALL:
-            return state.articleDataList.length;
+            return state.getter.getArticleDataList().length;
         case TOGGLE.SUBSCRIBED:
-            return state.subscribedCompanyNameSet.size;
+            return state.getter.getSubscribedCompanyNameSet().size;
     }
 
 }
 
 export function updateTabAnimationStyle() {
-    switch (state.toggleName) {
+    switch (state.getter.getToggleName()) {
         case TOGGLE.ALL:
             updateAllTabAnimation();
             break;
@@ -47,23 +47,25 @@ function updateSubscribedTabAnimation() {
 }
 
 function updateAllTabAnimation() {
-    const max = state.articleDataList[state.selectedArticleIndex].companies.length - 1;
+    const max = state.getter.getArticleDataList()[state.getter.getSelectedArticleIndex()].companies.length - 1;
     updateTabAnimation(max);
 
 }
 
 function updateTabAnimation(max) {
-    const animationTabDom = document.querySelector(`#animation_${state.selectedTabIndex}_tab`);
+    const animationTabDom = document.querySelector(`#animation_${state.getter.getSelectedTabIndex()}_tab`);
     let transform = "";
     if (max <= 0) {
         transform = "translate(-100%)";
     } else {
-        switch (state.toggleName) {
+
+        const selectedCompanyIndex = state.getter.getSelectedCompanyIndex();
+        switch (state.getter.getToggleName()) {
             case TOGGLE.ALL:
-                transform = `translate(-${100 - ((state.selectedCompanyIndex + 1) / max * 100)}%)`;
+                transform = `translate(-${100 - ((selectedCompanyIndex + 1) / max * 100)}%)`;
                 break;
             case TOGGLE.SUBSCRIBED:
-                transform = `translate(calc(-${100 - ((state.selectedCompanyIndex + 1) / max * 100)}% - 10px))`;
+                transform = `translate(calc(-${100 - ((selectedCompanyIndex + 1) / max * 100)}% - 10px))`;
                 break;
         }
     }
@@ -74,7 +76,7 @@ function updateTabAnimation(max) {
 
 
 export function getSubscribedTabValidation() {
-    return !(state.toggleName === TOGGLE.SUBSCRIBED && state.subscribedCompanyNameSet.size === 0);
+    return !(state.getter.getToggleName() === TOGGLE.SUBSCRIBED && state.getter.getSubscribedCompanyNameSet().size === 0);
 }
 
 export function getTabDomWithCleanUp() {

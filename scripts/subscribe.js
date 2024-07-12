@@ -6,7 +6,7 @@ import state from "./store.js";
 export function updateSubscribeButton() {
     if (!getSubscribedTabValidation()) return;
     const companyName = getCurrentCompany()?.name;
-    const isSubscribed = state.subscribedCompanyNameSet.has(companyName);
+    const isSubscribed = state.getter.getSubscribedCompanyNameSet().has(companyName);
     document.querySelector("#subscribe_button_wrapper").innerHTML = getSerializedSubscribeButtonHTML(isSubscribed);
     const subscribeButtonDom = document.querySelector("#subscribe_button");
     subscribeButtonDom.addEventListener("click", function () {
@@ -43,17 +43,19 @@ function getSerializedSubscribeButtonHTML(isSubscribed) {
 
 export function loadSubscribeCompanies() {
     const tmp = parseSetData(loadSubscribeCompaniesFromLocalStorage());
-    state.subscribedCompanyNameSet = tmp;
+    state.setter.setSubscribedCompanyNameSet(tmp);
 }
 
 export function subscribeCompany(company) {
-    state.subscribedCompanyNameSet.add(company);
-    saveSubscribeCompaniesToLocalStorage(state.subscribedCompanyNameSet);
+    const subscribedCompanyNameSet = state.getter.getSubscribedCompanyNameSet();
+    subscribedCompanyNameSet.add(company);
+    saveSubscribeCompaniesToLocalStorage(subscribedCompanyNameSet);
 }
 
 export function unSubscribeCompany(company) {
-    state.subscribedCompanyNameSet.delete(company);
-    saveSubscribeCompaniesToLocalStorage(state.subscribedCompanyNameSet);
+    const subscribedCompanyNameSet = state.getter.getSubscribedCompanyNameSet();
+    subscribedCompanyNameSet.delete(company);
+    saveSubscribeCompaniesToLocalStorage(subscribedCompanyNameSet);
 }
 
 function loadSubscribeCompaniesFromLocalStorage() {

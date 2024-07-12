@@ -21,9 +21,9 @@ export async function initializeData() {
             previewArticleData
         ]) => {
             const { articleDataList,companiesWithArticles } = articleData;
-            state.articleDataList = articleDataList;
-            state.companiesWithArticles = companiesWithArticles;
-            state.previewArticleData = previewArticleData;
+            state.setter.setArticleDataList(articleDataList);
+            state.setter.setCompaniesWithArticles(companiesWithArticles);
+            state.setter.setPreviewArticleData(previewArticleData);
             resolve();
         });
     })

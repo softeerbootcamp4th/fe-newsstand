@@ -2,24 +2,32 @@ import { TOGGLE } from "./magicNumber.js";
 import state from "./store.js";
 
 export function getCurrentCompany() {
-    switch (state.toggleName) {
+    const articleDataList = state.getter.getArticleDataList();
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
+    const selectedCompanyIndex = state.getter.getSelectedCompanyIndex();
+    switch (state.getter.getToggleName()) {
         case TOGGLE.ALL:
-            return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex];
+            return articleDataList[selectedTabIndex].companies[selectedCompanyIndex];
         case TOGGLE.SUBSCRIBED:
-            return getSubscribeCompanies(state)[state.selectedTabIndex];
+            return getSubscribeCompanies()[selectedTabIndex];
     }
 }
 
 export function getAllToggleCurrentCompanies() {
-    return state.articleDataList[state.selectedTabIndex].companies;
+    const articleDataList = state.getter.getArticleDataList();
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
+    return articleDataList[selectedTabIndex].companies;
 }
 
 export function getSubscribeCompanies() {
-    return (Object.values(state.companiesWithArticles)).filter(company => state.subscribedCompanyNameSet.has(company.name));
+    const subscribedCompanyNameSet = state.getter.getSubscribedCompanyNameSet();
+    const companiesWithArticles = state.getter.getCompaniesWithArticles();
+    return (Object.values(companiesWithArticles)).filter(company => subscribedCompanyNameSet.has(company.name));
 }
 
 export function getAllCompanyLength() {
-    return Object.keys(state.companiesWithArticles).length;
+    const companiesWithArticles = state.getter.getCompaniesWithArticles();
+    return Object.keys(companiesWithArticles).length;
 }
 
 
