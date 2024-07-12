@@ -1,7 +1,7 @@
-import { shownewstab } from "../displaynews/displaysubscribe.js";
+import { shownewstab } from "../displaynews/displaySubscribe.js";
 import { clickArt } from "../mainscript.js";
 import { animationTimer } from "../progressbar/progressbutton.js";
-import { subProgressTimer } from "../displaynews/displaysubscribe.js";
+import { subProgressTimer } from "../displaynews/displaySubscribe.js";
 import subscribeManager from "../statemanager/subscribeManager.js";
 
 export const mytabs = () => {
