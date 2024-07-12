@@ -1,30 +1,9 @@
 import { showsubscribe, subscribePress } from "../subscribe/subscribe.js";
+
 import { transformToProgress, resetProgress, animationTimer } from "../progressbar/progressbutton.js";
 import { newstype } from "../newstab/newstab.js";
-import { clickArt } from "../mainscript.js";
-import { originaltabs, mytabs } from "../newstab/newstab.js";
 import { subProgressTimer } from "./displaysubscribe.js";
 import stateManager from "../statemanager/stateManager.js";
-
-document.addEventListener('DOMContentLoaded', () => {
-    const allArticleButton = document.getElementById('all-article');
-    const myArticleButton = document.getElementById('my-article');
-
-    allArticleButton.addEventListener('click', () => {
-        clickArt('all-article');
-        originaltabs();
-        initmain();
-    });
-
-    myArticleButton.addEventListener('click', () => {
-        clickArt('my-article');
-        mytabs();
-    });
-});
-
-window.newsData = [];
-
-export let testingpages = [];
 
 let buttonId = "";
 
@@ -32,21 +11,14 @@ window.onload = async () => {
     try {
         const response = await fetch('../../news/allnews.json');
         const data = await response.json();
-        window.newsData = data;
-        testingpages = countpages(newsData);
-
+        stateManager.setAllNews(data);
+        stateManager.setPages(countpages(stateManager.getAllNews()));
         initmain();
     } catch (error) {
         console.error('Error loading JSON:', error);
     }
 };
 
-/*
-export var indexstate = {
-    pressIndex: 0,
-    pageIndex: 0
-};
-*/
 var btnRight = document.getElementById('btnRight');
 var btnLeft = document.getElementById('btnLeft');
 
@@ -57,8 +29,8 @@ function updateList(pridx) {
     } else {
         btnLeft.classList.remove('disabled');
     }
-
-    if (stateManager.getPageIndex() >= testingpages[pridx] - 1) {
+    const pageindex = stateManager.getPages();
+    if (stateManager.getPageIndex() >= pageindex[pridx] - 1) {
         stateManager.setPressIndex(getNextPressIndex(pridx));
         stateManager.setPageIndex(0);
         buttonId = newstype[stateManager.getPressIndex()];
@@ -80,25 +52,30 @@ btnLeft.addEventListener('click', () => {
 });
 
 function rightButtonClick(pridx) {
-    clearInterval(animationTimer); // 애니메이션 타이머 초기화
-
-    if (stateManager.getPageIndex() < testingpages[pridx] - 1) {
-        stateManager.setPageIndex(stateManager.getPageIndex() + 1);
+    //clearInterval(animationTimer); // 애니메이션 타이머 초기화
+    const pageindex = stateManager.getPages();
+    if (stateManager.getPageIndex() < pageindex[pridx] - 1) {
+        //+1
+        stateManager.setPageIndex(stateManager.getPageIndex());
+        updateList(stateManager.getPressIndex());
+        //stateManager.setPageIndex(stateManager.getPageIndex() + 1);
+        updateNewsDisplay(buttonId, stateManager.getPageIndex());
     } else {
-        stateManager.setPressIndex(getNextPressIndex(pridx));
-        stateManager.setPageIndex(0);
+        //stateManager.setPressIndex(getNextPressIndex(pridx));
+        //stateManager.setPageIndex(0);
         buttonId = newstype[stateManager.getPressIndex()];
         resetProgress();
         const nextButton = document.querySelector(`.text-button[data-index="${stateManager.getPressIndex()}"]`);
         transformToProgress(nextButton);
+        updateList(stateManager.getPressIndex());
+        updateNewsDisplay(buttonId, stateManager.getPageIndex());
     }
-    updateList(stateManager.getPressIndex());
-    updateNewsDisplay(buttonId, stateManager.getPageIndex());
+    
 }
 
 function leftButtonClick() {
-    clearInterval(animationTimer); // 애니메이션 타이머 초기화
-
+    //clearInterval(animationTimer); // 애니메이션 타이머 초기화
+    const pageindex = stateManager.getPages();
     if (stateManager.getPageIndex() > 0) {
         stateManager.setPageIndex(stateManager.getPageIndex() - 1);
     } else {
@@ -107,7 +84,7 @@ function leftButtonClick() {
         } else {
             stateManager.setPressIndex(newstype.length - 1);
         }
-        stateManager.setPageIndex(testingpages[stateManager.getPressIndex()] - 1);
+        stateManager.setPageIndex(pageindex[stateManager.getPressIndex()] - 1);
         buttonId = newstype[stateManager.getPressIndex()];
         resetProgress();
         const nextButton = document.querySelector(`.text-button[data-index="${stateManager.getPressIndex()}"]`);
@@ -118,11 +95,11 @@ function leftButtonClick() {
 }
 
 export const updateNewsDisplay = (pressType, pageidx) => {
-    const filteredNews = window.newsData.filter(item => item.pressType === pressType);
+    const filteredNews = stateManager.getAllNews().filter(item => item.pressType === pressType);
     const newsItem = filteredNews.find(item => item.pid === pageidx);
 
     if (newsItem) {
-        window.btntext = newsItem.pressName;
+        stateManager.setClickedNews(newsItem.pressName);
         document.querySelector('.news-press-img img').src = newsItem.pressImg;
         document.querySelector('.news-press-edit').textContent = newsItem.edittime;
         document.querySelector('.news-image-container img').src = newsItem.mainphoto;
@@ -155,12 +132,11 @@ export const initmain = () => {
     clearInterval(subProgressTimer);
     //원래
     resetProgress();
-    //
-    testingpages = countpages(window.newsData); 
-
+    //testingpages = countpages(stateManager.getAllNews()); 
+    stateManager.setPages(countpages(stateManager.getAllNews()));
     const buttons = document.querySelectorAll('.text-button');
+
     buttons.forEach(button => {
-        
         button.removeEventListener('click', handleButtonClick);
         button.addEventListener('click', handleButtonClick);
     });
@@ -169,8 +145,8 @@ export const initmain = () => {
     stateManager.setPageIndex(0); 
     //기존 코드 아래
     updateNewsDisplay("economy", stateManager.getPageIndex());
-    const ts = document.querySelector(".text-button");
-    transformToProgress(ts);
+    const defaultbutton = document.querySelector(".text-button");
+    transformToProgress(defaultbutton);
 }
 
 const handleButtonClick = (event) => {
