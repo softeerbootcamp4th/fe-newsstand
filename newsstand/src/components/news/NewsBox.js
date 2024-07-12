@@ -6,6 +6,7 @@ import IconView, { Icon } from '../base/IconView.js'
 import { isSubscribed, subscribe, moveToSubscribedCategory } from '../../utils/subscribeUtils.js'
 import { toastOn } from '../../utils/toastUtils.js'
 import { debounce } from '../../core/hooks/useState.js'
+import { changeIconByFoundation } from '../../utils/iconUtils.js'
 
 const NewsBox = (props) => {
     const [isHover, setIsHover] = useState({ stateId: 1, initialValue: false })
@@ -75,7 +76,7 @@ const NewsBox = (props) => {
 
     const companyIcon = createComponent(IconView, {
         id: props.id,
-        icon: props.news.icon,
+        icon: changeIconByFoundation(props.news.icon),
     })
 
     return {
