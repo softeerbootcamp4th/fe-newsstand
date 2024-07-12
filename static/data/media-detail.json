@@ -3,7 +3,7 @@
       {
          "id":1,
          "name":"서울경제",
-         "iconUrl":"./static/media-icon/media-icon-1.svg",
+         "iconUrl":"media-icon-1.svg",
          "editDate":"07월 01일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -20,7 +20,7 @@
       {
          "id":2,
          "name":"데일리안",
-         "iconUrl":"./static/media-icon/media-icon-2.svg",
+         "iconUrl":"media-icon-2.svg",
          "editDate":"07월 02일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -37,7 +37,7 @@
       {
          "id":3,
          "name":"헤럴드경제",
-         "iconUrl":"./static/media-icon/media-icon-3.svg",
+         "iconUrl":"media-icon-3.svg",
          "editDate":"07월 03일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -54,7 +54,7 @@
       {
          "id":4,
          "name":"SBS Biz",
-         "iconUrl":"./static/media-icon/media-icon-4.svg",
+         "iconUrl":"media-icon-4.svg",
          "editDate":"07월 04일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -71,7 +71,7 @@
       {
          "id":5,
          "name":"세계일보",
-         "iconUrl":"./static/media-icon/media-icon-5.svg",
+         "iconUrl":"media-icon-5.svg",
          "editDate":"07월 05일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -88,7 +88,7 @@
       {
          "id":6,
          "name":"아시아경제",
-         "iconUrl":"./static/media-icon/media-icon-6.svg",
+         "iconUrl":"media-icon-6.svg",
          "editDate":"07월 06일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -105,7 +105,7 @@
       {
          "id":7,
          "name":"이데일리",
-         "iconUrl":"./static/media-icon/media-icon-7.svg",
+         "iconUrl":"media-icon-7.svg",
          "editDate":"07월 07일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -122,7 +122,7 @@
       {
          "id":8,
          "name":"한겨례",
-         "iconUrl":"./static/media-icon/media-icon-8.svg",
+         "iconUrl":"media-icon-8.svg",
          "editDate":"07월 08일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -139,7 +139,7 @@
       {
          "id":9,
          "name":"아이뉴스",
-         "iconUrl":"./static/media-icon/media-icon-9.svg",
+         "iconUrl":"media-icon-9.svg",
          "editDate":"07월 09일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -156,7 +156,7 @@
       {
          "id":10,
          "name":"파이낸셜뉴스",
-         "iconUrl":"./static/media-icon/media-icon-10.svg",
+         "iconUrl":"media-icon-10.svg",
          "editDate":"07월 10일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -173,7 +173,7 @@
       {
          "id":11,
          "name":"스포츠서울",
-         "iconUrl":"./static/media-icon/media-icon-11.svg",
+         "iconUrl":"media-icon-11.svg",
          "editDate":"07월 11일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -190,7 +190,7 @@
       {
          "id":12,
          "name":"스포츠동아",
-         "iconUrl":"./static/media-icon/media-icon-12.svg",
+         "iconUrl":"media-icon-12.svg",
          "editDate":"07월 12일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -207,7 +207,7 @@
       {
          "id":13,
          "name":"석간문화일보",
-         "iconUrl":"./static/media-icon/media-icon-13.svg",
+         "iconUrl":"media-icon-13.svg",
          "editDate":"07월 13일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -224,7 +224,7 @@
       {
          "id":14,
          "name":"KBS World",
-         "iconUrl":"./static/media-icon/media-icon-14.svg",
+         "iconUrl":"media-icon-14.svg",
          "editDate":"07월 14일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -241,7 +241,7 @@
       {
          "id":15,
          "name":"Korea JoongAng Daily",
-         "iconUrl":"./static/media-icon/media-icon-15.svg",
+         "iconUrl":"media-icon-15.svg",
          "editDate":"07월 15일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -258,7 +258,7 @@
       {
          "id":16,
          "name":"Insight",
-         "iconUrl":"./static/media-icon/media-icon-16.svg",
+         "iconUrl":"media-icon-16.svg",
          "editDate":"07월 16일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -275,7 +275,7 @@
       {
          "id":17,
          "name":"법률방송뉴스",
-         "iconUrl":"./static/media-icon/media-icon-17.svg",
+         "iconUrl":"media-icon-17.svg",
          "editDate":"07월 17일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -292,7 +292,7 @@
       {
          "id":18,
          "name":"시사저널",
-         "iconUrl":"./static/media-icon/media-icon-18.svg",
+         "iconUrl":"media-icon-18.svg",
          "editDate":"07월 18일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -309,7 +309,7 @@
       {
          "id":19,
          "name":"RBS한국농어촌방송",
-         "iconUrl":"./static/media-icon/media-icon-19.svg",
+         "iconUrl":"media-icon-19.svg",
          "editDate":"07월 19일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -326,7 +326,7 @@
       {
          "id":20,
          "name":"조이뉴스24",
-         "iconUrl":"./static/media-icon/media-icon-20.svg",
+         "iconUrl":"media-icon-20.svg",
          "editDate":"07월 20일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -343,7 +343,7 @@
       {
          "id":21,
          "name":"에너지경제",
-         "iconUrl":"./static/media-icon/media-icon-21.svg",
+         "iconUrl":"media-icon-21.svg",
          "editDate":"07월 21일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -360,7 +360,7 @@
       {
          "id":22,
          "name":"BUSINESS POST",
-         "iconUrl":"./static/media-icon/media-icon-22.svg",
+         "iconUrl":"media-icon-22.svg",
          "editDate":"07월 22일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -377,7 +377,7 @@
       {
          "id":23,
          "name":"CEO스코어데일리",
-         "iconUrl":"./static/media-icon/media-icon-23.svg",
+         "iconUrl":"media-icon-23.svg",
          "editDate":"07월 23일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -394,7 +394,7 @@
       {
          "id":24,
          "name":"KNN",
-         "iconUrl":"./static/media-icon/media-icon-24.svg",
+         "iconUrl":"media-icon-24.svg",
          "editDate":"07월 24일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -411,7 +411,7 @@
       {
          "id":25,
          "name":"The Korea Herald",
-         "iconUrl":"./static/media-icon/media-icon-25.svg",
+         "iconUrl":"media-icon-25.svg",
          "editDate":"07월 25일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -428,7 +428,7 @@
       {
          "id":26,
          "name":"MBC",
-         "iconUrl":"./static/media-icon/media-icon-26.svg",
+         "iconUrl":"media-icon-26.svg",
          "editDate":"07월 26일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -445,7 +445,7 @@
       {
          "id":27,
          "name":"뉴스타파",
-         "iconUrl":"./static/media-icon/media-icon-27.svg",
+         "iconUrl":"media-icon-27.svg",
          "editDate":"07월 27일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -462,7 +462,7 @@
       {
          "id":28,
          "name":"NewDaily",
-         "iconUrl":"./static/media-icon/media-icon-28.svg",
+         "iconUrl":"media-icon-28.svg",
          "editDate":"07월 28일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -479,7 +479,7 @@
       {
          "id":29,
          "name":"국민일보",
-         "iconUrl":"./static/media-icon/media-icon-29.svg",
+         "iconUrl":"media-icon-29.svg",
          "editDate":"07월 29일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -496,7 +496,7 @@
       {
          "id":30,
          "name":"일간스포츠",
-         "iconUrl":"./static/media-icon/media-icon-30.svg",
+         "iconUrl":"media-icon-30.svg",
          "editDate":"07월 30일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -513,7 +513,7 @@
       {
          "id":31,
          "name":"경향신문",
-         "iconUrl":"./static/media-icon/media-icon-31.svg",
+         "iconUrl":"media-icon-31.svg",
          "editDate":"07월 31일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -530,7 +530,7 @@
       {
          "id":32,
          "name":"ZDNet Korea",
-         "iconUrl":"./static/media-icon/media-icon-32.svg",
+         "iconUrl":"media-icon-32.svg",
          "editDate":"07월 01일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -547,7 +547,7 @@
       {
          "id":33,
          "name":"마이데일리",
-         "iconUrl":"./static/media-icon/media-icon-33.svg",
+         "iconUrl":"media-icon-33.svg",
          "editDate":"07월 02일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -564,7 +564,7 @@
       {
          "id":34,
          "name":"머니투데이",
-         "iconUrl":"./static/media-icon/media-icon-34.svg",
+         "iconUrl":"media-icon-34.svg",
          "editDate":"07월 03일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -581,7 +581,7 @@
       {
          "id":35,
          "name":"SBS",
-         "iconUrl":"./static/media-icon/media-icon-35.svg",
+         "iconUrl":"media-icon-35.svg",
          "editDate":"07월 04일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -598,7 +598,7 @@
       {
          "id":36,
          "name":"OhMyNews",
-         "iconUrl":"./static/media-icon/media-icon-36.svg",
+         "iconUrl":"media-icon-36.svg",
          "editDate":"07월 05일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -615,7 +615,7 @@
       {
          "id":37,
          "name":"매일경제",
-         "iconUrl":"./static/media-icon/media-icon-37.svg",
+         "iconUrl":"media-icon-37.svg",
          "editDate":"07월 06일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -632,7 +632,7 @@
       {
          "id":38,
          "name":"MBN",
-         "iconUrl":"./static/media-icon/media-icon-38.svg",
+         "iconUrl":"media-icon-38.svg",
          "editDate":"07월 07일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -649,7 +649,7 @@
       {
          "id":39,
          "name":"YTN",
-         "iconUrl":"./static/media-icon/media-icon-39.svg",
+         "iconUrl":"media-icon-39.svg",
          "editDate":"07월 08일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -666,7 +666,7 @@
       {
          "id":40,
          "name":"시사위크",
-         "iconUrl":"./static/media-icon/media-icon-40.svg",
+         "iconUrl":"media-icon-40.svg",
          "editDate":"07월 09일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -683,7 +683,7 @@
       {
          "id":41,
          "name":"Digital Today",
-         "iconUrl":"./static/media-icon/media-icon-41.svg",
+         "iconUrl":"media-icon-41.svg",
          "editDate":"07월 10일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -700,7 +700,7 @@
       {
          "id":42,
          "name":"data news",
-         "iconUrl":"./static/media-icon/media-icon-42.svg",
+         "iconUrl":"media-icon-42.svg",
          "editDate":"07월 11일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -717,7 +717,7 @@
       {
          "id":43,
          "name":"한국대학신문",
-         "iconUrl":"./static/media-icon/media-icon-43.svg",
+         "iconUrl":"media-icon-43.svg",
          "editDate":"07월 12일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -734,7 +734,7 @@
       {
          "id":44,
          "name":"서울파이낸스",
-         "iconUrl":"./static/media-icon/media-icon-44.svg",
+         "iconUrl":"media-icon-44.svg",
          "editDate":"07월 13일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -751,7 +751,7 @@
       {
          "id":45,
          "name":"엑스포츠뉴스",
-         "iconUrl":"./static/media-icon/media-icon-45.svg",
+         "iconUrl":"media-icon-45.svg",
          "editDate":"07월 14일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -768,7 +768,7 @@
       {
          "id":46,
          "name":"맥스무비",
-         "iconUrl":"./static/media-icon/media-icon-46.svg",
+         "iconUrl":"media-icon-46.svg",
          "editDate":"07월 15일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -785,7 +785,7 @@
       {
          "id":47,
          "name":"OBS",
-         "iconUrl":"./static/media-icon/media-icon-47.svg",
+         "iconUrl":"media-icon-47.svg",
          "editDate":"07월 16일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -802,7 +802,7 @@
       {
          "id":48,
          "name":"소년한국일보",
-         "iconUrl":"./static/media-icon/media-icon-48.svg",
+         "iconUrl":"media-icon-48.svg",
          "editDate":"07월 17일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -819,7 +819,7 @@
       {
          "id":49,
          "name":"OSEN",
-         "iconUrl":"./static/media-icon/media-icon-49.svg",
+         "iconUrl":"media-icon-49.svg",
          "editDate":"07월 18일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -836,7 +836,7 @@
       {
          "id":50,
          "name":"디지털타임스",
-         "iconUrl":"./static/media-icon/media-icon-50.svg",
+         "iconUrl":"media-icon-50.svg",
          "editDate":"07월 19일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -853,7 +853,7 @@
       {
          "id":51,
          "name":"미디어오늘",
-         "iconUrl":"./static/media-icon/media-icon-51.svg",
+         "iconUrl":"media-icon-51.svg",
          "editDate":"07월 20일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -870,7 +870,7 @@
       {
          "id":52,
          "name":"연합뉴스TV",
-         "iconUrl":"./static/media-icon/media-icon-52.svg",
+         "iconUrl":"media-icon-52.svg",
          "editDate":"07월 21일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -887,7 +887,7 @@
       {
          "id":53,
          "name":"한겨례",
-         "iconUrl":"./static/media-icon/media-icon-53.svg",
+         "iconUrl":"media-icon-53.svg",
          "editDate":"07월 22일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -904,7 +904,7 @@
       {
          "id":54,
          "name":"Chosun Biz",
-         "iconUrl":"./static/media-icon/media-icon-54.svg",
+         "iconUrl":"media-icon-54.svg",
          "editDate":"07월 23일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -921,7 +921,7 @@
       {
          "id":55,
          "name":"JTBC",
-         "iconUrl":"./static/media-icon/media-icon-55.svg",
+         "iconUrl":"media-icon-55.svg",
          "editDate":"07월 02일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -938,7 +938,7 @@
       {
          "id":56,
          "name":"metro",
-         "iconUrl":"./static/media-icon/media-icon-56.svg",
+         "iconUrl":"media-icon-56.svg",
          "editDate":"07월 03일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -955,7 +955,7 @@
       {
          "id":57,
          "name":"비즈한국",
-         "iconUrl":"./static/media-icon/media-icon-57.svg",
+         "iconUrl":"media-icon-57.svg",
          "editDate":"07월 04일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -972,7 +972,7 @@
       {
          "id":58,
          "name":"주간경향",
-         "iconUrl":"./static/media-icon/media-icon-58.svg",
+         "iconUrl":"media-icon-58.svg",
          "editDate":"07월 05일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -989,7 +989,7 @@
       {
          "id":59,
          "name":"Forbes",
-         "iconUrl":"./static/media-icon/media-icon-59.svg",
+         "iconUrl":"media-icon-59.svg",
          "editDate":"07월 06일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1006,7 +1006,7 @@
       {
          "id":60,
          "name":"TvReport",
-         "iconUrl":"./static/media-icon/media-icon-60.svg",
+         "iconUrl":"media-icon-60.svg",
          "editDate":"07월 07일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1023,7 +1023,7 @@
       {
          "id":61,
          "name":"티브이데일리",
-         "iconUrl":"./static/media-icon/media-icon-61.svg",
+         "iconUrl":"media-icon-61.svg",
          "editDate":"07월 08일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1040,7 +1040,7 @@
       {
          "id":62,
          "name":"BBS News",
-         "iconUrl":"./static/media-icon/media-icon-62.svg",
+         "iconUrl":"media-icon-62.svg",
          "editDate":"07월 09일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1057,7 +1057,7 @@
       {
          "id":63,
          "name":"Monde diplomatique",
-         "iconUrl":"./static/media-icon/media-icon-63.svg",
+         "iconUrl":"media-icon-63.svg",
          "editDate":"07월 10일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1074,7 +1074,7 @@
       {
          "id":64,
          "name":"MK스포츠",
-         "iconUrl":"./static/media-icon/media-icon-64.svg",
+         "iconUrl":"media-icon-64.svg",
          "editDate":"07월 11일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1091,7 +1091,7 @@
       {
          "id":65,
          "name":"텐아시아",
-         "iconUrl":"./static/media-icon/media-icon-65.svg",
+         "iconUrl":"media-icon-65.svg",
          "editDate":"07월 12일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1108,7 +1108,7 @@
       {
          "id":66,
          "name":"대한민국 정책브리핑",
-         "iconUrl":"./static/media-icon/media-icon-66.svg",
+         "iconUrl":"media-icon-66.svg",
          "editDate":"07월 13일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1125,7 +1125,7 @@
       {
          "id":67,
          "name":"씨네21",
-         "iconUrl":"./static/media-icon/media-icon-67.svg",
+         "iconUrl":"media-icon-67.svg",
          "editDate":"07월 14일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1142,7 +1142,7 @@
       {
          "id":68,
          "name":"뉴스포스트",
-         "iconUrl":"./static/media-icon/media-icon-68.svg",
+         "iconUrl":"media-icon-68.svg",
          "editDate":"07월 15일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1159,7 +1159,7 @@
       {
          "id":69,
          "name":"정신의학신문",
-         "iconUrl":"./static/media-icon/media-icon-69.svg",
+         "iconUrl":"media-icon-69.svg",
          "editDate":"07월 16일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1176,7 +1176,7 @@
       {
          "id":70,
          "name":"철강금속신문",
-         "iconUrl":"./static/media-icon/media-icon-70.svg",
+         "iconUrl":"media-icon-70.svg",
          "editDate":"07월 17일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1193,7 +1193,7 @@
       {
          "id":71,
          "name":"Chosun71",
-         "iconUrl":"./static/media-icon/media-icon-71.svg",
+         "iconUrl":"media-icon-71.svg",
          "editDate":"07월 18일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1210,7 +1210,7 @@
       {
          "id":72,
          "name":"여성경제신문",
-         "iconUrl":"./static/media-icon/media-icon-72.svg",
+         "iconUrl":"media-icon-72.svg",
          "editDate":"07월 19일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1227,7 +1227,7 @@
       {
          "id":73,
          "name":"한국일보",
-         "iconUrl":"./static/media-icon/media-icon-73.svg",
+         "iconUrl":"media-icon-73.svg",
          "editDate":"07월 20일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1244,7 +1244,7 @@
       {
          "id":74,
          "name":"sportalkorea",
-         "iconUrl":"./static/media-icon/media-icon-74.svg",
+         "iconUrl":"media-icon-74.svg",
          "editDate":"07월 21일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1261,7 +1261,7 @@
       {
          "id":75,
          "name":"프레시안",
-         "iconUrl":"./static/media-icon/media-icon-75.svg",
+         "iconUrl":"media-icon-75.svg",
          "editDate":"07월 22일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1278,7 +1278,7 @@
       {
          "id":76,
          "name":"노컷뉴스",
-         "iconUrl":"./static/media-icon/media-icon-76.svg",
+         "iconUrl":"media-icon-76.svg",
          "editDate":"07월 23일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1295,7 +1295,7 @@
       {
          "id":77,
          "name":"The JoongAng",
-         "iconUrl":"./static/media-icon/media-icon-77.svg",
+         "iconUrl":"media-icon-77.svg",
          "editDate":"07월 24일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1312,7 +1312,7 @@
       {
          "id":78,
          "name":"서울신문",
-         "iconUrl":"./static/media-icon/media-icon-78.svg",
+         "iconUrl":"media-icon-78.svg",
          "editDate":"07월 25일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1329,7 +1329,7 @@
       {
          "id":79,
          "name":"스포츠조선",
-         "iconUrl":"./static/media-icon/media-icon-79.svg",
+         "iconUrl":"media-icon-79.svg",
          "editDate":"07월 26일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1346,7 +1346,7 @@
       {
          "id":80,
          "name":"전자신문",
-         "iconUrl":"./static/media-icon/media-icon-80.svg",
+         "iconUrl":"media-icon-80.svg",
          "editDate":"07월 27일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1363,7 +1363,7 @@
       {
          "id":81,
          "name":"천지일보",
-         "iconUrl":"./static/media-icon/media-icon-81.svg",
+         "iconUrl":"media-icon-81.svg",
          "editDate":"07월 28일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1380,7 +1380,7 @@
       {
          "id":82,
          "name":"Bloter",
-         "iconUrl":"./static/media-icon/media-icon-82.svg",
+         "iconUrl":"media-icon-82.svg",
          "editDate":"07월 29일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1397,7 +1397,7 @@
       {
          "id":83,
          "name":"KBS",
-         "iconUrl":"./static/media-icon/media-icon-83.svg",
+         "iconUrl":"media-icon-83.svg",
          "editDate":"07월 30일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1414,7 +1414,7 @@
       {
          "id":84,
          "name":"동아일보",
-         "iconUrl":"./static/media-icon/media-icon-84.svg",
+         "iconUrl":"media-icon-84.svg",
          "editDate":"07월 31일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1431,7 +1431,7 @@
       {
          "id":85,
          "name":"NEWSIS",
-         "iconUrl":"./static/media-icon/media-icon-85.svg",
+         "iconUrl":"media-icon-85.svg",
          "editDate":"07월 01일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1448,7 +1448,7 @@
       {
          "id":86,
          "name":"한국경제",
-         "iconUrl":"./static/media-icon/media-icon-86.svg",
+         "iconUrl":"media-icon-86.svg",
          "editDate":"07월 02일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1465,7 +1465,7 @@
       {
          "id":87,
          "name":"시사IN",
-         "iconUrl":"./static/media-icon/media-icon-87.svg",
+         "iconUrl":"media-icon-87.svg",
          "editDate":"07월 03일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1482,7 +1482,7 @@
       {
          "id":88,
          "name":"산",
-         "iconUrl":"./static/media-icon/media-icon-88.svg",
+         "iconUrl":"media-icon-88.svg",
          "editDate":"07월 04일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1499,7 +1499,7 @@
       {
          "id":89,
          "name":"독서신문",
-         "iconUrl":"./static/media-icon/media-icon-89.svg",
+         "iconUrl":"media-icon-89.svg",
          "editDate":"07월 05일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1516,7 +1516,7 @@
       {
          "id":90,
          "name":"EconoTimes",
-         "iconUrl":"./static/media-icon/media-icon-90.svg",
+         "iconUrl":"media-icon-90.svg",
          "editDate":"07월 06일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1533,7 +1533,7 @@
       {
          "id":91,
          "name":"TJB",
-         "iconUrl":"./static/media-icon/media-icon-91.svg",
+         "iconUrl":"media-icon-91.svg",
          "editDate":"07월 07일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1550,7 +1550,7 @@
       {
          "id":92,
          "name":"시사오늘 시사IN",
-         "iconUrl":"./static/media-icon/media-icon-92.svg",
+         "iconUrl":"media-icon-92.svg",
          "editDate":"07월 08일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1567,7 +1567,7 @@
       {
          "id":93,
          "name":"데일리한국",
-         "iconUrl":"./static/media-icon/media-icon-93.svg",
+         "iconUrl":"media-icon-93.svg",
          "editDate":"07월 09일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1584,7 +1584,7 @@
       {
          "id":94,
          "name":"뉴스토마토",
-         "iconUrl":"./static/media-icon/media-icon-94.svg",
+         "iconUrl":"media-icon-94.svg",
          "editDate":"07월 10일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1601,7 +1601,7 @@
       {
          "id":95,
          "name":"에이블뉴스",
-         "iconUrl":"./static/media-icon/media-icon-95.svg",
+         "iconUrl":"media-icon-95.svg",
          "editDate":"07월 11일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",
@@ -1618,7 +1618,7 @@
       {
          "id":96,
          "name":"YTN사이언스",
-         "iconUrl":"./static/media-icon/media-icon-96.svg",
+         "iconUrl":"media-icon-96.svg",
          "editDate":"07월 12일 16:23 편집",
          "imageContent":{
             "imageUrl":"https://menu.moneys.co.kr/moneyweek/thumb/2024/07/08/06/2024070813495957010_1.jpg/dims/optimize/",

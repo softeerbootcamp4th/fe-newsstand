@@ -1,3 +1,4 @@
+import { darkMode } from "../store/dark-mode.js";
 import { mediaDetail } from "../store/media-detail.js";
 import { mediaList } from "../store/media-list.js";
 import { subscribedMediaList } from "../store/subscribed-media.js";
@@ -130,6 +131,7 @@ function renderGridMedia(page) {
 
     gridListDOM.innerHTML = mediaListDOMString;
 
+    darkMode.addCallback("render-subscribed", () => renderGridMedia(page));
     subscribedMediaList.setCallback(() => renderGridMedia(page));
     setArrowDisplayInGrid(page);
 }
@@ -188,6 +190,7 @@ function renderListMedia(mediaIdx) {
     const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaDetailList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
 
+    darkMode.addCallback("render-subscribed", () => renderListMedia(selectedMediaIdx));
     subscribedMediaList.setCallback(() => renderListMedia(selectedMediaIdx));
     setSubscribeButtonEvent(subscribedMediaList.data[selectedMediaIdx]);
 }

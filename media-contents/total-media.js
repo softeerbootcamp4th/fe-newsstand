@@ -13,6 +13,7 @@ import {
     clickGridItem,
 } from "./util.js";
 import { mediaCategory } from "../store/media-category.js";
+import { darkMode } from "../store/dark-mode.js";
 
 /**
  * @description 전체 언론사를 렌더링하는 함수
@@ -128,6 +129,7 @@ function renderGridMedia(page) {
 
     gridListDOM.innerHTML = mediaListDOMString;
 
+    darkMode.addCallback("render-subscribed", () => renderGridMedia(page));
     subscribedMediaList.setCallback(() => renderGridMedia(page));
     setArrowDisplayInGrid(page);
 }
@@ -174,6 +176,7 @@ function renderListMedia(categoryIdx, mediaIdx) {
 
     const media = mediaList.findMediaById(category[categoryIdx].media[mediaIdx].id);
     subscribedMediaList.setCallback(() => renderListMedia(categoryIdx, mediaIdx));
+    darkMode.addCallback("render-subscribed", () => renderListMedia(categoryIdx, mediaIdx));
     setSubscribeButtonEvent(media, (mediaId) => renderSubscribedMedia(mediaId));
 }
 
