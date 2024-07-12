@@ -1,5 +1,5 @@
-import { allNewsData } from "./news.js";
-import { getSubscribedData } from "./subscribeData.js";
+import { allNewsData } from "../components/news.js";
+import { getSubscribedData } from "../feature/subscribeData.js";
 
 /// 랜더링을 해줘야할 때 progressBar를 업데이트 해주는 함수
 /// 리스트일때, 그리드일떄 나눠서 업데이트 해준다.

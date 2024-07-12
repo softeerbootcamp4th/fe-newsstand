@@ -1,12 +1,12 @@
-import { removeSubscribedData, getSubscribedData } from "./subscribeData.js";
+import { removeSubscribedData, getSubscribedData } from "../feature/subscribeData.js";
 import { newsListLi } from "./newsListLi.js";
-import { newsGrid } from "./newsGrid.js";
+import { newsGrid } from "../feature/newsGrid.js";
 import { nonLiList } from "./nonLiList.js";
-import { processCategory } from "./fieldTab.js";
+import { processCategory } from "../feature/fieldTab.js";
 import {
   handleCategoryClick,
   getCurrentSelectedIndex,
-} from "./handleCategoryClick.js";
+} from "../feature/handleCategoryClick.js";
 
 /// 구독해지를 누른 다음 리랜더링 해주는 코드
 /// 리스트일때, 그리드일때, 전체 언론사일때, 내가 구독한 언론사일때 4가지 경우의 수로 나눠서 랜더링을 다른 방식으로 해줌.
@@ -48,7 +48,7 @@ export const removeRerendering = (isFull) => {
       if (subscribed.length == 0) {
         nonLiList();
       } else {
-        if (currentIndex === subscribed.length - 1) {
+        if (currentIndex === subscribed.length) {
           processCategory(0, liList, false, false);
         } else {
           processCategory(currentIndex, liList, false, false);

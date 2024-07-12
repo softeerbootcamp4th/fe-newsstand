@@ -6,27 +6,27 @@
 /* Header */
 
 header {
-  display: flex;
-  justify-content: center;
-  margin-top: 58px;
+    display: flex;
+    justify-content: center;
+    margin-top: 58px;
 }
 
 .headerContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 930px;
-  height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 930px;
+    height: 29px;
 }
 
 #title {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
 
 .logoImage {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /*******************************************************************/
@@ -37,80 +37,81 @@ header {
 /* NewsTicker */
 
 #newsTicker {
-  display: flex;
-  justify-content: center;
-  margin-top: 58px;
+    display: flex;
+    justify-content: center;
+    margin-top: 58px;
 }
 
 .newsTicker {
-  display: flex;
-  justify-content: space-between;
-  width: 930px;
-  height: 49px;
-  gap: 8px;
+    display: flex;
+    justify-content: space-between;
+    width: 930px;
+    height: 49px;
+    gap: 8px;
 }
 
 .newsTickerEach {
-  border: 1px solid;
-  width: 461px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  background-color: var(--grayscale-50);
-  border-color: var(--border-default);
-  border-style: solid;
-  cursor: pointer;
-  overflow: hidden;
+    border: 1px solid;
+    width: 461px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: var(--grayscale-50);
+    border-color: var(--border-default);
+    border-style: solid;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .newsTickerEach:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .newsTickerEach span {
-  margin: 16px;
+    margin: 16px;
 }
 
 .newsTickerContainer {
-  overflow: hidden;
-  padding-top: 37px;
+    overflow: hidden;
+    padding-top: 37px;
 
-  /* 텍스트 높이에 맞게 조정 */
+    /* 텍스트 높이에 맞게 조정 */
 }
 
 #newsTitleShown {
-  opacity: 1;
+    opacity: 1;
 }
 
 #newsTitleHidden {
-  opacity: 0;
+    opacity: 0;
 }
 
 #newsTitleShown2 {
-  opacity: 1;
+    opacity: 1;
 }
 
 #newsTitleHidden2 {
-  opacity: 0;
+    opacity: 0;
 }
 
 .newsTickerContainer div:nth-child(1) {
-  white-space: nowrap;
-  height: 35px;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 35px;
 }
 
 .autoRolling {
-  animation: autoRollingAnimation 0.5s linear forwards;
+    animation: autoRollingAnimation 0.5s linear;
 }
 
 @keyframes autoRollingAnimation {
-  0% {
-    transform: translateY(0);
-  }
+    0% {
+        transform: translateY(0);
+    }
 
-  100% {
-    transform: translateY(-100%);
-  }
+    100% {
+        transform: translateY(-100%);
+    }
 }
 
 /*******************************************************************/
@@ -121,41 +122,41 @@ header {
 /* TopAndViewer */
 
 #TopAndViewer {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
 }
 
 .TopAndViewer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 930px;
-  height: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 930px;
+    height: 24px;
 }
 
 .TapButton {
-  display: flex;
-  justify-content: space-between;
-  width: 230px;
-  height: 22px;
-  gap: 24px;
+    display: flex;
+    justify-content: space-between;
+    width: 230px;
+    height: 22px;
+    gap: 24px;
 }
 
 .ViewerButton {
-  display: flex;
-  justify-content: space-between;
-  width: 56px;
-  height: 24px;
-  gap: 8px;
+    display: flex;
+    justify-content: space-between;
+    width: 56px;
+    height: 24px;
+    gap: 8px;
 }
 
 .listViewIcon {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .gridViewIcon {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /*******************************************************************/
@@ -166,203 +167,203 @@ header {
 /* NewsList */
 
 main {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
 }
 
 #NewsList {
-  position: relative;
-  width: 930px;
-  height: 388px;
-  border: 1px solid var(--border-default);
-  visibility: visible;
+    position: relative;
+    width: 930px;
+    height: 388px;
+    border: 1px solid var(--border-default);
+    visibility: visible;
 }
 
 #NewsList.hidden {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 #NewsList ul {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  background-color: var(--surface-alt);
-  overflow: hidden;
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: var(--surface-alt);
+    overflow: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
 
 #NewsList ul li {
-  flex: none;
-  display: flex;
+    flex: none;
+    display: flex;
 }
 
 .gridShow {
-  display: none;
+    display: none;
 }
 
 .notselectNews {
-  width: fit-content;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  padding: 0px 16px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: auto;
-  color: var(--grayscale-200);
+    width: fit-content;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0px 16px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: auto;
+    color: var(--grayscale-200);
 }
 
 .notselectNews:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .selectNews {
-  position: relative;
-  width: 166px;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  background-color: var(--surface-brand-alt);
-  padding: 0px 16px;
-  overflow: hidden;
+    position: relative;
+    width: 166px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--surface-brand-alt);
+    padding: 0px 16px;
+    overflow: hidden;
 }
 
 .selectNews::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background-color: var(--blue-500);
-  animation: widthAnimation 20s linear infinite;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--blue-500);
+    animation: widthAnimation 20s linear infinite;
 }
 
 .restartAnimation::after {
-  animation: none;
+    animation: none;
 }
 
 @keyframes widthAnimation {
-  0% {
-    width: 0%;
-  }
+    0% {
+        width: 0%;
+    }
 
-  100% {
-    width: 100%;
-  }
+    100% {
+        width: 100%;
+    }
 }
 
-.selectNews > * {
-  position: relative;
-  z-index: 1;
+.selectNews>* {
+    position: relative;
+    z-index: 1;
 }
 
 #mainNews {
-  padding: 24px;
+    padding: 24px;
 }
 
 .pressInfo {
-  display: flex;
-  height: 24px;
-  gap: 16px;
-  margin-bottom: 16px;
-  align-items: center;
+    display: flex;
+    height: 24px;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: center;
 }
 
 #news {
-  display: flex;
-  gap: 32px;
-  height: 260px;
+    display: flex;
+    gap: 32px;
+    height: 260px;
 }
 
 .newsLeft {
-  width: 320px;
+    width: 320px;
 }
 
-.newsLeft > img {
-  width: 320px;
-  height: 200px;
+.newsLeft>img {
+    width: 320px;
+    height: 200px;
 }
 
 .newsLeft:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .newsLeft:hover img {
-  transform: scale(1.05);
-  transition: transform 0.5s ease;
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
 }
 
 .newsLeft p {
-  margin-top: 16px;
+    margin-top: 16px;
 }
 
 .newsRight {
-  margin-top: 5px;
-  width: 530px;
-  height: 245px;
+    margin-top: 5px;
+    width: 530px;
+    height: 245px;
 }
 
 .newsEach {
-  list-style: none;
-  margin-bottom: 17px;
-  font-weight: 500;
-  font-size: 16px;
-  color: var(--grayscale-500);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    list-style: none;
+    margin-bottom: 17px;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--grayscale-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .newsEach:hover {
-  text-decoration: underline;
-  cursor: pointer;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .pressInfoButton {
-  height: 24px;
-  border-radius: 50px;
-  border: 1px;
-  gap: 2px;
-  padding: 0 6px;
-  background-color: var(--surface-alt);
-  border-color: var(--border-default);
-  border-style: solid;
-  display: flex;
-  align-items: center;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: auto;
-  color: var(--grayscale-200);
+    height: 24px;
+    border-radius: 50px;
+    border: 1px;
+    gap: 2px;
+    padding: 0 6px;
+    background-color: var(--surface-alt);
+    border-color: var(--border-default);
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: auto;
+    color: var(--grayscale-200);
 }
 
 .pressInfoButton:hover {
-  border-color: var(--grayscale-300);
-  text-decoration: underline;
-  color: var(--grayscale-500);
+    border-color: var(--grayscale-300);
+    text-decoration: underline;
+    color: var(--grayscale-500);
 }
 
 .pressInfoButton span {
-  padding-right: 4px;
+    padding-right: 4px;
 }
 
 .pressInfoButton:hover img {
-  filter: grayscale(100%) brightness(60%);
+    filter: grayscale(100%) brightness(60%);
 }
 
 #currentNewsIndex {
-  font-weight: 700;
-  font-size: 13px;
-  line-height: auto;
-  color: white;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: auto;
+    color: white;
 }
 
 /*******************************************************************/
@@ -373,31 +374,31 @@ main {
 /* snackBar */
 
 #snackBar {
-  position: fixed;
-  visibility: hidden;
-  width: 286px;
-  height: 54px;
-  background-color: var(--surface-brand-default);
-  color: white;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: auto;
-  box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
-    0 2px 18px hsla(var(--grayscale-black), 0.8);
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition: visibility 0s, opacity 0.5s linear;
-  opacity: 0;
+    position: fixed;
+    visibility: hidden;
+    width: 286px;
+    height: 54px;
+    background-color: var(--surface-brand-default);
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: auto;
+    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
+        0 2px 18px hsla(var(--grayscale-black), 0.8);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: visibility 0s, opacity 0.5s linear;
+    opacity: 0;
 }
 
 #snackBar.show {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 /*******************************************************************/
@@ -408,66 +409,66 @@ main {
 /* cancelAlert */
 
 #cancelAlert {
-  position: fixed;
-  width: 320px;
-  height: 140px;
-  box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
-    0 2px 18px hsla(var(--grayscale-black), 0.8);
-  z-index: 1;
-  left: 50%;
-  top: 50%;
-  border: 1px;
-  border-style: solid;
-  border-color: var(--border-default);
-  transform: translate(-50%, -50%);
-  visibility: hidden;
+    position: fixed;
+    width: 320px;
+    height: 140px;
+    box-shadow: 0 4px 2px hsla(var(--grayscale-black), 0.2),
+        0 2px 18px hsla(var(--grayscale-black), 0.8);
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    border: 1px;
+    border-style: solid;
+    border-color: var(--border-default);
+    transform: translate(-50%, -50%);
+    visibility: hidden;
 }
 
 #cancelAlert.show {
-  visibility: visible;
+    visibility: visible;
 }
 
 #cancelAlertTop {
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border-bottom: 1px;
-  border-style: solid;
-  border-color: var(--border-default);
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: var(--border-default);
 }
 
-#cancelAlertTop > p {
-  text-align: center;
+#cancelAlertTop>p {
+    text-align: center;
 }
 
 #cancelAlertBottom {
-  display: flex;
-  height: 50px;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--surface-alt);
-  border-bottom: 1px solid var(--border-default);
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-alt);
+    border-bottom: 1px solid var(--border-default);
 }
 
 #positiveButton {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #negativeButton {
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-left: 1px;
-  border-left-style: solid;
-  border-left-color: var(--border-default);
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px;
+    border-left-style: solid;
+    border-left-color: var(--border-default);
 }
 
 /*******************************************************************/
@@ -478,43 +479,43 @@ main {
 /* Left, Right Arrow Button */
 
 #leftButton {
-  position: absolute;
-  width: 24px;
-  height: 40px;
-  top: 55%;
-  left: -4%;
-  transform: translate(-50%, -50%);
-  transition: transform 0.5s ease;
-  visibility: hidden;
+    position: absolute;
+    width: 24px;
+    height: 40px;
+    top: 55%;
+    left: -4%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease;
+    visibility: hidden;
 }
 
 #leftButton.show {
-  visibility: visible;
+    visibility: visible;
 }
 
 #leftButton:hover {
-  cursor: pointer;
-  transform: translate(-50%, -50%) scale(1.3);
+    cursor: pointer;
+    transform: translate(-50%, -50%) scale(1.3);
 }
 
 #rightButton {
-  position: absolute;
-  width: 24px;
-  height: 40px;
-  top: 55%;
-  left: 104%;
-  transform: translate(-50%, -50%);
-  transition: transform 0.5s ease;
-  visibility: visible;
+    position: absolute;
+    width: 24px;
+    height: 40px;
+    top: 55%;
+    left: 104%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease;
+    visibility: visible;
 }
 
 #rightButton.hidden {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 #rightButton:hover {
-  cursor: pointer;
-  transform: translate(-50%, -50%) scale(1.3);
+    cursor: pointer;
+    transform: translate(-50%, -50%) scale(1.3);
 }
 
 /*******************************************************************/
@@ -525,42 +526,42 @@ main {
 /* gridView */
 
 #gridView {
-  width: 930px;
-  height: 388px;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  visibility: hidden;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 1px solid var(--border-default);
-  transform: translate(-50%, -50%);
-  cursor: pointer;
+    width: 930px;
+    height: 388px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid var(--border-default);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
 }
 
 #gridView.show {
-  visibility: visible;
+    visibility: visible;
 }
 
 .cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .cell:nth-child(-n + 18) {
-  border-bottom: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
 }
 
 .cell:not(:nth-child(6n)) {
-  border-right: 1px solid var(--border-default);
+    border-right: 1px solid var(--border-default);
 }
 
 .cell img {
-  max-width: 80%;
-  max-height: 80%;
+    max-width: 80%;
+    max-height: 80%;
 }
 
 /*******************************************************************/
@@ -571,41 +572,41 @@ main {
 /* gridLeft, girdRight Arrow Button */
 
 #gridLeftButton {
-  position: absolute;
-  width: 24px;
-  height: 40px;
-  top: 55%;
-  left: -4%;
-  transform: translate(-50%, -50%);
-  transition: transform 0.5s ease;
-  visibility: hidden;
+    position: absolute;
+    width: 24px;
+    height: 40px;
+    top: 55%;
+    left: -4%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease;
+    visibility: hidden;
 }
 
 #gridLeftButton.show {
-  visibility: visible;
+    visibility: visible;
 }
 
 #gridLeftButton:hover {
-  cursor: pointer;
-  transform: translate(-50%, -50%) scale(1.3);
+    cursor: pointer;
+    transform: translate(-50%, -50%) scale(1.3);
 }
 
 #gridRightButton {
-  position: absolute;
-  width: 24px;
-  height: 40px;
-  top: 55%;
-  left: 104%;
-  transform: translate(-50%, -50%);
-  transition: transform 0.5s ease;
-  visibility: hidden;
+    position: absolute;
+    width: 24px;
+    height: 40px;
+    top: 55%;
+    left: 104%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.5s ease;
+    visibility: hidden;
 }
 
 #gridRightButton.show {
-  visibility: visible;
+    visibility: visible;
 }
 
 #gridRightButton:hover {
-  cursor: pointer;
-  transform: translate(-50%, -50%) scale(1.3);
+    cursor: pointer;
+    transform: translate(-50%, -50%) scale(1.3);
 }

@@ -1,6 +1,6 @@
 import { processCategory } from "./fieldTab.js";
 import { getSubscribedData } from "./subscribeData.js";
-import { allNewsData } from "./news.js";
+import { allNewsData } from "../components/news.js";
 
 // 카테고리 목록을 클릭하면 실행되는 함수
 export const handleCategoryClick = async (index, liList, isFull) => {

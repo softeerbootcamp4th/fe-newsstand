@@ -1,4 +1,4 @@
-import { newsListLi } from "./newsListLi.js";
+import { newsListLi } from "../rendering/newsListLi.js";
 import { processCategory } from "./fieldTab.js";
 import { handleCategoryClick } from "./handleCategoryClick.js";
 

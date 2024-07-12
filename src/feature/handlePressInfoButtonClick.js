@@ -1,5 +1,5 @@
-import { pressInfoButton } from "./button.js";
-import { snackBar } from "./snackBar.js";
+import { pressInfoButton } from "../components/button.js";
+import { snackBar } from "../components/snackBar.js";
 import { clickSubscribeNews } from "./clickSubscribeNews.js";
 import { addSubscribedData } from "./subscribeData.js";
 

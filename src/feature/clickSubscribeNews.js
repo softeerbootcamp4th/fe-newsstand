@@ -1,5 +1,5 @@
-import { newsListLi } from "./newsListLi.js";
-import { nonLiList } from "./nonLiList.js";
+import { newsListLi } from "../rendering/newsListLi.js";
+import { nonLiList } from "../rendering/nonLiList.js";
 import { clearIntervalVar, processCategory } from "./fieldTab.js";
 import { handleCategoryClick } from "./handleCategoryClick.js";
 import { getSubscribedData } from "./subscribeData.js";
