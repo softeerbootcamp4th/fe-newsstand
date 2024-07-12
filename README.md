@@ -309,14 +309,15 @@ export const eventMap = new Map<string, Map<string, EventListener>>();
 
 class AppEvent extends Event {
   isPropagationStopped = false;
-  constructor(type: string, target: EventTarget | null) {
-    super(type);
+  constructor(type: string, e: EventInit, target: HTMLElement | null) {
+    super(type, e);
+
     Object.defineProperty(this, "target", {
-      writable: true,
       value: target,
+      writable: true,
     });
     Object.defineProperty(this, "target", {
-      writable: false,
+      writable: true,
     });
   }
 
@@ -332,11 +333,12 @@ const rootEventHandler = (e: Event | AppEvent) => {
 
   if (handler == null) {
     if (
-      target.parentElement != document.body &&
-      (target as unknown as AppEvent).isPropagationStopped === false
+      (e as AppEvent).isPropagationStopped === true ||
+      target.parentElement == document.body
     ) {
-      rootElement?.dispatchEvent(new AppEvent(e.type, target.parentElement));
+      return;
     }
+    rootElement?.dispatchEvent(new AppEvent(e.type, e, target.parentElement));
     return;
   }
   handler(e);
