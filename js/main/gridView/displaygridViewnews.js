@@ -1,7 +1,8 @@
 import { handleThemeChange, initializeGridViewContainer } from "../init.js";
-import { getSubscriptionList, setSubscriptionList } from "../listView/subscribe.js";
 import { getTheme } from "../../header/toggleTheme.js";
 import { renderSelectedTab } from "../toggleView.js";
+import { getSubscriptionList } from "../../common/getSubscriptionList.js";
+import { setSubscriptionList } from "../../common/setSubscriptionList.js";
 
 let newsData = [];
 let companies = [];

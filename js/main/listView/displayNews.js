@@ -1,6 +1,6 @@
+import { getSubscriptionList } from "../../common/getSubscriptionList.js";
 import { getTheme } from "../../header/toggleTheme.js";
 import { resetProgressBar } from "./displaylistViewNews.js";
-import { getSubscriptionList } from "./subscribe.js";
 
 const showNews = () => {
     document.querySelector('.news-container')?.classList.remove('hidden');

@@ -1,8 +1,8 @@
 import { category } from "../../data/categoryData.js";
 import { createCategory, loadCurrentCategoryNews } from "./listView/displaylistViewNews.js";
 import { initializeGridViewContainer } from "./init.js";
-import { getSubscriptionList  } from "./listView/subscribe.js";
 import { switchView } from "./switchView.js";
+import { getSubscriptionList } from "../common/getSubscriptionList.js";
 
 let prevTabType = 'all';
 let allTabClickHandler = null;

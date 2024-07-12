@@ -1,12 +1,12 @@
 import { category } from "../../../data/categoryData.js";
 import { initlizeListViewFunction } from "../init.js";
-import { getSubscriptionList } from "./subscribe.js";
 import { displayNews } from "./displayNews.js";
 import { showCategory } from "./showCategory.js";
 import { showInformation } from "./showInformation.js";
 import { updateCategoryDisplay } from "./updateCategoryDisplay.js";
 import { updateProgressBar } from "./updateProgressBar.js";
 import { updateBtnVisibility } from "./updateBtnVisibility.js";
+import { getSubscriptionList } from "../../common/getSubscriptionList.js";
 
 let curCategoryIdx = 0;
 let newsData = [];

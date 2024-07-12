@@ -31,7 +31,7 @@ export const switchView = (prevTabType, viewType) => {
         initlizeListViewFunction();
         handleClickTab('list-view', prevTabType);
 
-    } else if (viewType === 'grid-view') {
+    } else {
         listViewIcon.classList.remove("selected-icon");
         listViewIcon.src = "./src/icons/list-view.svg";
 
