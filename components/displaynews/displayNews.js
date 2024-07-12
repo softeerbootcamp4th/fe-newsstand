@@ -39,10 +39,10 @@ function updateList(pridx) {
         transformToProgress(nextButton);
         updateNewsDisplay(buttonId, stateManager.getPageIndex());
     } else {
-        stateManager.setPageIndex(stateManager.getPageIndex()+1);
-        resetProgress();
-        transformToProgress(buttonId);
-        updateNewsDisplay(buttonId, stateManager.getPageIndex());
+        stateManager.setPageIndex(stateManager.getPageIndex());
+        //resetProgress();
+        //transformToProgress(buttonId);
+        //updateNewsDisplay(buttonId, stateManager.getPageIndex());
     }
 }
 
