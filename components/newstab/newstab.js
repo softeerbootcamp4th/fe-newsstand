@@ -19,7 +19,7 @@ export const mytabs = () => {
         lists1.innerHTML = '';
         const lists2 = document.querySelector(".news-press-container");
         lists2.innerHTML = ''; 
-        //return;
+        return;
     }
     //필수
     else{
