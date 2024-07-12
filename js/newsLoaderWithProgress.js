@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentCategoryIndex = 0;
     let currentPressIndex = 0;
     let intervalId;
+    let newsData; // fetch로 받아온 뉴스 데이터를 저장하는 변수
 
     // 초기 첫 번째 카테고리를 활성화 상태로 지정하고 프로그래스 애니메이션 시작
     navItems[0].classList.add("active", "progress");
@@ -15,8 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('./asset/data/newsData.json')
         .then(response => response.json())
         .then(data => {
-            displayNews(data.newsList[0], 0);
-            updateNavItemText(currentCategoryIndex, currentPressIndex, data.newsList[currentCategoryIndex].press.length);
+            newsData = data.newsList; // 뉴스 데이터 저장
+            displayNews(newsData[0], 0); // 첫번째
+            updateNavItemText(currentCategoryIndex, currentPressIndex, newsData[currentCategoryIndex].press.length);
             startAutoProgress(); // 첫 번째 뉴스 데이터 표시 후 자동 진행 시작
         })
         .catch(error => console.error('데이터 가져오기 실패:', error));
@@ -35,47 +37,39 @@ document.addEventListener("DOMContentLoaded", () => {
     // 왼쪽 화살표 버튼에 클릭 이벤트 리스너 추가
     leftButton.addEventListener("click", function () {
         clearInterval(intervalId);
-    
-        fetch('./asset/data/newsData.json')
-            .then(response => response.json())
-            .then(data => {
-                if (currentPressIndex > 0) { // 첫 번째 언론사가 아닐 떄
-                    currentPressIndex--;
-                }else { // 첫 번째 언론사 일 때
-                    if (currentCategoryIndex > 0) { // 첫 번째 카테고리가 아닐 때
-                        currentCategoryIndex--;
-                    }else { // 첫 번째 카테고리 일 때
-                        currentCategoryIndex = data.newsList.length - 1; // 마지막 카테고리로 이동
-                    }
-                    currentPressIndex = data.newsList[currentCategoryIndex].press.length - 1; // 카테고리 내의 마지막 언론사로 이동
-                }
-                animateNavItem();
-                startAutoProgress();
-            })
-            .catch(error => console.error('데이터 가져오기 실패:', error));
+
+        if (currentPressIndex > 0) { // 첫 번째 언론사가 아닐 떄
+            currentPressIndex--;
+        }else { // 첫 번째 언론사 일 때
+            if (currentCategoryIndex > 0) { // 첫 번째 카테고리가 아닐 때
+                currentCategoryIndex--;
+            }else { // 첫 번째 카테고리 일 때
+                currentCategoryIndex = newsData.length - 1; // 마지막 카테고리로 이동
+            }
+            currentPressIndex = newsData[currentCategoryIndex].press.length - 1; // 카테고리 내의 마지막 언론사로 이동
+        }
+
+        animateNavItem();
+        startAutoProgress();
     });
     
     // 오른쪽 화살표 버튼에 클릭 이벤트 리스너 추가
     rightButton.addEventListener("click", function () {
         clearInterval(intervalId);
-    
-        fetch('./asset/data/newsData.json')
-            .then(response => response.json())
-            .then(data => {    
-                if(currentPressIndex < data.newsList[currentCategoryIndex].press.length - 1) { // 마지막 언론사가 아닐 때
-                    currentPressIndex++;
-                }else { // 마지막 언론사 일 때
-                    currentPressIndex = 0; // 첫 번째 언론사로 이동
-                    if(currentCategoryIndex < data.newsList.length - 1) { // 현재 카테고리가 마지막 카테고리가 아닐 때
-                        currentCategoryIndex++;
-                    }else { // 현재 카테고리가 마지막 카테고리 일 때
-                        currentCategoryIndex = 0; // 첫 번째 카테고리로 이동
-                    }
-                }
-                animateNavItem();
-                startAutoProgress();
-            })
-            .catch(error => console.error('데이터 가져오기 실패:', error));
+
+        if(currentPressIndex < newsData[currentCategoryIndex].press.length - 1) { // 마지막 언론사가 아닐 때
+            currentPressIndex++;
+        }else { // 마지막 언론사 일 때
+            currentPressIndex = 0; // 첫 번째 언론사로 이동
+            if(currentCategoryIndex < newsData.length - 1) { // 현재 카테고리가 마지막 카테고리가 아닐 때
+                currentCategoryIndex++;
+            }else { // 현재 카테고리가 마지막 카테고리 일 때
+                currentCategoryIndex = 0; // 첫 번째 카테고리로 이동
+            }
+        }
+
+        animateNavItem();
+        startAutoProgress();
     });
 
     // 자동으로 프로그래스바 애니메이션을 실행하는 함수
@@ -87,18 +81,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 자동으로 다음 뉴스 표시 및 프로그래스바 애니메이션을 실행하는 함수
     function nextNews() {
-        fetch('./asset/data/newsData.json')
-            .then(response => response.json())
-            .then(data => {
-                if(currentPressIndex < data.newsList[currentCategoryIndex].press.length - 1) { // 현재 언론사가 마지막 언론사가 아닐 때
-                    currentPressIndex++;
-                }else { // 현재 언론사가 마지막 언론사 일 때
-                    currentPressIndex = 0;
-                    currentCategoryIndex = (currentCategoryIndex + 1) % data.newsList.length;
-                }
-                animateNavItem();
-            })
-            .catch(error => console.error('데이터 가져오기 실패:', error));
+        if(currentPressIndex < newsData[currentCategoryIndex].press.length - 1) { // 현재 언론사가 마지막 언론사가 아닐 때
+            currentPressIndex++;
+        }else { // 현재 언론사가 마지막 언론사 일 때
+            currentPressIndex = 0;
+            currentCategoryIndex = (currentCategoryIndex + 1) % newsData.length;
+        }
+        animateNavItem();
     }
 
     // 각 li 태그에 대해 애니메이션을 적용하는 함수
@@ -114,21 +103,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentItem = navItems[currentCategoryIndex];
         currentItem.classList.add("active");
 
-        fetch('./asset/data/newsData.json')
-            .then(response => response.json())
-            .then(data => {
-                const newsData = data.newsList[currentCategoryIndex];
-                // 현재 언론사의 뉴스 데이터 표시
-                displayNews(newsData, currentPressIndex);
+        const categoryData = newsData[currentCategoryIndex];
+        // 현재 언론사의 뉴스 데이터 표시
+        displayNews(categoryData, currentPressIndex);
 
-                // 강제로 리플로우를 일으켜서 같은 카테고리에서 애니메이션이 다시 시작되도록 함
-                void currentItem.offsetWidth;
-                currentItem.classList.add("progress");
+        // 강제로 리플로우를 일으켜서 같은 카테고리에서 애니메이션이 다시 시작되도록 함
+        void currentItem.offsetWidth;
+        currentItem.classList.add("progress");
 
-                // "현재 언론사 인덱스 / 해당 카테고리의 언론사 개수" 텍스트 추가
-                updateNavItemText(currentCategoryIndex, currentPressIndex, newsData.press.length);
-            })
-            .catch(error => console.error('데이터 가져오기 실패:', error));
+        // "현재 언론사 인덱스 / 해당 카테고리의 언론사 개수" 텍스트 추가
+        updateNavItemText(currentCategoryIndex, currentPressIndex, categoryData.press.length);
     }
 
     // "현재 언론사 페이지 / 해당 카테고리의 전체 언론사 개수" 텍스트를 업데이트하는 함수
@@ -140,12 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 뉴스 데이터를 동적 생성하는 함수
-    function displayNews(newsData, pressIndex) {
+    function displayNews(categoryData, pressIndex) {
         // 기존에 있던 내용 삭제
         articleTop.innerHTML = '';
         articleBottom.innerHTML = '';
 
-        const pressData = newsData.press[pressIndex];
+        const pressData = categoryData.press[pressIndex];
 
         // <div class="articleTop"> 업데이트
         const pressImage = document.createElement('img');
