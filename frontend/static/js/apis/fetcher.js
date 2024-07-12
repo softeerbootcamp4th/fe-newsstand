@@ -21,12 +21,13 @@ class Fetcher {
 
     async patch(data, endpoint) {
         const jsonData = JSON.stringify(data);
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
         const response = await fetch(`${this.baseURL}/${endpoint}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: jsonData
+            method: "PATCH",
+            headers: headers,
+            body: jsonData,
+            redirect: "follow"
         })
         if (!response.ok) {
             throw new Error("request failed.")
