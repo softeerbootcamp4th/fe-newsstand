@@ -1,7 +1,8 @@
 class NewsListView {
-    constructor() {
+    constructor({onClickArrowButton}) {
         this.element = document.createElement('div');
         this.element.className = 'news-container';
+        this.onClickArrowButton = onClickArrowButton;
     }
 
     render(pressCategoryViewElement, pressInfoViewElement, pressNewsViewElement) {
@@ -16,23 +17,29 @@ class NewsListView {
         newsContentContainer.appendChild(pressCategoryViewElement);
         newsContentContainer.appendChild(pressInfoViewElement);
         newsContentContainer.appendChild(pressNewsViewElement);
+
+        this.addEventListenerToArrowButton();
     }
 
-    getElement() {
-        return this.element;
-    }
-
-    addEventListenerToArrowButton(callback) {
+    addEventListenerToArrowButton() {
         const buttons = this.element.querySelectorAll('.arrow-button');
         buttons.forEach(button => {
             button.addEventListener('click', (event) => {
                 if (button.id === "left-arrow") {
-                    callback('prev');
+                    this.onClickArrowButton('prev');
                 } else if (event.target.id === "right-arrow") {
-                    callback('next');
+                    this.onClickArrowButton('next');
                 }
             });
         });
+    }
+
+    update() {
+
+    }
+
+    getElement() {
+        return this.element;
     }
 }
 

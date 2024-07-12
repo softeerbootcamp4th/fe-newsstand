@@ -1,20 +1,32 @@
 import TAB_NEWS_DATA from "../../data/tabNewsData.js";
+import { StorageKey } from "../namespace/StorageKey.js";
+import storageManager from "./localStorageManager.js";
 
 export const DataManager = {
   getAllPressTabs() {
+    const subscribedPressTabsString = storageManager.getStorage(StorageKey.SUBSCRIBED);
+    const subscribedPressTabs = subscribedPressTabsString ? subscribedPressTabsString.split(',') : [];
+
     return TAB_NEWS_DATA.data.flatMap(tab => {
       return tab.newsTabs.map(newsTab => {
+        const updatedTabData = newsTab.tabData.map(data => {
+          return {
+            ...data,
+            subscribe: subscribedPressTabs.includes(data.mediaName.trim()) ? 'Y' : 'N'
+          };
+        });
+
         return {
           tabName: newsTab.tabName,
-          tabData: newsTab.tabData
+          tabData: updatedTabData
         };
       });
     });
   },
 
   getSubscribedPressTabs() {
-    const tabs = this.getAllPressTabs()
-    const subscribedPressTabsString = localStorage.getItem("subscribed");
+    const tabs = this.getAllPressTabs();
+    const subscribedPressTabsString = storageManager.getStorage(StorageKey.SUBSCRIBED);
 
     if (!subscribedPressTabsString) {
       console.log("no subscribed press");

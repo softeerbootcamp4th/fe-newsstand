@@ -4,10 +4,10 @@ import { StateKey } from '../../../namespace/StateKey.js';
 class PressCategoryModel {
     constructor() {
         this.state = {
-            isAllPress: globalState.getState(StateKey.isAllPress),
-            tabFields: globalState.getState(StateKey.tabFields),
-            selectedCategoryIndex: globalState.getState(StateKey.selectedCategoryIndex),
-            selectedCategoryCountIndex: globalState.getState(StateKey.selectedCategoryCountIndex),
+            isAllPress: globalState.getState(StateKey.IS_ALLPRESS),
+            tabFields: globalState.getState(StateKey.TABFIELDS),
+            selectedCategoryIndex: globalState.getState(StateKey.SELECTED_CATEGORY_INDEX),
+            selectedCategoryCountIndex: globalState.getState(StateKey.SELECTED_CATEGORY_COUNT_INDEX),
             countInfo: ''
         };
 
@@ -25,12 +25,14 @@ class PressCategoryModel {
     setState(newState) {
         this.state = { ...this.state, ...newState };
         this.setCountInfo();
-        console.log(this.state.countInfo);
     }
 
     setSelectedIndex(index) {
         this.setState({ selectedCategoryIndex: index });
-        globalState.setState(StateKey.selectedCategoryIndex, index);
+        this.setState({ selectedCategoryCountIndex: 0 });
+
+        globalState.setState(StateKey.SELECTED_CATEGORY_INDEX, index);
+        globalState.setState(StateKey.SELECTED_CATEGORY_COUNT_INDEX, 0);
     }
 }
 

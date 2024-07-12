@@ -58,7 +58,7 @@ class PressNewsView {
             `).join('');
         }
 
-        newsComment.textContent = `${news.pressName} 언론사에서 직접 편집한 뉴스입니다.`;
+        newsComment.textContent = `${news.mediaName} 언론사에서 직접 편집한 뉴스입니다.`;
     }
 
     getElement() {

@@ -7,34 +7,34 @@ class PressCategoryController {
     constructor() {
         this.model = new PressCategoryModel();
         this.view = new PressCategoryView({
-            onClickCategory: () => { this.onChangeCategory(); }
+            onClickCategory: (id) => { this.onChangeCategory(id); }
         });
 
         this.render();
 
-        globalState.subscribe(StateKey.isAllPress, (value) => {
-            this.updateModel(StateKey.isAllPress, value);
+        globalState.subscribe(StateKey.IS_ALLPRESS, (value) => {
+            this.updateModel(StateKey.IS_ALLPRESS, value);
         });
 
-        globalState.subscribe(StateKey.tabFields, (value) => {
-            this.updateModel(StateKey.tabFields, value);
+        globalState.subscribe(StateKey.TABFIELDS, (value) => {
+            this.updateModel(StateKey.TABFIELDS, value);
         });
 
-        globalState.subscribe(StateKey.selectedCategoryIndex, (value) => {
-            this.updateModel(StateKey.selectedCategoryIndex, value);
+        globalState.subscribe(StateKey.SELECTED_CATEGORY_INDEX, (value) => {
+            this.updateModel(StateKey.SELECTED_CATEGORY_INDEX, value);
         });
 
-        globalState.subscribe(StateKey.selectedCategoryCountIndex, (value) => {
-            this.updateModel(StateKey.selectedCategoryCountIndex, value);
+        globalState.subscribe(StateKey.SELECTED_CATEGORY_COUNT_INDEX, (value) => {
+            this.updateModel(StateKey.SELECTED_CATEGORY_COUNT_INDEX, value);
         });
 
-        this.updateModel();
+        this.updateModel(); 
     }
 
     updateModel(key, value) {
-        if (key && value) {
+        if (key) {
             this.model.setState({ [key]: value });
-        } 
+        }
 
         const newState = this.model.getState();
         this.view.update(newState);

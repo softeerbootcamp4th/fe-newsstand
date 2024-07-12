@@ -12,12 +12,14 @@ class PressCategoryView {
     }
 
     update( {tabFields, selectedCategoryIndex, isAllPress, countInfo}) {
-        this.element.innerHTML = this.createButtonHTML(isAllPress, tabFields, countInfo);
-        this.updateSelectedButtonStyle(selectedCategoryIndex);
+        this.element.innerHTML = this.createButtonHTML(tabFields);
+        this.attachButtonListeners();
+        this.updateSelectedButtonStyle(selectedCategoryIndex, countInfo, isAllPress);
     }
 
     attachButtonListeners() {
         const buttons = this.element.querySelectorAll('.press-category-button');
+
         buttons.forEach(button => {
             button.addEventListener('click', () => {
                 const intId = separateId(button.id);
@@ -26,7 +28,7 @@ class PressCategoryView {
         });
     }
 
-    createButtonHTML(isAllPress, tabFields, countInfo) {
+    createButtonHTML(tabFields) {
         let buttonsHTML = '';
         tabFields.forEach((category, index) => {
             buttonsHTML += `
@@ -34,7 +36,7 @@ class PressCategoryView {
                     <div class="press-category-button-progress"></div>
                     <div class="press-category-span-container">
                         <span>${category.tabName}</span>
-                        <span class="press-count-span">${isAllPress ? countInfo : '>'}</span>
+                        <span class="press-count-span"></span>
                     </div>
                 </button>
             `;
@@ -42,21 +44,34 @@ class PressCategoryView {
         return buttonsHTML;
     }
 
-    updateSelectedButtonStyle(selectedIndex) {
+    updateSelectedButtonStyle(selectedIndex, countInfo, isAllPress) {
         const buttons = this.element.querySelectorAll('.press-category-button');
 
         buttons.forEach((button, index) => {
             const isSelected = index === selectedIndex;
             button.className = isSelected ? 'press-category-button-selected' : 'press-category-button';
-            this.updateProgressBarStyle(button.querySelector('.press-category-button-progress'), isSelected);
+            this.updateInfoSpanStyle(button, isSelected, countInfo, isAllPress);
+            this.updateProgressBarStyle(button, isSelected);
         });
     }
 
-    updateProgressBarStyle(progressBar, isSelected) {
+    updateProgressBarStyle(button, isSelected) {
+        const progressBar = button.querySelector('.press-category-button-progress');
         if (isSelected) {
             progressBar.classList.add('selected');
         } else {
             progressBar.classList.remove('selected');
+        }
+    }
+
+    updateInfoSpanStyle(button, isSelected, countInfo, isAllPress) {
+        const infoSpan = button.querySelector('.press-count-span');
+        if (infoSpan) {
+            if (isAllPress) {
+                infoSpan.textContent = isSelected ? `${countInfo}` : "";
+            } else {
+                infoSpan.textContent = isSelected ? ">" : "";
+            }
         }
     }
 

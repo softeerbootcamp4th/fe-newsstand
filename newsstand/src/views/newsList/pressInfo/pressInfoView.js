@@ -16,11 +16,12 @@ const ICON = Object.freeze({
 })
 
 class PressInfoView {
-    constructor({onClickChipButton}) {
+    constructor({onClickChipButton, callbackSubscribed}) {
         this.element = document.createElement('div');
         this.element.className = CLASS.PRESS_INFO_CONTAINER;
         this.chipButton = null;
         this.onClickChipButton = onClickChipButton;
+        this.callbackSubscribed = callbackSubscribed;
     }
 
     render() {
@@ -60,7 +61,7 @@ class PressInfoView {
     }
 
     showSnackBar() {
-        const snackBar = SnackBar({ title: '내가 구독한 언론사에 추가되었습니다.' });
+        const snackBar = SnackBar({ title: '내가 구독한 언론사에 추가되었습니다.' , callback: this.callbackSubscribed});
         snackBar.show();
     }
 

@@ -8,16 +8,18 @@ class PressNewsController {
     this.model = new PressNewsModel();
     this.view = new PressNewsView();
 
-    globalState.subscribe(StateKey.selectedCategoryCountIndex, () => { this.updateModel() });
+    globalState.subscribe(StateKey.SELECTED_CATEGORY_COUNT_INDEX, () => { this.updateModel() });
+    globalState.subscribe(StateKey.SELECTED_CATEGORY_INDEX, () => { this.updateModel() });
   
     this.render();
     this.updateModel();
   }
 
   updateModel() {
-    const tabFields = globalState.getState(StateKey.tabFields);
-    const selectedCategoryIndex = globalState.getState(StateKey.selectedCategoryIndex);
-    const selectedCategoryCountIndex = globalState.getState(StateKey.selectedCategoryCountIndex);
+
+    const tabFields = globalState.getState(StateKey.TABFIELDS);
+    const selectedCategoryIndex = globalState.getState(StateKey.SELECTED_CATEGORY_INDEX);
+    const selectedCategoryCountIndex = globalState.getState(StateKey.SELECTED_CATEGORY_COUNT_INDEX);
 
     const news = tabFields[selectedCategoryIndex].tabData[selectedCategoryCountIndex];
 

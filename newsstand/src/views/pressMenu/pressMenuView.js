@@ -1,7 +1,9 @@
 class PressMenuView {
-    constructor() {
+    constructor({onClickSubscribeMenu, onClickListMenu}) {
         this.element = document.createElement('div');
         this.element.className = 'press-menu-container';
+        this.onClickSubscribeMenu = onClickSubscribeMenu;
+        this.onClickListMenu = onClickListMenu;
     }
 
     render() {
@@ -17,24 +19,26 @@ class PressMenuView {
         `;
 
         this.element.innerHTML = html;
+        this.addEventListenerToSubscribeButtons();
+        this.addEventListenerToListButtons();
     }
 
-    addEventListenerToSubscribeButtons(callback) {
+    addEventListenerToSubscribeButtons() {
         const subscribeButtons = this.element.querySelectorAll('.subscribe-menu-button');
 
         subscribeButtons.forEach(button => {
             button.addEventListener('click', (event) => {
-                callback(event.target.id === 'all-press');
+                this.onClickSubscribeMenu(event.target.id === 'all-press');
             });
         });
     }
 
-    addEventListenerToListButtons(callback) {
+    addEventListenerToListButtons() {
         const listGridButtons = this.element.querySelectorAll('.list-grid-button');
-        
+
         listGridButtons.forEach(button => {
             button.addEventListener('click', (event) => {
-                callback(event.target.id === 'list-view');
+                this.onClickListMenu(event.target.id === 'list-view');
             });
         });
     }
