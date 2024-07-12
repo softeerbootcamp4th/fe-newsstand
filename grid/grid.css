@@ -10,9 +10,19 @@
 }
 
 .gridItem {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border: 0.5px solid black;
+}
+
+.gridItem .subscribe {
+  display: none;
+  position: absolute;
+}
+
+.gridItem:hover .subscribe {
+  display: block;
 }

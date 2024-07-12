@@ -37,7 +37,11 @@ export function updateGridContent(categoryIndex) {
     mediaPageList = getGridList(getMyDataAsArray());
 
   if (mediaPageList.length !== 0)
-    renderGridItems(gridWrapper, mediaPageList[categoryIndex]);
+    renderGridItems(
+      gridWrapper,
+      mediaPageList[categoryIndex],
+      state.headerCategory
+    );
 }
 
 /**
@@ -64,11 +68,35 @@ function getGridList(mediaObjectList) {
  * @param {node} container
  * @param {array} itemList
  */
-function renderGridItems(container, itemList) {
+function renderGridItems(container, itemList, headerCategory) {
+  addSubscribeEventToGrid();
   itemList.forEach((element) => {
     const item = generateNode("li", "gridItem");
     item.innerHTML = element.media;
 
+    const subItem = generateNode("button", "subscribe");
+    if (headerCategory === 0) subItem.innerHTML = "+ 구독하기";
+    else if (headerCategory === 1) subItem.innerHTML = "구독해지";
+
+    item.appendChild(subItem);
     container.appendChild(item);
   });
+}
+
+function addSubscribeEventToGrid() {
+  const gridWrapper = document.querySelector(".newsGrid_wrapper");
+  gridWrapper.addEventListener("click", ({ target }) =>
+    subscribeCallBack(target)
+  );
+}
+
+//target이 어떤 언론사 id를 가지는지 알아야 함
+//innerHTML밖에 정보가 없어 mediaData와 비교 필요
+//target.innerHTML === mediaData[index].media 일 때 index를 이용해서 mediaID를 가져온 뒤
+//store.addItemToSet("myList", medaiId);
+//지금 자료의 형태가 매우 좋지 못함,, 확장성이 없음
+function subscribeCallBack(target) {
+  if (target.tagName === "BUTTON") {
+    console.log(target);
+  }
 }
