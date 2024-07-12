@@ -213,6 +213,6 @@ export const render = () =>
 export const init = (app: AppComponent<object, any>, root: HTMLElement) => {
   initComponent = app;
   rootElement = root;
-  addRootEvent(root);
+  addRootEvent(rootElement);
   render();
 };
