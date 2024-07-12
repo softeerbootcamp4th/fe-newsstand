@@ -2,13 +2,14 @@ import { shownewstab } from "../displaynews/displaysubscribe.js";
 import { clickArt } from "../mainscript.js";
 import { animationTimer } from "../progressbar/progressbutton.js";
 import { subProgressTimer } from "../displaynews/displaysubscribe.js";
+import subscribeManager from "../statemanager/subscribeManager.js";
 
 export const mytabs = () => {
-    const datas1 = localStorage.getItem("mysubscribe");
+    const subscribedDatas = localStorage.getItem("mysubscribe");
     clickArt('my-article');
     clearInterval(animationTimer);
     clearInterval(subProgressTimer);
-    if (datas1.length === 0) {
+    if (subscribedDatas.length === 0) {
         console.log('No data found in localStorage');
         const button = document.querySelector(`.news-list-header`);
         button.innerHTML = '';
@@ -22,8 +23,9 @@ export const mytabs = () => {
     }
     //필수
     else{
-        const parsedData = JSON.parse(datas1);
-        shownewstab(parsedData);
+        const parsedData = JSON.parse(subscribedDatas);
+        subscribeManager.setSubscribedData(parsedData);
+        shownewstab(subscribeManager.getSubscribedData());
     }
 }
 
