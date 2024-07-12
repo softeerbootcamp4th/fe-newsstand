@@ -42,7 +42,7 @@ const App = () => {
     const foundationButton = createComponent(FoundationButton, {
         id: 'foundattion_btn',
         icon: foundation.value === 'dark' ? Icon.SUN : Icon.MOON,
-        variant: foundation.value === 'dark' ? ButtonVariantProps.WHITE : ButtonVariantProps.GRAY,
+        variant: ButtonVariantProps.WHITE,
         onClick: () => {
             if (foundation.value === 'light') setFoundation('dark')
             else setFoundation('light')
