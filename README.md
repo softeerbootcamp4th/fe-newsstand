@@ -28,24 +28,22 @@ export const App = () => {
 
 # 컴포넌트, 엘리먼트 생성
 
-## 첫 작품의 실패
+## 첫 시도 실패
 
 ```tsx
 export const App = () => {
-	const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
   const increment = () => setCount(count + 1);
   return Div({
     children: [
-	    H1({
-		    children: [
-			    `Count: ${count}`
-		    ],
-	    }),
-	    Button({
-		    onClick: increment, 
-		    children: ["Increment"]
-	    })
-	  ],
+      H1({
+        children: [`Count: ${count}`],
+      }),
+      Button({
+        onClick: increment,
+        children: ["Increment"],
+      }),
+    ],
   });
 };
 ```
