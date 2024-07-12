@@ -24,9 +24,6 @@ export const transformToProgress = (element) => {
     const updateProgress = () => {
         stateManager.setPageIndex(stateManager.getPageIndex() + 1);
 
-        console.log(stateManager.getPressIndex());
-        console.log(stateManager.getPageIndex());
-
         counts++;
         updateButtonText(element);
         updateNewsDisplay(newstype[stateManager.getPressIndex()], stateManager.getPageIndex());
