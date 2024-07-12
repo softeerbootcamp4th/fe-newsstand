@@ -2,7 +2,7 @@ import { showsubscribe, subscribePress } from "../subscribe/subscribe.js";
 
 import { transformToProgress, resetProgress, animationTimer } from "../progressbar/progressbutton.js";
 import { newstype } from "../newstab/newstab.js";
-import { subProgressTimer } from "./displaysubscribe.js";
+import { subProgressTimer } from "./displaySubscribe.js";
 import stateManager from "../statemanager/stateManager.js";
 
 let buttonId = "";
