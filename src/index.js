@@ -11,7 +11,7 @@ import { NewsListRenderer } from "./renderers/NewsListRenderer.js";
 import { arrowClickEventInfo } from "./events/newsListEvent.js";
 import { RollingNewsStates } from "./states/RollingNewsStates.js";
 import { RollingNewsEventHandler } from "./eventHandlers/RollingNewsEventHandler.js";
-import { rollingNewsEventInfo } from "./events/rollingNewsEvent.js";
+import { newsRolledEventInfo, rollingNewsEventInfo } from "./events/rollingNewsEvent.js";
 import { RollingNewsRenderer } from "./renderers/RollingNewsRenderer.js";
 import { InitEventHandler } from "./eventHandlers/InitEventHandler.js";
 import { InitEventInfo } from "./events/InitEvent.js";
@@ -32,9 +32,9 @@ newsStates.subscribe(new NewsListRenderer);
 
 const rollingNewsStates = new RollingNewsStates({ rollingNewsData });
 
-new RollingNewsEventHandler(rollingNewsStates, [rollingNewsEventInfo]);
+new RollingNewsEventHandler(rollingNewsStates, [rollingNewsEventInfo, newsRolledEventInfo]);
 
 rollingNewsStates.subscribe(new RollingNewsRenderer);
 
 // 초기화
-new InitEventHandler([newsStates], [InitEventInfo]);
+new InitEventHandler([newsStates, rollingNewsStates], [InitEventInfo]);

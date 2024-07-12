@@ -62,38 +62,38 @@ function setRightName() {
 function animateLeftHeaders() {
     leftVisibleHeader = newsHeader[0].animate(
         [
-            {transform : "translateY(0)"},
-            {transform : "translateY(49px)"}
+            { transform: "translateY(0)" },
+            { transform: "translateY(49px)" }
         ],
-        {duration:1000}
-    );    
+        { duration: 1000 }
+    );
 
     leftHiddenHeader = hiddenHeader[0].animate(
         [
-            {transform : "translateY(0)"},
-            {transform : "translateY(49px)"}
+            { transform: "translateY(0)" },
+            { transform: "translateY(49px)" }
         ],
-        {duration:1000}
-    ); 
+        { duration: 1000 }
+    );
     leftName = setTimeout(setLeftName, 1000)
 }
 
 function animateRightHeaders() {
     rightVisibleHeader = newsHeader[1].animate(
         [
-            {transform : "translateY(0)"},
-            {transform : "translateY(49px)"}
+            { transform: "translateY(0)" },
+            { transform: "translateY(49px)" }
         ],
-        {duration:1000}
-    );    
+        { duration: 1000 }
+    );
 
     rightHiddenHeader = hiddenHeader[1].animate(
         [
-            {transform : "translateY(0)"},
-            {transform : "translateY(49px)"}
+            { transform: "translateY(0)" },
+            { transform: "translateY(49px)" }
         ],
-        {duration:1000}
-    );    
+        { duration: 1000 }
+    );
 
     rightName = setTimeout(setRightName, 1000);
 }
