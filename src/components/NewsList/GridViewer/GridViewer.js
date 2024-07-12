@@ -207,16 +207,19 @@ GridViewer.prototype.render = function () {
   const { companies, start, isLast } = this.state;
 
   this.$element.innerHTML = /* html */ `
-    ${companies
-      .map(
-        ({ id, lightLogo, darkLogo }) => /* html */ `
-        <li data-company-id="${id}" class="cell"><img src="${
-          idDarkMode ? darkLogo : lightLogo
-        }"/></li>
-      `
+    ${Array.from({ length: COMPANIES_PER_PAGE })
+      .map((_, idx) => companies[idx] ?? null)
+      .map((company) =>
+        company
+          ? /* html */
+            `<li data-company-id="${company.id}" class="cell"><img src="${
+              idDarkMode ? company.darkLogo : company.lightLogo
+            }"/></li>`
+          : /* html */
+            `<li class="cell empty"><span></span></li>`
       )
       .join("")}
-
+  
     <button id="prevButton" class="newsButton prev${
       start === 0 ? " hide" : ""
     }"><img src="${leftButton}"/></button>
