@@ -17,7 +17,7 @@ const Header = () => {
                 <img src='./assets/newsstand_ico.svg' style="height: 24px; margin-right: 8px;"/>
                 <span>뉴스스탠드</span>
             </div>
-            <div style="font-size: 16px; color: gray;">${todayString}</div>
+            <div style="font-size: 16px; color: var(--gray200);">${todayString}</div>
         </div>
         `,
     }
