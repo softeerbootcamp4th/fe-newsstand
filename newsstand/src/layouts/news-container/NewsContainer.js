@@ -6,7 +6,7 @@ import GridNewsstand from './GridNewsstand.js'
 import Alert from '../../components/base/Alert.js'
 import { mediaCategoryData } from '../../datas/mockData.js'
 
-const NewsContainer = () => {
+const NewsContainer = (props) => {
     const [selectedCategory, setSelectedCategory] = useState({ stateId: 1, initialValue: mediaCategoryData[0] })
     const [selectedSource, setSelectedSource] = useState({ stateId: 2, initialValue: '전체 언론사' })
     const [viewType, setViewType] = useState({ stateId: 3, initialValue: 'list' })
@@ -46,6 +46,7 @@ const NewsContainer = () => {
         subscribedCompanyIdList: subscribedCompanyIdList,
         setSubscribedCompanyIdList: setSubscribedCompanyIdList,
         isShowAlert: isShowAlert,
+        foundation: props.foundation,
         style: 'width:100%; height: 80%',
     })
 
@@ -61,6 +62,7 @@ const NewsContainer = () => {
         subscribedCompanyIdList: subscribedCompanyIdList,
         setSubscribedCompanyIdList: setSubscribedCompanyIdList,
         isShowAlert: isShowAlert,
+        foundation: props.foundation,
         style: 'width:100%; height:70%;',
     })
 

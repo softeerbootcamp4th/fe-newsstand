@@ -41,7 +41,7 @@ const MainNews = (props) => {
 
     const companyIcon = createComponent(IconView, {
         id: 1,
-        icon: props.newsData.value ? changeIconByFoundation(props.newsData.value.companyIcon) : '',
+        icon: changeIconByFoundation(props.newsData.value.companyIcon, props.foundation.value),
     })
 
     const subscribeButton = createComponent(Button, {

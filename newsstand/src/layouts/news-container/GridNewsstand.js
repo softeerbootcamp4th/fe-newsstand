@@ -55,6 +55,7 @@ const GridNewsstand = (props) => {
             setSelectedCategory: props.setSelectedCategory,
             setSelectedSource: props.setSelectedSource,
             setViewType: props.setViewType,
+            foundation: props.foundation,
             style: 'width: 100%; height:100%;',
         })
     })

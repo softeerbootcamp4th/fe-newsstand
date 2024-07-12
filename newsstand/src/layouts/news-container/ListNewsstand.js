@@ -162,6 +162,7 @@ const ListNewsstand = (props) => {
         setSelectedSource: props.setSelectedSource,
         setViewType: props.setViewType,
         isShowAlert: props.isShowAlert,
+        foundation: props.foundation,
         style: 'width:40%; padding:2%;',
     })
 

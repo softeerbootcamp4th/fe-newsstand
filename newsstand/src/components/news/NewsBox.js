@@ -76,7 +76,7 @@ const NewsBox = (props) => {
 
     const companyIcon = createComponent(IconView, {
         id: props.id,
-        icon: changeIconByFoundation(props.news.icon),
+        icon: changeIconByFoundation(props.news.icon, props.foundation.value),
     })
 
     return {
