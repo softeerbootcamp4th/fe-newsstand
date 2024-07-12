@@ -1,7 +1,7 @@
-import { Div, ce, useEffect } from "@/libs";
+import { Div, cc, useEffect } from "@/libs";
 import { ContentFilter } from "../ContentFilter/ContentFilter";
 import { useState } from "@/libs";
-import { cc } from "@/libs";
+
 import styles from "./index.module.css";
 import { MediaContentFilterType } from "@/models/MediaContentFilter";
 import { AllcontentList } from "./AllcontentList";
@@ -16,7 +16,7 @@ export const ContentList = () => {
       setMediaName(null);
     }
   }, [currentFilter]);
-  return ce(Div, {
+  return cc(Div, {
     className: styles.container,
     children: [
       cc(ContentFilter, {

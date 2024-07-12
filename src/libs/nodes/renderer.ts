@@ -38,11 +38,11 @@ export type RenderingAppElement<T extends HTMLElement = HTMLElement> =
     forced: boolean;
   };
 
-export interface CreatedAppComponent<P = object> {
+export interface CreatedAppComponent<P = object, R = unknown> {
   render: (
     props: P,
   ) =>
-    | CreatedAppComponent<P>
+    | CreatedAppComponent<R>
     | CreatedAppElement
     | string
     | number
@@ -51,9 +51,9 @@ export interface CreatedAppComponent<P = object> {
   props: P;
   renderName: string;
 }
-export type AppComponent<P = object> = AppRender<
+export type AppComponent<P, R> = AppRender<
   P,
-  CreatedAppComponent<P> | CreatedAppElement | string | number | false | null
+  CreatedAppComponent<R> | CreatedAppElement | string | number | false | null
 >;
 export type RenderingAppComponent<P = object> = CreatedAppComponent<P> & {
   key: string;
@@ -73,7 +73,7 @@ export const isCreatedAppComponent = (
 };
 
 export const isAppElement = (
-  app: AppComponent | AppElement,
+  app: AppComponent<any, any> | AppElement,
 ): app is AppElement => {
   return (app as AppElement).type === "element";
 };

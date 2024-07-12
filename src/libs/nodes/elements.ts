@@ -11,13 +11,6 @@ export const Raw = (data: string): CreatedAppElement => {
 };
 Raw.type = "element";
 
-export function ce<T extends HTMLElement>(
-  render: AppElement<T>,
-  props: AppElementProps<T>,
-): CreatedAppElement<T> {
-  return render(props);
-}
-
 const createElement = <T extends HTMLElement = HTMLElement>(
   tagName: string,
   props: AppElementProps<T>,

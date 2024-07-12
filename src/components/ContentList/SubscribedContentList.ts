@@ -1,4 +1,4 @@
-import { useState, useEffect, cc, ce, Main, Raw } from "@/libs";
+import { useState, useEffect, cc, cc, Main, Raw } from "@/libs";
 import { MediaIdByCategories } from "@/models/Newsstand";
 import { MediaContent } from "../MediaContent/MediaContent";
 import { MediaContentTabs } from "./ContentListHeader";
@@ -90,7 +90,7 @@ export const SubscribedContentList = ({
     loadData();
   };
 
-  return ce(Main, {
+  return cc(Main, {
     children: [
       cc(MediaContentTabs, {
         tabs: tabData,

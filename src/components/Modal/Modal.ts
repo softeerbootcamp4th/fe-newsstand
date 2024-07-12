@@ -1,4 +1,4 @@
-import { ce, Div, Button, AppChild } from "@/libs";
+import { cc, Div, Button, AppChild } from "@/libs";
 import styles from "./Modal.module.css";
 import typoStyles from "@/styles/typo.module.css";
 
@@ -17,25 +17,25 @@ export const Modal = ({
   content,
 }: ModalProps) => {
   const buttonStyle = `${typoStyles["available-medium16"]} ${styles["btn"]}`;
-  return ce(Div, {
+  return cc(Div, {
     className: styles.modal,
     children: [
-      ce(Div, {
+      cc(Div, {
         className: styles["modal-box"],
         children: [
-          ce(Div, {
+          cc(Div, {
             className: styles["modal-content"],
             children: [content],
           }),
-          ce(Div, {
+          cc(Div, {
             className: styles["btn-box"],
             children: [
-              ce(Button, {
+              cc(Button, {
                 className: buttonStyle,
                 children: [confirmText],
                 onClick: onConfirm,
               }),
-              ce(Button, {
+              cc(Button, {
                 className: buttonStyle,
                 children: [dismissText],
                 onClick: onDismiss,

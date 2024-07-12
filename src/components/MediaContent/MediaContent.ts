@@ -1,8 +1,8 @@
-import { Button, Div, Raw, ce } from "@/libs";
+import { Button, Div, Raw, cc } from "@/libs";
 import styles from "./MediaContent.module.css";
 import { Category } from "@/models/Newsstand";
 import { useMedia } from "@/hooks/useMedia";
-import { cc } from "@/libs";
+
 import { MediaContentHeader } from "./MediaContentHeader";
 import { useMediaRecentNews } from "@/hooks/useMediaRecentNews";
 import { MediaContentView } from "./MediaContentView";
@@ -28,10 +28,10 @@ export const MediaContent = ({
 }: MediaContentProps) => {
   const [media, setMedia] = useMedia(mediaId);
   const newsList = useMediaRecentNews(mediaId, category.id);
-  return ce(Div, {
+  return cc(Div, {
     className: styles.container,
     children: [
-      ce(Button, {
+      cc(Button, {
         className: `${styles.btn} ${styles.left}`,
         children: [Raw(LeftIcon)],
         onClick: handlePrev,
@@ -44,9 +44,9 @@ export const MediaContent = ({
       }),
       cc(MediaContentView, {
         newsList: newsList,
-        media,
+        media: media,
       }),
-      ce(Button, {
+      cc(Button, {
         className: `${styles.btn} ${styles.right}`,
         children: [Raw(RightIcon)],
         onClick: handleNext,

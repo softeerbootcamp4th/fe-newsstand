@@ -1,4 +1,4 @@
-import { AppChild, Div, cc, ce, useState } from "@/libs";
+import { AppChild, AppComponent, Div, cc, cc, useState } from "@/libs";
 import { createContext } from "@/libs/hooks/useContext";
 import styles from "./ToastProvider.module.css";
 import typoStyles from "@/styles/typo.module.css";
@@ -8,11 +8,11 @@ interface ToastContextValue {
 export const ToastContext = createContext<ToastContextValue | null>(null);
 
 const ToastContainer = ({ toasts }: { toasts: string[] }) => {
-  return ce(Div, {
+  return cc(Div, {
     className: styles.container,
     children: [
       ...toasts.map((toast) =>
-        ce(Div, {
+        cc(Div, {
           className: `${styles.toast} ${typoStyles["display-medium16"]}`,
           children: [toast],
         }),
@@ -30,7 +30,7 @@ export const ToastProvider = ({ children }: { children: AppChild[] }) => {
     }, 5000);
   };
 
-  return ToastContext.Provider({
+  return cc(ToastContext.Provider, {
     value: {
       addToast,
     },

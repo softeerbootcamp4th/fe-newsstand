@@ -1,7 +1,7 @@
-import { Button, Div, Img, Raw, Span, ce } from "@/libs";
+import { Button, Div, Img, Raw, Span, cc } from "@/libs";
 import styles from "./MediaContentHeader.module.css";
 import typoStyles from "@/styles/typo.module.css";
-import { cc } from "@/libs";
+
 import { formatDetailDate } from "@/utils/formatDate";
 import { PlucIcon } from "@/assets/PlucIocn";
 import { Media } from "@/models/Media";
@@ -12,9 +12,9 @@ import { Modal } from "../Modal/Modal";
 import { useToastContext } from "@/hooks/useToastContext";
 
 const Logo = ({ src }: { src?: string }) => {
-  return ce(Span, {
+  return cc(Span, {
     children: [
-      ce(Img, {
+      cc(Img, {
         src,
         className: styles.logo,
       }),
@@ -23,7 +23,7 @@ const Logo = ({ src }: { src?: string }) => {
 };
 
 const LastEditedDate = ({ date }: { date?: string }) => {
-  return ce(Span, {
+  return cc(Span, {
     className: `${typoStyles["display-medium12"]} ${styles.date}`,
     children: [formatDetailDate(new Date(date ?? 0))],
   });
@@ -56,12 +56,12 @@ const SubscribeButton = ({
         onDismiss: onDismiss,
         confirmText: "예, 해지합니다",
         dismissText: "아니오",
-        content: ce(Div, {
+        content: cc(Div, {
           className: `${styles["subscibe-content"]} ${typoStyles["display-medium16"]}`,
           children: [
-            ce(Span, {
+            cc(Span, {
               children: [
-                ce(Span, {
+                cc(Span, {
                   className: typoStyles["display-bold16"],
                   children: [media.name],
                 }),
@@ -75,13 +75,13 @@ const SubscribeButton = ({
     );
   };
   if (!isSubscribed) {
-    return ce(Button, {
+    return cc(Button, {
       className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
       children: [Raw(PlucIcon), "구독하기"],
       onClick: onClick,
     });
   }
-  return ce(Button, {
+  return cc(Button, {
     className: `${typoStyles["available-medium12"]} ${styles["subscribe-button"]}`,
     children: [Raw(CloseIcon)],
     onClick: openModal,
@@ -105,7 +105,7 @@ export const MediaContentHeader = ({
     return null;
   }
   const isSubscribed = media.isSubscribed;
-  return ce(Div, {
+  return cc(Div, {
     className: styles.header,
     children: [
       cc(Logo, {

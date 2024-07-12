@@ -1,4 +1,4 @@
-import { useState, useEffect, cc, ce, Main } from "@/libs";
+import { useState, useEffect, cc, cc, Main } from "@/libs";
 import { MediaIdByCategories } from "@/models/Newsstand";
 import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
@@ -91,7 +91,7 @@ export const AllcontentList = ({
     setMediaName(media.name);
   };
 
-  return ce(Main, {
+  return cc(Main, {
     children: [
       cc(MediaContentTabs, {
         tabs: tabData,

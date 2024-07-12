@@ -1,5 +1,6 @@
-import { Div, ce } from "../nodes/elements";
-import { AppChild, AppComponent } from "../nodes/renderer";
+import { Div } from "../nodes/elements";
+import { cc } from "../nodes/components";
+import { AppChild } from "../nodes/renderer";
 
 type Subscriber<T> = (value: T) => void;
 
@@ -15,7 +16,7 @@ export const createContext = <T>(defaultValue: T) => {
   }) => {
     value = newValue;
     subscribers.forEach((cb) => cb(value));
-    return ce(Div, {
+    return cc(Div, {
       children,
     });
   };
@@ -27,10 +28,7 @@ export const createContext = <T>(defaultValue: T) => {
   };
 
   return {
-    Provider: Provider satisfies AppComponent<{
-      children: AppChild[];
-      value: T;
-    }>,
+    Provider: Provider,
     Consumer,
     subscribe: (subscriber: Subscriber<T>) => {
       subscribers.add(subscriber);
