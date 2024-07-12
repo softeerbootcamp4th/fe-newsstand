@@ -12,7 +12,7 @@ function NewsList({ $target, position = "beforeend" }) {
 
   this.state = {
     companyFilterIndex: 0,
-    viewTypeFilterIndex: 0,
+    viewTypeFilterIndex: 1,
   };
 
   this.render(this.state.companyFilterIndex);
