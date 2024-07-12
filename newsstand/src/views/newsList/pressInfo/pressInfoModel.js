@@ -2,19 +2,30 @@ import globalState from '../../../app/GlobalState.js';
 
 class PressInfoModel {
     constructor() {
-        this.press = {};
+        this.state = {
+            press: {}
+        };
     }
 
     setPress(press) {
-        this.press = press;
+        this.state.press = press;
     }
 
     getPress() {
-        return this.press;
+        return this.state.press;
     }
 
+
+    getState() {
+        return this.state;
+    }
+
+    setState(newState) {
+        this.state = { ...this.state, ...newState };
+
+    }
     toggleSubscription() {
-        this.press.subscribe = this.press.subscribe === 'Y' ? 'N' : 'Y';
+        this.state.press.subscribe = this.state.press.subscribe === 'Y' ? 'N' : 'Y';
     }
 }
 

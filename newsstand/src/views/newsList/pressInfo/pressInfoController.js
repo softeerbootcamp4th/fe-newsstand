@@ -15,9 +15,10 @@ class PressInfoController {
             callbackSubscribed: () => this.moveToSubscribePress()
         });
 
-        globalState.subscribe(StateKey.SELECTED_CATEGORY_COUNT_INDEX, this.updateModel.bind(this));
-
         this.render();
+
+        globalState.subscribe(StateKey.SELECTED_CATEGORY_COUNT_INDEX, () => this.updateModel());
+
         this.updateModel();
     }
 

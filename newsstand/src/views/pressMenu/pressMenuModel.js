@@ -15,6 +15,7 @@ class PressMenuModel {
         this.isAllPress = isAllPress;
 
         globalState.setState(StateKey.IS_ALLPRESS, isAllPress);
+        globalState.setState(StateKey.TABFIELDS, isAllPress? DataManager.getAllPressTabs(): DataManager.getSubscribedPressTabs());
         globalState.setState(StateKey.SELECTED_CATEGORY_INDEX, 0);
         globalState.setState(StateKey.SELECTED_CATEGORY_COUNT_INDEX, 0);
     }
@@ -26,7 +27,7 @@ class PressMenuModel {
     setGridView(isGrid) {
         this.isGrid = isGrid;
 
-        globalState.setState(StateKey.isGrid, isGrid);
+        globalState.setState(StateKey.IS_GRIDVIEW, isGrid);
     }
 }
 

@@ -24,8 +24,6 @@ class PressMenuController {
 
     handleAllPress(isAllPress) {
         this.model.setAllPress(isAllPress);
-
-        globalState.setState(StateKey.TABFIELDS, isAllPress? DataManager.getAllPressTabs(): DataManager.getSubscribedPressTabs());
     }
 
     handleListView(isListView) {

@@ -8,10 +8,11 @@ class PressNewsController {
     this.model = new PressNewsModel();
     this.view = new PressNewsView();
 
+    this.render();
+
     globalState.subscribe(StateKey.SELECTED_CATEGORY_COUNT_INDEX, () => { this.updateModel() });
     globalState.subscribe(StateKey.SELECTED_CATEGORY_INDEX, () => { this.updateModel() });
-  
-    this.render();
+
     this.updateModel();
   }
 
