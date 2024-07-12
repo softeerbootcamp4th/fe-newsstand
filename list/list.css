@@ -11,35 +11,6 @@ body {
 .wrapper {
   max-width: 930px;
 }
-.header_selected {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 20px 0;
-  gap: 10px;
-}
-
-#category button,
-#show button {
-  border: 0;
-  background-color: white;
-  font-size: 24px;
-  color: #879298;
-}
-
-#category button {
-  margin-right: 20px;
-}
-#show button {
-  margin-left: 10px;
-}
-
-#category button.selected,
-#show button.selected {
-  font-weight: 700;
-  color: black;
-  pointer-events: none;
-}
 
 main {
   display: flex;

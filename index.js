@@ -3,71 +3,32 @@ import { headlineData } from "../resources/data.js";
 import { startBannerInterval } from "../global/interval.js";
 import { setupHeader } from "../components/header/header.js";
 import { generateListContent } from "./list/list.js";
-import { deleteNodeById } from "./utils/utils.js";
-import { generateGridContent } from "./grid/grid.js";
 import store from "../global/stoageManager.js";
 import state from "../global/state.js";
-import { updateMyList } from "./resources/data.js";
+import {
+  addHeaderCategoryEvent,
+  addHeaderShowEvent,
+} from "./components/content_header/content_header.js";
 
-//요소 생성
+store.setSet("myList", new Set());
+
 //header
 setupHeader();
-state.headerCategory = 0;
-state.headerShow = 0;
+
 //banner
 const bannerContainer = document.getElementById("banner_container");
 generateBanner(bannerContainer, headlineData[0]);
 generateBanner(bannerContainer, headlineData[1]);
 startBannerInterval();
 
-const contentContainer = document.getElementById("content_wrapper");
-generateListContent(contentContainer, state.headerCategory);
-
-//각 배너는 time delay를 가지고 롤링
+//content header
 const headerCategory = document.querySelectorAll(".headerCategory");
 const headerShow = document.querySelectorAll(".headerShow");
+headerCategory[state.headerCategory].classList.add("selected");
+headerShow[state.headerShow].classList.add("selected");
+addHeaderCategoryEvent();
+addHeaderShowEvent();
 
-// 초기화 함수
-function initialize() {
-  store.setSet("myList", new Set());
-  //header_selected 초기화
-  headerCategory[0].classList.add("selected");
-  headerShow[0].classList.add("selected");
-
-  headerCategory.forEach((element, index) => {
-    element.addEventListener("click", () => {
-      headerCategory[state.headerCategory].classList.remove("selected");
-      element.classList.add("selected");
-
-      state.headerCategory = index;
-
-      deleteNodeById("content_wrapper");
-      updateMyList();
-
-      if (state.headerShow === 0)
-        generateListContent(contentContainer, state.headerCategory);
-      else if (state.headerShow === 1)
-        generateGridContent(contentContainer, state.headerCategory);
-    });
-  });
-
-  headerShow.forEach((element, index) => {
-    element.addEventListener("click", () => {
-      headerShow[state.headerShow].classList.remove("selected");
-      element.classList.add("selected");
-
-      state.headerShow = index;
-
-      deleteNodeById("nav_container");
-      deleteNodeById("content_wrapper");
-
-      if (index === 0)
-        generateListContent(contentContainer, state.headerCategory);
-      else if (index === 1)
-        generateGridContent(contentContainer, state.headerCategory);
-    });
-  });
-}
-
-// 초기화
-initialize();
+//content
+const contentContainer = document.getElementById("content_wrapper");
+generateListContent(contentContainer, state.headerCategory);
