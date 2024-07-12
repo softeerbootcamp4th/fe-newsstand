@@ -1,4 +1,4 @@
-import { menuInfo, isGrid, isMediaWhole, newsState } from "../../../pages/state/newsState.js";
+import { menuInfo, isGrid, isMediaWhole, newsState, isDown, startX, scrollLeft } from "../../../pages/state/newsState.js";
 import { initArticleList } from "../articleList.js";
 import { createArticleList, renderGridSubscription, renderSubscriptionList, renderWholeGrid } from "../html/articleListHtml.js";
 import { setSubscriptionData } from "../articleList.js";
@@ -10,6 +10,7 @@ import { setSubscription } from "../../../utils/api.js";
 import { createSnackBar, deleteSnackBar } from "../../snackBar/snackBar.js";
 
 // 전체 언론사, 구독한 언론사
+
 export const addModeSelectionEventListener = () => {
     document.querySelector('.media-wrapper').addEventListener('click', (event) => {
         if (event.target.classList.contains('mode-selection-btn')) {
@@ -18,10 +19,6 @@ export const addModeSelectionEventListener = () => {
         }
     });
 }
-
-let isDown = false;
-let startX;
-let scrollLeft;
 
 // 리스트 보기, 그리드 보기
 export const addViewSelectionEventListener = () => {
@@ -148,19 +145,19 @@ export const addScrollEventListener = () => {
     const scrollable = document.querySelector('.article-menu-wrapper');
 
     scrollable.addEventListener('mousedown', (e) => {
-        isDown = true;
+        newsState.setIsDown(true);
         scrollable.classList.add('active');
-        startX = e.pageX - scrollable.offsetLeft;
-        scrollLeft = scrollable.scrollLeft;
+        newsState.setStartX(e.pageX - scrollable.offsetLeft);
+        newsState.setScrollLeft(scrollable.scrollLeft);
     });
     
     scrollable.addEventListener('mouseleave', () => {
-        isDown = false;
+        newsState.setIsDown(false);
         scrollable.classList.remove('active');
     });
     
     scrollable.addEventListener('mouseup', () => {
-        isDown = false;
+        newsState.setIsDown(false);
         scrollable.classList.remove('active');
     });
     

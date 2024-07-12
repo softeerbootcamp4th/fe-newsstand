@@ -12,6 +12,9 @@ export let isMediaWhole = true;
 export let isGrid = false;
 export let CATEGORY_TIMEOUT = 1000 * 20;
 export let nowMediaName = '';
+export let isDown = false;
+export let startX;
+export let scrollLeft;
 
 export const newsState = {
     setMenuInfo: (info) => { menuInfo = info },
@@ -24,4 +27,7 @@ export const newsState = {
     setIsMediaWhole: (bool) => { isMediaWhole = bool },
     setIsGrid: (bool) => { isGrid = bool },
     setNowMediaName: (name) => { nowMediaName = name },
+    setIsDown: (bool) => { isDown = bool },
+    setStartX: (x) => { startX = x },
+    setScrollLeft: (dist) => { scrollLeft = dist },
 };
