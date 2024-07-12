@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Deque } from "./deque";
 import { diffingCommit } from "./diffingCommit";
 import { addRootEvent, eventMap } from "./event";
@@ -209,7 +210,7 @@ export const render = () =>
     afterRender();
   });
 
-export const init = (app: AppComponent<object, object>, root: HTMLElement) => {
+export const init = (app: AppComponent<object, any>, root: HTMLElement) => {
   initComponent = app;
   _root = root;
   addRootEvent(root);
