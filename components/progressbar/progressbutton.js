@@ -1,13 +1,15 @@
 import { newstype } from "../newstab/newstab.js";
-import { updateNewsDisplay, testingpages } from "../displaynews/displayNews.js";
+import { updateNewsDisplay } from "../displaynews/displayNews.js";
 import stateManager from "../statemanager/stateManager.js";
 export let animationTimer;
 
 export const transformToProgress = (element) => {
+    console.log(stateManager.getPressIndex());
+    console.log(stateManager.getPageIndex());
     element.setAttribute('data-original-text', element.textContent);
     element.classList.add('progress-button');
-
-    const maxrepeat = testingpages[Number(element.dataset.index)];
+    const pageindex = stateManager.getPages();
+    const maxrepeat = pageindex[Number(element.dataset.index)];
     let counts = 0;
 
     const startAnimation = () => {
@@ -20,6 +22,8 @@ export const transformToProgress = (element) => {
 
     const updateProgress = () => {
         stateManager.setPageIndex(stateManager.getPageIndex() + 1);
+        console.log(stateManager.getPressIndex());
+        console.log(stateManager.getPageIndex());
         counts++;
         updateButtonText(element);
         updateNewsDisplay(newstype[stateManager.getPressIndex()], stateManager.getPageIndex());
@@ -27,8 +31,8 @@ export const transformToProgress = (element) => {
         if (counts >= maxrepeat) {
             clearInterval(animationTimer);
             stateManager.setPressIndex((stateManager.getPressIndex() + 1) % newstype.length);
-            //indexstate.pressIndex = (indexstate.pressIndex + 1) % newstype.length;
             stateManager.setPageIndex(0);
+
             const nextButton = document.querySelector(`.text-button[data-index="${stateManager.getPressIndex()}"]`);
             resetProgress();
             transformToProgress(nextButton);
@@ -43,7 +47,7 @@ export const transformToProgress = (element) => {
     updateButtonText(element);
     startAnimation();
 
-    animationTimer = setInterval(updateProgress, 2100);
+    animationTimer = setInterval(updateProgress, 2050);
 }
 
 export const updateButtonText = (element) => {
@@ -55,7 +59,8 @@ export const updateButtonText = (element) => {
     }
     const iii = element.dataset.index;
     const snum = Number(iii);
-    spanElement.textContent = `${stateManager.getPageIndex() + 1}/${testingpages[snum]}`;
+    const pageindex = stateManager.getPages();
+    spanElement.textContent = `${stateManager.getPageIndex() + 1}/${pageindex[snum]}`;
     element.textContent = originalText;
     element.appendChild(spanElement);
 }
