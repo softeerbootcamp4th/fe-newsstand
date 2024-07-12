@@ -5,7 +5,7 @@ const AutoRollingNews = (props) => {
     let interval = ''
     let rollingContainer = null
 
-    document.addEventListener('DOMContentLoaded', () => {
+    const bindEvents = () => {
         setTimeout(() => {
             interval = setInterval(rollingCallback, 5000)
         }, props.wait)
@@ -20,7 +20,20 @@ const AutoRollingNews = (props) => {
         rollingContainer.addEventListener('mouseout', function () {
             interval = setInterval(rollingCallback, 5000)
         })
-    })
+    }
+
+    const removeEvents = () => {
+        if (!rollingContainer) {
+            rollingContainer = document.querySelector(`#auto-rolling-news-container${props.id}`)
+        }
+
+        rollingContainer.removeEventListener('mouseover', function () {
+            clearInterval(interval)
+        })
+        rollingContainer.removeEventListener('mouseout', function () {
+            interval = setInterval(rollingCallback, 5000)
+        })
+    }
 
     function rollingCallback() {
         if (!rollingContainer) {
@@ -74,6 +87,8 @@ const AutoRollingNews = (props) => {
                 </div>
             </div>
         `,
+        bindEvents,
+        removeEvents,
     }
 }
 
