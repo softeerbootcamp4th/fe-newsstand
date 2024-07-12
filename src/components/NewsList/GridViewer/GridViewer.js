@@ -37,8 +37,7 @@ function GridViewer({ $target, position = "beforeend", changeTab, filter }) {
     }),
 
     UnsubscribeAlert: new UnsubscribeAlert({
-      $target: this.$element,
-      company: "",
+      $target: $target,
       onConfirm: () => {},
     }),
   };
@@ -114,7 +113,12 @@ GridViewer.prototype.handleCompanyButtonClick = function ($button) {
   }
 
   if (classList.contains("unsubscribe")) {
-    this.unsubscribeCompany({ id: companyId });
+    const { company, id } = this.state.companies.find(
+      (company) => Number(company.id) === Number(companyId)
+    );
+
+    this.components.UnsubscribeAlert.setOnConfirm(this.unsubscribeCompany.bind(this, [id]));
+    this.components.UnsubscribeAlert.show(company);
 
     return;
   }
@@ -160,7 +164,7 @@ GridViewer.prototype.subscribeCompany = function ({ id, company, lightLogo, dark
   }, 2000);
 };
 
-GridViewer.prototype.unsubscribeCompany = function ({ id }) {
+GridViewer.prototype.unsubscribeCompany = function (id) {
   removeCompany({ id });
 
   if (this.props.filter === "company") {
