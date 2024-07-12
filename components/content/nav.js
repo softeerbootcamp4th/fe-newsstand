@@ -160,6 +160,7 @@ function handleNavClick(
   stopInterval();
   intervalStartFunction();
 
+  state.currentMediaIndex = 0;
   updateFunction(state.currentCategoryIndex);
 }
 
