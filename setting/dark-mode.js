@@ -1,4 +1,4 @@
-import { getItem, setItem } from "../utils/local-storage.js";
+import { darkMode } from "../store/dark-mode.js";
 
 /**
  * @description 다크모드 설정을 렌더하는 함수
@@ -14,7 +14,7 @@ export function renderDarkmode() {
  */
 function renderDarkmodeButton() {
     const darkmodeButtonDOM = document.querySelector(".dark-mode__button");
-    const isDarkmode = getItem("dark-mode") ?? false;
+    const isDarkmode = darkMode.isDarkMode;
 
     const darkmodeButtonDOMString = isDarkmode ? `
             <img class="dark-mode__icon dark-mode__icon--dark" alt="라이트모드 전환 아이콘" src="./static/icons/moon.png" />
@@ -37,16 +37,17 @@ function renderDarkmodeButton() {
  */
 function setDarkmode() {
     const darkmodeButtonDOM = document.querySelector(".dark-mode__button");
-
     darkmodeButtonDOM.addEventListener("click", clickDarkMode);
+
+    /**
+     * 다크모드 토글 후 실행될 콜백 등록
+     */
+    darkMode.addCallback('render-button', renderDarkmodeButton);
 }
 
 /**
  * @description 다크모드 버튼 클릭 이벤트 리스너
  */
 function clickDarkMode() {
-    const isDarkmode = getItem("dark-mode") ?? false;
-    setItem("dark-mode", !isDarkmode);
-
-    renderDarkmodeButton();
+    darkMode.toggleMode();
 }

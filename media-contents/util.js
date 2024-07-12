@@ -1,3 +1,4 @@
+import { darkMode } from "../store/dark-mode.js";
 import { mediaList } from "../store/media-list.js";
 import { subscribedMediaList } from "../store/subscribed-media.js";
 import { renderAlert } from "../utils/render-alert.js";
@@ -49,10 +50,11 @@ export function getSelectedCategoryContentsDOMString(media) {
     const { id, iconUrl, editDate, imageContent, contents } = media;
 
     const isSubscribed = subscribedMediaList.isSubscribed(id);
+    const isDarkmode = darkMode.isDarkMode;
 
     return `
     <section class="flexbox__flex-start--center gap16">
-        <img alt="언론사 아이콘" src="${iconUrl}"/>
+        <img alt="언론사 아이콘" src="./static/media-icon/${isDarkmode ? 'dark' : 'light'}/${iconUrl}"/>
         <p class="text__medium12">${editDate}</p>
         ${isSubscribed ? `
             <button class="button__container subscribe-button__${id}--unsubscribe" data-media-id="${id}">
@@ -144,9 +146,10 @@ export function getDisplayMode() {
  */
 export function getGridMediaItem(media) {
     const isSubscribed = subscribedMediaList.isSubscribed(media.id);
+    const isDarkmode = darkMode.isDarkMode;
 
     return `<li class="media-contents__grid-item">
-                <img class="media-contents__grid-item-icon" alt="${media.name} 언론사 아이콘" src="${media.icon}"/>
+                <img class="media-contents__grid-item-icon" alt="${media.name} 언론사 아이콘" src="./static/media-icon/${isDarkmode ? 'dark' : 'light'}/${media.icon}"/>
                 ${isSubscribed ? `
                 <button class="button__container subscribe-button__${media.id}--unsubscribe" data-media-id="${media.id}">
                     <img class="subscribe-button__icon--unsubscribe subscribe-button--default" alt="구독 취소 아이콘" src="./static/icons/close-default.svg" />
