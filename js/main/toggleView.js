@@ -1,6 +1,6 @@
 import { category } from "../../data/categoryData.js";
 import { createCategory, loadCurrentCategoryNews } from "./listView/displaylistViewNews.js";
-import { initializeGridViewContainer } from "./init.js";
+import { initializeGridViewContainer } from "../common/init.js";
 import { switchView } from "./switchView.js";
 import { getSubscriptionList } from "../common/getSubscriptionList.js";
 

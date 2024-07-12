@@ -1,6 +1,6 @@
 import { ListView } from "../../components/main/ListView.js";
 import { GridView } from "../../components/main/GridView.js";
-import { initalizeSubscribeFunction, initializeGridViewContainer, initlizeListViewFunction } from "./init.js";
+import { initalizeSubscribeFunction, initializeGridViewContainer, initlizeListViewFunction } from "../common/init.js";
 import { handleClickTab } from "./toggleView.js";
 
 /*

@@ -1,5 +1,5 @@
 import { category } from "../../../data/categoryData.js";
-import { initlizeListViewFunction } from "../init.js";
+import { initlizeListViewFunction } from "../../common/init.js";
 import { displayNews } from "./displayNews.js";
 import { showCategory } from "./showCategory.js";
 import { showInformation } from "./showInformation.js";

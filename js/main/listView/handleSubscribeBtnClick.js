@@ -1,4 +1,4 @@
-import { initalizeSubscribeFunction } from "../init.js";
+import { initalizeSubscribeFunction } from "../../common/init.js";
 import { renderSelectedTab } from '../toggleView.js';
 import { getSubscriptionList } from "../../common/getSubscriptionList.js";
 import { setSubscriptionList } from "../../common/setSubscriptionList.js";

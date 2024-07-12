@@ -1,6 +1,6 @@
 import './loadComponent.js';
 import '../header/toggleTheme.js';
-import '../newsSection/rollingnews.js';
+import '../newsSection/displayrollingNews.js';
 import '../main/listView/handleSubscribeBtnClick.js';
 import '../header/todayDate.js';
 import '../main/gridView/displaygridViewnews.js';

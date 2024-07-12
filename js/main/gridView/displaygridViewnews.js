@@ -1,4 +1,4 @@
-import { handleThemeChange, initializeGridViewContainer } from "../init.js";
+import { handleThemeChange, initializeGridViewContainer } from "../../common/init.js";
 import { filterData } from "./filterData.js";
 import { createGridItem } from "./createGridItem.js";
 import { createPaginationButtons } from "./createPaginationButton.js";

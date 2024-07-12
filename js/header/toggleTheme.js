@@ -1,4 +1,4 @@
-import { handleThemeChange } from "../main/init.js";
+import { handleThemeChange } from "../common/init.js";
 
 const handleToggle = () => {
     const themeToggleBtn = document.querySelector('#theme-toggle');
