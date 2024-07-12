@@ -47,7 +47,7 @@ export function getUnselectedCategoryItemDOMString(categoryName, categoryIdx) {
  * @returns "<section>...</section>"
  */
 export function getSelectedCategoryContentsDOMString(media) {
-    const { id, iconUrl, editDate, imageContent, contents } = media;
+    const { id, name, iconUrl, editDate, imageContent, contents } = media;
 
     const isSubscribed = subscribedMediaList.isSubscribed(id);
     const isDarkmode = darkMode.isDarkMode;
@@ -85,7 +85,7 @@ export function getSelectedCategoryContentsDOMString(media) {
                     </li>
                     `)}
             </ul>
-            <p class="media-contents__tip text__medium14 text--weak">SBS Biz 언론사에서 직접 편집한 뉴스입니다.</p>
+            <p class="media-contents__tip text__medium14 text--weak">${name} 언론사에서 직접 편집한 뉴스입니다.</p>
         </section>
     </section>
     `;
