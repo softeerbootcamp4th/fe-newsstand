@@ -8,6 +8,11 @@
 
     overflow-y: hidden;
     user-select: none;
+
+    scrollbar-width: none;
+}
+.media-contents__category-list::-webkit-scrollbar{
+    display: none;
 }
 .media-contents__category-item {
     padding: 0 16px;
