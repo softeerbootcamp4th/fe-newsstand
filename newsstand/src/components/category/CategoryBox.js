@@ -73,6 +73,7 @@ const CategoryBox = (props) => {
     } else {
         clearIntervalForce()
     }
+
     return {
         element: `
             <div class="category-box-wrap id="category-box-wrap-${props.id}"
@@ -81,7 +82,7 @@ const CategoryBox = (props) => {
                 <div class="category-box-fill" id="category-fill-${props.id}"></div>
                 <li class="category-text-wrap" id="category-text-${props.id}"
                     style="font-weight: ${props.state.value === props.text ? 'bold' : 400};
-                    color: ${props.state.value === props.text ? 'white' : 'black'};"
+                    color: ${props.state.value === props.text ? 'white' : 'var(--black)'};"
                 >
                     <span class="category-text">
                         ${props.text} 

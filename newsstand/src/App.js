@@ -15,7 +15,7 @@ const App = () => {
     const newsContainerLayout = createComponent(NewsContainer, { id: 1, style: 'width:100%; height:74%;' })
     const toastComponent = createComponent(Toast, { text: '내가 구독한 언론사에 추가되었습니다.' })
 
-    const savedFoundation = localStorage.getItem('foundation') || 'white'
+    const savedFoundation = localStorage.getItem('foundation') || 'light'
     const [foundation, setFoundation] = useState({ stateId: 1, initialValue: savedFoundation })
 
     useEffect(
@@ -44,8 +44,8 @@ const App = () => {
         icon: foundation.value === 'dark' ? Icon.SUN : Icon.MOON,
         variant: foundation.value === 'dark' ? ButtonVariantProps.WHITE : ButtonVariantProps.GRAY,
         onClick: () => {
-            if (foundation.value === 'white') setFoundation('dark')
-            else setFoundation('white')
+            if (foundation.value === 'light') setFoundation('dark')
+            else setFoundation('light')
         },
     })
 

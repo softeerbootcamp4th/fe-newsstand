@@ -25,16 +25,39 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    background-color: var(--white);
+    color: var(--black);
 }
 
 .light {
-    background-color: #ffffff;
-    color: #14212b;
+    --white-alt: rgba(255, 255, 255, 0.7);
+    --white: #ffffff;
+    --gray50: #f5f7f9;
+    --gray100: #d2dae0;
+    --gray200: #879298;
+    --gray300: #6e8091;
+    --gray400: #5f6e76;
+    --gray500: #4b5966;
+    --black: #14212b;
+
+    --blue100: #7890e7;
+    --blue500: #4362d0;
+
+    --shadow: 0px 2px 18px 0px #14212b14;
 }
 
 .dark {
-    background-color: #14212b;
-    color: #ffffff;
+    --white: #14212b;
+    --black: #ffffff;
+    --gray50: #4b5966;
+    --gray100: #5f6e76;
+    --gray200: rgba(255, 255, 255, 0.7);
+    --gray300: rgba(255, 255, 255, 0.7);
+    --gray400: #d2dae0;
+    --gray500: #f5f7f9;
+    --blue100: #7890e7;
+    --blue500: #4362d0;
+    --shadow: 0px 2px 18px 0px #14212b14;
 }
 
 h1,
