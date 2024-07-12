@@ -10,8 +10,9 @@ import state from "../global/state.js";
  */
 export function generateGridContent(container, headerCategoryIndex) {
   stopInterval();
+
   state.currentCategoryIndex = 0;
-  let currentGridIndex = headerCategoryIndex;
+  let currentGridIndex = state.currentCategoryIndex;
 
   container.classList.remove("list");
   container.classList.add("grid");

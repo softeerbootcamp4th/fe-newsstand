@@ -69,7 +69,7 @@ export function generateUnsubscribe() {
     contentTitle.appendChild(sub);
   }
 
-  sub.innerHTML = "구독 해지";
+  sub.innerHTML = "x";
   sub.addEventListener("click", () =>
     saveRemoveList(myList[state.currentCategoryIndex])
   );

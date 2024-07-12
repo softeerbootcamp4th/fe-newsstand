@@ -1,12 +1,13 @@
 import { generateBanner } from "../components/banner/newsBanner.js";
 import { headlineData } from "../resources/data.js";
 import { startBannerInterval } from "../global/interval.js";
-import store from "../global/stoageManager.js";
-import state from "../global/state.js";
 import { setupHeader } from "../components/content_header/header.js";
 import { generateListContent } from "./list/list.js";
 import { deleteNodeById } from "./utils/utils.js";
 import { generateGridContent } from "./grid/grid.js";
+import store from "../global/stoageManager.js";
+import state from "../global/state.js";
+import { updateMyList } from "./resources/data.js";
 
 //요소 생성
 //header
@@ -41,6 +42,7 @@ function initialize() {
       state.headerCategory = index;
 
       deleteNodeById("content_wrapper");
+      updateMyList();
 
       if (state.headerShow === 0)
         generateListContent(contentContainer, state.headerCategory);
