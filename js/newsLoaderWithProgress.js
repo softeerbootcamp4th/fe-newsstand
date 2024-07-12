@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const navItems = document.querySelectorAll(".navItem");
-    const articleTop = document.querySelector('.articleTop');
-    const articleBottom = document.querySelector('.articleBottom');
-    // const leftButton = document.querySelector('.leftButton');
-    // const rightButton = document.querySelector('.rightButton');
+    const articleTop = document.querySelector(".articleTop");
+    const articleBottom = document.querySelector(".articleBottom");
+    const leftButton = document.querySelector(".leftButton");
+    const rightButton = document.querySelector(".rightButton");
     let currentCategoryIndex = 0;
     let currentPressIndex = 0;
     let intervalId;
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             displayNews(data.newsList[0], 0);
+            updateNavItemText(currentCategoryIndex, currentPressIndex, data.newsList[currentCategoryIndex].press.length);
             startAutoProgress(); // 첫 번째 뉴스 데이터 표시 후 자동 진행 시작
         })
         .catch(error => console.error('데이터 가져오기 실패:', error));
@@ -31,35 +32,73 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // leftButton.addEventListener("click", function () {
-    //     clearInterval(intervalId);
-    //     if(currentPressIndex === 0) {
-    //         currentCategoryIndex--;
-    //         currentPressIndex = 0;
-    //     }else {
-    //         currentPressIndex--;
-    //     }
-    //     animateNavItem();
-    //     startAutoProgress();
-    // });
-
-    // rightButton.addEventListener("click", function () {
-    //     clearInterval(intervalId);
-    //     if(currentPressIndex === navItems[currentCategoryIndex].length - 1) {
-    //         currentCategoryIndex++;
-    //         currentPressIndex = 0;
-    //     }else {
-    //         currentPressIndex++;
-    //     }
-    //     animateNavItem();
-    //     startAutoProgress();
-    // });
+    // 왼쪽 화살표 버튼에 클릭 이벤트 리스너 추가
+    leftButton.addEventListener("click", function () {
+        clearInterval(intervalId);
+    
+        fetch('./asset/data/newsData.json')
+            .then(response => response.json())
+            .then(data => {
+                if (currentPressIndex > 0) { // 첫 번째 언론사가 아닐 떄
+                    currentPressIndex--;
+                }else { // 첫 번째 언론사 일 때
+                    if (currentCategoryIndex > 0) { // 첫 번째 카테고리가 아닐 때
+                        currentCategoryIndex--;
+                    }else { // 첫 번째 카테고리 일 때
+                        currentCategoryIndex = data.newsList.length - 1; // 마지막 카테고리로 이동
+                    }
+                    currentPressIndex = data.newsList[currentCategoryIndex].press.length - 1; // 카테고리 내의 마지막 언론사로 이동
+                }
+                animateNavItem();
+                startAutoProgress();
+            })
+            .catch(error => console.error('데이터 가져오기 실패:', error));
+    });
+    
+    // 오른쪽 화살표 버튼에 클릭 이벤트 리스너 추가
+    rightButton.addEventListener("click", function () {
+        clearInterval(intervalId);
+    
+        fetch('./asset/data/newsData.json')
+            .then(response => response.json())
+            .then(data => {    
+                if(currentPressIndex < data.newsList[currentCategoryIndex].press.length - 1) { // 마지막 언론사가 아닐 때
+                    currentPressIndex++;
+                }else { // 마지막 언론사 일 때
+                    currentPressIndex = 0; // 첫 번째 언론사로 이동
+                    if(currentCategoryIndex < data.newsList.length - 1) { // 현재 카테고리가 마지막 카테고리가 아닐 때
+                        currentCategoryIndex++;
+                    }else { // 현재 카테고리가 마지막 카테고리 일 때
+                        currentCategoryIndex = 0; // 첫 번째 카테고리로 이동
+                    }
+                }
+                animateNavItem();
+                startAutoProgress();
+            })
+            .catch(error => console.error('데이터 가져오기 실패:', error));
+    });
 
     // 자동으로 프로그래스바 애니메이션을 실행하는 함수
     function startAutoProgress() {
         intervalId = setInterval(() => {
-            animateNavItem();
-        }, 20000); // 20초마다 다음 요소로 이동
+            nextNews();
+        }, 20000); // 20초마다 다음 언론사로 이동
+    }
+
+    // 자동으로 다음 뉴스 표시 및 프로그래스바 애니메이션을 실행하는 함수
+    function nextNews() {
+        fetch('./asset/data/newsData.json')
+            .then(response => response.json())
+            .then(data => {
+                if(currentPressIndex < data.newsList[currentCategoryIndex].press.length - 1) { // 현재 언론사가 마지막 언론사가 아닐 때
+                    currentPressIndex++;
+                }else { // 현재 언론사가 마지막 언론사 일 때
+                    currentPressIndex = 0;
+                    currentCategoryIndex = (currentCategoryIndex + 1) % data.newsList.length;
+                }
+                animateNavItem();
+            })
+            .catch(error => console.error('데이터 가져오기 실패:', error));
     }
 
     // 각 li 태그에 대해 애니메이션을 적용하는 함수
@@ -87,21 +126,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 currentItem.classList.add("progress");
 
                 // "현재 언론사 인덱스 / 해당 카테고리의 언론사 개수" 텍스트 추가
-                const anchor = currentItem.querySelector('a');
-                anchor.style.whiteSpace = 'pre'; // 공백을 유지하도록 설정
-                anchor.textContent += '     '; // 5개의 공백 문자열 추가
-                anchor.textContent += `${currentPressIndex + 1} / ${newsData.press.length}`;
-
-                // 다음 언론사로 인덱스 증가
-                currentPressIndex++;
-
-                // 모든 언론사의 뉴스 데이터가 표시된 후에 자동으로 다음 카테고리로 전환
-                if (currentPressIndex >= newsData.press.length) {
-                    currentPressIndex = 0; // 인덱스 초기화
-                    currentCategoryIndex = (currentCategoryIndex + 1) % navItems.length; // 다음 카테고리로 이동
-                }
+                updateNavItemText(currentCategoryIndex, currentPressIndex, newsData.press.length);
             })
             .catch(error => console.error('데이터 가져오기 실패:', error));
+    }
+
+    // "현재 언론사 페이지 / 해당 카테고리의 전체 언론사 개수" 텍스트를 업데이트하는 함수
+    function updateNavItemText(categoryIndex, pressIndex, totalPress) {
+        const currentItem = navItems[categoryIndex];
+        const anchor = currentItem.querySelector('a');
+        anchor.style.whiteSpace = 'pre'; // 공백을 유지하도록 설정
+        anchor.textContent += `       ${pressIndex + 1} / ${totalPress}`;
     }
 
     // 뉴스 데이터를 동적 생성하는 함수
