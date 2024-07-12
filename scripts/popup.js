@@ -12,7 +12,7 @@ export function addToastPopup() {
     setTimeout(()=>{
         toastPopupDom.remove();
         switchToggleWithToggleName(TOGGLE.SUBSCRIBED);
-    },TIME.SECOND * 5);
+    },TIME.SECOND * 20);
 }
 
 export function addDeletePopup(companyName) {
