@@ -1,6 +1,7 @@
-import { createCategory, showInformation, loadCurrentCategoryNews } from "./displaylistViewNews.js";
+import { createCategory, loadCurrentCategoryNews } from "./displaylistViewNews.js";
 import { initalizeSubscribeFunction } from "../init.js";
-import { moveToSubscribeTab } from '../toggleView.js';
+import { renderSelectedTab } from '../toggleView.js';
+import { showInformation } from "./showInformation.js";
 
 export const getSubscriptionList = () => {
     const subscriptionList = localStorage.getItem('subscriptions');
@@ -74,7 +75,7 @@ export function handleSubscribeBtnClick() {
             toastAlert.classList.add('show');
             setTimeout(() => {
                 toastAlert.classList.remove('show');
-                moveToSubscribeTab();
+                renderSelectedTab('subscribe', 'list-view');
             }, 500);
         }
     });

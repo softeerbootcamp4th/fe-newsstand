@@ -504,7 +504,7 @@ main {
     display: block;
     position: relative;
     border-radius: 30px;
-    background-color: var(--surface-brand-default);
+    background-color: var(--surface-brand-alt);
     box-shadow: 0 0 16px 3px rgba(0 0 0 / 15%);
     cursor: pointer;
 
@@ -522,7 +522,7 @@ main {
 
   /* 체크박스가 체크되면 변경 이벤트 */
 #theme-toggle:checked ~ .theme-toggle-switch {
-    background: var(--surface-brand-alt);
+    background: var(--surface-brand-default);
 }
   
 #theme-toggle:checked ~ .theme-toggle-switch .theme-toggle-btn {

@@ -1,14 +1,13 @@
 import { handleThemeChange, initializeGridViewContainer } from "../init.js";
 import { getSubscriptionList, setSubscriptionList } from "../listView/subscribe.js";
-import { getTheme, onThemeChange } from "../../header/toggleTheme.js";
-import { handleTabClick } from "../toggleView.js";
+import { getTheme } from "../../header/toggleTheme.js";
+import { renderSelectedTab } from "../toggleView.js";
 
 let newsData = [];
 let companies = [];
 let currentPage = 0; // 현재 페이지를 추적하기 위한 변수
 const itemsPerPage = 24; // 한 페이지당 보여줄 아이템 수
 let subscriptionList;
-let curViewType = 'all';
 
 document.addEventListener('DOMContentLoaded', () => {
     if (!document.querySelector('.grid-view-container')) return;
@@ -29,8 +28,6 @@ function createGridItem() {
     const modal = document.querySelector('.modal-container');
 
     const theme = getTheme();
-    console.log(theme);
-
 
     for (let i = 0; i < itemsPerPage; i++) {
         const gridItem = document.createElement('div');
@@ -118,11 +115,11 @@ function createGridSubscribeItem() {
                     setSubscriptionList(subscriptionList);
                     subscribeBtn.textContent = '+ 해지하기';
                     toastAlert.classList.add('show');
-                    handleTabClick('subscribe', 'grid-view');    
+                    renderSelectedTab('subscribe', 'grid-view');    
 
                     setTimeout(() => {
                         toastAlert.classList.remove('show');
-                        handleTabClick('subscribe', 'grid-view');    
+                        renderSelectedTab('subscribe', 'grid-view');    
                     }, 5000);
                 }
             });
@@ -146,7 +143,7 @@ function handleModalBtnClick(company) {
         subscriptionList = subscriptionList.filter(item => item !== company);
         setSubscriptionList(subscriptionList);
         document.querySelector('.grid-sub-btn').textContent = '+ 구독하기'  
-        handleTabClick('subscribe', 'grid-view');    
+        renderSelectedTab('subscribe', 'grid-view');    
     });
 
     document.querySelector('.modal-cancle-btn').addEventListener('click', () => {

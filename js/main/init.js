@@ -1,15 +1,16 @@
 import { category } from "../../data/categoryData.js";
 import { fetchNewsData } from "./gridView/displaygridViewnews.js";
-import { createCategory, initalizeHeaderScroll, initializeArrowBtn, loadCurrentCategoryNews } from "./listView/displaylistViewNews.js";
+import { createCategory, initializeArrowBtn, loadCurrentCategoryNews } from "./listView/displaylistViewNews.js";
 import { handleModalBtnClick, handleSubscribeBtnClick, updateButton } from "./listView/subscribe.js";
 import { onThemeChange } from "../header/toggleTheme.js";
+import { initializeHeaderScroll } from "./listView/inititalizeHeaderComponent.js.js";
 
 let curViewType = 'all';
 
 export const initlizeListViewFunction = () => {
     createCategory(category, 'all');
     loadCurrentCategoryNews('all');
-    initalizeHeaderScroll();
+    initializeHeaderScroll();
     initializeArrowBtn();
 
 }
