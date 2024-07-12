@@ -187,12 +187,22 @@ function renderListMedia(mediaIdx) {
     /**
      * 선택된 카테고리의 콘텐츠 렌더링
      */
-    const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaDetailList[selectedMediaIdx]);
-    contentsBoxDOM.innerHTML = contentsString;
+    renderSelectedCategory(selectedMediaIdx);
 
-    darkMode.addCallback("render-subscribed", () => renderListMedia(selectedMediaIdx));
+    darkMode.addCallback("render-subscribed", () => renderSelectedCategory(selectedMediaIdx));
     subscribedMediaList.setCallback(() => renderListMedia(selectedMediaIdx));
     setSubscribeButtonEvent(subscribedMediaList.data[selectedMediaIdx]);
+}
+
+/**
+ * @description 선택된 카테고리의 콘텐츠를 렌더링하는 함수
+ */
+function renderSelectedCategory(selectedMediaIdx) {
+    const subscribedMediaDetailList = subscribedMediaList.data.map((subscribed) => mediaDetail.findMediaById(subscribed.id));
+    const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
+
+    const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaDetailList[selectedMediaIdx]);
+    contentsBoxDOM.innerHTML = contentsString;
 }
 
 /**
