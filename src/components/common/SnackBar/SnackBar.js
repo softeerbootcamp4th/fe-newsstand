@@ -1,21 +1,19 @@
 import "./SnackBar.css";
 
-function SnackBar({ $target, position = "beforeend", text, duration = 2000, onSuccess }) {
+function SnackBar({ $target, position = "beforeend" }) {
   this.$element = document.createElement("div");
   this.$element.className = "snackBar";
   this.$element.classList.add("hide");
 
   $target.insertAdjacentElement(position, this.$element);
 
-  this.render(text);
+  this.show = function ({ text, duration = 2000 }) {
+    this.render(text);
 
-  this.show = function () {
     this.$element.classList.remove("hide");
 
     setTimeout(() => {
       this.$element.classList.add("hide");
-
-      if (onSuccess) onSuccess();
     }, duration);
   };
 }

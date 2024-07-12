@@ -59,7 +59,7 @@ ContentsBox.prototype.handleSubscribeButtonClick = function () {
 
   this.props.onSubscribeCompany({ id, company, lightLogo, darkLogo });
 
-  this.components.SnackBar.show();
+  this.components.SnackBar.show({ text: "내가 구독한 언론사에 추가되었습니다." });
   this.showUnsubscribeButton();
 };
 
