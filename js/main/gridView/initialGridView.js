@@ -1,4 +1,4 @@
-import { initializeGridViewContainer } from "../init.js";
+import { initializeGridViewContainer } from "../../common/init.js";
 import { handleClickTab } from "../toggleView.js";
 
 document.addEventListener("DOMContentLoaded", () => {

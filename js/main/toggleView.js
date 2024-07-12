@@ -1,18 +1,16 @@
 import { category } from "../../data/categoryData.js";
 import { createCategory, loadCurrentCategoryNews } from "./listView/displaylistViewNews.js";
-import { initalizeSubscribeFunction, initializeGridViewContainer, initlizeListViewFunction } from "./init.js";
-import { getSubscriptionList  } from "./listView/subscribe.js";
+import { initializeGridViewContainer } from "../common/init.js";
+import { switchView } from "./switchView.js";
+import { getSubscriptionList } from "../common/getSubscriptionList.js";
 
-let prevViewType = null;
 let prevTabType = 'all';
+let allTabClickHandler = null;
+let subscribeTabClickHandler = null;
+
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (document.querySelector('.list-view-container')) {
-        handleClickTab('list-view');
-    } else {
-        handleClickTab('grid-view');
-    }
-
+    document.querySelector('.list-view-container') ? handleClickTab('list-view') : handleClickTab('grid-view');
     setupViewToggle();
 });
 
@@ -21,92 +19,15 @@ const setupViewToggle = () => {
     const gridViewIcon = document.querySelector(".grid-view");
 
     listViewIcon.addEventListener("click", () => {
-        switchView('list-view');
+        switchView(prevTabType, 'list-view');
     });
 
     gridViewIcon.addEventListener("click", () => {
-        switchView('grid-view');
+        switchView(prevTabType, 'grid-view');
     });
 };
 
-const switchView = (viewType) => {
-    const mainHeader = document.querySelector('.main-header');
-    const listViewIcon = document.querySelector(".list-view");
-    const gridViewIcon = document.querySelector(".grid-view");
-
-    if (viewType === 'list-view') {
-        gridViewIcon.classList.remove("selected-icon");
-        gridViewIcon.src = "./src/icons/grid-view.svg";
-
-        document.querySelector('.grid-view-container').remove();
-        document.querySelector('.arrow.right-btn.grid').remove();
-        document.querySelector('.arrow.left-btn.grid').remove();
-
-        listViewIcon.classList.add("selected-icon");
-        listViewIcon.src = "./src/icons/list-view-checked.svg";
-
-        mainHeader.insertAdjacentHTML(
-            "afterend",
-            `
-            <div class="list-view-container selected-view column-flex">
-                <div class="list-view-header"></div>
-                <div class="info hidden">구독한 언론사가 없습니다.</div>
-                <div class="news-container column-flex">
-                    <div class="container-header">
-                        <img alt="company-logo" id="logo">
-                        <p class="edit-date"></p>
-                        <div class="subscribe-btn"><span>+</span>구독하기</div>
-                    </div>
-                    <div class="news-item-container">
-                        <div class="main-news column-flex"></div>
-                        <div class="sub-news column-flex"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="arrow left-btn list">
-                <img src="./src/images/LeftButton.png" alt="left-arrow">
-            </div>
-            <div class="arrow right-btn list">
-                <img src="./src/images/RightButton.png" alt="left-arrow">
-            </div>
-            `
-        );
-
-        initalizeSubscribeFunction();
-        initlizeListViewFunction();
-        handleClickTab('list-view', prevTabType);
-
-    } else if (viewType === 'grid-view') {
-        listViewIcon.classList.remove("selected-icon");
-        listViewIcon.src = "./src/icons/list-view.svg";
-
-        document.querySelector('.list-view-container').remove();
-        document.querySelector('.arrow.right-btn.list').remove();
-        document.querySelector('.arrow.left-btn.list').remove();
-
-        gridViewIcon.classList.add("selected-icon");
-        gridViewIcon.src = "./src/icons/grid-view-checked.svg";
-
-        mainHeader.insertAdjacentHTML(
-            "afterend",`
-            <div class="grid-view-container selected-view"></div>
-            <div class="arrow left-btn grid">
-                <img src="./src/images/LeftButton.png" alt="left-arrow">
-            </div>
-            <div class="arrow right-btn grid">
-                <img src="./src/images/RightButton.png" alt="left-arrow">
-            </div>
-            `
-        );
-
-        initializeGridViewContainer('prevTabType');
-        handleClickTab('grid-view', prevTabType);
-    }
-
-    checkCurViewType(viewType);
-};
-
-export const handleTabClick = (tabType, viewType) => {
+export const renderSelectedTab = (tabType, viewType) => {
     const allTab = document.querySelector('.all');
     const subscribeTab = document.querySelector('.subscribe');
     const leftBtn = document.querySelector('.left-btn.grid');
@@ -122,7 +43,7 @@ export const handleTabClick = (tabType, viewType) => {
         if (viewType === 'list-view') {
             createCategory(category, 'all');
             loadCurrentCategoryNews('all');
-        } else if (viewType === 'grid-view') {
+        } else {
             initializeGridViewContainer('all');
             if (leftBtn) leftBtn.style.display = 'block';
             if (rightBtn) rightBtn.style.display = 'block';
@@ -133,16 +54,13 @@ export const handleTabClick = (tabType, viewType) => {
             let subscriptions = getSubscriptionList().reverse();
             createCategory(subscriptions, 'subscribe');
             loadCurrentCategoryNews('subscribe');
-        } else if (viewType === 'grid-view') {
+        } else {
             initializeGridViewContainer('subscribe');
             if (leftBtn) leftBtn.style.display = 'none';
             if (rightBtn) rightBtn.style.display = 'none';
         }
     }
 };
-
-let allTabClickHandler = null;
-let subscribeTabClickHandler = null;
 
 export const handleClickTab = (viewType, initialTabType = 'all') => {
     const allTab = document.querySelector('.all');
@@ -151,21 +69,11 @@ export const handleClickTab = (viewType, initialTabType = 'all') => {
     if (allTabClickHandler) allTab.removeEventListener('click', allTabClickHandler);
     if (subscribeTabClickHandler) subscribeTab.removeEventListener('click', subscribeTabClickHandler);
 
-    allTabClickHandler = () => handleTabClick('all', viewType);
-    subscribeTabClickHandler = () => handleTabClick('subscribe', viewType);
+    allTabClickHandler = () => renderSelectedTab('all', viewType);
+    subscribeTabClickHandler = () => renderSelectedTab('subscribe', viewType);
 
     allTab.addEventListener('click', allTabClickHandler);
     subscribeTab.addEventListener('click', subscribeTabClickHandler);
 
-    handleTabClick(initialTabType, viewType);
-};
-
-const checkCurViewType = (viewType) => {
-    if (prevViewType !== viewType) {
-        prevViewType = viewType;
-    }
-};
-
-export const moveToSubscribeTab = () => {
-    handleTabClick('subscribe', 'list-view');
+    renderSelectedTab(initialTabType, viewType);
 };

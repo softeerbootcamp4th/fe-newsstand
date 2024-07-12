@@ -1,27 +1,20 @@
 import { category } from "../../../data/categoryData.js";
-import { initlizeListViewFunction } from "../init.js";
-import { getSubscriptionList } from "./subscribe.js";
-import { getTheme } from "../../header/toggleTheme.js";
+import { initlizeListViewFunction } from "../../common/init.js";
+import { displayNews } from "./displayNews.js";
+import { showCategory } from "./showCategory.js";
+import { showInformation } from "./showInformation.js";
+import { updateCategoryDisplay } from "./updateCategoryDisplay.js";
+import { updateProgressBar } from "./updateProgressBar.js";
+import { updateBtnVisibility } from "./updateBtnVisibility.js";
+import { getSubscriptionList } from "../../common/getSubscriptionList.js";
 
 let curCategoryIdx = 0;
 let newsData = [];
 let curNewsIdx = 0;
 let prevCategoryType;
-const intervalTime = 20000;
 let progressBarTimeout;
 let subscriptions;
-let mainEventHandler;
 
-/* 다른 탭을 선택했을 때 초기화 함수 */
-function checkCurDataType(dataType) {
-    if(prevCategoryType !== dataType) {
-        newsData = [];
-        curCategoryIdx = 0;
-        curNewsIdx = 0;
-        prevCategoryType = dataType;
-        subscriptions = getSubscriptionList().reverse();
-    }
-}
 
 /* 카테고리 초기화 및 클릭 이벤트 추가 함수 */
 export const createCategory = (data, dataType) => {
@@ -62,6 +55,17 @@ export const createCategory = (data, dataType) => {
 
 }
 
+/* 다른 탭을 선택했을 때 초기화 함수 */
+function checkCurDataType(dataType) {
+    if(prevCategoryType !== dataType) {
+        newsData = [];
+        curCategoryIdx = 0;
+        curNewsIdx = 0;
+        prevCategoryType = dataType;
+        subscriptions = getSubscriptionList().reverse();
+    }
+}
+
 /* 조회한 카테고리의 전체 뉴스 가져오는 함수 */
 export const loadCurrentCategoryNews = (dataType) => {
 
@@ -78,165 +82,25 @@ export const loadCurrentCategoryNews = (dataType) => {
         })
         .then(data => {
             newsData = data;
-            dataType === 'subscribe' && subscriptions.length === 0 ? showInformation() :displayNews(dataType);
-            updateBtnVisibility();
-            updateCategoryDisplay();
+            let news = dataType === 'all' ? newsData[curCategoryIdx].news[curNewsIdx] : newsData.flatMap(category => category.news.filter(newsItem => newsItem.company === subscriptions[curCategoryIdx]))[0];
+            dataType === 'subscribe' && subscriptions.length === 0 ? showInformation() : displayNews(news);
+            updateBtnVisibility(prevCategoryType, curCategoryIdx, curNewsIdx, newsData);
+            updateCategoryDisplay(curCategoryIdx, prevCategoryType, newsData, curNewsIdx);
             startProgressBar(); // 첫 데이터 로드 후 프로그래스바 시작
         })
         .catch(error => {
             console.error(error);
         });
     } else {
-        dataType === 'subscribe' && subscriptions.length === 0 ? showInformation() :displayNews(dataType);
-        updateBtnVisibility();
-        updateCategoryDisplay();
+        let news = dataType === 'all' ? newsData[curCategoryIdx].news[curNewsIdx] : newsData.flatMap(category => category.news.filter(newsItem => newsItem.company === subscriptions[curCategoryIdx]))[0];
+        dataType === 'subscribe' && subscriptions.length === 0 ? showInformation() : displayNews(news);
+        updateBtnVisibility(prevCategoryType, curCategoryIdx, curNewsIdx, newsData);
+        updateCategoryDisplay(curCategoryIdx, prevCategoryType, newsData, curNewsIdx);
         startProgressBar(); // 데이터 갱신 후 프로그래스바 시작
     }
 
 }
 
-export const showInformation = () => {
-    document.querySelector('.news-container').classList.add('hidden');
-    document.querySelector('.info').classList.remove('hidden');
-}
-;
-
-const showNews = () => {
-    document.querySelector('.news-container')?.classList.remove('hidden');
-    document.querySelector('.info').classList.add('hidden');
-
-}
-/* 현재 카테고리의 뉴스 정보로 div 생성하는 함수 */
-function displayNews(dataType) {
-
-    const theme = getTheme();
-
-    subscriptions = getSubscriptionList().reverse();
-
-    showNews();
-
-    const mainNewsDiv = document.querySelector('.main-news');
-    const subNewsDiv = document.querySelector('.sub-news');
-
-    mainNewsDiv.innerHTML = '';
-    subNewsDiv.innerHTML = '';
-
-    const news = dataType === 'all' ?  newsData[curCategoryIdx].news[curNewsIdx] : newsData.flatMap(category => category.news.filter(newsItem => newsItem.company === subscriptions[curCategoryIdx]))[0];
-    const subscribeBtn = document.querySelector('.subscribe-btn');
-
-
-    if(subscriptions.includes(news.company)) {
-        subscribeBtn.classList.add('my-subscribe');
-        subscribeBtn.textContent = 'x';
-    } else {
-        subscribeBtn.classList.remove('my-subscribe');
-        subscribeBtn.textContent = '+ 구독하기';
-    }
-
-    document.getElementById('logo').src = theme === 'light' ? news.logoUrl : news.logoUrl.replace(/\.[^/.]+$/, "") + '_dark.png';
-    document.getElementById('logo').alt = news.company;
-    document.querySelector('.edit-date').textContent = `${news.date} 편집`;
-
-    const thummnailImg = document.createElement('img');
-    thummnailImg.src = news.thumbnailUrl;
-    thummnailImg.classList.add('thumbnail-img');
-    const thumbnailNews = document.createElement('div');
-    thumbnailNews.textContent = news.newsItems[0].title;
-
-    mainNewsDiv.appendChild(thummnailImg);
-    mainNewsDiv.appendChild(thumbnailNews);
-
-    if(mainEventHandler) mainNewsDiv.removeEventListener('click', mainEventHandler);
-
-    mainEventHandler = () => {
-        window.open(news.newsItems[0].url, '_blank');
-    };
-
-    mainNewsDiv.addEventListener('click', mainEventHandler);
-
-    news.newsItems.slice(1).forEach(n => {
-        const newsItemDiv = document.createElement('div');
-        newsItemDiv.classList.add('sub-news-item');
-        newsItemDiv.textContent = n.title;
-        newsItemDiv.addEventListener('click', () => {
-            window.open(n.url, '_blank');
-        });
-
-        subNewsDiv.appendChild(newsItemDiv);
-    });
-
-    const explanationDiv = document.createElement('div');
-    explanationDiv.classList.add('explanation');
-    explanationDiv.textContent = `${news.company} 언론사에서 직접 편집한 뉴스 입니다.`;
-    subNewsDiv.appendChild(explanationDiv);
-
-    resetProgressBar();
-}
-
-function updateCategoryDisplay() {
-    const categoryItems = document.querySelectorAll('.category-item');
-    categoryItems.forEach((item, index) => {
-        // 기존의 인덱스 요소 제거
-        const existingIndexElement = prevCategoryType === 'all' ? item.querySelector('.index-text') : item.querySelector('.arrow-icon');
-        if (existingIndexElement) {
-            existingIndexElement.remove();
-        }
-
-        if(prevCategoryType === 'all') {
-            // 새로운 인덱스 요소 생성 및 추가
-            const textElement = document.createElement('span');
-            textElement.classList.add('index-text');
-
-            if (index === curCategoryIdx) {
-                textElement.textContent = `${curNewsIdx + 1} / ${newsData[curCategoryIdx].news.length}`;
-                item.classList.add('selected-category'); 
-            } else {
-                item.classList.remove('selected-category'); 
-            }
-
-            item.appendChild(textElement);
-        }
-        else {
-            const imgElement = document.createElement('img');
-            imgElement.classList.add('arrow-icon');
-            if (index === curCategoryIdx) {
-                imgElement.src = './src/icons/chevron-right.svg';
-                imgElement.style.display = 'block';
-                item.classList.remove('selected-category'); 
-            } else {
-                item.classList.remove('selected-category'); 
-            }
-            item.appendChild(imgElement);
-        }
-    });
-}
-
-/* 프로그래스바 삭제 */
-function resetProgressBar() {
-    clearTimeout(progressBarTimeout);
-    const categoryItems = document.querySelectorAll('.category-item');
-    categoryItems.forEach(item => {
-        item.classList.remove('selected');
-        const progressBarDivElement = item.querySelector('.progress-bar');
-        if(progressBarDivElement) {
-            progressBarDivElement.remove();
-        }
-    });
-    showCategory(curCategoryIdx);
-    updateProgressBar();
-}
-
-/* 프로그래스바 생성 */
-function updateProgressBar() {
-    const categoryItems = document.querySelectorAll('.category-item');
-    const selectedDiv = categoryItems[curCategoryIdx];
-
-    const progressBarDivElement = document.createElement('div');
-    progressBarDivElement.classList.add('progress-bar');
-    selectedDiv.appendChild(progressBarDivElement);
-
-    progressBarDivElement.style.animation = `progressAnimation ${intervalTime / 1000}s linear forwards`;
-}
 
 function startProgressBar() {
     clearTimeout(progressBarTimeout);
@@ -259,40 +123,27 @@ function startProgressBar() {
                 curNewsIdx = 0;
             }
         }
-        updateBtnVisibility();
+        updateBtnVisibility(prevCategoryType, curCategoryIdx, curNewsIdx, newsData);
         loadCurrentCategoryNews(prevCategoryType);
-    }, intervalTime);
+    }, 20000);
 }
 
-function showCategory(index) {
-    const parentDiv = document.querySelector('.list-view-header');
-    const selectedDiv = parentDiv.children[index];
-    selectedDiv.classList.add('selected');
+/* 프로그래스바 삭제 */
+export function resetProgressBar() {
+    clearTimeout(progressBarTimeout);
+    const categoryItems = document.querySelectorAll('.category-item');
+    categoryItems.forEach(item => {
+        item.classList.remove('selected');
+        const progressBarDivElement = item.querySelector('.progress-bar');
+        if(progressBarDivElement) {
+            progressBarDivElement.remove();
+        }
+    });
+    showCategory(curCategoryIdx);
+    updateProgressBar(curCategoryIdx);
 }
 
-function updateBtnVisibility() {
-    const leftBtn = document.querySelector('.left-btn');
-    const rightBtn = document.querySelector('.right-btn');
 
-    if(prevCategoryType === 'subscribe' || curNewsIdx === 0 ) {
-        leftBtn.style.display = "none";
-    }
-    else {
-        leftBtn.style.display = "block";
-    }
-
-    if(prevCategoryType === 'subscribe') {        
-        rightBtn.style.display = "none";
-        return;
-    }
-        
-    if(curNewsIdx === newsData[curCategoryIdx].news.length-1) {
-        rightBtn.style.display = "none";
-    }
-    else {
-        rightBtn.style.display = "block";
-    }
-}
 
 export const initializeArrowBtn = () => {
     const leftBtn = document.querySelector('.left-btn.list');
@@ -302,7 +153,7 @@ export const initializeArrowBtn = () => {
         if(curNewsIdx > 0) {
             curNewsIdx--;
             resetProgressBar();
-            updateBtnVisibility();
+            updateBtnVisibility(prevCategoryType, curCategoryIdx, curNewsIdx, newsData);
             loadCurrentCategoryNews(prevCategoryType);
         }
     });
@@ -311,22 +162,13 @@ export const initializeArrowBtn = () => {
         if(curNewsIdx < newsData[curCategoryIdx].news.length - 1) {
             curNewsIdx++;
             resetProgressBar();
-            updateBtnVisibility();
+            updateBtnVisibility(prevCategoryType, curCategoryIdx, curNewsIdx, newsData);
             loadCurrentCategoryNews(prevCategoryType);
         }
     });
 
 }
 
-export function initalizeHeaderScroll() {
-    const header = document.querySelector('.list-view-header');
-
-    header.addEventListener('wheel', (event) => {
-        if (event.deltaY === 0) return;
-        event.preventDefault();
-        header.scrollLeft += event.deltaY;
-});
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     if(!document.querySelector('.list-view-container')) return;
