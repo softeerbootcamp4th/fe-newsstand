@@ -235,7 +235,6 @@ export const addHoverUnderlineEventListener = () => {
         a.addEventListener('mouseout', () => a.classList?.remove('a-underline'));
     })
     document.querySelector('.thumbnail-part').addEventListener('mouseover', function() {
-        console.log(this)
         this.querySelector('p').classList?.add('p-underline');
     })
     document.querySelector('.thumbnail-part').addEventListener('mouseout', function() {

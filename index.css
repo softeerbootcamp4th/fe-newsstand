@@ -1,3 +1,10 @@
+@import url('./css/alert.css');
+@import url('./css/arrow.css');
+@import url('./css/articleList.css');
+@import url('./css/header.css');
+@import url('./css/newsBar.css');
+@import url('./css/snackBar.css');
+
 a {
     text-decoration: none;
     color: inherit;
