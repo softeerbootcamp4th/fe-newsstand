@@ -45,7 +45,7 @@ export const categoryData = {
 
 export const mediaData = {
   media1: {
-    media: "언론사1",
+    media: "데일리안",
     logoUrl: "../resources/asset 1 1.png",
     news: [
       "경제 성장률, 기대 이상의 상승",
@@ -57,7 +57,7 @@ export const mediaData = {
     ],
   },
   media2: {
-    media: "언론사2",
+    media: "해럴드경제",
     logoUrl: "../resources/asset 2 1.png",
 
     news: [

@@ -8,9 +8,11 @@ import {
   updateNavElements,
   updateCategoryByIndex,
   updateMyMedia,
+  startMyNewsInterval,
 } from "./nav.js";
 import state from "../../global/state.js";
 import { updateGridContent } from "../../grid/grid.js";
+import { stopInterval } from "../../global/interval.js";
 
 const leftButton = document.querySelector(".leftButton");
 const rightButton = document.querySelector(".rightButton");
@@ -24,6 +26,7 @@ rightButton.addEventListener("click", () => moveNextMedia(state));
  */
 function movePrevMedia(state) {
   if (state.headerShow === 0) {
+    stopInterval();
     resetCover();
 
     const newState =
@@ -38,6 +41,8 @@ function movePrevMedia(state) {
     state.headerCategory === 0
       ? updateCategoryByIndex(state.currentCategoryIndex)
       : updateMyMedia(state.currentCategoryIndex);
+
+    state.headerCategory === 0 ? startNewsInterval() : startMyNewsInterval();
   } else if (state.headerShow === 1) {
     if (state.headerCategory === 0) {
       let index = state.currentCategoryIndex - 1;
@@ -61,6 +66,7 @@ function movePrevMedia(state) {
  */
 function moveNextMedia(state) {
   if (state.headerShow === 0) {
+    stopInterval();
     resetCover();
 
     const newState =
@@ -75,6 +81,8 @@ function moveNextMedia(state) {
     state.headerCategory === 0
       ? updateCategoryByIndex(state.currentCategoryIndex)
       : updateMyMedia(state.currentCategoryIndex);
+
+    state.headerCategory === 0 ? startNewsInterval() : startMyNewsInterval();
   } else if (state.headerShow === 1) {
     if (state.headerCategory === 0) {
       let index =

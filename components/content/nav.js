@@ -248,7 +248,7 @@ export function updateNavElements(navElementNodes) {
 /**
  * newsList interval 시작 함수
  */
-function startNewsInterval() {
+export function startNewsInterval() {
   const navElementNodes = document.querySelectorAll(".contentList li");
   startInterval(
     "news",
@@ -263,7 +263,7 @@ function startNewsInterval() {
 /**
  * myList interval 시작 함수
  */
-function startMyNewsInterval() {
+export function startMyNewsInterval() {
   const navElementNodes = document.querySelectorAll(".contentList li");
   startInterval(
     "my",
