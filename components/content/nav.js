@@ -268,6 +268,7 @@ function startMyNewsInterval() {
     "my",
     navElementNodes,
     state,
+    null,
     updateNavElements,
     updateMyNewsList
   );

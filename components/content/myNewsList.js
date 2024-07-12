@@ -38,7 +38,7 @@ function createFooterElement(container, media) {
  */
 export function updateMyNewsList(currentCategoryIndex) {
   const newsListContainer = deleteNodeById("newsList_container");
-  const mediaList = getMyDataAsArray().map((element) => element.media);
+  const mediaList = getMyDataAsArray();
 
   setMedia(mediaList, currentCategoryIndex);
 
@@ -59,5 +59,6 @@ export function updateMyNewsList(currentCategoryIndex) {
  */
 function setMedia(mediaList, mediaIndex) {
   const currentMedia = document.querySelector(".media");
-  currentMedia.innerHTML = mediaList[mediaIndex];
+  currentMedia.src = mediaList[mediaIndex].logoUrl;
+  currentMedia.alt = mediaList[mediaIndex].media;
 }

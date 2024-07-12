@@ -46,6 +46,7 @@ export const categoryData = {
 export const mediaData = {
   media1: {
     media: "언론사1",
+    logoUrl: "../resources/asset 1 1.png",
     news: [
       "경제 성장률, 기대 이상의 상승",
       "코로나19 백신 접종률, 예상을 웃도는 증가",
@@ -57,6 +58,8 @@ export const mediaData = {
   },
   media2: {
     media: "언론사2",
+    logoUrl: "../resources/asset 2 1.png",
+
     news: [
       "주식 시장 급락, 투자자들 불안 증가",
       "금리 인상 기대에 부동산 시장 영향",
@@ -68,6 +71,8 @@ export const mediaData = {
   },
   media3: {
     media: "언론사3",
+    logoUrl: "../resources/asset 3 1.png",
+
     news: [
       "5G 네트워크 확장 속도, 소비자 접근성 향상",
       "통신사들의 요금 인하 경쟁 가열",
@@ -79,6 +84,8 @@ export const mediaData = {
   },
   media4: {
     media: "언론사4",
+    logoUrl: "../resources/asset 4 1.png",
+
     news: [
       "새로운 방송 규제로 인한 업계 변화",
       "5G 기술의 새로운 활용 사례",
@@ -90,6 +97,8 @@ export const mediaData = {
   },
   media5: {
     media: "언론사5",
+    logoUrl: "../resources/asset 5 1.png",
+
     news: [
       "클라우드 기술의 혁신과 비즈니스 적용",
       "사물인터넷 기술의 새로운 시장 동향",
@@ -101,6 +110,8 @@ export const mediaData = {
   },
   media6: {
     media: "언론사6",
+    logoUrl: "../resources/asset 6 1.png",
+
     news: [
       "최신 모바일 애플리케이션 개발 동향",
       "IT 기술이 변화시키는 전통 산업의 혁신",
@@ -112,6 +123,8 @@ export const mediaData = {
   },
   media7: {
     media: "언론사7",
+    logoUrl: "../resources/asset 7 1.png",
+
     news: [
       "글로벌 경제 전망과 리스크 요인",
       "국제 금융 시장의 변동성 분석",
@@ -123,6 +136,8 @@ export const mediaData = {
   },
   media8: {
     media: "언론사8",
+    logoUrl: "../resources/asset 8 1.png",
+
     news: [
       "국제 정치의 핵심 이슈와 동향 분석",
       "국제 갈등 해결을 위한 외교 전략",
@@ -134,6 +149,8 @@ export const mediaData = {
   },
   media9: {
     media: "언론사9",
+    logoUrl: "../resources/asset 9 1.png",
+
     news: [
       "스포츠 이벤트의 최신 결과와 하이라이트",
       "올림픽 및 세계 스포츠 대회의 준비 상황",
@@ -145,6 +162,8 @@ export const mediaData = {
   },
   media10: {
     media: "언론사10",
+    logoUrl: "../resources/asset 10 1.png",
+
     news: [
       "스포츠 스타들의 인터뷰와 생각",
       "연예계의 신규 인재 발굴과 성장",
@@ -156,6 +175,8 @@ export const mediaData = {
   },
   media11: {
     media: "언론사11",
+    logoUrl: "../resources/asset 11 1.png",
+
     news: [
       "매거진의 최신 호 기사와 특집",
       "전문지의 특허와 기술 혁신 분석",
@@ -167,6 +188,8 @@ export const mediaData = {
   },
   media12: {
     media: "언론사12",
+    logoUrl: "../resources/asset 12 1.png",
+
     news: [
       "매거진의 비즈니스와 경영 전략 분석",
       "전문지의 산업별 트렌드와 전망",

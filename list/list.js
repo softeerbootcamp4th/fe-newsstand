@@ -2,12 +2,17 @@ import { deleteNav, generateNav } from "../components/content/nav.js";
 import { updateMyList } from "../resources/data.js";
 import { getTodayString, generateNode } from "../utils/utils.js";
 
+/**
+ * newsList 레이아웃 동적으로 생성
+ * @param {node} container
+ * @param {int} headerCategoryIndex
+ */
 export function generateListContent(container, headerCategoryIndex) {
   container.classList.remove("grid");
   container.classList.add("list");
 
   const divContentTitle = generateNode("div", "content_title");
-  const pMedia = generateNode("p", "media");
+  const pMedia = generateNode("img", "media");
   const pDate = generateNode("p", "date");
   pDate.textContent = getTodayString();
 
@@ -45,6 +50,7 @@ export function generateListContent(container, headerCategoryIndex) {
   updateMyList();
 }
 
+// 더미 데이터
 const sampleNewsData = {
   thumbnailUrl: "../resources/Thumbnail.png",
   title: "이미지 뉴스 제목",

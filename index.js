@@ -1,7 +1,7 @@
 import { generateBanner } from "../components/banner/newsBanner.js";
 import { headlineData } from "../resources/data.js";
 import { startBannerInterval } from "../global/interval.js";
-import { setupHeader } from "../components/content_header/header.js";
+import { setupHeader } from "../components/header/header.js";
 import { generateListContent } from "./list/list.js";
 import { deleteNodeById } from "./utils/utils.js";
 import { generateGridContent } from "./grid/grid.js";

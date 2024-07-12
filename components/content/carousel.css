@@ -1,0 +1,20 @@
+.leftButton {
+  position: absolute;
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.rightButton {
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.leftButton,
+.rightButton {
+  border: 0;
+  background-color: white;
+  font-size: 50px;
+}

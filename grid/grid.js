@@ -97,6 +97,5 @@ function addSubscribeEventToGrid() {
 //지금 자료의 형태가 매우 좋지 못함,, 확장성이 없음
 function subscribeCallBack(target) {
   if (target.tagName === "BUTTON") {
-    console.log(target);
   }
 }

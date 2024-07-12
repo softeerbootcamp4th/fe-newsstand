@@ -1,4 +1,6 @@
 @import "./global/global.css";
+@import "./components/header/header.css";
 @import "./components/banner/newsBanner.css";
+@import "./components/content/carousel.css";
 @import "./list/list.css";
 @import "./grid/grid.css";

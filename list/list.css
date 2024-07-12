@@ -11,26 +11,6 @@ body {
 .wrapper {
   max-width: 930px;
 }
-
-.header_title {
-  margin: 30px 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 6px;
-}
-
-.today {
-  margin-left: auto;
-  color: #879298;
-}
-
-#banner_container {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
-
 .header_selected {
   display: flex;
   flex-direction: row;
@@ -67,25 +47,6 @@ main {
   position: relative;
 }
 
-.leftButton {
-  position: absolute;
-  left: -50px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.rightButton {
-  position: absolute;
-  right: -50px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.leftButton,
-.rightButton {
-  border: 0;
-  background-color: white;
-  font-size: 50px;
-}
-
 #content_wrapper {
   display: flex;
   flex-direction: column;
@@ -105,6 +66,10 @@ main {
   height: 24px;
   margin-bottom: 12px;
   gap: 16px;
+}
+
+.content_title img {
+  margin-bottom: 1px;
 }
 
 .media {
