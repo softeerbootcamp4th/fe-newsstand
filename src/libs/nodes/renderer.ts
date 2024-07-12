@@ -10,7 +10,7 @@ export type AppChild =
   | null
   | undefined;
 
-export type AppRender<P = any, R = object> = (props: P) => R;
+export type AppRender<P = object, R = object> = (props: P) => R;
 export type AppElementProps<T extends HTMLElement = HTMLElement> =
   Partial<EventHandlers> &
     Omit<Partial<T>, "children" | "style"> & {
@@ -38,7 +38,7 @@ export type RenderingAppElement<T extends HTMLElement = HTMLElement> =
     forced: boolean;
   };
 
-export interface CreatedAppComponent<P = object, R = unknown> {
+export interface CreatedAppComponent<P = object, R = object> {
   render: (
     props: P,
   ) =>

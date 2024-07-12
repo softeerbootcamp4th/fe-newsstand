@@ -14,7 +14,7 @@ import {
 import { isPropsEqual } from "./utils";
 
 export let currentKey: string = "";
-let initComponent: AppComponent | null = null;
+let initComponent: AppComponent<object, object> | null = null;
 let _root: HTMLElement | null = null;
 export let isRendering = false;
 export const updateQueue = new Deque<() => void>();
@@ -209,7 +209,7 @@ export const render = () =>
     afterRender();
   });
 
-export const init = (app: AppComponent, root: HTMLElement) => {
+export const init = (app: AppComponent<object, object>, root: HTMLElement) => {
   initComponent = app;
   _root = root;
   addRootEvent(root);
