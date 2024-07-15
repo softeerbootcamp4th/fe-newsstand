@@ -1,14 +1,17 @@
+import { renderNews } from "./renderNews.js";
+import { rollingNews } from "./rollingnews.js";
+
+const intervalTime = 5000;
 let leftIndex = 0;
 let rightIndex = 0;
-const intervalTime = 5000;
-
 let leftTimer;
 let rightTimer;
-
 let leftNews = [];
 let rightNews = [];
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => fetchData());
+
+function fetchData () {
   const leftNewsContainer = document.querySelector(".news-container-left");
   const rightNewsContainer = document.querySelector(".news-container-right");
 
@@ -58,70 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => {
       console.error("Fetch error:", error);
     });
-});
 
-// 뉴스 아이템 생성 함수
-function createNewsItem(news, classname = "") {
-  const newsItem = document.createElement("div");
-  newsItem.classList.add("news-item", classname);
-  newsItem.insertAdjacentHTML(
-    "afterbegin",
-    `
-    <span class="news-company">${news.company}</span>
-    <p class="news-title">${news.title}</p>
-  `
-  );
-  newsItem.setAttribute("data-url", news.url);
-  newsItem.addEventListener("click", () => {
-    window.open(news.url, "_blank");
-  });
 
-  return newsItem;
 }
+
 
 function createInterval(container, news, index, type) {
   return setInterval(() => {
     if (type === 'left') {
-      leftIndex = rollingNews(container, news, leftIndex);
+      leftIndex = rollingNews(container, news, index);
     } else {
-      rightIndex = rollingNews(container, news, rightIndex);
+      rightIndex = rollingNews(container, news, index);
     }
   }, intervalTime);
 }
 
-function renderNews(container, news, index) {
-  container.innerHTML = "";
-  const newsItem = createNewsItem(news[index], "show");
-  const nextNewsItem = createNewsItem(
-    news[(index + 1) % news.length],
-    "hidden"
-  );
-  container.appendChild(newsItem);
-  container.appendChild(nextNewsItem);
-}
 
-function rollingNews(container, news, index) {
-  const curNewsItem = container.querySelector(".news-item.show");
-  const nextNewsItem = container.querySelector(".news-item.hidden");
-
-  if (curNewsItem) {
-    curNewsItem.classList.remove("show");
-    curNewsItem.classList.add("exit");
-  }
-
-  if (nextNewsItem) {
-    nextNewsItem.classList.remove("hidden");
-    nextNewsItem.classList.add("show");
-  }
-
-  setTimeout(() => {
-    if (curNewsItem) curNewsItem.remove();
-    const newNewsItem = createNewsItem(
-      news[(index + 2) % news.length],
-      "hidden"
-    );
-    container.appendChild(newNewsItem);
-  }, 1000);
-
-  return (index + 1) % news.length;
-}

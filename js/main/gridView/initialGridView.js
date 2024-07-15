@@ -1,5 +1,5 @@
-import { initializeGridViewContainer } from "./displaygridViewnews.js";
-import { handleClickTab } from "./toggleView.js";
+import { initializeGridViewContainer } from "../../common/init.js";
+import { handleClickTab } from "../toggleView.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const mainHeader = document.querySelector('.main-header');
