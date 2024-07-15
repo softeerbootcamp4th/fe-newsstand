@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="../style/index.css" />
+  <link rel="stylesheet" type="text/css" href="./style/index.css" />
   <title>뉴스</title>
 
 <body>
   <div class="page">
     <header class="header">
       <div>
-        <img src="../img/newspaper.png" alt="뉴스스탠드" class="newspaper" />
+        <img src="./img/newspaper.png" alt="뉴스스탠드" class="newspaper" />
 
         <span>뉴스스탠드</span>
       </div>
@@ -54,14 +54,13 @@
         <span class="my">내가 구독한 언론사</span>
       </div>
 
-      <div>
-        <img class="list-view" src="../img/list-view.png" alt="리스트 토글" />
-        <img src="../img/grid-view.png" alt="그리드 토글" />
+      <div class="view-toggle">
+        <img class="list-button" src="./img/list-view.png" alt="리스트 토글" />
+        <img class="grid-button" src="./img/grid-view.png" alt="그리드 토글" />
       </div>
     </div>
 
     <div class="newsgroup">
-
     </div>
 
     <div class="paper">
@@ -84,8 +83,8 @@
           </div>
         </div>
 
-        <img class="leftscroll" src="../img/LeftButton.png" alt="왼쪽스크롤">
-        <img class="rightscroll" src="../img/RightButton.png" alt="오른쪽스크롤">
+        <img class="leftscroll" src="./img/LeftButton.png" alt="왼쪽스크롤">
+        <img class="rightscroll" src="./img/RightButton.png" alt="오른쪽스크롤">
 
         <div class="snackbar">
           내가 구독한 언론사에 추가되었습니다.
@@ -107,12 +106,19 @@
       </div>
 
       <div class="no-news">
-        구독한 언론사 또는 뉴스가 없습니다.
+        <img src="./img/danger.png">
+        <span>구독한 언론사 또는 뉴스가 없습니다.</span>
+      </div>
+    </div>
+
+    <div class="grid-view">
+      <div class="cell">
+        언론사
       </div>
     </div>
   </div>
 
-  <script src="../src/index.js" type="module"></script>
+  <script src="./src/index.js" type="module"></script>
 </body>
 </head>
 

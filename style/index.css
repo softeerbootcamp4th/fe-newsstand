@@ -6,11 +6,9 @@
   max-width: 930px;
   margin-left: auto;
   margin-right: auto;
-  /* border: solid red; */
 }
 
 .header {
-  /* border: solid black; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,7 +98,7 @@
   color: black;
 }
 
-.toggle .list-view {
+.toggle .list-button {
   filter: invert(44%) sepia(40%) saturate(1022%) hue-rotate(190deg) brightness(83%) contrast(98%);
 }
 
@@ -111,6 +109,9 @@
   align-items: center;
   color: #879298;
   height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  user-select: none;
 }
 
 .newsgroup div {
@@ -171,6 +172,12 @@
   border-radius: 12px;
   padding-left: 6px;
   padding-right: 6px;
+}
+
+.paper .subscribe-bar button:hover {
+  background-color: white;
+  color: #4B5966;
+  border: #6E8091 1px solid;
 }
 
 .paper .subscribe-bar button:active {
@@ -250,7 +257,7 @@
   cursor: pointer;
 }
 
-.paper .snackbar {
+.snackbar {
   color: white;
   font-size: 16px;
   background-color: #4362D0;
@@ -265,7 +272,7 @@
   transform: translate(-50%, -50%);
 }
 
-.paper .unsubscribe-alert {
+.unsubscribe-alert {
   width: 320px;
   background-color: white;
   position: absolute;
@@ -276,7 +283,7 @@
   display: none;
 }
 
-.paper .unsubscribe-alert .up {
+.unsubscribe-alert .up {
   height: 92px;
   display: flex;
   flex-direction: column;
@@ -286,18 +293,18 @@
   font-size: 16px;
 }
 
-.paper .unsubscribe-alert .up .company-name {
+.unsubscribe-alert .up .company-name {
   color: black;
   font-weight: bold;
 }
 
-.paper .unsubscribe-alert .down {
+.unsubscribe-alert .down {
   background-color: #F5F7F9;
   border-top: 1px solid #D2DAE0;
   display: flex;
 }
 
-.paper .unsubscribe-alert .down div {
+.unsubscribe-alert .down div {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -307,15 +314,76 @@
   color: #14212B;
 }
 
-.paper .unsubscribe-alert .down div:hover {
+.unsubscribe-alert .down div:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.paper .unsubscribe-alert .down .unsubscribe-yes {
+.unsubscribe-alert .down .unsubscribe-yes {
   border-right: 1px solid #D2DAE0;
 }
 
 .paper .no-news {
   display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  color: #879298;
+}
+
+.paper .no-news img {
+  height: 150px;
+  width: 150px;
+}
+
+.grid-view {
+  border-top: solid #D2DAE0 1px;
+  border-left: solid #D2DAE0 1px;
+  height: 388px;
+  position: relative;
+  display: none;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.grid-view .cell {
+  border-right: solid #D2DAE0 1px;
+  border-bottom: solid #D2DAE0 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-view .cell:hover {
+  background-color: #F5F7F9;
+}
+
+.grid-view .cell button {
+  display: none;
+  background-color: #F5F7F9;
+  border: #D2DAE0 1px solid;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  height: 24px;
+  min-width: 24px;
+  color: #879298;
+  border-radius: 12px;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.grid-view .cell button:hover {
+  background-color: white;
+  color: #4B5966;
+  border: #6E8091 1px solid;
+  cursor: pointer;
+}
+
+.grid-view .cell button:active {
+  color: white;
+  background-color: #7890E7;
+  border: 1px solid #4362D0;
 }
