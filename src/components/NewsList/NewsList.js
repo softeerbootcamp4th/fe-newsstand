@@ -2,7 +2,7 @@ import "./NewsList.css";
 import EmptyListViewer from "@/components/NewsList/EmptyListViewer/EmptyListViewer";
 import ListViewer from "@/components/NewsList/ListViewer/ListViewer";
 import { getSubscribedCompanies } from "@/data/storageHandler";
-import { getSVGTemplate } from "../SVG/SVG";
+import { getSVGTemplate } from "@/components/common/SVG/SVG";
 import GridViewer from "@/components/NewsList/GridViewer/GridViewer";
 
 function NewsList({ $target, position = "beforeend" }) {
@@ -12,7 +12,7 @@ function NewsList({ $target, position = "beforeend" }) {
 
   this.state = {
     companyFilterIndex: 0,
-    viewTypeFilterIndex: 0,
+    viewTypeFilterIndex: 1,
   };
 
   this.render(this.state.companyFilterIndex);
@@ -29,7 +29,7 @@ NewsList.prototype.setState = function ({ companyFilterIndex, viewTypeFilterInde
 };
 
 NewsList.prototype.changeTab = function (companyFilterIndex, tabIndex) {
-  this.state = { companyFilterIndex };
+  this.state.companyFilterIndex = companyFilterIndex;
 
   this.render(tabIndex);
 };
@@ -51,7 +51,9 @@ NewsList.prototype.handleClick = function (event) {
   }
 };
 
-NewsList.prototype.render = function (tabIndex) {
+NewsList.prototype.render = function (tabIndex = 0) {
+  const { companyFilterIndex, viewTypeFilterIndex } = this.state;
+
   this.$element.innerHTML = /* html */ `
     <section class="filterSection">
       <ul class="newsFilter">
@@ -59,7 +61,7 @@ NewsList.prototype.render = function (tabIndex) {
           .map(
             (value, idx) => /* html */ `
             <li data-tab-number="${idx}" class="filterTab${
-              idx === this.state.companyFilterIndex ? " selected" : ""
+              idx === companyFilterIndex ? " selected" : ""
             }">${value}</li>
           `
           )
@@ -70,7 +72,7 @@ NewsList.prototype.render = function (tabIndex) {
             .map(
               (iconId, idx) => /* html */ `
               <li data-tab-number="${idx}" class="filterTab${
-                idx === this.state.viewTypeFilterIndex ? " selected" : ""
+                idx === viewTypeFilterIndex ? " selected" : ""
               }">
               ${getSVGTemplate({ iconId })}</li>
             `
@@ -80,10 +82,10 @@ NewsList.prototype.render = function (tabIndex) {
     </section>
   `;
 
-  const companyFilter = this.state.companyFilterIndex === 0 ? "category" : "company";
-  const viewTypeFilter = this.state.viewTypeFilterIndex === 0 ? "list" : "grid";
+  const companyFilter = companyFilterIndex === 0 ? "category" : "company";
+  const viewTypeFilter = viewTypeFilterIndex === 0 ? "list" : "grid";
 
-  if (this.state.companyFilterIndex === 1 && getSubscribedCompanies().length < 1) {
+  if (companyFilterIndex === 1 && getSubscribedCompanies().length < 1) {
     new EmptyListViewer({ $target: this.$element });
 
     return;
@@ -101,7 +103,11 @@ NewsList.prototype.render = function (tabIndex) {
   }
 
   if (viewTypeFilter === "grid") {
-    new GridViewer({ $target: this.$element });
+    new GridViewer({
+      $target: this.$element,
+      filter: companyFilter,
+      changeTab: this.changeTab.bind(this),
+    });
   }
 };
 

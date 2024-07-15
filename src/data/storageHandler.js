@@ -1,22 +1,26 @@
 export const SUBSCRIBE_COMPANIES_LOCAL_STORAGE_KEYS = "subscribe_companies";
 
-export function addCompany(company) {
+export function addCompany({ id, company, lightLogo, darkLogo }) {
   const companies = getSubscribedCompanies();
+  const idSet = new Set(companies.map(({ id }) => Number(id)));
 
-  companies.push(company);
+  if (idSet.has(Number(id))) {
+    console.error("이미 구독한 언론사입니다.");
 
-  const companySet = new Set(companies);
+    return;
+  }
 
-  localStorage.setItem(
-    SUBSCRIBE_COMPANIES_LOCAL_STORAGE_KEYS,
-    JSON.stringify(Array.from(companySet))
-  );
+  companies.push({ id: Number(id), company, lightLogo, darkLogo });
+
+  localStorage.setItem(SUBSCRIBE_COMPANIES_LOCAL_STORAGE_KEYS, JSON.stringify(companies));
 }
 
-export function removeCompany(company) {
+export function removeCompany({ id }) {
   const companies = getSubscribedCompanies();
 
-  const updatedCompanies = companies.filter((name) => name !== company);
+  const updatedCompanies = companies.filter(
+    ({ id: companyId }) => Number(companyId) !== Number(id)
+  );
 
   localStorage.setItem(SUBSCRIBE_COMPANIES_LOCAL_STORAGE_KEYS, JSON.stringify(updatedCompanies));
 }
@@ -35,8 +39,8 @@ export function getSubscribedCompanies() {
   }
 }
 
-export function isSubscribeCompany(company) {
+export function isSubscribeCompany(companyId) {
   const companies = getSubscribedCompanies();
 
-  return companies.includes(company);
+  return companies.some(({ id }) => Number(id) === Number(companyId));
 }

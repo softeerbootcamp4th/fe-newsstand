@@ -5,7 +5,7 @@ import ContentsBox from "@/components/NewsList/ListViewer/ContentsBox/ContentsBo
 import { addCompany, getSubscribedCompanies, removeCompany } from "@/data/storageHandler";
 import { CATEGORIES } from "@/data/constants";
 import { getNews } from "@/apis/news";
-import { getSVGTemplate } from "@/components/SVG/SVG";
+import { getSVGTemplate } from "@/components/common/SVG/SVG";
 import { shuffleArray } from "@/utils/array";
 
 function ListViewer({
@@ -55,16 +55,18 @@ ListViewer.prototype.loadNews = async function (tab, page) {
   if (this.props.filter === "category") {
     const news = await getNews({ category: tab });
 
-    const shuffledNews = shuffleArray(news);
+    // const shuffledNews = shuffleArray(news);
+    const shuffledNews = news;
 
     this.setState({ tab, page, news: shuffledNews, tabs: CATEGORIES });
   }
 
   if (this.props.filter === "company") {
     const companies = getSubscribedCompanies();
-    const news = await getNews({ company: companies[tab] });
+    const tabs = companies.map(({ company }) => company);
+    const news = await getNews({ companyId: companies[tab].id });
 
-    this.setState({ tab, page, news, tabs: companies });
+    this.setState({ tab, page, news, tabs });
   }
 
   this.initializeProgress();
@@ -135,7 +137,7 @@ ListViewer.prototype.nextPage = function () {
     return;
   }
 
-  this.loadNews(this.state.tab, nextPage);
+  this.setState({ page: nextPage });
 };
 
 ListViewer.prototype.prevPage = function () {
@@ -147,7 +149,7 @@ ListViewer.prototype.prevPage = function () {
     return;
   }
 
-  this.loadNews(this.state.tab, prevPage);
+  this.setState({ page: prevPage });
 };
 
 ListViewer.prototype.nextTab = function () {
@@ -174,8 +176,8 @@ ListViewer.prototype.prevTab = function () {
   this.loadNews(prevTab, this.state.news.length - 1);
 };
 
-ListViewer.prototype.unsubscribeCompany = function (company) {
-  removeCompany(company);
+ListViewer.prototype.unsubscribeCompany = function ({ id, company }) {
+  removeCompany({ id, company });
 
   if (this.props.filter === "company") {
     if (getSubscribedCompanies().length < 1) {
@@ -194,8 +196,8 @@ ListViewer.prototype.unsubscribeCompany = function (company) {
   }
 };
 
-ListViewer.prototype.subscribeCompany = function (company) {
-  addCompany(company);
+ListViewer.prototype.subscribeCompany = function ({ id, company, lightLogo, darkLogo }) {
+  addCompany({ id, company, lightLogo, darkLogo });
 
   const tabLength = getSubscribedCompanies().length;
 

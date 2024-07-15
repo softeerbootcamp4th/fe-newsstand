@@ -41,12 +41,10 @@ function ContentsBox({
 
     SnackBar: new SnackBar({
       $target: this.$element,
-      text: "내가 구독한 언론사에 추가되었습니다.",
     }),
 
     UnsubscribeAlert: new UnsubscribeAlert({
       $target: this.$element,
-      company: news.company,
       onConfirm: this.handleUnsubscribe.bind(this),
     }),
   };
@@ -55,16 +53,20 @@ function ContentsBox({
 }
 
 ContentsBox.prototype.handleSubscribeButtonClick = function () {
-  this.props.onSubscribeCompany(this.props.news.company);
+  const { id, company, lightLogo, darkLogo } = this.props.news;
 
-  this.components.SnackBar.show();
+  this.props.onSubscribeCompany({ id, company, lightLogo, darkLogo });
+
+  this.components.SnackBar.show({ text: "내가 구독한 언론사에 추가되었습니다." });
   this.showUnsubscribeButton();
 };
 
 ContentsBox.prototype.handleUnsubscribe = function () {
-  this.props.onUnsubscribeCompany(this.props.news.company);
+  const { id, company } = this.props.news;
 
-  this.components.UnsubscribeAlert.show();
+  this.props.onUnsubscribeCompany({ id, company });
+
+  this.components.UnsubscribeAlert.show(company);
   this.showSubscribeButton();
 };
 
@@ -79,7 +81,7 @@ ContentsBox.prototype.showUnsubscribeButton = function () {
 };
 
 ContentsBox.prototype.showUnsubscribeAlert = function () {
-  this.components.UnsubscribeAlert.show();
+  this.components.UnsubscribeAlert.show(this.props.news.company);
 };
 
 ContentsBox.prototype.formatDate = function formatDate(date) {
@@ -120,7 +122,7 @@ ContentsBox.prototype.render = function () {
 };
 
 ContentsBox.prototype.renderSubscribeButton = function () {
-  if (isSubscribeCompany(this.props.news.company)) {
+  if (isSubscribeCompany(this.props.news.id)) {
     this.showUnsubscribeButton();
 
     return;
