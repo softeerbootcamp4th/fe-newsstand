@@ -1,4 +1,4 @@
-import { dateFormatter } from "../utils/dateFormatter.js";
+import { dateFormatter } from "../../utils/dateFormatter.js";
 
 const id = "newstandTitle"
 function init() {

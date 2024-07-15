@@ -1,11 +1,15 @@
-import { NEWS } from "../data/data.js";
-import * as mainContent from "./mainContent/index.js";
-import * as mainContentSelector from "./mainContentSelector/index.js";
-import * as title from "./newsstandTitle/index.js";
+import * as mainContent from "./component/mainContent/index.js";
+import * as mainContentSelector from "./component/mainContentSelector/index.js";
+import * as title from "./component/newsstandTitle/index.js";
+import * as ticker from "./component/ticker/index.js";
 import { reducer, reducerInit } from "./reducer.js";
-import * as ticker from "./ticker/index.js";
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    const didLoadActions = {}
+    didLoadActions[ticker.id] = ticker.domDidLoad
+    didLoadActions[mainContent.id] = mainContent.domDidLoad
+
     const template = reducerInit(
         [
             title.actions,
@@ -13,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             mainContentSelector.actions,
             mainContent.actions
         ],
+        didLoadActions,
         title.init(),
         ticker.init(),
         mainContentSelector.init(),
@@ -21,14 +26,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.body.addEventListener('click', event => reducer.click(event), true)
     document.getElementById("newsstand").insertAdjacentHTML("afterbegin", template);
-    ticker.domDidLoad(NEWS)
-    mainContent.domDidLoad(NEWS)
+    reducer.loadComplete()
 });
 
 const stylesheets = [
-    "static/js/newsstandTitle/newstandTitle.css",
-    "static/js/ticker/ticker.css",
-    "static/js/mainContentSelector/mainContentSelector.css"
+    "static/js/component/newsstandTitle/newstandTitle.css",
+    "static/js/component/ticker/ticker.css",
+    "static/js/component/mainContentSelector/mainContentSelector.css"
 ];
 
 stylesheets.forEach(loadCSS);

@@ -1,4 +1,4 @@
-import { removeAllChild } from "../utils/removeAllChild.js";
+import { removeAllChild } from "../../utils/removeAllChild.js";
 
 function rollingNews(currentDom, futureDom, template) {
     removeAllChild(futureDom)
