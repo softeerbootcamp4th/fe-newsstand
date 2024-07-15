@@ -1906,25 +1906,6 @@ export const allNewsData = [
                     { id: 5, title: '제주특별자치도 지역 환경 보호를 위한 지속 가능한 발전 전략' },
                 ],
             },
-            {
-                id: 10,
-                companyId: 96,
-                companyIcon: '../../images/assets/company/company_ico_96.svg',
-                companyName: 'YTN사이언스',
-                updatedDate: '7월 29일 오전 11:00 직접 편집',
-                mainNews: {
-                    id: 96,
-                    src: 'https://picsum.photos/500/300?img=96',
-                    title: '강원도, 자연 경관 보존 및 관리 전략 발표',
-                },
-                news: [
-                    { id: 1, title: '강원도 지역 자연 생태 보전 및 보호 계획' },
-                    { id: 2, title: '강원도 지역 관광 산업과 자연 경관 보존을 위한 협력 계획' },
-                    { id: 3, title: '강원도 지역 산림 자원 관리 및 생태계 보호 계획' },
-                    { id: 4, title: '강원도 지역 생태 관광 및 관리 프로그램 확대 계획' },
-                    { id: 5, title: '강원도 지역 생태계를 보호하고 지역 경제 발전에 기여하는 전략' },
-                ],
-            },
         ],
     },
 ]

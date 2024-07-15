@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+export const autoRollingNews = () => {
     const newsItems = [
         "[속보] 미국, '중동 양자 정상 회담' 제안…이란, 긍정적 반응",
         "[속보] 日, 도쿄 올림픽 개막식 준비 완료…코로나19 예방 대책 강화",
@@ -10,22 +10,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let index1 = 0;
     let index2 = 0;
     let interval1, interval2;
-    let timeout1, timeout2;
 
     const changeNews = () => {
         const newsTitleShown = document.getElementById("newsTitleShown");
         const newsTitleHidden = document.getElementById("newsTitleHidden");
 
-        // 4.5초 후에 애니메이션 시작
-        timeout1 = setTimeout(() => {
-            newsTitleShown.classList.add('autoRolling');
-            newsTitleHidden.classList.add('autoRolling');
-        }, 4500);
+
+        newsTitleShown.classList.add("autoRolling");
+        newsTitleHidden.classList.add("autoRolling");
+
 
         // 5초 후에 텍스트 교체 및 클래스 초기화
-        interval1 = setTimeout(() => {
-            newsTitleShown.classList.remove('autoRolling');
-            newsTitleHidden.classList.remove('autoRolling');
+        setTimeout(() => {
+            newsTitleShown.classList.remove("autoRolling");
+            newsTitleHidden.classList.remove("autoRolling");
 
             // 교체할 텍스트 업데이트
             newsTitleShown.innerText = newsItems[(index1 + 1) % newsItems.length];
@@ -33,23 +31,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // index 업데이트
             index1 = (index1 + 1) % newsItems.length;
-        }, 5000);
-    }
+        }, 500);
+    };
 
     const changeSecondNews = () => {
         const newsTitleShown = document.getElementById("newsTitleShown2");
         const newsTitleHidden = document.getElementById("newsTitleHidden2");
 
-        // 4.5초 후에 애니메이션 시작
-        timeout2 = setTimeout(() => {
-            newsTitleShown.classList.add('autoRolling');
-            newsTitleHidden.classList.add('autoRolling');
-        }, 4500);
+
+        newsTitleShown.classList.add("autoRolling");
+        newsTitleHidden.classList.add("autoRolling");
+
 
         // 5초 후에 텍스트 교체 및 클래스 초기화
-        interval2 = setTimeout(() => {
-            newsTitleShown.classList.remove('autoRolling');
-            newsTitleHidden.classList.remove('autoRolling');
+        setTimeout(() => {
+            newsTitleShown.classList.remove("autoRolling");
+            newsTitleHidden.classList.remove("autoRolling");
 
             // 교체할 텍스트 업데이트
             newsTitleShown.innerText = newsItems[(index2 + 1) % newsItems.length];
@@ -57,25 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // index 업데이트
             index2 = (index2 + 1) % newsItems.length;
-        }, 5000);
-    }
+        }, 500);
+    };
 
     const startNewsInterval = () => {
-        changeNews();
-        interval1 = setInterval(changeNews, 5000);
-    }
+        interval1 = setInterval(changeNews, 4500);
+    };
 
     const startSecondNewsInterval = () => {
-        changeSecondNews();
-        interval2 = setInterval(changeSecondNews, 5000);
-    }
-
-    const stopNewsInterval = () => {
-        clearTimeout(timeout1);
-        clearTimeout(timeout2);
-        clearInterval(interval1);
-        clearInterval(interval2);
-    }
+        interval2 = setInterval(changeSecondNews, 4500);
+    };
 
     startNewsInterval();
 
@@ -87,16 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const ticker2 = document.querySelector("#ticker2");
 
     ticker1.addEventListener("mouseenter", () => {
-        clearTimeout(timeout1);
         clearInterval(interval1);
     });
 
-    //ticker1.addEventListener("mouseleave", startNewsInterval);
+    ticker1.addEventListener("mouseleave", startNewsInterval);
 
     ticker2.addEventListener("mouseenter", () => {
-        clearTimeout(timeout2);
         clearInterval(interval2);
     });
 
-    //ticker2.addEventListener("mouseleave", startSecondNewsInterval);
-});
+    ticker2.addEventListener("mouseleave", startSecondNewsInterval);
+};
