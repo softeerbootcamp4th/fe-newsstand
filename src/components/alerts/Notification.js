@@ -1,10 +1,10 @@
 import "./Alerts.css";
 
-function renderNotification(mediaName) {
+export default function Notification(mediaName) {
   return new Promise((resolve) => {
-    const container = document.querySelector('.container');
-    const confirmation = document.createElement('div');
-    confirmation.className = 'confirmation';
+    const container = document.querySelector(".container");
+    const confirmation = document.createElement("div");
+    confirmation.className = "confirmation";
     confirmation.innerHTML = `
       <div class="confirm-text">
         <span class="confirm-media">${mediaName}</span>
@@ -17,19 +17,14 @@ function renderNotification(mediaName) {
     `;
     container.appendChild(confirmation);
 
-    const confirmYesButton = confirmation.querySelector('.confirm-yes');
-    const confirmNoButton = confirmation.querySelector('.confirm-no');
-
-    confirmYesButton.addEventListener('click', () => {
-      confirmation.remove();
-      resolve(true);
-    });
-
-    confirmNoButton.addEventListener('click', () => {
-      confirmation.remove();
-      resolve(false);
+    confirmation.addEventListener("click", (event) => {
+      if (event.target.matches(".confirm-yes")) {
+        confirmation.remove();
+        resolve(true);
+      } else if (event.target.matches(".confirm-no")) {
+        confirmation.remove();
+        resolve(false);
+      }
     });
   });
 }
-
-export { renderNotification };

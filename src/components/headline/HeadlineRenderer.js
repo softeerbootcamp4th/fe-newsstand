@@ -1,6 +1,7 @@
 import { getTopNews } from "../../apis/NewsAPI.js";
 
-async function renderHeadline(idx, headlineItemId) {
+// 헤드라인 롤링 UI
+export default async function renderHeadline(idx, headlineItemId) {
   const headlineItem = document.getElementById(headlineItemId);
   const rollingList = headlineItem.querySelector(".rolling");
   const allNews = await getTopNews().then(data => data[idx].newsLists);
@@ -12,9 +13,7 @@ async function renderHeadline(idx, headlineItemId) {
        <a href="${news.url}" target="_blank" rel="noopener noreferrer">${news.description}</a>
      </span>
    </li>
- `).join('');
+ `).join("");
 
   return rollingList;
 }
-
-export { renderHeadline };

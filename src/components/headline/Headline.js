@@ -1,7 +1,8 @@
-import { renderHeadline } from "./HeadlineRenderer.js";
+import renderHeadline from "./HeadlineRenderer.js";
 import startRolling from "./HeadlineRolling.js";
 import "./Headlines.css";
 
+// 헤드라인 전체 영역 UI
 export default function Headline(elementId) {
   const headlineElement = document.getElementById(elementId);
 
