@@ -22,7 +22,6 @@ function ListHeaderSubscribedComponent({cursor, subList}, {moveTo})
 	} );
 
 	const dom = html`<nav class="listNav full-paged" data-unique-key="list-view-header">${items}</nav>`;
-
 	mountDraggable(dom);
 	dom.addEventListener( "click", (e)=>{
 		const button = e.target.closest(".listItem");
