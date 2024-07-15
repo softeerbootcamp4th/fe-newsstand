@@ -20,20 +20,27 @@ const NewsSourceSelector = (props) => {
         state: props.selectedSource,
         onClick: () => {
             props.setSelectedSource('내가 구독한 언론사')
-            props.setSelectedCategory(getCompanyName(getSubscribedCompaniesId()[0]))
+
+            getSubscribedCompaniesId().then((idList) => {
+                props.setSelectedCategory(getCompanyName(idList[0]))
+            })
         },
     })
 
     const listCategoryButton = createComponent(IconView, {
-        id: 1,
-        icon: Icon.LIST_CATEGORY,
-        onClick: () => props.setViewType('list'),
+        id: `${props.id}-1`,
+        icon: props.viewType.value === 'list' ? Icon.SELECTED_LIST_CATEGORY : Icon.UNSELECTED_LIST_CATEGORY,
+        onClick: () => {
+            props.setViewType('list')
+        },
     })
 
     const gridCategoryButton = createComponent(IconView, {
-        id: 2,
-        icon: Icon.GRID_CATEGORY,
-        onClick: () => props.setViewType('grid'),
+        id: `${props.id}-2`,
+        icon: props.viewType.value === 'list' ? Icon.SELECTED_GRID_CATEGORY : Icon.UNSELECTED_GRID_CATEGORY,
+        onClick: () => {
+            props.setViewType('grid')
+        },
     })
 
     return {

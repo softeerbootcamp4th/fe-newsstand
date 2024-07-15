@@ -3,7 +3,7 @@ import createComponent from './component.js'
 const render = (component, props) => {
     const $component = document.getElementById(component.name + props.id)
     if (!$component) {
-        throw new Error(`${component.name} not found!`)
+        return
     }
 
     const componentInstance = createComponent(component, props)

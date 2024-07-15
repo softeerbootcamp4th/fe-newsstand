@@ -4,6 +4,7 @@ import createComponent from '../../core/component/component.js'
 import ImageView from '../base/ImageView.js'
 import { toastOn } from '../../utils/toastUtils.js'
 import { isSubscribed, subscribe, moveToSubscribedCategory } from '../../utils/subscribeUtils.js'
+import { changeIconByFoundation } from '../../utils/iconUtils.js'
 import useState from '../../core/hooks/useState.js'
 import useEffect from '../../core/hooks/useEffect.js'
 
@@ -16,7 +17,7 @@ const MainNews = (props) => {
                 setSubscribed(res)
             })
         },
-        [props.newsData, props.setSelectedSource],
+        [props.newsData, props.setSelectedSource, props.isShowAlert],
         1,
     )
 
@@ -27,6 +28,7 @@ const MainNews = (props) => {
             props.setIsShowAlert(true)
         } else {
             subscribe(value.companyId)
+            setSubscribed(true)
             toastOn()
             moveToSubscribedCategory({
                 companyName: value.companyName,
@@ -39,7 +41,7 @@ const MainNews = (props) => {
 
     const companyIcon = createComponent(IconView, {
         id: 1,
-        icon: props.newsData.value ? props.newsData.value.companyIcon : '',
+        icon: changeIconByFoundation(props.newsData.value.companyIcon, props.foundation.value),
     })
 
     const subscribeButton = createComponent(Button, {

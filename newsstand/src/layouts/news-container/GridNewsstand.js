@@ -12,7 +12,6 @@ const GridNewsstand = (props) => {
     const [page, setPage] = useState({ stateId: 1, initialValue: 1 })
     const [maxPage, setMaxPage] = useState({ stateId: 2, initialValue: 0 })
     const [companyData, setCompanyData] = useState({ stateId: 3, initialValue: [] })
-    const [subscribedCompanyIdList, setSubscribedCompanyIdList] = useState({ stateId: 2, initialValue: [] })
 
     const initCompanyData = () => {
         if (props.viewType.value === 'list') return
@@ -41,11 +40,11 @@ const GridNewsstand = (props) => {
             })
 
         getSubscribedCompaniesId().then((idList) => {
-            setSubscribedCompanyIdList(idList)
+            props.setSubscribedCompanyIdList(idList)
         })
     }
 
-    useEffect(() => initCompanyData(), [props.viewType, props.selectedSource, page], 1)
+    useEffect(() => initCompanyData(), [props.viewType, props.selectedSource, props.isShowAlert, page], 1)
 
     const newsBoxes = companyData.value.map((news, index) => {
         return createComponent(NewsBox, {
@@ -56,6 +55,7 @@ const GridNewsstand = (props) => {
             setSelectedCategory: props.setSelectedCategory,
             setSelectedSource: props.setSelectedSource,
             setViewType: props.setViewType,
+            foundation: props.foundation,
             style: 'width: 100%; height:100%;',
         })
     })
@@ -81,12 +81,15 @@ const GridNewsstand = (props) => {
     const bindEvents = () => {
         const leftBtn = document.querySelector('.left-btn')
         const rightBtn = document.querySelector('.right-btn')
-
-        leftBtn.removeEventListener('click', handleLeftButtonClick)
-        rightBtn.removeEventListener('click', handleRightButtonClick)
-
         leftBtn.addEventListener('click', handleLeftButtonClick)
         rightBtn.addEventListener('click', handleRightButtonClick)
+    }
+
+    const removeEvents = () => {
+        const leftBtn = document.querySelector('.left-btn')
+        const rightBtn = document.querySelector('.right-btn')
+        leftBtn.removeEventListener('click', handleLeftButtonClick)
+        rightBtn.removeEventListener('click', handleRightButtonClick)
     }
 
     return {
@@ -104,6 +107,7 @@ const GridNewsstand = (props) => {
         </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 

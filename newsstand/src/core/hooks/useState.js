@@ -4,7 +4,7 @@ import { deepEqual } from '../../utils/deepEqual.js'
 
 export const componentsState = new Map()
 
-const debounce = (func, wait) => {
+export const debounce = (func, wait) => {
     let timeout
     return (...args) => {
         const later = () => {
@@ -38,7 +38,7 @@ const useState = ({ stateId, initialValue }) => {
         }
     }
 
-    const debouncedSetState = debounce(setState, 10)
+    const debouncedSetState = debounce(setState, 0)
 
     return [{ stateId: stateId, value: state }, debouncedSetState]
 }

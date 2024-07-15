@@ -5,35 +5,21 @@ export const ButtonVariantProps = {
     GRAY: 'gray',
 }
 
-const buttonVariant = (type) => {
+export const buttonVariant = (type) => {
     const variant = {
         white: {
-            light: {
-                backgroundColor: '#fff',
-                hoverdColor: '#f0f0f0',
-                color: 'gray',
-            },
-            dark: {
-                backgroundColor: '#375a7f',
-                hoverdColor: '#2d4866',
-                color: '#fff',
-            },
+            backgroundColor: 'var(--white)',
+            hoverdColor: 'var(--gray50)',
+            color: 'var(--gray200)',
         },
         gray: {
-            light: {
-                backgroundColor: 'gainsboro',
-                hoverdColor: '#bcbcbc',
-                color: 'gray',
-            },
-            dark: {
-                backgroundColor: '#444950',
-                hoverdColor: '#3a3f46',
-                color: '#fff',
-            },
+            backgroundColor: 'var(--gray50)',
+            hoverdColor: 'var(--white)',
+            color: 'var(--gray200)',
         },
     }
 
-    return variant[type].light
+    return variant[type]
 }
 
 const Button = (props) => {
@@ -52,29 +38,30 @@ const Button = (props) => {
     }
 
     const bindEvents = () => {
-        const button = document.getElementById(`button${props.id}`)
-
-        // 기존의 리스너가 있다면 제거
-        button.removeEventListener('mouseenter', handleMouseEnter)
-        button.removeEventListener('mouseleave', handleMouseLeave)
-        button.removeEventListener('click', handleMouseClick)
-
-        // 새로운 리스너 등록
+        const button = document.getElementById(`button-${props.id}`)
         button.addEventListener('mouseenter', handleMouseEnter)
         button.addEventListener('mouseleave', handleMouseLeave)
         button.addEventListener('click', handleMouseClick)
+    }
+
+    const removeEvents = () => {
+        const button = document.getElementById(`button-${props.id}`)
+        button.removeEventListener('mouseenter', handleMouseEnter)
+        button.removeEventListener('mouseleave', handleMouseLeave)
+        button.removeEventListener('click', handleMouseClick)
     }
 
     const { backgroundColor, hoverdColor, color } = buttonVariant(props.variant)
 
     return {
         element: `
-        <div class="button" id="button${props.id}" style="background-color: ${isHover.value ? hoverdColor : backgroundColor}; color: ${color};">
+        <div class="button" id="button-${props.id}" style="background-color: ${isHover.value ? hoverdColor : backgroundColor}; color: ${color};">
             ${props.icon ? `<img class="button-left-icon" src=${props.icon} alt="icon"/>` : ''}
             ${props.text}
         </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 

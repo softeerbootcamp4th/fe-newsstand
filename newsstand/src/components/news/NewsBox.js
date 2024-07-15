@@ -5,37 +5,43 @@ import createComponent from '../../core/component/component.js'
 import IconView, { Icon } from '../base/IconView.js'
 import { isSubscribed, subscribe, moveToSubscribedCategory } from '../../utils/subscribeUtils.js'
 import { toastOn } from '../../utils/toastUtils.js'
+import { debounce } from '../../core/hooks/useState.js'
+import { changeIconByFoundation } from '../../utils/iconUtils.js'
 
 const NewsBox = (props) => {
     const [isHover, setIsHover] = useState({ stateId: 1, initialValue: false })
     const [subscribed, setSubscribed] = useState({ stateId: 2, initialValue: false })
 
+    const debouncedSetIsHover = debounce(setIsHover, 60)
+
     useEffect(
         () => {
-            isSubscribed(props.news.id).then((res) => {
-                setSubscribed(res)
-            })
+            isHover &&
+                isSubscribed(props.news.id).then((res) => {
+                    setSubscribed(res)
+                })
         },
-        [],
+        [isHover],
         1,
     )
 
     const handleMouseEnter = () => {
-        setIsHover(true)
+        debouncedSetIsHover(true)
     }
 
     const handleMouseLeave = () => {
-        setIsHover(false)
+        debouncedSetIsHover(false)
     }
 
     const bindEvents = () => {
         const newsBox = document.getElementById(`news-box${props.id}`)
-
-        newsBox.removeEventListener('mouseenter', handleMouseEnter)
-        newsBox.removeEventListener('mouseleave', handleMouseLeave)
-
         newsBox.addEventListener('mouseenter', handleMouseEnter)
         newsBox.addEventListener('mouseleave', handleMouseLeave)
+    }
+    const removeEvents = () => {
+        const newsBox = document.getElementById(`news-box${props.id}`)
+        newsBox.removeEventListener('mouseenter', handleMouseEnter)
+        newsBox.removeEventListener('mouseleave', handleMouseLeave)
     }
 
     const handleSubscriptionButtonClick = () => {
@@ -70,7 +76,7 @@ const NewsBox = (props) => {
 
     const companyIcon = createComponent(IconView, {
         id: props.id,
-        icon: props.news.icon,
+        icon: changeIconByFoundation(props.news.icon, props.foundation.value),
     })
 
     return {
@@ -80,6 +86,7 @@ const NewsBox = (props) => {
         </div>
         `,
         bindEvents,
+        removeEvents,
     }
 }
 

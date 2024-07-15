@@ -6,17 +6,21 @@ import GridNewsstand from './GridNewsstand.js'
 import Alert from '../../components/base/Alert.js'
 import { mediaCategoryData } from '../../datas/mockData.js'
 
-const NewsContainer = () => {
+const NewsContainer = (props) => {
     const [selectedCategory, setSelectedCategory] = useState({ stateId: 1, initialValue: mediaCategoryData[0] })
     const [selectedSource, setSelectedSource] = useState({ stateId: 2, initialValue: '전체 언론사' })
     const [viewType, setViewType] = useState({ stateId: 3, initialValue: 'list' })
     const [isShowAlert, setIsShowAlert] = useState({ stateId: 4, initialValue: false })
     const [currentCompanyInfo, setCurrentCompanyInfo] = useState({ stateId: 5, initialValue: undefined })
+    const [subscribedCompanyIdList, setSubscribedCompanyIdList] = useState({ stateId: 6, initialValue: [] })
 
     const alertComponent = createComponent(Alert, {
         id: 1,
         setIsShowAlert: setIsShowAlert,
         currentCompanyInfo: currentCompanyInfo,
+        subscribedCompanyIdList: subscribedCompanyIdList,
+        setSelectedCategory: setSelectedCategory,
+        selectedSource: selectedSource,
     })
 
     const newsSourceSelectorLayout = createComponent(NewsSourceSelector, {
@@ -39,7 +43,11 @@ const NewsContainer = () => {
         setViewType: setViewType,
         setCurrentCompanyInfo: setCurrentCompanyInfo,
         setIsShowAlert: setIsShowAlert,
-        style: 'width:100%;',
+        subscribedCompanyIdList: subscribedCompanyIdList,
+        setSubscribedCompanyIdList: setSubscribedCompanyIdList,
+        isShowAlert: isShowAlert,
+        foundation: props.foundation,
+        style: 'width:100%; height: 80%',
     })
 
     const gridNewsstandLayout = createComponent(GridNewsstand, {
@@ -51,6 +59,10 @@ const NewsContainer = () => {
         setSelectedCategory: setSelectedCategory,
         setSelectedSource: setSelectedSource,
         setViewType: setViewType,
+        subscribedCompanyIdList: subscribedCompanyIdList,
+        setSubscribedCompanyIdList: setSubscribedCompanyIdList,
+        isShowAlert: isShowAlert,
+        foundation: props.foundation,
         style: 'width:100%; height:70%;',
     })
 
