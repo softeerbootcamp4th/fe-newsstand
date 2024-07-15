@@ -1,0 +1,28 @@
+.grid {
+  height: 388px;
+}
+
+.newsGrid_wrapper {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, min(97px));
+}
+
+.gridItem {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: 0.5px solid black;
+}
+
+.gridItem .subscribe {
+  display: none;
+  position: absolute;
+}
+
+.gridItem:hover .subscribe {
+  display: block;
+}

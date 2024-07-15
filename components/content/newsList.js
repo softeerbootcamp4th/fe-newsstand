@@ -1,6 +1,10 @@
-import { deleteNodeById, generateNode } from "../utils/utils.js";
+import { deleteNodeById, generateNode } from "../../utils/utils.js";
 import { setProgress } from "./nav.js";
-import { categoryData, getMediaLength, mediaData } from "../resources/data.js";
+import {
+  categoryData,
+  getMediaLength,
+  mediaData,
+} from "../../resources/data.js";
 import "./carousel.js";
 
 /**
@@ -45,9 +49,7 @@ export function updateNewsList(
   currentMediaIndex
 ) {
   const newsListContainer = deleteNodeById("newsList_container");
-  const mediaList = categoryData[category].map(
-    (element) => mediaData[element].media
-  );
+  const mediaList = categoryData[category].map((element) => mediaData[element]);
   const contentList = categoryData[category];
 
   setProgress(
@@ -68,5 +70,6 @@ export function updateNewsList(
  */
 function setMedia(mediaList, mediaIndex) {
   const currentMedia = document.querySelector(".media");
-  currentMedia.innerHTML = mediaList[mediaIndex];
+  currentMedia.src = mediaList[mediaIndex].logoUrl;
+  currentMedia.alt = mediaList[mediaIndex].media;
 }

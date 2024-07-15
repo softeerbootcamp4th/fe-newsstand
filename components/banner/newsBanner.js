@@ -1,4 +1,8 @@
-import { generateNode } from "../utils/utils.js";
+import {
+  startBannerInterval,
+  stopBannerInterval,
+} from "../../global/interval.js";
+import { generateNode } from "../../utils/utils.js";
 /**
  * content를 롤링하는 배너를 container의 child로 생성
  * @param {Node} container
@@ -10,6 +14,12 @@ export function generateBanner(container, content) {
 
   const bannerList = generateNode("ul", "bannerList");
   listContainer.appendChild(bannerList);
+  bannerList.addEventListener("mouseover", ({ target }) =>
+    stopBannerInterval(target)
+  );
+  bannerList.addEventListener("mouseleave", ({ target }) =>
+    startBannerInterval(target)
+  );
 
   content.news.forEach((element) => {
     const elementContainer = generateNode("li");

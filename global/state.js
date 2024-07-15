@@ -8,6 +8,7 @@ class State {
     this._currentCategoryIndex = 0;
     this._currentMediaIndex = 0;
     this._headerCategory = 0;
+    this._headerShow = 0;
 
     State.instance = this;
     return this;
@@ -32,6 +33,13 @@ class State {
   }
   set headerCategory(category) {
     this._headerCategory = category;
+  }
+
+  get headerShow() {
+    return this._headerShow;
+  }
+  set headerShow(show) {
+    this._headerShow = show;
   }
 }
 

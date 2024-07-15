@@ -1,5 +1,5 @@
-import store from "../utils/stoageManager.js";
-import state from "../list/state.js";
+import store from "../../global/stoageManager.js";
+import state from "../../global/state.js";
 import {
   addMyData,
   categoryData,
@@ -7,8 +7,8 @@ import {
   mediaData,
   myList,
   removeMyDataById,
-} from "../resources/data.js";
-import { generateNode } from "../utils/utils.js";
+} from "../../resources/data.js";
+import { generateNode } from "../../utils/utils.js";
 
 //삭제할 언론사를 임시 저장할 배열
 let needRemove = [];
@@ -18,10 +18,12 @@ let needRemove = [];
  */
 export function generateSubscribe() {
   const contentTitle = document.querySelector(".content_title");
-  contentTitle.lastChild.remove();
+  let sub = contentTitle.querySelector(".subscribe");
 
-  const sub = generateNode("button", "subscribe");
-  contentTitle.appendChild(sub);
+  if (!sub) {
+    sub = generateNode("button", "subscribe");
+    contentTitle.appendChild(sub);
+  }
 
   needRemove = resetNeedRemove(needRemove);
 
@@ -60,12 +62,14 @@ function addMediaToMyList() {
  */
 export function generateUnsubscribe() {
   const contentTitle = document.querySelector(".content_title");
-  contentTitle.lastChild.remove();
+  let sub = contentTitle.querySelector(".subscribe");
 
-  const sub = generateNode("button", "subscribe");
-  contentTitle.appendChild(sub);
+  if (!sub) {
+    sub = generateNode("button", "subscribe");
+    contentTitle.appendChild(sub);
+  }
 
-  sub.innerHTML = "구독 해지";
+  sub.innerHTML = "x";
   sub.addEventListener("click", () =>
     saveRemoveList(myList[state.currentCategoryIndex])
   );

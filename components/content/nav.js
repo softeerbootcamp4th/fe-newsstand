@@ -1,43 +1,33 @@
-import { deleteNodeById, generateNode } from "../utils/utils.js";
+import { deleteNodeById, generateNode } from "../../utils/utils.js";
 import { updateMyNewsList } from "./myNewsList.js";
 import { updateNewsList } from "./newsList.js";
-import {
-  categoryList,
-  myList,
-  getMediaLength,
-  getMyListLength,
-  mediaData,
-} from "../resources/data.js";
-import state from "../list/state.js";
+import { categoryList, myList, mediaData } from "../../resources/data.js";
+import state from "../../global/state.js";
 import { generateSubscribe, generateUnsubscribe } from "./subscribe.js";
-
-var newsInterval; //왜 전역변수로 설정해야 작동하는가??
-var myInterval;
+import { startInterval, stopInterval } from "../../global/interval.js";
 
 /**
  * Nav목록으로 네비게이션 바를 container의 child로 생성 후 초기화
  * @param {Node} container Nav가 붙을 돔 객체
  * @param {Array} currentHeaderCategoryIndex Nav에 보여질 현재 선택된 리스트
  */
-export function generateNav(container, currentHeaderCategoryIndex) {
+export function generateNav(container) {
   let selectedList;
-  if (currentHeaderCategoryIndex === 0) {
+  if (state.headerCategory === 0) {
     selectedList = categoryList;
-    state.headerCategory = 0;
-  } else if (currentHeaderCategoryIndex === 1) {
+  } else if (state.headerCategory === 1) {
     selectedList = myList.map((element) => mediaData[element].media);
-    state.headerCategory = 1;
   }
 
   navInit(selectedList);
 
-  if (currentHeaderCategoryIndex === 0) generateNavForNewsList();
-  else if (currentHeaderCategoryIndex === 1) generateNavForMyList();
+  if (state.headerCategory === 0) generateNavForNewsList(selectedList);
+  else if (state.headerCategory === 1) generateNavForMyList(selectedList);
 
   function navInit(selectedList) {
     state.currentCategoryIndex = 0;
     state.currentMediaIndex = 0;
-    resetInterval();
+    stopInterval();
 
     const nav = generateNode("nav", "content_navigator");
     const ul = generateNode("ul", "contentList");
@@ -76,7 +66,7 @@ function createNavElement(container, category) {
 /**
  * newsList를 생성하는 함수
  */
-function generateNavForNewsList() {
+function generateNavForNewsList(selectedList) {
   updateNewsList(
     categoryList[state.currentCategoryIndex],
     state.currentCategoryIndex,
@@ -85,9 +75,16 @@ function generateNavForNewsList() {
 
   generateSubscribe();
 
-  const navElementNodes = document.querySelectorAll(".contentList li");
+  const navNode = document.querySelector(".contentList");
+  const navNodeElements = document.querySelectorAll(".contentList li");
 
-  setupNavElements(navElementNodes, startNewsInterval, updateCategoryByIndex);
+  setupNavElements(
+    navNode,
+    navNodeElements,
+    startNewsInterval,
+    updateCategoryByIndex,
+    selectedList
+  );
 
   startNewsInterval();
 }
@@ -95,38 +92,90 @@ function generateNavForNewsList() {
 /**
  * 구독 newsList를 생성하는 함수
  */
-export function generateNavForMyList() {
+export function generateNavForMyList(selectedList) {
   updateMyNewsList(state.currentCategoryIndex);
 
   generateUnsubscribe();
 
-  const navElementNodes = document.querySelectorAll(".contentList li");
+  const navNode = document.querySelector(".contentList");
+  const navNodeElements = document.querySelectorAll(".contentList li");
 
-  setupNavElements(navElementNodes, startMyNewsInterval, updateMyMedia);
+  setupNavElements(
+    navNode,
+    navNodeElements,
+    startMyNewsInterval,
+    updateMyMedia,
+    selectedList
+  );
 
   startMyNewsInterval();
 }
 
 /**
- * navElementNodes에 이벤트 리스너를 추가하고 Interval 을 시작하는 함수
+ * navNode 이벤트 리스너를 추가하고 Interval 을 시작하는 함수
  */
 function setupNavElements(
-  navElementNodes,
+  navNode,
+  navNodeElements,
+  intervalStartFunction,
+  updateFunction,
+  selectedList
+) {
+  navNode.addEventListener("click", function ({ target }) {
+    handleNavClick(
+      target,
+      navNodeElements,
+      selectedList,
+      intervalStartFunction,
+      updateFunction
+    );
+  });
+}
+
+/**
+ * 선택된 탭을 찾아 selected 부여, state변경, interval 재시작, content 업데이트
+ * @param {node} target
+ * @param {node array} navNodeElements
+ * @param {array} selectedList
+ */
+function handleNavClick(
+  target,
+  navNodeElements,
+  selectedList,
   intervalStartFunction,
   updateFunction
 ) {
-  navElementNodes.forEach((element, index) => {
-    element.addEventListener("click", function () {
-      navElementNodes[state.currentCategoryIndex].classList.remove("selected");
-      element.classList.add("selected");
+  if (target.tagName === "UL") {
+    return false;
+  }
+
+  navNodeElements[state.currentCategoryIndex].classList.remove("selected");
+
+  if (target.tagName === "LI") {
+    target = target.querySelector("span");
+  }
+
+  selectCategoryByContent(target.innerHTML, selectedList, navNodeElements);
+
+  stopInterval();
+  intervalStartFunction();
+
+  state.currentMediaIndex = 0;
+  updateFunction(state.currentCategoryIndex);
+}
+
+/**
+ * content와 동일한 array index를 찾아 navNode에 selectedClass 부여하고 state 변경
+ * @param {String} content
+ */
+function selectCategoryByContent(content, array, navNodeElements) {
+  for (const [index, element] of array.entries()) {
+    if (element === content) {
+      navNodeElements[index].classList.add("selected");
       state.currentCategoryIndex = index;
-
-      resetInterval();
-      intervalStartFunction();
-
-      updateFunction(state.currentCategoryIndex);
-    });
-  });
+      break;
+    }
+  }
 }
 
 /**
@@ -197,76 +246,31 @@ export function updateNavElements(navElementNodes) {
 }
 
 /**
- * news List 자동 전환
- * @param {node Array} navElementNodes
+ * newsList interval 시작 함수
  */
-function handleNewsInterval(navElementNodes) {
-  state.currentMediaIndex++;
-  if (
-    state.currentMediaIndex >=
-    getMediaLength(categoryList[state.currentCategoryIndex])
-  ) {
-    state.currentCategoryIndex =
-      (state.currentCategoryIndex + 1) % categoryList.length;
-    state.currentMediaIndex = 0;
-  }
-
-  updateNavElements(navElementNodes);
-  updateNewsList(
-    categoryList[state.currentCategoryIndex],
-    state.currentCategoryIndex,
-    state.currentMediaIndex
+export function startNewsInterval() {
+  const navElementNodes = document.querySelectorAll(".contentList li");
+  startInterval(
+    "news",
+    navElementNodes,
+    state,
+    categoryList,
+    updateNavElements,
+    updateNewsList
   );
 }
 
 /**
- * my news List 자동 전환
- * @param {node Array} navElementNodes
+ * myList interval 시작 함수
  */
-function handleMyInterval(navElementNodes) {
-  (state.currentCategoryIndex + 1) % getMyListLength();
-
-  updateNavElements(navElementNodes);
-  updateMyNewsList(state.currentCategoryIndex);
-}
-
-/**
- * news면 newsList, my면 myList 자동 전환
- * @param {String} intervalType
- */
-function startInterval(intervalType) {
+export function startMyNewsInterval() {
   const navElementNodes = document.querySelectorAll(".contentList li");
-  const isNewsInterval = intervalType === "news";
-  const isMyInterval = intervalType === "my";
-
-  if (isNewsInterval) {
-    newsInterval = setInterval(
-      () => handleNewsInterval(navElementNodes),
-      20000
-    );
-  } else if (isMyInterval) {
-    myInterval = setInterval(() => handleMyInterval(navElementNodes), 20000);
-  }
-}
-
-/**
- * news list Interval 시작
- */
-function startNewsInterval() {
-  startInterval("news");
-}
-
-/**
- * my list Interval 시작
- */
-function startMyNewsInterval() {
-  startInterval("my");
-}
-
-/**
- * news list, my list Interval 삭제
- */
-function resetInterval() {
-  clearInterval(newsInterval);
-  clearInterval(myInterval);
+  startInterval(
+    "my",
+    navElementNodes,
+    state,
+    null,
+    updateNavElements,
+    updateMyNewsList
+  );
 }

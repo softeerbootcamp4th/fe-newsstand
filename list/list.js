@@ -1,80 +1,57 @@
-import { deleteNav, generateNav } from "../components/nav.js";
-import { generateBanner } from "../components/newsBanner.js";
-import { getTodayString } from "../utils/utils.js";
-import store from "../utils/stoageManager.js";
-import { updateMyList, headlineData } from "../resources/data.js";
+import { deleteNav, generateNav } from "../components/content/nav.js";
+import { updateMyList } from "../resources/data.js";
+import { getTodayString, generateNode } from "../utils/utils.js";
 
-let currentHeaderCategoryIndex = 0;
+/**
+ * newsList 레이아웃 동적으로 생성
+ * @param {node} container
+ * @param {int} headerCategoryIndex
+ */
+export function generateListContent(container, headerCategoryIndex) {
+  container.classList.remove("grid");
+  container.classList.add("list");
 
-//요소 생성
-//header
-const today = document.querySelector(".today");
-today.innerHTML = getTodayString();
-//banner
-const bannerContainer = document.getElementById("banner_container");
-generateBanner(bannerContainer, headlineData[0]);
-generateBanner(bannerContainer, headlineData[1]);
-//nav
-const navContainer = document.getElementById("nav_container");
-generateNav(navContainer, currentHeaderCategoryIndex);
+  const divContentTitle = generateNode("div", "content_title");
+  const pMedia = generateNode("img", "media");
+  const pDate = generateNode("p", "date");
+  pDate.textContent = getTodayString();
 
-//각 배너는 time delay를 가지고 롤링
-function rollingCallback(time) {
-  const prevElements = bannerContainer.querySelectorAll(".prev");
-  prevElements.forEach((prev, index) => {
-    setTimeout(() => {
-      prev.classList.remove("prev");
-    }, index * time);
-  });
+  divContentTitle.appendChild(pMedia);
+  divContentTitle.appendChild(pDate);
 
-  const currentElements = bannerContainer.querySelectorAll(".current");
-  currentElements.forEach((current, index) => {
-    setTimeout(() => {
-      current.classList.remove("current");
-      current.classList.add("prev");
-    }, index * time);
-  });
+  const divNewsListWrapper = generateNode("div", "newsList_wrapper");
 
-  const nextElements = bannerContainer.querySelectorAll(".next");
-  nextElements.forEach((next, index) => {
-    setTimeout(() => {
-      next.classList.remove("next");
-      next.classList.add("current");
+  const divImageNews = generateNode("div", "imageNews");
+  const imgThumbnail = document.createElement("img");
+  imgThumbnail.src = sampleNewsData.thumbnailUrl;
+  imgThumbnail.alt = sampleNewsData.title;
+  const divImageNewsTitle = generateNode("div", "imageNews_title");
+  divImageNewsTitle.textContent = sampleNewsData.title;
 
-      let nextNext = next.nextElementSibling;
-      if (!nextNext) {
-        nextNext = next.parentElement.firstElementChild;
-      }
-      nextNext.classList.add("next");
-    }, index * time);
-  });
-}
-const headerCategory = document.querySelectorAll(".headerCategory");
-const headerShow = document.querySelectorAll(".headerShow");
+  divImageNews.appendChild(imgThumbnail);
+  divImageNews.appendChild(divImageNewsTitle);
 
-setInterval(() => rollingCallback(1000), 5000);
+  const divNewsListContainer = document.createElement("div");
+  divNewsListContainer.id = "newsList_container";
 
-// 초기화 함수
-function initialize() {
-  store.setSet("myList", new Set());
-  //header_selected 초기화
-  headerCategory[0].classList.add("selected");
-  headerShow[0].classList.add("selected");
+  divNewsListWrapper.appendChild(divImageNews);
+  divNewsListWrapper.appendChild(divNewsListContainer);
 
-  headerCategory.forEach((element, index) => {
-    element.addEventListener("click", () => {
-      headerCategory[currentHeaderCategoryIndex].classList.remove("selected");
-      element.classList.add("selected");
+  const divNewsItem = generateNode("div", "newsItem");
+  divNewsItem.appendChild(divContentTitle);
+  divNewsItem.appendChild(divNewsListWrapper);
 
-      currentHeaderCategoryIndex = index;
+  container.appendChild(divNewsItem);
 
-      //nav 삭제후 재생성
-      updateMyList();
-      deleteNav();
-      generateNav(navContainer, currentHeaderCategoryIndex);
-    });
-  });
+  deleteNav();
+
+  const navContainer = document.getElementById("nav_container");
+  generateNav(navContainer, headerCategoryIndex);
+  updateMyList();
 }
 
-// 초기화
-initialize();
+// 더미 데이터
+const sampleNewsData = {
+  thumbnailUrl: "../resources/Thumbnail.png",
+  title: "이미지 뉴스 제목",
+};
