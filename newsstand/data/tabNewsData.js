@@ -99,7 +99,7 @@
                 mediaName: "SBSBiz",
                 sourceLogo: "assets/news/logo/sbsBiz.svg",
                 newsDate: "2023.02.10. 11:11",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://img.sbs.co.kr/newimg/news/20240706/201954883_1280.jpg",
@@ -192,7 +192,7 @@
                 mediaName: "연합뉴스TV",
                 sourceLogo: "assets/news/logo/yonhap.svg",
                 newsDate: "2023.02.10. 18:27",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://img0.yna.co.kr/photo/yna/YH/2024/01/04/PYH2024010414600001300_P4.jpg",
@@ -234,7 +234,7 @@
                 mediaName: "세계일보",
                 sourceLogo: "assets/news/logo/segye.svg",
                 newsDate: "2023.02.10. 11:11",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://img.segye.com/content/image/2024/07/05/20240705508906.jpg",
@@ -284,7 +284,7 @@
                 mediaName: "조선일보",
                 sourceLogo: "assets/news/logo/chosun.svg",
                 newsDate: "2023.12.10. 11:27",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://imgnews.pstatic.net/image/023/2024/07/06/0003844628_001_20240706160012847.jpg?type=w647",
@@ -379,7 +379,7 @@
                 mediaName: "서울신문",
                 sourceLogo: "assets/news/logo/seoul.svg",
                 newsDate: "2023.04.15. 18:27",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://imgnews.pstatic.net/image/081/2024/07/06/0003462874_001_20240706213311195.jpg",
@@ -424,7 +424,7 @@
                 mediaName: "한겨레",
                 sourceLogo: "assets/news/logo/hankyoreh.svg",
                 newsDate: "2024.04.10. 18:27",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://imgnews.pstatic.net/image/028/2024/07/05/0002696883_001_20240706181017816.jpg",
@@ -518,7 +518,7 @@
                 mediaName: "국민일보",
                 sourceLogo: "assets/news/logo/kookmin.svg",
                 newsDate: "2024.10.30. 18:27",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://imgnews.pstatic.net/image/005/2024/07/06/2024070605322412876_1720211544_0020279245_20240706064407477.jpg",
@@ -567,7 +567,7 @@
                 mediaName: "데일리안",
                 sourceLogo: "assets/news/logo/dailyan.svg",
                 newsDate: "2022.02.22. 18:27",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://cdnimage.dailian.co.kr/news/202407/news_1720067848_1379800_m_1.jpeg",
@@ -610,7 +610,7 @@
                 mediaName: "아이뉴스",
                 sourceLogo: "assets/news/logo/inews.svg",
                 newsDate: "2021.01.11. 11:07",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://image.inews24.com/v1/d78daaadfcbb27.jpg",
@@ -701,7 +701,7 @@
                 mediaName: "아시아경제",
                 sourceLogo: "assets/news/logo/asia.svg",
                 newsDate: "2020.02.20. 18:27",
-                subscribe: "Y",
+                subscribe: "N",
                 mainNews: {
                   thumbnailImage:
                     "https://cphoto.asiae.co.kr/listimglink/1/2024070617161542351_1720253775.jpg",

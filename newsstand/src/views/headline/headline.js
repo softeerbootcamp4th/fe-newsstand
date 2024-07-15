@@ -55,12 +55,12 @@ export const Headline = () => {
     };
 
     function startLeftRolling() {
-        intervalManager.startTimer(IntervalKey.RollingLeft, rollLeftNews, IntervalConst.RollingTime);
+        intervalManager.startTimer(IntervalKey.ROLLINGl_LEFT, rollLeftNews, IntervalConst.ROLLING_TIME);
     }
 
     function startRightRolling() {
         setTimeout(() => {
-            intervalManager.startTimer(IntervalKey.RollingRight, rollRightNews, IntervalConst.RollingTime);
+            intervalManager.startTimer(IntervalKey.ROLLING_RIGHT, rollRightNews, IntervalConst.ROLLING_TIME);
         }, 1000); 
     }
 

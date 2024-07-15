@@ -12,7 +12,7 @@ export const NewsList = ({ isAllPress, tabs }) => {
     let selectedPressIndex = 0;
 
     function startTimer() {
-        intervalManager.startTimer(IntervalKey.Progress,changeToNextPress, IntervalConst.ProgressTime)
+        intervalManager.startTimer(IntervalKey.PROGRESS,changeToNextPress, IntervalConst.PROGRESS_TIME);
     }
 
     function render() {

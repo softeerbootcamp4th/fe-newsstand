@@ -24,6 +24,9 @@ export const SnackBar = (props) => {
 
       setTimeout(() => {
           document.body.removeChild(element);
+          if (props.callback) {
+            props.callback();
+        }
       }, 3600);
   }
 

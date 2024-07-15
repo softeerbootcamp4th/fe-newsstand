@@ -49,47 +49,30 @@ const PressCategoryContainer = ({
         }
     }
 
-    function createButton(category, index) {
-        const button = document.createElement('button');
-        button.className = 'press-category-button';
-        button.id = `press-category-${index}`;
-
-        const progressBar = document.createElement('div');
-        progressBar.className = 'press-category-button-progress';   
-        progressBar.id = `press-category-${index}`;
-
-        const container = document.createElement('div');
-        container.className = 'press-category-span-container';
-        container.id = `press-category-${index}`;
-
-        const tabNameSpan = document.createElement('span');
-        tabNameSpan.id = `press-category-${index}`;
-        tabNameSpan.textContent = category.tabName;
-
-        const countSpan = document.createElement('span');
-        countSpan.id = `press-category-${index}`;
-        countSpan.className = `press-count-span`;
-        countSpan.textContent = '';
-
-        container.appendChild(tabNameSpan);
-        container.appendChild(countSpan);
-
-        button.appendChild(progressBar);
-        button.appendChild(container);
-        return button;
+    function createButtonHTML(category, index) {
+        return `
+            <button class="press-category-button" id="press-category-${index}">
+                <div class="press-category-button-progress" id="press-category-${index}"></div>
+                <div class="press-category-span-container" id="press-category-${index}">
+                    <span id="press-category-${index}">${category.tabName}</span>
+                    <span id="press-category-${index}" class="press-count-span"></span>
+                </div>
+            </button>
+        `;
     }
-
+    
     function renderButtons() {
-        element.innerHTML = '';
-        buttons = [];
-        progressBars = [];
+        let buttonsHTML = '';
         tabFields.forEach((category, index) => {
-            const button = createButton(category, index);
-            element.appendChild(button);
-            buttons.push(button);
-            progressBars.push(button.querySelector('.press-category-button-progress'));
+            buttonsHTML += createButtonHTML(category, index);
         });
+    
+        element.innerHTML = buttonsHTML;
+    
+        buttons = Array.from(element.querySelectorAll('.press-category-button'));
+        progressBars = Array.from(element.querySelectorAll('.press-category-button-progress'));
     }
+    
 
     function addEventListeners() {
         buttons.forEach(button => {

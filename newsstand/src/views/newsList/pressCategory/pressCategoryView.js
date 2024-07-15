@@ -1,92 +1,93 @@
-// // pressCategoryView.js
-// import { separateId } from "../../../utils/utils.js";
+import { separateId } from "../../../utils/utils.js";
 
-// export function createView({ model, onChangeCategory }) {
-//   const element = document.createElement("div");
-//   element.className = "press-category-container";
+const CLASS = Object.freeze({
+    PRESS_CATEGORY_CONTAINER: 'press-category-container',
+    PRESS_CATEGORY_BUTTON: 'press-category-button',
+    PRESS_CATEGORY_BUTTON_SELECTED: 'press-category-button-selected',
+    PRESS_CATEGORY_BUTTON_PROGRESS: 'press-category-button-progress',
+    PRESS_CATEGORY_SPAN_CONTAINER: 'press-category-span-container',
+    PRESS_COUNT_SPAN: 'press-count-span',
+    SELECTED: 'selected'
+});
 
-//   let buttons = [];
-//   let progressBars = [];
+class PressCategoryView {
+    constructor({ onClickCategory }) {
+        this.element = document.createElement('div');
+        this.element.className = CLASS.PRESS_CATEGORY_CONTAINER;
+        this.categoryClickCallback = onClickCategory;
+    }
 
-//   function onClickEvent(event) {
-//     const intId = separateId(event.target.id);
-//     onChangeCategory(intId);
-//   }
+    render() {
+        this.element.innerHTML = '';
+    }
 
-//   function updateSelectedButtonStyle() {
-//     const rootStyles = getComputedStyle(document.documentElement);
+    update({ tabFields, selectedCategoryIndex, isAllPress, countInfo }) {
+        this.element.innerHTML = this.createButtonHTML(tabFields);
+        this.attachButtonListeners();
+        this.updateSelectedButtonStyle(selectedCategoryIndex, countInfo, isAllPress);
+    }
 
-//     buttons.forEach((button, index) => {
-//       const tabModel = model.tabs[index];
-//       const isSelected = tabModel.selectedIndex !== undefined;
+    attachButtonListeners() {
+        const buttons = this.element.querySelectorAll(`.${CLASS.PRESS_CATEGORY_BUTTON}`);
 
-//       button.style.backgroundColor = isSelected
-//         ? rootStyles.getPropertyValue("--color-surface-brand-alt")
-//         : "transparent";
-//       button.style.color = isSelected
-//         ? rootStyles.getPropertyValue("--color-text-white-default")
-//         : rootStyles.getPropertyValue("--color-text-weak");
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const intId = separateId(button.id);
+                this.categoryClickCallback(intId);
+            });
+        });
+    }
 
-//       const categoryCountSpan = button.querySelector(".press-count-span");
-//       if (categoryCountSpan) {
-//         button.style.width = isSelected ? "166px" : "max-content";
-//         categoryCountSpan.textContent = isSelected
-//           ? `${tabModel.selectedIndex + 1}/${tabModel.tabDataCount}`
-//           : "";
-//       }
+    createButtonHTML(tabFields) {
+        let buttonsHTML = '';
+        tabFields.forEach((category, index) => {
+            buttonsHTML += `
+                <button class="${CLASS.PRESS_CATEGORY_BUTTON}" id="press-category-${index}">
+                    <div class="${CLASS.PRESS_CATEGORY_BUTTON_PROGRESS}"></div>
+                    <div class="${CLASS.PRESS_CATEGORY_SPAN_CONTAINER}">
+                        <span>${category.tabName}</span>
+                        <span class="${CLASS.PRESS_COUNT_SPAN}"></span>
+                    </div>
+                </button>
+            `;
+        });
+        return buttonsHTML;
+    }
 
-//       if (isSelected) {
-//         progressBars[index].classList.add("selected");
-//       } else {
-//         progressBars[index].classList.remove("selected");
-//       }
-//     });
-//   }
+    updateSelectedButtonStyle(selectedIndex, countInfo, isAllPress) {
+        const buttons = this.element.querySelectorAll(`.${CLASS.PRESS_CATEGORY_BUTTON}`);
 
-//   function createButtonHTML(category, index) {
-//     const isSelected = category.selectedIndex !== undefined;
-//     const countSpanText = isSelected
-//       ? `${category.selectedIndex + 1}/${category.tabDataCount}`
-//       : "";
+        buttons.forEach((button, index) => {
+            const isSelected = index === selectedIndex;
+            button.className = isSelected ? CLASS.PRESS_CATEGORY_BUTTON_SELECTED : CLASS.PRESS_CATEGORY_BUTTON;
+            this.updateInfoSpanStyle(button, isSelected, countInfo, isAllPress);
+            this.updateProgressBarStyle(button, isSelected);
+        });
+    }
 
-//     return `
-//       <button class="press-category-button" id="press-category-${index}">
-//         <div class="press-category-button-progress"></div>
-//         <div class="press-category-span-container">
-//           <span>${category.tabName}</span>
-//           <span class="press-count-span">${countSpanText}</span>
-//         </div>
-//       </button>
-//     `;
-//   }
+    updateProgressBarStyle(button, isSelected) {
+        const progressBar = button.querySelector(`.${CLASS.PRESS_CATEGORY_BUTTON_PROGRESS}`);
+        if (isSelected) {
+            progressBar.classList.add(CLASS.SELECTED);
+        } else {
+            progressBar.classList.remove(CLASS.SELECTED);
+        }
+    }
 
-//   function renderButtons() {
-//     element.innerHTML = "";
-//     buttons = [];
-//     progressBars = [];
+    updateInfoSpanStyle(button, isSelected, countInfo, isAllPress) {
+        const infoSpan = button.querySelector(`.${CLASS.PRESS_COUNT_SPAN}`);
+        if (infoSpan) {
+            if (isAllPress) {
+                infoSpan.textContent = isSelected ? `${countInfo}` : "";
+            } else {
+                infoSpan.textContent = isSelected ? ">" : "";
+            }
+        }
+    }
 
-//     model.tabs.forEach((category, index) => {
-//       const buttonHTML = createButtonHTML(category, index);
-//       element.innerHTML += buttonHTML;
-//     });
+    getElement() {
+        return this.element;
+    }
+}
 
-//     buttons = Array.from(element.querySelectorAll(".press-category-button"));
-//     progressBars = Array.from(
-//       element.querySelectorAll(".press-category-button-progress")
-//     );
-
-//     buttons.forEach((button) => {
-//       button.addEventListener("click", onClickEvent);
-//     });
-//   }
-
-//   function render() {
-//     renderButtons();
-//     updateSelectedButtonStyle();
-//   }
-
-//   return {
-//     element,
-//     render,
-//   };
-// }
+export default PressCategoryView;
