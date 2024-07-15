@@ -13,3 +13,9 @@ export async function fetchSubscribedNewsData() {
     const subscribedNewsData = await subscribedNewsResponse.json();
     return subscribedNewsData
 }
+
+export async function fetchRollingNewsData() {
+    const rollingNewsResponse = await fetch(`http://127.0.0.1:8000/rollingNewsList`);
+    const rollingNewsData = await rollingNewsResponse.json();
+    return rollingNewsData
+}

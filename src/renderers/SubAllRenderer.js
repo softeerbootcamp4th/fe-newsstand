@@ -28,7 +28,6 @@ class SubAllRenderer extends Renderer {
      * @param {string} subAllInfo - 선택된 '전체언론사', '내가 구독한 언론사' 정보 
      */
     _render({ subAllInfo }) {
-        debugger;
         const subAllElement = this.#generateSubAllElement(subAllInfo);
         this.subAllContainer.innerHTML = '';
         this.subAllContainer.innerHTML += subAllElement;
@@ -40,7 +39,6 @@ class SubAllRenderer extends Renderer {
      * @returns {Element}
      */
     #generateSubAllElement(subAllInfo) {
-        debugger;
         return `<span class="news-list__menu__selectors__all" ${subAllInfo === "all" ? "data-selected='yes'" : ""}>전체언론사</span>
                 <span class="news-list__menu__selectors__all" ${subAllInfo === "sub" ? "data-selected='yes'" : ""}>내가 구독한 언론사</span>`
     }

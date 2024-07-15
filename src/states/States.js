@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from "../constants/message.js";
+
 /**
  * @class States
  * @classdesc State를 옵저버 패턴의 Subject로 만들기 위한 클래스 
@@ -26,6 +28,10 @@ class States {
      */
     notify(eventInfo) {
         this.observers.forEach((observer) => observer.update(eventInfo))
+    }
+
+    setInitialState() {
+        throw new Error(ERROR_MESSAGE.NOT_IMPLEMENTED)
     }
 }
 

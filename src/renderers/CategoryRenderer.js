@@ -1,3 +1,4 @@
+import { categoryEventNameList } from "../events/categoryEvent.js";
 import { Renderer } from "./Renderer.js";
 
 /**
@@ -19,16 +20,17 @@ class CategoryRenderer extends Renderer {
      * @returns {boolean}
      */
     _checkEventName(event) {
-        return event.eventName === 'clickCategory'; // 나중에 상수 배열로 빼기
+        return categoryEventNameList.includes(event.eventName);
     }
 
     /**
      * 생성된 element를 렌더링하는 함수
      * @param {number} categoryIndex - 선택된 카테고리 인덱스
      * @param {Array} categoryList - 표시 될 카테고리 목록
+     * @param {number} currentNewsListIndex - 현제 표시될 뉴스 목록의 인덱스
      */
-    _render({ categoryIndex, categoryList }) {
-        const categoryListElement = this.#generateCategoryListElement(categoryIndex, categoryList);
+    _render({ categoryIndex, categoryList, currentNewsListIndex, currentNewsListCount }) {
+        const categoryListElement = this.#generateCategoryListElement(categoryIndex, categoryList, currentNewsListIndex, currentNewsListCount);
         this.categoryContainer.innerHTML = '';
         this.categoryContainer.innerHTML += categoryListElement;
     }
@@ -37,11 +39,17 @@ class CategoryRenderer extends Renderer {
      * 표시될 element를 생성하는 함수
      * @param {number} categoryIndex - 선택된 카테고리 인덱스
      * @param {Array} categoryList - 표시 될 카테고리 목록
+     * @param {number} currentNewsListIndex - 현제 표시될 뉴스 목록의 인덱스
      * @returns {Element}
      */
-    #generateCategoryListElement(categoryIndex = 0, categoryList) {
+    #generateCategoryListElement(categoryIndex = 0, categoryList, currentNewsListIndex, currentNewsListCount) {
         return categoryList.map((category, index) =>
-            `<li class="news-list__navbar__category" data-selected=${index === categoryIndex ? "yes" : "no"}>${category}</li>`
+            `<li class="news-list__navbar__category" 
+            data-selected=${index === categoryIndex ? "yes" : "no"} 
+            data-news-index=${currentNewsListIndex}
+            data-news-count=${currentNewsListCount}>
+                ${category}
+            </li>`
         ).join("")
     }
 }

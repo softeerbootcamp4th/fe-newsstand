@@ -1,19 +1,10 @@
 import { EventsHandler } from "./EventsHandler.js";
 
-/**
- * @class CategoryEventHandler
- * @classdesc 카테고리 이벤트 핸들러
- */
-class CategoryEventHandler extends EventsHandler {
-    /**
-     * @constructor
-     * @param {States} states - 주입받은 states 
-     * @param {object} eventInfoList - 발생한 이벤트 리스트
-     */
+class RollingNewsEventHandler extends EventsHandler {
     constructor(states = {}, eventInfoList = []) {
         super();
         this.states = states;
-        this.element = document.querySelector(".news-list__navbar");
+        this.element = document.querySelector(".clipping-box");
         this.#addEvents(eventInfoList);
     }
 
@@ -30,4 +21,4 @@ class CategoryEventHandler extends EventsHandler {
     }
 }
 
-export { CategoryEventHandler }
+export { RollingNewsEventHandler }
