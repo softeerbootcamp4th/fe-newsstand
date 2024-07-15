@@ -29,23 +29,40 @@ function clickMediaFilter(e) {
  * @description 필터에 맞는 언론사 콘텐츠를 렌더하는 함수
  */
 function renderMediaContents(mediaId) {
-    const filterMediaDOM = document.querySelector("#media-filter");
-
     if (mediaId === "total-media") {
-        filterMediaDOM.dataset.selectedFilter = "total-media";
-        setSelectedMedia("total-media");
-        setUnselectedMedia("subscribed-media");
-
-        resetSubscribedMedia();
+        setTotalMedia();
         renderTotalMedia();
     } else if (mediaId === "subscribed-media") {
-        filterMediaDOM.dataset.selectedFilter = "subscribed-media";
-        setSelectedMedia("subscribed-media");
-        setUnselectedMedia("total-media");
-        
-        resetTotalMedia();
+        setSubscribedMedia();
         renderSubscribedMedia();
     }
+}
+
+/**
+ * @description 전체 언론사로 전환해주는 함수
+ */
+export function setTotalMedia() {
+    const filterMediaDOM = document.querySelector("#media-filter");
+
+    setSelectedMedia("total-media");
+    setUnselectedMedia("subscribed-media");
+
+    filterMediaDOM.dataset.selectedFilter = "total-media";
+
+    resetSubscribedMedia();
+}
+/**
+ * @description 내가 구독한 언론사로 전환해주는 함수
+ */
+export function setSubscribedMedia() {
+    const filterMediaDOM = document.querySelector("#media-filter");
+
+    setSelectedMedia("subscribed-media");
+    setUnselectedMedia("total-media");
+
+    filterMediaDOM.dataset.selectedFilter = "subscribed-media";
+
+    resetTotalMedia();
 }
 
 /**

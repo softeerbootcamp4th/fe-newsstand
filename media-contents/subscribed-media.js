@@ -1,5 +1,8 @@
+import { darkMode } from "../store/dark-mode.js";
+import { mediaDetail } from "../store/media-detail.js";
+import { mediaList } from "../store/media-list.js";
 import { subscribedMediaList } from "../store/subscribed-media.js";
-import { getData } from "../utils/fetch.js";
+import { getIndex } from "../utils/get-index.js";
 import { getBoundNumber } from "../utils/get-number.js";
 import { DATA_COUNT_PER_GRID, DEFAULT_MEDIA_INDEX, DEFAULT_PAGE } from "./constant.js";
 import { 
@@ -12,26 +15,22 @@ import {
     clickGridItem,
 } from "./util.js";
 
-let mediaDetailData = {};
-let mediaListData = {};
-
 /**
  * @description 구독한 언론사를 렌더링하는 함수
  */
-export async function renderSubscribedMedia() {
-    mediaDetailData = await getData('../static/data/media-detail.json');
-    mediaListData = await getData('../static/data/media.json');
-
+export async function renderSubscribedMedia(mediaId) {
     const displayMode = getDisplayMode();
 
     const gridBoxDOM = document.querySelector(".media-contents__grid-box");
-    const listBoxDOM = document.querySelector(".media-contents__list-box")
+    const listBoxDOM = document.querySelector(".media-contents__list-box");
 
     if (displayMode === "list-display") {
         gridBoxDOM.classList.add("non-display");
         listBoxDOM.classList.remove("non-display");
 
-        renderListMedia();
+        const mediaIdx = getIndex(mediaId, subscribedMediaList.data);
+
+        renderListMedia(mediaIdx);
     } else if (displayMode === "grid-display") {
         gridBoxDOM.classList.remove("non-display");
         listBoxDOM.classList.add("non-display");
@@ -103,7 +102,9 @@ function setArrowDisplayInGrid(page) {
     const prevMediaButton = document.querySelector(".media-contents__left-button");
     const nextMediaButton = document.querySelector(".media-contents__right-button");
 
-    const maxPage = Math.floor((subscribedMediaList.getSubscribedMediaLength() - 1) / DATA_COUNT_PER_GRID);
+    const lastPage = Math.floor((subscribedMediaList.getSubscribedMediaLength() - 1) / DATA_COUNT_PER_GRID);
+    const maxPage = lastPage >= 4 ? 3 : lastPage;
+
 
     if (page === 0) {
         prevMediaButton.classList.add("non-display");
@@ -130,6 +131,7 @@ function renderGridMedia(page) {
 
     gridListDOM.innerHTML = mediaListDOMString;
 
+    darkMode.addCallback("render-subscribed", () => renderGridMedia(page));
     subscribedMediaList.setCallback(() => renderGridMedia(page));
     setArrowDisplayInGrid(page);
 }
@@ -137,10 +139,10 @@ function renderGridMedia(page) {
 /**
  * @description 내가 구독한 언론사를 리스트 형식으로 렌더링하는 함수
  */
-function renderListMedia(mediaId) {
+function renderListMedia(mediaIdx) {
     const mediaListDOM = document.querySelector(".media-contents__category-list");
     const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
-    const subscribedMediaDetailList = subscribedMediaList.data.map((subscribed) => mediaDetailData.data.find((_media) => _media.id === subscribed.id))
+    const subscribedMediaDetailList = subscribedMediaList.data.map((subscribed) => mediaDetail.findMediaById(subscribed.id));
 
     if (subscribedMediaList.getSubscribedMediaLength() === 0) {
         mediaListDOM.innerHTML = "";
@@ -151,9 +153,8 @@ function renderListMedia(mediaId) {
     /**
      * 언론사 카테고리 렌더링
      */
-    const selectedMediaId = mediaId ?? subscribedMediaList.data[0].id;
-    const _selectedMediaIdx = subscribedMediaList.data.findIndex((media) => media.id === selectedMediaId);
-    const selectedMediaIdx = _selectedMediaIdx === -1 ? 0 : _selectedMediaIdx;
+    const subscribedLength = subscribedMediaList.getSubscribedMediaLength();
+    const selectedMediaIdx = mediaIdx >= subscribedLength ? 0 : mediaIdx;
 
     let mediaListDOMString = ''
     subscribedMediaDetailList.forEach((_media, _mediaIdx) => {
@@ -174,6 +175,11 @@ function renderListMedia(mediaId) {
     progressAnimationDOM.addEventListener("animationiteration", navigateNextMedia);
 
     /**
+     * 선택된 언론사로 스크롤
+     */
+    scrollToSelectedMedia();
+
+    /**
      * 카테고리 이벤트 리스너 등록
      */
     mediaListDOM.addEventListener('click', clickMediaList);
@@ -181,11 +187,22 @@ function renderListMedia(mediaId) {
     /**
      * 선택된 카테고리의 콘텐츠 렌더링
      */
+    renderSelectedCategory(selectedMediaIdx);
+
+    darkMode.addCallback("render-subscribed", () => renderSelectedCategory(selectedMediaIdx));
+    subscribedMediaList.setCallback(() => renderListMedia(selectedMediaIdx));
+    setSubscribeButtonEvent(subscribedMediaList.data[selectedMediaIdx]);
+}
+
+/**
+ * @description 선택된 카테고리의 콘텐츠를 렌더링하는 함수
+ */
+function renderSelectedCategory(selectedMediaIdx) {
+    const subscribedMediaDetailList = subscribedMediaList.data.map((subscribed) => mediaDetail.findMediaById(subscribed.id));
+    const contentsBoxDOM = document.querySelector(".media-contents__contents-box");
+
     const contentsString = getSelectedCategoryContentsDOMString(subscribedMediaDetailList[selectedMediaIdx]);
     contentsBoxDOM.innerHTML = contentsString;
-
-    subscribedMediaList.setCallback(() => renderListMedia(selectedMediaId));
-    setSubscribeButtonEvent(subscribedMediaList.data[selectedMediaIdx]);
 }
 
 /**
@@ -203,7 +220,7 @@ function clickMediaList(e) {
         return;
     }
 
-    renderListMedia(subscribedMediaList.data[mediaIdx].id);
+    renderListMedia(mediaIdx);
 }
 
 /**
@@ -261,8 +278,7 @@ function clickListNavigationButton(step) {
     }
 
     selectedCategory.dataset.selectedCategoryIdx = nextCategoryIdx;
-    const nextCategory = subscribedMediaList.data[nextCategoryIdx];
-    renderListMedia(nextCategory.id);
+    renderListMedia(nextCategoryIdx);
 }
 
 /**
@@ -272,7 +288,7 @@ function clickGridNavigationButton(step) {
     const gridBoxDOM = document.querySelector(".media-contents__grid-box");
     const currentPage = parseInt(gridBoxDOM.dataset.gridPage);
 
-    const media = subscribedMediaList.data.map((subscribed) => mediaListData.data.find((_media) => _media.id === subscribed.id));
+    const media = subscribedMediaList.data.map((subscribed) => mediaList.findMediaById(subscribed.id));
     const mediaLength = media.length;
     const nextPage = getBoundNumber(currentPage + step, 0, Math.floor((mediaLength - 1) / DATA_COUNT_PER_GRID));
 
@@ -290,5 +306,21 @@ function clickGridList(e) {
         return;
     }
 
-    return clickGridItem(e, mediaListData.data);
+    return clickGridItem(e);
+}
+
+/**
+ * @description 선택된 언론사로 스크롤하는 함수
+ */
+function scrollToSelectedMedia() {
+    const mediaListDOM = document.querySelector(".media-contents__category-list");
+    const categoryListDOM = document.querySelector(".media-contents__category-list");
+    const selectedMediaDOM = mediaListDOM.querySelector(".media-contents__category-item--selected");
+
+    const { width: selectedMediaWidth, left: selectedMediaLeft } = selectedMediaDOM.getBoundingClientRect();
+    const { width: categoryListWidth, left: categoryListLeft } = categoryListDOM.getBoundingClientRect();
+
+    const scroll = selectedMediaLeft - categoryListLeft - categoryListWidth + selectedMediaWidth;
+
+    categoryListDOM.scrollBy({ left: scroll });
 }

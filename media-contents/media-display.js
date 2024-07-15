@@ -17,20 +17,13 @@ export function renderMediaDisplay() {
  */
 function clickMediaDisplay(e) {
     const displayId = e.target.id;
-    const mediaDisplayDOM = document.querySelector("#display-style");
     const mediaFilterDOM = document.querySelector("#media-filter");
     const selectedFilter = mediaFilterDOM.dataset.selectedFilter;
 
     if (displayId === "list-display") {
-        setSelectedDisplay("list-display");
-        setUnelectedDisplay("grid-display");
-        
-        mediaDisplayDOM.dataset.selectedDisplay = "list-display";
+        setListDisplay();
     } else if (displayId === "grid-display") {
-        setSelectedDisplay("grid-display");
-        setUnelectedDisplay("list-display");
-
-        mediaDisplayDOM.dataset.selectedDisplay = "grid-display";
+        setGridDisplay();
     }
 
     if (selectedFilter === "total-media") {
@@ -40,6 +33,29 @@ function clickMediaDisplay(e) {
         resetTotalMedia();
         renderSubscribedMedia();
     }
+}
+
+/**
+ * @description 리스트 보기로 전환해주는 함수
+ */
+export function setListDisplay() {
+    const mediaDisplayDOM = document.querySelector("#display-style");
+
+    setSelectedDisplay("list-display");
+    setUnelectedDisplay("grid-display");
+    
+    mediaDisplayDOM.dataset.selectedDisplay = "list-display";
+}
+/**
+ * @description 그리드 보기로 전환해주는 함수
+ */
+export function setGridDisplay() {
+    const mediaDisplayDOM = document.querySelector("#display-style");
+
+    setSelectedDisplay("grid-display");
+    setUnelectedDisplay("list-display");
+
+    mediaDisplayDOM.dataset.selectedDisplay = "grid-display";
 }
 
 /**

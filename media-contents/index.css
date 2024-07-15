@@ -8,6 +8,11 @@
 
     overflow-y: hidden;
     user-select: none;
+
+    scrollbar-width: none;
+}
+.media-contents__category-list::-webkit-scrollbar{
+    display: none;
 }
 .media-contents__category-item {
     padding: 0 16px;
@@ -68,7 +73,11 @@
 
 .media-contents__image-content {
     width: 320px;
-    cursor: pointer;
+}
+.media-contents__image-wrapper {
+    width: 320px;
+    height: 200px;
+    overflow: hidden;
 }
 .media-contents__image-content img {
     width: 320px;
