@@ -1,16 +1,17 @@
-import { shownewstab } from "../displaynews/displaysubscribe.js";
+import { shownewstab } from "../displaynews/displaySubscribe.js";
 import { clickArt } from "../mainscript.js";
 import { animationTimer } from "../progressbar/progressbutton.js";
-import { subProgressTimer } from "../displaynews/displaysubscribe.js";
+import { subProgressTimer } from "../displaynews/displaySubscribe.js";
+import subscribeManager from "../statemanager/subscribeManager.js";
 
 export const mytabs = () => {
-    const datas1 = localStorage.getItem("mysubscribe");
+    const subscribedDatas = localStorage.getItem("mysubscribe");
     clickArt('my-article');
     clearInterval(animationTimer);
-    if (!datas1) {
+    clearInterval(subProgressTimer);
+    if (subscribedDatas.length === 0) {
         console.log('No data found in localStorage');
         const button = document.querySelector(`.news-list-header`);
-        
         button.innerHTML = '';
         const lists = document.querySelector(".news-main-container");
         lists.innerHTML = '';
@@ -20,11 +21,11 @@ export const mytabs = () => {
         lists2.innerHTML = ''; 
         return;
     }
-
     //필수
     else{
-        const parsedData = JSON.parse(datas1);
-        shownewstab(parsedData);
+        const parsedData = JSON.parse(subscribedDatas);
+        subscribeManager.setSubscribedData(parsedData);
+        shownewstab(subscribeManager.getSubscribedData());
     }
 }
 
@@ -32,6 +33,7 @@ export const newstype = ["economy", "broadcast", "internet", "englishnews", "spo
 
 export const originaltabs = () => {
     clearInterval(subProgressTimer);
+    clearInterval(animationTimer);
     const defaultn = document.querySelector(".news-list-header");
     defaultn.innerHTML = 
     "<article class=\"text-button\" id=\"economy\" data-index=\"0\">종합/경제 <span></span></article>"+

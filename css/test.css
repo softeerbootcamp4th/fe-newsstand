@@ -81,7 +81,7 @@ h2 {
     font-family: 'Pretendard Variable', sans-serif;
     font-size: 14px;
     color: #5f6e76;
-    animation: animateHeadline 5s infinite;
+    /*animation: animateHeadline 5s infinite; */
 }
 
 .article:hover {
@@ -339,7 +339,7 @@ button:hover {
 .btn.disabled {
     opacity: 0;
     pointer-events: none; 
-  }
+}
 
 .right-button{
     position: relative;
@@ -365,7 +365,7 @@ button:hover {
 
 .progress-button.animate {
     background-position: left bottom;
-    animation: fillAnimation 4s linear;
+    animation: fillAnimation 2s linear;
 }
 
 .progress-button:hover{

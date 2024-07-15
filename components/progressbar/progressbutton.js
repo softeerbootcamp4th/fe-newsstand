@@ -1,6 +1,6 @@
-import { testingpages, indexstate } from "../displaynews/displayNews.js";
 import { newstype } from "../newstab/newstab.js";
 import { updateNewsDisplay } from "../displaynews/displayNews.js";
+import stateManager from "../statemanager/stateManager.js";
 
 export let animationTimer;
 
@@ -8,7 +8,9 @@ export const transformToProgress = (element) => {
     element.setAttribute('data-original-text', element.textContent);
     element.classList.add('progress-button');
 
-    const maxrepeat = testingpages[Number(element.dataset.index)];
+    const pageindex = stateManager.getPages();
+    const maxrepeat = pageindex[Number(element.dataset.index)];
+
     let counts = 0;
 
     const startAnimation = () => {
@@ -16,23 +18,25 @@ export const transformToProgress = (element) => {
         
         setTimeout(() => {
             element.classList.remove('animate');
-        }, 4000);
+        }, 2000);
     };
 
     const updateProgress = () => {
-        indexstate.pageIndex++;
+        stateManager.setPageIndex(stateManager.getPageIndex() + 1);
+
         counts++;
         updateButtonText(element);
-        updateNewsDisplay(newstype[indexstate.pressIndex], indexstate.pageIndex);
+        updateNewsDisplay(newstype[stateManager.getPressIndex()], stateManager.getPageIndex());
 
         if (counts >= maxrepeat) {
             clearInterval(animationTimer);
-            indexstate.pressIndex = (indexstate.pressIndex + 1) % newstype.length;
-            indexstate.pageIndex = 0;
-            const nextButton = document.querySelector(`.text-button[data-index="${indexstate.pressIndex}"]`);
+            stateManager.setPressIndex((stateManager.getPressIndex() + 1) % newstype.length);
+            stateManager.setPageIndex(0);
+
+            const nextButton = document.querySelector(`.text-button[data-index="${stateManager.getPressIndex()}"]`);
             resetProgress();
             transformToProgress(nextButton);
-            updateNewsDisplay(newstype[indexstate.pressIndex], indexstate.pageIndex);
+            updateNewsDisplay(newstype[stateManager.getPressIndex()], stateManager.getPageIndex());
             return;
         }
 
@@ -43,7 +47,7 @@ export const transformToProgress = (element) => {
     updateButtonText(element);
     startAnimation();
 
-    animationTimer = setInterval(updateProgress, 4100);
+    animationTimer = setInterval(updateProgress, 2050);
 }
 
 export const updateButtonText = (element) => {
@@ -55,7 +59,8 @@ export const updateButtonText = (element) => {
     }
     const iii = element.dataset.index;
     const snum = Number(iii);
-    spanElement.textContent = `${indexstate.pageIndex + 1}/${testingpages[snum]}`;
+    const pageindex = stateManager.getPages();
+    spanElement.textContent = `${stateManager.getPageIndex() + 1}/${pageindex[snum]}`;
     element.textContent = originalText;
     element.appendChild(spanElement);
 }
