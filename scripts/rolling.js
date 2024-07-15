@@ -1,12 +1,14 @@
-export function addEventToRollingBox(state) {
+import state from "./store.js";
+
+export function addEventToRollingBox() {
     let indexPointer = {
         leftAnimationIndex: 0,
         rightAnimationIndex: 0
     };
-
-    initializeData(indexPointer, state.previewArticleData);
+    const previewArticleData = state.getter.getPreviewArticleData();
+    initializeData(indexPointer, previewArticleData);
     addPauseEvent();
-    addRollingEvent(indexPointer, state.previewArticleData);
+    addRollingEvent(indexPointer, previewArticleData);
 }
 
 function initializeData(indexPointer, previewArticleData) {

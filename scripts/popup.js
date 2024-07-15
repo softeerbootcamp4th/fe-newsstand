@@ -3,19 +3,20 @@ import { renderArticles, renderPopup, renderTabAnimationList, renderTabList } fr
 import { unSubscribeCompany } from "./subscribe.js";
 import { getTabLength, updateTabAnimationStyle } from "./tab.js";
 import { switchToggleWithToggleName } from "./toggle.js";
+import state from "./store.js";
 
-export function addToastPopup(state) {
+export function addToastPopup() {
     const toastMessage = `내가 구독한 언론사에 추가되었습니다.`;
     const toastPopupDom = generateToastPopupDom(toastMessage);
     renderPopup(toastPopupDom);
     setTimeout(()=>{
         toastPopupDom.remove();
-        switchToggleWithToggleName(state,TOGGLE.SUBSCRIBED);
-    },TIME.SECOND * 5);
+        switchToggleWithToggleName(TOGGLE.SUBSCRIBED);
+    },TIME.SECOND * 20);
 }
 
-export function addDeletePopup(state,companyName) {
-    const deletePopupDom = generateDeletePopupDom(state,companyName);
+export function addDeletePopup(companyName) {
+    const deletePopupDom = generateDeletePopupDom(companyName);
     deletePopupDom
     renderPopup(deletePopupDom);    
 }
@@ -27,7 +28,7 @@ export function generateToastPopupDom(message) {
     return toastPopupDom;
 }
 
-export function generateDeletePopupDom(state,companyName) {
+export function generateDeletePopupDom(companyName) {
     const deletePopupDom = document.createElement('div');
     deletePopupDom.classList.add('delete_popup');
     deletePopupDom.innerHTML = `
@@ -46,24 +47,25 @@ export function generateDeletePopupDom(state,companyName) {
             </div>
         </div>
     `;
-    deletePopupDom.addEventListener("click",(event) => handleDeletePopup(state,event.target));
+    deletePopupDom.addEventListener("click",(event) => handleDeletePopup(event.target));
     return deletePopupDom;
 }
 
-function handleDeletePopup(state,target) {
+function handleDeletePopup(target) {
     if(target.dataset.id === POPUP.ACCEPT){
-        handleDeleteAction(state,target.dataset.company_name);
+        handleDeleteAction(target.dataset.company_name);
     }
     document.querySelector(".delete_popup").remove();
 }
 
-function handleDeleteAction(state,companyName) {
-    unSubscribeCompany(state,companyName);
-    if (state.selectedTabIndex > (getTabLength(state) - 1)) {
-        state.selectedTabIndex -= 1;
+function handleDeleteAction(companyName) {
+    unSubscribeCompany(companyName);
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
+    if (selectedTabIndex > (getTabLength() - 1)) {
+        state.setter.setSelectedTabIndex(selectedTabIndex-1)
     }
-    renderTabList(state);
-    renderTabAnimationList(state);
-    updateTabAnimationStyle(state);
-    renderArticles(state);
+    renderTabList();
+    renderTabAnimationList();
+    updateTabAnimationStyle();
+    renderArticles();
 }

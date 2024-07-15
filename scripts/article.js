@@ -1,28 +1,43 @@
 import { getCurrentCompany } from "./company.js";
 import { TOGGLE } from "./magicNumber.js";
 import { assignCSS } from "./util.js";
+import state from "./store.js";
 
- export function getCurrentArticle(state) {
-    switch(state.toggleName){
+const articleDataList = state.getter.getArticleDataList();
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
+    const selectedCompanyIndex = state.getter.getSelectedCompanyIndex();
+    const selectedArticleIndex = state.getter.getSelectedArticleIndex();
+    const companiesWithArticles = state.getter.getCompaniesWithArticles();
+
+ export function getCurrentArticle() {
+    const articleDataList = state.getter.getArticleDataList();
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
+    const selectedCompanyIndex = state.getter.getSelectedCompanyIndex();
+    const selectedArticleIndex = state.getter.getSelectedArticleIndex();
+    switch(state.getter.getToggleName()){
         case TOGGLE.ALL:
-            return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles[state.selectedArticleIndex];
+            return articleDataList[selectedTabIndex].companies[selectedCompanyIndex].articles[selectedArticleIndex];
         case TOGGLE.SUBSCRIBED:
-            return getCurrentCompany(state) ? getCurrentCompany(state).articles[state.selectedArticleIndex] : undefined;
+            return getCurrentCompany() ? getCurrentCompany().articles[selectedArticleIndex] : undefined;
     }  
  }
 
- export function getCurrentArticleList(state) {
-    switch(state.toggleName){
+ export function getCurrentArticleList() {
+    const articleDataList = state.getter.getArticleDataList();
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
+    const selectedCompanyIndex = state.getter.getSelectedCompanyIndex();
+    const companiesWithArticles = state.getter.getCompaniesWithArticles();
+    switch(state.getter.getToggleName()){
         case TOGGLE.ALL:
-            return state.articleDataList[state.selectedTabIndex].companies[state.selectedCompanyIndex].articles;
+            return articleDataList[selectedTabIndex].companies[selectedCompanyIndex].articles;
         case TOGGLE.SUBSCRIBED:
-            return state.companiesWithArticles[getCurrentCompany(state).name].articles;
+            return companiesWithArticles[getCurrentCompany().name].articles;
     }
  }
 
-export function updateArticleBox(state){
-    const currentCompany = getCurrentCompany(state);
-    const currentArticle = getCurrentArticle(state);
+export function updateArticleBox(){
+    const currentCompany = getCurrentCompany();
+    const currentArticle = getCurrentArticle();
 
     const registerDateDom = document.querySelector("#register_date");
     const companyImgDom = document.querySelector("#company_img");

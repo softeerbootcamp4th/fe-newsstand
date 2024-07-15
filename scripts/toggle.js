@@ -1,19 +1,20 @@
-import { getSubscribeCompanies } from "./company.js";
+import { getAllCompanyLength, getSubscribeCompanies } from "./company.js";
 import { TOGGLE } from "./magicNumber.js";
 import { renderDefaultSceen } from "./render.js";
 import { getTabLength } from "./tab.js";
+import state from "./store.js";
 
-export function addEventToToggle(state) {
+export function addEventToToggle() {
     const toggleWrapperDom = document.querySelector(".toggle_wrapper");
-    toggleWrapperDom.addEventListener("click", (event) => switchToggleWithToggleDom(state, event.target));
+    toggleWrapperDom.addEventListener("click", (event) => switchToggleWithToggleDom(event.target));
 }
 
-export function switchToggleWithToggleDom(state, toggleDom) {
+export function switchToggleWithToggleDom(toggleDom) {
     const toggleName = toggleDom.id.split("_")[1];
-    switchToggleWithToggleName(state, toggleName);
+    switchToggleWithToggleName(toggleName);
 }
 
-export function switchToggleWithToggleName(state, toggleName) {
+export function switchToggleWithToggleName(toggleName) {
     switch (toggleName) {
         case TOGGLE.ALL:
             document.querySelector("#toggle_all").classList.add('toggle_item_active');
@@ -24,8 +25,8 @@ export function switchToggleWithToggleName(state, toggleName) {
             document.querySelector("#toggle_all").classList.remove('toggle_item_active');
             break;
     }
-    state.toggleName = toggleName;
-    renderDefaultSceen(state);
+    state.setter.setToggleName(toggleName);
+    renderDefaultSceen();
 }
 
 export function setUpToggleWithDefaultOption(leftDom, rightDom) {
@@ -49,21 +50,24 @@ function setUpToggleWithDisabledCondition(disabledCondition) {
     }
 }
 
-export function updateAllToggleArrow(state) {
-    const max = getSubscribeCompanies(state).length - 1;
+export function updateAllToggleArrow() {
+    const max = getAllCompanyLength() - 1;
     const min = 0;
-    const tabLastIndex = getTabLength(state) - 1;
+    const tabLastIndex = getTabLength() - 1;
+    const selectedCompanyIndex = state.getter.getSelectedCompanyIndex();
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
     setUpToggleWithDisabledCondition({
-        left: state.selectedCompanyIndex == min && state.selectedTabIndex == min,
-        right: state.selectedCompanyIndex == max && state.selectedTabIndex == tabLastIndex
+        left: selectedCompanyIndex == min && selectedTabIndex == min,
+        right: selectedCompanyIndex == max && selectedTabIndex == tabLastIndex
     });
 }
 
-export function updateSubscribedToggleArrow(state) {
-    const max = getTabLength(state) - 1;
+export function updateSubscribedToggleArrow() {
+    const max = getTabLength() - 1;
     const min = 0;
+    const selectedTabIndex = state.getter.getSelectedTabIndex();
     setUpToggleWithDisabledCondition({
-        left: state.selectedTabIndex === min,
-        right: state.selectedTabIndex === max
+        left: selectedTabIndex === min,
+        right: selectedTabIndex === max
     });
 }
