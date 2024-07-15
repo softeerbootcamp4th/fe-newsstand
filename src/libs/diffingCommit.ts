@@ -3,7 +3,7 @@ export const diffingCommit = (cur: ChildNode, nxt: ChildNode) => {
     return;
   }
 
-  if (!(cur instanceof HTMLElement && nxt instanceof HTMLElement)) {
+  if (!(cur instanceof Element && nxt instanceof Element)) {
     if (cur.textContent !== nxt.textContent) {
       cur.replaceWith(nxt);
     }
@@ -30,9 +30,6 @@ export const diffingCommit = (cur: ChildNode, nxt: ChildNode) => {
       cur.removeAttribute(name);
     }
   }
-  if (cur.innerHTML !== nxt.innerHTML) {
-    cur.innerHTML = nxt.innerHTML;
-  }
 
   // Update children
   const curChildren = Array.from(cur.childNodes);
@@ -42,6 +39,7 @@ export const diffingCommit = (cur: ChildNode, nxt: ChildNode) => {
   for (let i = 0; i < maxLen; i++) {
     const curChild = curChildren[i];
     const nxtChild = nxtChildren[i];
+
     if (curChild && nxtChild) {
       diffingCommit(curChild, nxtChild);
     } else if (!curChild && nxtChild) {

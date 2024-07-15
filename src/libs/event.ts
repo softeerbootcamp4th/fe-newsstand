@@ -1,3 +1,5 @@
+import { rootElement } from "./core";
+
 export type EventListener<T extends Event = Event> = (event: T) => void;
 export type EventKey = `on${string}`;
 
@@ -48,14 +50,38 @@ export const EventNameMaps = new Map<string, string>([
 
 export const eventMap = new Map<string, Map<string, EventListener>>();
 
-const rootEventHandler = (e: Event) => {
+class AppEvent extends Event {
+  isPropagationStopped = false;
+  constructor(type: string, e: EventInit, target: HTMLElement | null) {
+    super(type, e);
+
+    Object.defineProperty(this, "target", {
+      value: target,
+      writable: true,
+    });
+    Object.defineProperty(this, "target", {
+      writable: true,
+    });
+  }
+
+  stopPropagation() {
+    super.stopPropagation();
+    this.isPropagationStopped = true;
+  }
+}
+
+const rootEventHandler = (e: Event | AppEvent) => {
   const target = e.target as HTMLElement;
   const handler = eventMap.get(target.getAttribute("key") ?? "")?.get(e.type);
 
   if (handler == null) {
-    if (target.parentElement != document.body) {
-      target.parentElement?.dispatchEvent(new Event(e.type, e));
+    if (
+      (e as AppEvent).isPropagationStopped === true ||
+      target.parentElement == document.body
+    ) {
+      return;
     }
+    rootElement?.dispatchEvent(new AppEvent(e.type, e, target.parentElement));
     return;
   }
   handler(e);

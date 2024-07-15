@@ -1,4 +1,4 @@
-import { ce, Span } from "@/libs";
+import { cc, Span } from "@/libs";
 import styles from "./CategoryTabActiveBadge.module.css";
 interface CategoryTabActiveBadgeProps {
   curIdx: number;
@@ -8,10 +8,10 @@ export const CategoryTabActiveBadge = ({
   curIdx,
   total,
 }: CategoryTabActiveBadgeProps) => {
-  return ce(Span, {
+  return cc(Span, {
     children: [
       `${curIdx + 1}`,
-      ce(Span, { className: styles.week, children: [`/${total}`] }),
+      cc(Span, { className: styles.week, children: [`/${total}`] }),
     ],
   });
 };

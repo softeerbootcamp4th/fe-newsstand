@@ -1,4 +1,4 @@
-import { AppChild, Div, cc, ce, useState } from "@/libs";
+import { AppChild, Div, cc, useState } from "@/libs";
 import { createContext } from "@/libs/hooks/useContext";
 
 interface ModalContextValue {
@@ -26,7 +26,7 @@ export const ModalProvider = ({ children }: { children: AppChild[] }) => {
     } as ModalContextValue,
     children: [
       ...children,
-      ce(Div, {
+      cc(Div, {
         children: currentModals,
       }),
     ],

@@ -14,6 +14,7 @@
 .tab {
   display: flex;
   align-items: center;
+  justify-content: center;
   justify-content: space-between;
   flex-shrink: 0;
   padding-left: 16px;

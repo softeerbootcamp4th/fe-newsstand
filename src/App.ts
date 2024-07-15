@@ -1,20 +1,24 @@
 import { AppHeader } from "./components/AppHeader";
 import { CurrentNews } from "./components/CurrentNews";
-import { cc } from "./libs/nodes/components";
-import { ce, Div } from "./libs/nodes/elements";
+import { Div } from "./libs/nodes/elements";
 import styles from "./App.module.css";
-import { MediaContent } from "./components/MediaContent";
+import { ContentList } from "./components/ContentList";
 import { ModalProvider } from "./providers/ModalProvider";
-import { AppComponent } from "./libs";
+import { ToastProvider } from "./providers/ToastProvider";
+import { cc } from "./libs";
 export const App = () => {
-  return cc(ModalProvider as AppComponent, {
+  return cc(ToastProvider, {
     children: [
-      ce(Div, {
-        className: styles.container,
+      cc(ModalProvider, {
         children: [
-          cc(AppHeader, {}),
-          cc(CurrentNews, {}),
-          cc(MediaContent, {}),
+          cc(Div, {
+            className: styles.container,
+            children: [
+              cc(AppHeader, {}),
+              cc(CurrentNews, {}),
+              cc(ContentList, {}),
+            ],
+          }),
         ],
       }),
     ],

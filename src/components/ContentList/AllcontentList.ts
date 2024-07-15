@@ -1,19 +1,20 @@
-import { Div, Main, ce } from "@/libs";
-import { MediaContentFilter } from "./MediaContentFilter";
-import { useEffect, useState } from "@/libs";
-import { cc } from "@/libs";
-import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
+import { useState, useEffect, cc, Main } from "@/libs";
 import { MediaIdByCategories } from "@/models/Newsstand";
-import { MediaContentTabs } from "./MediaContentTabs";
-import styles from "./index.module.css";
+import { getMediaIdByCategories } from "@/remotes/getMediaIdByCategories";
 import { CategoryTabActiveBadge } from "./CategoryTabActiveBadge";
-import { MediaContentMain } from "./MediaContentMain";
-export type MediaContentFilterType = "전체 언론사" | "내가 구독한 언론사";
+import { MediaContent } from "../MediaContent/MediaContent";
+import { MediaContentTabs } from "./ContentListHeader";
+import { MediaContentFilterType } from "@/models/MediaContentFilter";
+import { Media } from "@/models/Media";
 
-export const MediaContent = () => {
-  const [currentFilter, setCurrentFilter] =
-    useState<MediaContentFilterType>("전체 언론사");
-
+interface AllcontentListProps {
+  setCurrentFilter: (filter: MediaContentFilterType) => void;
+  setMediaName: (mediaName: string) => void;
+}
+export const AllcontentList = ({
+  setCurrentFilter,
+  setMediaName,
+}: AllcontentListProps) => {
   const [currentData, setCurrentData] = useState<MediaIdByCategories | null>(
     null,
   );
@@ -85,27 +86,23 @@ export const MediaContent = () => {
       onNext: handleNext,
     };
   });
+  const handleSubscribe = (media: Media) => {
+    setCurrentFilter("내가 구독한 언론사");
+    setMediaName(media.name);
+  };
 
-  return ce(Div, {
-    className: styles.container,
+  return cc(Main, {
     children: [
-      cc(MediaContentFilter, {
-        currentFilter: currentFilter,
-        setCurrentFilter: setCurrentFilter,
+      cc(MediaContentTabs, {
+        tabs: tabData,
+        hasNext: hasNext,
       }),
-      ce(Main, {
-        children: [
-          cc(MediaContentTabs, {
-            tabs: tabData,
-            hasNext: hasNext,
-          }),
-          cc(MediaContentMain, {
-            mediaId: currentMediaId,
-            category: currentCategory,
-            handleNext: handleNext,
-            handlePrev,
-          }),
-        ],
+      cc(MediaContent, {
+        mediaId: currentMediaId,
+        category: currentCategory,
+        handleNext: handleNext,
+        handlePrev,
+        handleSubscribe,
       }),
     ],
   });

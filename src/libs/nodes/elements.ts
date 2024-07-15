@@ -1,6 +1,6 @@
 import { EventNameMaps } from "../event";
 import { AppElement, AppElementProps, CreatedAppElement } from "./renderer";
-export const Raw = (data: string) => {
+export const Raw = (data: string): CreatedAppElement => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(data, "text/xml");
   return {
@@ -10,13 +10,6 @@ export const Raw = (data: string) => {
   };
 };
 Raw.type = "element";
-
-export function ce<T extends HTMLElement>(
-  render: AppElement<T>,
-  props: AppElementProps<T>,
-): CreatedAppElement<T> {
-  return render(props);
-}
 
 const createElement = <T extends HTMLElement = HTMLElement>(
   tagName: string,
@@ -158,3 +151,11 @@ export const Img: AppElement<HTMLImageElement> = (
 };
 
 Img.type = "element";
+
+export const Br: AppElement<HTMLBRElement> = (
+  props: AppElementProps<HTMLBRElement>,
+) => {
+  return createElement<HTMLBRElement>("br", props);
+};
+
+Br.type = "element";

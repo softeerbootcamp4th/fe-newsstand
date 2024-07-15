@@ -1,45 +1,52 @@
-import { Button, Div, Raw, ce } from "@/libs";
-import styles from "./MediaContentMain.module.css";
+import { Button, Div, Raw, cc } from "@/libs";
+import styles from "./MediaContent.module.css";
 import { Category } from "@/models/Newsstand";
 import { useMedia } from "@/hooks/useMedia";
-import { cc } from "@/libs";
-import { MediaContentMainHeader } from "./MediaContentMainHeader";
+
+import { MediaContentHeader } from "./MediaContentHeader";
 import { useMediaRecentNews } from "@/hooks/useMediaRecentNews";
 import { MediaContentView } from "./MediaContentView";
 import { RightIcon } from "@/assets/RightIcon";
 import { LeftIcon } from "@/assets/LeftIcon";
+import { Media } from "@/models/Media";
 
-interface MediaContentMainProps {
+interface MediaContentProps {
   mediaId: number;
   category: Category;
   handleNext: () => void;
   handlePrev: () => void;
+  handleUnsubscribe?: () => void;
+  handleSubscribe?: (media: Media) => void;
 }
-export const MediaContentMain = ({
+export const MediaContent = ({
   mediaId,
   category,
   handleNext,
   handlePrev,
-}: MediaContentMainProps) => {
+  handleUnsubscribe,
+  handleSubscribe,
+}: MediaContentProps) => {
   const [media, setMedia] = useMedia(mediaId);
   const newsList = useMediaRecentNews(mediaId, category.id);
-  return ce(Div, {
+  return cc(Div, {
     className: styles.container,
     children: [
-      ce(Button, {
+      cc(Button, {
         className: `${styles.btn} ${styles.left}`,
         children: [Raw(LeftIcon)],
         onClick: handlePrev,
       }),
-      cc(MediaContentMainHeader, {
+      cc(MediaContentHeader, {
         media,
         setMedia,
+        handleUnsubscribe,
+        handleSubscribe,
       }),
       cc(MediaContentView, {
         newsList: newsList,
-        media,
+        media: media,
       }),
-      ce(Button, {
+      cc(Button, {
         className: `${styles.btn} ${styles.right}`,
         children: [Raw(RightIcon)],
         onClick: handleNext,
