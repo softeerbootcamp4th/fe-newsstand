@@ -41,6 +41,25 @@
                         {"subNewsId": 4, "subNewsTitle": "하와이 이승만 동상 찾은 김여사 \"위업 재조명되길\""},
                         {"subNewsId": 5, "subNewsTitle": "이재명, 당대표 연임 출마 선언"}
                     ]
+                },
+                {
+                    "pressId": 2,
+                    "pressLogo": "./asset/images/경향신문.svg",
+                    "pressName": "경향신문",
+                    "editDate": "2024.06.18 18:40 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "오늘부터 성수역 인근 안전요원 배치···성동구청장 \"시민 안전 최선\"",
+                        "mainNewsImage": "./asset/images/경향신문 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId": 0, "subNewsTitle": "한동훈, 원희룡 겨냥 \"노상방뇨하듯…거짓 마타도어 구태정치\""},
+                        {"subNewsId": 1, "subNewsTitle": "비에 잠긴 군산, 땀에 젖은 서울…극과 극 날씨 왜?"},
+                        {"subNewsId": 2, "subNewsTitle": "서울시의회가 강행한 학생인권조례 폐지안 ‘집행정지’ 소송 간다"},
+                        {"subNewsId": 3, "subNewsTitle": "티웨이항공, 우여곡절 끝 8월부터 파리행 항공기 띄운다"},
+                        {"subNewsId": 4, "subNewsTitle": "홍범도 후예들이 굽는 ‘레표시카’ 맛보세요"},
+                        {"subNewsId": 5, "subNewsTitle": "서울시의회가 강행한 학생인권조례 폐지안 ‘집행정지’ 소송 간다"}
+                    ]
                 }
             ]
         },
@@ -128,6 +147,25 @@
                         {"subNewsId":3, "subNewsTitle": "세운5구역, GS건설 합류 정상화 '3800억 브리지론' 차환"},
                         {"subNewsId":4, "subNewsTitle": "[단독]금융위, 비트모빅 DEX 거래소 ‘모빅매니아’ 수사 의뢰"},
                         {"subNewsId":5, "subNewsTitle": "카카오 김범수, 'SM 시세조종' 혐의로 검찰 소환 조사"}
+                    ]
+                },
+                {
+                    "pressId": 2,
+                    "pressLogo": "./asset/images/디지털타임스.svg",
+                    "pressName": "디지털타임스",
+                    "editDate": "2024.07.11 16:30 편집",
+                    "mainNews": {
+                        "mainNewsId": 0,
+                        "mainNewsTitle": "[기획] 배민, 또 갑질 도졌다… 수수료 9.8%로 인상",
+                        "mainNewsImage": "./asset/images/디지털타임스 메인 썸네일.jpg"
+                    },
+                    "subNews": [
+                        {"subNewsId":0, "subNewsTitle": "지난달 주담대 6.3조 `발작 급증`…7·8월이 더 `걱정`"},
+                        {"subNewsId":1, "subNewsTitle": "[속보] `불법 촬영 혐의` 황의조…검찰, 불구속 기소"},
+                        {"subNewsId":2, "subNewsTitle": "\"4년간 맞으며 방송\"…곳곳에 멍자국 쯔양 과거 영상들 재조명"},
+                        {"subNewsId":3, "subNewsTitle": "`피프티 피프티` 손배 첫 재판…어트랙트 \"배상해야\" vs 더기버스 \"어떤 손해냐\""},
+                        {"subNewsId":4, "subNewsTitle": "한국 `초고령사회` 진입 초읽기...5명 중 1명이 65세 이상 노인"},
+                        {"subNewsId":5, "subNewsTitle": "\"아뿔싸\"…조국 `한동훈 가발` 조작사진에 속아 합성사진 올렸다 `빛삭`"}
                     ]
                 }
             ]
