@@ -85,6 +85,19 @@ export class Deque {
 	}
 
 	/*
+	*current 값을 반환하는 메서드
+	*/
+	getCurrent() {
+		return (this.current);
+	}
+
+	/*
+	*current 값을 설정하는 메서드
+	*/
+	setCurrent(value) {
+		this.current = value;
+	}
+	/*
 	*deque 의 size를 반환하는 메서드
 	*/
 	size() {

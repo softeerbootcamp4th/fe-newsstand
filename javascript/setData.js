@@ -18,7 +18,7 @@ export function	setFieldTab(fieldName, Deque) {
 /*
 * field별 언론사 정보 및 구독 버튼
 */
-function	setPressInfo(Deque) {
+export function	setPressInfo(Deque) {
 	const	pressNews = document.querySelector(".PressNews");
 	if (pressNews)
 	{

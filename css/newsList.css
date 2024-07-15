@@ -1,3 +1,80 @@
+.snackBar {
+  visibility: hidden;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 423px;
+  left: 497px;
+  padding: 16px 24px;
+  text-align: center;
+  background-color: #4362D0;
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 22px;
+  z-index: 1;
+}
+
+.snackBar.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.Alert {
+  position: absolute;
+  top: 380px;
+  left: 480px;
+  width: 320px;
+  height: auto;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.Alert.show {
+  visibility: visible;
+}
+
+.Frame-42 {
+  width: 320px;
+  min-height: 92px;
+  padding: 24px;
+  box-sizing: border-box;
+  text-align: center;
+  border: 1px solid #D2DAE0;
+  color: #5F6E76;
+  background-color: #FFFFFF;
+}
+
+.Buttons {
+  width: 320px;
+  height: auto;
+  border: 1px solid #D2DAE0;
+  display: flex;
+  align-items: center;
+  background-color: #F5F7F9;
+  cursor: pointer;
+}
+
+.PositiveButton {
+  width: 160px;
+  height: 48px;
+  border: 1px solid #D2DAE0;
+  text-align: center;
+  font-size: 16px;
+  line-height: 48px;
+  color: #5F6E76;
+}
+
+.NegativeButton {
+  width: 160px;
+  height: 48px;
+  border: 1px solid #D2DAE0;
+  text-align: center;
+  font-size: 16px;
+  line-height: 48px;
+  font-weight: bold;
+  color: #14212B;
+}
+
 .NewsList {
   position: absolute;
   top: 256px;
