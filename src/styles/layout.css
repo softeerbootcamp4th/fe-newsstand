@@ -18,8 +18,8 @@ body {
 }
 
 #contents-container {
-  padding: 10px 20px;
-  max-width: calc(40px + 930px); /* add padding s*/
+  padding: 50px;
+  max-width: calc(100px + 930px); /* add paddings */
   width: 100%;
 }
 
@@ -60,9 +60,16 @@ main {
 
   position: relative;
   width: 100%;
+  height: 100%;
 }
 
 .empty-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 340px;
+
   padding: 20px;
   text-align: center;
 }

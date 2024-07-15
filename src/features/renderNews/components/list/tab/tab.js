@@ -2,45 +2,46 @@ import { createIcon } from "../../../../../components/icon/icon.js";
 import { getCategoryList } from "../../../../../apis/news.js";
 import { MainNewsState } from "../../../../../types/news.js";
 import {
-  setTotalTabNumber,
-  updateCompany,
-  updateCompanyType,
+  setTotalTabNumberInListView,
+  selectCompanyByIndexInListView,
+  selectCompanyTypeInListView,
 } from "../../../utils/updateStates.js";
 import { createTabItem } from "./tabItem.js";
 
 /**
  * @param {MainNewsState} state
  */
-export async function createTab({ currentTabId, currentCompanyIndex, currentDataType, data }) {
-  const container = document.createElement("div");
-  container.className = "list-tab border-box";
+export async function createTab({ categoryId, companyIndex, dataTabId, companies }) {
+  const tab = document.createElement("div");
+  tab.className = "list-tab border-box";
 
-  if (currentDataType === "all-news-tab") {
+  if (dataTabId === "all-news-tab") {
     const categoryList = await getCategoryList();
-    setTotalTabNumber(categoryList.length);
+
+    setTotalTabNumberInListView(categoryList.length);
 
     categoryList.forEach(({ id, name }) => {
-      const categoryElement = createTabItem({
+      const categoryComponent = createTabItem({
         innerText: name,
-        isSelected: +id === +currentTabId,
-        children: `${currentCompanyIndex + 1}/${data.length}`,
-        onClick: async () => await updateCompanyType(id),
+        isSelected: +id === +categoryId,
+        children: companies.length && `${companyIndex + 1}/${companies.length}`,
+        onClick: async () => await selectCompanyTypeInListView(id),
       });
 
-      container.appendChild(categoryElement);
+      tab.appendChild(categoryComponent);
     });
   } else {
-    data.forEach(({ name: companyName }, companyIndex) => {
-      const companyElement = createTabItem({
+    companies.forEach(({ name: companyName }, index) => {
+      const companyComponent = createTabItem({
         innerText: companyName,
-        isSelected: companyIndex === currentCompanyIndex,
+        isSelected: companyIndex === index,
         children: createIcon({ iconId: "arrow" }),
-        onClick: () => updateCompany(companyIndex),
+        onClick: () => selectCompanyByIndexInListView(index),
       });
 
-      container.appendChild(companyElement);
+      tab.appendChild(companyComponent);
     });
   }
 
-  return container;
+  return tab;
 }

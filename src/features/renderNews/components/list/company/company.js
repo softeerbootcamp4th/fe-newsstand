@@ -2,22 +2,23 @@ import { Company, NewsItem } from "../../../../../types/news.js";
 import { convertStringToFragment } from "../../../../../utils/convertStringToFragment.js";
 import { createSubscriptionButton } from "../../../../subscriptionButton/components/subscriptionButton.js";
 import { getObjectSubscribedCompanies } from "../../../../subscriptionButton/utils/localStorage.js";
+import { createCompanyLogoTemplate } from "../../@common/companyLogo.js";
 
 /**
- * @param {Company} company
+ * @param {Company} companyData
  * @param {"all-news-tab" | "subscribed-news-tab"} dataType
  * @returns {HTMLDivElement}
  */
-export function createCompany(company, dataType) {
-  const container = document.createElement("div");
-  container.className = "list-company-container border-box";
+export function createCompany(companyData, dataType) {
+  const company = document.createElement("div");
+  company.className = "list-company-container border-box";
 
-  const header = createHeader(company, dataType);
-  const contents = createMainContents(company);
+  const headerComponent = createHeader(companyData, dataType);
+  const contentsComponent = createMainContents(companyData);
 
-  container.append(header, contents);
+  company.append(headerComponent, contentsComponent);
 
-  return container;
+  return company;
 }
 
 /**
@@ -26,21 +27,25 @@ export function createCompany(company, dataType) {
  * @returns {HTMLDivElement}
  */
 function createHeader(company, dataType) {
-  const { id, logoUrl, name, updatedDate } = company;
-  const formattedUpdatedDate = formatDateString(updatedDate);
+  const { id, updatedDate } = company;
 
   const header = document.createElement("div");
   header.className = "company-container-header display-medium12";
 
-  header.innerHTML = `
-                      <img src=${logoUrl} alt='${name} 로고'/>
-                      <time>${formattedUpdatedDate}</time>
-                    `;
+  const companyLogoComponent = convertStringToFragment(createCompanyLogoTemplate(company));
+  const updatedDateComponent = convertStringToFragment(
+    `<time>${formatDateString(updatedDate)}</time>`
+  );
+  header.append(companyLogoComponent, updatedDateComponent);
 
   const subscriptions = getObjectSubscribedCompanies();
   const isSubscribed = Object.hasOwn(subscriptions, id);
-  const subscriptionButton = createSubscriptionButton({ company, isSubscribed, dataType });
-  header.appendChild(subscriptionButton);
+  const subscriptionButtonComponent = createSubscriptionButton({
+    company,
+    dataTabId: dataType,
+    isSubscribed,
+  });
+  header.appendChild(subscriptionButtonComponent);
 
   return header;
 }
@@ -50,12 +55,12 @@ function createHeader(company, dataType) {
  * @returns {HTMLDivElement}
  */
 function createMainContents({ newsItems, name, mainNews }) {
-  const thumbnailNews = createStringMainNews(mainNews);
-  const newsList = createStringNewsList(newsItems, name);
+  const thumbnailNewsString = createStringMainNews(mainNews);
+  const newsListString = createStringNewsList(newsItems, name);
 
   const contentsString = `<div class='company-container-contents'>
-                            ${thumbnailNews}
-                            ${newsList}
+                            ${thumbnailNewsString}
+                            ${newsListString}
                           </div>`;
 
   return convertStringToFragment(contentsString);
@@ -68,11 +73,11 @@ function createMainContents({ newsItems, name, mainNews }) {
 function createStringMainNews(mainNews) {
   const { thumbnailUrl } = mainNews;
 
-  const newsTitle = createStringNewsTitle(mainNews);
+  const newsTitleString = createStringNewsTitle(mainNews);
 
   return `<div class='main-news'>
             <img loading='lazy' src=${thumbnailUrl} alt='메인 뉴스 썸네일'/>
-            ${newsTitle}
+            ${newsTitleString}
           </div>`;
 }
 
@@ -82,10 +87,10 @@ function createStringMainNews(mainNews) {
  * @returns {string}
  */
 function createStringNewsList(newsList, name) {
-  const newsElements = newsList.map(createStringNewsTitle).join("");
+  const newsListString = newsList.map(createStringNewsTitle).join("");
 
   return `<ul class="news-list">
-            ${newsElements}
+            ${newsListString}
             <p class="display-medium14">${name}에서 직접 편집한 뉴스입니다.</p>
           </ul>`;
 }

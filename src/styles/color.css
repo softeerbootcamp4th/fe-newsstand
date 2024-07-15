@@ -1,0 +1,62 @@
+:root {
+  --grayscale-white-alt: #ffffffb3;
+  --grayscale-white: #ffffff;
+  --grayscale-50: #f5f7f9;
+  --grayscale-100: #d2dae0;
+  --grayscale-200: #879298;
+  --grayscale-300: #6e8091;
+  --grayscale-400: #5f6e76;
+  --grayscale-500: #4b5966;
+  --grayscale-black: #14212b;
+
+  --blue-100: #7890e7;
+  --blue-500: #4362d0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --border-default: var(--grayscale-100);
+    --border-bold: var(--grayscale-300);
+
+    --surface-default: var(--grayscale-white);
+    --surface-alt: var(--grayscale-50);
+
+    --surface-brand-alt: var(--blue-100);
+    --surface-brand-default: var(--blue-500);
+
+    --text-point: var(--blue-500);
+    --text-white-default: var(--grayscale-white);
+    --text-weak: var(--grayscale-200);
+    --text-default: var(--grayscale-400);
+    --text-bold: var(--grayscale-500);
+    --text-strong: var(--grayscale-black);
+  }
+
+  body {
+    background-color: var(--grayscale-white);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --border-default: var(--grayscale-400);
+    --border-bold: var(--grayscale-white-alt);
+
+    --surface-default: var(--grayscale-black);
+    --surface-alt: var(--grayscale-500);
+
+    --surface-brand-alt: var(--blue-100);
+    --surface-brand-default: var(--blue-500);
+
+    --text-point: var(--blue-500);
+    --text-white-default: var(--grayscale-black);
+    --text-weak: var(--grayscale-white-alt);
+    --text-default: var(--grayscale-100);
+    --text-bold: var(--grayscale-50);
+    --text-strong: var(--grayscale-white);
+  }
+
+  body {
+    background-color: var(--grayscale-black);
+  }
+}
